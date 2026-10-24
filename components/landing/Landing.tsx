@@ -10,7 +10,7 @@ import { SiteNav } from "@/components/SiteNav";
 import { DayOfAsks } from "./DayOfAsks";
 import { Reviews } from "./Reviews";
 import { stepVisuals } from "./StepVisuals";
-import { faqs, planParts, priceRow, problem, steps, why, whyThis } from "@/lib/landing";
+import { faqs, planParts, problem, steps, why, whyThis } from "@/lib/landing";
 import { angles, offer, type AngleId } from "@/lib/offer";
 import { reviewsMinimum, testimonials, type Testimonial } from "@/lib/testimonials";
 
@@ -36,6 +36,9 @@ function Headline({ angle }: { angle: AngleId }) {
   );
 }
 
+/** The hero's phone is off for now, so the hero is its copy alone. Set this to true to bring it back. */
+const heroPhone = false;
+
 /**
  * The landing page, for one ad angle: only the hero headline changes. Section order follows the brief, and
  * the bands alternate off white and tint as before. LAYOUT.md has the details. `reviews` is only passed by
@@ -48,8 +51,8 @@ export function Landing({ angle, reviews = testimonials }: { angle: AngleId; rev
       <SiteNav cta={false} />
 
       <main id="main">
-        {/* Hero: one centered column on phones, copy beside the phone on desktop, in a band shorter than the screen */}
-        <section className="hero" aria-labelledby="hero-title" data-section="hero" data-motion="running">
+        {/* Hero: one centered column. With the phone, copy beside it on desktop, in a band shorter than the screen */}
+        <section className="hero" aria-labelledby="hero-title" data-section="hero" data-motion={heroPhone ? "running" : undefined}>
           <div className="wrap hero-grid">
             <div className="hero-copy">
               <h1 id="hero-title" className="hero-title">
@@ -58,24 +61,26 @@ export function Landing({ angle, reviews = testimonials }: { angle: AngleId; rev
               <p className="hero-lead text-lead text-balance text-muted">{offer.sentence}</p>
               <div className="hero-cta">
                 <GetStarted size="lg" label={offer.cta} />
-                <p className="text-body font-medium text-balance text-muted lg:text-lead">{offer.ctaNote}</p>
+                <p className="text-body text-balance text-muted">{offer.ctaNote}</p>
               </div>
             </div>
-            <div className="hero-visual">
-              <div className="aura" aria-hidden="true">
-                <span className="aura-base aura-glow" />
-                <span className="aura-orbit aura-orbit-a aura-glow">
-                  <span className="aura-blob" />
-                </span>
-                <span className="aura-orbit aura-orbit-b aura-glow">
-                  <span className="aura-blob" />
-                </span>
-                <span className="aura-light aura-glow" />
+            {heroPhone ? (
+              <div className="hero-visual">
+                <div className="aura" aria-hidden="true">
+                  <span className="aura-base aura-glow" />
+                  <span className="aura-orbit aura-orbit-a aura-glow">
+                    <span className="aura-blob" />
+                  </span>
+                  <span className="aura-orbit aura-orbit-b aura-glow">
+                    <span className="aura-blob" />
+                  </span>
+                  <span className="aura-light aura-glow" />
+                </div>
+                <PhoneMockup />
               </div>
-              <PhoneMockup />
-            </div>
+            ) : null}
           </div>
-          <MotionToggle />
+          {heroPhone ? <MotionToggle /> : null}
         </section>
 
         {/* The problem: her day of asks, the words beside it on desktop */}
@@ -147,7 +152,7 @@ export function Landing({ angle, reviews = testimonials }: { angle: AngleId; rev
           </div>
         </section>
 
-        {/* What's in your plan: the five parts on a deep slate band, then the price and the way in */}
+        {/* What's in your plan: the five parts on a deep slate band, then the way in. The landing page never shows the price. */}
         <section className="band band-deep" aria-labelledby="plan-title" data-section="plan">
           <div className="wrap">
             <div className="center-head">
@@ -171,9 +176,7 @@ export function Landing({ angle, reviews = testimonials }: { angle: AngleId; rev
                 );
               })}
             </ul>
-            <div className="price-row">
-              <p className="price-figure">{priceRow.price}</p>
-              <p className="price-note">{priceRow.note}</p>
+            <div className="plan-cta">
               <GetStarted size="lg" tone="invert" label={offer.cta} />
             </div>
           </div>

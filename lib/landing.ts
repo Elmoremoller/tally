@@ -1,6 +1,6 @@
 import type { ComponentType, SVGProps } from "react";
 import { Check, Clock, Eye, Shield, Sparkle } from "@/components/icons";
-import { dollars, offer } from "./offer";
+import { offer } from "./offer";
 import { openQuestions, policyQuestion, resultCopy } from "./questions";
 import { AI_POLICIES, policyLabels } from "./week";
 
@@ -25,11 +25,11 @@ export const problem = {
     // Always the one taking notes
     { app: "chat", from: "Your manager", time: "9:02 AM", text: "Can you take notes in the 2pm? You’re so good at it." },
     // Fixing everyone's slides
-    { app: "chat", from: "Sales lead", time: "10:41 AM", text: "Quick favor. Can you fix my slides before 4?" },
-    // Planning the offsite
-    { app: "mail", from: "Head of people", time: "12:15 PM", text: "Would you plan the offsite again this year?" },
-    // "Can you just run our socials?"
-    { app: "chat", from: "Director", time: "2:30 PM", text: "Can you just run our socials?" },
+    { app: "chat", from: "Coworker", time: "10:41 AM", text: "Jess is out today. Could you finish her slides before 4?" },
+    // Planning the party
+    { app: "mail", from: "HR", time: "12:15 PM", text: "Would you plan the holiday party again this year?" },
+    // Showing the new hire the ropes
+    { app: "chat", from: "Director", time: "2:30 PM", text: "New hire starts Monday. Can you show her the ropes?" },
     // Everyone says use AI / Nobody says what's allowed
     { app: "calendar", from: "All hands", time: "4:00 PM", text: "Everyone should be using AI by now. Guidelines to follow." },
     // No time for the real job
@@ -91,12 +91,6 @@ export const planParts = {
 } as const;
 export type PlanPartId = (typeof planParts.parts)[number]["id"];
 
-/** Under the plan's five parts: the price, and the way in. The note was approved on 2026-10-24. */
-export const priceRow = {
-  price: dollars(offer.price.cents),
-  note: "Paid once, after your free result. No subscription.",
-};
-
 /** Why this and not another AI course: the brief's one paragraph, as four cards. The wording is a DRAFT. */
 export const whyThis = {
   title: "Why this and not another AI course",
@@ -110,7 +104,8 @@ export const whyThis = {
 
 export const faqs = [
   { q: "Is this a course?", a: "No, it’s a personal plan built from your answers." },
-  { q: "Is it a subscription?", a: `No. ${dollars(offer.price.cents)}, paid once.` },
+  // The landing page never shows the price; the paywall does, after the free result.
+  { q: "Is it a subscription?", a: "No. Paid once." },
   {
     q: "My company restricts AI. Does this still work?",
     a: "Yes. Your plan follows your company’s rules and focuses on what you’re allowed to do, plus handing work back and getting seen.",

@@ -70,7 +70,7 @@
   --fs-hero: clamp(2.875rem, 1.4rem + 4.2vw, 4.5rem);
   --lh-hero: 1.1;
   --tr-hero: -0.012em;
-  --fs-display: clamp(2.25rem, 1.5rem + 3.1vw, 3.875rem);
+  --fs-display: clamp(2.25rem, 1.6rem + 2.2vw, 3.375rem);
   --lh-display: 1.06;
   --tr-display: -0.008em;
   --fs-title: clamp(1.5rem, 1.3rem + 0.85vw, 1.9375rem);
@@ -92,7 +92,7 @@
   /* Layout */
   --wrap: 68rem;
   --gutter: clamp(1rem, 4.5vw, 2rem);
-  --section: clamp(4.5rem, 2.75rem + 6vw, 8.5rem);
+  --section: clamp(3.5rem, 2.5rem + 3vw, 5.5rem);
   --nav-h: 3.5rem;
   --r-card: 1.5rem;
 
@@ -220,7 +220,7 @@
     justify-items: center;
     gap: 1rem;
     max-width: 42rem;
-    margin: 0 auto clamp(2.5rem, 2rem + 2.5vw, 4rem);
+    margin: 0 auto clamp(2rem, 1.5rem + 1.5vw, 3rem);
     text-align: center;
   }
   .heading {
@@ -358,11 +358,19 @@
       background: var(--btn-chip-hover);
     }
   }
+  /* Large buttons are the main actions, so their label is set in the heading serif, in the same voice as the
+     headlines. The serif has one weight, so the label is regular and a size up to hold its own. The arrow's
+     circle keeps the size it had with the grotesk label. */
   .btn-lg {
     min-height: 3.625rem;
-    padding: 1rem 2.125rem;
+    padding: 0.875rem 2.125rem;
+    font-family: var(--stack-display);
+    font-size: 1.5rem;
+    font-weight: 400;
+    letter-spacing: 0;
+  }
+  .btn-lg svg {
     font-size: 1.125rem;
-    letter-spacing: var(--tr-body);
   }
   /* Off white on the slate band */
   .btn-invert {
@@ -448,11 +456,11 @@
     margin-left: 0;
   }
   .nav-centered .nav-brand svg {
-    height: 2.5rem;
+    height: 2.75rem;
   }
   @media (min-width: 66.8125rem) {
     .nav-centered .nav-brand svg {
-      height: 2.875rem;
+      height: 3.125rem;
     }
   }
 
@@ -500,14 +508,23 @@
     letter-spacing: var(--tr-lead);
     pointer-events: auto;
   }
+  /* The label is set like a large button's, in the heading serif; the chip beside it stays in the grotesk.
+     The arrow's circle keeps its size. */
   .get-bar-label {
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
     min-width: 0;
+    font-family: var(--stack-display);
+    font-size: 1.5rem;
+    font-weight: 400;
     line-height: 1.15;
+    letter-spacing: 0;
     text-align: left;
     text-wrap: balance;
+  }
+  .get-bar-label svg {
+    font-size: var(--fs-lead);
   }
   .get-bar .icon-arrow {
     margin-inline-end: 0;
@@ -597,9 +614,10 @@
     color: var(--slate);
   }
 
-  /* Hero. One centered column on phones and tablets, with the phone shown down to its three cards and cut
-     off in the empty space below them. On desktop the copy sits beside the whole phone in a band about
-     four fifths of the screen tall (after Good Inside), so the next section starts on the first screen. */
+  /* Hero. One centered column on phones and tablets, with the phone (when it is on) shown down to its three
+     cards and cut off in the empty space below them. On desktop the copy sits beside the whole phone in a
+     band about four fifths of the screen tall (after Good Inside), so the next section starts on the first
+     screen. */
   .hero {
     --phone-w: min(22.5rem, 68vw);
     --phone-h: calc(var(--phone-w) * 18.45 / 9);
@@ -639,25 +657,29 @@
   .hero-visual .phone {
     width: var(--phone-w);
   }
+  /* With the phone off (for now), the hero is its copy alone: one centred column at every width, with
+     about the same space above and below as a band. */
+  .hero:not(:has(.hero-visual)) {
+    padding-block: clamp(2.5rem, 1.5rem + 4vw, 5.5rem);
+  }
   @media (min-width: 66.8125rem) {
     /* About four fifths of the screen, and always tall enough for the copy. The whole phone fits inside
        the band with the same space above and below it: its height is the band less that space. */
-    .hero {
+    .hero:has(.hero-visual) {
       --hero-h: clamp(36rem, 78svh, 50rem);
       --phone-w: clamp(15rem, calc((var(--hero-h) - 5rem) * 9 / 18.45), 26rem);
       display: grid;
       min-height: var(--hero-h);
       padding-block: 2.5rem;
     }
-    .hero-grid {
+    .hero:has(.hero-visual) .hero-grid {
       grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
       align-items: center;
       justify-items: start;
       column-gap: clamp(2rem, 4vw, 4.5rem);
       text-align: left;
     }
-    .hero-copy,
-    .hero-cta {
+    .hero:has(.hero-visual) :is(.hero-copy, .hero-cta) {
       justify-items: start;
     }
     /* The phone sits centered beside the copy, whole. */
@@ -1800,31 +1822,14 @@
       grid-column: span 3;
     }
   }
-  .price-row {
+  /* The way in under the plan's parts. No price on the landing page: the paywall shows it after the free result. */
+  .plan-cta {
     display: flex;
-    flex-wrap: wrap;
-    align-items: center;
     justify-content: center;
-    gap: 0.75rem 1.25rem;
     margin-top: clamp(2rem, 1.5rem + 2vw, 3rem);
   }
-  .price-figure {
-    font-family: var(--stack-display);
-    font-size: clamp(3.025rem, 2.475rem + 2.2vw, 3.85rem);
-    font-weight: 400;
-    line-height: 1;
-    letter-spacing: -0.01em;
-  }
-  .price-note {
-    max-width: 13em;
-    font-size: var(--fs-small);
-    font-weight: 500;
-    line-height: var(--lh-small);
-    opacity: 0.88;
-    text-wrap: balance;
-  }
   @media (max-width: 45.875rem) {
-    .price-row .btn {
+    .plan-cta .btn {
       flex-basis: 100%;
     }
   }
@@ -2069,7 +2074,7 @@
     --focus: var(--off-white);
     background: var(--slate);
     color: var(--off-white);
-    padding-block: clamp(5rem, 3.5rem + 6vw, 9rem);
+    padding-block: clamp(4rem, 2.75rem + 3.5vw, 6.5rem);
     text-align: center;
   }
   .closing ::selection {
@@ -2082,7 +2087,7 @@
   .closing-title {
     max-width: 12em;
     font-family: var(--stack-display);
-    font-size: clamp(2.75rem, 1.54rem + 5.06vw, 5.225rem);
+    font-size: clamp(2.75rem, 1.75rem + 3.4vw, 4.25rem);
     font-weight: 400;
     line-height: 1.04;
     letter-spacing: -0.01em;
@@ -2320,13 +2325,13 @@
   }
   .quiz-brand svg {
     display: block;
-    height: 2.5rem;
+    height: 2.75rem;
     width: auto;
     translate: 0 6%;
   }
   @media (min-width: 66.8125rem) {
     .quiz-brand svg {
-      height: 2.875rem;
+      height: 3.125rem;
     }
   }
   /* The progress line: grows from the left as you go, on a faint track the width of the column. */
