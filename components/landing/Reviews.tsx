@@ -2,7 +2,9 @@ import type { CSSProperties } from "react";
 import { MotionToggle } from "@/components/MotionToggle";
 import { reviewsTitle, type Testimonial } from "@/lib/testimonials";
 
-// Reviews in rows that drift sideways, the top row left and the bottom row right, after Saidwell. Each row is
+// On phones the reviews are one row she swipes by hand, a card at a time with the next one peeking in: two rows
+// drifting in opposite directions were unreadable at that width. From tablets up they drift sideways, the top
+// row left and the bottom row right, after Saidwell. Each row is
 // repeated enough to fill the widest screens, then drawn twice so it can loop without a seam; screen readers
 // get each review once. A row stops while the pointer is on it, the button below stops both, and they rest
 // while off screen. When the visitor prefers less motion nothing moves and each row scrolls by hand.
@@ -74,6 +76,16 @@ export function Reviews({ reviews }: { reviews: readonly Testimonial[] }) {
             {reviewsTitle}
           </h2>
         </div>
+      </div>
+      {/* Phones: one row, swiped by hand. Tablets and up: the drifting rows. CSS shows one and hides the other. */}
+      <div className="reviews-swipe" role="region" aria-label={reviewsTitle} tabIndex={0}>
+        <ul>
+          {reviews.map((review, i) => (
+            <li key={i}>
+              <Card review={review} />
+            </li>
+          ))}
+        </ul>
       </div>
       <div className="reviews-rows">
         {rows.map((row, i) => (
