@@ -7,6 +7,7 @@ import { ArrowRight } from "@/components/icons";
 import { paywallConsent as consent } from "@/lib/legal";
 import { paywallCopy } from "@/lib/plan-copy";
 import type { AiPolicy, AiTool, WeekTask } from "@/lib/week";
+import { Dock } from "./Dock";
 import { PlanPreview } from "./PlanPreview";
 
 /**
@@ -34,17 +35,20 @@ export function Paywall({
       <p className="paywall-lead">{paywallCopy.lead}</p>
       <PlanPreview tasks={tasks} aiTools={aiTools} aiPolicy={aiPolicy} knownFor={knownFor} />
 
+      {/* On a phone the price and the button stay pinned while she reads the cards, and the error shows with them. */}
       <form action={action} className="paywall-form">
-        <p className="paywall-price">{paywallCopy.price}</p>
-        <button type="submit" className="btn btn-lg paywall-cta" disabled={pending}>
-          {pending ? paywallCopy.pending : paywallCopy.cta}
-          {pending ? null : <ArrowRight />}
-        </button>
-        {state?.error ? (
-          <p className="quiz-error" role="alert">
-            {state.error}
-          </p>
-        ) : null}
+        <Dock className="paywall-dock">
+          <p className="paywall-price">{paywallCopy.price}</p>
+          <button type="submit" className="btn btn-lg paywall-cta" disabled={pending}>
+            {pending ? paywallCopy.pending : paywallCopy.cta}
+            {pending ? null : <ArrowRight />}
+          </button>
+          {state?.error ? (
+            <p className="quiz-error" role="alert">
+              {state.error}
+            </p>
+          ) : null}
+        </Dock>
         <p className="paywall-fine">
           {paywallCopy.refund} {paywallCopy.secure}
         </p>

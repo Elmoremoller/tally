@@ -3054,9 +3054,10 @@
   /* The paywall: one card under the free result. The headline, a look at her plan in five small cards, then
      the price above the button. */
   .paywall {
+    --paywall-pad: clamp(1.5rem, 1.1rem + 1.8vw, 2.25rem);
     width: 100%;
     margin-top: 1rem;
-    padding: clamp(1.5rem, 1.1rem + 1.8vw, 2.25rem);
+    padding: var(--paywall-pad);
     border-radius: var(--r-card);
     background: var(--off-white);
     box-shadow:
@@ -3216,6 +3217,7 @@
     letter-spacing: var(--tr-lead);
     color: var(--ink);
     text-align: center;
+    text-wrap: balance;
   }
   .paywall-cta {
     width: 100%;
@@ -3230,6 +3232,64 @@
     line-height: var(--lh-micro);
     color: var(--muted);
     text-align: center;
+  }
+
+  /* The main button kept in reach on a phone (components/quiz/Dock.tsx), the way phone quizzes and paywalls
+     do it: pinned to the bottom of the screen while the step scrolls under it, and back in its own place at
+     the end. While pinned it gets the header's frosted bar, so the two frame the screen. */
+  .quiz-dock-end {
+    display: none;
+  }
+  @media (max-width: 45.875rem) {
+    .quiz-dock {
+      position: sticky;
+      bottom: 0;
+      z-index: 30;
+      margin: 1.25rem calc(var(--gutter) * -1) 0;
+      padding: 0.75rem var(--gutter);
+      transition:
+        background-color 0.2s ease,
+        box-shadow 0.2s ease;
+    }
+    .quiz-dock[data-stuck] {
+      background: var(--material);
+      -webkit-backdrop-filter: saturate(150%) blur(20px);
+      backdrop-filter: saturate(150%) blur(20px);
+      box-shadow: 0 -1px 0 var(--line);
+    }
+    .quiz-dock-end {
+      display: block;
+    }
+    .quiz-dock > .quiz-next {
+      margin-top: 0;
+    }
+    /* Looks right and Edit side by side, so the pinned bar stays one button tall. They stack if they don't fit. */
+    .quiz-confirm-end {
+      display: flex;
+      flex-wrap: wrap;
+    }
+    .quiz-confirm-end .btn {
+      flex: 1 1 auto;
+      width: auto;
+      padding-inline: 1.25rem;
+    }
+    .quiz-confirm-end .btn-quiet {
+      flex-grow: 0;
+    }
+    /* The form steps aside so the price and the button belong to the whole card, and stay pinned while
+       the cards above them scroll. */
+    .paywall-form {
+      display: contents;
+    }
+    .paywall-dock {
+      display: grid;
+      gap: 0.75rem;
+      margin: 1.5rem calc(var(--paywall-pad) * -1) 0;
+      padding-inline: var(--paywall-pad);
+    }
+    .paywall-dock ~ .paywall-fine {
+      margin-top: 0.75rem;
+    }
   }
 }
 
@@ -4875,7 +4935,8 @@
   }
   /* Headers let more of the colour through. */
   :root:has(.backdrop) .nav,
-  .quiz-head {
+  .quiz-head,
+  .quiz-dock[data-stuck] {
     background: rgb(239 234 228 / 0.5);
   }
 }
@@ -5090,6 +5151,7 @@
   .nav,
   :root:has(.backdrop) .nav,
   .quiz-head,
+  .quiz-dock[data-stuck],
   .motion-toggle,
   .ask {
     background: var(--off-white);

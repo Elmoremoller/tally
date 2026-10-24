@@ -2,6 +2,7 @@ import type { Dispatch, FormEvent, RefObject, SetStateAction } from "react";
 import { ArrowRight } from "@/components/icons";
 import { privacyNote } from "@/lib/questions";
 import { ANSWER_MAX } from "@/lib/week";
+import { Dock } from "./Dock";
 import { MicButton } from "./MicButton";
 import { TypingHint } from "./TypingHint";
 
@@ -74,10 +75,12 @@ export function TextStep({ title, hint, placeholder, examples, value, setValue, 
           </p>
         ) : null}
       </div>
-      <button type="submit" className="btn btn-lg quiz-next" disabled={!value.trim()}>
-        Continue
-        <ArrowRight />
-      </button>
+      <Dock>
+        <button type="submit" className="btn btn-lg quiz-next" disabled={!value.trim()}>
+          Continue
+          <ArrowRight />
+        </button>
+      </Dock>
     </form>
   );
 }

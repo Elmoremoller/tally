@@ -1,6 +1,7 @@
 import type { CSSProperties, RefObject } from "react";
 import { heardCopy } from "@/lib/questions";
 import { PILES, pileLabels, SLIDER_MAX, SLIDER_STEP, type Pile, type WeekTask } from "@/lib/week";
+import { Dock } from "./Dock";
 
 type HeardStepProps = {
   role: string;
@@ -101,7 +102,7 @@ export function HeardStep({ role, knownFor, tasks, onTasks, editing, onEditing, 
           {error}
         </p>
       ) : null}
-      <div className="quiz-confirm quiz-confirm-end">
+      <Dock className="quiz-confirm quiz-confirm-end">
         <button
           type="button"
           className="btn btn-lg"
@@ -113,7 +114,7 @@ export function HeardStep({ role, knownFor, tasks, onTasks, editing, onEditing, 
         <button type="button" className="btn btn-lg btn-quiet" onClick={() => onEditing(!editing)}>
           {editing ? heardCopy.doneEditing : heardCopy.edit}
         </button>
-      </div>
+      </Dock>
     </>
   );
 }

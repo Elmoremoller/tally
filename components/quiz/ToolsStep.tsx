@@ -2,6 +2,7 @@ import type { RefObject } from "react";
 import { ArrowRight, Check } from "@/components/icons";
 import { policyQuestion, toolsQuestion } from "@/lib/questions";
 import { AI_POLICIES, AI_TOOLS, policyLabels, toolLabels, type AiPolicy, type AiTool } from "@/lib/week";
+import { Dock } from "./Dock";
 
 type ToolsStepProps = {
   tools: AiTool[];
@@ -67,10 +68,12 @@ export function ToolsStep({ tools, onTools, policy, onPolicy, onSubmit, error, h
           {error}
         </p>
       ) : null}
-      <button type="button" className="btn btn-lg quiz-next" disabled={!tools.length || !policy} onClick={onSubmit}>
-        Continue
-        <ArrowRight />
-      </button>
+      <Dock>
+        <button type="button" className="btn btn-lg quiz-next" disabled={!tools.length || !policy} onClick={onSubmit}>
+          Continue
+          <ArrowRight />
+        </button>
+      </Dock>
     </>
   );
 }
