@@ -7,9 +7,11 @@ import { MotionToggle } from "@/components/MotionToggle";
 import { PhoneMockup } from "@/components/PhoneMockup";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteNav } from "@/components/SiteNav";
+import { Reviews } from "./Reviews";
 import { stepVisuals } from "./StepVisuals";
 import { faqs, planParts, priceRow, problem, steps, why, whyThis } from "@/lib/landing";
 import { angles, offer, type AngleId } from "@/lib/offer";
+import { reviewsMinimum, testimonials, type Testimonial } from "@/lib/testimonials";
 
 /**
  * The headline with its key phrase in bold and the underline drawn under it. Punctuation right after the
@@ -35,9 +37,10 @@ function Headline({ angle }: { angle: AngleId }) {
 
 /**
  * The landing page, for one ad angle: only the hero headline changes. Section order follows the brief, and
- * the bands alternate warm white and tint as before. LAYOUT.md has the details.
+ * the bands alternate warm white and tint as before. LAYOUT.md has the details. `reviews` is only passed by
+ * the local preview; the live page shows the real ones from lib/testimonials.ts.
  */
-export function Landing({ angle }: { angle: AngleId }) {
+export function Landing({ angle, reviews = testimonials }: { angle: AngleId; reviews?: readonly Testimonial[] }) {
   return (
     <>
       {/* No action in the nav: once the hero's button scrolls away, the Get started bar carries it. */}
@@ -198,6 +201,9 @@ export function Landing({ angle }: { angle: AngleId }) {
             </ul>
           </div>
         </section>
+
+        {/* Reviews from real buyers, drifting sideways. Hidden until there are enough. */}
+        {reviews.length >= reviewsMinimum ? <Reviews reviews={reviews} /> : null}
 
         {/* Final call to action */}
         <section className="closing" aria-labelledby="closing-title" data-section="closing">

@@ -17,11 +17,12 @@ Each section carries a `data-section` attribute in `components/landing/Landing.t
 | 5 | `how` | How it works | (new, after Saidwell) | Tinted band. A warm white card per step: a small picture of what the step looks like on top (her answer being typed, her hours, her plan), then the step's number and line. Stacked on phones, three across from tablets up. |
 | 6 | `plan` | What’s in your plan | Everything you get, after Saidwell | Deep red band. Five warm white cards, each a tinted panel with a small copy of its plan screen, then a red title and one line. Two columns on phones and tablets with the first card across the top; on desktop two wide cards over three. Then the price row: $19.99, a short note and Take the free quiz in inverted colours. The bottom bar steps aside while this band is on screen. |
 | 7 | `why-this` | Why this and not another AI course | What’s inside your plan | Tinted band. Four warm white cards, each an icon tile and one sentence starting with a bold lead. |
-| 8 | `closing` | Final call to action | Closing band | Full bleed deep red band. The mark, the short ad line, Take the free quiz in inverted colours, and Takes about 2 minutes. |
-| 9 | `faq` | Questions | FAQ | Warm white band. Six collapsible questions. |
-| 10 | `footer` | Footer | Footer | The Privacy and Terms links, then the name across the full width. |
+| 8 | `reviews` | In their own words | (new, after Saidwell) | Warm white band, shown only once lib/testimonials.ts holds three real reviews. Tinted cards (her words in grey with one phrase in bold ink, then an initial, her name and a detail line) in two full width rows drifting sideways in opposite directions, the edges fading out; one row while there are fewer than six. A row rests under the pointer, the pause button under the rows stops both, and they rest off screen. With reduced motion nothing moves and each row scrolls by hand. Local preview with placeholders: /preview/reviews. |
+| 9 | `closing` | Final call to action | Closing band | Full bleed deep red band. The mark, the short ad line, Take the free quiz in inverted colours, and Takes about 2 minutes. |
+| 10 | `faq` | Questions | FAQ | Warm white band. Six collapsible questions. |
+| 11 | `footer` | Footer | Footer | The Privacy and Terms links, then the name across the full width. |
 
-After the hero the bands go warm white, tint, warm white, tint, then the deep red plan band, tint again, and the deep red closing band. Cards follow the band they sit on: tinted on warm white, warm white on tint and on red.
+After the hero the bands go warm white, tint, warm white, tint, then the deep red plan band, tint again, warm white for the reviews once they show, and the deep red closing band. Cards follow the band they sit on: tinted on warm white, warm white on tint and on red.
 
 ## What changed from the page it was copied from, and why
 

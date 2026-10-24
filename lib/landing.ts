@@ -6,7 +6,8 @@ import { AI_POLICIES, policyLabels } from "./week";
 
 // The landing page's words. Word for word from the brief where it gives them; lines marked DRAFT fill a gap
 // and wait for approval. The rules: no dashes, no colons in headlines, always a plan, AI is the how and never
-// the headline, and no testimonials, ratings, customer counts or results until real buyers exist.
+// the headline, and no testimonials, ratings, customer counts or results until real buyers exist (real reviews go
+// in lib/testimonials.ts).
 
 type Icon = ComponentType<SVGProps<SVGSVGElement>>;
 

@@ -4590,6 +4590,143 @@
   }
 }
 
+/* ---------- Reviews ---------- */
+@layer components {
+  /* Rows of review cards drifting sideways across the full width, the edges fading out. Each row's track holds
+     two identical passes, so moving it half its width lands exactly where it started. */
+  .reviews-rows {
+    display: grid;
+    gap: 1rem;
+  }
+  .reviews-row {
+    --reviews-fade: min(7rem, 8vw);
+    overflow: hidden;
+    mask-image: linear-gradient(90deg, transparent, #000 var(--reviews-fade), #000 calc(100% - var(--reviews-fade)), transparent);
+  }
+  .reviews-track {
+    display: flex;
+    width: max-content;
+    animation: reviews-drift var(--reviews-time) linear infinite;
+    will-change: transform;
+  }
+  .reviews-row[data-reverse] .reviews-track {
+    animation-direction: reverse;
+  }
+  @keyframes reviews-drift {
+    to {
+      transform: translateX(-50%);
+    }
+  }
+  /* Rests while the pointer is on a row, so a card can be read, and while paused or off screen. */
+  .reviews-row:hover .reviews-track,
+  .reviews[data-motion="paused"] .reviews-track,
+  .reviews[data-offscreen] .reviews-track {
+    animation-play-state: paused;
+  }
+  .reviews-pass {
+    display: flex;
+    gap: 1rem;
+    padding-inline-end: 1rem;
+  }
+  .reviews-pass > li {
+    display: flex;
+  }
+  .review {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    width: clamp(16.5rem, 78vw, 21.5rem);
+    padding: 1.5rem;
+    border-radius: var(--r-card);
+    background: var(--tint);
+  }
+  /* Her words in grey, the phrase she'd underline in ink, after Saidwell. */
+  .review-quote {
+    font-size: var(--fs-body);
+    line-height: var(--lh-body);
+    letter-spacing: var(--tr-body);
+    color: var(--muted);
+    text-wrap: pretty;
+  }
+  .review-quote strong {
+    font-weight: 650;
+    color: var(--ink);
+  }
+  .review-by {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-top: auto;
+  }
+  .review-initial {
+    display: grid;
+    flex: none;
+    place-items: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    background: var(--warm-white);
+    font-weight: 700;
+    color: var(--deep-red);
+  }
+  .review-name {
+    display: block;
+    font-size: var(--fs-small);
+    font-weight: 650;
+    line-height: var(--lh-small);
+    letter-spacing: var(--tr-small);
+    color: var(--ink);
+  }
+  .review-detail {
+    display: block;
+    font-size: var(--fs-micro);
+    line-height: var(--lh-micro);
+    letter-spacing: var(--tr-micro);
+    color: var(--muted);
+  }
+  /* The pause button sits under the rows, at the right edge of the column. */
+  .reviews-foot {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 1.25rem;
+  }
+  .reviews-foot .motion-toggle {
+    position: relative;
+    inset: auto;
+  }
+
+  /* With less motion nothing drifts: each row shows its reviews once, centred when they fit and scrolled by
+     hand when they don't. */
+  @media (prefers-reduced-motion: reduce) {
+    .reviews-row {
+      overflow-x: auto;
+      overscroll-behavior-x: contain;
+      scroll-snap-type: x proximity;
+      scroll-padding-inline: var(--gutter);
+      scrollbar-width: thin;
+      scrollbar-color: var(--line-strong) transparent;
+      padding-bottom: 0.5rem;
+      mask-image: none;
+    }
+    .reviews-track {
+      min-width: 100%;
+      justify-content: center;
+      padding-inline: var(--gutter);
+      animation: none;
+    }
+    .reviews-pass {
+      padding-inline-end: 0;
+    }
+    .reviews-pass > li {
+      scroll-snap-align: start;
+    }
+    .reviews [data-repeat],
+    .reviews-foot {
+      display: none;
+    }
+  }
+}
+
 /* ---------- Preferences ---------- */
 @media (prefers-reduced-motion: reduce) {
   /* Gentler equivalents: things appear in place, presses change colour instead of scale. */
@@ -4750,6 +4887,7 @@
   }
   .btn,
   .safety-exit,
+  .review,
   .quiz-choice,
   .quiz-topic,
   .quiz-story,
