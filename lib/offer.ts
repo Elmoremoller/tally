@@ -2,6 +2,9 @@
 // copy rules: no dashes, no colons in headlines, no hype words, and it's always a plan. This file imports
 // nothing, so Node can test it.
 
+/** A sentence with non-breaking spaces, so a line can only break before or after it. */
+const whole = (sentence: string) => sentence.replaceAll(" ", "\u00a0");
+
 export const offer = {
   name: "Tally",
   /** Shown in brackets until it's a real address. */
@@ -10,15 +13,14 @@ export const offer = {
   price: { cents: 1999, currency: "usd" },
   refund: "[REFUND POLICY, Karl to confirm]",
   /** Under the hero headline. */
-  lead:
-    "The late nights, the weekend emails, the feeling that you’re always behind. Most of it is busywork nobody even notices. Tally builds you a personal plan to hand it to AI, so you can actually switch off at night.",
+  lead: "Most of what keeps you late is busywork nobody notices. Tally builds you a plan to hand it to AI.",
   adLine: "Win back your hours. Get the credit you’ve earned.",
   cta: "Take the free quiz",
   quizTime: "Takes about 2 minutes",
   /** The way back to her plan, top right of the header and in the footer. It opens Open your plan at /login. */
   login: "Log in",
-  /** Under the hero's button. */
-  ctaNote: "See where your hours actually go. Free quiz, about 2 minutes.",
+  /** Under the hero's button. When it wraps, on the smallest phones, it breaks between the sentences. */
+  ctaNote: `${whole("See where your hours go.")} ${whole("About 2 minutes.")}`,
   /** The page title, and the line search engines and link previews show. The share image uses adLine. */
   meta: {
     title: "Close the laptop at 5",
