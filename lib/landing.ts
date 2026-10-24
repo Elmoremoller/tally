@@ -15,6 +15,8 @@ type Icon = ComponentType<SVGProps<SVGSVGElement>>;
  * The problem: the brief's ten moments told as one day of hers. Asks land one after another until 7:48 in the
  * evening, when the project she was hired for is still overdue; the two lines beside them say the rest. Each
  * ask's comment names the moments it carries. The title, the asks and the lines were approved on 2026-10-24.
+ * `phone: false` hides an ask on phones only (under 735px), where every ask wraps and six made the section
+ * nearly two screens tall; tablets and desktop show all six.
  */
 export const problem = {
   title: "Sound familiar?",
@@ -25,11 +27,11 @@ export const problem = {
     // Always the one taking notes
     { app: "chat", from: "Your manager", time: "9:02 AM", text: "Can you take notes in the 2pm? You’re so good at it." },
     // Fixing everyone's slides
-    { app: "chat", from: "Coworker", time: "10:41 AM", text: "Jess is out today. Could you finish her slides before 4?" },
+    { app: "chat", from: "Coworker", time: "10:41 AM", text: "Jess is out today. Could you finish her slides before 4?", phone: false },
     // Planning the party
     { app: "mail", from: "HR", time: "12:15 PM", text: "Would you plan the holiday party again this year?" },
     // Showing the new hire the ropes
-    { app: "chat", from: "Director", time: "2:30 PM", text: "New hire starts Monday. Can you show her the ropes?" },
+    { app: "chat", from: "Director", time: "2:30 PM", text: "New hire starts Monday. Can you show her the ropes?", phone: false },
     // Everyone says use AI / Nobody says what's allowed
     { app: "calendar", from: "All hands", time: "4:00 PM", text: "Everyone should be using AI by now. Guidelines to follow." },
     // No time for the real job

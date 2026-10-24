@@ -17,10 +17,20 @@ export function DayOfAsks() {
         <span className="day-time">{problem.clock.time}</span>
       </p>
       <Arrive className="asks">
-        {problem.asks.map(({ app, from, time, text }, i) => {
+        {problem.asks.map((ask, i) => {
+          const { app, from, time, text } = ask;
           const Icon = apps[app];
+          const onPhone = !("phone" in ask);
+          // Where it falls among the asks a phone shows, so they still arrive one after another without a gap.
+          const phoneIndex = problem.asks.slice(0, i).filter((other) => !("phone" in other)).length;
           return (
-            <li key={from} className="ask" data-app={app} style={{ "--i": i } as CSSProperties}>
+            <li
+              key={from}
+              className="ask"
+              data-app={app}
+              data-phone={onPhone ? undefined : "off"}
+              style={{ "--i": i, "--pi": phoneIndex } as CSSProperties}
+            >
               <span className="ask-app" aria-hidden="true">
                 <Icon />
               </span>
