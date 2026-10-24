@@ -12,11 +12,15 @@ type Rgb = readonly [number, number, number];
 
 export type DotPalette = { tan: Rgb; dusty: Rgb; sky: Rgb };
 
+/** A small extra clear patch, such as the logo in the header above the hero: its centre and half size, in px. */
+export type Hole = { x: number; y: number; halfW: number; halfH: number };
+
 /**
  * The clear middle: half its width and half its height, and how far the dots take to come back in, all in
- * px. It is centred on the canvas unless `cx` and `cy` say where. The arms circle this point.
+ * px. It is centred on the canvas unless `cx` and `cy` say where. The arms circle this point. `holes` are
+ * kept clear too, with a short feather of their own.
  */
-export type Clear = { x: number; y: number; feather: number; cx?: number; cy?: number };
+export type Clear = { x: number; y: number; feather: number; cx?: number; cy?: number; holes?: readonly Hole[] };
 
 /** Everything about each square that stays the same from frame to frame, worked out once for a size. */
 export type DotGrid = {
@@ -65,6 +69,8 @@ export const RIPPLE_LIFE = 1.8;
 const POINTER_REACH = 150;
 const RIPPLE_SPEED = 400;
 const RIPPLE_WIDTH = 30;
+/** How far the dots take to come back in round a hole, in px. */
+const HOLE_FEATHER = 36;
 
 const FALLBACK: DotPalette = { tan: [166, 138, 105], dusty: [122, 144, 168], sky: [174, 202, 232] };
 
@@ -130,11 +136,15 @@ export function makeGrid(width: number, height: number, clear: Clear): DotGrid {
     for (let col = 0; col < cols; col++) {
       const x = (col + 0.5) * cell;
       const y = (row + 0.5) * cell;
-      const open = smooth(
+      let open = smooth(
         0,
         1,
         Math.hypot(Math.max(Math.abs(x - cx) - clear.x, 0), Math.max(Math.abs(y - cy) - clear.y, 0)) / clear.feather,
       );
+      for (const hole of clear.holes ?? []) {
+        const gap = Math.hypot(Math.max(Math.abs(x - hole.x) - hole.halfW, 0), Math.max(Math.abs(y - hole.y) - hole.halfH, 0));
+        open = Math.min(open, smooth(0, 1, gap / HOLE_FEATHER));
+      }
       if (open === 0) continue;
 
       const n = grid.count++;

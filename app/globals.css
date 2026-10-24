@@ -419,6 +419,19 @@
   :root[data-scrolled] .nav::after {
     opacity: 1;
   }
+  /* The landing page: at the very top the bar is clear, so the hero's dots run up behind the logo and Log in
+     and the whole first screen moves. The moment she scrolls, it turns back into the bar. */
+  :root:has(.hero > .dots) .nav {
+    transition:
+      background-color 0.3s ease,
+      -webkit-backdrop-filter 0.3s ease,
+      backdrop-filter 0.3s ease;
+  }
+  :root:has(.hero > .dots):not([data-scrolled]) .nav {
+    background: transparent;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
   .nav-inner {
     display: flex;
     align-items: center;
@@ -639,7 +652,10 @@
     --hero-pad: clamp(2.5rem, 1.5rem + 4vw, 5.5rem);
     /* The pause button sits in the bottom space, so on a phone it never covers the line above it */
     --hero-pad-end: max(4.75rem, var(--hero-pad));
-    padding-block: var(--hero-pad) var(--hero-pad-end);
+    /* It runs up under the header, so its dots fill the whole first screen; the header's height goes back
+       on the top padding, so the copy stays exactly where it was */
+    margin-top: calc(-1 * var(--nav-h));
+    padding-block: calc(var(--hero-pad) + var(--nav-h)) var(--hero-pad-end);
   }
   /* The hero is a picture the shape of the screen it was designed on: nav plus hero is 16:9 (1920x1080) on a
      landscape screen and 9:16 (1080x1920) on a portrait one, scaled to the width, so its height follows the
