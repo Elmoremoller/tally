@@ -1,4 +1,5 @@
 import { supabaseAdmin } from "./supabase";
+import type { PlanInput } from "./plan-writer";
 import type { AiPolicy, AiTool, Pile } from "./week";
 
 // Worth Her Time's tables, as supabase/migrations/20261024120000_worth_her_time.sql makes them, and the
@@ -187,6 +188,73 @@ export const failPlan = (planId: string, error: string) => call<void>("fail_plan
 
 export const logEvent = (name: EventName, sessionId: string | null, angle: string, props: Record<string, unknown> = {}) =>
   call<void>("log_event", { p_session_id: sessionId, p_name: name, p_angle: angle, p_props: props });
+
+/** A plan by its access token. Anything that doesn't look like one of ours never reaches the database. */
+export async function planByToken(token: string): Promise<PlanRow | null> {
+  if (!/^[0-9a-f]{43,128}$/i.test(token)) return null;
+  const { data, error } = await supabaseAdmin().from("plans").select("*").eq("access_token", token).maybeSingle();
+  if (error) throw new Error(`Loading a plan failed: ${error.message}`);
+  return data as PlanRow | null;
+}
+
+export async function planById(id: string): Promise<PlanRow | null> {
+  const { data, error } = await supabaseAdmin().from("plans").select("*").eq("id", id).maybeSingle();
+  if (error) throw new Error(`Loading a plan failed: ${error.message}`);
+  return data as PlanRow | null;
+}
+
+export async function planForSession(sessionId: string): Promise<PlanRow | null> {
+  const { data, error } = await supabaseAdmin().from("plans").select("*").eq("session_id", sessionId).maybeSingle();
+  if (error) throw new Error(`Loading a plan failed: ${error.message}`);
+  return data as PlanRow | null;
+}
+
+/** Her most recent plan, for opening it from the sign in email. */
+export async function latestPlanForEmail(email: string): Promise<PlanRow | null> {
+  const db = supabaseAdmin();
+  const { data: orders, error } = await db
+    .from("orders")
+    .select("id")
+    .eq("email", email.toLowerCase())
+    .eq("product", "plan")
+    .order("created_at", { ascending: false })
+    .limit(1);
+  if (error) throw new Error(`Finding a plan failed: ${error.message}`);
+  if (!orders?.length) return null;
+  const { data, error: planError } = await db.from("plans").select("*").eq("order_id", orders[0].id).maybeSingle();
+  if (planError) throw new Error(`Finding a plan failed: ${planError.message}`);
+  return data as PlanRow | null;
+}
+
+/** The email a plan was bought with. */
+export async function orderEmail(orderId: string): Promise<string | null> {
+  const { data, error } = await supabaseAdmin().from("orders").select("email").eq("id", orderId).maybeSingle();
+  if (error) throw new Error(`Loading an order failed: ${error.message}`);
+  return (data?.email as string | undefined) ?? null;
+}
+
+/** What the plan writer needs: her answers, her summaries and her tasks with the hours she confirmed. */
+export async function loadPlanInput(plan: PlanRow): Promise<PlanInput> {
+  const { intake, tasks } = await loadWeek(plan.session_id);
+  if (!intake?.job_text || !intake.week_text || !intake.known_for_text || !intake.ai_tools || !intake.ai_policy) {
+    throw new Error("Her answers are missing");
+  }
+  if (!intake.role_summary || !intake.known_for_summary || !tasks.length) throw new Error("Her quiz isn't finished");
+  return {
+    job: intake.job_text,
+    week: intake.week_text,
+    knownFor: intake.known_for_text,
+    followUp:
+      intake.follow_up_question && intake.follow_up_answer
+        ? { question: intake.follow_up_question, answer: intake.follow_up_answer }
+        : null,
+    role: intake.role_summary,
+    knownForSummary: intake.known_for_summary,
+    aiTools: intake.ai_tools,
+    aiPolicy: intake.ai_policy,
+    tasks: tasks.map((t) => ({ name: t.name, pile: t.pile, hours: t.confirmed_hours ?? t.estimated_hours })),
+  };
+}
 
 /** One session as the quiz and its result read it: the session, her answers, and her tasks in order. */
 export async function loadWeek(sessionId: string) {

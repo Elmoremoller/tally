@@ -5,48 +5,54 @@ import { useActionState } from "react";
 import { startCheckout } from "@/app/start/checkout";
 import { ArrowRight, Check } from "@/components/icons";
 import { paywallConsent as consent } from "@/lib/legal";
-import { dollars, PLAN_PRICE } from "@/lib/prices";
+import { paywallCopy } from "@/lib/plan-copy";
+import type { WeekTask } from "@/lib/week";
+
+/** Her biggest task in a pile, by her own hours. */
+const top = (tasks: Pick<WeekTask, "name" | "pile" | "hours">[], pile: WeekTask["pile"]) =>
+  tasks.filter((t) => t.pile === pile).sort((a, b) => b.hours - a.hours)[0];
 
 /**
- * Get my plan. Every line is about their own fights, not about what they are buying. The price is on the
- * button, so there are no surprises on Stripe’s page. Adding their partner is free, so it is a line in the
- * list rather than something to choose.
+ * Get my plan, under her free result: the headline, two lines built from her own tasks, the five parts of
+ * the plan, the price and the refund line, and the button to Stripe's page.
  */
-export function Paywall({ topics, situation }: { topics: string; situation: string }) {
+export function Paywall({ tasks }: { tasks: Pick<WeekTask, "name" | "pile" | "hours">[] }) {
   const [state, action, pending] = useActionState(startCheckout, null);
+  const toAi = top(tasks, "hand_to_ai");
+  const back = top(tasks, "hand_back");
 
   return (
     <section className="paywall" aria-labelledby="paywall-title">
       <h2 id="paywall-title" className="paywall-title">
-        Your plan
+        {paywallCopy.title}
       </h2>
       <ul className="paywall-list">
-        <li>
-          <Check />
-          One small step a day, through Prevent, Pause and Repair.
-        </li>
-        {topics ? (
+        {toAi ? (
           <li>
             <Check />
-            The exact words for your fights about {topics}.
+            {paywallCopy.prompts(toAi.name)}
           </li>
         ) : null}
-        <li>
-          <Check />
-          What to say when {situation}.
-        </li>
-        <li>
-          <Check />A check for any message, before you send it.
-        </li>
-        <li>
-          <Check />
-          Use it on your own, or invite your partner for free.
-        </li>
+        {back ? (
+          <li>
+            <Check />
+            {paywallCopy.handBack(back.name)}
+          </li>
+        ) : null}
+        {paywallCopy.parts.map((part) => (
+          <li key={part.title}>
+            <Check />
+            <span>
+              <strong>{part.title}.</strong> {part.text}
+            </span>
+          </li>
+        ))}
       </ul>
 
       <form action={action} className="paywall-form">
+        <p className="paywall-price">{paywallCopy.price}</p>
         <button type="submit" className="btn btn-lg paywall-cta" disabled={pending}>
-          {pending ? "One moment" : `Get my plan · ${dollars(PLAN_PRICE)}`}
+          {pending ? paywallCopy.pending : paywallCopy.cta}
           {pending ? null : <ArrowRight />}
         </button>
         {state?.error ? (
@@ -54,8 +60,10 @@ export function Paywall({ topics, situation }: { topics: string; situation: stri
             {state.error}
           </p>
         ) : null}
-        <p className="paywall-fine">One payment, no subscription. Secure payment with Stripe.</p>
-        {/* In a new tab, so reading them doesn't lose the quiz they just finished. */}
+        <p className="paywall-fine">
+          {paywallCopy.refund} {paywallCopy.secure}
+        </p>
+        {/* In a new tab, so reading them doesn't lose the result she just got. */}
         <p className="paywall-fine paywall-consent">
           {consent.before}
           <Link href="/terms" target="_blank" rel="noopener noreferrer">

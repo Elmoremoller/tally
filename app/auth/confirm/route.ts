@@ -1,11 +1,8 @@
 import type { EmailOtpType } from "@supabase/supabase-js";
-import { cookies } from "next/headers";
 import { NextResponse, type NextRequest } from "next/server";
-import { AFTER_SIGN_IN_COOKIE, afterSignIn } from "@/lib/after-sign-in";
 import { supabaseWithSession } from "@/lib/supabase";
 
-// The link in the login email lands here. It signs the person in on this browser, then opens their plan,
-// or the check in if that's what they opened before signing in.
+// The link in her email lands here. It signs her in on this browser, then opens her plan.
 export async function GET(request: NextRequest) {
   const { searchParams, origin } = request.nextUrl;
   const tokenHash = searchParams.get("token_hash");
@@ -19,8 +16,5 @@ export async function GET(request: NextRequest) {
       ? await supabase.auth.exchangeCodeForSession(code)
       : { error: new Error("No token in the link") };
 
-  const jar = await cookies();
-  const next = afterSignIn(jar.get(AFTER_SIGN_IN_COOKIE)?.value);
-  if (!error) jar.delete(AFTER_SIGN_IN_COOKIE);
-  return NextResponse.redirect(new URL(error ? "/login?link=expired" : next, origin));
+  return NextResponse.redirect(new URL(error ? "/login?link=expired" : "/plan", origin));
 }

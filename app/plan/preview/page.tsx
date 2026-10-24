@@ -1,16 +1,17 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
-import { PlanView } from "@/components/plan/PlanView";
-import { needsSafetyCheck, SafetyCheckPage } from "@/components/plan/SafetyCheckPage";
+import { PlanPage } from "@/components/plan/PlanPage";
+import { PlanWaiting } from "@/components/plan/PlanWaiting";
 import { SiteNav } from "@/components/SiteNav";
-import { previewAllowed, previewCheckIn, previewPlan, previewProgress, sampleViewer } from "@/lib/preview";
-import { momentIndex, reviewDue, type ReviewRow } from "@/lib/progress";
+import { offer } from "@/lib/offer";
+import { planSamples } from "@/lib/plan-samples";
+import { previewAllowed } from "@/lib/preview";
 
-// A sample plan, only on a local setup: /plan/preview?type=quick_sparks&day=3&as=partner&review=1
-// (see previewPlan in lib/preview.ts for every option, and checkin=day_14 for a check in's card). Answers
-// move the sample on without saving anything.
-export const metadata: Metadata = { title: "Plan preview · The Couple Standard", robots: { index: false } };
+// A sample plan, only on a local setup. /plan/preview shows the marketing coordinator's plan; add
+// ?sample=law_firm for the executive assistant's, &state=pending or &state=failed for the waiting page, and
+// &welcome=1 for the note shown right after paying. Nothing is saved or sent.
+export const metadata: Metadata = { title: `Plan preview · ${offer.name}`, robots: { index: false } };
 
 export default function Page({ searchParams }: PageProps<"/plan/preview">) {
   return (
@@ -25,32 +26,10 @@ export default function Page({ searchParams }: PageProps<"/plan/preview">) {
 
 async function Preview({ searchParams }: { searchParams: PageProps<"/plan/preview">["searchParams"] }) {
   // Reading the address first keeps this page decided per request, so PLAN_PREVIEW at start up is what counts.
-  const params = await searchParams;
+  const { sample, state, welcome } = await searchParams;
   if (!previewAllowed) notFound();
-  const plan = previewPlan(params);
-  const viewer = sampleViewer(plan.type, plan.as);
-  if (await needsSafetyCheck(viewer.role)) return <SafetyCheckPage />;
-
-  const now = new Date();
-  const progress = previewProgress(plan, now);
-  // The sample's earlier steps all count as It helped.
-  const history: ReviewRow[] = progress.path
-    .slice(0, progress.index)
-    .map((stepId, i) => ({ stepId, version: "main", outcome: "helped", at: new Date(now.getTime() - (progress.index - i) * 86_400_000) }));
-  const started = new Date(now.getTime() - plan.day * 86_400_000);
-  return (
-    <PlanView
-      ctx={viewer.ctx}
-      name={viewer.name}
-      role={viewer.role}
-      partnerEmail={viewer.row.partner_email}
-      progress={progress}
-      reviewDue={reviewDue(progress, now)}
-      history={history}
-      ack={progress.current ? plan.after : null}
-      moment={momentIndex(started, now, plan.wants)}
-      checkIn={previewCheckIn(params)}
-      preview={plan}
-    />
-  );
+  const content = sample === "law_firm" ? planSamples.law_firm : planSamples.marketing;
+  const note = welcome === "1" ? { email: "you@example.com", token: null } : null;
+  if (state === "pending" || state === "failed") return <PlanWaiting failed={state === "failed"} welcome={note} />;
+  return <PlanPage content={content} welcome={note} />;
 }

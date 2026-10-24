@@ -2805,7 +2805,8 @@
     color: var(--ink);
   }
 
-  /* The paywall: one card under the reveal. Every line is about their fights; the price sits on the button. */
+  /* The paywall: one card under the free result. Two lines from her own tasks, the plan's five parts, then
+     the price above the button. */
   .paywall {
     width: 100%;
     margin-top: 1rem;
@@ -2850,10 +2851,20 @@
     stroke-linecap: round;
     stroke-linejoin: round;
   }
+  .paywall-list strong {
+    color: var(--deep-red);
+  }
   .paywall-form {
     display: grid;
     gap: 0.75rem;
     margin-top: 1.5rem;
+  }
+  .paywall-price {
+    font-size: var(--fs-lead);
+    font-weight: 700;
+    letter-spacing: var(--tr-lead);
+    color: var(--ink);
+    text-align: center;
   }
   .paywall-cta {
     width: 100%;
@@ -3172,6 +3183,11 @@
     line-height: 1.45;
     overflow: hidden;
     resize: none;
+  }
+  /* A long prompt or profile reads better in the regular weight. */
+  .plan-say textarea[data-long] {
+    font-weight: 500;
+    line-height: 1.5;
   }
   .plan-say textarea:focus {
     outline: none;
@@ -3531,6 +3547,70 @@
     color: var(--ink);
   }
 
+  /* The work audit: her tasks in a pile, each with its way to hand it back. */
+  .plan-tasks {
+    display: grid;
+    gap: 0.75rem;
+    margin: 0.25rem 0 0;
+    padding: 0;
+    list-style: none;
+  }
+  .plan-tasks li {
+    display: grid;
+    gap: 0.625rem;
+  }
+  .plan-tasks li + li {
+    padding-top: 0.75rem;
+    border-top: 1px solid var(--line);
+  }
+  .plan-task-name {
+    font-weight: 600;
+    color: var(--ink);
+    text-wrap: pretty;
+  }
+  /* Hours back: each task she hands off, with her own hours. */
+  .plan-hours {
+    display: grid;
+    gap: 0.375rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .plan-hours li {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.625rem 0.875rem;
+    border-radius: 0.75rem;
+    background: var(--tint);
+    color: var(--ink);
+  }
+  .plan-hours b {
+    color: var(--deep-red);
+    white-space: nowrap;
+    font-variant-numeric: tabular-nums;
+  }
+  /* Safe use rules and a project's first steps */
+  .plan-rules,
+  .plan-steps {
+    display: grid;
+    gap: 0.5rem;
+    margin: 0;
+    padding-left: 1.25rem;
+    color: var(--ink);
+    text-wrap: pretty;
+  }
+  .plan-rules {
+    list-style: disc;
+  }
+  .plan-steps {
+    list-style: decimal;
+  }
+  .plan-rules li::marker,
+  .plan-steps li::marker {
+    color: var(--deep-red);
+    font-weight: 700;
+  }
   .plan-foot {
     display: grid;
     justify-items: start;

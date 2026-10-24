@@ -1,15 +1,16 @@
 "use client";
 
 import { useActionState } from "react";
-import { resendLink } from "@/app/welcome/actions";
+import { resendPlanLink } from "@/app/plan/actions";
 
-export function ResendLink({ sessionId }: { sessionId: string }) {
-  const [state, action, pending] = useActionState(resendLink, null);
+/** Under the note about her email: send the link to her plan again. Nothing to send on a preview. */
+export function ResendLink({ token }: { token: string | null }) {
+  const [state, action, pending] = useActionState(resendPlanLink, null);
   return (
     <form action={action} className="page-resend">
-      <input type="hidden" name="session_id" value={sessionId} />
+      <input type="hidden" name="token" value={token ?? ""} />
       <p>No email after a minute? Check your spam folder, or</p>
-      <button type="submit" className="link-button" disabled={pending}>
+      <button type="submit" className="link-button" disabled={pending || !token}>
         {pending ? "Sending" : "send it again"}
       </button>
       {state?.sent ? <p role="status">Sent. It can take a minute to arrive.</p> : null}

@@ -1,37 +1,36 @@
-import type { CoupleTypeId } from "./quiz";
-import { requestOrigin } from "./site";
+import { checkoutCopy } from "./plan-copy";
 import { CURRENCY, PLAN_PRICE } from "./prices";
+import { requestOrigin } from "./site";
 import { stripe } from "./stripe";
 
-/** Marks Checkouts this site started, in case the Stripe account sells other things too. */
-export const APP_TAG = "couple-standard";
+/** Marks Checkouts this site started, since the Stripe account also sells The Couple Standard's plan. */
+export const APP_TAG = "worth-her-time";
 
 /**
- * Starts a Stripe Checkout for the plan and returns its address. Adding a partner is free, so the plan is
- * the only thing on it. The name below is what people see on Stripe's page and on their receipt, so it
- * talks about the plan, never a product.
+ * Starts a Stripe Checkout for her plan and returns its address. It carries her quiz session, so the payment
+ * opens the plan built from her answers. Stripe asks for her email.
  */
-export async function createCheckout({ email, coupleType }: { email: string; coupleType: CoupleTypeId }) {
+export async function createCheckout(sessionId: string) {
   const origin = await requestOrigin();
-  const session = await stripe().checkout.sessions.create({
+  const checkout = await stripe().checkout.sessions.create({
     mode: "payment",
-    // Cards only (Apple Pay and Google Pay included), so a payment is either done or not when people come back.
+    // Cards only (Apple Pay and Google Pay included), so a payment is either done or not when she comes back.
     allowed_payment_method_types: ["card"],
-    customer_email: email,
+    client_reference_id: sessionId,
     line_items: [
       {
         quantity: 1,
         price_data: {
           currency: CURRENCY,
           unit_amount: PLAN_PRICE,
-          product_data: { name: "Your plan", description: "Prevent, Pause, Repair, built around your answers." },
+          product_data: { name: checkoutCopy.name, description: checkoutCopy.description },
         },
       },
     ],
-    metadata: { app: APP_TAG, email, kind: "plan", couple_type: coupleType },
+    metadata: { app: APP_TAG, kind: "plan", session_id: sessionId },
     success_url: `${origin}/welcome?session_id={CHECKOUT_SESSION_ID}`,
     cancel_url: `${origin}/start/result`,
   });
-  if (!session.url) throw new Error("Stripe did not return a checkout address.");
-  return session.url;
+  if (!checkout.url) throw new Error("Stripe did not return a checkout address.");
+  return checkout.url;
 }

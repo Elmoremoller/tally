@@ -2,41 +2,38 @@
 
 import { redirect } from "next/navigation";
 import { createCheckout } from "@/lib/checkout";
-import { readResult } from "@/lib/result-cookie";
+import { loadWeek, noteSessionCheckout, planForSession } from "@/lib/funnel-db";
+import { paywallCopy } from "@/lib/plan-copy";
+import { readSessionId } from "@/lib/session-cookie";
 import { stripeConfigured } from "@/lib/stripe";
-import { supabaseAdmin, supabaseConfigured } from "@/lib/supabase";
 
 export type CheckoutState = { error: string } | null;
 
-/** Get my plan: sends them to Stripe Checkout for the plan. */
+/** Get my plan: sends her to Stripe Checkout for the plan built from this browser's quiz. */
 export async function startCheckout(): Promise<CheckoutState> {
-  const result = await readResult();
-  if (!result) return { error: "Please take the quiz first, so we can make your plan." };
+  const sessionId = await readSessionId();
+  if (!sessionId) return { error: paywallCopy.quizFirst };
   if (!stripeConfigured) {
-    return {
-      error:
-        process.env.NODE_ENV === "production"
-          ? "Something went wrong. Please try again in a minute."
-          : "Payments are not set up yet. Add the Stripe test keys from SETUP.md.",
-    };
-  }
-
-  // So a quiz about to turn 30 days old isn't deleted while they pay (see the privacy SQL file).
-  if (supabaseConfigured) {
-    try {
-      const { error } = await supabaseAdmin().rpc("note_checkout", { p_email: result.email });
-      if (error) console.error("note_checkout failed", error.message);
-    } catch (error) {
-      console.error("note_checkout failed", error);
-    }
+    return { error: process.env.NODE_ENV === "production" ? paywallCopy.error : paywallCopy.notSetUp };
   }
 
   let url: string;
   try {
-    url = await createCheckout({ email: result.email, coupleType: result.coupleType });
+    const { session } = await loadWeek(sessionId);
+    if (!session || session.status === "started") return { error: paywallCopy.quizFirst };
+    // Already paid for: back to her plan rather than paying twice.
+    if (session.status === "paid") {
+      const plan = await planForSession(sessionId);
+      if (plan) url = `/plan/${plan.access_token}`;
+      else return { error: paywallCopy.error };
+    } else {
+      // So the privacy cleanup never removes her answers while she's paying.
+      await noteSessionCheckout(sessionId).catch((error) => console.error("note_session_checkout failed", error));
+      url = await createCheckout(sessionId);
+    }
   } catch (error) {
     console.error("Checkout failed", error);
-    return { error: "Something went wrong. Please try again in a minute." };
+    return { error: paywallCopy.error };
   }
   redirect(url);
 }

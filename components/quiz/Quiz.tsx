@@ -9,13 +9,14 @@ import { followUpCopy, openQuestions, quizErrors, readingLine } from "@/lib/ques
 import type { AiPolicy, AiTool, WeekTask } from "@/lib/week";
 import { FreeResult } from "./FreeResult";
 import { HeardStep } from "./HeardStep";
+import { Paywall } from "./Paywall";
 import { QuizHeader } from "./QuizHeader";
 import { TextStep } from "./TextStep";
 import { ToolsStep } from "./ToolsStep";
 
 // One screen at a time: her job, her week, what she wants to be known for, then the two taps. The AI reads
 // her answers while "Reading your week" shows; if her week was too thin it asks one follow up, once. Then
-// Here's what we heard, with her hours on sliders, and Looks right shows her free result.
+// Here's what we heard, with her hours on sliders, and Looks right shows her free result and the paywall.
 const STEPS = ["job", "week", "known_for", "tools"] as const;
 const SCREENS = STEPS.length + 1;
 /** "Reading your week" stays up at least this long, so it can be read. */
@@ -164,7 +165,9 @@ export function Quiz() {
             </h1>
           </div>
         ) : phase === "result" ? (
-          <FreeResult tasks={tasks} headingRef={headingRef} />
+          <FreeResult tasks={tasks} headingRef={headingRef}>
+            <Paywall tasks={tasks} />
+          </FreeResult>
         ) : (
           <div key={phase === "questions" ? step : phase} className="quiz-step" data-dir={direction}>
             {phase === "questions" ? (

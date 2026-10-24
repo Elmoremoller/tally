@@ -1,22 +1,21 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 import { connection } from "next/server";
 import { Suspense } from "react";
 import { Backdrop } from "@/components/Backdrop";
-import { WelcomeFlow } from "@/components/fight-help/WelcomeFlow";
-import { ResendLink } from "@/components/plan/ResendLink";
 import { SiteNav } from "@/components/SiteNav";
-import type { HelpNames } from "@/lib/fight-help";
 import { fulfillCheckout, type Fulfilment } from "@/lib/fulfill";
-import { previewAllowed } from "@/lib/preview";
-import { supabaseAdmin } from "@/lib/supabase";
-import { saveRepairAgreementAfterPaying } from "./actions";
+import { offer } from "@/lib/offer";
+import { welcomeCopy } from "@/lib/plan-copy";
+import { writePlanAfterResponse } from "@/lib/plan-generation";
 
-// Where Stripe sends people after paying. It opens the plan straight away (the webhook does the same,
-// whichever is first), asks whether they just had a fight, and tells them where their login link went.
-// On a local setup, /welcome?preview=1 shows it with a sample couple, without Stripe, and saves nothing.
+// Where Stripe sends her after paying. It records the payment straight away (the webhook does the same,
+// whichever is first), starts writing her plan, and opens her plan's private page, which shows "Your plan
+// is being prepared" until it's ready.
+export const maxDuration = 300;
 export const metadata: Metadata = {
-  title: "Your plan is ready · The Couple Standard",
+  title: `Your plan · ${offer.name}`,
   robots: { index: false },
 };
 
@@ -37,80 +36,38 @@ export default function Page({ searchParams }: PageProps<"/welcome">) {
 async function Welcome({ searchParams }: { searchParams: PageProps<"/welcome">["searchParams"] }) {
   // Always decided per request: it asks Stripe about this payment.
   await connection();
-  const params = await searchParams;
-  if (previewAllowed && params.preview === "1") {
-    return (
-      <WelcomeFlow names={{ me: "Sam", partner: "Alex" }} save={null}>
-        <LinkLine email="sam@example.com" sent />
-        <ResendLink sessionId="cs_preview" />
-      </WelcomeFlow>
-    );
-  }
-  const sessionId = params.session_id;
+  const { session_id: checkoutId } = await searchParams;
   let result: Fulfilment | "error" = { paid: false, reason: "not-ours" };
-  if (typeof sessionId === "string" && sessionId.startsWith("cs_")) {
+  if (typeof checkoutId === "string" && checkoutId.startsWith("cs_")) {
     try {
-      result = await fulfillCheckout(sessionId);
+      result = await fulfillCheckout(checkoutId);
     } catch (error) {
       console.error("Welcome fulfilment failed", error);
       result = "error";
     }
   }
 
-  // Something on our side failed, but the payment may well have gone through. Never ask them to pay again.
+  if (result !== "error" && result.paid) {
+    writePlanAfterResponse(result.planId);
+    redirect(`/plan/${result.token}?welcome=1`);
+  }
+
+  // Something on our side failed, but the payment may well have gone through. Never ask her to pay again.
   if (result === "error") {
     return (
       <>
-        <h1 className="page-title">We’re still opening your plan</h1>
-        <p className="page-text">
-          This can take a minute. Refresh this page soon, or watch for an email with the link to your plan.
-        </p>
+        <h1 className="page-title">{welcomeCopy.stillOpening}</h1>
+        <p className="page-text">{welcomeCopy.stillOpeningText}</p>
       </>
     );
   }
-
-  if (!result.paid || typeof sessionId !== "string") {
-    return (
-      <>
-        <h1 className="page-title">That payment didn’t go through</h1>
-        <p className="page-text">Nothing has changed on your side. You can try again whenever you’re ready.</p>
-        <Link href="/start/result" className="btn btn-lg page-cta">
-          Try again
-        </Link>
-      </>
-    );
-  }
-
   return (
-    <WelcomeFlow names={await namesFor(result.email)} save={saveRepairAgreementAfterPaying.bind(null, sessionId)}>
-      <LinkLine email={result.email} sent={result.linkSent !== false} />
-      <ResendLink sessionId={sessionId} />
-    </WelcomeFlow>
+    <>
+      <h1 className="page-title">{welcomeCopy.notPaid}</h1>
+      <p className="page-text">{welcomeCopy.notPaidText}</p>
+      <Link href="/start/result" className="btn btn-lg page-cta">
+        {welcomeCopy.tryAgain}
+      </Link>
+    </>
   );
-}
-
-function LinkLine({ email, sent }: { email: string; sent: boolean }) {
-  return sent ? (
-    <p className="page-text">
-      We sent a link to <strong>{email}</strong>. Open it to see your plan.
-    </p>
-  ) : (
-    <p className="page-text">
-      We couldn’t email your link to <strong>{email}</strong> just now. Try sending it again below.
-    </p>
-  );
-}
-
-/** Their first names from the quiz, for the help after a fight. It still works without them. */
-async function namesFor(email: string): Promise<HelpNames> {
-  try {
-    const { data } = await supabaseAdmin()
-      .from("people")
-      .select("your_name, partner_name")
-      .eq("email", email.toLowerCase())
-      .maybeSingle();
-    return { me: data?.your_name ?? null, partner: data?.partner_name ?? null };
-  } catch {
-    return { me: null, partner: null };
-  }
 }

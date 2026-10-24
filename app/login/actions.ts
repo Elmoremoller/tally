@@ -1,6 +1,6 @@
 "use server";
 
-import { looksLikeEmail } from "@/lib/quiz";
+import { looksLikeEmail } from "@/lib/clean";
 import { sendLoginLink, supabaseConfigured } from "@/lib/supabase";
 
 export type LoginState = { sent: boolean; error?: string } | null;

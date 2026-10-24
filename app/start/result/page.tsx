@@ -3,12 +3,14 @@ import { redirect } from "next/navigation";
 import { Suspense } from "react";
 import { Backdrop } from "@/components/Backdrop";
 import { FreeResult } from "@/components/quiz/FreeResult";
+import { Paywall } from "@/components/quiz/Paywall";
 import { QuizHeader } from "@/components/quiz/QuizHeader";
 import { loadWeek } from "@/lib/funnel-db";
 import { offer } from "@/lib/offer";
 import { readSessionId } from "@/lib/session-cookie";
 
-// Her free result again, from her session, for coming back to it, like after a trip to Stripe without paying.
+// Her free result and the paywall again, from her session, for coming back to it, like after a trip to Stripe
+// without paying.
 export const metadata: Metadata = {
   title: `Your week · ${offer.name}`,
   robots: { index: false },
@@ -33,5 +35,10 @@ async function SavedResult() {
   const week = sessionId ? await loadWeek(sessionId).catch(() => null) : null;
   const done = week?.session && week.session.status !== "started" && week.tasks.length;
   if (!week || !done) redirect("/start");
-  return <FreeResult tasks={week.tasks.map((t) => ({ name: t.name, pile: t.pile, hours: t.confirmed_hours ?? t.estimated_hours }))} />;
+  const tasks = week.tasks.map((t) => ({ name: t.name, pile: t.pile, hours: t.confirmed_hours ?? t.estimated_hours }));
+  return (
+    <FreeResult tasks={tasks}>
+      <Paywall tasks={tasks} />
+    </FreeResult>
+  );
 }

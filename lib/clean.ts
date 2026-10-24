@@ -17,3 +17,5 @@ export const cleanBullets = (value: unknown) =>
   value.every((b) => typeof b === "string" && b.trim().length > 0 && b.length <= 300)
     ? (value as string[]).map((b) => b.trim())
     : null;
+
+export const looksLikeEmail = (value: string) => /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(value);

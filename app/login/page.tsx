@@ -4,9 +4,10 @@ import { Suspense } from "react";
 import { Backdrop } from "@/components/Backdrop";
 import { LoginForm } from "@/components/plan/LoginForm";
 import { SiteNav } from "@/components/SiteNav";
+import { offer } from "@/lib/offer";
 
 export const metadata: Metadata = {
-  title: "Open your plan · The Couple Standard",
+  title: `Open your plan · ${offer.name}`,
   robots: { index: false },
 };
 
@@ -23,7 +24,7 @@ export default function Page({ searchParams }: PageProps<"/login">) {
         <p className="page-text">Enter the email you used, and we’ll send you a link. No password needed.</p>
         <LoginForm />
         <p className="page-small">
-          No plan yet? <Link href="/start">Take the quiz</Link>
+          No plan yet? <Link href="/start">{offer.cta}</Link>
         </p>
       </main>
     </>

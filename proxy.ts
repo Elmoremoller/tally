@@ -1,6 +1,5 @@
 import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
-import { AFTER_SIGN_IN_COOKIE, AFTER_SIGN_IN_MAX_AGE, rememberFor } from "@/lib/after-sign-in";
 import { SOURCE_COOKIE, SOURCE_MAX_AGE, sourceFrom, writeSource } from "@/lib/source";
 
 export async function proxy(request: NextRequest) {
@@ -31,8 +30,8 @@ function landing(request: NextRequest) {
   return response;
 }
 
-// Keeps people signed in on their plan: Supabase logins last an hour, and this quietly renews them
-// on every visit. It does not decide who may see a plan; the plan page and the database do that.
+// Keeps her signed in where the email's link lands: Supabase logins last an hour, and this quietly renews
+// them. It does not decide who may see a plan; the plan's private link does that.
 async function plan(request: NextRequest) {
   let response = NextResponse.next({ request });
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
@@ -50,21 +49,10 @@ async function plan(request: NextRequest) {
       },
     },
   });
-  const { data } = await supabase.auth.getClaims();
-  // Someone signed out who opens the check in gets it again after signing in from the email link.
-  const remember = data?.claims ? null : rememberFor(request.nextUrl.pathname);
-  if (remember) {
-    response.cookies.set(AFTER_SIGN_IN_COOKIE, remember, {
-      httpOnly: true,
-      sameSite: "lax",
-      secure: process.env.NODE_ENV === "production",
-      path: "/",
-      maxAge: AFTER_SIGN_IN_MAX_AGE,
-    });
-  }
+  await supabase.auth.getClaims();
   return response;
 }
 
 export const config = {
-  matcher: ["/", "/plan/:path*"],
+  matcher: ["/", "/plan"],
 };
