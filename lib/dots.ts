@@ -1,8 +1,8 @@
 /**
  * The dotted field behind the landing page's hero, and, held still, behind the quiz: small squares in the
- * brand colours, thick toward the edges and thinning out toward a clear middle. Density is turned into dots
- * with an ordered dither, so a slow change in density reads as dots switching on and off, not as a fade.
- * This only draws; the component owns the canvas, the clock and when to stop.
+ * brand colours, gathered in soft lobes that circle a clear middle. Density is turned into dots with an
+ * ordered dither, so a slow change in density reads as dots switching on and off, not as a fade. This only
+ * draws; the component owns the canvas, the clock and when to stop.
  */
 
 type Rgb = readonly [number, number, number];
@@ -12,20 +12,31 @@ export type DotPalette = { tan: Rgb; dusty: Rgb; sky: Rgb };
 export type DotLook = {
   /** Seconds into the motion. A field held still is just one fixed moment. */
   t: number;
-  /** How far the edge of the field slides back and forth, and how strongly its density swells in waves. 0 holds each still. */
-  drift: number;
-  pulse: number;
   /** Scales the squares' size and opacity. 1 is the hero; less is a quiet backdrop. */
   size: number;
   alpha: number;
   /**
    * The clear middle: half its width and half its height, and how far the dots take to come back in, all in
-   * px. It is centred on the canvas unless `cx` and `cy` say where.
+   * px. It is centred on the canvas unless `cx` and `cy` say where. The lobes circle this point.
    */
   clear: { x: number; y: number; feather: number; cx?: number; cy?: number };
 };
 
 const FALLBACK: DotPalette = { tan: [166, 138, 105], dusty: [122, 144, 168], sky: [174, 202, 232] };
+
+/**
+ * The lobes of density, all circling the clear middle clockwise. `start` is where each begins (radians, 0 at
+ * the right, growing clockwise), `turn` the seconds it takes to go all the way round, `reach` how far out it
+ * orbits as a share of the width and height (past 0.5 it is half off the edge), and `size` its radius as a
+ * share of the width (never under 220px, so a phone, where only the top and bottom show, still sees them
+ * most of the time). At the start there is a big lobe at the right, two at the left and a small one at the bottom.
+ */
+const LOBES = [
+  { start: 0, turn: 30, reach: [0.5, 0.5], size: 0.26, weight: 1.15 },
+  { start: -2.356, turn: 40, reach: [0.46, 0.5], size: 0.21, weight: 0.85 },
+  { start: 2.356, turn: 52, reach: [0.5, 0.5], size: 0.17, weight: 0.75 },
+  { start: 1, turn: 36, reach: [0.48, 0.5], size: 0.18, weight: 0.8 },
+] as const;
 
 /** Bayer 4x4: the thresholds a cell's density is compared with. */
 const BAYER = [0, 8, 2, 10, 12, 4, 14, 6, 3, 11, 1, 9, 15, 7, 13, 5];
@@ -64,7 +75,7 @@ function rgba([r, g, b]: Rgb, a: number) {
 }
 
 export function paintDots(ctx: CanvasRenderingContext2D, width: number, height: number, palette: DotPalette, look: DotLook) {
-  const { t, drift, pulse, size, alpha, clear } = look;
+  const { t, size, alpha, clear } = look;
   const fills = {
     tan: rgba(palette.tan, 0.85 * alpha),
     dusty: rgba(palette.dusty, 0.8 * alpha),
@@ -76,10 +87,17 @@ export function paintDots(ctx: CanvasRenderingContext2D, width: number, height: 
   const midX = clear.cx ?? width / 2;
   const midY = clear.cy ?? height / 2;
 
-  // Where the thick edge begins (it slides), and the top patch (it slides and swells)
-  const edge = 0.6 + drift * 0.09 * Math.sin(t * 0.55);
-  const patchX = (0.3 + drift * 0.06 * Math.sin(t * 0.4)) * width;
-  const patchR = (0.3 + pulse * 0.04 * Math.sin(t * 1.5)) * width;
+  // Each lobe goes round its ellipse, wanders in a small circle of its own, and swells and shrinks a little
+  const lobes = LOBES.map((lobe, i) => {
+    const angle = lobe.start + (t / lobe.turn) * Math.PI * 2;
+    const wander = t * 0.9 + i * 2.1;
+    return {
+      x: midX + Math.cos(angle) * lobe.reach[0] * width + Math.cos(wander) * 0.025 * width,
+      y: midY + Math.sin(angle) * lobe.reach[1] * height + Math.sin(wander) * 0.025 * width,
+      r: Math.max(lobe.size * width, 220) * (1 + 0.15 * Math.sin(t * 1.4 + i * 1.7)),
+      weight: lobe.weight,
+    };
+  });
 
   ctx.clearRect(0, 0, width, height);
   for (let row = 0; row < rows; row++) {
@@ -94,12 +112,10 @@ export function paintDots(ctx: CanvasRenderingContext2D, width: number, height: 
       );
       if (open === 0) continue;
 
-      const nx = x / width;
-      const ny = y / height;
-      let density = Math.pow(smooth(edge, 1.02, nx), 0.85) * (0.85 + 0.15 * Math.sin(ny * 5 + t * 0.8 * drift));
-      density += 0.7 * Math.max(0, 1 - Math.hypot(x - patchX, y * 1.3) / patchR);
-      density += 0.6 * Math.max(0, 1 - Math.hypot(x - 0.02 * width, (y - height) * 1.3) / (0.22 * width));
-      density *= 1 + pulse * 0.45 * Math.sin(t * 1.5 - nx * 3.2 + ny * 1.5);
+      let density = 0;
+      for (const lobe of lobes) density += lobe.weight * Math.max(0, 1 - Math.hypot(x - lobe.x, y - lobe.y) / lobe.r);
+      // A two-armed swirl turns through the lobes, so the dots circle inside them too
+      density *= 1 + 0.3 * Math.sin(t * 1.2 - 2 * Math.atan2(y - midY, x - midX));
       density = Math.min(1, density * open);
 
       if (density <= 0.02 || density <= (BAYER[(row & 3) * 4 + (col & 3)] + 0.5) / 16) continue;

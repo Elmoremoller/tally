@@ -3,7 +3,7 @@
 import { useEffect, useRef } from "react";
 import { paintDots, readPalette, type DotLook } from "@/lib/dots";
 
-/** The moment a still field is drawn at: the pose of the drift and pulse it is held in. */
+/** The moment a still field is drawn at: where the circling lobes are held. */
 const STILL_AT = 2.4;
 
 /** The hero's copy, as a centre and half size in the canvas's own pixels. */
@@ -14,8 +14,6 @@ function look(still: boolean, width: number, height: number, t: number, copy: Co
     // The quiz: quiet, and only in the margins either side of the column (on a phone, in the empty bands top and bottom)
     return {
       t,
-      drift: 1,
-      pulse: 1,
       size: 0.6,
       alpha: 0.5,
       clear:
@@ -29,8 +27,6 @@ function look(still: boolean, width: number, height: number, t: number, copy: Co
   const x = Math.min(middle.halfW + 56, width / 2 - 12);
   return {
     t,
-    drift: 1,
-    pulse: 1,
     size: 1,
     alpha: 1,
     clear: { x, y: middle.halfH + 8, cx: middle.x, cy: middle.y, feather: Math.max(60, Math.min(220, width / 2 - x)) },
@@ -38,7 +34,7 @@ function look(still: boolean, width: number, height: number, t: number, copy: Co
 }
 
 /**
- * The dotted field, drawn on a canvas that fills its parent. In the hero it drifts and pulses, keeps clear
+ * The dotted field, drawn on a canvas that fills its parent. In the hero it circles and swells, keeps clear
  * of the hero's copy (`.hero-copy`), and holds still when the hero's pause button says so, when the hero is
  * off screen, and for visitors who prefer reduced motion. With `still` (the quiz) it is drawn once and never
  * moves. It is decoration only.
