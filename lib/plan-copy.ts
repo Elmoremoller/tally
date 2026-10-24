@@ -10,7 +10,7 @@ const inSentence = (name: string) => (/^\p{Lu}\p{Ll}/u.test(name) ? name.charAt(
 
 export const paywallCopy = {
   title: "Get your plan to win those hours back and turn them into credit.",
-  lead: "Here’s what’s inside, built from your answers.", // DRAFT
+  lead: "Here’s what’s inside, built from your answers.", // approved 2026-10-24
   handBack: (task: string) => `A polite script to hand back ${inSentence(task)}`,
   price: `${dollars(offer.price.cents)}, paid once. No subscription.`,
   refund: offer.refund,
@@ -24,7 +24,7 @@ export const paywallCopy = {
 
 /**
  * The look at her plan under the paywall: one card per part, with her own tasks, hours and tool in clear and
- * the words the plan writer adds after checkout behind a lock. All DRAFT.
+ * the words the plan writer adds after checkout behind a lock. Approved on 2026-10-24.
  */
 export const previewCopy = {
   lock: "Written for you after checkout",
