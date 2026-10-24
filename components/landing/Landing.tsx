@@ -11,7 +11,7 @@ import { SiteNav } from "@/components/SiteNav";
 import { DayOfAsks } from "./DayOfAsks";
 import { Reviews } from "./Reviews";
 import { stepVisuals } from "./StepVisuals";
-import { faqs, planParts, problem, steps, why, whyThis } from "@/lib/landing";
+import { faqs, planParts, problem, steps, why } from "@/lib/landing";
 import { angleFit, angles, offer, type AngleId } from "@/lib/offer";
 import { landingTestimonials, reviewsMinimum, type Testimonial } from "@/lib/testimonials";
 
@@ -107,7 +107,7 @@ export function Landing({ angle, reviews = landingTestimonials }: { angle: Angle
           </div>
         </section>
 
-        {/* Why it happens: each finding led by its figure, then its words and its source */}
+        {/* Running on empty: each feeling named big, then what it's like, then what Tally does about it */}
         <section className="band" aria-labelledby="why-title" data-section="why">
           <div className="wrap">
             <div className="center-head">
@@ -116,13 +116,13 @@ export function Landing({ angle, reviews = landingTestimonials }: { angle: Angle
               </h2>
               <p className="text-lead text-balance text-muted">{why.lead}</p>
             </div>
-            <ul className="stats">
-              {why.stats.map(({ figure, text, source }) => (
-                <li key={figure} className="stat">
-                  <p className="stat-figure">{figure}</p>
-                  <p className="stat-text">{text}</p>
-                  <p className="stat-source">
-                    <span>Source</span> {source}
+            <ul className="feelings">
+              {why.cards.map(({ feeling, text, outcome }) => (
+                <li key={feeling} className="feeling">
+                  <p className="feeling-word">{feeling}</p>
+                  <p className="feeling-text">{text}</p>
+                  <p className="feeling-outcome">
+                    <span>With Tally</span> {outcome}
                   </p>
                 </li>
               ))}
@@ -159,7 +159,8 @@ export function Landing({ angle, reviews = landingTestimonials }: { angle: Angle
           </div>
         </section>
 
-        {/* What's in your plan: the five parts on a deep slate band, then the way in. The landing page never shows the price. */}
+        {/* What's in your plan: the five parts on a deep slate band. The way in is the closing band's button right
+            below it (they read as one slate block until the reviews show). The landing page never shows the price. */}
         <section className="band band-deep" aria-labelledby="plan-title" data-section="plan">
           <div className="wrap">
             <div className="center-head">
@@ -182,32 +183,6 @@ export function Landing({ angle, reviews = landingTestimonials }: { angle: Angle
                   </li>
                 );
               })}
-            </ul>
-            <div className="plan-cta">
-              <GetStarted size="lg" tone="invert" label={offer.cta} />
-            </div>
-          </div>
-        </section>
-
-        {/* Why this and not another AI course */}
-        <section className="band bg-tint" aria-labelledby="why-this-title" data-section="why-this">
-          <div className="wrap">
-            <div className="center-head">
-              <h2 id="why-this-title" className="heading">
-                {whyThis.title}
-              </h2>
-            </div>
-            <ul className="inside">
-              {whyThis.items.map(({ lead, text, Icon, ...item }) => (
-                <li key={lead} className="inside-card">
-                  <span className="inside-icon" data-filled={"filled" in item || undefined} aria-hidden="true">
-                    <Icon />
-                  </span>
-                  <p className="inside-text">
-                    <strong>{lead}</strong> {text}
-                  </p>
-                </li>
-              ))}
             </ul>
           </div>
         </section>

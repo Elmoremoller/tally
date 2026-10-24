@@ -1,5 +1,5 @@
 import type { ComponentType, SVGProps } from "react";
-import { Check, Clock, Eye, Shield, Sparkle } from "@/components/icons";
+import { Check, Clock, Sparkle } from "@/components/icons";
 import { offer } from "./offer";
 import { openQuestions, policyQuestion, resultCopy } from "./questions";
 import { AI_POLICIES, policyLabels } from "./week";
@@ -38,27 +38,29 @@ export const problem = {
 } as const;
 
 /**
- * Why it happens: three findings, each led by its figure, then the finding word for word and its source.
- * Never rounded, never ours: the figure is the finding's own number. The lead line was approved on 2026-10-24.
+ * Running on empty: what the asks do to her, as three feelings, each with what Tally does about it. No figures
+ * and no studies (the user's call on 2026-10-24: she cares about herself and the outcome, not the data). Every
+ * outcome is a real part of the plan, hours, scripts or visibility, and none promises a result for her health.
+ * DRAFT until the user has seen it on the page.
  */
 export const why = {
-  title: "Why it happens",
-  lead: "It’s not you. Here’s what the research shows.",
-  stats: [
+  title: "Running on empty",
+  lead: "Burnout doesn’t arrive all at once. It builds from a hundred small asks.",
+  cards: [
     {
-      figure: "200 hours",
-      text: "In one study, women spent about 200 more hours a year than men on work that never got them promoted.",
-      source: "The No Club",
+      feeling: "Overworked",
+      text: "Full days, and still your own work is waiting when everyone else logs off.",
+      outcome: "Hours back every week, from your own numbers.",
     },
     {
-      figure: "Almost 50%",
-      text: "Women get asked to take on this work almost 50% more often.",
-      source: "The No Club",
+      feeling: "Stressed",
+      text: "Always one ask away from the next one, with a head that won’t switch off at night.",
+      outcome: "Polite scripts to hand work back, without the awkward talk.",
     },
     {
-      figure: "13% vs 6%",
-      text: "In a 2025 study, women who used AI were rated 13% less competent for identical work. Men, 6%.",
-      source: "HBR, The Hidden Penalty of Using AI at Work",
+      feeling: "Burnt out",
+      text: "Tired in a way a weekend doesn’t fix, while no one sees how much you carry.",
+      outcome: "A plan that gets your work seen, so you can close the laptop at 5.",
     },
   ],
 } as const;
@@ -90,17 +92,6 @@ export const planParts = {
   ],
 } as const;
 export type PlanPartId = (typeof planParts.parts)[number]["id"];
-
-/** Why this and not another AI course: the brief's one paragraph, as four cards. The wording is a DRAFT. */
-export const whyThis = {
-  title: "Why this and not another AI course",
-  items: [
-    { lead: "It’s not a course.", text: "It’s a plan built from your answers, done in about ten minutes.", Icon: Check as Icon },
-    { lead: "Your role, your tools.", text: "Built around the work you do and the AI you have.", Icon: Sparkle as Icon, filled: true },
-    { lead: "Your company’s AI rules.", text: "Your plan follows them, so you only do what’s allowed.", Icon: Shield as Icon },
-    { lead: "Time and credit.", text: "Win back hours, then turn them into work people notice.", Icon: Eye as Icon },
-  ],
-} as const;
 
 export const faqs = [
   { q: "Is this a course?", a: "No, it’s a personal plan built from your answers." },

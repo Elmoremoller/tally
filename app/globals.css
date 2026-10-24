@@ -590,64 +590,6 @@
     }
   }
 
-  /* Icon cards (Why this and not another AI course): each an icon tile and one sentence that starts with a
-     bold lead. Four across on desktop, two on tablets, one column on phones. */
-  .inside {
-    display: grid;
-    gap: 1rem;
-  }
-  @media (min-width: 45.9375rem) {
-    .inside {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 1.25rem;
-    }
-  }
-  @media (min-width: 66.8125rem) {
-    .inside {
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-    }
-  }
-  .inside-card {
-    display: grid;
-    align-content: start;
-    gap: 1rem;
-    padding: clamp(1.5rem, 1rem + 2vw, 2rem);
-    border-radius: var(--r-card);
-    background: var(--tint);
-  }
-  .inside-icon {
-    display: grid;
-    place-items: center;
-    width: 3rem;
-    height: 3rem;
-    border-radius: 0.875rem;
-    background: var(--off-white);
-    color: var(--slate);
-  }
-  .inside-icon svg {
-    width: 1.5rem;
-    height: 1.5rem;
-    fill: none;
-    stroke: currentColor;
-    stroke-width: 1.8;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-  }
-  .inside-icon[data-filled] svg {
-    fill: currentColor;
-    stroke: none;
-  }
-  .inside-text {
-    font-size: var(--fs-body);
-    line-height: var(--lh-body);
-    color: var(--ink);
-    text-wrap: pretty;
-  }
-  .inside-text strong {
-    font-weight: 700;
-    color: var(--slate);
-  }
-
   /* Hero. One centered column on phones and tablets, with the phone (when it is on) shown down to its three
      cards and cut off in the empty space below them. On desktop the copy sits beside the whole phone in a
      band about four fifths of the screen tall (after Good Inside), so the next section starts on the first
@@ -1618,26 +1560,19 @@
     }
   }
 
-  /* Cards follow the band they sit on: tinted on off white, off white on tint. */
-  .bg-tint .inside-card {
-    background: var(--off-white);
-  }
-  .bg-tint .inside-icon {
-    background: var(--tint);
-  }
-  /* Why it happens: each finding led by its figure, big, then its words, then its source under a hairline.
-     One column on phones, three across from tablets up. */
-  .stats {
+  /* Running on empty: each feeling named big, then what it is like, then what Tally does about it under a
+     hairline. One column on phones, three across from tablets up. */
+  .feelings {
     display: grid;
     gap: 1rem;
   }
   @media (min-width: 45.9375rem) {
-    .stats {
+    .feelings {
       grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 1.25rem;
     }
   }
-  .stat {
+  .feeling {
     display: flex;
     flex-direction: column;
     gap: 0.875rem;
@@ -1645,7 +1580,7 @@
     border-radius: var(--r-card);
     background: var(--tint);
   }
-  .stat-figure {
+  .feeling-word {
     font-family: var(--stack-display);
     font-size: clamp(2.75rem, 2.2rem + 1.98vw, 3.575rem);
     font-weight: 400;
@@ -1654,37 +1589,39 @@
     color: var(--slate);
     white-space: nowrap;
   }
-  .stat-text {
+  .feeling-text {
     font-size: var(--fs-lead);
     line-height: var(--lh-lead);
     letter-spacing: var(--tr-lead);
     color: var(--ink);
     text-wrap: pretty;
   }
-  .stat-source {
+  .feeling-outcome {
     margin-top: auto;
     padding-top: 0.875rem;
     border-top: 1px solid var(--line);
-    font-size: var(--fs-small);
-    line-height: var(--lh-small);
-    letter-spacing: var(--tr-small);
-    color: var(--muted);
+    font-size: var(--fs-body);
+    line-height: var(--lh-body);
+    letter-spacing: var(--tr-body);
+    font-weight: 600;
+    color: var(--slate);
     text-wrap: pretty;
   }
-  .stat-source span {
-    margin-right: 0.35em;
+  .feeling-outcome span {
+    display: block;
+    margin-bottom: 0.25rem;
     font-size: 0.75rem;
     font-weight: 700;
     letter-spacing: 0.06em;
     text-transform: uppercase;
-    color: var(--slate);
+    color: var(--muted);
   }
-  /* Three narrow cards on tablets: smaller figures and body size words, so nothing breaks every few words. */
+  /* Three narrow cards on tablets: smaller words and body size lines, so nothing breaks every few words. */
   @media (min-width: 45.9375rem) and (max-width: 66.8125rem) {
-    .stat-figure {
+    .feeling-word {
       font-size: 2rem;
     }
-    .stat-text {
+    .feeling-text {
       font-size: var(--fs-body);
       line-height: var(--lh-body);
       letter-spacing: var(--tr-body);
@@ -1768,7 +1705,7 @@
   /* What's in your plan: the product, on a deep slate band. Each part is a card with a tinted panel holding a
      small copy of its screen, then its name and one line. Two columns on phones and tablets with the first
      part across the top; on desktop the first two share the top row and the other three sit under them.
-     The price and the way in come straight after. */
+     The closing band's button is the way in. */
   .band-deep {
     --focus: var(--off-white);
     background: var(--slate);
@@ -1861,16 +1798,10 @@
       grid-column: span 3;
     }
   }
-  /* The way in under the plan's parts. No price on the landing page: the paywall shows it after the free result. */
-  .plan-cta {
-    display: flex;
-    justify-content: center;
-    margin-top: clamp(2rem, 1.5rem + 2vw, 3rem);
-  }
-  @media (max-width: 45.875rem) {
-    .plan-cta .btn {
-      flex-basis: 100%;
-    }
+  /* With no reviews between them, the plan band runs straight into the closing band, so the closing band
+     drops its own top padding and the plan band's bottom padding is the only gap. */
+  .band-deep + .closing {
+    padding-top: 0;
   }
 
   .shot {
