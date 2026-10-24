@@ -1,6 +1,8 @@
 import type { ComponentType, SVGProps } from "react";
 import { Check, Clock, Eye, Plus, Shield, Sparkle } from "@/components/icons";
 import { dollars, offer } from "./offer";
+import { policyQuestion } from "./questions";
+import { AI_POLICIES, policyLabels } from "./week";
 
 // The landing page's words. Word for word from the brief where it gives them; lines marked DRAFT fill a gap
 // and wait for approval. The rules: no dashes, no colons in headlines, always a plan, AI is the how and never
@@ -98,9 +100,9 @@ export const faqs = [
  * marketing coordinator whose company's view on AI is unclear.
  */
 export const phoneSample = {
-  question: "What’s your company’s view on AI?",
-  choices: ["Encouraged", "Unclear", "Restricted", "No idea"],
-  picked: "Unclear",
+  question: policyQuestion.title,
+  choices: AI_POLICIES.map((id) => policyLabels[id]),
+  picked: policyLabels.unclear,
   hours: "9 hours",
   resultLead: "You spend about",
   resultLine: "a week on work nobody notices.",

@@ -2,13 +2,15 @@ import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 import { Suspense } from "react";
 import { Backdrop } from "@/components/Backdrop";
+import { FreeResult } from "@/components/quiz/FreeResult";
 import { QuizHeader } from "@/components/quiz/QuizHeader";
-import { Reveal } from "@/components/quiz/Reveal";
-import { readResult } from "@/lib/result-cookie";
+import { loadWeek } from "@/lib/funnel-db";
+import { offer } from "@/lib/offer";
+import { readSessionId } from "@/lib/session-cookie";
 
-// The couple type and the paywall again, for someone coming back from Stripe without paying.
+// Her free result again, from her session, for coming back to it, like after a trip to Stripe without paying.
 export const metadata: Metadata = {
-  title: "Your pattern · The Couple Standard",
+  title: `Your week · ${offer.name}`,
   robots: { index: false },
 };
 
@@ -27,15 +29,9 @@ export default function Page() {
 }
 
 async function SavedResult() {
-  const result = await readResult();
-  if (!result) redirect("/start");
-  return (
-    <Reveal
-      coupleType={result.coupleType}
-      topics={result.topics}
-      you={result.you}
-      partner={result.partner}
-      partnerName={result.partnerName}
-    />
-  );
+  const sessionId = await readSessionId();
+  const week = sessionId ? await loadWeek(sessionId).catch(() => null) : null;
+  const done = week?.session && week.session.status !== "started" && week.tasks.length;
+  if (!week || !done) redirect("/start");
+  return <FreeResult tasks={week.tasks.map((t) => ({ name: t.name, pile: t.pile, hours: t.confirmed_hours ?? t.estimated_hours }))} />;
 }

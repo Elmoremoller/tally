@@ -1,12 +1,11 @@
 import { supabaseAdmin } from "./supabase";
+import type { AiPolicy, AiTool, Pile } from "./week";
 
 // Worth Her Time's tables, as supabase/migrations/20261024120000_worth_her_time.sql makes them, and the
 // calls that write them. Server only: every call uses the secret key. The types are written by hand, since
 // the database lives in an account the type generator here can't reach. Keep them in step with the SQL.
 
-export type Pile = "hand_to_ai" | "hand_back" | "keep_visible";
-export type AiTool = "chatgpt" | "copilot" | "gemini" | "claude" | "not_sure";
-export type AiPolicy = "encouraged" | "unclear" | "restricted" | "no_idea";
+export type { AiPolicy, AiTool, Pile };
 export type SessionStatus = "started" | "completed" | "paid";
 export type PlanStatus = "pending" | "ready" | "failed";
 export type EventName =
@@ -126,7 +125,7 @@ export const saveAnswers = (
   });
 
 /** False once the session has had its three AI readings. */
-export const useIntakeCall = (sessionId: string) => call<boolean>("use_intake_call", { p_session_id: sessionId });
+export const spendIntakeCall = (sessionId: string) => call<boolean>("use_intake_call", { p_session_id: sessionId });
 
 export const saveIntakeResult = (
   sessionId: string,
@@ -188,3 +187,24 @@ export const failPlan = (planId: string, error: string) => call<void>("fail_plan
 
 export const logEvent = (name: EventName, sessionId: string | null, angle: string, props: Record<string, unknown> = {}) =>
   call<void>("log_event", { p_session_id: sessionId, p_name: name, p_angle: angle, p_props: props });
+
+/** One session as the quiz and its result read it: the session, her answers, and her tasks in order. */
+export async function loadWeek(sessionId: string) {
+  const db = supabaseAdmin();
+  const [session, intake, tasks] = await Promise.all([
+    db.from("sessions").select("*").eq("id", sessionId).maybeSingle(),
+    db.from("intake").select("*").eq("session_id", sessionId).maybeSingle(),
+    db.from("tasks").select("*").eq("session_id", sessionId).order("position"),
+  ]);
+  const error = session.error ?? intake.error ?? tasks.error;
+  if (error) throw new Error(`Loading session failed: ${error.message}`);
+  return {
+    session: session.data as SessionRow | null,
+    intake: intake.data as IntakeRow | null,
+    tasks: ((tasks.data ?? []) as TaskRow[]).map((t) => ({
+      ...t,
+      estimated_hours: Number(t.estimated_hours),
+      confirmed_hours: t.confirmed_hours === null ? null : Number(t.confirmed_hours),
+    })),
+  };
+}
