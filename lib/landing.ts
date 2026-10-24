@@ -29,7 +29,7 @@ export const problem = {
 
 /**
  * Why it happens: three findings, each led by its figure, then the finding word for word and its source.
- * Never rounded, never ours: the figure is the finding's own number. The lead line is a DRAFT.
+ * Never rounded, never ours: the figure is the finding's own number. The lead line was approved on 2026-10-24.
  */
 export const why = {
   title: "Why it happens",
@@ -81,7 +81,7 @@ export const planParts = {
 } as const;
 export type PlanPartId = (typeof planParts.parts)[number]["id"];
 
-/** Under the plan's five parts: the price, and the way in. The note is a DRAFT. */
+/** Under the plan's five parts: the price, and the way in. The note was approved on 2026-10-24. */
 export const priceRow = {
   price: dollars(offer.price.cents),
   note: "Paid once, after your free result. No subscription.",
