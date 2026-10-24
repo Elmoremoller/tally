@@ -6,7 +6,7 @@ import { sans, serif } from "./fonts";
 import "./globals.css";
 
 // The title, description and link preview words come from lib/offer.ts, like the share image and the icons.
-const title = `${offer.name} · ${offer.meta.title}`;
+const title = `${offer.name} | ${offer.meta.title}`;
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl()),

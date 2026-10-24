@@ -905,6 +905,11 @@
   .hero-title strong {
     font-style: italic;
   }
+  /* A key phrase too wide for a small phone (fit in lib/offer.ts): below about 414px the headline shrinks
+     just enough for the phrase to fit between the gutters. Wider screens keep the full size. */
+  .hero-title[data-fit] {
+    font-size: min(var(--fs-hero), calc((100vw - 2 * var(--gutter)) / var(--key-em)));
+  }
 
   /* The smile: the logo's grin, drawn once under the key phrase. It is a pseudo-element, so it never
      becomes part of the headline's text. The shape is a mask; the colour comes from the token. */

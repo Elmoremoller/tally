@@ -1,3 +1,4 @@
+import type { CSSProperties } from "react";
 import { Mark } from "@/components/brand/Logo";
 import { Faq } from "@/components/Faq";
 import { GetStarted } from "@/components/GetStarted";
@@ -11,7 +12,7 @@ import { DayOfAsks } from "./DayOfAsks";
 import { Reviews } from "./Reviews";
 import { stepVisuals } from "./StepVisuals";
 import { faqs, planParts, problem, steps, why, whyThis } from "@/lib/landing";
-import { angles, offer, type AngleId } from "@/lib/offer";
+import { angleFit, angles, offer, type AngleId } from "@/lib/offer";
 import { reviewsMinimum, testimonials, type Testimonial } from "@/lib/testimonials";
 
 /**
@@ -45,6 +46,7 @@ const heroPhone = false;
  * the local preview; the live page shows the real ones from lib/testimonials.ts.
  */
 export function Landing({ angle, reviews = testimonials }: { angle: AngleId; reviews?: readonly Testimonial[] }) {
+  const fit = angleFit(angle);
   return (
     <>
       {/* No action in the nav: once the hero's button scrolls away, the Get started bar carries it. */}
@@ -55,10 +57,15 @@ export function Landing({ angle, reviews = testimonials }: { angle: AngleId; rev
         <section className="hero" aria-labelledby="hero-title" data-section="hero" data-motion={heroPhone ? "running" : undefined}>
           <div className="wrap hero-grid">
             <div className="hero-copy">
-              <h1 id="hero-title" className="hero-title">
+              <h1
+                id="hero-title"
+                className="hero-title"
+                data-fit={fit ? "" : undefined}
+                style={fit ? ({ "--key-em": fit } as CSSProperties) : undefined}
+              >
                 <Headline angle={angle} />
               </h1>
-              <p className="hero-lead text-lead text-balance text-muted">{offer.sentence}</p>
+              <p className="hero-lead text-lead text-balance text-muted">{offer.lead}</p>
               <div className="hero-cta">
                 <GetStarted size="lg" label={offer.cta} />
                 <p className="text-body text-balance text-muted">{offer.ctaNote}</p>
