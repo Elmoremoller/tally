@@ -1,35 +1,19 @@
 import type { CSSProperties } from "react";
-import { method } from "@/lib/content";
-import { situation, type PlanContext } from "@/lib/plan";
-import { choiceQuestions, coupleTypes, topicMoments } from "@/lib/quiz";
+import { phoneSample as sample } from "@/lib/landing";
 import { Mark } from "./brand/Logo";
-import { ArrowRight, ArrowUp, Battery, Signal, Sparkle, Wifi } from "./icons";
-
-// The sample couple the phone plays through: one goes quiet, the other wants to talk now, about chores.
-const sample: PlanContext = {
-  coupleType: "push_and_pull",
-  topics: ["chores", "money"],
-  you: "go_quiet",
-  partner: "sort_it_out_now",
-  partnerName: null,
-  start: "",
-  makeUp: "",
-};
-const question = choiceQuestions[0];
-const type = coupleTypes[sample.coupleType];
+import { ArrowRight, Battery, Copy, Signal, Sparkle, Wifi } from "./icons";
 
 /**
- * The hero's product shot, drawn in HTML and CSS: a phone that plays through the product on a loop. The
- * first quiz question gets answered, the couple type comes up, then the plan. The motion toggle pauses it;
- * with reduced motion it shows the plan and holds still. It reads as one image to assistive tech; the same
- * copy is set as real text further down the page.
+ * The hero's product shot, drawn in HTML and CSS: a phone that plays through the product on a loop. A quiz
+ * answer gets picked, her hours come up, then her plan. The motion toggle pauses it; with reduced motion it
+ * shows the plan and holds still. It reads as one image to assistive tech. The words are in lib/landing.ts.
  */
 export function PhoneMockup() {
   return (
     <div
       className="phone"
       role="img"
-      aria-label="A phone playing through the quiz: a question gets answered, the couple type comes up, then a plan with three cards, Prevent, Pause and Repair, above a message check."
+      aria-label={`A phone playing through the quiz: a question gets answered, the hours a week on work nobody notices come up, then a plan with three cards, ${sample.cards.map((c) => c.title).join(", ")}.`}
     >
       <div className="screen">
         <div className="status">
@@ -42,16 +26,16 @@ export function PhoneMockup() {
         </div>
         <span className="island" />
         <div className="scenes">
-          {/* 1. The first question, answered */}
+          {/* 1. A quiz question, answered */}
           <div className="scene scene-quiz">
             <span className="demo-progress">
               <span />
             </span>
-            <p className="demo-question">{question.title}</p>
+            <p className="demo-question">{sample.question}</p>
             <ul className="demo-choices">
-              {question.choices.map((choice) => (
-                <li key={choice.id} className={choice.id === sample.you ? "is-picked" : undefined}>
-                  {choice.label}
+              {sample.choices.map((choice) => (
+                <li key={choice} className={choice === sample.picked ? "is-picked" : undefined}>
+                  {choice}
                 </li>
               ))}
             </ul>
@@ -61,36 +45,36 @@ export function PhoneMockup() {
             </span>
           </div>
 
-          {/* 2. The couple type their answers suggest */}
+          {/* 2. Her hours */}
           <div className="scene scene-type">
-            <p className="demo-eyebrow">Your answers suggest</p>
+            <p className="demo-eyebrow">{sample.resultLead}</p>
             <p className="demo-type">
-              <strong className="smile">{type.name}</strong>
+              <strong className="smile">{sample.hours}</strong>
             </p>
-            <p className="demo-moment">
-              {topicMoments.chores}, {situation(sample)}.
-            </p>
+            <p className="demo-moment">{sample.resultLine}</p>
             <div className="demo-built">
-              <p>Built around your fights about</p>
+              <p>Sorted into three piles</p>
               <ul>
-                <li>Chores</li>
-                <li>Money</li>
+                {sample.piles.map((pile) => (
+                  <li key={pile}>{pile}</li>
+                ))}
               </ul>
             </div>
           </div>
 
-          {/* 3. The plan */}
+          {/* 3. Her plan */}
           <div className="scene scene-plan app">
             <div className="app-head">
               <Mark className="app-mark" />
               <p className="app-title">Your plan</p>
             </div>
             <ul className="app-topics">
-              <li>Chores</li>
-              <li>Money</li>
+              {sample.chips.map((chip) => (
+                <li key={chip}>{chip}</li>
+              ))}
             </ul>
             <ol className="app-cards">
-              {method.map(({ title, text, Icon }, i) => (
+              {sample.cards.map(({ title, text, Icon }, i) => (
                 <li key={title} className="app-card" style={{ "--i": i } as CSSProperties}>
                   <span className="app-icon">
                     <Icon />
@@ -101,14 +85,15 @@ export function PhoneMockup() {
               ))}
             </ol>
             <ul className="app-quick">
-              <li>Weekly check in</li>
-              <li>10 minute repair</li>
+              {sample.quick.map((item) => (
+                <li key={item}>{item}</li>
+              ))}
             </ul>
             <div className="app-ask">
               <Sparkle className="sparkle" />
-              <span>Check my message</span>
+              <span>{sample.ask}</span>
               <span className="send">
-                <ArrowUp />
+                <Copy />
               </span>
             </div>
           </div>

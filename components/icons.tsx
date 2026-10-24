@@ -30,7 +30,7 @@ export const ArrowUp = (props: IconProps) => (
   </Icon>
 );
 
-/** Prevent: a shield with a tick. */
+/** A shield with a tick: rules that keep you safe. */
 export const Shield = (props: IconProps) => (
   <Icon {...props}>
     <path d="M12 3.5 19 6.2v5.1c0 4.3-2.9 7.9-7 9.2-4.1-1.3-7-4.9-7-9.2V6.2z" />
@@ -38,7 +38,7 @@ export const Shield = (props: IconProps) => (
   </Icon>
 );
 
-/** Pause: two bars in a circle. */
+/** Two bars in a circle. */
 export const PauseCircle = (props: IconProps) => (
   <Icon {...props}>
     <circle cx="12" cy="12" r="8.5" />
@@ -46,14 +46,14 @@ export const PauseCircle = (props: IconProps) => (
   </Icon>
 );
 
-/** Repair: a heart. */
+/** A heart. */
 export const Heart = (props: IconProps) => (
   <Icon {...props}>
     <path d="M12 19.5s-7.5-4.6-7.5-10.1A4.4 4.4 0 0 1 12 6.6a4.4 4.4 0 0 1 7.5 2.8c0 5.5-7.5 10.1-7.5 10.1z" />
   </Icon>
 );
 
-/** Your couple pattern: two circles that overlap. */
+/** Two circles that overlap. */
 export const Pair = (props: IconProps) => (
   <Icon {...props}>
     <circle cx="9" cy="12" r="5.5" />
@@ -73,10 +73,34 @@ export const Check = (props: IconProps) => (
   </Icon>
 );
 
-/** The message check: a four point sparkle, filled. */
+/** AI: a four point sparkle, filled. */
 export const Sparkle = (props: IconProps) => (
   <Icon {...props}>
     <path d="M12 2.5c.5 3.9 1.6 6.1 3.2 7.5 1.5 1.3 3.6 2 6.3 2.5-2.7.5-4.8 1.2-6.3 2.5-1.6 1.4-2.7 3.6-3.2 7.5-.5-3.9-1.6-6.1-3.2-7.5-1.5-1.3-3.6-2-6.3-2.5 2.7-.5 4.8-1.2 6.3-2.5 1.6-1.4 2.7-3.6 3.2-7.5z" />
+  </Icon>
+);
+
+/** Hours: a clock. */
+export const Clock = (props: IconProps) => (
+  <Icon {...props}>
+    <circle cx="12" cy="12" r="8.5" />
+    <path d="M12 7.5V12l3 2" />
+  </Icon>
+);
+
+/** Copy: two sheets, one over the other. */
+export const Copy = (props: IconProps) => (
+  <Icon {...props}>
+    <rect x="8.5" y="8.5" width="11" height="11" rx="2.2" />
+    <path d="M15.5 8.5V6.7a2.2 2.2 0 0 0-2.2-2.2H6.7a2.2 2.2 0 0 0-2.2 2.2v6.6a2.2 2.2 0 0 0 2.2 2.2h1.8" />
+  </Icon>
+);
+
+/** Getting seen: an eye. */
+export const Eye = (props: IconProps) => (
+  <Icon {...props}>
+    <path d="M2.8 12S6.2 5.8 12 5.8 21.2 12 21.2 12 17.8 18.2 12 18.2 2.8 12 2.8 12z" />
+    <circle cx="12" cy="12" r="2.8" />
   </Icon>
 );
 

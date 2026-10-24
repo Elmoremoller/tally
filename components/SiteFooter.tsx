@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { offer } from "@/lib/offer";
 import { Wordmark } from "./brand/Logo";
 
 export function SiteFooter() {
@@ -6,7 +7,6 @@ export function SiteFooter() {
     <footer className="footer" data-section="footer">
       <div className="wrap">
         <div className="footer-row">
-          <p>Not therapy. Made for everyday arguments.</p>
           <nav aria-label="Legal">
             <ul className="footer-links">
               <li>
@@ -18,7 +18,7 @@ export function SiteFooter() {
             </ul>
           </nav>
         </div>
-        <Wordmark className="footer-wordmark" title="The Couple Standard" />
+        <Wordmark className="footer-wordmark" title={offer.name} />
       </div>
     </footer>
   );

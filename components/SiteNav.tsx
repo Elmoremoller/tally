@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { offer } from "@/lib/offer";
 import { Lockup } from "./brand/Logo";
 import { GetStarted } from "./GetStarted";
 
@@ -11,7 +12,7 @@ export function SiteNav({ cta = true }: { cta?: boolean }) {
   return (
     <header className={cta ? "nav" : "nav nav-centered"} data-section="nav">
       <div className="wrap nav-inner">
-        <Link href="/" className="nav-brand" aria-label="The Couple Standard, home">
+        <Link href="/" className="nav-brand" aria-label={`${offer.name}, home`}>
           <Lockup />
         </Link>
         {cta ? <GetStarted /> : null}

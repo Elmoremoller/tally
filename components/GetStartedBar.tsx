@@ -2,11 +2,16 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { offer } from "@/lib/offer";
 import { START_HREF } from "./GetStarted";
 import { ArrowRight } from "./icons";
 
+/** "Takes about 2 minutes", in two lines on phones: the last two words go on the second. */
+const time = offer.quizTime.split(" ");
+const timeLines = [time.slice(0, -2).join(" "), time.slice(-2).join(" ")];
+
 /**
- * The landing page's Get started, pinned to the bottom of the screen. The whole bar is the button. It rises
+ * The landing page's action, pinned to the bottom of the screen. The whole bar is the button. It rises
  * once the hero's Get started has scrolled away under the nav, and steps aside while the closing band or
  * the footer is on screen, so there is only ever one Get started in reach. While hidden it is inert.
  */
@@ -54,12 +59,12 @@ export function GetStartedBar() {
     <div className="get-bar" data-shown={shown || undefined} inert={!shown}>
       <Link href={START_HREF} className="btn get-bar-link" data-cta="get-started-bar">
         <span className="get-bar-label">
-          Get started
+          {offer.cta}
           <ArrowRight />
         </span>
         <span className="get-bar-chip">
-          <span>Takes under</span>
-          <span>3 minutes</span>
+          <span>{timeLines[0]}</span>
+          <span>{timeLines[1]}</span>
         </span>
       </Link>
     </div>

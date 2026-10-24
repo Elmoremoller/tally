@@ -1,14 +1,9 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
 import { company, type LegalPage } from "@/lib/legal";
-import { hotline, lifeline } from "@/lib/safety";
 
-/** The words in the pages that open something: the hotline, 988, the Privacy page, and our email once it's real. */
+/** The words in the pages that open something: the Privacy page, and our email once it's real. */
 const targets: Record<string, { href: string; external?: boolean }> = {
-  "1.800.799.7233": { href: hotline.call },
-  "88788": { href: hotline.text },
-  "thehotline.org": { href: hotline.chat, external: true },
-  "988": { href: lifeline },
   "Privacy page": { href: "/privacy" },
   ...(company.email.includes("@") ? { [company.email]: { href: `mailto:${company.email}` } } : {}),
 };

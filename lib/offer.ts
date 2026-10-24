@@ -27,16 +27,17 @@ export const offer = {
 export type AngleId = keyof typeof angles;
 
 /**
- * The hero headline for each ad angle, picked with ?angle= in the address. `key` is the phrase drawn with the
- * underline, and must appear in the headline word for word.
+ * The hero headline for each ad angle, picked with ?angle= in the address. `key` is the phrase set in bold
+ * with the underline drawn under it. It must appear in the headline word for word, and stay short: it never
+ * wraps, so it has to fit across a small phone.
  */
 export const angles = {
-  default: { headline: "Win back your hours. Get the credit you’ve earned.", key: "Win back your hours." },
-  note_taker: { headline: "Always the one taking the notes? Win those hours back.", key: "Win those hours back." },
-  late_nights: { headline: "Stop working late on work nobody notices.", key: "nobody notices" },
+  default: { headline: "Win back your hours. Get the credit you’ve earned.", key: "your hours" },
+  note_taker: { headline: "Always the one taking the notes? Win those hours back.", key: "those hours" },
+  late_nights: { headline: "Stop working late on work nobody notices.", key: "working late" },
   always_yes: { headline: "Said yes to everything? Get time back for your real job.", key: "your real job" },
-  socials_add_on: { headline: "“Can you just run our socials?” Take your hours back.", key: "Take your hours back." },
-  secret_ai: { headline: "Use AI at work openly and get the credit for it.", key: "get the credit" },
+  socials_add_on: { headline: "“Can you just run our socials?” Take your hours back.", key: "your hours" },
+  secret_ai: { headline: "Use AI at work openly and get the credit for it.", key: "the credit" },
   vague_policy: { headline: "Everyone says use AI. Here’s what you can actually do.", key: "actually do" },
 } as const satisfies Record<string, { headline: string; key: string }>;
 

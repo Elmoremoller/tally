@@ -1,18 +1,20 @@
 import type { Metadata, Viewport } from "next";
 import { PageBehavior } from "@/components/PageBehavior";
+import { offer } from "@/lib/offer";
 import { siteUrl } from "@/lib/site";
 import "./globals.css";
 
-const description = "A personal plan built around how you two fight, so you know what to do next.";
+// The title, description and link preview words come from lib/offer.ts, like the share image and the icons.
+const title = `${offer.name} · ${offer.meta.title}`;
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl()),
-  title: "The Couple Standard · Fight less, make up faster",
-  description,
+  title,
+  description: offer.meta.description,
   openGraph: {
-    title: "The Couple Standard · Fight less, make up faster",
-    description,
-    siteName: "The Couple Standard",
+    title,
+    description: offer.meta.description,
+    siteName: offer.name,
     type: "website",
   },
 };

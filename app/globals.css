@@ -1,9 +1,9 @@
 @import "tailwindcss";
 
 /*
-  The Couple Standard landing page.
-  One centered column with one action always in reach: Get started, at each decision point and in a bar
-  at the bottom of the screen between them.
+  Worth Her Time.
+  One centered column with one action always in reach: Take the free quiz, at each decision point and in a
+  bar at the bottom of the screen between them.
   Deep red carries the logo, headings, buttons and brand backgrounds. Warm white is the page, and anything
   set on red. The only ornament is the smile from the logo.
 */
@@ -55,8 +55,8 @@
   /* Type. Size, leading and tracking move together: tracking tightens as size grows, loosens as it shrinks. */
   --stack-display: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI Variable Display", "Segoe UI", system-ui, Roboto, "Helvetica Neue", Arial, sans-serif;
   --stack-text: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI Variable Text", "Segoe UI", system-ui, Roboto, "Helvetica Neue", Arial, sans-serif;
-  /* Sized for "Know exactly what to say when it starts going wrong.": three lines on desktop, so the hero
-     still ends on the first screen. Was 5.25rem at most for the shorter "Fight less, make up faster." */
+  /* Sized for a headline of about fifty characters: three lines at most on desktop, so the hero still ends
+     on the first screen. */
   --fs-hero: clamp(2.625rem, 1.25rem + 3.8vw, 4rem);
   --lh-hero: 1.04;
   --tr-hero: -0.028em;
@@ -488,12 +488,17 @@
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
+    min-width: 0;
+    line-height: 1.15;
+    text-align: left;
+    text-wrap: balance;
   }
   .get-bar .icon-arrow {
     margin-inline-end: 0;
   }
-  /* The smallest phones have no room for the arrow beside the big chip; the whole bar is the button anyway. */
-  @media (max-width: 22.4375rem) {
+  /* Phones have no room for the arrow beside the big chip; the whole bar is the button anyway. On the
+     smallest, the label goes to two lines, like the chip beside it. */
+  @media (max-width: 29.9375rem) {
     .get-bar-link {
       padding-left: 1.25rem;
     }
@@ -518,60 +523,8 @@
     }
   }
 
-  /* Trust row: three true things in a slim band under the hero, where other pages show press logos. A
-     hairline sets it off from the hero. A short list on phones, one centered line from tablets up. */
-  .trust {
-    border-top: 1px solid var(--line);
-    padding-block: clamp(1.25rem, 1rem + 1vw, 1.75rem);
-  }
-  .trust-list {
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-    width: fit-content;
-    margin-inline: auto;
-  }
-  @media (min-width: 45.9375rem) {
-    .trust-list {
-      flex-direction: row;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 0.75rem clamp(1.5rem, 3vw, 2.5rem);
-      width: auto;
-    }
-  }
-  .trust-item {
-    display: flex;
-    align-items: flex-start;
-    gap: 0.625rem;
-    color: var(--ink);
-    font-size: var(--fs-body);
-    font-weight: 500;
-    line-height: var(--lh-body);
-  }
-  .trust-icon {
-    display: grid;
-    place-items: center;
-    flex: none;
-    width: 1.5rem;
-    height: 1.5rem;
-    margin-top: calc((var(--lh-body) * 1em - 1.5rem) / 2);
-    border-radius: 50%;
-    background: var(--red-wash);
-    color: var(--deep-red);
-  }
-  .trust-icon svg {
-    width: 0.875rem;
-    height: 0.875rem;
-    fill: none;
-    stroke: currentColor;
-    stroke-width: 2.75;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-  }
-
-  /* What's inside your plan: four tinted cards on warm white, each an icon tile and one sentence that starts
-     with the part's name in bold. Four across on desktop, two on tablets, one column on phones. */
+  /* Icon cards (Why this and not another AI course): each an icon tile and one sentence that starts with a
+     bold lead. Four across on desktop, two on tablets, one column on phones. */
   .inside {
     display: grid;
     gap: 1rem;
@@ -626,51 +579,6 @@
   .inside-text strong {
     font-weight: 700;
     color: var(--deep-red);
-  }
-
-  /* Founding couple quotes, hidden until there are three real ones. Tinted cards on a warm white band:
-     one column up to desktop, so three never leave one stranded on a row of its own, then side by side. */
-  .quotes {
-    display: grid;
-    gap: 1rem;
-    max-width: 42rem;
-    margin-inline: auto;
-  }
-  @media (min-width: 66.8125rem) {
-    .quotes {
-      grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
-      gap: 1.25rem;
-      max-width: none;
-    }
-  }
-  .quote {
-    display: grid;
-    align-content: space-between;
-    gap: 1.5rem;
-    height: 100%;
-    margin: 0;
-    padding: clamp(1.5rem, 1rem + 2vw, 2.25rem);
-    border-radius: var(--r-card);
-    background: var(--tint);
-  }
-  .quote-text {
-    margin: 0;
-    color: var(--ink);
-    font-size: var(--fs-lead);
-    line-height: var(--lh-lead);
-    letter-spacing: var(--tr-lead);
-    text-wrap: pretty;
-  }
-  .quote-by {
-    display: grid;
-    gap: 0.125rem;
-    color: var(--muted);
-    font-size: var(--fs-small);
-    line-height: var(--lh-small);
-  }
-  .quote-name {
-    color: var(--ink);
-    font-weight: 600;
   }
 
   /* Hero. One centered column on phones and tablets, with the phone shown down to its three cards and cut
@@ -1200,8 +1108,8 @@
     background: var(--ink);
   }
 
-  /* The phone plays through the product on one 15 second loop: the first question gets answered (0 to 4s),
-     the couple type comes up (4.5 to 9s), then the plan (9 to 15s). The motion toggle pauses every part. */
+  /* The phone plays through the product on one 15 second loop: a quiz question gets answered (0 to 4s),
+     her hours come up (4.5 to 9s), then her plan (9 to 15s). The motion toggle pauses every part. */
   .phone {
     --demo-loop: 15s;
   }
@@ -1411,7 +1319,7 @@
     }
   }
 
-  /* 2. The couple type */
+  /* 2. Her hours */
   .demo-eyebrow {
     font-size: 0.95em;
     font-weight: 600;
@@ -1472,7 +1380,7 @@
     font-weight: 600;
   }
 
-  /* Topics */
+  /* Chips: the problem's moments, in one wrapped row */
   .topics {
     display: flex;
     flex-wrap: wrap;
@@ -1496,305 +1404,6 @@
     letter-spacing: var(--tr-lead);
     line-height: 1.2;
     color: var(--ink);
-  }
-
-  /* Tap a topic to see its words: the chips are buttons, the chosen one goes deep red. */
-  .taster .topic {
-    border: 0;
-    font-family: inherit;
-    cursor: pointer;
-    touch-action: manipulation;
-    transition:
-      background-color 0.2s ease,
-      box-shadow 0.2s ease,
-      color 0.2s ease,
-      transform var(--dur-spring-fast) var(--ease-spring-fast);
-  }
-  .taster .topic:hover {
-    background: color-mix(in oklab, var(--warm-white), var(--tint) 55%);
-  }
-  .taster .topic:active {
-    transform: scale(0.97);
-    transition-duration: 0.2s, 0.2s, 0.2s, 0.08s;
-  }
-  .taster .topic:focus-visible {
-    outline: 2px solid var(--focus);
-    outline-offset: 3px;
-  }
-  .taster .topic[aria-pressed="true"] {
-    background: var(--deep-red);
-    box-shadow: 0 10px 24px -12px rgb(127 3 0 / 0.55);
-    color: var(--warm-white);
-  }
-  /* Every topic's card sits in the same cell, so the box is as tall as the longest and never jumps. */
-  .taster-stack {
-    display: grid;
-    max-width: 66rem;
-    margin: clamp(1.75rem, 1.4rem + 1.5vw, 2.5rem) auto 0;
-  }
-  .taster-card {
-    grid-area: 1 / 1;
-    display: grid;
-    margin: 0;
-    padding: 0.5rem 1.375rem;
-    border-radius: 1.75rem;
-    background: var(--warm-white);
-    box-shadow:
-      0 0 0 1px var(--line),
-      0 24px 48px -28px rgb(90 20 10 / 0.35);
-    list-style: none;
-    visibility: hidden;
-    opacity: 0;
-    transform: translateY(6px);
-    transition:
-      opacity 0.3s ease,
-      transform 0.45s var(--ease-spring-fast),
-      visibility 0s linear 0.3s;
-  }
-  .taster-card[data-on] {
-    visibility: visible;
-    opacity: 1;
-    transform: none;
-    transition:
-      opacity 0.3s ease,
-      transform 0.45s var(--ease-spring-fast),
-      visibility 0s;
-  }
-  .taster-part {
-    display: grid;
-    align-content: start;
-    gap: 0.625rem;
-    padding-block: 1.25rem;
-  }
-  .taster-part + .taster-part {
-    border-top: 1px solid var(--line);
-  }
-  .taster-label {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-size: var(--fs-small);
-    font-weight: 700;
-    color: var(--deep-red);
-  }
-  .taster-icon {
-    display: grid;
-    place-items: center;
-    width: 1.875rem;
-    height: 1.875rem;
-    border-radius: 999px;
-    background: var(--red-wash);
-  }
-  .taster-icon svg {
-    width: 1.05rem;
-    height: 1.05rem;
-    fill: none;
-    stroke: currentColor;
-    stroke-width: 2;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-  }
-  .taster-words {
-    margin: 0;
-    font-size: var(--fs-body);
-    line-height: var(--lh-lead);
-    letter-spacing: var(--tr-lead);
-    color: var(--ink);
-    text-wrap: pretty;
-  }
-  .taster-words::before {
-    content: "“";
-  }
-  .taster-words::after {
-    content: "”";
-  }
-  @media (min-width: 56rem) {
-    .taster-card {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      padding: 0.75rem;
-    }
-    .taster-words {
-      font-size: var(--fs-lead);
-    }
-    .taster-part {
-      padding: 1.25rem 1.5rem;
-    }
-    .taster-part + .taster-part {
-      border-top: 0;
-      border-left: 1px solid var(--line);
-    }
-  }
-
-  /* Loud fights or quiet ones: two cards, each with a tiny chat on top */
-  .styles {
-    display: grid;
-    gap: 1rem;
-    max-width: 58rem;
-    margin-inline: auto;
-  }
-  .style-card {
-    display: grid;
-    align-content: start;
-    padding: 0.75rem 0.75rem 1.75rem;
-    border-radius: 1.75rem;
-    background: var(--warm-white);
-    box-shadow:
-      0 0 0 1px var(--line),
-      0 24px 48px -30px rgb(90 20 10 / 0.3);
-  }
-  .style-visual {
-    display: grid;
-    place-items: center;
-    height: 10.5rem;
-    margin-bottom: 1.5rem;
-    border-radius: 1.25rem;
-    background: var(--tint);
-    overflow: hidden;
-  }
-  .style-title,
-  .style-text,
-  .style-gets {
-    margin-inline: 1rem;
-  }
-  .style-title {
-    font-family: var(--stack-display);
-    font-size: var(--fs-title);
-    font-weight: 700;
-    line-height: var(--lh-title);
-    letter-spacing: var(--tr-title);
-    color: var(--deep-red);
-  }
-  .style-text {
-    margin-top: 0.5rem;
-    font-size: var(--fs-lead);
-    line-height: var(--lh-lead);
-    letter-spacing: var(--tr-lead);
-    color: var(--ink);
-    text-wrap: pretty;
-  }
-  .style-gets {
-    display: grid;
-    gap: 0.75rem;
-    margin-top: 1.25rem;
-    padding: 1.25rem 0 0;
-    border-top: 1px solid var(--line);
-    list-style: none;
-  }
-  .style-gets li {
-    display: grid;
-    grid-template-columns: 1.5rem minmax(0, 1fr);
-    gap: 0.625rem;
-    align-items: start;
-    font-size: var(--fs-body);
-    font-weight: 500;
-    line-height: 1.4;
-    color: var(--ink);
-  }
-  .style-gets svg {
-    width: 1.5rem;
-    height: 1.5rem;
-    padding: 0.25rem;
-    border-radius: 999px;
-    background: var(--deep-red);
-    fill: none;
-    stroke: var(--warm-white);
-    stroke-width: 2.6;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-  }
-  @media (min-width: 48rem) {
-    .styles {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 1.25rem;
-    }
-  }
-
-  /* The tiny chats: bubbles that pile up when it gets loud, and a "Seen" with no reply when it goes quiet */
-  .chat {
-    display: flex;
-    flex-direction: column;
-    width: min(15rem, 78%);
-  }
-  .chat-bubble {
-    position: relative;
-    display: block;
-    height: 2.125rem;
-    border-radius: 1.0625rem;
-  }
-  /* A line of "text" in each bubble */
-  .chat-bubble::after {
-    content: "";
-    position: absolute;
-    top: 50%;
-    left: 0.875rem;
-    right: 28%;
-    height: 0.375rem;
-    border-radius: 999px;
-    translate: 0 -50%;
-    background: rgb(34 29 26 / 0.13);
-  }
-  .chat-bubble.is-me::after {
-    background: rgb(255 255 255 / 0.42);
-  }
-  .chat-bubble.is-me {
-    align-self: flex-end;
-    border-bottom-right-radius: 0.375rem;
-    background: linear-gradient(180deg, #b01d12, var(--deep-red));
-  }
-  .chat-bubble.is-them {
-    align-self: flex-start;
-    border-bottom-left-radius: 0.375rem;
-    background: var(--warm-white);
-    box-shadow: 0 0 0 1px var(--line);
-  }
-  .chat-loud .chat-bubble {
-    box-shadow: 0 6px 14px -8px rgb(90 20 10 / 0.45);
-  }
-  .chat-loud .chat-bubble.is-them {
-    box-shadow:
-      0 0 0 1px var(--line),
-      0 6px 14px -8px rgb(90 20 10 / 0.35);
-  }
-  .chat-loud .chat-bubble + .chat-bubble {
-    margin-top: -0.5rem;
-  }
-  .chat-loud .chat-bubble:nth-child(1) {
-    rotate: -3deg;
-  }
-  .chat-loud .chat-bubble:nth-child(2) {
-    rotate: 2.5deg;
-  }
-  .chat-loud .chat-bubble:nth-child(3) {
-    rotate: -2deg;
-  }
-  .chat-loud .chat-bubble:nth-child(4) {
-    rotate: 3deg;
-  }
-  .chat-seen {
-    align-self: flex-end;
-    margin-top: 0.375rem;
-    font-size: var(--fs-micro);
-    font-weight: 600;
-    color: var(--muted);
-  }
-  .chat-typing {
-    align-self: flex-start;
-    display: flex;
-    gap: 0.3rem;
-    margin-top: 2.25rem;
-    padding: 0.75rem 0.875rem;
-    border-radius: 1.0625rem;
-    border-bottom-left-radius: 0.375rem;
-    background: var(--warm-white);
-    box-shadow: 0 0 0 1px var(--line);
-    opacity: 0.7;
-  }
-  .chat-typing i {
-    width: 0.4375rem;
-    height: 0.4375rem;
-    border-radius: 999px;
-    background: var(--muted);
-    opacity: 0.45;
   }
 
   /* How it works: three steps on a line */
@@ -1931,6 +1540,37 @@
     color: var(--ink);
     text-wrap: pretty;
   }
+  .method-icon[data-filled] svg {
+    fill: currentColor;
+    stroke: none;
+  }
+  /* Where a finding comes from, under it: a small red label, then the source. */
+  .method-source {
+    font-size: var(--fs-small);
+    line-height: var(--lh-small);
+    letter-spacing: var(--tr-small);
+    color: var(--muted);
+    text-wrap: pretty;
+  }
+  .method-source span {
+    margin-right: 0.35em;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--deep-red);
+  }
+  /* Cards follow the band they sit on: tinted on warm white, warm white on tint. */
+  .band:not(.bg-tint) .method-card {
+    background: var(--tint);
+    box-shadow: none;
+  }
+  .bg-tint .inside-card {
+    background: var(--warm-white);
+  }
+  .bg-tint .inside-icon {
+    background: var(--tint);
+  }
   /* Three narrow cards on tablets: step down to body size so lines don't break every few words. */
   @media (min-width: 45.9375rem) and (max-width: 66.8125rem) {
     .method-text {
@@ -1950,9 +1590,23 @@
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
   }
+  /* Five cards: three then two, centered, on desktop; on tablets the odd one out sits in the middle. */
+  @media (min-width: 45.9375rem) and (max-width: 66.8125rem) {
+    .get:last-child:nth-child(odd) {
+      grid-column: 1 / -1;
+      justify-self: center;
+      width: calc(50% - 0.5rem);
+    }
+  }
   @media (min-width: 66.8125rem) {
     .gets {
-      grid-template-columns: repeat(4, minmax(0, 1fr));
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+    }
+    .get {
+      grid-column: span 2;
+    }
+    .get:nth-child(4):nth-last-child(2) {
+      grid-column: 2 / span 2;
     }
   }
   .get {
@@ -2035,6 +1689,36 @@
     stroke-width: 2.2;
     stroke-linecap: round;
     stroke-linejoin: round;
+  }
+  .shot svg.is-filled {
+    fill: currentColor;
+    stroke: none;
+  }
+  /* Hours back: the total, then each task's hours */
+  .shot-big {
+    font-family: var(--stack-display);
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: var(--deep-red);
+  }
+  .shot-rows {
+    display: grid;
+    gap: 0.3rem;
+  }
+  .shot-rows span {
+    display: flex;
+    justify-content: space-between;
+    gap: 0.5rem;
+    padding: 0.45rem 0.625rem;
+    border-radius: 0.5rem;
+    background: var(--tint);
+    font-weight: 600;
+  }
+  .shot-rows b {
+    color: var(--deep-red);
+    font-variant-numeric: tabular-nums;
   }
   .shot-head {
     display: flex;
@@ -4579,12 +4263,7 @@
     animation: quiz-pulse 1.6s ease-in-out infinite alternate;
   }
   .quiz-choice:active,
-  .quiz-topic:active,
-  .taster .topic:active {
-    transform: none;
-  }
-  /* A topic's words fade in place instead of rising. */
-  .taster-card {
+  .quiz-topic:active {
     transform: none;
   }
   .quiz-progress span,
@@ -4678,10 +4357,7 @@
   }
   .get,
   .topic,
-  .taster-card,
-  .style-card,
   .method-card,
-  .quote,
   .quiz-choice,
   .quiz-topic {
     box-shadow: 0 0 0 1px var(--line-strong);
@@ -4710,12 +4386,7 @@
   }
   /* Box shadows are dropped here, so the chosen answer shows with a thicker border in the highlight colour. */
   .quiz-choice[aria-pressed="true"],
-  .quiz-topic[data-on],
-  .taster .topic[aria-pressed="true"] {
+  .quiz-topic[data-on] {
     border: 3px solid Highlight;
-  }
-  .taster .topic,
-  .taster-card {
-    border: 1px solid ButtonText;
   }
 }
