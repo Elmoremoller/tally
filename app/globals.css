@@ -641,12 +641,20 @@
     --hero-pad-end: max(4.75rem, var(--hero-pad));
     padding-block: var(--hero-pad) var(--hero-pad-end);
   }
-  /* The first screen is the hero: the screen's height less the nav (never under 28rem, and capped at 70rem so a
-     tall portrait screen isn't mostly empty), the copy centred in it. Landscape on a desktop, portrait on a
-     phone, whatever the shape. The grid takes the band's height less the hero's own padding. */
+  /* The hero is a picture the shape of the screen it was designed on: nav plus hero is 16:9 (1920x1080) on a
+     landscape screen and 9:16 (1080x1920) on a portrait one, scaled to the width, so its height follows the
+     width, not the window. Never under 28rem, and capped (90rem landscape, 70rem portrait) so an ultrawide or
+     tall monitor isn't mostly empty. The copy is centred in it. The grid takes the band's height less the
+     hero's own padding. */
   .hero:not(:has(.hero-visual)) .hero-grid {
-    min-height: calc(clamp(28rem, 100svh - var(--nav-h), 70rem) - var(--hero-pad) - var(--hero-pad-end));
+    --hero-h: clamp(28rem, calc(100vw * 9 / 16 - var(--nav-h)), 90rem);
+    min-height: calc(var(--hero-h) - var(--hero-pad) - var(--hero-pad-end));
     align-content: center;
+  }
+  @media (orientation: portrait) {
+    .hero:not(:has(.hero-visual)) .hero-grid {
+      --hero-h: clamp(28rem, calc(100vw * 16 / 9 - var(--nav-h)), 70rem);
+    }
   }
   /* The dotted field fills its parent and is only decoration. In the hero it sits behind the copy; in the
      quiz's backdrop it is simply painted after the blooms and under the grain. */
