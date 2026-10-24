@@ -636,9 +636,17 @@
   /* With the phone off (for now), the hero is its copy alone: one centred column at every width, with
      about the same space above and below as a band. */
   .hero:not(:has(.hero-visual)) {
-    padding-block: clamp(2.5rem, 1.5rem + 4vw, 5.5rem);
+    --hero-pad: clamp(2.5rem, 1.5rem + 4vw, 5.5rem);
     /* The pause button sits in the bottom space, so on a phone it never covers the line above it */
-    padding-block-end: max(4.75rem, clamp(2.5rem, 1.5rem + 4vw, 5.5rem));
+    --hero-pad-end: max(4.75rem, var(--hero-pad));
+    padding-block: var(--hero-pad) var(--hero-pad-end);
+  }
+  /* The first screen is the hero: the screen's height less the nav (never under 28rem, and capped at 70rem so a
+     tall portrait screen isn't mostly empty), the copy centred in it. Landscape on a desktop, portrait on a
+     phone, whatever the shape. The grid takes the band's height less the hero's own padding. */
+  .hero:not(:has(.hero-visual)) .hero-grid {
+    min-height: calc(clamp(28rem, 100svh - var(--nav-h), 70rem) - var(--hero-pad) - var(--hero-pad-end));
+    align-content: center;
   }
   /* The dotted field fills its parent and is only decoration. In the hero it sits behind the copy; in the
      quiz's backdrop it is simply painted after the blooms and under the grain. */
