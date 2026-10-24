@@ -3,51 +3,36 @@
 import Link from "next/link";
 import { useActionState } from "react";
 import { startCheckout } from "@/app/start/checkout";
-import { ArrowRight, Check } from "@/components/icons";
+import { ArrowRight } from "@/components/icons";
 import { paywallConsent as consent } from "@/lib/legal";
 import { paywallCopy } from "@/lib/plan-copy";
-import type { WeekTask } from "@/lib/week";
-
-/** Her biggest task in a pile, by her own hours. */
-const top = (tasks: Pick<WeekTask, "name" | "pile" | "hours">[], pile: WeekTask["pile"]) =>
-  tasks.filter((t) => t.pile === pile).sort((a, b) => b.hours - a.hours)[0];
+import type { AiPolicy, AiTool, WeekTask } from "@/lib/week";
+import { PlanPreview } from "./PlanPreview";
 
 /**
- * Get my plan, under her free result: the headline, two lines built from her own tasks, the five parts of
- * the plan, the price and the refund line, and the button to Stripe's page.
+ * Get my plan, under her free result: the headline, a look at her plan built from her answers, the price and
+ * the refund line, and the button to Stripe's page.
  */
-export function Paywall({ tasks }: { tasks: Pick<WeekTask, "name" | "pile" | "hours">[] }) {
+export function Paywall({
+  tasks,
+  aiTools,
+  aiPolicy,
+  knownFor,
+}: {
+  tasks: Pick<WeekTask, "name" | "pile" | "hours">[];
+  aiTools: AiTool[];
+  aiPolicy: AiPolicy | null;
+  knownFor: string;
+}) {
   const [state, action, pending] = useActionState(startCheckout, null);
-  const toAi = top(tasks, "hand_to_ai");
-  const back = top(tasks, "hand_back");
 
   return (
     <section className="paywall" aria-labelledby="paywall-title">
       <h2 id="paywall-title" className="paywall-title">
         {paywallCopy.title}
       </h2>
-      <ul className="paywall-list">
-        {toAi ? (
-          <li>
-            <Check />
-            {paywallCopy.prompts(toAi.name)}
-          </li>
-        ) : null}
-        {back ? (
-          <li>
-            <Check />
-            {paywallCopy.handBack(back.name)}
-          </li>
-        ) : null}
-        {paywallCopy.parts.map((part) => (
-          <li key={part.title}>
-            <Check />
-            <span>
-              <strong>{part.title}.</strong> {part.text}
-            </span>
-          </li>
-        ))}
-      </ul>
+      <p className="paywall-lead">{paywallCopy.lead}</p>
+      <PlanPreview tasks={tasks} aiTools={aiTools} aiPolicy={aiPolicy} knownFor={knownFor} />
 
       <form action={action} className="paywall-form">
         <p className="paywall-price">{paywallCopy.price}</p>

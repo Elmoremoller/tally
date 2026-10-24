@@ -1,6 +1,8 @@
 import Anthropic from "@anthropic-ai/sdk";
 import { PLAN_PROMPT_VERSION, PLAN_SYSTEM } from "./plan-prompt";
-import { AI_TOOLS, policyLabels, toolLabels, type AiPolicy, type AiTool, type Pile } from "./week";
+import { policyLabels, profileTool, promptTasks, shouldAsk, toolLabels, type AiPolicy, type AiTool, type Pile } from "./week";
+
+export { PROMPTS_MAX, profileTool, promptTasks, shouldAsk } from "./week";
 
 // Writes her plan with the master prompt in lib/plan-prompt.ts, then holds the answer to the rules before
 // anything is saved. Her tasks, piles and hours come from what she confirmed, never from the model: the
@@ -8,9 +10,6 @@ import { AI_TOOLS, policyLabels, toolLabels, type AiPolicy, type AiTool, type Pi
 // and the model from ANTHROPIC_MODEL_PLAN. Imports nothing else from the site, so a script can run it.
 
 export const planModel = () => process.env.ANTHROPIC_MODEL_PLAN || "claude-sonnet-5-5";
-
-/** At most this many tasks get a ready prompt: her biggest ones to hand to AI. */
-export const PROMPTS_MAX = 5;
 
 export type PlanInput = {
   job: string;
@@ -41,20 +40,6 @@ export type PlanContent = {
   project: { title: string; why: string; steps: string[] };
   aiTalk: string;
 };
-
-/** The tool her work profile is for: the first one she can use, or null when she isn't sure. */
-export const profileTool = (tools: AiTool[]) => AI_TOOLS.find((t) => t !== "not_sure" && tools.includes(t)) ?? null;
-
-/** She should ask what's approved when the rules are unclear, or she isn't sure which tools she can use. */
-export const shouldAsk = (input: Pick<PlanInput, "aiTools" | "aiPolicy">) =>
-  input.aiPolicy === "unclear" || input.aiPolicy === "no_idea" || !profileTool(input.aiTools);
-
-/** Her tasks to hand to AI that get a prompt: the biggest first, at most five. */
-export const promptTasks = (tasks: PlanInput["tasks"]) =>
-  tasks
-    .filter((t) => t.pile === "hand_to_ai")
-    .sort((a, b) => b.hours - a.hours)
-    .slice(0, PROMPTS_MAX);
 
 const fence = (text: string) => text.replace(/<\/?\s*[a-z_]+\s*>/gi, "");
 

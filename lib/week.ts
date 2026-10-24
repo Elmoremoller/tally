@@ -53,3 +53,23 @@ export const hoursNobodyNotices = (tasks: readonly { pile: Pile; hours: number }
 
 /** "9.5 hours", "1 hour", "0 hours". */
 export const hoursText = (hours: number) => `${Number.isInteger(hours) ? hours : hours.toFixed(1)} ${hours === 1 ? "hour" : "hours"}`;
+
+// What her plan will hold, shared by the plan writer and the preview under the paywall, so the preview shows
+// exactly the tasks and the ask line the plan gets.
+
+/** At most this many tasks get a ready prompt: her biggest ones to hand to AI. */
+export const PROMPTS_MAX = 5;
+
+/** The tool her work profile is for: the first one she can use, or null when she isn't sure. */
+export const profileTool = (tools: readonly AiTool[]) => AI_TOOLS.find((t) => t !== "not_sure" && tools.includes(t)) ?? null;
+
+/** She should ask what's approved when the rules are unclear, or she isn't sure which tools she can use. */
+export const shouldAsk = (input: { aiTools: readonly AiTool[]; aiPolicy: AiPolicy }) =>
+  input.aiPolicy === "unclear" || input.aiPolicy === "no_idea" || !profileTool(input.aiTools);
+
+/** Her tasks to hand to AI that get a prompt: the biggest first, at most five. */
+export const promptTasks = <T extends { pile: Pile; hours: number }>(tasks: readonly T[]) =>
+  tasks
+    .filter((t) => t.pile === "hand_to_ai")
+    .sort((a, b) => b.hours - a.hours)
+    .slice(0, PROMPTS_MAX);

@@ -166,7 +166,7 @@ export function Quiz() {
           </div>
         ) : phase === "result" ? (
           <FreeResult tasks={tasks} headingRef={headingRef}>
-            <Paywall tasks={tasks} />
+            <Paywall tasks={tasks} aiTools={tools} aiPolicy={policy} knownFor={heard?.knownFor ?? ""} />
           </FreeResult>
         ) : (
           <div key={phase === "questions" ? step : phase} className="quiz-step" data-dir={direction}>

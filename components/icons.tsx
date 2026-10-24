@@ -73,6 +73,14 @@ export const Check = (props: IconProps) => (
   </Icon>
 );
 
+/** A padlock: written for her after checkout. */
+export const Lock = (props: IconProps) => (
+  <Icon {...props}>
+    <rect x="5.5" y="10.5" width="13" height="9.5" rx="2" />
+    <path d="M8.5 10.5V8a3.5 3.5 0 0 1 7 0v2.5" />
+  </Icon>
+);
+
 /** AI: a four point sparkle, filled. */
 export const Sparkle = (props: IconProps) => (
   <Icon {...props}>

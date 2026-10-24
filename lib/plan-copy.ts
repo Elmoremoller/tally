@@ -10,9 +10,8 @@ const inSentence = (name: string) => (/^\p{Lu}\p{Ll}/u.test(name) ? name.charAt(
 
 export const paywallCopy = {
   title: "Get your plan to win those hours back and turn them into credit.",
-  prompts: (task: string) => `Ready prompts for ${inSentence(task)}`,
+  lead: "Here’s what’s inside, built from your answers.", // DRAFT
   handBack: (task: string) => `A polite script to hand back ${inSentence(task)}`,
-  parts: planParts.parts.map((p) => ({ title: p.title, text: p.text })),
   price: `${dollars(offer.price.cents)}, paid once. No subscription.`,
   refund: offer.refund,
   cta: "Get my plan",
@@ -21,6 +20,30 @@ export const paywallCopy = {
   quizFirst: "Please take the quiz first, so we can make your plan.",
   error: "Something went wrong. Please try again in a minute.",
   notSetUp: "Payments are not set up yet. Add the Stripe test key to .env.local.",
+};
+
+/**
+ * The look at her plan under the paywall: one card per part, with her own tasks, hours and tool in clear and
+ * the words the plan writer adds after checkout behind a lock. All DRAFT.
+ */
+export const previewCopy = {
+  lock: "Written for you after checkout",
+  moreScripts: (others: string[]) =>
+    others.length === 1
+      ? `Plus a script for ${inSentence(others[0])}.`
+      : `Plus ${others.length} more scripts for your other tasks to hand back.`,
+  piles: "Your tasks in three piles",
+  rules: { encouraged: "With safe use rules for a company that encourages AI.", restricted: "With safe use rules for a company that restricts AI." },
+  rulesAsk: "With safe use rules, and a message to ask what’s approved.",
+  prompts: (count: number) => `${count} ready ${count === 1 ? "prompt" : "prompts"}`,
+  projectTitle: "One project for the work you want credit for",
+  projectLine: "With first steps, and a script for talking about your AI use with your manager.",
+  /**
+   * Blurred behind each lock and hidden from screen readers, so it is never read as hers. Sample words only,
+   * there to give the lock the shape of real writing.
+   */
+  standIn:
+    "I’d like to put my time into the work that moves things forward, so here’s a simple way we could share this from now on. If you send it over a few days ahead, I can review it and keep it where it should be.",
 };
 
 /** What people see on Stripe's page and their receipt. DRAFT */
