@@ -3,17 +3,15 @@ import { APP_TAG } from "./checkout";
 import { recordOrder } from "./funnel-db";
 import { CURRENCY, PLAN_PRICE } from "./prices";
 import { stripe } from "./stripe";
-import { sendLoginLink } from "./supabase";
 
 export type Fulfilment =
   | { paid: false; reason: "unpaid" | "not-ours" }
-  | { paid: true; email: string; token: string; planId: string; first: boolean; linkSent?: boolean };
+  | { paid: true; email: string; token: string; planId: string; first: boolean };
 
 /**
  * Records her paid Checkout and adds her plan, waiting to be written. Called from the Stripe webhook and
  * from the page she lands on after paying, whichever comes first; the database counts each Checkout once,
- * so a repeated webhook never makes a second order, and the email with her plan link only goes out the
- * first time.
+ * so a repeated webhook never makes a second order. The email with her plan goes out once it's written.
  */
 export async function fulfillCheckout(checkoutId: string): Promise<Fulfilment> {
   let checkout: Stripe.Checkout.Session;
@@ -40,14 +38,5 @@ export async function fulfillCheckout(checkoutId: string): Promise<Fulfilment> {
     email,
   });
   if (!order.plan_id || !order.access_token) throw new Error(`No plan was added for Checkout ${checkout.id}`);
-
-  let linkSent: boolean | undefined;
-  if (order.first) {
-    // The login is set up before the email goes out, so even if the email fails, "send it again" and the
-    // login page still work. The email's link signs her in and opens her plan.
-    const { error } = await sendLoginLink(email, { create: true }).catch((e: Error) => ({ error: e }));
-    if (error) console.error("The plan link email failed", error.message);
-    linkSent = !error;
-  }
-  return { paid: true, email, token: order.access_token, planId: order.plan_id, first: order.first, linkSent };
+  return { paid: true, email, token: order.access_token, planId: order.plan_id, first: order.first };
 }

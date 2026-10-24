@@ -1,7 +1,8 @@
 "use server";
 
 import { orderEmail, planByToken } from "@/lib/funnel-db";
-import { sendLoginLink } from "@/lib/supabase";
+import { requestOrigin } from "@/lib/site";
+import { sendPlanEmail } from "@/lib/supabase";
 
 export type ResendState = { sent: boolean; error?: string } | null;
 
@@ -10,8 +11,9 @@ export async function resendPlanLink(_: ResendState, form: FormData): Promise<Re
   try {
     const plan = await planByToken(String(form.get("token") ?? ""));
     const email = plan ? await orderEmail(plan.order_id) : null;
-    if (!email) return { sent: false, error: "We couldn’t find that plan." };
-    const { error } = await sendLoginLink(email, { create: true });
+    if (!plan || !email) return { sent: false, error: "We couldn’t find that plan." };
+    const origin = await requestOrigin();
+    const { error } = await sendPlanEmail(email, `${origin}/plan/${plan.access_token}`, origin);
     if (error) return { sent: false, error: "Please wait a minute, then try again." };
     return { sent: true };
   } catch (error) {

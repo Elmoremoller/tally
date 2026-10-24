@@ -46,26 +46,34 @@ export async function supabaseWithSession() {
 }
 
 /**
- * Makes sure this email has a login, already confirmed. Without this, Supabase would send a brand new
- * person its "Confirm signup" email instead of the Magic Link one, and that link can't sign them in here.
- * It also means a failed email never leaves a paying customer without a login. Server only.
+ * Her login's id, setting one up (already confirmed) if she has none yet. Without a confirmed login,
+ * Supabase would send its "Confirm signup" email instead of the Magic Link one. Server only.
  */
-async function ensureLogin(email: string) {
-  const { error } = await supabaseAdmin().auth.admin.createUser({ email, email_confirm: true });
+async function loginId(email: string) {
+  const admin = supabaseAdmin().auth.admin;
+  const { data, error } = await admin.createUser({ email, email_confirm: true });
+  if (data?.user) return data.user.id;
   if (error && error.code !== "email_exists" && !/already/i.test(error.message)) {
     throw new Error(`Could not set up the login for ${email}: ${error.message}`);
   }
+  // She has one already. Looked up in the database (20261024130000_login_lookup.sql), since asking Supabase
+  // Auth for a link would count as an email and hold the real one back for a minute.
+  const found = await supabaseAdmin().rpc("login_id_for_email", { p_email: email });
+  if (found.error || !found.data) throw new Error(`Could not find the login for ${email}: ${found.error?.message ?? "none"}`);
+  return found.data as string;
 }
 
 /**
- * Emails a login link. The email's link opens /auth/confirm on this site (see the Magic Link email in SETUP.md).
- * `create` is true when the person has just paid or was just invited, so their login is set up first.
+ * Emails her the private link to her plan. The link is kept on her login (user_metadata.plan_url) and the
+ * Magic Link email shows it (see SETUP.md), so the email opens her plan directly and keeps working. Pass
+ * `origin` where there's no request to read the site's address from, like after a response has gone out.
  */
-export async function sendLoginLink(email: string, { create }: { create: boolean }) {
-  if (create) await ensureLogin(email);
-  const origin = await requestOrigin();
+export async function sendPlanEmail(email: string, planUrl: string, origin?: string) {
+  const id = await loginId(email);
+  const { error } = await supabaseAdmin().auth.admin.updateUserById(id, { user_metadata: { plan_url: planUrl } });
+  if (error) throw new Error(`Could not keep the plan link for ${email}: ${error.message}`);
   return supabaseServer().auth.signInWithOtp({
     email,
-    options: { shouldCreateUser: false, emailRedirectTo: `${origin}/auth/confirm` },
+    options: { shouldCreateUser: false, emailRedirectTo: `${origin ?? (await requestOrigin())}/auth/confirm` },
   });
 }

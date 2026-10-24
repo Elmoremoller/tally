@@ -1,0 +1,16 @@
+<!--
+  Supabase: Authentication, then Emails, then Magic Link. Subject: Your plan is ready
+  Worth Her Time keeps each buyer's private plan link on her login (user_metadata.plan_url), so her email
+  opens her plan directly and keeps working. Anyone without one, like The Couple Standard's customers, gets
+  the one time sign in link as before. A mistake in this template makes Supabase fall back to its default.
+-->
+{{ if .Data.plan_url }}
+<h2>Your plan is ready</h2>
+<p>Here’s your personal plan to win back your hours and get the credit you’ve earned.</p>
+<p><a href="{{ .Data.plan_url }}">Open my plan</a></p>
+<p>This link is private to you. Keep this email to come back to your plan any time.</p>
+{{ else }}
+<h2>Your plan is ready</h2>
+<p>Tap the link below to open it. It works once, for the next hour.</p>
+<p><a href="{{ .SiteURL }}/auth/confirm?token_hash={{ .TokenHash }}&type=email">Open my plan</a></p>
+{{ end }}

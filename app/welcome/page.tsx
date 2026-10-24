@@ -48,7 +48,7 @@ async function Welcome({ searchParams }: { searchParams: PageProps<"/welcome">["
   }
 
   if (result !== "error" && result.paid) {
-    writePlanAfterResponse(result.planId);
+    await writePlanAfterResponse(result.planId);
     redirect(`/plan/${result.token}?welcome=1`);
   }
 

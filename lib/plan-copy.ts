@@ -69,7 +69,7 @@ export const planCopy = {
   pendingText: "It usually takes under a minute. This page opens it by itself.", // DRAFT
   failedTitle: "Your plan is taking longer than usual",
   failedText: "We’ve been told and we’re on it. Keep this link: your plan appears here as soon as it’s ready.", // DRAFT
-  welcomeNote: (email: string) => `We also sent a link to ${email}, so you can always come back to your plan.`, // DRAFT
+  welcomeNote: (email: string) => `We’re emailing the link to your plan to ${email}, so you can always come back to it.`, // DRAFT
   notFoundTitle: "We couldn’t find that plan",
   notFoundText: "Check the link in your email, or enter your email for a new one.",
 };

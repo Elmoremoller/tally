@@ -24,7 +24,7 @@ export async function POST(request: Request) {
     try {
       // Checkouts this site didn't start, like The Couple Standard's, come back as not ours and are acknowledged.
       const result = await fulfillCheckout(event.data.object.id);
-      if (result.paid) writePlanAfterResponse(result.planId);
+      if (result.paid) await writePlanAfterResponse(result.planId);
     } catch (error) {
       // A 500 makes Stripe try again later.
       console.error("Fulfilment failed", error);

@@ -69,6 +69,6 @@ async function TokenPlan({
   if (plan.status === "ready" && content?.version === 1) return <PlanPage content={content} welcome={note} />;
 
   // The database starts an attempt only when none is running (or one stopped over 3 minutes ago).
-  if (plan.status === "pending") writePlanAfterResponse(plan.id);
+  if (plan.status === "pending") await writePlanAfterResponse(plan.id);
   return <PlanWaiting failed={plan.status === "failed"} welcome={note} />;
 }
