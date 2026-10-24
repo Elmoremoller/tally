@@ -38,7 +38,7 @@ export type AngleId = keyof typeof angles;
  * shrinks just enough for it to fit. Measure it again whenever the key changes.
  */
 export const angles = {
-  default: { headline: "Close the laptop at 5. Without falling behind.", key: "Without falling behind", fit: 8.12 },
+  default: { headline: "You’re not behind, you’re just buried.", key: "you’re just buried", fit: 6.27 },
   note_taker: { headline: "Always the one taking the notes? Win those hours back.", key: "those hours" },
   late_nights: { headline: "Stop working late on work nobody notices.", key: "working late" },
   always_yes: { headline: "Said yes to everything? Get time back for your real job.", key: "your real job" },
