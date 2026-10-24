@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { PageBehavior } from "@/components/PageBehavior";
 import { offer } from "@/lib/offer";
 import { siteUrl } from "@/lib/site";
+import { sans, serif } from "./fonts";
 import "./globals.css";
 
 // The title, description and link preview words come from lib/offer.ts, like the share image and the icons.
@@ -20,8 +21,8 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  // Matches --warm-white, so the browser chrome blends into the page.
-  themeColor: "#f9f5ed",
+  // Matches --off-white, so the browser chrome blends into the page.
+  themeColor: "#efeae4",
   colorScheme: "light",
 };
 
@@ -31,7 +32,7 @@ const noScriptStyles = ".qa .qa-a{grid-template-rows:1fr}.qa .qa-a>div{visibilit
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     // Next pauses smooth scrolling during route changes only when this attribute is present.
-    <html lang="en" data-scroll-behavior="smooth">
+    <html lang="en" data-scroll-behavior="smooth" className={`${serif.variable} ${sans.variable}`}>
       <head>
         <noscript dangerouslySetInnerHTML={{ __html: `<style>${noScriptStyles}</style>` }} />
       </head>

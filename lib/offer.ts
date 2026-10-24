@@ -1,9 +1,9 @@
-// The offer, in one place: a new name, a new price or a new ad angle is one edit here. Worth Her Time is a
-// working name. Words here follow the copy rules: no dashes, no colons in headlines, no hype words, and it's
-// always a plan. This file imports nothing, so Node can test it.
+// The offer, in one place: a new name, a new price or a new ad angle is one edit here. Words here follow the
+// copy rules: no dashes, no colons in headlines, no hype words, and it's always a plan. This file imports
+// nothing, so Node can test it.
 
 export const offer = {
-  name: "Worth Her Time",
+  name: "Tally",
   /** Shown in brackets until it's a real address. */
   supportEmail: "[support email]",
   /** In cents, charged through Stripe Checkout. Paid once, no subscription. */

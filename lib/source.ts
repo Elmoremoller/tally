@@ -4,7 +4,7 @@ import { angleFor, type AngleId } from "./offer";
 // in a cookie for 30 days, and the quiz copies them onto her session when it starts. The latest ad she came
 // from wins. This file imports nothing from the server, so the proxy can use it.
 
-export const SOURCE_COOKIE = "wht_source";
+export const SOURCE_COOKIE = "tally_source";
 export const SOURCE_MAX_AGE = 60 * 60 * 24 * 30;
 
 export type Source = {

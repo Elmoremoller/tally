@@ -1,27 +1,18 @@
 import { ImageResponse } from "next/og";
-import { offer } from "@/lib/offer";
+import { ICON } from "@/components/brand/paths";
 
-// A placeholder home screen icon until there is a logo: the name's first letter in warm white on deep red.
+// The home screen icon: the off white T from the favicon on a dusty blue square. The phone rounds the
+// corners itself, so the square runs to the edges.
 export const size = { width: 180, height: 180 };
 export const contentType = "image/png";
 
 export default function AppleIcon() {
   return new ImageResponse(
     (
-      <div
-        style={{
-          width: "100%",
-          height: "100%",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          background: "#960400",
-          color: "#f9f5ed",
-          fontSize: 112,
-          fontWeight: 700,
-        }}
-      >
-        {offer.name.charAt(0)}
+      <div style={{ width: "100%", height: "100%", display: "flex", background: "#7a90a8" }}>
+        <svg width="180" height="180" viewBox={ICON.viewBox}>
+          <path fill="#efeae4" fillRule="evenodd" d={ICON.t} />
+        </svg>
       </div>
     ),
     size,

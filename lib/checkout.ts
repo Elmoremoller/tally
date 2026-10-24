@@ -4,7 +4,7 @@ import { requestOrigin } from "./site";
 import { stripe } from "./stripe";
 
 /** Marks Checkouts this site started, since the Stripe account also sells The Couple Standard's plan. */
-export const APP_TAG = "worth-her-time";
+export const APP_TAG = "tally";
 
 /**
  * Starts a Stripe Checkout for her plan and returns its address. It carries her quiz session, so the payment

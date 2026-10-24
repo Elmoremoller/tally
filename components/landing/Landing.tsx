@@ -38,7 +38,7 @@ function Headline({ angle }: { angle: AngleId }) {
 
 /**
  * The landing page, for one ad angle: only the hero headline changes. Section order follows the brief, and
- * the bands alternate warm white and tint as before. LAYOUT.md has the details. `reviews` is only passed by
+ * the bands alternate off white and tint as before. LAYOUT.md has the details. `reviews` is only passed by
  * the local preview; the live page shows the real ones from lib/testimonials.ts.
  */
 export function Landing({ angle, reviews = testimonials }: { angle: AngleId; reviews?: readonly Testimonial[] }) {
@@ -147,7 +147,7 @@ export function Landing({ angle, reviews = testimonials }: { angle: AngleId; rev
           </div>
         </section>
 
-        {/* What's in your plan: the five parts on a deep red band, then the price and the way in */}
+        {/* What's in your plan: the five parts on a deep slate band, then the price and the way in */}
         <section className="band band-deep" aria-labelledby="plan-title" data-section="plan">
           <div className="wrap">
             <div className="center-head">

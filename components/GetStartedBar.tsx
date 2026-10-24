@@ -37,7 +37,7 @@ export function GetStartedBar() {
     );
     heroObserver.observe(heroCta);
 
-    // The plan band and the closing band have their own button, and the bar would vanish on their deep red anyway.
+    // The plan band and the closing band have their own button, and the bar would vanish on their slate anyway.
     const blockerObserver = new IntersectionObserver((entries) => {
       for (const entry of entries) {
         if (entry.isIntersecting) blocking.add(entry.target);

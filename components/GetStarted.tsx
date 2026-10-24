@@ -6,15 +6,15 @@ export const START_HREF = "/start";
 
 type GetStartedProps = {
   size?: "md" | "lg";
-  /** "invert" is warm white on a deep red band. */
-  tone?: "red" | "invert";
+  /** "invert" is off white on a slate band. */
+  tone?: "slate" | "invert";
   className?: string;
   /** Get started, unless the button says something more specific. */
   label?: string;
 };
 
 /** The page's one action. Every Get started button on the site is this component, apart from the GetStartedBar. */
-export function GetStarted({ size = "md", tone = "red", className, label = "Get started" }: GetStartedProps) {
+export function GetStarted({ size = "md", tone = "slate", className, label = "Get started" }: GetStartedProps) {
   const classes = ["btn", size === "lg" && "btn-lg", tone === "invert" && "btn-invert", className]
     .filter(Boolean)
     .join(" ");

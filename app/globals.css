@@ -1,83 +1,93 @@
 @import "tailwindcss";
 
 /*
-  Worth Her Time.
+  Tally.
   One centered column with one action always in reach: Take the free quiz, at each decision point and in a
   bar at the bottom of the screen between them.
-  Deep red carries the logo, headings, buttons and brand backgrounds. Warm white is the page, and anything
-  set on red. The only ornament is the smile from the logo.
+  Five colours and nothing else. Off white is the page. Deep slate blue carries the text, headings, buttons
+  and the strong bands, and anything set on slate is off white. Dusty blue is the logo and its tile, light
+  sky blue the soft bands and the glow, and warm tan the one accent: the line drawn under a key phrase.
+  Dusty blue and tan are too light to carry text on off white, so they only ever draw shapes.
 */
 
 :root {
-  /* Brand */
-  --deep-red: #960400;
-  --warm-white: #f9f5ed;
+  /* The five brand colours */
+  --off-white: #efeae4; /* the page */
+  --tan: #a68a69; /* warm accent */
+  --sky: #aecae8; /* light sky blue, soft backgrounds */
+  --dusty-blue: #7a90a8; /* main brand blue: the logo */
+  --slate: #48596b; /* deep slate blue, the darkest */
 
-  /* Support colours */
-  --ink: #221d1a; /* near black, body text */
-  --muted: #665c55; /* muted warm grey, secondary text */
-  --tint: #f3e6df; /* soft red tint, subtle surfaces */
+  /* Made from the five */
+  --ink: var(--slate); /* body text, 6:1 on off white */
+  --muted: #506174; /* secondary text: slate with a touch of dusty blue, 5.3:1 on off white, 4.6:1 on tint */
+  --tint: #d5dde6; /* sky blue at 40% on off white, for the soft bands. Slate reads 5.3:1 on it */
+  --slate-top: #576a7d; /* slate lit from above with dusty blue, the top of a slate button */
+  --slate-base: #3f4e5e; /* slate in shade, the bottom of a slate button */
 
-  /* Tones of the colours above, made with alpha only */
-  --line: rgb(34 29 26 / 0.12);
-  --line-strong: rgb(34 29 26 / 0.22);
-  --red-wash: rgb(150 4 0 / 0.08);
-  --red-wash-hover: rgb(150 4 0 / 0.13);
-  --red-wash-press: rgb(150 4 0 / 0.2);
-  --material: rgb(249 245 237 / 0.8);
-  --edge: rgb(34 29 26 / 0.07);
-  --bezel-highlight: rgb(249 245 237 / 0.1);
-  --selection: rgb(150 4 0 / 0.16);
-  --selection-on-red: rgb(249 245 237 / 0.28);
-  /* The hero's moving aura: deep red at falling strengths, and a warm white highlight */
-  --blush-core: rgb(150 4 0 / 0.24);
-  --blush-mid: rgb(150 4 0 / 0.12);
-  --blush-edge: rgb(150 4 0 / 0.04);
-  --blush-bloom: rgb(150 4 0 / 0.28);
-  --blush-rose: rgb(150 4 0 / 0.2);
-  --blush-light: rgb(249 245 237 / 0.6);
-  /* The aura behind the quiz and the plan: the brand red, a warmer coral and a cooler rose made from it,
-     and a warm light. Only ever used as soft blooms in the backdrop. */
-  --bloom-red: rgb(150 4 0 / 0.42);
-  --bloom-coral: rgb(222 128 100 / 0.46);
-  --bloom-rose: rgb(170 40 60 / 0.32);
-  --bloom-light: rgb(252 236 220 / 0.9);
+  /* Tones of the colours above, made with alpha only. Shadows are slate in deep shade (36 45 54). */
+  --line: rgb(72 89 107 / 0.15);
+  --line-strong: rgb(72 89 107 / 0.28);
+  --slate-wash: rgb(72 89 107 / 0.08);
+  --slate-wash-hover: rgb(72 89 107 / 0.13);
+  --slate-wash-press: rgb(72 89 107 / 0.2);
+  --material: rgb(239 234 228 / 0.8);
+  --edge: rgb(36 45 54 / 0.08);
+  --bezel-highlight: rgb(239 234 228 / 0.1);
+  --selection: rgb(174 202 232 / 0.6);
+  --selection-on-slate: rgb(239 234 228 / 0.28);
+  /* The hero's moving aura: sky blue at falling strengths, a faint dusty blue, and an off white highlight.
+     Tan stays out of it: mixed with the blues it turns grey. */
+  --glow-core: rgb(174 202 232 / 0.7);
+  --glow-mid: rgb(174 202 232 / 0.34);
+  --glow-edge: rgb(174 202 232 / 0.1);
+  --glow-bloom: rgb(174 202 232 / 0.5);
+  --glow-dusty: rgb(122 144 168 / 0.14);
+  --glow-light: rgb(239 234 228 / 0.7);
+  /* The aura behind the quiz and the plan: sky blue, dusty blue and warm tan, and an off white light. Only
+     ever used as soft blooms in the backdrop. */
+  --bloom-sky: rgb(174 202 232 / 0.56);
+  --bloom-dusty: rgb(122 144 168 / 0.2);
+  --bloom-tan: rgb(166 138 105 / 0.12);
+  --bloom-light: rgb(239 234 228 / 0.9);
   /* Frosted cards over the aura */
-  --frost: rgb(251 247 241 / 0.66);
-  --frost-tint: rgb(255 240 232 / 0.62);
-  --frost-edge: rgb(255 255 255 / 0.55);
-  --frost-shadow: 0 10px 30px -12px rgb(90 20 10 / 0.22);
+  --frost: rgb(245 242 239 / 0.7);
+  --frost-tint: rgb(213 221 230 / 0.66);
+  --frost-edge: rgb(255 255 255 / 0.5);
+  --frost-shadow: 0 10px 30px -12px rgb(36 45 54 / 0.22);
   --focus: var(--ink);
-  --shadow-1: 0 1px 2px rgb(34 29 26 / 0.06);
-  --shadow-2: 0 1px 2px rgb(34 29 26 / 0.05), 0 10px 24px -8px rgb(34 29 26 / 0.14);
-  --shadow-3: 0 1px 2px rgb(34 29 26 / 0.04), 0 18px 40px -14px rgb(34 29 26 / 0.16), 0 56px 110px -36px rgb(34 29 26 / 0.26);
+  --shadow-1: 0 1px 2px rgb(36 45 54 / 0.06);
+  --shadow-2: 0 1px 2px rgb(36 45 54 / 0.05), 0 10px 24px -8px rgb(36 45 54 / 0.14);
+  --shadow-3: 0 1px 2px rgb(36 45 54 / 0.04), 0 18px 40px -14px rgb(36 45 54 / 0.16), 0 56px 110px -36px rgb(36 45 54 / 0.26);
 
-  /* Type. Size, leading and tracking move together: tracking tightens as size grows, loosens as it shrinks. */
-  --stack-display: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI Variable Display", "Segoe UI", system-ui, Roboto, "Helvetica Neue", Arial, sans-serif;
-  --stack-text: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI Variable Text", "Segoe UI", system-ui, Roboto, "Helvetica Neue", Arial, sans-serif;
+  /* Type. Headings in the condensed serif, everything else in the grotesk (app/fonts.ts says which files).
+     The serif has one weight, so headings are regular and a key phrase is set in italic, never bold. Size,
+     leading and tracking move together: tracking tightens as size grows, loosens as it shrinks. */
+  --stack-display: var(--brand-serif), "Times New Roman", Times, serif;
+  --stack-text: var(--brand-sans), -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, Roboto, "Helvetica Neue", Arial, sans-serif;
   /* Sized for a headline of about fifty characters: three lines at most on desktop, so the hero still ends
      on the first screen. */
-  --fs-hero: clamp(2.625rem, 1.25rem + 3.8vw, 4rem);
-  --lh-hero: 1.04;
-  --tr-hero: -0.028em;
-  --fs-display: clamp(2rem, 1.35rem + 2.8vw, 3.5rem);
-  --lh-display: 1.08;
-  --tr-display: -0.02em;
-  --fs-title: clamp(1.375rem, 1.2rem + 0.75vw, 1.75rem);
-  --lh-title: 1.2;
-  --tr-title: -0.012em;
+  --fs-hero: clamp(2.875rem, 1.4rem + 4.2vw, 4.5rem);
+  --lh-hero: 1.1;
+  --tr-hero: -0.012em;
+  --fs-display: clamp(2.25rem, 1.5rem + 3.1vw, 3.875rem);
+  --lh-display: 1.06;
+  --tr-display: -0.008em;
+  --fs-title: clamp(1.5rem, 1.3rem + 0.85vw, 1.9375rem);
+  --lh-title: 1.15;
+  --tr-title: -0.004em;
   --fs-lead: clamp(1.1875rem, 1.13rem + 0.25vw, 1.3125rem);
   --lh-lead: 1.42;
-  --tr-lead: -0.006em;
+  --tr-lead: -0.005em;
   --fs-body: 1.0625rem;
   --lh-body: 1.5;
-  --tr-body: -0.01em;
+  --tr-body: -0.003em;
   --fs-small: 0.9375rem;
   --lh-small: 1.45;
-  --tr-small: -0.004em;
+  --tr-small: 0em;
   --fs-micro: 0.8125rem;
   --lh-micro: 1.4;
-  --tr-micro: 0.008em;
+  --tr-micro: 0.01em;
 
   /* Layout */
   --wrap: 68rem;
@@ -111,8 +121,11 @@
   --breakpoint-lg: 66.8125rem; /* 1069px */
 }
 @theme inline {
-  --color-deep-red: var(--deep-red);
-  --color-warm-white: var(--warm-white);
+  --color-off-white: var(--off-white);
+  --color-tan: var(--tan);
+  --color-sky: var(--sky);
+  --color-dusty-blue: var(--dusty-blue);
+  --color-slate: var(--slate);
   --color-ink: var(--ink);
   --color-muted: var(--muted);
   --color-tint: var(--tint);
@@ -151,13 +164,14 @@
   html {
     -webkit-text-size-adjust: 100%;
     text-size-adjust: 100%;
+    font-synthesis-weight: none;
     scroll-padding-top: calc(var(--nav-h) + 1rem);
-    background: var(--warm-white);
+    background: var(--off-white);
   }
   body {
     margin: 0;
     min-height: 100dvh;
-    background: var(--warm-white);
+    background: var(--off-white);
     color: var(--ink);
     font-family: var(--stack-text);
     font-size: var(--fs-body);
@@ -212,10 +226,10 @@
   .heading {
     font-family: var(--stack-display);
     font-size: var(--fs-display);
-    font-weight: 700;
+    font-weight: 400;
     line-height: var(--lh-display);
     letter-spacing: var(--tr-display);
-    color: var(--deep-red);
+    color: var(--slate);
     text-wrap: balance;
   }
 
@@ -230,7 +244,7 @@
     padding: 0 1.1rem;
     border-radius: 999px;
     background: var(--ink);
-    color: var(--warm-white);
+    color: var(--off-white);
     font-size: var(--fs-small);
     font-weight: 600;
     text-decoration: none;
@@ -245,13 +259,13 @@
      they lift toward you and a trailing arrow, in its own light circle, slides forward; pressed, they sink.
      Each variant sets the colours below and keeps the same behaviour. */
   .btn {
-    --btn-bg: var(--deep-red);
-    --btn-top: #b01d12;
-    --btn-base: #7f0300;
-    --btn-ink: var(--warm-white);
-    --btn-shadow: rgb(150 4 0 / 0.6);
-    --btn-chip: rgb(249 245 237 / 0.2);
-    --btn-chip-hover: rgb(249 245 237 / 0.32);
+    --btn-bg: var(--slate);
+    --btn-top: var(--slate-top);
+    --btn-base: var(--slate-base);
+    --btn-ink: var(--off-white);
+    --btn-shadow: rgb(72 89 107 / 0.6);
+    --btn-chip: rgb(239 234 228 / 0.2);
+    --btn-chip-hover: rgb(239 234 228 / 0.32);
     --btn-ring: 0 0 0 0 transparent;
     position: relative;
     display: inline-flex;
@@ -267,7 +281,7 @@
       var(--btn-ring),
       inset 0 1px 0 rgb(255 255 255 / 0.3),
       inset 0 -1px 0 rgb(0 0 0 / 0.18),
-      0 1px 2px rgb(90 10 0 / 0.22),
+      0 1px 2px rgb(36 45 54 / 0.22),
       0 10px 22px -10px var(--btn-shadow);
     color: var(--btn-ink);
     font-size: var(--fs-small);
@@ -293,7 +307,7 @@
         var(--btn-ring),
         inset 0 1px 0 rgb(255 255 255 / 0.34),
         inset 0 -1px 0 rgb(0 0 0 / 0.18),
-        0 3px 6px rgb(90 10 0 / 0.18),
+        0 3px 6px rgb(36 45 54 / 0.18),
         0 20px 34px -12px var(--btn-shadow);
     }
   }
@@ -350,27 +364,27 @@
     font-size: 1.125rem;
     letter-spacing: var(--tr-body);
   }
-  /* Warm white on the deep red band */
+  /* Off white on the slate band */
   .btn-invert {
-    --btn-bg: var(--warm-white);
-    --btn-top: #fffdf9;
-    --btn-base: #efe5d9;
-    --btn-ink: var(--deep-red);
-    --btn-shadow: rgb(40 0 0 / 0.45);
-    --btn-chip: var(--red-wash);
-    --btn-chip-hover: var(--red-wash-hover);
-    --focus: var(--warm-white);
+    --btn-bg: var(--off-white);
+    --btn-top: #f5f2ef;
+    --btn-base: #e3e1de;
+    --btn-ink: var(--slate);
+    --btn-shadow: rgb(36 45 54 / 0.45);
+    --btn-chip: var(--slate-wash);
+    --btn-chip-hover: var(--slate-wash-hover);
+    --focus: var(--off-white);
   }
-  /* The second choice next to a main button: warm white with a red outline, and less depth. */
+  /* The second choice next to a main button: off white with a slate outline, and less depth. */
   .btn-quiet {
-    --btn-bg: var(--warm-white);
-    --btn-top: #fffdf9;
-    --btn-base: #f3ebe1;
-    --btn-ink: var(--deep-red);
-    --btn-shadow: rgb(90 20 10 / 0.25);
-    --btn-chip: var(--red-wash);
-    --btn-chip-hover: var(--red-wash-hover);
-    --btn-ring: inset 0 0 0 1.5px var(--deep-red);
+    --btn-bg: var(--off-white);
+    --btn-top: #f5f2ef;
+    --btn-base: #e8e5e0;
+    --btn-ink: var(--slate);
+    --btn-shadow: rgb(36 45 54 / 0.25);
+    --btn-chip: var(--slate-wash);
+    --btn-chip-hover: var(--slate-wash-hover);
+    --btn-ring: inset 0 0 0 1.5px var(--slate);
   }
 
   /* Nav: a translucent material with content scrolling underneath. No divider; a soft edge appears only
@@ -411,17 +425,19 @@
     margin-left: -0.25rem;
     padding-inline: 0.25rem;
     border-radius: 0.75rem;
-    color: var(--deep-red);
+    color: var(--dusty-blue);
     transition: opacity 0.2s ease;
   }
   .nav-brand:active {
     opacity: 0.6;
     transition-duration: 0.05s;
   }
+  /* The wordmark's y hangs below the line, so the box is nudged down to centre the letters, not the box. */
   .nav-brand svg {
     display: block;
-    height: 1.75rem;
+    height: 2.125rem;
     width: auto;
+    translate: 0 6%;
   }
   /* The nav without an action (every page after the landing page): logo in the middle, bigger, in a
      taller bar, the same as the quiz's header. The bar's height is set with --nav-h further down. */
@@ -432,11 +448,11 @@
     margin-left: 0;
   }
   .nav-centered .nav-brand svg {
-    height: 2.125rem;
+    height: 2.5rem;
   }
   @media (min-width: 66.8125rem) {
     .nav-centered .nav-brand svg {
-      height: 2.5rem;
+      height: 2.875rem;
     }
   }
 
@@ -455,7 +471,7 @@
     justify-content: center;
     padding: 0 var(--gutter) calc(1rem + env(safe-area-inset-bottom, 0px));
     pointer-events: none;
-    filter: drop-shadow(0 10px 24px rgb(90 20 10 / 0.2));
+    filter: drop-shadow(0 10px 24px rgb(36 45 54 / 0.2));
     opacity: 0;
     translate: 0 2rem;
     visibility: hidden;
@@ -554,8 +570,8 @@
     width: 3rem;
     height: 3rem;
     border-radius: 0.875rem;
-    background: var(--warm-white);
-    color: var(--deep-red);
+    background: var(--off-white);
+    color: var(--slate);
   }
   .inside-icon svg {
     width: 1.5rem;
@@ -578,7 +594,7 @@
   }
   .inside-text strong {
     font-weight: 700;
-    color: var(--deep-red);
+    color: var(--slate);
   }
 
   /* Hero. One centered column on phones and tablets, with the phone shown down to its three cards and cut
@@ -653,11 +669,11 @@
     }
   }
 
-  /* The moving background: a warm aura behind the phone, in the brand reds. It moves slowly (23 to 31
+  /* The moving background: a soft aura behind the phone, in sky and dusty blue. It moves slowly (23 to 31
      second cycles, well below the 0.2 Hz range that bothers people), animates transform only, stops
      off screen and on request, and stays still for anyone who prefers reduced motion. It sits beside
      the copy, never under it, so the text keeps its contrast. */
-  /* A soft blush halo, sized from the phone (2.4 phones across) and fading to nothing at its edge. It is
+  /* A soft sky blue halo, sized from the phone (2.4 phones across) and fading to nothing at its edge. It is
      centered behind the phone, leaning a little right on desktop toward the open side of the screen.
      Near the headline it has already faded to almost nothing. */
   .aura {
@@ -689,7 +705,7 @@
     --glow-move: aura-breathe;
     --glow-time: 24s;
     inset: 0;
-    background: radial-gradient(closest-side, var(--blush-core), var(--blush-mid) 48%, var(--blush-edge) 76%, transparent);
+    background: radial-gradient(closest-side, var(--glow-core), var(--glow-mid) 48%, var(--glow-edge) 76%, transparent);
   }
   /* Two soft blooms circling the phone in opposite directions, once every 22 and 31 seconds, so the
      colour keeps travelling around it and never lines up the same way twice. Each bloom is a little
@@ -714,14 +730,14 @@
     top: 27%;
     width: 58%;
     height: 46%;
-    background: radial-gradient(closest-side, var(--blush-bloom), transparent);
+    background: radial-gradient(closest-side, var(--glow-bloom), transparent);
   }
   .aura-orbit-b .aura-blob {
     left: 27%;
     top: 50%;
     width: 46%;
     height: 50%;
-    background: radial-gradient(closest-side, var(--blush-rose), transparent);
+    background: radial-gradient(closest-side, var(--glow-dusty), transparent);
   }
   @keyframes aura-orbit {
     to {
@@ -733,7 +749,7 @@
       transform: rotate(-1turn);
     }
   }
-  /* Warm light drifting through the upper part of the glow */
+  /* Light drifting through the upper part of the glow */
   .aura-light {
     --glow-move: aura-drift;
     --glow-time: 29s;
@@ -741,7 +757,7 @@
     top: 10%;
     width: 46%;
     height: 46%;
-    background: radial-gradient(closest-side, var(--blush-light), transparent);
+    background: radial-gradient(closest-side, var(--glow-light), transparent);
   }
   @keyframes aura-breathe {
     from {
@@ -792,7 +808,7 @@
       transform var(--dur-spring-fast) var(--ease-spring-fast);
   }
   .motion-toggle:hover {
-    background: var(--warm-white);
+    background: var(--off-white);
   }
   .motion-toggle:active {
     transform: scale(0.94);
@@ -800,9 +816,9 @@
       background-color 0.2s ease,
       transform 0.08s ease-out;
   }
-  /* It can sit over the red disc, so the focus ring is two tone and shows on either background. */
+  /* It can sit over the slate disc, so the focus ring is two tone and shows on either background. */
   .motion-toggle:focus-visible {
-    outline: 3px solid var(--warm-white);
+    outline: 3px solid var(--off-white);
     outline-offset: 1px;
     box-shadow:
       0 0 0 6px var(--ink),
@@ -827,11 +843,11 @@
     font-weight: 400;
     line-height: var(--lh-hero);
     letter-spacing: var(--tr-hero);
-    color: var(--deep-red);
+    color: var(--slate);
     text-wrap: balance;
   }
   .hero-title strong {
-    font-weight: 700;
+    font-style: italic;
   }
 
   /* The smile: the logo's grin, drawn once under the key phrase. It is a pseudo-element, so it never
@@ -845,10 +861,11 @@
     content: "";
     position: absolute;
     left: 0.02em;
-    top: calc(100% - 0.02em);
+    /* Tucked up into the serif's long descenders, so it stays clear of the line below. */
+    top: calc(100% - 0.1em);
     width: calc(100% - 0.04em);
     height: 0.3em;
-    background: var(--deep-red);
+    background: var(--tan);
     /* The 300x24 box stretches to the phrase; the stroke stays about 0.06em thick at every size. */
     --smile-shape: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 24' preserveAspectRatio='none'%3E%3Cpath d='M5 5C70 20 230 20 295 5' fill='none' stroke='currentColor' stroke-width='5' stroke-linecap='round'/%3E%3C/svg%3E");
     -webkit-mask: var(--smile-shape) center / 100% 100% no-repeat;
@@ -913,7 +930,7 @@
     height: 100%;
     overflow: hidden;
     border-radius: 12.5% / 5.9%;
-    background: var(--warm-white);
+    background: var(--off-white);
     color: var(--ink);
     font-size: 4.9cqi;
     line-height: 1.35;
@@ -965,14 +982,13 @@
   .app-head .app-mark {
     width: 2.1em;
     height: auto;
-    color: var(--deep-red);
   }
   .app-title {
     font-family: var(--stack-display);
     font-size: 1.55em;
-    font-weight: 700;
+    font-weight: 400;
     line-height: 1.1;
-    letter-spacing: -0.02em;
+    letter-spacing: -0.01em;
   }
   .app-topics {
     display: flex;
@@ -982,8 +998,8 @@
   .app-topics li {
     padding: 0.2em 0.65em;
     border-radius: 999px;
-    background: var(--red-wash);
-    color: var(--deep-red);
+    background: var(--slate-wash);
+    color: var(--slate);
     font-size: 0.82em;
     font-weight: 600;
   }
@@ -1021,8 +1037,8 @@
     width: 2.05em;
     height: 2.05em;
     border-radius: 50%;
-    background: var(--deep-red);
-    color: var(--warm-white);
+    background: var(--slate);
+    color: var(--off-white);
   }
   .app-icon svg {
     width: 1.15em;
@@ -1037,7 +1053,7 @@
     align-self: center;
     font-size: 1.08em;
     font-weight: 700;
-    color: var(--deep-red);
+    color: var(--slate);
   }
   .app-card-text {
     grid-column: 1 / -1;
@@ -1066,7 +1082,7 @@
     gap: 0.55em;
     padding: 0.4em 0.4em 0.4em 0.85em;
     border-radius: 999px;
-    background: var(--warm-white);
+    background: var(--off-white);
     box-shadow:
       0 0 0 1px var(--line-strong),
       var(--shadow-1);
@@ -1077,7 +1093,7 @@
     width: 1.1em;
     height: 1.1em;
     flex: none;
-    color: var(--deep-red);
+    color: var(--slate);
     fill: currentColor;
   }
   .app-ask .send {
@@ -1087,8 +1103,8 @@
     height: 2em;
     margin-left: auto;
     border-radius: 50%;
-    background: var(--deep-red);
-    color: var(--warm-white);
+    background: var(--slate);
+    color: var(--off-white);
   }
   .app-ask .send svg {
     width: 1em;
@@ -1215,7 +1231,7 @@
     width: 12%;
     height: 100%;
     border-radius: inherit;
-    background: var(--deep-red);
+    background: var(--slate);
     animation: demo-progress var(--demo-loop) var(--ease-spring-fast) infinite both;
   }
   @keyframes demo-progress {
@@ -1232,10 +1248,10 @@
     margin-top: 0.4em;
     font-family: var(--stack-display);
     font-size: 1.5em;
-    font-weight: 700;
+    font-weight: 400;
     line-height: 1.12;
-    letter-spacing: -0.018em;
-    color: var(--deep-red);
+    letter-spacing: -0.005em;
+    color: var(--slate);
     text-wrap: balance;
   }
   .demo-choices {
@@ -1247,20 +1263,20 @@
     position: relative;
     padding: 0.75em 0.85em;
     border-radius: 0.95em;
-    background: var(--warm-white);
+    background: var(--off-white);
     box-shadow: 0 0 0 1px var(--line-strong);
     font-size: 0.9em;
     font-weight: 600;
     line-height: 1.25;
   }
-  /* The tap: a press, then the answer turns red */
+  /* The tap: a press, then the answer turns slate */
   .demo-choices .is-picked {
     animation: demo-pick var(--demo-loop) ease infinite both;
   }
   @keyframes demo-pick {
     0%,
     12% {
-      background: var(--warm-white);
+      background: var(--off-white);
       box-shadow: 0 0 0 1px var(--line-strong);
       transform: none;
     }
@@ -1271,8 +1287,8 @@
     }
     15.5%,
     100% {
-      background: var(--red-wash);
-      box-shadow: 0 0 0 2px var(--deep-red);
+      background: var(--slate-wash);
+      box-shadow: 0 0 0 2px var(--slate);
       transform: none;
     }
   }
@@ -1287,11 +1303,11 @@
     min-height: 2.75em;
     margin-top: 0.2em;
     border-radius: 999px;
-    background: linear-gradient(180deg, #b01d12, var(--deep-red) 55%, #7f0300);
+    background: linear-gradient(180deg, var(--slate-top), var(--slate) 55%, var(--slate-base));
     box-shadow:
       inset 0 1px 0 rgb(255 255 255 / 0.22),
-      0 0.5em 1em -0.6em rgb(127 3 0 / 0.7);
-    color: var(--warm-white);
+      0 0.5em 1em -0.6em rgb(36 45 54 / 0.7);
+    color: var(--off-white);
     font-size: 0.95em;
     font-weight: 700;
     animation: demo-next var(--demo-loop) ease infinite both;
@@ -1327,10 +1343,10 @@
   .demo-type {
     font-family: var(--stack-display);
     font-size: 2.3em;
-    font-weight: 700;
+    font-weight: 400;
     line-height: 1.05;
-    letter-spacing: -0.025em;
-    color: var(--deep-red);
+    letter-spacing: -0.01em;
+    color: var(--slate);
   }
   .scene-type .smile::after {
     animation: demo-smile var(--demo-loop) var(--ease-draw) infinite both;
@@ -1374,7 +1390,7 @@
   .demo-built li {
     padding: 0.25em 0.75em;
     border-radius: 999px;
-    background: var(--warm-white);
+    background: var(--off-white);
     box-shadow: 0 0 0 1px var(--line);
     font-size: 0.86em;
     font-weight: 600;
@@ -1408,7 +1424,7 @@
       text-align: left;
     }
   }
-  /* Her phone's lock screen, without the phone: a deep red wallpaper with soft light in it, the time, and the
+  /* Her phone's lock screen, without the phone: a deep slate wallpaper with soft blue light in it, the time, and the
      asks as frosted notifications. */
   .day {
     position: relative;
@@ -1418,12 +1434,12 @@
     padding: clamp(1.75rem, 1.4rem + 1.5vw, 2.5rem) clamp(0.625rem, 0.4rem + 1vw, 1rem) clamp(0.625rem, 0.4rem + 1vw, 1rem);
     border-radius: 2.25rem;
     background:
-      radial-gradient(65% 40% at 88% 4%, rgb(222 128 100 / 0.6), transparent 72%),
-      radial-gradient(60% 45% at 8% 100%, rgb(170 40 60 / 0.75), transparent 72%),
-      radial-gradient(80% 55% at 25% 30%, rgb(196 40 18 / 0.55), transparent 75%),
-      var(--deep-red);
+      radial-gradient(65% 40% at 88% 4%, rgb(174 202 232 / 0.12), transparent 72%),
+      radial-gradient(60% 45% at 8% 100%, rgb(122 144 168 / 0.7), transparent 72%),
+      radial-gradient(80% 55% at 25% 30%, rgb(122 144 168 / 0.1), transparent 75%),
+      var(--slate);
     box-shadow: var(--shadow-3);
-    color: var(--warm-white);
+    color: var(--off-white);
   }
   .day-clock {
     display: grid;
@@ -1431,19 +1447,20 @@
     margin-bottom: 1.5rem;
     text-align: center;
   }
+  /* Full strength: on the slate wallpaper, off white is 4.9:1 at its lightest and would drop under 4.5:1
+     faded. */
   .day-name {
     font-size: var(--fs-small);
     font-weight: 600;
     letter-spacing: 0.01em;
-    opacity: 0.85;
   }
   .day-time {
     font-family: var(--stack-display);
     font-size: clamp(3.75rem, 3rem + 3vw, 5rem);
-    font-weight: 300;
+    font-weight: 400;
     font-variant-numeric: tabular-nums;
     line-height: 1;
-    letter-spacing: -0.03em;
+    letter-spacing: -0.01em;
   }
   .asks {
     display: grid;
@@ -1456,10 +1473,10 @@
     gap: 0.75rem;
     padding: 0.75rem 0.875rem;
     border-radius: 1.25rem;
-    background: rgb(251 247 241 / 0.95);
+    background: rgb(245 242 239 / 0.95);
     -webkit-backdrop-filter: saturate(150%) blur(20px);
     backdrop-filter: saturate(150%) blur(20px);
-    box-shadow: 0 8px 20px -12px rgb(60 10 5 / 0.5);
+    box-shadow: 0 8px 20px -12px rgb(36 45 54 / 0.5);
     color: var(--ink);
   }
   .ask-app {
@@ -1468,17 +1485,17 @@
     width: 2.25rem;
     height: 2.25rem;
     border-radius: 0.625rem;
-    background: var(--deep-red);
-    color: var(--warm-white);
+    background: var(--slate);
+    color: var(--off-white);
   }
   .ask[data-app="mail"] .ask-app {
     background: var(--ink);
   }
   .ask[data-app="calendar"] .ask-app,
   .ask[data-app="reminder"] .ask-app {
-    background: #fff;
+    background: var(--off-white);
     box-shadow: inset 0 0 0 1px var(--line);
-    color: var(--deep-red);
+    color: var(--slate);
   }
   .ask-app svg {
     width: 1.25rem;
@@ -1512,7 +1529,7 @@
   }
   .ask[data-app="reminder"] .ask-time {
     font-weight: 650;
-    color: var(--deep-red);
+    color: var(--slate);
   }
   .ask-text {
     font-size: var(--fs-small);
@@ -1540,9 +1557,9 @@
     }
   }
 
-  /* Cards follow the band they sit on: tinted on warm white, warm white on tint. */
+  /* Cards follow the band they sit on: tinted on off white, off white on tint. */
   .bg-tint .inside-card {
-    background: var(--warm-white);
+    background: var(--off-white);
   }
   .bg-tint .inside-icon {
     background: var(--tint);
@@ -1569,11 +1586,11 @@
   }
   .stat-figure {
     font-family: var(--stack-display);
-    font-size: clamp(2.5rem, 2rem + 1.8vw, 3.25rem);
-    font-weight: 700;
+    font-size: clamp(2.75rem, 2.2rem + 1.98vw, 3.575rem);
+    font-weight: 400;
     line-height: 1;
-    letter-spacing: -0.03em;
-    color: var(--deep-red);
+    letter-spacing: -0.01em;
+    color: var(--slate);
     white-space: nowrap;
   }
   .stat-text {
@@ -1599,7 +1616,7 @@
     font-weight: 700;
     letter-spacing: 0.06em;
     text-transform: uppercase;
-    color: var(--deep-red);
+    color: var(--slate);
   }
   /* Three narrow cards on tablets: smaller figures and body size words, so nothing breaks every few words. */
   @media (min-width: 45.9375rem) and (max-width: 66.8125rem) {
@@ -1630,14 +1647,14 @@
     flex-direction: column;
     overflow: hidden;
     border-radius: var(--r-card);
-    background: var(--warm-white);
+    background: var(--off-white);
     box-shadow:
       0 0 0 1px var(--line),
       var(--shadow-1);
   }
   .flow-visual,
   .part-visual {
-    --panel: color-mix(in oklab, var(--tint), var(--deep-red) 5%);
+    --panel: color-mix(in oklab, var(--tint), var(--slate) 5%);
     position: relative;
     display: flex;
     justify-content: center;
@@ -1670,15 +1687,15 @@
     width: 2.25rem;
     height: 2.25rem;
     border-radius: 50%;
-    background: var(--deep-red);
-    color: var(--warm-white);
-    font-family: var(--stack-display);
+    background: var(--slate);
+    color: var(--off-white);
+    font-family: var(--stack-text);
     font-size: 1rem;
     font-weight: 700;
     font-variant-numeric: tabular-nums;
   }
   .flow-title {
-    font-family: var(--stack-display);
+    font-family: var(--stack-text);
     font-size: 1.1875rem;
     font-weight: 600;
     line-height: 1.3;
@@ -1687,20 +1704,20 @@
     text-wrap: pretty;
   }
 
-  /* What's in your plan: the product, on a deep red band. Each part is a card with a tinted panel holding a
+  /* What's in your plan: the product, on a deep slate band. Each part is a card with a tinted panel holding a
      small copy of its screen, then its name and one line. Two columns on phones and tablets with the first
      part across the top; on desktop the first two share the top row and the other three sit under them.
      The price and the way in come straight after. */
   .band-deep {
-    --focus: var(--warm-white);
-    background: var(--deep-red);
-    color: var(--warm-white);
+    --focus: var(--off-white);
+    background: var(--slate);
+    color: var(--off-white);
   }
   .band-deep ::selection {
-    background: var(--selection-on-red);
+    background: var(--selection-on-slate);
   }
   .band-deep .heading {
-    color: var(--warm-white);
+    color: var(--off-white);
   }
   .parts {
     display: grid;
@@ -1712,7 +1729,7 @@
     flex-direction: column;
     overflow: hidden;
     border-radius: var(--r-card);
-    background: var(--warm-white);
+    background: var(--off-white);
   }
   .part:first-child {
     grid-column: 1 / -1;
@@ -1732,12 +1749,12 @@
     color: var(--ink);
   }
   .part-title {
-    font-family: var(--stack-display);
+    font-family: var(--stack-text);
     font-size: 1.0625rem;
     font-weight: 700;
     line-height: 1.25;
     letter-spacing: -0.012em;
-    color: var(--deep-red);
+    color: var(--slate);
     text-wrap: balance;
   }
   .part-desc {
@@ -1793,10 +1810,10 @@
   }
   .price-figure {
     font-family: var(--stack-display);
-    font-size: clamp(2.75rem, 2.25rem + 2vw, 3.5rem);
-    font-weight: 700;
+    font-size: clamp(3.025rem, 2.475rem + 2.2vw, 3.85rem);
+    font-weight: 400;
     line-height: 1;
-    letter-spacing: -0.03em;
+    letter-spacing: -0.01em;
   }
   .price-note {
     max-width: 13em;
@@ -1821,10 +1838,10 @@
     min-height: 15rem;
     padding: 1rem 1rem 1.25rem;
     border-radius: 1.125rem;
-    background: var(--warm-white);
+    background: var(--off-white);
     box-shadow:
       0 0 0 1px var(--line),
-      0 18px 36px -22px rgb(90 20 10 / 0.35);
+      0 18px 36px -22px rgb(36 45 54 / 0.35);
     font-size: 0.75rem;
     line-height: 1.35;
     letter-spacing: 0.004em;
@@ -1847,10 +1864,10 @@
   .shot-big {
     font-family: var(--stack-display);
     font-size: 1.5rem;
-    font-weight: 700;
+    font-weight: 400;
     line-height: 1.1;
-    letter-spacing: -0.02em;
-    color: var(--deep-red);
+    letter-spacing: -0.01em;
+    color: var(--slate);
   }
   .shot-rows {
     display: grid;
@@ -1866,7 +1883,7 @@
     font-weight: 600;
   }
   .shot-rows b {
-    color: var(--deep-red);
+    color: var(--slate);
     font-variant-numeric: tabular-nums;
   }
   /* How it works: her answer being written, her hours, her plan's parts */
@@ -1877,7 +1894,7 @@
     height: 1.05em;
     margin-left: 2px;
     vertical-align: -0.2em;
-    background: var(--deep-red);
+    background: var(--slate);
     animation: shot-caret 1s steps(2, jump-none) infinite;
   }
   @keyframes shot-caret {
@@ -1913,7 +1930,7 @@
   .shot-list svg {
     width: 0.875rem;
     height: 0.875rem;
-    color: var(--deep-red);
+    color: var(--slate);
   }
   .shot-head {
     display: flex;
@@ -1931,8 +1948,8 @@
     gap: 0.25rem;
     padding: 0.2rem 0.55rem;
     border-radius: 999px;
-    background: var(--red-wash);
-    color: var(--deep-red);
+    background: var(--slate-wash);
+    color: var(--slate);
     font-size: 0.6875rem;
     font-weight: 700;
   }
@@ -1941,12 +1958,12 @@
     height: 0.8125rem;
   }
   .shot-title {
-    font-family: var(--stack-display);
+    font-family: var(--stack-text);
     font-size: 0.9375rem;
     font-weight: 700;
     line-height: 1.2;
     letter-spacing: -0.01em;
-    color: var(--deep-red);
+    color: var(--slate);
     text-wrap: balance;
   }
   .shot-box {
@@ -1959,12 +1976,12 @@
   .shot-label {
     font-size: 0.6875rem;
     font-weight: 700;
-    color: var(--deep-red);
+    color: var(--slate);
   }
   .shot-say {
     padding: 0.5rem 0.625rem;
     border-radius: 0.5rem;
-    background: var(--warm-white);
+    background: var(--off-white);
     box-shadow: 0 0 0 1px var(--line);
     font-weight: 600;
     text-wrap: pretty;
@@ -1975,8 +1992,8 @@
     max-width: 82%;
     padding: 0.5rem 0.75rem;
     border-radius: 0.875rem 0.875rem 0.25rem 0.875rem;
-    background: linear-gradient(180deg, #b01d12, var(--deep-red));
-    color: var(--warm-white);
+    background: linear-gradient(180deg, var(--slate-top), var(--slate));
+    color: var(--off-white);
     font-weight: 600;
   }
   .shot-verdict {
@@ -1996,9 +2013,9 @@
     font-weight: 600;
   }
   .shot-tabs .is-on {
-    background: var(--deep-red);
+    background: var(--slate);
     box-shadow: none;
-    color: var(--warm-white);
+    color: var(--off-white);
   }
   .shot-chips span {
     display: inline-flex;
@@ -2006,8 +2023,8 @@
     gap: 0.25rem;
     padding: 0.25rem 0.6rem;
     border-radius: 999px;
-    background: var(--red-wash);
-    color: var(--deep-red);
+    background: var(--slate-wash);
+    color: var(--slate);
     font-size: 0.6875rem;
     font-weight: 700;
   }
@@ -2018,7 +2035,7 @@
   .shot-field {
     padding: 0.625rem 0.75rem;
     border-radius: 0.625rem;
-    background: var(--warm-white);
+    background: var(--off-white);
     box-shadow: inset 0 0 0 1px var(--line-strong);
     color: var(--muted);
   }
@@ -2031,11 +2048,11 @@
     min-height: 2.375rem;
     padding: 0.375rem 0.5rem 0.375rem 1rem;
     border-radius: 999px;
-    background: linear-gradient(180deg, #b01d12, var(--deep-red) 55%, #7f0300);
+    background: linear-gradient(180deg, var(--slate-top), var(--slate) 55%, var(--slate-base));
     box-shadow:
       inset 0 1px 0 rgb(255 255 255 / 0.22),
-      0 8px 16px -10px rgb(127 3 0 / 0.7);
-    color: var(--warm-white);
+      0 8px 16px -10px rgb(36 45 54 / 0.7);
+    color: var(--off-white);
     font-size: 0.8125rem;
     font-weight: 700;
   }
@@ -2049,28 +2066,27 @@
 
   /* Closing band */
   .closing {
-    --focus: var(--warm-white);
-    background: var(--deep-red);
-    color: var(--warm-white);
+    --focus: var(--off-white);
+    background: var(--slate);
+    color: var(--off-white);
     padding-block: clamp(5rem, 3.5rem + 6vw, 9rem);
     text-align: center;
   }
   .closing ::selection {
-    background: var(--selection-on-red);
+    background: var(--selection-on-slate);
   }
   .closing-mark {
     width: 3.5rem;
     height: auto;
-    color: var(--warm-white);
   }
   .closing-title {
     max-width: 12em;
     font-family: var(--stack-display);
-    font-size: clamp(2.5rem, 1.4rem + 4.6vw, 4.75rem);
-    font-weight: 700;
+    font-size: clamp(2.75rem, 1.54rem + 5.06vw, 5.225rem);
+    font-weight: 400;
     line-height: 1.04;
-    letter-spacing: -0.026em;
-    color: var(--warm-white);
+    letter-spacing: -0.01em;
+    color: var(--off-white);
     text-wrap: balance;
   }
 
@@ -2094,7 +2110,7 @@
     min-height: 2.75rem;
     padding-block: 1.25rem;
     text-align: left;
-    font-family: var(--stack-display);
+    font-family: var(--stack-text);
     font-size: 1.1875rem;
     font-weight: 600;
     line-height: 1.35;
@@ -2109,16 +2125,16 @@
     width: 1.75rem;
     height: 1.75rem;
     border-radius: 50%;
-    background: var(--red-wash);
+    background: var(--slate-wash);
     transition:
       background-color 0.2s ease,
       transform var(--dur-spring) var(--ease-spring);
   }
   .qa-q:hover .qa-icon {
-    background: var(--red-wash-hover);
+    background: var(--slate-wash-hover);
   }
   .qa-q:active .qa-icon {
-    background: var(--red-wash-press);
+    background: var(--slate-wash-press);
     transition-duration: 0.05s;
   }
   .qa-icon::before,
@@ -2130,7 +2146,7 @@
     width: 0.7rem;
     height: 2px;
     border-radius: 2px;
-    background: var(--deep-red);
+    background: var(--slate);
     transform: translate(-50%, -50%);
     transition: transform var(--dur-spring) var(--ease-spring);
   }
@@ -2161,7 +2177,7 @@
     text-wrap: pretty;
   }
   .qa-a p a {
-    color: var(--deep-red);
+    color: var(--slate);
     font-weight: 600;
     text-decoration: underline;
     text-underline-offset: 0.2em;
@@ -2182,11 +2198,12 @@
     border-top: 1px solid var(--line);
     overflow: hidden;
   }
+  /* Everything in the footer sits on the centre line: the links, then the wordmark under them. */
   .footer-row {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
     gap: 0.5rem 2rem;
     padding-bottom: clamp(1.75rem, 1rem + 3vw, 3rem);
     font-size: var(--fs-small);
@@ -2213,24 +2230,24 @@
     transition: background-color 0.2s ease;
   }
   .footer-links a:hover {
-    background: var(--red-wash);
+    background: var(--slate-wash);
   }
   .footer-links a:active {
-    background: var(--red-wash-press);
+    background: var(--slate-wash-press);
     transition-duration: 0.05s;
   }
   .footer-wordmark {
     display: block;
-    width: 100%;
+    width: min(100%, 30rem);
     height: auto;
-    margin-bottom: clamp(1.5rem, 1rem + 2vw, 2.5rem);
-    color: var(--deep-red);
+    margin: 0 auto clamp(1.5rem, 1rem + 2vw, 2.5rem);
+    color: var(--dusty-blue);
   }
 }
 
 /* ---------- The quiz (/start) ---------- */
 /* One question per screen in a narrow column, the way phone quizzes do it: the question on top, big
-   answers stacked under it, a thin progress line in the header. Same warm white, deep red and smile as
+   answers stacked under it, a thin progress line in the header. Same off white, slate and smile as
    the landing page, so it reads as the same place. */
 @layer components {
   .quiz {
@@ -2277,10 +2294,10 @@
     transition: background-color 0.2s ease;
   }
   .quiz-back:hover {
-    background: var(--red-wash);
+    background: var(--slate-wash);
   }
   .quiz-back:active {
-    background: var(--red-wash-press);
+    background: var(--slate-wash-press);
     transition-duration: 0.05s;
   }
   .quiz-back svg {
@@ -2299,16 +2316,17 @@
     min-height: 2.75rem;
     padding-inline: 0.25rem;
     border-radius: 0.75rem;
-    color: var(--deep-red);
+    color: var(--dusty-blue);
   }
   .quiz-brand svg {
     display: block;
-    height: 2.125rem;
+    height: 2.5rem;
     width: auto;
+    translate: 0 6%;
   }
   @media (min-width: 66.8125rem) {
     .quiz-brand svg {
-      height: 2.5rem;
+      height: 2.875rem;
     }
   }
   /* The progress line: grows from the left as you go, on a faint track the width of the column. */
@@ -2324,7 +2342,7 @@
     display: block;
     height: 100%;
     border-radius: inherit;
-    background: var(--deep-red);
+    background: var(--slate);
     transform-origin: left;
     transition: transform var(--dur-spring) var(--ease-spring);
   }
@@ -2349,11 +2367,11 @@
   }
   .quiz-title {
     font-family: var(--stack-display);
-    font-size: clamp(1.75rem, 1.45rem + 1.4vw, 2.5rem);
-    font-weight: 700;
+    font-size: clamp(1.925rem, 1.595rem + 1.54vw, 2.75rem);
+    font-weight: 400;
     line-height: 1.12;
-    letter-spacing: -0.018em;
-    color: var(--deep-red);
+    letter-spacing: -0.005em;
+    color: var(--slate);
     text-wrap: balance;
   }
   .quiz-title:focus {
@@ -2367,7 +2385,7 @@
     color: var(--muted);
   }
 
-  /* Single answers: big, full width, one tap. The chosen one gets a red ring and a tick. */
+  /* Single answers: big, full width, one tap. The chosen one gets a slate ring and a tick. */
   .quiz-choices {
     display: grid;
     gap: 0.75rem;
@@ -2383,7 +2401,7 @@
     padding: 0.875rem 1rem 0.875rem 1.25rem;
     border: 0;
     border-radius: 1.25rem;
-    background: var(--warm-white);
+    background: var(--off-white);
     box-shadow:
       0 0 0 1px var(--line),
       var(--shadow-1);
@@ -2401,15 +2419,15 @@
       transform var(--dur-spring-fast) var(--ease-spring-fast);
   }
   .quiz-choice:hover {
-    background: color-mix(in oklab, var(--warm-white), var(--tint) 55%);
+    background: color-mix(in oklab, var(--off-white), var(--tint) 55%);
   }
   .quiz-choice:active {
     transform: scale(0.98);
     transition-duration: 0.2s, 0.2s, 0.08s;
   }
   .quiz-choice[aria-pressed="true"] {
-    background: var(--red-wash);
-    box-shadow: 0 0 0 2px var(--deep-red);
+    background: var(--slate-wash);
+    box-shadow: 0 0 0 2px var(--slate);
   }
   .quiz-tick {
     display: grid;
@@ -2419,7 +2437,7 @@
     height: 1.75rem;
     border-radius: 50%;
     box-shadow: inset 0 0 0 1.5px var(--line-strong);
-    color: var(--warm-white);
+    color: var(--off-white);
     transition:
       background-color 0.2s ease,
       box-shadow 0.2s ease;
@@ -2439,7 +2457,7 @@
       transform var(--dur-spring-fast) var(--ease-spring-fast);
   }
   .quiz-choice[aria-pressed="true"] .quiz-tick {
-    background: var(--deep-red);
+    background: var(--slate);
     box-shadow: none;
   }
   .quiz-choice[aria-pressed="true"] .quiz-tick svg {
@@ -2463,7 +2481,7 @@
     min-height: 2.875rem;
     padding: 0.55rem 1.15rem;
     border-radius: 999px;
-    background: var(--warm-white);
+    background: var(--off-white);
     box-shadow:
       0 0 0 1px var(--line),
       var(--shadow-1);
@@ -2482,7 +2500,7 @@
       transform var(--dur-spring-fast) var(--ease-spring-fast);
   }
   .quiz-topic:hover {
-    background: color-mix(in oklab, var(--warm-white), var(--tint) 55%);
+    background: color-mix(in oklab, var(--off-white), var(--tint) 55%);
   }
   .quiz-topic:active {
     transform: scale(0.97);
@@ -2493,9 +2511,9 @@
     outline-offset: 3px;
   }
   .quiz-topic[data-on] {
-    background: var(--deep-red);
+    background: var(--slate);
     box-shadow: none;
-    color: var(--warm-white);
+    color: var(--off-white);
   }
   .quiz-topic svg {
     width: 1.05rem;
@@ -2543,7 +2561,7 @@
     padding: 0.75rem 1.125rem;
     border: 0;
     border-radius: 1rem;
-    background: var(--warm-white);
+    background: var(--off-white);
     box-shadow:
       0 0 0 1px var(--line-strong),
       var(--shadow-1);
@@ -2554,15 +2572,15 @@
   }
   .quiz-field input:focus {
     outline: none;
-    box-shadow: 0 0 0 2px var(--deep-red);
+    box-shadow: 0 0 0 2px var(--slate);
   }
   .quiz-field input[aria-invalid] {
-    box-shadow: 0 0 0 2px var(--deep-red);
+    box-shadow: 0 0 0 2px var(--slate);
   }
   .quiz-error {
     font-size: var(--fs-small);
     font-weight: 600;
-    color: var(--deep-red);
+    color: var(--slate);
   }
 
   /* The open question: room for a few lines, with the privacy promise right under the box. */
@@ -2572,7 +2590,7 @@
     padding: 0.875rem 1.125rem;
     border: 0;
     border-radius: 1rem;
-    background: var(--warm-white);
+    background: var(--off-white);
     box-shadow:
       0 0 0 1px var(--line-strong),
       var(--shadow-1);
@@ -2585,7 +2603,7 @@
   }
   .quiz-story:focus {
     outline: none;
-    box-shadow: 0 0 0 2px var(--deep-red);
+    box-shadow: 0 0 0 2px var(--slate);
   }
   .quiz-private {
     font-size: var(--fs-small);
@@ -2628,7 +2646,7 @@
     height: 1.1em;
     margin-left: 1px;
     vertical-align: -0.2em;
-    background: var(--deep-red);
+    background: var(--slate);
     animation: shot-caret 1s steps(2, jump-none) infinite;
   }
   .quiz-story:focus ~ .quiz-typing::after {
@@ -2649,8 +2667,8 @@
     padding: 0.45rem 1rem 0.45rem 0.85rem;
     border: 0;
     border-radius: 999px;
-    background: var(--red-wash);
-    color: var(--deep-red);
+    background: var(--slate-wash);
+    color: var(--slate);
     font: inherit;
     font-size: var(--fs-small);
     font-weight: 600;
@@ -2662,7 +2680,7 @@
       transform var(--dur-spring-fast) var(--ease-spring-fast);
   }
   .quiz-mic:hover {
-    background: var(--red-wash-hover);
+    background: var(--slate-wash-hover);
   }
   .quiz-mic:active {
     transform: scale(0.97);
@@ -2681,8 +2699,8 @@
     stroke-linejoin: round;
   }
   .quiz-mic[aria-pressed="true"] {
-    background: var(--deep-red);
-    color: var(--warm-white);
+    background: var(--slate);
+    color: var(--off-white);
   }
   .quiz-mic[aria-pressed="true"] svg {
     animation: quiz-pulse 0.9s ease-in-out infinite alternate;
@@ -2707,7 +2725,7 @@
     margin: 1.25rem 0 0;
     padding: 0.25rem 1.375rem;
     border-radius: var(--r-card);
-    background: var(--warm-white);
+    background: var(--off-white);
     box-shadow:
       0 0 0 1px var(--line),
       var(--shadow-1);
@@ -2738,8 +2756,8 @@
     flex: none;
     padding: 0.2rem 0.6rem;
     border-radius: 999px;
-    background: var(--red-wash);
-    color: var(--deep-red);
+    background: var(--slate-wash);
+    color: var(--slate);
     font-size: 0.75rem;
     font-weight: 700;
     white-space: nowrap;
@@ -2754,7 +2772,7 @@
     color: var(--muted);
     font-variant-numeric: tabular-nums;
   }
-  /* Hours on a slider: a deep red fill up to the thumb, and a thumb big enough for a thumb. */
+  /* Hours on a slider: a slate fill up to the thumb, and a thumb big enough for a thumb. */
   .quiz-slider {
     width: 100%;
     height: 2.75rem;
@@ -2771,12 +2789,12 @@
   .quiz-slider::-webkit-slider-runnable-track {
     height: 0.5rem;
     border-radius: 999px;
-    background: linear-gradient(to right, var(--deep-red) var(--fill), var(--tint) var(--fill));
+    background: linear-gradient(to right, var(--slate) var(--fill), var(--tint) var(--fill));
   }
   .quiz-slider::-moz-range-track {
     height: 0.5rem;
     border-radius: 999px;
-    background: linear-gradient(to right, var(--deep-red) var(--fill), var(--tint) var(--fill));
+    background: linear-gradient(to right, var(--slate) var(--fill), var(--tint) var(--fill));
   }
   .quiz-slider::-webkit-slider-thumb {
     width: 1.75rem;
@@ -2784,9 +2802,9 @@
     margin-top: -0.625rem;
     border: 0;
     border-radius: 50%;
-    background: var(--warm-white);
+    background: var(--off-white);
     box-shadow:
-      0 0 0 2px var(--deep-red),
+      0 0 0 2px var(--slate),
       var(--shadow-1);
     -webkit-appearance: none;
     appearance: none;
@@ -2796,19 +2814,19 @@
     height: 1.75rem;
     border: 0;
     border-radius: 50%;
-    background: var(--warm-white);
+    background: var(--off-white);
     box-shadow:
-      0 0 0 2px var(--deep-red),
+      0 0 0 2px var(--slate),
       var(--shadow-1);
   }
   .quiz-slider:focus-visible::-webkit-slider-thumb {
     box-shadow:
-      0 0 0 2px var(--deep-red),
+      0 0 0 2px var(--slate),
       0 0 0 5px var(--focus);
   }
   .quiz-slider:focus-visible::-moz-range-thumb {
     box-shadow:
-      0 0 0 2px var(--deep-red),
+      0 0 0 2px var(--slate),
       0 0 0 5px var(--focus);
   }
   /* Edit: the name in a field, the three piles as chips, and Remove. */
@@ -2826,7 +2844,7 @@
     padding: 0.4rem 0.85rem;
     border: 0;
     border-radius: 999px;
-    background: var(--warm-white);
+    background: var(--off-white);
     box-shadow: 0 0 0 1px var(--line-strong);
     color: var(--ink);
     font: inherit;
@@ -2836,9 +2854,9 @@
     touch-action: manipulation;
   }
   .quiz-piles button[aria-pressed="true"] {
-    background: var(--deep-red);
+    background: var(--slate);
     box-shadow: none;
-    color: var(--warm-white);
+    color: var(--off-white);
   }
   .quiz-piles button:focus-visible {
     outline: 2px solid var(--focus);
@@ -2869,7 +2887,7 @@
     margin: clamp(1.5rem, 1.2rem + 1.2vw, 2rem) 0 0;
     padding: 1.25rem 1.375rem;
     border-radius: var(--r-card);
-    background: var(--warm-white);
+    background: var(--off-white);
     box-shadow:
       0 0 0 1px var(--line),
       var(--shadow-1);
@@ -2891,16 +2909,16 @@
     height: 0.5rem;
     margin-top: calc((var(--lh-lead) * 1em - 0.5rem) / 2);
     border-radius: 50%;
-    background: var(--deep-red);
+    background: var(--slate);
   }
   .quiz-check {
     margin-top: clamp(1.75rem, 1.4rem + 1.5vw, 2.5rem);
     font-family: var(--stack-display);
     font-size: var(--fs-title);
-    font-weight: 700;
+    font-weight: 400;
     line-height: var(--lh-title);
     letter-spacing: var(--tr-title);
-    color: var(--deep-red);
+    color: var(--slate);
   }
   .quiz-confirm {
     display: grid;
@@ -2923,8 +2941,8 @@
     width: 2.75rem;
     height: 2.75rem;
     border-radius: 50%;
-    border: 3px solid var(--red-wash-hover);
-    border-top-color: var(--deep-red);
+    border: 3px solid var(--slate-wash-hover);
+    border-top-color: var(--slate);
     animation: quiz-spin 0.9s linear infinite;
   }
   @keyframes quiz-spin {
@@ -2957,11 +2975,11 @@
   .quiz-type {
     margin-top: 0.75rem;
     font-family: var(--stack-display);
-    font-size: clamp(2.75rem, 1.9rem + 4vw, 4.5rem);
-    font-weight: 700;
+    font-size: clamp(3.025rem, 2.09rem + 4.4vw, 4.95rem);
+    font-weight: 400;
     line-height: var(--lh-hero);
     letter-spacing: var(--tr-hero);
-    color: var(--deep-red);
+    color: var(--slate);
     text-wrap: balance;
   }
   .quiz-type:focus {
@@ -2997,7 +3015,7 @@
     text-wrap: pretty;
   }
   .quiz-focus strong {
-    color: var(--deep-red);
+    color: var(--slate);
   }
   .quiz-built {
     display: grid;
@@ -3026,7 +3044,7 @@
   .quiz-built li {
     padding: 0.4rem 0.9rem;
     border-radius: 999px;
-    background: var(--warm-white);
+    background: var(--off-white);
     box-shadow: 0 0 0 1px var(--line);
     font-size: var(--fs-small);
     font-weight: 600;
@@ -3040,7 +3058,7 @@
     margin-top: 1rem;
     padding: clamp(1.5rem, 1.1rem + 1.8vw, 2.25rem);
     border-radius: var(--r-card);
-    background: var(--warm-white);
+    background: var(--off-white);
     box-shadow:
       0 0 0 1px var(--line),
       var(--shadow-2);
@@ -3049,10 +3067,10 @@
   .paywall-title {
     font-family: var(--stack-display);
     font-size: var(--fs-title);
-    font-weight: 700;
+    font-weight: 400;
     line-height: var(--lh-title);
     letter-spacing: var(--tr-title);
-    color: var(--deep-red);
+    color: var(--slate);
   }
   .paywall-lead {
     margin-top: 0.5rem;
@@ -3074,7 +3092,7 @@
     gap: 0.625rem;
     padding: 1rem 1.125rem 1.125rem;
     border-radius: 1.25rem;
-    background: var(--warm-white);
+    background: var(--off-white);
     box-shadow: 0 0 0 1px var(--line);
     color: var(--ink);
     text-wrap: pretty;
@@ -3083,15 +3101,15 @@
     justify-self: start;
     padding: 0.25rem 0.7rem;
     border-radius: 999px;
-    background: var(--red-wash);
-    color: var(--deep-red);
+    background: var(--slate-wash);
+    color: var(--slate);
     font-size: var(--fs-micro);
     font-weight: 700;
     line-height: var(--lh-micro);
     letter-spacing: var(--tr-micro);
   }
   .peek-title {
-    font-family: var(--stack-display);
+    font-family: var(--stack-text);
     font-size: 1.125rem;
     font-weight: 700;
     line-height: 1.3;
@@ -3129,7 +3147,7 @@
     color: var(--ink);
   }
   .peek-chips b {
-    color: var(--deep-red);
+    color: var(--slate);
     font-variant-numeric: tabular-nums;
   }
   .peek-card .plan-hours li {
@@ -3167,7 +3185,7 @@
     gap: 0.375rem;
     padding: 0.35rem 0.8rem 0.35rem 0.6rem;
     border-radius: 999px;
-    background: var(--warm-white);
+    background: var(--off-white);
     box-shadow:
       0 0 0 1px var(--line),
       var(--shadow-1);
@@ -3182,7 +3200,7 @@
     width: 1rem;
     height: 1rem;
     fill: none;
-    stroke: var(--deep-red);
+    stroke: var(--slate);
     stroke-width: 2;
     stroke-linecap: round;
     stroke-linejoin: round;
@@ -3226,11 +3244,11 @@
   }
   .page-title {
     font-family: var(--stack-display);
-    font-size: clamp(2rem, 1.6rem + 1.8vw, 2.75rem);
-    font-weight: 700;
+    font-size: clamp(2.2rem, 1.76rem + 1.98vw, 3.025rem);
+    font-weight: 400;
     line-height: 1.1;
     letter-spacing: var(--tr-display);
-    color: var(--deep-red);
+    color: var(--slate);
     text-wrap: balance;
   }
   .page-text {
@@ -3253,7 +3271,7 @@
     color: var(--muted);
   }
   .page-small a {
-    color: var(--deep-red);
+    color: var(--slate);
     font-weight: 600;
   }
   .page-resend {
@@ -3285,7 +3303,7 @@
     padding: 0;
     border: 0;
     background: none;
-    color: var(--deep-red);
+    color: var(--slate);
     font: inherit;
     font-weight: 600;
     text-decoration: underline;
@@ -3315,7 +3333,7 @@
     padding: 0 1.125rem;
     border-radius: 999px;
     background: var(--ink);
-    color: var(--warm-white);
+    color: var(--off-white);
     font-size: var(--fs-small);
     font-weight: 600;
     text-decoration: none;
@@ -3323,15 +3341,15 @@
     transition: background-color 0.2s ease;
   }
   .safety-exit:hover {
-    background: color-mix(in oklab, var(--ink), var(--warm-white) 16%);
+    background: color-mix(in oklab, var(--ink), var(--off-white) 16%);
   }
   .safety-title {
     font-family: var(--stack-display);
-    font-size: clamp(1.75rem, 1.45rem + 1.4vw, 2.5rem);
-    font-weight: 700;
+    font-size: clamp(1.925rem, 1.595rem + 1.54vw, 2.75rem);
+    font-weight: 400;
     line-height: 1.12;
-    letter-spacing: -0.018em;
-    color: var(--deep-red);
+    letter-spacing: -0.005em;
+    color: var(--slate);
     text-wrap: balance;
   }
   .safety-title:focus {
@@ -3363,7 +3381,7 @@
   }
   .safety-note a,
   .plan-foot a {
-    color: var(--deep-red);
+    color: var(--slate);
     font-weight: 600;
     text-decoration: underline;
     text-underline-offset: 0.2em;
@@ -3393,11 +3411,11 @@
   .plan-title {
     margin-top: 0.25rem;
     font-family: var(--stack-display);
-    font-size: clamp(2.25rem, 1.75rem + 2.4vw, 3.25rem);
-    font-weight: 700;
+    font-size: clamp(2.475rem, 1.925rem + 2.64vw, 3.575rem);
+    font-weight: 400;
     line-height: 1.05;
     letter-spacing: var(--tr-display);
-    color: var(--deep-red);
+    color: var(--slate);
   }
   .plan-intro {
     margin-top: 0.75rem;
@@ -3417,7 +3435,7 @@
     gap: 1rem;
     padding: clamp(1.5rem, 1.1rem + 1.8vw, 2.25rem);
     border-radius: var(--r-card);
-    background: var(--warm-white);
+    background: var(--off-white);
     box-shadow:
       0 0 0 1px var(--line),
       var(--shadow-2);
@@ -3446,8 +3464,8 @@
     gap: 0.375rem;
     padding: 0.3rem 0.75rem 0.3rem 0.5rem;
     border-radius: 999px;
-    background: var(--red-wash);
-    color: var(--deep-red);
+    background: var(--slate-wash);
+    color: var(--slate);
     font-size: var(--fs-small);
     font-weight: 700;
   }
@@ -3463,10 +3481,10 @@
   .plan-today-title {
     font-family: var(--stack-display);
     font-size: var(--fs-title);
-    font-weight: 700;
+    font-weight: 400;
     line-height: var(--lh-title);
     letter-spacing: var(--tr-title);
-    color: var(--deep-red);
+    color: var(--slate);
     text-wrap: balance;
   }
   /* Notice: the one useful idea, read first. */
@@ -3491,7 +3509,7 @@
     font-size: var(--fs-micro);
     font-weight: 700;
     letter-spacing: var(--tr-micro);
-    color: var(--deep-red);
+    color: var(--slate);
   }
   .plan-say {
     display: grid;
@@ -3507,7 +3525,7 @@
     padding: 0.75rem 1rem;
     border: 0;
     border-radius: 0.875rem;
-    background: var(--warm-white);
+    background: var(--off-white);
     box-shadow: 0 0 0 1px var(--line-strong);
     color: var(--ink);
     font: inherit;
@@ -3524,7 +3542,7 @@
   }
   .plan-say textarea:focus {
     outline: none;
-    box-shadow: 0 0 0 2px var(--deep-red);
+    box-shadow: 0 0 0 2px var(--slate);
   }
   .plan-say-copy,
   .plan-review-now {
@@ -3538,7 +3556,7 @@
   .plan-ack {
     padding: 0.875rem 1.125rem;
     border-radius: 1rem;
-    background: var(--red-wash);
+    background: var(--slate-wash);
     color: var(--ink);
     font-weight: 600;
     text-wrap: pretty;
@@ -3624,7 +3642,7 @@
   .plan-earlier .plan-earlier-part {
     font-size: var(--fs-micro);
     font-weight: 700;
-    color: var(--deep-red);
+    color: var(--slate);
   }
   .plan-earlier .plan-earlier-title {
     font-weight: 600;
@@ -3644,10 +3662,10 @@
   .plan-section-title {
     font-family: var(--stack-display);
     font-size: var(--fs-title);
-    font-weight: 700;
+    font-weight: 400;
     line-height: var(--lh-title);
     letter-spacing: var(--tr-title);
-    color: var(--deep-red);
+    color: var(--slate);
     text-wrap: balance;
   }
   .plan-section-text {
@@ -3656,7 +3674,7 @@
   }
   .plan-earlier .plan-earlier-outcome {
     font-weight: 600;
-    color: var(--deep-red);
+    color: var(--slate);
   }
 
   /* Today's small moment */
@@ -3685,18 +3703,18 @@
     gap: 0.375rem;
     padding: 1.125rem 1.25rem 1.25rem;
     border-radius: 1.25rem;
-    background: var(--warm-white);
+    background: var(--off-white);
     box-shadow: 0 0 0 1px var(--line);
     color: var(--ink);
     text-wrap: pretty;
   }
   .plan-tool-title {
     margin-bottom: 0.25rem;
-    font-family: var(--stack-display);
+    font-family: var(--stack-text);
     font-size: 1.125rem;
     font-weight: 700;
     line-height: 1.3;
-    color: var(--deep-red);
+    color: var(--slate);
     text-wrap: balance;
   }
   .plan-tool .plan-try-label {
@@ -3721,7 +3739,7 @@
     padding: 0.5rem 1.05rem;
     border: 0;
     border-radius: 999px;
-    background: var(--warm-white);
+    background: var(--off-white);
     box-shadow: 0 0 0 1px var(--line);
     color: var(--ink);
     font: inherit;
@@ -3733,9 +3751,9 @@
       color 0.2s ease;
   }
   .plan-tab[aria-pressed="true"] {
-    background: var(--deep-red);
+    background: var(--slate);
     box-shadow: none;
-    color: var(--warm-white);
+    color: var(--off-white);
   }
   .plan-script-list {
     display: grid;
@@ -3754,7 +3772,7 @@
     font-size: var(--fs-micro);
     font-weight: 700;
     letter-spacing: var(--tr-micro);
-    color: var(--deep-red);
+    color: var(--slate);
   }
   .plan-script-lead {
     font-size: var(--fs-small);
@@ -3791,7 +3809,7 @@
     padding: 0.875rem 1.125rem;
     border: 0;
     border-radius: 1rem;
-    background: var(--warm-white);
+    background: var(--off-white);
     box-shadow:
       0 0 0 1px var(--line-strong),
       var(--shadow-1);
@@ -3803,7 +3821,7 @@
   }
   .plan-check-form textarea:focus {
     outline: none;
-    box-shadow: 0 0 0 2px var(--deep-red);
+    box-shadow: 0 0 0 2px var(--slate);
   }
   .plan-check .btn {
     width: 100%;
@@ -3813,10 +3831,10 @@
     gap: 0.875rem;
     padding: 1.25rem;
     border-radius: 1.25rem;
-    background: var(--warm-white);
+    background: var(--off-white);
     box-shadow: 0 0 0 1px var(--line);
   }
-  /* Each part of an answer: a small red label, then the words. */
+  /* Each part of an answer: a small slate label, then the words. */
   .plan-review-part {
     display: grid;
     gap: 0.25rem;
@@ -3825,7 +3843,7 @@
     font-size: var(--fs-micro);
     font-weight: 700;
     letter-spacing: var(--tr-micro);
-    color: var(--deep-red);
+    color: var(--slate);
   }
   .plan-review-flags {
     display: grid;
@@ -3854,10 +3872,10 @@
     text-wrap: pretty;
   }
   .plan-review-verdict {
-    font-family: var(--stack-display);
+    font-family: var(--stack-text);
     font-size: 1.25rem;
     font-weight: 700;
-    color: var(--deep-red);
+    color: var(--slate);
   }
   /* A version to send, in a box they can change. */
   .plan-review-suggestion {
@@ -3919,7 +3937,7 @@
     color: var(--ink);
   }
   .plan-hours b {
-    color: var(--deep-red);
+    color: var(--slate);
     white-space: nowrap;
     font-variant-numeric: tabular-nums;
   }
@@ -3941,7 +3959,7 @@
   }
   .plan-rules li::marker,
   .plan-steps li::marker {
-    color: var(--deep-red);
+    color: var(--slate);
     font-weight: 700;
   }
   .plan-foot {
@@ -3982,7 +4000,7 @@
     padding: 0;
     border: 0;
     background: none;
-    color: var(--deep-red);
+    color: var(--slate);
     font: inherit;
     font-weight: 600;
     text-decoration: none;
@@ -4007,11 +4025,11 @@
   }
   .help-title {
     font-family: var(--stack-display);
-    font-size: clamp(1.75rem, 1.45rem + 1.4vw, 2.5rem);
-    font-weight: 700;
+    font-size: clamp(1.925rem, 1.595rem + 1.54vw, 2.75rem);
+    font-weight: 400;
     line-height: 1.12;
-    letter-spacing: -0.018em;
-    color: var(--deep-red);
+    letter-spacing: -0.005em;
+    color: var(--slate);
     text-wrap: balance;
   }
   .help-title:focus {
@@ -4021,7 +4039,7 @@
     margin-top: 0.5rem;
     font-family: var(--stack-display);
     font-size: var(--fs-title);
-    font-weight: 700;
+    font-weight: 400;
     line-height: var(--lh-title);
     letter-spacing: var(--tr-title);
     color: var(--ink);
@@ -4034,7 +4052,7 @@
     text-wrap: pretty;
   }
   .help-unsafe a {
-    color: var(--deep-red);
+    color: var(--slate);
     font-weight: 600;
     text-decoration: underline;
     text-underline-offset: 0.2em;
@@ -4053,7 +4071,7 @@
     text-wrap: pretty;
   }
   .help-list li::marker {
-    color: var(--deep-red);
+    color: var(--slate);
   }
   /* Answers and buttons here can run long, so they take the whole width and wrap on a phone. */
   .help-wide,
@@ -4107,14 +4125,14 @@
     inset: 13%;
     z-index: 1;
     border-radius: 50%;
-    background: var(--warm-white);
+    background: var(--off-white);
     box-shadow: 0 0 0 1px var(--line);
   }
   .help-breath,
   .help-breath::before {
     position: absolute;
     border-radius: 50%;
-    background: var(--red-wash);
+    background: var(--slate-wash);
   }
   .help-breath {
     inset: 0;
@@ -4145,11 +4163,11 @@
   .help-time-num,
   .help-time-part {
     font-family: var(--stack-display);
-    font-weight: 700;
+    font-weight: 400;
     line-height: 1;
-    letter-spacing: -0.02em;
+    letter-spacing: -0.01em;
     font-variant-numeric: tabular-nums;
-    color: var(--deep-red);
+    color: var(--slate);
   }
   .help-time-num {
     font-size: clamp(3rem, 2.6rem + 2vw, 3.75rem);
@@ -4183,14 +4201,14 @@
     background: var(--line-strong);
   }
   .help-dots li[data-on] {
-    background: var(--deep-red);
+    background: var(--slate);
   }
   .help-who {
     justify-self: start;
     padding: 0.3rem 0.75rem;
     border-radius: 999px;
-    background: var(--red-wash);
-    color: var(--deep-red);
+    background: var(--slate-wash);
+    color: var(--slate);
     font-size: var(--fs-small);
     font-weight: 700;
   }
@@ -4237,7 +4255,7 @@
     font-size: var(--fs-micro);
     font-weight: 700;
     letter-spacing: var(--tr-micro);
-    color: var(--deep-red);
+    color: var(--slate);
   }
   .help-notes dd {
     margin: 0.25rem 0 0;
@@ -4264,10 +4282,10 @@
   .help-box-title {
     font-family: var(--stack-display);
     font-size: var(--fs-title);
-    font-weight: 700;
+    font-weight: 400;
     line-height: var(--lh-title);
     letter-spacing: var(--tr-title);
-    color: var(--deep-red);
+    color: var(--slate);
     text-wrap: balance;
   }
   .help-box-text {
@@ -4314,7 +4332,7 @@
     gap: 0.625rem;
     padding: clamp(1.25rem, 1rem + 1vw, 1.75rem);
     border-radius: var(--r-card);
-    background: var(--warm-white);
+    background: var(--off-white);
     box-shadow:
       0 0 0 1px var(--line),
       var(--shadow-1);
@@ -4323,15 +4341,15 @@
   .standard-mark {
     width: 2.5rem;
     height: auto;
-    color: var(--deep-red);
+    color: var(--slate);
   }
   .plan-standard-title {
     font-family: var(--stack-display);
     font-size: var(--fs-title);
-    font-weight: 700;
+    font-weight: 400;
     line-height: var(--lh-title);
     letter-spacing: var(--tr-title);
-    color: var(--deep-red);
+    color: var(--slate);
   }
   .plan-standard-text {
     color: var(--ink);
@@ -4362,11 +4380,11 @@
   }
   .standard-title {
     font-family: var(--stack-display);
-    font-size: clamp(2rem, 1.6rem + 2vw, 2.875rem);
-    font-weight: 700;
+    font-size: clamp(2.2rem, 1.76rem + 2.2vw, 3.163rem);
+    font-weight: 400;
     line-height: 1.06;
     letter-spacing: var(--tr-display);
-    color: var(--deep-red);
+    color: var(--slate);
     text-wrap: balance;
   }
   .standard-intro {
@@ -4389,7 +4407,7 @@
     gap: 0.75rem;
     padding: clamp(1.25rem, 1rem + 1vw, 1.75rem);
     border-radius: var(--r-card);
-    background: var(--warm-white);
+    background: var(--off-white);
     box-shadow:
       0 0 0 1px var(--line),
       var(--shadow-1);
@@ -4397,10 +4415,10 @@
   .standard-part-title {
     font-family: var(--stack-display);
     font-size: var(--fs-title);
-    font-weight: 700;
+    font-weight: 400;
     line-height: var(--lh-title);
     letter-spacing: var(--tr-title);
-    color: var(--deep-red);
+    color: var(--slate);
     text-wrap: balance;
   }
   .standard-heard {
@@ -4426,7 +4444,7 @@
     font-size: var(--fs-micro);
     font-weight: 700;
     letter-spacing: var(--tr-micro);
-    color: var(--deep-red);
+    color: var(--slate);
   }
   .standard-text {
     font-size: var(--fs-lead);
@@ -4455,8 +4473,8 @@
     color: var(--ink);
   }
   .standard-status[data-status="agreed"] {
-    background: var(--red-wash);
-    color: var(--deep-red);
+    background: var(--slate-wash);
+    color: var(--slate);
   }
   .standard-status svg {
     width: 1rem;
@@ -4503,10 +4521,10 @@
   .plan-checkin-title {
     font-family: var(--stack-display);
     font-size: var(--fs-title);
-    font-weight: 700;
+    font-weight: 400;
     line-height: var(--lh-title);
     letter-spacing: var(--tr-title);
-    color: var(--deep-red);
+    color: var(--slate);
     text-wrap: balance;
   }
   .plan-checkin-text {
@@ -4554,7 +4572,7 @@
     display: block;
     height: 100%;
     border-radius: inherit;
-    background: var(--deep-red);
+    background: var(--slate);
     transform-origin: left;
     transition: transform var(--dur-spring) var(--ease-spring);
   }
@@ -4580,7 +4598,7 @@
     width: 1.375rem;
     height: 1.375rem;
     margin: calc((var(--lh-body) * 1em - 1.375rem) / 2) 0 0;
-    accent-color: var(--deep-red);
+    accent-color: var(--slate);
     cursor: pointer;
   }
   .checkin-done {
@@ -4604,7 +4622,7 @@
 
 /* ---------- Privacy and terms (/privacy, /terms) ---------- */
 /* Long reading, so one calm column at a comfortable measure: the title and date, then short sections under
-   plain headings. Links are the site's red, underlined, so they read as links in running text. */
+   plain headings. Links are the site's slate, underlined, so they read as links in running text. */
 @layer components {
   .legal-page {
     max-width: calc(38rem + var(--gutter) * 2);
@@ -4638,10 +4656,10 @@
   .legal-title {
     font-family: var(--stack-display);
     font-size: var(--fs-title);
-    font-weight: 700;
+    font-weight: 400;
     line-height: var(--lh-title);
     letter-spacing: var(--tr-title);
-    color: var(--deep-red);
+    color: var(--slate);
     text-wrap: balance;
   }
   .legal-text,
@@ -4658,11 +4676,11 @@
     list-style: disc;
   }
   .legal-list li::marker {
-    color: var(--deep-red);
+    color: var(--slate);
   }
   .legal a,
   .paywall-consent a {
-    color: var(--deep-red);
+    color: var(--slate);
     font-weight: 600;
     text-decoration: underline;
     text-underline-offset: 0.2em;
@@ -4677,7 +4695,7 @@
 /* Secondary text sits right on the blooms here, so it is a shade darker to keep 4.5:1 or better. Outside
    the layers, like the tokens it overrides. */
 :root:has(.backdrop) {
-  --muted: #544a44;
+  --muted: var(--slate);
 }
 /* The centered nav's taller bar, matching the quiz's header. Outside the layers, like the --nav-h token
    it changes, so page offsets that use --nav-h follow it. */
@@ -4729,7 +4747,7 @@
   }
 }
 
-/* The landing page's blush aura, brought inside. Four soft blooms sit behind frosted cards, with a fine
+/* The landing page's aura, brought inside. Four soft blooms sit behind frosted cards, with a fine
    grain over them so the colour reads as light on paper rather than a flat gradient. It never moves on
    its own: --stage (0 to 1, set from the quiz's progress or the part of the plan) shifts the light a
    little, so the background answers to what you do. The landing page is not affected. */
@@ -4740,7 +4758,7 @@
     inset: 0;
     z-index: -1;
     overflow: hidden;
-    background: var(--warm-white);
+    background: var(--off-white);
     pointer-events: none;
   }
   /* The page's own background would cover the backdrop, so it steps aside while one is on the page. */
@@ -4752,28 +4770,28 @@
     border-radius: 50%;
     transition: transform 1.4s var(--ease-out);
   }
-  .bloom-red {
+  .bloom-sky {
     right: -34vmax;
     top: -26vmax;
     width: 96vmax;
     height: 84vmax;
-    background: radial-gradient(closest-side, var(--bloom-red), rgb(150 4 0 / 0.34) 40%, rgb(150 4 0 / 0.12) 72%, transparent);
+    background: radial-gradient(closest-side, var(--bloom-sky), rgb(174 202 232 / 0.42) 40%, rgb(174 202 232 / 0.15) 72%, transparent);
     transform: translate(calc(var(--stage) * -14vmax), calc(var(--stage) * 10vmax));
   }
-  .bloom-coral {
+  .bloom-tan {
     left: -42vmax;
     top: calc(56% - 50vmax);
     width: 88vmax;
     height: 100vmax;
-    background: radial-gradient(closest-side, var(--bloom-coral), rgb(222 128 100 / 0.36) 40%, rgb(222 128 100 / 0.13) 72%, transparent);
+    background: radial-gradient(closest-side, var(--bloom-tan), rgb(166 138 105 / 0.09) 40%, rgb(166 138 105 / 0.03) 72%, transparent);
     transform: translate(calc(var(--stage) * 10vmax), calc(var(--stage) * -12vmax));
   }
-  .bloom-rose {
+  .bloom-dusty {
     right: -30vmax;
     bottom: -32vmax;
     width: 104vmax;
     height: 80vmax;
-    background: radial-gradient(closest-side, var(--bloom-rose), rgb(170 40 60 / 0.26) 40%, rgb(170 40 60 / 0.09) 72%, transparent);
+    background: radial-gradient(closest-side, var(--bloom-dusty), rgb(122 144 168 / 0.15) 40%, rgb(122 144 168 / 0.05) 72%, transparent);
     transform: translate(calc(var(--stage) * -18vmax), calc(var(--stage) * -6vmax));
   }
   .bloom-light {
@@ -4790,14 +4808,14 @@
       opacity: 0.78;
     }
   }
-  /* Grain: warm specks at very low strength, multiplied into the colour underneath. */
+  /* Grain: slate specks at very low strength, multiplied into the colour underneath. */
   .backdrop::after {
     content: "";
     position: absolute;
     inset: 0;
     opacity: 0.55;
     mix-blend-mode: multiply;
-    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .35 0 0 0 0 .2 0 0 0 0 .15 0 0 0 .14 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .28 0 0 0 0 .35 0 0 0 0 .42 0 0 0 .14 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
   }
 
   /* Frosted surfaces: the aura shows through the cards, answers and fields. */
@@ -4834,7 +4852,7 @@
       var(--frost-shadow);
   }
   .quiz-choice[aria-pressed="true"] {
-    background: var(--red-wash-hover);
+    background: var(--slate-wash-hover);
   }
   .plan-script,
   .plan-tip,
@@ -4853,12 +4871,12 @@
   }
   .quiz-choice:hover,
   .quiz-topic:not([data-on]):hover {
-    background: rgb(251 247 241 / 0.84);
+    background: rgb(245 242 239 / 0.84);
   }
   /* Headers let more of the colour through. */
   :root:has(.backdrop) .nav,
   .quiz-head {
-    background: rgb(249 245 237 / 0.5);
+    background: rgb(239 234 228 / 0.5);
   }
 }
 
@@ -4937,9 +4955,9 @@
     width: 2.5rem;
     height: 2.5rem;
     border-radius: 50%;
-    background: var(--warm-white);
+    background: var(--off-white);
     font-weight: 700;
-    color: var(--deep-red);
+    color: var(--slate);
   }
   .review-name {
     display: block;
@@ -5074,7 +5092,7 @@
   .quiz-head,
   .motion-toggle,
   .ask {
-    background: var(--warm-white);
+    background: var(--off-white);
     -webkit-backdrop-filter: none;
     backdrop-filter: none;
   }
@@ -5093,7 +5111,7 @@
   .plan-tab:not([aria-pressed="true"]),
   .plan-standard,
   .standard-part {
-    background: var(--warm-white);
+    background: var(--off-white);
     -webkit-backdrop-filter: none;
     backdrop-filter: none;
   }
@@ -5128,16 +5146,16 @@
   .plan-review,
   .plan-standard,
   .standard-part {
-    background: var(--warm-white);
+    background: var(--off-white);
   }
 }
 @media (prefers-contrast: more) {
   :root {
-    --line: rgb(34 29 26 / 0.45);
-    --line-strong: rgb(34 29 26 / 0.65);
+    --line: rgb(72 89 107 / 0.7);
+    --line-strong: rgb(72 89 107 / 0.9);
   }
   .nav {
-    background: var(--warm-white);
+    background: var(--off-white);
     -webkit-backdrop-filter: none;
     backdrop-filter: none;
     box-shadow: 0 1px 0 var(--line-strong);
@@ -5150,7 +5168,7 @@
     box-shadow: 0 0 0 1px var(--line-strong);
   }
   .quiz-choice[aria-pressed="true"] {
-    box-shadow: 0 0 0 2px var(--deep-red);
+    box-shadow: 0 0 0 2px var(--slate);
   }
 }
 @media (forced-colors: active) {

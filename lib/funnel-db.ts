@@ -2,7 +2,7 @@ import { supabaseAdmin } from "./supabase";
 import type { PlanInput } from "./plan-writer";
 import type { AiPolicy, AiTool, Pile } from "./week";
 
-// Worth Her Time's tables, as supabase/migrations/20261024120000_worth_her_time.sql makes them, and the
+// Tally's tables, as supabase/migrations/20261024120000_worth_her_time.sql makes them, and the
 // calls that write them. Server only: every call uses the secret key. The types are written by hand, since
 // the database lives in an account the type generator here can't reach. Keep them in step with the SQL.
 
