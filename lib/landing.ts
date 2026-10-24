@@ -1,7 +1,7 @@
 import type { ComponentType, SVGProps } from "react";
-import { Check, Clock, Eye, Plus, Shield, Sparkle } from "@/components/icons";
+import { Check, Clock, Eye, Shield, Sparkle } from "@/components/icons";
 import { dollars, offer } from "./offer";
-import { policyQuestion } from "./questions";
+import { openQuestions, policyQuestion, resultCopy } from "./questions";
 import { AI_POLICIES, policyLabels } from "./week";
 
 // The landing page's words. Word for word from the brief where it gives them; lines marked DRAFT fill a gap
@@ -27,25 +27,28 @@ export const problem = {
   ],
 } as const;
 
-/** Why it happens: three findings, each with its source underneath. Never rounded, never ours. */
+/**
+ * Why it happens: three findings, each led by its figure, then the finding word for word and its source.
+ * Never rounded, never ours: the figure is the finding's own number. The lead line is a DRAFT.
+ */
 export const why = {
   title: "Why it happens",
+  lead: "It’s not you. Here’s what the research shows.",
   stats: [
     {
+      figure: "200 hours",
       text: "In one study, women spent about 200 more hours a year than men on work that never got them promoted.",
       source: "The No Club",
-      Icon: Clock as Icon,
     },
     {
+      figure: "Almost 50%",
       text: "Women get asked to take on this work almost 50% more often.",
       source: "The No Club",
-      Icon: Plus as Icon,
     },
     {
+      figure: "13% vs 6%",
       text: "In a 2025 study, women who used AI were rated 13% less competent for identical work. Men, 6%.",
       source: "HBR, The Hidden Penalty of Using AI at Work",
-      Icon: Sparkle as Icon,
-      filled: true,
     },
   ],
 } as const;
@@ -55,6 +58,15 @@ export const steps = [
   "See how many hours go to work nobody notices.",
   "Get your plan to win them back and turn them into credit.",
 ] as const;
+
+/** What each step looks like, drawn small above it. The words are the quiz's and the plan's own. */
+export const stepSample = {
+  question: openQuestions.week.title,
+  answer: "Lots of meetings where I end up taking notes, chasing people for updates…",
+  hours: "9 hours",
+  resultLead: resultCopy.lead,
+  resultLine: resultCopy.line,
+};
 
 /** What's in your plan: the five parts, each with a small copy of its screen. The lines are DRAFTS. */
 export const planParts = {
@@ -68,6 +80,12 @@ export const planParts = {
   ],
 } as const;
 export type PlanPartId = (typeof planParts.parts)[number]["id"];
+
+/** Under the plan's five parts: the price, and the way in. The note is a DRAFT. */
+export const priceRow = {
+  price: dollars(offer.price.cents),
+  note: "Paid once, after your free result. No subscription.",
+};
 
 /** Why this and not another AI course: the brief's one paragraph, as four cards. The wording is a DRAFT. */
 export const whyThis = {

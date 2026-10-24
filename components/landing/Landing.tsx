@@ -7,7 +7,8 @@ import { MotionToggle } from "@/components/MotionToggle";
 import { PhoneMockup } from "@/components/PhoneMockup";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteNav } from "@/components/SiteNav";
-import { faqs, planParts, problem, steps, why, whyThis } from "@/lib/landing";
+import { stepVisuals } from "./StepVisuals";
+import { faqs, planParts, priceRow, problem, steps, why, whyThis } from "@/lib/landing";
 import { angles, offer, type AngleId } from "@/lib/offer";
 
 /**
@@ -91,22 +92,21 @@ export function Landing({ angle }: { angle: AngleId }) {
           </div>
         </section>
 
-        {/* Why it happens: three findings, each with its source */}
+        {/* Why it happens: each finding led by its figure, then its words and its source */}
         <section className="band" aria-labelledby="why-title" data-section="why">
           <div className="wrap">
             <div className="center-head">
               <h2 id="why-title" className="heading">
                 {why.title}
               </h2>
+              <p className="text-lead text-balance text-muted">{why.lead}</p>
             </div>
-            <ul className="method">
-              {why.stats.map(({ text, source, Icon, ...stat }) => (
-                <li key={text} className="method-card">
-                  <span className="method-icon" data-filled={"filled" in stat || undefined} aria-hidden="true">
-                    <Icon />
-                  </span>
-                  <p className="method-text">{text}</p>
-                  <p className="method-source">
+            <ul className="stats">
+              {why.stats.map(({ figure, text, source }) => (
+                <li key={figure} className="stat">
+                  <p className="stat-figure">{figure}</p>
+                  <p className="stat-text">{text}</p>
+                  <p className="stat-source">
                     <span>Source</span> {source}
                   </p>
                 </li>
@@ -115,7 +115,7 @@ export function Landing({ angle }: { angle: AngleId }) {
           </div>
         </section>
 
-        {/* How it works */}
+        {/* How it works: each step with a small picture of what it looks like */}
         <section className="band bg-tint" aria-labelledby="how-title" data-section="how">
           <div className="wrap">
             <div className="center-head">
@@ -123,43 +123,56 @@ export function Landing({ angle }: { angle: AngleId }) {
                 How it works
               </h2>
             </div>
-            <ol className="steps">
-              {steps.map((step, i) => (
-                <li key={step} className="step">
-                  <span className="step-num" aria-hidden="true">
-                    {i + 1}
-                  </span>
-                  <p className="step-text">{step}</p>
-                </li>
-              ))}
+            <ol className="flow">
+              {steps.map((step, i) => {
+                const Visual = stepVisuals[i];
+                return (
+                  <li key={step} className="flow-step">
+                    <div className="flow-visual" aria-hidden="true">
+                      <Visual />
+                    </div>
+                    <div className="flow-text">
+                      <span className="flow-num" aria-hidden="true">
+                        {i + 1}
+                      </span>
+                      <p className="flow-title">{step}</p>
+                    </div>
+                  </li>
+                );
+              })}
             </ol>
           </div>
         </section>
 
-        {/* What's in your plan: the five parts, each with a small copy of its screen */}
-        <section className="band" aria-labelledby="plan-title" data-section="plan">
+        {/* What's in your plan: the five parts on a deep red band, then the price and the way in */}
+        <section className="band band-deep" aria-labelledby="plan-title" data-section="plan">
           <div className="wrap">
             <div className="center-head">
               <h2 id="plan-title" className="heading">
                 {planParts.title}
               </h2>
             </div>
-            <ul className="gets">
+            <ul className="parts">
               {planParts.parts.map(({ id, title, text }) => {
                 const Preview = previews[id];
                 return (
-                  <li key={id} className="get">
-                    <div className="get-visual" aria-hidden="true">
+                  <li key={id} className="part">
+                    <div className="part-visual" aria-hidden="true">
                       <Preview />
                     </div>
-                    <div className="get-text">
-                      <h3 className="get-title">{title}</h3>
-                      <p className="get-desc">{text}</p>
+                    <div className="part-text">
+                      <h3 className="part-title">{title}</h3>
+                      <p className="part-desc">{text}</p>
                     </div>
                   </li>
                 );
               })}
             </ul>
+            <div className="price-row">
+              <p className="price-figure">{priceRow.price}</p>
+              <p className="price-note">{priceRow.note}</p>
+              <GetStarted size="lg" tone="invert" label={offer.cta} />
+            </div>
           </div>
         </section>
 

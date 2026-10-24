@@ -37,7 +37,7 @@ export function GetStartedBar() {
     );
     heroObserver.observe(heroCta);
 
-    // The closing band has its own Get started, and the bar would vanish on its deep red anyway.
+    // The plan band and the closing band have their own button, and the bar would vanish on their deep red anyway.
     const blockerObserver = new IntersectionObserver((entries) => {
       for (const entry of entries) {
         if (entry.isIntersecting) blocking.add(entry.target);
@@ -46,7 +46,7 @@ export function GetStartedBar() {
       update();
     });
     document
-      .querySelectorAll('[data-section="closing"], [data-section="footer"]')
+      .querySelectorAll('[data-section="plan"], [data-section="closing"], [data-section="footer"]')
       .forEach((node) => blockerObserver.observe(node));
 
     return () => {
