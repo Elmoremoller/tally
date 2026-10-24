@@ -1,0 +1,67 @@
+"use client";
+
+import Link from "next/link";
+import { useEffect, useState } from "react";
+import { START_HREF } from "./GetStarted";
+import { ArrowRight } from "./icons";
+
+/**
+ * The landing page's Get started, pinned to the bottom of the screen. The whole bar is the button. It rises
+ * once the hero's Get started has scrolled away under the nav, and steps aside while the closing band or
+ * the footer is on screen, so there is only ever one Get started in reach. While hidden it is inert.
+ */
+export function GetStartedBar() {
+  const [shown, setShown] = useState(false);
+
+  useEffect(() => {
+    const heroCta = document.querySelector('[data-section="hero"] [data-cta="get-started"]');
+    if (!heroCta) return;
+
+    let pastHero = false;
+    const blocking = new Set<Element>();
+    const update = () => setShown(pastHero && blocking.size === 0);
+
+    // The hero's button counts as gone once it slides under the sticky nav, not once it leaves the screen.
+    const navHeight = Math.round(document.querySelector('[data-section="nav"]')?.getBoundingClientRect().height ?? 0);
+    const heroObserver = new IntersectionObserver(
+      ([entry]) => {
+        pastHero = !entry.isIntersecting && entry.boundingClientRect.top < navHeight;
+        update();
+      },
+      { rootMargin: `-${navHeight}px 0px 0px 0px` },
+    );
+    heroObserver.observe(heroCta);
+
+    // The closing band has its own Get started, and the bar would vanish on its deep red anyway.
+    const blockerObserver = new IntersectionObserver((entries) => {
+      for (const entry of entries) {
+        if (entry.isIntersecting) blocking.add(entry.target);
+        else blocking.delete(entry.target);
+      }
+      update();
+    });
+    document
+      .querySelectorAll('[data-section="closing"], [data-section="footer"]')
+      .forEach((node) => blockerObserver.observe(node));
+
+    return () => {
+      heroObserver.disconnect();
+      blockerObserver.disconnect();
+    };
+  }, []);
+
+  return (
+    <div className="get-bar" data-shown={shown || undefined} inert={!shown}>
+      <Link href={START_HREF} className="btn get-bar-link" data-cta="get-started-bar">
+        <span className="get-bar-label">
+          Get started
+          <ArrowRight />
+        </span>
+        <span className="get-bar-chip">
+          <span>Takes under</span>
+          <span>3 minutes</span>
+        </span>
+      </Link>
+    </div>
+  );
+}

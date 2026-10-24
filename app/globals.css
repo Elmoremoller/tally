@@ -1,0 +1,4721 @@
+@import "tailwindcss";
+
+/*
+  The Couple Standard landing page.
+  One centered column with one action always in reach: Get started, at each decision point and in a bar
+  at the bottom of the screen between them.
+  Deep red carries the logo, headings, buttons and brand backgrounds. Warm white is the page, and anything
+  set on red. The only ornament is the smile from the logo.
+*/
+
+:root {
+  /* Brand */
+  --deep-red: #960400;
+  --warm-white: #f9f5ed;
+
+  /* Support colours */
+  --ink: #221d1a; /* near black, body text */
+  --muted: #665c55; /* muted warm grey, secondary text */
+  --tint: #f3e6df; /* soft red tint, subtle surfaces */
+
+  /* Tones of the colours above, made with alpha only */
+  --line: rgb(34 29 26 / 0.12);
+  --line-strong: rgb(34 29 26 / 0.22);
+  --red-wash: rgb(150 4 0 / 0.08);
+  --red-wash-hover: rgb(150 4 0 / 0.13);
+  --red-wash-press: rgb(150 4 0 / 0.2);
+  --material: rgb(249 245 237 / 0.8);
+  --edge: rgb(34 29 26 / 0.07);
+  --bezel-highlight: rgb(249 245 237 / 0.1);
+  --selection: rgb(150 4 0 / 0.16);
+  --selection-on-red: rgb(249 245 237 / 0.28);
+  /* The hero's moving aura: deep red at falling strengths, and a warm white highlight */
+  --blush-core: rgb(150 4 0 / 0.24);
+  --blush-mid: rgb(150 4 0 / 0.12);
+  --blush-edge: rgb(150 4 0 / 0.04);
+  --blush-bloom: rgb(150 4 0 / 0.28);
+  --blush-rose: rgb(150 4 0 / 0.2);
+  --blush-light: rgb(249 245 237 / 0.6);
+  /* The aura behind the quiz and the plan: the brand red, a warmer coral and a cooler rose made from it,
+     and a warm light. Only ever used as soft blooms in the backdrop. */
+  --bloom-red: rgb(150 4 0 / 0.42);
+  --bloom-coral: rgb(222 128 100 / 0.46);
+  --bloom-rose: rgb(170 40 60 / 0.32);
+  --bloom-light: rgb(252 236 220 / 0.9);
+  /* Frosted cards over the aura */
+  --frost: rgb(251 247 241 / 0.66);
+  --frost-tint: rgb(255 240 232 / 0.62);
+  --frost-edge: rgb(255 255 255 / 0.55);
+  --frost-shadow: 0 10px 30px -12px rgb(90 20 10 / 0.22);
+  --focus: var(--ink);
+  --shadow-1: 0 1px 2px rgb(34 29 26 / 0.06);
+  --shadow-2: 0 1px 2px rgb(34 29 26 / 0.05), 0 10px 24px -8px rgb(34 29 26 / 0.14);
+  --shadow-3: 0 1px 2px rgb(34 29 26 / 0.04), 0 18px 40px -14px rgb(34 29 26 / 0.16), 0 56px 110px -36px rgb(34 29 26 / 0.26);
+
+  /* Type. Size, leading and tracking move together: tracking tightens as size grows, loosens as it shrinks. */
+  --stack-display: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI Variable Display", "Segoe UI", system-ui, Roboto, "Helvetica Neue", Arial, sans-serif;
+  --stack-text: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI Variable Text", "Segoe UI", system-ui, Roboto, "Helvetica Neue", Arial, sans-serif;
+  /* Sized for "Know exactly what to say when it starts going wrong.": three lines on desktop, so the hero
+     still ends on the first screen. Was 5.25rem at most for the shorter "Fight less, make up faster." */
+  --fs-hero: clamp(2.625rem, 1.25rem + 3.8vw, 4rem);
+  --lh-hero: 1.04;
+  --tr-hero: -0.028em;
+  --fs-display: clamp(2rem, 1.35rem + 2.8vw, 3.5rem);
+  --lh-display: 1.08;
+  --tr-display: -0.02em;
+  --fs-title: clamp(1.375rem, 1.2rem + 0.75vw, 1.75rem);
+  --lh-title: 1.2;
+  --tr-title: -0.012em;
+  --fs-lead: clamp(1.1875rem, 1.13rem + 0.25vw, 1.3125rem);
+  --lh-lead: 1.42;
+  --tr-lead: -0.006em;
+  --fs-body: 1.0625rem;
+  --lh-body: 1.5;
+  --tr-body: -0.01em;
+  --fs-small: 0.9375rem;
+  --lh-small: 1.45;
+  --tr-small: -0.004em;
+  --fs-micro: 0.8125rem;
+  --lh-micro: 1.4;
+  --tr-micro: 0.008em;
+
+  /* Layout */
+  --wrap: 68rem;
+  --gutter: clamp(1rem, 4.5vw, 2rem);
+  --section: clamp(4.5rem, 2.75rem + 6vw, 8.5rem);
+  --nav-h: 3.5rem;
+  --r-card: 1.5rem;
+
+  /* Motion. Critically damped springs (damping 1.0) sampled into linear(), response about 0.4s and 0.3s. */
+  --ease-spring: linear(0, 0.037, 0.118, 0.22, 0.326, 0.43, 0.523, 0.605, 0.676, 0.737, 0.787, 0.829, 0.863, 0.891, 0.913, 0.931, 0.946, 0.957, 0.967, 0.974, 0.979, 0.984, 0.988, 0.99, 0.992, 0.994, 0.995, 0.996, 0.997, 0.998, 0.998, 0.999, 1);
+  --dur-spring: 0.74s;
+  --ease-spring-fast: linear(0, 0.061, 0.189, 0.333, 0.468, 0.586, 0.683, 0.761, 0.822, 0.868, 0.903, 0.929, 0.948, 0.963, 0.973, 0.981, 0.986, 0.99, 0.993, 0.995, 0.996, 0.997, 0.998, 0.999, 1);
+  --dur-spring-fast: 0.48s;
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-draw: cubic-bezier(0.5, 0, 0.2, 1);
+
+  color-scheme: light;
+}
+@supports not (transition-timing-function: linear(0, 1)) {
+  :root {
+    --ease-spring: cubic-bezier(0.22, 1, 0.36, 1);
+    --ease-spring-fast: cubic-bezier(0.22, 1, 0.36, 1);
+  }
+}
+
+/* Tailwind reads the tokens above. The default palette is cleared, so only brand colours exist as utilities. */
+@theme {
+  --color-*: initial;
+  --breakpoint-*: initial;
+  --breakpoint-md: 45.9375rem; /* 735px */
+  --breakpoint-lg: 66.8125rem; /* 1069px */
+}
+@theme inline {
+  --color-deep-red: var(--deep-red);
+  --color-warm-white: var(--warm-white);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-tint: var(--tint);
+  --color-line: var(--line);
+
+  --font-sans: var(--stack-text);
+  --font-display: var(--stack-display);
+
+  --text-hero: var(--fs-hero);
+  --text-hero--line-height: var(--lh-hero);
+  --text-hero--letter-spacing: var(--tr-hero);
+  --text-display: var(--fs-display);
+  --text-display--line-height: var(--lh-display);
+  --text-display--letter-spacing: var(--tr-display);
+  --text-title: var(--fs-title);
+  --text-title--line-height: var(--lh-title);
+  --text-title--letter-spacing: var(--tr-title);
+  --text-lead: var(--fs-lead);
+  --text-lead--line-height: var(--lh-lead);
+  --text-lead--letter-spacing: var(--tr-lead);
+  --text-body: var(--fs-body);
+  --text-body--line-height: var(--lh-body);
+  --text-body--letter-spacing: var(--tr-body);
+  --text-small: var(--fs-small);
+  --text-small--line-height: var(--lh-small);
+  --text-small--letter-spacing: var(--tr-small);
+  --text-micro: var(--fs-micro);
+  --text-micro--line-height: var(--lh-micro);
+  --text-micro--letter-spacing: var(--tr-micro);
+
+  --radius-card: var(--r-card);
+}
+
+/* ---------- Base ---------- */
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+    scroll-padding-top: calc(var(--nav-h) + 1rem);
+    background: var(--warm-white);
+  }
+  body {
+    margin: 0;
+    min-height: 100dvh;
+    background: var(--warm-white);
+    color: var(--ink);
+    font-family: var(--stack-text);
+    font-size: var(--fs-body);
+    line-height: var(--lh-body);
+    letter-spacing: var(--tr-body);
+    font-kerning: normal;
+    font-optical-sizing: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: clip;
+  }
+  a,
+  button {
+    -webkit-tap-highlight-color: transparent;
+  }
+  strong {
+    font-weight: 700;
+  }
+  ::selection {
+    background: var(--selection);
+  }
+  :focus-visible {
+    outline: 2px solid var(--focus);
+    outline-offset: 3px;
+  }
+}
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+/* ---------- Components ---------- */
+@layer components {
+  .wrap {
+    width: 100%;
+    max-width: calc(var(--wrap) + var(--gutter) * 2);
+    margin-inline: auto;
+    padding-inline: var(--gutter);
+  }
+  .band {
+    padding-block: var(--section);
+  }
+  .center-head {
+    display: grid;
+    justify-items: center;
+    gap: 1rem;
+    max-width: 42rem;
+    margin: 0 auto clamp(2.5rem, 2rem + 2.5vw, 4rem);
+    text-align: center;
+  }
+  .heading {
+    font-family: var(--stack-display);
+    font-size: var(--fs-display);
+    font-weight: 700;
+    line-height: var(--lh-display);
+    letter-spacing: var(--tr-display);
+    color: var(--deep-red);
+    text-wrap: balance;
+  }
+
+  .skip {
+    position: absolute;
+    left: var(--gutter);
+    top: 0.375rem;
+    z-index: 60;
+    display: inline-flex;
+    align-items: center;
+    min-height: 2.75rem;
+    padding: 0 1.1rem;
+    border-radius: 999px;
+    background: var(--ink);
+    color: var(--warm-white);
+    font-size: var(--fs-small);
+    font-weight: 600;
+    text-decoration: none;
+    transform: translateY(-160%);
+  }
+  .skip:focus-visible {
+    transform: none;
+  }
+
+  /* Buttons. Feedback lands on press, not on release. They have real depth: a lighter top edge, a darker
+     base and a soft shadow in their own colour, so they look like something you can press. Pointed at,
+     they lift toward you and a trailing arrow, in its own light circle, slides forward; pressed, they sink.
+     Each variant sets the colours below and keeps the same behaviour. */
+  .btn {
+    --btn-bg: var(--deep-red);
+    --btn-top: #b01d12;
+    --btn-base: #7f0300;
+    --btn-ink: var(--warm-white);
+    --btn-shadow: rgb(150 4 0 / 0.6);
+    --btn-chip: rgb(249 245 237 / 0.2);
+    --btn-chip-hover: rgb(249 245 237 / 0.32);
+    --btn-ring: 0 0 0 0 transparent;
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    min-width: 2.75rem;
+    min-height: 2.75rem;
+    padding: 0.625rem 1.25rem;
+    border-radius: 999px;
+    background: var(--btn-bg) linear-gradient(180deg, var(--btn-top), var(--btn-bg) 55%, var(--btn-base));
+    box-shadow:
+      var(--btn-ring),
+      inset 0 1px 0 rgb(255 255 255 / 0.3),
+      inset 0 -1px 0 rgb(0 0 0 / 0.18),
+      0 1px 2px rgb(90 10 0 / 0.22),
+      0 10px 22px -10px var(--btn-shadow);
+    color: var(--btn-ink);
+    font-size: var(--fs-small);
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: var(--tr-small);
+    text-decoration: none;
+    white-space: nowrap;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    transition:
+      transform 0.45s var(--ease-spring-fast),
+      box-shadow 0.35s ease,
+      filter 0.2s ease;
+  }
+  /* Only where there is a mouse: on touch screens a hover would stick after the tap. */
+  @media (hover: hover) {
+    .btn:hover {
+      transform: translateY(-2px);
+      filter: brightness(1.06);
+      box-shadow:
+        var(--btn-ring),
+        inset 0 1px 0 rgb(255 255 255 / 0.34),
+        inset 0 -1px 0 rgb(0 0 0 / 0.18),
+        0 3px 6px rgb(90 10 0 / 0.18),
+        0 20px 34px -12px var(--btn-shadow);
+    }
+  }
+  .btn:active {
+    transform: translateY(0) scale(0.98);
+    filter: brightness(0.96);
+    box-shadow:
+      var(--btn-ring),
+      inset 0 2px 4px rgb(0 0 0 / 0.2),
+      0 4px 10px -6px var(--btn-shadow);
+    transition:
+      transform 0.08s ease-out,
+      box-shadow 0.08s ease-out,
+      filter 0.08s ease-out;
+  }
+  .btn:disabled {
+    filter: none;
+    transform: none;
+    box-shadow: var(--btn-ring);
+  }
+  .btn svg {
+    width: 1.05em;
+    height: 1.05em;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    transition:
+      transform 0.45s var(--ease-spring-fast),
+      background-color 0.2s ease;
+  }
+  /* The forward arrow sits in its own light circle and points at what happens next. Other icons, like
+     play and pause, stay plain. */
+  .btn .icon-arrow {
+    width: 2em;
+    height: 2em;
+    padding: 0.5em;
+    margin-block: -0.35em;
+    margin-inline: 0.15em -0.85em;
+    border-radius: 50%;
+    background: var(--btn-chip);
+    stroke-width: 2.25;
+  }
+  @media (hover: hover) {
+    .btn:hover .icon-arrow {
+      transform: translateX(4px);
+      background: var(--btn-chip-hover);
+    }
+  }
+  .btn-lg {
+    min-height: 3.625rem;
+    padding: 1rem 2.125rem;
+    font-size: 1.125rem;
+    letter-spacing: var(--tr-body);
+  }
+  /* Warm white on the deep red band */
+  .btn-invert {
+    --btn-bg: var(--warm-white);
+    --btn-top: #fffdf9;
+    --btn-base: #efe5d9;
+    --btn-ink: var(--deep-red);
+    --btn-shadow: rgb(40 0 0 / 0.45);
+    --btn-chip: var(--red-wash);
+    --btn-chip-hover: var(--red-wash-hover);
+    --focus: var(--warm-white);
+  }
+  /* The second choice next to a main button: warm white with a red outline, and less depth. */
+  .btn-quiet {
+    --btn-bg: var(--warm-white);
+    --btn-top: #fffdf9;
+    --btn-base: #f3ebe1;
+    --btn-ink: var(--deep-red);
+    --btn-shadow: rgb(90 20 10 / 0.25);
+    --btn-chip: var(--red-wash);
+    --btn-chip-hover: var(--red-wash-hover);
+    --btn-ring: inset 0 0 0 1.5px var(--deep-red);
+  }
+
+  /* Nav: a translucent material with content scrolling underneath. No divider; a soft edge appears only
+     once content actually runs under it. */
+  .nav {
+    position: sticky;
+    top: 0;
+    z-index: 40;
+    background: var(--material);
+    -webkit-backdrop-filter: saturate(150%) blur(20px);
+    backdrop-filter: saturate(150%) blur(20px);
+  }
+  .nav::after {
+    content: "";
+    position: absolute;
+    inset-inline: 0;
+    top: 100%;
+    height: 0.875rem;
+    background: linear-gradient(to bottom, var(--edge), transparent);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+  }
+  :root[data-scrolled] .nav::after {
+    opacity: 1;
+  }
+  .nav-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    height: var(--nav-h);
+  }
+  .nav-brand {
+    display: inline-flex;
+    align-items: center;
+    min-height: 2.75rem;
+    margin-left: -0.25rem;
+    padding-inline: 0.25rem;
+    border-radius: 0.75rem;
+    color: var(--deep-red);
+    transition: opacity 0.2s ease;
+  }
+  .nav-brand:active {
+    opacity: 0.6;
+    transition-duration: 0.05s;
+  }
+  .nav-brand svg {
+    display: block;
+    height: 1.75rem;
+    width: auto;
+  }
+  /* The nav without an action (every page after the landing page): logo in the middle, bigger, in a
+     taller bar, the same as the quiz's header. The bar's height is set with --nav-h further down. */
+  .nav-centered .nav-inner {
+    justify-content: center;
+  }
+  .nav-centered .nav-brand {
+    margin-left: 0;
+  }
+  .nav-centered .nav-brand svg {
+    height: 2.125rem;
+  }
+  @media (min-width: 66.8125rem) {
+    .nav-centered .nav-brand svg {
+      height: 2.5rem;
+    }
+  }
+
+  /* Get started bar (after Saidwell's): the landing page's action, pinned to the bottom of the screen
+     between the hero and the closing band. The whole bar is one button, with how long it takes in a light
+     chip on the right. It rises into place and drops away; GetStartedBar decides when. */
+  html:has(.get-bar) {
+    scroll-padding-bottom: 6rem;
+  }
+  .get-bar {
+    position: fixed;
+    inset-inline: 0;
+    bottom: 0;
+    z-index: 30;
+    display: flex;
+    justify-content: center;
+    padding: 0 var(--gutter) calc(1rem + env(safe-area-inset-bottom, 0px));
+    pointer-events: none;
+    filter: drop-shadow(0 10px 24px rgb(90 20 10 / 0.2));
+    opacity: 0;
+    translate: 0 2rem;
+    visibility: hidden;
+    transition:
+      opacity 0.25s ease,
+      translate 0.3s var(--ease-out),
+      visibility 0s linear 0.3s;
+  }
+  .get-bar[data-shown] {
+    opacity: 1;
+    translate: 0 0;
+    visibility: visible;
+    transition:
+      opacity 0.4s ease,
+      translate var(--dur-spring) var(--ease-spring),
+      visibility 0s;
+  }
+  .get-bar-link {
+    justify-content: space-between;
+    gap: 0.75rem;
+    width: 100%;
+    max-width: 38rem;
+    min-height: 4rem;
+    padding: 0.5rem 0.5rem 0.5rem 1.5rem;
+    font-size: var(--fs-lead);
+    letter-spacing: var(--tr-lead);
+    pointer-events: auto;
+  }
+  .get-bar-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .get-bar .icon-arrow {
+    margin-inline-end: 0;
+  }
+  /* The smallest phones have no room for the arrow beside the big chip; the whole bar is the button anyway. */
+  @media (max-width: 22.4375rem) {
+    .get-bar-link {
+      padding-left: 1.25rem;
+    }
+    .get-bar .icon-arrow {
+      display: none;
+    }
+  }
+  /* As big as Get started: two lines on phones, one line from tablets up. */
+  .get-bar-chip {
+    display: grid;
+    padding: 0.5rem 1rem;
+    border-radius: 999px;
+    background: var(--btn-chip);
+    line-height: 1.15;
+    text-align: left;
+  }
+  @media (min-width: 45.9375rem) {
+    .get-bar-chip {
+      grid-auto-flow: column;
+      gap: 0.3em;
+      padding: 0.75rem 1.25rem;
+    }
+  }
+
+  /* Trust row: three true things in a slim band under the hero, where other pages show press logos. A
+     hairline sets it off from the hero. A short list on phones, one centered line from tablets up. */
+  .trust {
+    border-top: 1px solid var(--line);
+    padding-block: clamp(1.25rem, 1rem + 1vw, 1.75rem);
+  }
+  .trust-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    width: fit-content;
+    margin-inline: auto;
+  }
+  @media (min-width: 45.9375rem) {
+    .trust-list {
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.75rem clamp(1.5rem, 3vw, 2.5rem);
+      width: auto;
+    }
+  }
+  .trust-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.625rem;
+    color: var(--ink);
+    font-size: var(--fs-body);
+    font-weight: 500;
+    line-height: var(--lh-body);
+  }
+  .trust-icon {
+    display: grid;
+    place-items: center;
+    flex: none;
+    width: 1.5rem;
+    height: 1.5rem;
+    margin-top: calc((var(--lh-body) * 1em - 1.5rem) / 2);
+    border-radius: 50%;
+    background: var(--red-wash);
+    color: var(--deep-red);
+  }
+  .trust-icon svg {
+    width: 0.875rem;
+    height: 0.875rem;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2.75;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  /* What's inside your plan: four tinted cards on warm white, each an icon tile and one sentence that starts
+     with the part's name in bold. Four across on desktop, two on tablets, one column on phones. */
+  .inside {
+    display: grid;
+    gap: 1rem;
+  }
+  @media (min-width: 45.9375rem) {
+    .inside {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1.25rem;
+    }
+  }
+  @media (min-width: 66.8125rem) {
+    .inside {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+  }
+  .inside-card {
+    display: grid;
+    align-content: start;
+    gap: 1rem;
+    padding: clamp(1.5rem, 1rem + 2vw, 2rem);
+    border-radius: var(--r-card);
+    background: var(--tint);
+  }
+  .inside-icon {
+    display: grid;
+    place-items: center;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 0.875rem;
+    background: var(--warm-white);
+    color: var(--deep-red);
+  }
+  .inside-icon svg {
+    width: 1.5rem;
+    height: 1.5rem;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  .inside-icon[data-filled] svg {
+    fill: currentColor;
+    stroke: none;
+  }
+  .inside-text {
+    font-size: var(--fs-body);
+    line-height: var(--lh-body);
+    color: var(--ink);
+    text-wrap: pretty;
+  }
+  .inside-text strong {
+    font-weight: 700;
+    color: var(--deep-red);
+  }
+
+  /* Founding couple quotes, hidden until there are three real ones. Tinted cards on a warm white band:
+     one column up to desktop, so three never leave one stranded on a row of its own, then side by side. */
+  .quotes {
+    display: grid;
+    gap: 1rem;
+    max-width: 42rem;
+    margin-inline: auto;
+  }
+  @media (min-width: 66.8125rem) {
+    .quotes {
+      grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+      gap: 1.25rem;
+      max-width: none;
+    }
+  }
+  .quote {
+    display: grid;
+    align-content: space-between;
+    gap: 1.5rem;
+    height: 100%;
+    margin: 0;
+    padding: clamp(1.5rem, 1rem + 2vw, 2.25rem);
+    border-radius: var(--r-card);
+    background: var(--tint);
+  }
+  .quote-text {
+    margin: 0;
+    color: var(--ink);
+    font-size: var(--fs-lead);
+    line-height: var(--lh-lead);
+    letter-spacing: var(--tr-lead);
+    text-wrap: pretty;
+  }
+  .quote-by {
+    display: grid;
+    gap: 0.125rem;
+    color: var(--muted);
+    font-size: var(--fs-small);
+    line-height: var(--lh-small);
+  }
+  .quote-name {
+    color: var(--ink);
+    font-weight: 600;
+  }
+
+  /* Hero. One centered column on phones and tablets, with the phone shown down to its three cards and cut
+     off in the empty space below them. On desktop the copy sits beside the whole phone in a band about
+     four fifths of the screen tall (after Good Inside), so the next section starts on the first screen. */
+  .hero {
+    --phone-w: min(22.5rem, 68vw);
+    --phone-h: calc(var(--phone-w) * 18.45 / 9);
+    position: relative;
+    isolation: isolate;
+    overflow: clip;
+    padding-block: clamp(2.25rem, 1.25rem + 4vw, 5rem) 0;
+  }
+  .hero-grid {
+    display: grid;
+    justify-items: center;
+    text-align: center;
+  }
+  .hero-copy {
+    display: grid;
+    justify-items: center;
+  }
+  .hero-lead {
+    max-width: 30em;
+    margin-top: 1.75rem;
+  }
+  .hero-cta {
+    display: grid;
+    justify-items: center;
+    gap: 0.875rem;
+    margin-top: 2.25rem;
+  }
+  /* Shrinks to the phone, so the aura is sized and placed from the phone itself. It is only as tall as
+     the part of the phone that shows: 76% of it, which ends in the empty space under the three cards. */
+  .hero-visual {
+    position: relative;
+    display: grid;
+    place-items: start center;
+    height: calc(var(--phone-h) * 0.76);
+    margin-top: clamp(3rem, 2rem + 4vw, 5rem);
+  }
+  .hero-visual .phone {
+    width: var(--phone-w);
+  }
+  @media (min-width: 66.8125rem) {
+    /* About four fifths of the screen, and always tall enough for the copy. The whole phone fits inside
+       the band with the same space above and below it: its height is the band less that space. */
+    .hero {
+      --hero-h: clamp(36rem, 78svh, 50rem);
+      --phone-w: clamp(15rem, calc((var(--hero-h) - 5rem) * 9 / 18.45), 26rem);
+      display: grid;
+      min-height: var(--hero-h);
+      padding-block: 2.5rem;
+    }
+    .hero-grid {
+      grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+      align-items: center;
+      justify-items: start;
+      column-gap: clamp(2rem, 4vw, 4.5rem);
+      text-align: left;
+    }
+    .hero-copy,
+    .hero-cta {
+      justify-items: start;
+    }
+    /* The phone sits centered beside the copy, whole. */
+    .hero-visual {
+      align-self: center;
+      justify-self: center;
+      height: auto;
+      margin-top: 0;
+    }
+  }
+
+  /* The moving background: a warm aura behind the phone, in the brand reds. It moves slowly (23 to 31
+     second cycles, well below the 0.2 Hz range that bothers people), animates transform only, stops
+     off screen and on request, and stays still for anyone who prefers reduced motion. It sits beside
+     the copy, never under it, so the text keeps its contrast. */
+  /* A soft blush halo, sized from the phone (2.4 phones across) and fading to nothing at its edge. It is
+     centered behind the phone, leaning a little right on desktop toward the open side of the screen.
+     Near the headline it has already faded to almost nothing. */
+  .aura {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    z-index: -1;
+    width: 240%;
+    aspect-ratio: 1;
+    translate: -50% -50%;
+    pointer-events: none;
+  }
+  @media (min-width: 66.8125rem) {
+    .aura {
+      left: 70%;
+    }
+  }
+  .aura-glow {
+    will-change: transform;
+    animation: var(--glow-move) var(--glow-time) ease-in-out infinite alternate;
+  }
+  .aura-base,
+  .aura-light,
+  .aura-blob {
+    position: absolute;
+    border-radius: 50%;
+  }
+  .aura-base {
+    --glow-move: aura-breathe;
+    --glow-time: 24s;
+    inset: 0;
+    background: radial-gradient(closest-side, var(--blush-core), var(--blush-mid) 48%, var(--blush-edge) 76%, transparent);
+  }
+  /* Two soft blooms circling the phone in opposite directions, once every 22 and 31 seconds, so the
+     colour keeps travelling around it and never lines up the same way twice. Each bloom is a little
+     oval, so it also changes shape as it turns. */
+  .aura-orbit {
+    position: absolute;
+    inset: 0;
+    animation-timing-function: linear;
+    animation-direction: normal;
+  }
+  .aura-orbit-a {
+    --glow-move: aura-orbit;
+    --glow-time: 22s;
+  }
+  .aura-orbit-b {
+    --glow-move: aura-orbit-back;
+    --glow-time: 31s;
+    animation-delay: -13s;
+  }
+  .aura-orbit-a .aura-blob {
+    left: 40%;
+    top: 27%;
+    width: 58%;
+    height: 46%;
+    background: radial-gradient(closest-side, var(--blush-bloom), transparent);
+  }
+  .aura-orbit-b .aura-blob {
+    left: 27%;
+    top: 50%;
+    width: 46%;
+    height: 50%;
+    background: radial-gradient(closest-side, var(--blush-rose), transparent);
+  }
+  @keyframes aura-orbit {
+    to {
+      transform: rotate(1turn);
+    }
+  }
+  @keyframes aura-orbit-back {
+    to {
+      transform: rotate(-1turn);
+    }
+  }
+  /* Warm light drifting through the upper part of the glow */
+  .aura-light {
+    --glow-move: aura-drift;
+    --glow-time: 29s;
+    left: 22%;
+    top: 10%;
+    width: 46%;
+    height: 46%;
+    background: radial-gradient(closest-side, var(--blush-light), transparent);
+  }
+  @keyframes aura-breathe {
+    from {
+      transform: scale(0.94);
+    }
+    to {
+      transform: scale(1.05);
+    }
+  }
+  @keyframes aura-drift {
+    from {
+      transform: translate(-16%, -8%);
+    }
+    to {
+      transform: translate(40%, 30%);
+    }
+  }
+  .hero[data-motion="paused"] :is(.aura-glow, .scene, .demo-progress span, .demo-choices li, .demo-next, .app-card),
+  .hero[data-motion="paused"] .scene .smile::after,
+  .hero[data-offscreen] :is(.aura-glow, .scene, .demo-progress span, .demo-choices li, .demo-next, .app-card),
+  .hero[data-offscreen] .scene .smile::after {
+    animation-play-state: paused;
+  }
+
+  /* Pause and play for the aura. On phones and tablets it sits just beside the phone's lower right edge,
+     clear of the frame; on desktop, bottom right of the hero. */
+  .motion-toggle {
+    position: absolute;
+    right: max(0.375rem, calc((100% - var(--phone-w)) / 2 - 3.25rem));
+    bottom: 1rem;
+    z-index: 1;
+    display: grid;
+    place-items: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    border-radius: 50%;
+    background: var(--material);
+    -webkit-backdrop-filter: saturate(150%) blur(20px);
+    backdrop-filter: saturate(150%) blur(20px);
+    box-shadow:
+      0 0 0 1px var(--line),
+      var(--shadow-1);
+    color: var(--ink);
+    cursor: pointer;
+    touch-action: manipulation;
+    transition:
+      background-color 0.2s ease,
+      transform var(--dur-spring-fast) var(--ease-spring-fast);
+  }
+  .motion-toggle:hover {
+    background: var(--warm-white);
+  }
+  .motion-toggle:active {
+    transform: scale(0.94);
+    transition:
+      background-color 0.2s ease,
+      transform 0.08s ease-out;
+  }
+  /* It can sit over the red disc, so the focus ring is two tone and shows on either background. */
+  .motion-toggle:focus-visible {
+    outline: 3px solid var(--warm-white);
+    outline-offset: 1px;
+    box-shadow:
+      0 0 0 6px var(--ink),
+      var(--shadow-1);
+  }
+  .motion-toggle svg {
+    width: 1rem;
+    height: 1rem;
+    fill: currentColor;
+  }
+  @media (min-width: 66.8125rem) {
+    .motion-toggle {
+      right: max(var(--gutter), calc((100% - var(--wrap)) / 2));
+      bottom: 1.5rem;
+    }
+  }
+
+  .hero-title {
+    max-width: 12em;
+    font-family: var(--stack-display);
+    font-size: var(--fs-hero);
+    font-weight: 400;
+    line-height: var(--lh-hero);
+    letter-spacing: var(--tr-hero);
+    color: var(--deep-red);
+    text-wrap: balance;
+  }
+  .hero-title strong {
+    font-weight: 700;
+  }
+
+  /* The smile: the logo's grin, drawn once under the key phrase. It is a pseudo-element, so it never
+     becomes part of the headline's text. The shape is a mask; the colour comes from the token. */
+  .smile {
+    position: relative;
+    display: inline-block;
+    white-space: nowrap;
+  }
+  .smile::after {
+    content: "";
+    position: absolute;
+    left: 0.02em;
+    top: calc(100% - 0.02em);
+    width: calc(100% - 0.04em);
+    height: 0.3em;
+    background: var(--deep-red);
+    /* The 300x24 box stretches to the phrase; the stroke stays about 0.06em thick at every size. */
+    --smile-shape: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 24' preserveAspectRatio='none'%3E%3Cpath d='M5 5C70 20 230 20 295 5' fill='none' stroke='currentColor' stroke-width='5' stroke-linecap='round'/%3E%3C/svg%3E");
+    -webkit-mask: var(--smile-shape) center / 100% 100% no-repeat;
+    mask: var(--smile-shape) center / 100% 100% no-repeat;
+    pointer-events: none;
+    animation: smile-draw 0.9s var(--ease-draw) 0.55s both;
+  }
+  @keyframes smile-draw {
+    from {
+      clip-path: inset(0 100% 0 0);
+    }
+    to {
+      clip-path: inset(0 0 0 0);
+    }
+  }
+
+  /* Phone mockup, built in HTML and CSS. Everything inside scales with the phone's width (cqi). */
+  .phone {
+    position: relative;
+    width: min(22.5rem, 76vw);
+    aspect-ratio: 9 / 18.45; /* iPhone 15 Pro body */
+    padding: 2.9%;
+    border-radius: 15.5% / 7.3%;
+    background: var(--ink);
+    box-shadow:
+      inset 0 0 0 1.5px var(--bezel-highlight),
+      var(--shadow-3);
+    container-type: inline-size;
+  }
+  .phone {
+    animation: phone-rise var(--dur-spring) var(--ease-spring) 0.15s both;
+  }
+  @keyframes phone-rise {
+    from {
+      transform: translateY(2rem) scale(0.985);
+    }
+  }
+  /* Side buttons */
+  .phone::before,
+  .phone::after {
+    content: "";
+    position: absolute;
+    width: 1.1%;
+    border-radius: 2px;
+    background: var(--ink);
+  }
+  .phone::before {
+    left: -0.9%;
+    top: 18%;
+    height: 7%;
+    box-shadow: 0 9cqi 0 var(--ink);
+  }
+  .phone::after {
+    right: -0.9%;
+    top: 25%;
+    height: 11%;
+  }
+  .screen {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: hidden;
+    border-radius: 12.5% / 5.9%;
+    background: var(--warm-white);
+    color: var(--ink);
+    font-size: 4.9cqi;
+    line-height: 1.35;
+    letter-spacing: -0.01em;
+    text-align: left;
+  }
+  .status {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 3.4em;
+    padding: 0.35em 1.75em 0;
+    font-size: 0.95em;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+  .status-icons {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35em;
+  }
+  .status-icons svg {
+    height: 0.8em;
+    width: auto;
+    fill: currentColor;
+  }
+  .island {
+    position: absolute;
+    left: 50%;
+    top: 0.75em;
+    width: 31%;
+    height: 1.95em;
+    border-radius: 999px;
+    background: var(--ink);
+    transform: translateX(-50%);
+  }
+  .app {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    gap: 0.7em;
+    padding: 0.6em 1.05em 0.8em;
+  }
+  .app-head {
+    display: flex;
+    align-items: center;
+    gap: 0.6em;
+  }
+  .app-head .app-mark {
+    width: 2.1em;
+    height: auto;
+    color: var(--deep-red);
+  }
+  .app-title {
+    font-family: var(--stack-display);
+    font-size: 1.55em;
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+  }
+  .app-topics {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35em;
+  }
+  .app-topics li {
+    padding: 0.2em 0.65em;
+    border-radius: 999px;
+    background: var(--red-wash);
+    color: var(--deep-red);
+    font-size: 0.82em;
+    font-weight: 600;
+  }
+  .app-cards {
+    display: grid;
+    gap: 0.6em;
+  }
+  .app-card {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: 0.4em 0.7em;
+    padding: 0.95em 0.95em 1em;
+    border-radius: 1.1em;
+    background: var(--tint);
+  }
+  .app-card {
+    animation: demo-card var(--demo-loop) var(--ease-spring-fast) infinite both;
+    animation-delay: calc(var(--i) * 0.12s);
+  }
+  @keyframes demo-card {
+    0%,
+    61% {
+      opacity: 0;
+      transform: translateY(0.9em);
+    }
+    66%,
+    100% {
+      opacity: 1;
+      transform: none;
+    }
+  }
+  .app-icon {
+    display: grid;
+    place-items: center;
+    width: 2.05em;
+    height: 2.05em;
+    border-radius: 50%;
+    background: var(--deep-red);
+    color: var(--warm-white);
+  }
+  .app-icon svg {
+    width: 1.15em;
+    height: 1.15em;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  .app-card-title {
+    align-self: center;
+    font-size: 1.08em;
+    font-weight: 700;
+    color: var(--deep-red);
+  }
+  .app-card-text {
+    grid-column: 1 / -1;
+    font-size: 0.92em;
+    line-height: 1.35;
+    color: var(--ink);
+  }
+  /* Suggestions above the message check, as quick actions */
+  .app-quick {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4em;
+    margin-top: auto;
+  }
+  .app-quick li {
+    padding: 0.4em 0.75em;
+    border-radius: 999px;
+    box-shadow: inset 0 0 0 1px var(--line-strong);
+    font-size: 0.86em;
+    font-weight: 600;
+    color: var(--ink);
+  }
+  .app-ask {
+    display: flex;
+    align-items: center;
+    gap: 0.55em;
+    padding: 0.4em 0.4em 0.4em 0.85em;
+    border-radius: 999px;
+    background: var(--warm-white);
+    box-shadow:
+      0 0 0 1px var(--line-strong),
+      var(--shadow-1);
+    color: var(--muted);
+    font-size: 0.95em;
+  }
+  .app-ask .sparkle {
+    width: 1.1em;
+    height: 1.1em;
+    flex: none;
+    color: var(--deep-red);
+    fill: currentColor;
+  }
+  .app-ask .send {
+    display: grid;
+    place-items: center;
+    width: 2em;
+    height: 2em;
+    margin-left: auto;
+    border-radius: 50%;
+    background: var(--deep-red);
+    color: var(--warm-white);
+  }
+  .app-ask .send svg {
+    width: 1em;
+    height: 1em;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2.4;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  .home-bar {
+    align-self: center;
+    width: 36%;
+    height: 0.32em;
+    margin-bottom: 0.55em;
+    border-radius: 999px;
+    background: var(--ink);
+  }
+
+  /* The phone plays through the product on one 15 second loop: the first question gets answered (0 to 4s),
+     the couple type comes up (4.5 to 9s), then the plan (9 to 15s). The motion toggle pauses every part. */
+  .phone {
+    --demo-loop: 15s;
+  }
+  .scenes {
+    position: relative;
+    flex: 1;
+  }
+  .scene {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    padding: 0.6em 1.05em 0.8em;
+    animation: var(--demo-loop) var(--ease-draw) infinite both;
+  }
+  /* Without motion, only the plan shows. */
+  .scene-quiz,
+  .scene-type {
+    opacity: 0;
+  }
+  .scene-quiz {
+    gap: 0.9em;
+    padding-top: 1em;
+    animation-name: demo-quiz;
+  }
+  .scene-type {
+    justify-content: center;
+    align-items: center;
+    gap: 0.7em;
+    padding-bottom: 2.5em;
+    text-align: center;
+    animation-name: demo-type;
+  }
+  .scene-plan {
+    gap: 0.7em;
+    animation-name: demo-plan;
+  }
+  @keyframes demo-quiz {
+    0%,
+    27% {
+      opacity: 1;
+      transform: none;
+    }
+    30%,
+    96% {
+      opacity: 0;
+      transform: translateY(-0.8em);
+    }
+    96.01% {
+      opacity: 0;
+      transform: translateY(0.8em);
+    }
+    100% {
+      opacity: 1;
+      transform: none;
+    }
+  }
+  @keyframes demo-type {
+    0%,
+    29% {
+      opacity: 0;
+      transform: translateY(0.8em);
+    }
+    32%,
+    57% {
+      opacity: 1;
+      transform: none;
+    }
+    60%,
+    100% {
+      opacity: 0;
+      transform: translateY(-0.8em);
+    }
+  }
+  @keyframes demo-plan {
+    0%,
+    59% {
+      opacity: 0;
+      transform: translateY(0.8em);
+    }
+    62%,
+    95% {
+      opacity: 1;
+      transform: none;
+    }
+    98%,
+    100% {
+      opacity: 0;
+      transform: translateY(-0.8em);
+    }
+  }
+
+  /* 1. The first question */
+  .demo-progress {
+    display: block;
+    height: 0.3em;
+    border-radius: 999px;
+    background: var(--line);
+    overflow: hidden;
+  }
+  .demo-progress span {
+    display: block;
+    width: 12%;
+    height: 100%;
+    border-radius: inherit;
+    background: var(--deep-red);
+    animation: demo-progress var(--demo-loop) var(--ease-spring-fast) infinite both;
+  }
+  @keyframes demo-progress {
+    0%,
+    17% {
+      width: 12%;
+    }
+    21%,
+    100% {
+      width: 24%;
+    }
+  }
+  .demo-question {
+    margin-top: 0.4em;
+    font-family: var(--stack-display);
+    font-size: 1.5em;
+    font-weight: 700;
+    line-height: 1.12;
+    letter-spacing: -0.018em;
+    color: var(--deep-red);
+    text-wrap: balance;
+  }
+  .demo-choices {
+    display: grid;
+    gap: 0.5em;
+    margin-top: 0.3em;
+  }
+  .demo-choices li {
+    position: relative;
+    padding: 0.75em 0.85em;
+    border-radius: 0.95em;
+    background: var(--warm-white);
+    box-shadow: 0 0 0 1px var(--line-strong);
+    font-size: 0.9em;
+    font-weight: 600;
+    line-height: 1.25;
+  }
+  /* The tap: a press, then the answer turns red */
+  .demo-choices .is-picked {
+    animation: demo-pick var(--demo-loop) ease infinite both;
+  }
+  @keyframes demo-pick {
+    0%,
+    12% {
+      background: var(--warm-white);
+      box-shadow: 0 0 0 1px var(--line-strong);
+      transform: none;
+    }
+    13.5% {
+      background: var(--tint);
+      box-shadow: 0 0 0 1px var(--line-strong);
+      transform: scale(0.97);
+    }
+    15.5%,
+    100% {
+      background: var(--red-wash);
+      box-shadow: 0 0 0 2px var(--deep-red);
+      transform: none;
+    }
+  }
+
+  /* Continue wakes up once the answer is picked, like the real one */
+  .demo-next {
+    display: inline-flex;
+    align-items: center;
+    align-self: stretch;
+    justify-content: center;
+    gap: 0.45em;
+    min-height: 2.75em;
+    margin-top: 0.2em;
+    border-radius: 999px;
+    background: linear-gradient(180deg, #b01d12, var(--deep-red) 55%, #7f0300);
+    box-shadow:
+      inset 0 1px 0 rgb(255 255 255 / 0.22),
+      0 0.5em 1em -0.6em rgb(127 3 0 / 0.7);
+    color: var(--warm-white);
+    font-size: 0.95em;
+    font-weight: 700;
+    animation: demo-next var(--demo-loop) ease infinite both;
+  }
+  .demo-next svg {
+    width: 1.55em;
+    height: 1.55em;
+    padding: 0.32em;
+    border-radius: 999px;
+    background: rgb(255 255 255 / 0.16);
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2.4;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  @keyframes demo-next {
+    0%,
+    14% {
+      opacity: 0.35;
+    }
+    17%,
+    100% {
+      opacity: 1;
+    }
+  }
+
+  /* 2. The couple type */
+  .demo-eyebrow {
+    font-size: 0.95em;
+    font-weight: 600;
+  }
+  .demo-type {
+    font-family: var(--stack-display);
+    font-size: 2.3em;
+    font-weight: 700;
+    line-height: 1.05;
+    letter-spacing: -0.025em;
+    color: var(--deep-red);
+  }
+  .scene-type .smile::after {
+    animation: demo-smile var(--demo-loop) var(--ease-draw) infinite both;
+  }
+  @keyframes demo-smile {
+    0%,
+    33% {
+      clip-path: inset(0 100% 0 0);
+    }
+    39%,
+    100% {
+      clip-path: inset(0 0 0 0);
+    }
+  }
+  .demo-moment {
+    margin-top: 0.5em;
+    font-size: 0.98em;
+    font-weight: 600;
+    line-height: 1.35;
+    text-wrap: balance;
+  }
+  .demo-built {
+    display: grid;
+    justify-items: center;
+    gap: 0.55em;
+    width: 100%;
+    margin-top: 0.6em;
+    padding: 0.9em;
+    border-radius: 1.1em;
+    background: var(--tint);
+  }
+  .demo-built p {
+    font-size: 0.82em;
+    font-weight: 600;
+    color: var(--muted);
+  }
+  .demo-built ul {
+    display: flex;
+    gap: 0.4em;
+  }
+  .demo-built li {
+    padding: 0.25em 0.75em;
+    border-radius: 999px;
+    background: var(--warm-white);
+    box-shadow: 0 0 0 1px var(--line);
+    font-size: 0.86em;
+    font-weight: 600;
+  }
+
+  /* Topics */
+  .topics {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.625rem;
+    max-width: 46rem;
+    margin-inline: auto;
+  }
+  .topic {
+    display: inline-flex;
+    align-items: center;
+    min-height: 2.75rem;
+    padding: 0.55rem 1.15rem;
+    border-radius: 999px;
+    background: var(--warm-white);
+    box-shadow:
+      0 0 0 1px var(--line),
+      var(--shadow-1);
+    font-size: var(--fs-lead);
+    font-weight: 600;
+    letter-spacing: var(--tr-lead);
+    line-height: 1.2;
+    color: var(--ink);
+  }
+
+  /* Tap a topic to see its words: the chips are buttons, the chosen one goes deep red. */
+  .taster .topic {
+    border: 0;
+    font-family: inherit;
+    cursor: pointer;
+    touch-action: manipulation;
+    transition:
+      background-color 0.2s ease,
+      box-shadow 0.2s ease,
+      color 0.2s ease,
+      transform var(--dur-spring-fast) var(--ease-spring-fast);
+  }
+  .taster .topic:hover {
+    background: color-mix(in oklab, var(--warm-white), var(--tint) 55%);
+  }
+  .taster .topic:active {
+    transform: scale(0.97);
+    transition-duration: 0.2s, 0.2s, 0.2s, 0.08s;
+  }
+  .taster .topic:focus-visible {
+    outline: 2px solid var(--focus);
+    outline-offset: 3px;
+  }
+  .taster .topic[aria-pressed="true"] {
+    background: var(--deep-red);
+    box-shadow: 0 10px 24px -12px rgb(127 3 0 / 0.55);
+    color: var(--warm-white);
+  }
+  /* Every topic's card sits in the same cell, so the box is as tall as the longest and never jumps. */
+  .taster-stack {
+    display: grid;
+    max-width: 66rem;
+    margin: clamp(1.75rem, 1.4rem + 1.5vw, 2.5rem) auto 0;
+  }
+  .taster-card {
+    grid-area: 1 / 1;
+    display: grid;
+    margin: 0;
+    padding: 0.5rem 1.375rem;
+    border-radius: 1.75rem;
+    background: var(--warm-white);
+    box-shadow:
+      0 0 0 1px var(--line),
+      0 24px 48px -28px rgb(90 20 10 / 0.35);
+    list-style: none;
+    visibility: hidden;
+    opacity: 0;
+    transform: translateY(6px);
+    transition:
+      opacity 0.3s ease,
+      transform 0.45s var(--ease-spring-fast),
+      visibility 0s linear 0.3s;
+  }
+  .taster-card[data-on] {
+    visibility: visible;
+    opacity: 1;
+    transform: none;
+    transition:
+      opacity 0.3s ease,
+      transform 0.45s var(--ease-spring-fast),
+      visibility 0s;
+  }
+  .taster-part {
+    display: grid;
+    align-content: start;
+    gap: 0.625rem;
+    padding-block: 1.25rem;
+  }
+  .taster-part + .taster-part {
+    border-top: 1px solid var(--line);
+  }
+  .taster-label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: var(--fs-small);
+    font-weight: 700;
+    color: var(--deep-red);
+  }
+  .taster-icon {
+    display: grid;
+    place-items: center;
+    width: 1.875rem;
+    height: 1.875rem;
+    border-radius: 999px;
+    background: var(--red-wash);
+  }
+  .taster-icon svg {
+    width: 1.05rem;
+    height: 1.05rem;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  .taster-words {
+    margin: 0;
+    font-size: var(--fs-body);
+    line-height: var(--lh-lead);
+    letter-spacing: var(--tr-lead);
+    color: var(--ink);
+    text-wrap: pretty;
+  }
+  .taster-words::before {
+    content: "“";
+  }
+  .taster-words::after {
+    content: "”";
+  }
+  @media (min-width: 56rem) {
+    .taster-card {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      padding: 0.75rem;
+    }
+    .taster-words {
+      font-size: var(--fs-lead);
+    }
+    .taster-part {
+      padding: 1.25rem 1.5rem;
+    }
+    .taster-part + .taster-part {
+      border-top: 0;
+      border-left: 1px solid var(--line);
+    }
+  }
+
+  /* Loud fights or quiet ones: two cards, each with a tiny chat on top */
+  .styles {
+    display: grid;
+    gap: 1rem;
+    max-width: 58rem;
+    margin-inline: auto;
+  }
+  .style-card {
+    display: grid;
+    align-content: start;
+    padding: 0.75rem 0.75rem 1.75rem;
+    border-radius: 1.75rem;
+    background: var(--warm-white);
+    box-shadow:
+      0 0 0 1px var(--line),
+      0 24px 48px -30px rgb(90 20 10 / 0.3);
+  }
+  .style-visual {
+    display: grid;
+    place-items: center;
+    height: 10.5rem;
+    margin-bottom: 1.5rem;
+    border-radius: 1.25rem;
+    background: var(--tint);
+    overflow: hidden;
+  }
+  .style-title,
+  .style-text,
+  .style-gets {
+    margin-inline: 1rem;
+  }
+  .style-title {
+    font-family: var(--stack-display);
+    font-size: var(--fs-title);
+    font-weight: 700;
+    line-height: var(--lh-title);
+    letter-spacing: var(--tr-title);
+    color: var(--deep-red);
+  }
+  .style-text {
+    margin-top: 0.5rem;
+    font-size: var(--fs-lead);
+    line-height: var(--lh-lead);
+    letter-spacing: var(--tr-lead);
+    color: var(--ink);
+    text-wrap: pretty;
+  }
+  .style-gets {
+    display: grid;
+    gap: 0.75rem;
+    margin-top: 1.25rem;
+    padding: 1.25rem 0 0;
+    border-top: 1px solid var(--line);
+    list-style: none;
+  }
+  .style-gets li {
+    display: grid;
+    grid-template-columns: 1.5rem minmax(0, 1fr);
+    gap: 0.625rem;
+    align-items: start;
+    font-size: var(--fs-body);
+    font-weight: 500;
+    line-height: 1.4;
+    color: var(--ink);
+  }
+  .style-gets svg {
+    width: 1.5rem;
+    height: 1.5rem;
+    padding: 0.25rem;
+    border-radius: 999px;
+    background: var(--deep-red);
+    fill: none;
+    stroke: var(--warm-white);
+    stroke-width: 2.6;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  @media (min-width: 48rem) {
+    .styles {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1.25rem;
+    }
+  }
+
+  /* The tiny chats: bubbles that pile up when it gets loud, and a "Seen" with no reply when it goes quiet */
+  .chat {
+    display: flex;
+    flex-direction: column;
+    width: min(15rem, 78%);
+  }
+  .chat-bubble {
+    position: relative;
+    display: block;
+    height: 2.125rem;
+    border-radius: 1.0625rem;
+  }
+  /* A line of "text" in each bubble */
+  .chat-bubble::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 0.875rem;
+    right: 28%;
+    height: 0.375rem;
+    border-radius: 999px;
+    translate: 0 -50%;
+    background: rgb(34 29 26 / 0.13);
+  }
+  .chat-bubble.is-me::after {
+    background: rgb(255 255 255 / 0.42);
+  }
+  .chat-bubble.is-me {
+    align-self: flex-end;
+    border-bottom-right-radius: 0.375rem;
+    background: linear-gradient(180deg, #b01d12, var(--deep-red));
+  }
+  .chat-bubble.is-them {
+    align-self: flex-start;
+    border-bottom-left-radius: 0.375rem;
+    background: var(--warm-white);
+    box-shadow: 0 0 0 1px var(--line);
+  }
+  .chat-loud .chat-bubble {
+    box-shadow: 0 6px 14px -8px rgb(90 20 10 / 0.45);
+  }
+  .chat-loud .chat-bubble.is-them {
+    box-shadow:
+      0 0 0 1px var(--line),
+      0 6px 14px -8px rgb(90 20 10 / 0.35);
+  }
+  .chat-loud .chat-bubble + .chat-bubble {
+    margin-top: -0.5rem;
+  }
+  .chat-loud .chat-bubble:nth-child(1) {
+    rotate: -3deg;
+  }
+  .chat-loud .chat-bubble:nth-child(2) {
+    rotate: 2.5deg;
+  }
+  .chat-loud .chat-bubble:nth-child(3) {
+    rotate: -2deg;
+  }
+  .chat-loud .chat-bubble:nth-child(4) {
+    rotate: 3deg;
+  }
+  .chat-seen {
+    align-self: flex-end;
+    margin-top: 0.375rem;
+    font-size: var(--fs-micro);
+    font-weight: 600;
+    color: var(--muted);
+  }
+  .chat-typing {
+    align-self: flex-start;
+    display: flex;
+    gap: 0.3rem;
+    margin-top: 2.25rem;
+    padding: 0.75rem 0.875rem;
+    border-radius: 1.0625rem;
+    border-bottom-left-radius: 0.375rem;
+    background: var(--warm-white);
+    box-shadow: 0 0 0 1px var(--line);
+    opacity: 0.7;
+  }
+  .chat-typing i {
+    width: 0.4375rem;
+    height: 0.4375rem;
+    border-radius: 999px;
+    background: var(--muted);
+    opacity: 0.45;
+  }
+
+  /* How it works: three steps on a line */
+  .steps {
+    display: grid;
+    gap: 0;
+    max-width: 30rem;
+    margin-inline: auto;
+    counter-reset: step;
+  }
+  .step {
+    position: relative;
+    display: grid;
+    grid-template-columns: 2.75rem minmax(0, 1fr);
+    column-gap: 1.25rem;
+    padding-bottom: 2.25rem;
+  }
+  .step:last-child {
+    padding-bottom: 0;
+  }
+  /* The line that joins one number to the next */
+  .step:not(:last-child)::before {
+    content: "";
+    position: absolute;
+    left: calc(1.375rem - 1px);
+    top: 3.25rem;
+    bottom: 0.5rem;
+    width: 2px;
+    border-radius: 2px;
+    background: var(--line-strong);
+  }
+  .step-num {
+    display: grid;
+    place-items: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    border-radius: 50%;
+    background: var(--deep-red);
+    color: var(--warm-white);
+    font-family: var(--stack-display);
+    font-size: 1.125rem;
+    font-weight: 700;
+    letter-spacing: 0;
+    font-variant-numeric: tabular-nums;
+  }
+  .step-text {
+    align-self: center;
+    font-family: var(--stack-display);
+    font-size: var(--fs-title);
+    font-weight: 600;
+    line-height: var(--lh-title);
+    letter-spacing: var(--tr-title);
+    text-wrap: balance;
+  }
+  @media (min-width: 45.9375rem) {
+    .steps {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 2rem;
+      max-width: none;
+    }
+    .step {
+      grid-template-columns: none;
+      justify-items: center;
+      row-gap: 1.5rem;
+      padding-bottom: 0;
+      text-align: center;
+    }
+    .step:not(:last-child)::before {
+      left: calc(50% + 2.375rem);
+      right: calc(-50% - 2rem + 2.375rem);
+      top: calc(1.375rem - 1px);
+      bottom: auto;
+      width: auto;
+      height: 2px;
+    }
+    .step-text {
+      align-self: start;
+      max-width: 15em;
+    }
+  }
+
+  /* Method cards */
+  .method {
+    display: grid;
+    gap: 1rem;
+  }
+  @media (min-width: 45.9375rem) {
+    .method {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1.25rem;
+    }
+  }
+  .method-card {
+    display: grid;
+    align-content: start;
+    gap: 1rem;
+    padding: clamp(1.5rem, 1rem + 2vw, 2.25rem);
+    border-radius: var(--r-card);
+    background: var(--warm-white);
+    box-shadow:
+      0 0 0 1px var(--line),
+      var(--shadow-1);
+  }
+  .method-icon {
+    display: grid;
+    place-items: center;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 0.875rem;
+    background: var(--red-wash);
+    color: var(--deep-red);
+  }
+  .method-icon svg {
+    width: 1.5rem;
+    height: 1.5rem;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  .method-title {
+    font-family: var(--stack-display);
+    font-size: var(--fs-title);
+    font-weight: 700;
+    line-height: var(--lh-title);
+    letter-spacing: var(--tr-title);
+    color: var(--deep-red);
+  }
+  .method-text {
+    font-size: var(--fs-lead);
+    line-height: var(--lh-lead);
+    letter-spacing: var(--tr-lead);
+    color: var(--ink);
+    text-wrap: pretty;
+  }
+  /* Three narrow cards on tablets: step down to body size so lines don't break every few words. */
+  @media (min-width: 45.9375rem) and (max-width: 66.8125rem) {
+    .method-text {
+      font-size: var(--fs-body);
+      line-height: var(--lh-body);
+      letter-spacing: var(--tr-body);
+    }
+  }
+
+  /* Everything you get */
+  .gets {
+    display: grid;
+    gap: 1rem;
+  }
+  @media (min-width: 45.9375rem) {
+    .gets {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+  @media (min-width: 66.8125rem) {
+    .gets {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+  }
+  .get {
+    display: flex;
+    flex-direction: column;
+    border-radius: var(--r-card);
+    background: var(--tint);
+    overflow: hidden;
+  }
+  .get-visual {
+    display: grid;
+    place-items: center;
+    min-height: 9rem;
+    padding: 1.5rem 1.25rem 0.25rem;
+  }
+  @media (min-width: 45.9375rem) {
+    .get-visual {
+      min-height: 11rem;
+    }
+  }
+  .get-text {
+    display: grid;
+    gap: 0.4rem;
+    padding: 1.1rem 1.5rem 1.6rem;
+  }
+  .get-title {
+    font-family: var(--stack-display);
+    font-size: 1.1875rem;
+    font-weight: 700;
+    line-height: 1.25;
+    letter-spacing: -0.012em;
+    color: var(--ink);
+    text-wrap: balance;
+  }
+  .get-desc {
+    font-size: var(--fs-small);
+    line-height: var(--lh-small);
+    letter-spacing: var(--tr-small);
+    color: var(--muted);
+    text-wrap: pretty;
+  }
+
+  /* Small copies of the plan's screens inside the cards, cut off at the bottom like a screen that keeps going.
+     Decorative, so they never carry information alone. */
+  .get .get-visual {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    height: 14rem;
+    min-height: 0;
+    padding: 1.5rem 1.25rem 0;
+    overflow: hidden;
+    /* The screen fades out at the bottom instead of stopping mid line. */
+    -webkit-mask-image: linear-gradient(180deg, #000 calc(100% - 3.5rem), transparent);
+    mask-image: linear-gradient(180deg, #000 calc(100% - 3.5rem), transparent);
+  }
+  .shot {
+    display: flex;
+    flex-direction: column;
+    gap: 0.625rem;
+    flex: none;
+    width: min(100%, 16rem);
+    min-height: 15rem;
+    padding: 1rem 1rem 1.25rem;
+    border-radius: 1.125rem;
+    background: var(--warm-white);
+    box-shadow:
+      0 0 0 1px var(--line),
+      0 18px 36px -22px rgb(90 20 10 / 0.35);
+    font-size: 0.75rem;
+    line-height: 1.35;
+    letter-spacing: 0.004em;
+    color: var(--ink);
+    text-align: left;
+  }
+  .shot svg {
+    flex: none;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2.2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  .shot-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+  }
+  .shot-kicker {
+    font-weight: 700;
+  }
+  .shot-tag {
+    display: inline-flex;
+    align-items: center;
+    align-self: flex-start;
+    gap: 0.25rem;
+    padding: 0.2rem 0.55rem;
+    border-radius: 999px;
+    background: var(--red-wash);
+    color: var(--deep-red);
+    font-size: 0.6875rem;
+    font-weight: 700;
+  }
+  .shot-tag svg {
+    width: 0.8125rem;
+    height: 0.8125rem;
+  }
+  .shot-title {
+    font-family: var(--stack-display);
+    font-size: 0.9375rem;
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+    color: var(--deep-red);
+    text-wrap: balance;
+  }
+  .shot-box {
+    display: grid;
+    gap: 0.375rem;
+    padding: 0.75rem 0.8rem;
+    border-radius: 0.75rem;
+    background: var(--tint);
+  }
+  .shot-label {
+    font-size: 0.6875rem;
+    font-weight: 700;
+    color: var(--deep-red);
+  }
+  .shot-say {
+    padding: 0.5rem 0.625rem;
+    border-radius: 0.5rem;
+    background: var(--warm-white);
+    box-shadow: 0 0 0 1px var(--line);
+    font-weight: 600;
+    text-wrap: pretty;
+  }
+  /* The message they were about to send */
+  .shot-msg {
+    align-self: flex-end;
+    max-width: 82%;
+    padding: 0.5rem 0.75rem;
+    border-radius: 0.875rem 0.875rem 0.25rem 0.875rem;
+    background: linear-gradient(180deg, #b01d12, var(--deep-red));
+    color: var(--warm-white);
+    font-weight: 600;
+  }
+  .shot-verdict {
+    margin-top: 0.125rem;
+  }
+  .shot-tabs,
+  .shot-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.375rem;
+  }
+  .shot-tabs span {
+    padding: 0.25rem 0.6rem;
+    border-radius: 999px;
+    box-shadow: 0 0 0 1px var(--line);
+    font-size: 0.6875rem;
+    font-weight: 600;
+  }
+  .shot-tabs .is-on {
+    background: var(--deep-red);
+    box-shadow: none;
+    color: var(--warm-white);
+  }
+  .shot-chips span {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0.25rem 0.6rem;
+    border-radius: 999px;
+    background: var(--red-wash);
+    color: var(--deep-red);
+    font-size: 0.6875rem;
+    font-weight: 700;
+  }
+  .shot-chips svg {
+    width: 0.75rem;
+    height: 0.75rem;
+  }
+  .shot-field {
+    padding: 0.625rem 0.75rem;
+    border-radius: 0.625rem;
+    background: var(--warm-white);
+    box-shadow: inset 0 0 0 1px var(--line-strong);
+    color: var(--muted);
+  }
+  /* A small copy of the real button: depth, and the arrow in its own circle */
+  .shot-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    min-height: 2.375rem;
+    padding: 0.375rem 0.5rem 0.375rem 1rem;
+    border-radius: 999px;
+    background: linear-gradient(180deg, #b01d12, var(--deep-red) 55%, #7f0300);
+    box-shadow:
+      inset 0 1px 0 rgb(255 255 255 / 0.22),
+      0 8px 16px -10px rgb(127 3 0 / 0.7);
+    color: var(--warm-white);
+    font-size: 0.8125rem;
+    font-weight: 700;
+  }
+  .shot-btn svg {
+    width: 1.5rem;
+    height: 1.5rem;
+    padding: 0.3rem;
+    border-radius: 999px;
+    background: rgb(255 255 255 / 0.16);
+  }
+
+  /* Closing band */
+  .closing {
+    --focus: var(--warm-white);
+    background: var(--deep-red);
+    color: var(--warm-white);
+    padding-block: clamp(5rem, 3.5rem + 6vw, 9rem);
+    text-align: center;
+  }
+  .closing ::selection {
+    background: var(--selection-on-red);
+  }
+  .closing-mark {
+    width: 3.5rem;
+    height: auto;
+    color: var(--warm-white);
+  }
+  .closing-title {
+    max-width: 12em;
+    font-family: var(--stack-display);
+    font-size: clamp(2.5rem, 1.4rem + 4.6vw, 4.75rem);
+    font-weight: 700;
+    line-height: 1.04;
+    letter-spacing: -0.026em;
+    color: var(--warm-white);
+    text-wrap: balance;
+  }
+
+  /* FAQ */
+  .faq-list {
+    max-width: 46rem;
+    margin-inline: auto;
+  }
+  .qa {
+    border-bottom: 1px solid var(--line);
+  }
+  .qa:first-child {
+    border-top: 1px solid var(--line);
+  }
+  .qa-q {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1.5rem;
+    width: 100%;
+    min-height: 2.75rem;
+    padding-block: 1.25rem;
+    text-align: left;
+    font-family: var(--stack-display);
+    font-size: 1.1875rem;
+    font-weight: 600;
+    line-height: 1.35;
+    letter-spacing: -0.012em;
+    color: var(--ink);
+    cursor: pointer;
+    touch-action: manipulation;
+  }
+  .qa-icon {
+    position: relative;
+    flex: none;
+    width: 1.75rem;
+    height: 1.75rem;
+    border-radius: 50%;
+    background: var(--red-wash);
+    transition:
+      background-color 0.2s ease,
+      transform var(--dur-spring) var(--ease-spring);
+  }
+  .qa-q:hover .qa-icon {
+    background: var(--red-wash-hover);
+  }
+  .qa-q:active .qa-icon {
+    background: var(--red-wash-press);
+    transition-duration: 0.05s;
+  }
+  .qa-icon::before,
+  .qa-icon::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 0.7rem;
+    height: 2px;
+    border-radius: 2px;
+    background: var(--deep-red);
+    transform: translate(-50%, -50%);
+    transition: transform var(--dur-spring) var(--ease-spring);
+  }
+  .qa-icon::after {
+    transform: translate(-50%, -50%) rotate(90deg);
+  }
+  .qa.is-open .qa-icon {
+    transform: rotate(180deg);
+  }
+  .qa.is-open .qa-icon::after {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  .qa-a {
+    display: grid;
+    grid-template-rows: 1fr;
+    transition: grid-template-rows var(--dur-spring) var(--ease-spring);
+  }
+  .qa-a > div {
+    overflow: hidden;
+  }
+  .qa-a p {
+    max-width: 40em;
+    padding: 0 3rem 1.4rem 0;
+    font-size: var(--fs-lead);
+    line-height: var(--lh-lead);
+    letter-spacing: var(--tr-lead);
+    color: var(--muted);
+    text-wrap: pretty;
+  }
+  .qa-a p a {
+    color: var(--deep-red);
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+  }
+  /* Closed answers leave the tab order and the accessibility tree once they have finished closing.
+     A <noscript> style in the root layout shows every answer when JavaScript is off. */
+  .qa:not(.is-open) .qa-a {
+    grid-template-rows: 0fr;
+  }
+  .qa:not(.is-open) .qa-a > div {
+    visibility: hidden;
+    transition: visibility 0s var(--dur-spring);
+  }
+
+  /* Footer */
+  .footer {
+    padding-top: clamp(3rem, 2rem + 3vw, 4.5rem);
+    border-top: 1px solid var(--line);
+    overflow: hidden;
+  }
+  .footer-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem 2rem;
+    padding-bottom: clamp(1.75rem, 1rem + 3vw, 3rem);
+    font-size: var(--fs-small);
+    letter-spacing: var(--tr-small);
+    color: var(--muted);
+  }
+  /* The links' padding hangs outside the text column, so the words line up wherever the row wraps. */
+  .footer-links {
+    display: flex;
+    gap: 0.25rem;
+    margin-inline: -0.75rem;
+  }
+  .footer-links a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 2.75rem;
+    min-height: 2.75rem;
+    padding-inline: 0.75rem;
+    border-radius: 999px;
+    color: var(--ink);
+    font-weight: 500;
+    text-decoration: none;
+    transition: background-color 0.2s ease;
+  }
+  .footer-links a:hover {
+    background: var(--red-wash);
+  }
+  .footer-links a:active {
+    background: var(--red-wash-press);
+    transition-duration: 0.05s;
+  }
+  .footer-wordmark {
+    display: block;
+    width: 100%;
+    height: auto;
+    margin-bottom: clamp(1.5rem, 1rem + 2vw, 2.5rem);
+    color: var(--deep-red);
+  }
+}
+
+/* ---------- The quiz (/start) ---------- */
+/* One question per screen in a narrow column, the way phone quizzes do it: the question on top, big
+   answers stacked under it, a thin progress line in the header. Same warm white, deep red and smile as
+   the landing page, so it reads as the same place. */
+@layer components {
+  .quiz {
+    --quiz-w: 34rem;
+    min-height: 100dvh;
+  }
+  .quiz-head {
+    position: sticky;
+    top: 0;
+    z-index: 40;
+    background: var(--material);
+    -webkit-backdrop-filter: saturate(150%) blur(20px);
+    backdrop-filter: saturate(150%) blur(20px);
+  }
+  /* A taller header than the landing page's nav, with a bigger logo: it is the one constant on every
+     question, so it carries the brand while the questions change. */
+  .quiz {
+    --quiz-head-h: 4.5rem;
+  }
+  @media (min-width: 66.8125rem) {
+    .quiz {
+      --quiz-head-h: 5.25rem;
+    }
+  }
+  .quiz-head-row {
+    display: grid;
+    grid-template-columns: 3rem 1fr 3rem;
+    align-items: center;
+    max-width: calc(var(--quiz-w) + var(--gutter) * 2);
+    height: var(--quiz-head-h);
+    margin-inline: auto;
+    padding-inline: calc(var(--gutter) - 0.5rem);
+  }
+  .quiz-back {
+    display: grid;
+    place-items: center;
+    width: 3rem;
+    height: 3rem;
+    border: 0;
+    border-radius: 50%;
+    background: transparent;
+    color: var(--ink);
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+  .quiz-back:hover {
+    background: var(--red-wash);
+  }
+  .quiz-back:active {
+    background: var(--red-wash-press);
+    transition-duration: 0.05s;
+  }
+  .quiz-back svg {
+    width: 1.625rem;
+    height: 1.625rem;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  .quiz-brand {
+    justify-self: center;
+    display: inline-flex;
+    align-items: center;
+    min-height: 2.75rem;
+    padding-inline: 0.25rem;
+    border-radius: 0.75rem;
+    color: var(--deep-red);
+  }
+  .quiz-brand svg {
+    display: block;
+    height: 2.125rem;
+    width: auto;
+  }
+  @media (min-width: 66.8125rem) {
+    .quiz-brand svg {
+      height: 2.5rem;
+    }
+  }
+  /* The progress line: grows from the left as you go, on a faint track the width of the column. */
+  .quiz-progress {
+    max-width: var(--quiz-w);
+    height: 5px;
+    margin-inline: max(var(--gutter), calc((100% - var(--quiz-w)) / 2));
+    border-radius: 4px;
+    background: var(--line);
+    overflow: hidden;
+  }
+  .quiz-progress span {
+    display: block;
+    height: 100%;
+    border-radius: inherit;
+    background: var(--deep-red);
+    transform-origin: left;
+    transition: transform var(--dur-spring) var(--ease-spring);
+  }
+
+  .quiz-main {
+    max-width: calc(var(--quiz-w) + var(--gutter) * 2);
+    margin-inline: auto;
+    padding: clamp(2rem, 1.25rem + 3vw, 3.5rem) var(--gutter) 4rem;
+  }
+  /* Each screen slides in from the side you are heading to, a short way, on the spring. */
+  .quiz-step {
+    animation: quiz-in var(--dur-spring) var(--ease-spring) both;
+  }
+  .quiz-step[data-dir="back"] {
+    --quiz-from: -1.25rem;
+  }
+  @keyframes quiz-in {
+    from {
+      opacity: 0;
+      transform: translateX(var(--quiz-from, 1.25rem));
+    }
+  }
+  .quiz-title {
+    font-family: var(--stack-display);
+    font-size: clamp(1.75rem, 1.45rem + 1.4vw, 2.5rem);
+    font-weight: 700;
+    line-height: 1.12;
+    letter-spacing: -0.018em;
+    color: var(--deep-red);
+    text-wrap: balance;
+  }
+  .quiz-title:focus {
+    outline: none;
+  }
+  .quiz-hint {
+    margin-top: 0.625rem;
+    font-size: var(--fs-lead);
+    line-height: var(--lh-lead);
+    letter-spacing: var(--tr-lead);
+    color: var(--muted);
+  }
+
+  /* Single answers: big, full width, one tap. The chosen one gets a red ring and a tick. */
+  .quiz-choices {
+    display: grid;
+    gap: 0.75rem;
+    margin-top: clamp(1.75rem, 1.4rem + 1.5vw, 2.5rem);
+  }
+  .quiz-choice {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    width: 100%;
+    min-height: 3.75rem;
+    padding: 0.875rem 1rem 0.875rem 1.25rem;
+    border: 0;
+    border-radius: 1.25rem;
+    background: var(--warm-white);
+    box-shadow:
+      0 0 0 1px var(--line),
+      var(--shadow-1);
+    color: var(--ink);
+    font: inherit;
+    font-size: var(--fs-body);
+    font-weight: 600;
+    line-height: 1.3;
+    text-align: left;
+    cursor: pointer;
+    touch-action: manipulation;
+    transition:
+      background-color 0.2s ease,
+      box-shadow 0.2s ease,
+      transform var(--dur-spring-fast) var(--ease-spring-fast);
+  }
+  .quiz-choice:hover {
+    background: color-mix(in oklab, var(--warm-white), var(--tint) 55%);
+  }
+  .quiz-choice:active {
+    transform: scale(0.98);
+    transition-duration: 0.2s, 0.2s, 0.08s;
+  }
+  .quiz-choice[aria-pressed="true"] {
+    background: var(--red-wash);
+    box-shadow: 0 0 0 2px var(--deep-red);
+  }
+  .quiz-tick {
+    display: grid;
+    flex: none;
+    place-items: center;
+    width: 1.75rem;
+    height: 1.75rem;
+    border-radius: 50%;
+    box-shadow: inset 0 0 0 1.5px var(--line-strong);
+    color: var(--warm-white);
+    transition:
+      background-color 0.2s ease,
+      box-shadow 0.2s ease;
+  }
+  .quiz-tick svg {
+    width: 1.05rem;
+    height: 1.05rem;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    opacity: 0;
+    transform: scale(0.6);
+    transition:
+      opacity 0.15s ease,
+      transform var(--dur-spring-fast) var(--ease-spring-fast);
+  }
+  .quiz-choice[aria-pressed="true"] .quiz-tick {
+    background: var(--deep-red);
+    box-shadow: none;
+  }
+  .quiz-choice[aria-pressed="true"] .quiz-tick svg {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* The topics: the landing page's chips, now tappable. */
+  .quiz-topics {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.625rem;
+    margin: clamp(1.75rem, 1.4rem + 1.5vw, 2.5rem) 0 0;
+    padding: 0;
+    border: 0;
+  }
+  .quiz-topic {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    min-height: 2.875rem;
+    padding: 0.55rem 1.15rem;
+    border-radius: 999px;
+    background: var(--warm-white);
+    box-shadow:
+      0 0 0 1px var(--line),
+      var(--shadow-1);
+    font-size: var(--fs-body);
+    font-weight: 600;
+    line-height: 1.2;
+    color: var(--ink);
+    cursor: pointer;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    transition:
+      background-color 0.2s ease,
+      box-shadow 0.2s ease,
+      color 0.2s ease,
+      transform var(--dur-spring-fast) var(--ease-spring-fast);
+  }
+  .quiz-topic:hover {
+    background: color-mix(in oklab, var(--warm-white), var(--tint) 55%);
+  }
+  .quiz-topic:active {
+    transform: scale(0.97);
+    transition-duration: 0.2s, 0.2s, 0.2s, 0.08s;
+  }
+  .quiz-topic:has(:focus-visible) {
+    outline: 2px solid var(--focus);
+    outline-offset: 3px;
+  }
+  .quiz-topic[data-on] {
+    background: var(--deep-red);
+    box-shadow: none;
+    color: var(--warm-white);
+  }
+  .quiz-topic svg {
+    width: 1.05rem;
+    height: 1.05rem;
+    margin-left: -0.25rem;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .quiz-next {
+    width: 100%;
+    margin-top: clamp(2rem, 1.6rem + 2vw, 3rem);
+  }
+  .quiz-next:disabled {
+    background: var(--line);
+    color: var(--muted);
+    cursor: not-allowed;
+    transform: none;
+  }
+  .quiz-next:disabled svg {
+    transform: none;
+  }
+
+  /* Names and email */
+  .quiz-fields {
+    display: grid;
+    gap: 1rem;
+    margin-top: clamp(1.75rem, 1.4rem + 1.5vw, 2.5rem);
+  }
+  .quiz-field {
+    display: grid;
+    gap: 0.5rem;
+  }
+  .quiz-field > span {
+    font-size: var(--fs-small);
+    font-weight: 600;
+    color: var(--ink);
+  }
+  .quiz-field input {
+    width: 100%;
+    min-height: 3.5rem;
+    padding: 0.75rem 1.125rem;
+    border: 0;
+    border-radius: 1rem;
+    background: var(--warm-white);
+    box-shadow:
+      0 0 0 1px var(--line-strong),
+      var(--shadow-1);
+    color: var(--ink);
+    font: inherit;
+    font-size: 1.125rem; /* 18px, so iOS does not zoom in on focus */
+    transition: box-shadow 0.2s ease;
+  }
+  .quiz-field input:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px var(--deep-red);
+  }
+  .quiz-field input[aria-invalid] {
+    box-shadow: 0 0 0 2px var(--deep-red);
+  }
+  .quiz-error {
+    font-size: var(--fs-small);
+    font-weight: 600;
+    color: var(--deep-red);
+  }
+
+  /* The open question: room for a few lines, with the privacy promise right under the box. */
+  .quiz-story {
+    width: 100%;
+    min-height: 9rem;
+    padding: 0.875rem 1.125rem;
+    border: 0;
+    border-radius: 1rem;
+    background: var(--warm-white);
+    box-shadow:
+      0 0 0 1px var(--line-strong),
+      var(--shadow-1);
+    color: var(--ink);
+    font: inherit;
+    font-size: 1.125rem; /* 18px, so iOS does not zoom in on focus */
+    line-height: 1.5;
+    resize: vertical;
+    transition: box-shadow 0.2s ease;
+  }
+  .quiz-story:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px var(--deep-red);
+  }
+  .quiz-private {
+    font-size: var(--fs-small);
+    line-height: var(--lh-small);
+    color: var(--muted);
+    text-wrap: pretty;
+  }
+  .link-button.quiz-skip {
+    display: block;
+    margin: 0.75rem auto 0;
+  }
+
+  /* The reflection: their words back in a quiet card, then the question and its two answers. */
+  .quiz-heard {
+    display: grid;
+    gap: 0.875rem;
+    margin: clamp(1.5rem, 1.2rem + 1.2vw, 2rem) 0 0;
+    padding: 1.25rem 1.375rem;
+    border-radius: var(--r-card);
+    background: var(--warm-white);
+    box-shadow:
+      0 0 0 1px var(--line),
+      var(--shadow-1);
+    list-style: none;
+  }
+  .quiz-heard li {
+    display: grid;
+    grid-template-columns: 0.5rem minmax(0, 1fr);
+    column-gap: 0.875rem;
+    font-size: var(--fs-lead);
+    line-height: var(--lh-lead);
+    letter-spacing: var(--tr-lead);
+    color: var(--ink);
+    text-wrap: pretty;
+  }
+  .quiz-heard li::before {
+    content: "";
+    width: 0.5rem;
+    height: 0.5rem;
+    margin-top: calc((var(--lh-lead) * 1em - 0.5rem) / 2);
+    border-radius: 50%;
+    background: var(--deep-red);
+  }
+  .quiz-check {
+    margin-top: clamp(1.75rem, 1.4rem + 1.5vw, 2.5rem);
+    font-family: var(--stack-display);
+    font-size: var(--fs-title);
+    font-weight: 700;
+    line-height: var(--lh-title);
+    letter-spacing: var(--tr-title);
+    color: var(--deep-red);
+  }
+  .quiz-confirm {
+    display: grid;
+    gap: 0.75rem;
+    margin-top: 1rem;
+  }
+  .quiz-confirm .btn {
+    width: 100%;
+  }
+
+  /* Making your plan: a short, calm moment between the last answer and the reveal. */
+  .quiz-making {
+    display: grid;
+    justify-items: center;
+    gap: 1.5rem;
+    padding-top: clamp(4rem, 3rem + 6vh, 8rem);
+    text-align: center;
+  }
+  .quiz-spinner {
+    width: 2.75rem;
+    height: 2.75rem;
+    border-radius: 50%;
+    border: 3px solid var(--red-wash-hover);
+    border-top-color: var(--deep-red);
+    animation: quiz-spin 0.9s linear infinite;
+  }
+  @keyframes quiz-spin {
+    to {
+      transform: rotate(1turn);
+    }
+  }
+  @keyframes quiz-pulse {
+    from {
+      opacity: 0.35;
+    }
+  }
+
+  /* The reveal: the couple type at hero size, with the smile drawn under it. */
+  .quiz-reveal {
+    display: grid;
+    justify-items: center;
+    padding-top: clamp(0.5rem, 2vh, 2rem);
+    text-align: center;
+  }
+  .quiz-eyebrow {
+    font-size: var(--fs-lead);
+    font-weight: 600;
+    letter-spacing: var(--tr-lead);
+    color: var(--ink);
+  }
+  .quiz-eyebrow + .quiz-title {
+    margin-top: 0.5rem;
+  }
+  .quiz-type {
+    margin-top: 0.75rem;
+    font-family: var(--stack-display);
+    font-size: clamp(2.75rem, 1.9rem + 4vw, 4.5rem);
+    font-weight: 700;
+    line-height: var(--lh-hero);
+    letter-spacing: var(--tr-hero);
+    color: var(--deep-red);
+    text-wrap: balance;
+  }
+  .quiz-type:focus {
+    outline: none;
+  }
+  /* Their own fight, in one line: "When chores come up, you go quiet and Alex wants to talk now." */
+  .quiz-moment {
+    max-width: 26em;
+    margin-top: 1.75rem;
+    font-size: var(--fs-lead);
+    font-weight: 600;
+    line-height: var(--lh-lead);
+    letter-spacing: var(--tr-lead);
+    color: var(--ink);
+    text-wrap: balance;
+  }
+  .quiz-moment + .quiz-type-text {
+    margin-top: 0.75rem;
+  }
+  .quiz-type-text {
+    max-width: 28em;
+    margin-top: 2rem;
+    font-size: var(--fs-lead);
+    line-height: var(--lh-lead);
+    letter-spacing: var(--tr-lead);
+    color: var(--ink);
+    text-wrap: pretty;
+  }
+  .quiz-focus {
+    max-width: 30em;
+    margin-top: 1.25rem;
+    color: var(--muted);
+    text-wrap: pretty;
+  }
+  .quiz-focus strong {
+    color: var(--deep-red);
+  }
+  .quiz-built {
+    display: grid;
+    justify-items: center;
+    gap: 0.875rem;
+    width: 100%;
+    margin-top: 2.25rem;
+    padding: 1.5rem 1.25rem;
+    border-radius: var(--r-card);
+    background: var(--tint);
+  }
+  .quiz-built p {
+    font-size: var(--fs-small);
+    font-weight: 600;
+    color: var(--muted);
+  }
+  .quiz-built ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .quiz-built li {
+    padding: 0.4rem 0.9rem;
+    border-radius: 999px;
+    background: var(--warm-white);
+    box-shadow: 0 0 0 1px var(--line);
+    font-size: var(--fs-small);
+    font-weight: 600;
+    color: var(--ink);
+  }
+
+  /* The paywall: one card under the reveal. Every line is about their fights; the price sits on the button. */
+  .paywall {
+    width: 100%;
+    margin-top: 1rem;
+    padding: clamp(1.5rem, 1.1rem + 1.8vw, 2.25rem);
+    border-radius: var(--r-card);
+    background: var(--warm-white);
+    box-shadow:
+      0 0 0 1px var(--line),
+      var(--shadow-2);
+    text-align: left;
+  }
+  .paywall-title {
+    font-family: var(--stack-display);
+    font-size: var(--fs-title);
+    font-weight: 700;
+    line-height: var(--lh-title);
+    letter-spacing: var(--tr-title);
+    color: var(--deep-red);
+  }
+  .paywall-list {
+    display: grid;
+    gap: 0.875rem;
+    margin: 1.25rem 0 0;
+    padding: 0;
+    list-style: none;
+  }
+  .paywall-list li {
+    display: grid;
+    grid-template-columns: 1.375rem minmax(0, 1fr);
+    gap: 0.75rem;
+    align-items: start;
+    color: var(--ink);
+    text-wrap: pretty;
+  }
+  .paywall-list svg {
+    width: 1.375rem;
+    height: 1.375rem;
+    margin-top: 0.05rem;
+    fill: none;
+    stroke: var(--deep-red);
+    stroke-width: 2.25;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  .paywall-form {
+    display: grid;
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+  }
+  .paywall-cta {
+    width: 100%;
+    font-variant-numeric: tabular-nums;
+  }
+  .paywall-cta:disabled {
+    opacity: 0.7;
+    cursor: progress;
+  }
+  .paywall-fine {
+    font-size: var(--fs-micro);
+    line-height: var(--lh-micro);
+    color: var(--muted);
+    text-align: center;
+  }
+}
+
+/* ---------- Small pages: after paying, logging in ---------- */
+@layer components {
+  .page-narrow {
+    display: grid;
+    gap: 1rem;
+    max-width: calc(30rem + var(--gutter) * 2);
+    margin-inline: auto;
+    padding: clamp(2.5rem, 1.5rem + 5vw, 5rem) var(--gutter) 4rem;
+  }
+  .page-title {
+    font-family: var(--stack-display);
+    font-size: clamp(2rem, 1.6rem + 1.8vw, 2.75rem);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: var(--tr-display);
+    color: var(--deep-red);
+    text-wrap: balance;
+  }
+  .page-text {
+    font-size: var(--fs-lead);
+    line-height: var(--lh-lead);
+    letter-spacing: var(--tr-lead);
+    color: var(--ink);
+    text-wrap: pretty;
+  }
+  .page-note {
+    padding: 0.875rem 1rem;
+    border-radius: 1rem;
+    background: var(--tint);
+    font-weight: 600;
+  }
+  .page-small,
+  .page-resend {
+    font-size: var(--fs-small);
+    line-height: var(--lh-small);
+    color: var(--muted);
+  }
+  .page-small a {
+    color: var(--deep-red);
+    font-weight: 600;
+  }
+  .page-resend {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.25rem 0.375rem;
+    margin-top: 0.5rem;
+  }
+  .page-resend p {
+    margin: 0;
+  }
+  .page-resend [role="status"],
+  .page-resend [role="alert"] {
+    flex-basis: 100%;
+  }
+  .page-form {
+    display: grid;
+    gap: 1rem;
+    margin-top: 0.5rem;
+  }
+  .page-cta {
+    width: 100%;
+    margin-top: 0.5rem;
+  }
+  .link-button {
+    display: inline;
+    min-height: 2.75rem;
+    padding: 0;
+    border: 0;
+    background: none;
+    color: var(--deep-red);
+    font: inherit;
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+    cursor: pointer;
+  }
+  .link-button:disabled {
+    color: var(--muted);
+    cursor: progress;
+  }
+}
+
+/* ---------- The calm page: after Yes or Not sure to the safety question ---------- */
+/* The hotline, nothing to buy, and a quick way out. The same quiet column as the quiz, so it reads as the
+   same place, with the call as the one filled button. Inside the message check it is a card, one size down. */
+@layer components {
+  .safety {
+    display: grid;
+    gap: 1rem;
+  }
+  /* First and top right, where the hotline's own quick exit sits. */
+  .safety-exit {
+    justify-self: end;
+    display: inline-flex;
+    align-items: center;
+    min-height: 2.75rem;
+    padding: 0 1.125rem;
+    border-radius: 999px;
+    background: var(--ink);
+    color: var(--warm-white);
+    font-size: var(--fs-small);
+    font-weight: 600;
+    text-decoration: none;
+    touch-action: manipulation;
+    transition: background-color 0.2s ease;
+  }
+  .safety-exit:hover {
+    background: color-mix(in oklab, var(--ink), var(--warm-white) 16%);
+  }
+  .safety-title {
+    font-family: var(--stack-display);
+    font-size: clamp(1.75rem, 1.45rem + 1.4vw, 2.5rem);
+    font-weight: 700;
+    line-height: 1.12;
+    letter-spacing: -0.018em;
+    color: var(--deep-red);
+    text-wrap: balance;
+  }
+  .safety-title:focus {
+    outline: none;
+  }
+  .safety[data-level="3"] .safety-title {
+    font-size: var(--fs-title);
+    line-height: var(--lh-title);
+    letter-spacing: var(--tr-title);
+  }
+  .safety-text {
+    font-size: var(--fs-lead);
+    line-height: var(--lh-lead);
+    letter-spacing: var(--tr-lead);
+    color: var(--ink);
+    text-wrap: pretty;
+  }
+  .safety-actions {
+    display: grid;
+    gap: 0.75rem;
+    margin-block: 0.5rem;
+  }
+  .safety-actions .btn {
+    width: 100%;
+  }
+  .safety-note {
+    color: var(--muted);
+    text-wrap: pretty;
+  }
+  .safety-note a,
+  .plan-foot a {
+    color: var(--deep-red);
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+  }
+  .safety-back {
+    justify-self: start;
+  }
+}
+
+/* ---------- Their plan (/plan) ---------- */
+/* One column. Today's step leads, as the one thing to do; the words for their fights and the message
+   check follow, open from the first day. Same brand as everywhere else, quieter than the landing page. */
+@layer components {
+  .plan {
+    display: grid;
+    gap: clamp(2.5rem, 2rem + 2vw, 3.5rem);
+    max-width: calc(36rem + var(--gutter) * 2);
+    min-height: 60vh;
+    margin-inline: auto;
+    padding: clamp(1.75rem, 1.25rem + 2.5vw, 3rem) var(--gutter) 4rem;
+  }
+  .plan-eyebrow {
+    font-size: var(--fs-lead);
+    font-weight: 600;
+    color: var(--ink);
+  }
+  .plan-title {
+    margin-top: 0.25rem;
+    font-family: var(--stack-display);
+    font-size: clamp(2.25rem, 1.75rem + 2.4vw, 3.25rem);
+    font-weight: 700;
+    line-height: 1.05;
+    letter-spacing: var(--tr-display);
+    color: var(--deep-red);
+  }
+  .plan-intro {
+    margin-top: 0.75rem;
+    font-size: var(--fs-lead);
+    line-height: var(--lh-lead);
+    letter-spacing: var(--tr-lead);
+    color: var(--muted);
+    text-wrap: pretty;
+  }
+  .plan-intro strong {
+    color: var(--ink);
+  }
+
+  /* Today's step: the one card that carries weight. */
+  .plan-today {
+    display: grid;
+    gap: 1rem;
+    padding: clamp(1.5rem, 1.1rem + 1.8vw, 2.25rem);
+    border-radius: var(--r-card);
+    background: var(--warm-white);
+    box-shadow:
+      0 0 0 1px var(--line),
+      var(--shadow-2);
+  }
+  .plan-today-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem 1rem;
+  }
+  /* Each stays on one line; when both don't fit, the part moves under the label. */
+  .plan-today-label,
+  .plan-part {
+    white-space: nowrap;
+  }
+  .plan-today-label {
+    font-size: var(--fs-small);
+    font-weight: 700;
+    letter-spacing: var(--tr-micro);
+    color: var(--ink);
+  }
+  .plan-part {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    padding: 0.3rem 0.75rem 0.3rem 0.5rem;
+    border-radius: 999px;
+    background: var(--red-wash);
+    color: var(--deep-red);
+    font-size: var(--fs-small);
+    font-weight: 700;
+  }
+  .plan-part svg {
+    width: 1.125rem;
+    height: 1.125rem;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.9;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  .plan-today-title {
+    font-family: var(--stack-display);
+    font-size: var(--fs-title);
+    font-weight: 700;
+    line-height: var(--lh-title);
+    letter-spacing: var(--tr-title);
+    color: var(--deep-red);
+    text-wrap: balance;
+  }
+  /* Notice: the one useful idea, read first. */
+  .plan-notice {
+    font-size: var(--fs-lead);
+    line-height: var(--lh-lead);
+    letter-spacing: var(--tr-lead);
+    color: var(--ink);
+    text-wrap: pretty;
+  }
+  /* Try: one action, or a sentence they can change and copy. */
+  .plan-try {
+    display: grid;
+    gap: 0.625rem;
+    padding: 1rem 1.125rem 1.125rem;
+    border-radius: 1rem;
+    background: var(--tint);
+    color: var(--ink);
+    text-wrap: pretty;
+  }
+  .plan-try-label {
+    font-size: var(--fs-micro);
+    font-weight: 700;
+    letter-spacing: var(--tr-micro);
+    color: var(--deep-red);
+  }
+  .plan-say {
+    display: grid;
+    gap: 0.375rem;
+  }
+  .plan-say-hint {
+    font-size: var(--fs-small);
+    line-height: var(--lh-small);
+    color: var(--muted);
+  }
+  .plan-say textarea {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 0;
+    border-radius: 0.875rem;
+    background: var(--warm-white);
+    box-shadow: 0 0 0 1px var(--line-strong);
+    color: var(--ink);
+    font: inherit;
+    font-size: 1.0625rem; /* 17px, so iOS does not zoom in on focus */
+    font-weight: 600;
+    line-height: 1.45;
+    overflow: hidden;
+    resize: none;
+  }
+  .plan-say textarea:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px var(--deep-red);
+  }
+  .plan-say-copy,
+  .plan-review-now {
+    justify-self: start;
+  }
+  /* The line for the answer they just gave, above the step it led to. */
+  .plan-now {
+    display: grid;
+    gap: 0.75rem;
+  }
+  .plan-ack {
+    padding: 0.875rem 1.125rem;
+    border-radius: 1rem;
+    background: var(--red-wash);
+    color: var(--ink);
+    font-weight: 600;
+    text-wrap: pretty;
+  }
+  /* Did you try it?, in place of today's step. */
+  .step-review-step {
+    margin-top: 0.25rem;
+    font-weight: 600;
+    color: var(--muted);
+    text-wrap: pretty;
+  }
+  .plan-today .quiz-choices,
+  .plan-today .quiz-heard {
+    margin-top: 0;
+  }
+  .step-review-line {
+    min-height: 6rem;
+  }
+  /* What they agreed: one line, like the other fields, that grows to fit their words. */
+  .step-review-agree {
+    min-height: 3.5rem;
+    overflow: hidden;
+    resize: none;
+  }
+  .step-review-reading {
+    justify-items: center;
+    padding-block: clamp(2rem, 1.5rem + 3vw, 3rem);
+    text-align: center;
+  }
+  .plan-today .link-button.quiz-skip {
+    margin-top: 0;
+  }
+  .plan-tip {
+    padding: 0.875rem 1rem;
+    border-radius: 1rem;
+    background: var(--tint);
+    font-size: var(--fs-small);
+    line-height: var(--lh-small);
+    color: var(--ink);
+    text-wrap: pretty;
+  }
+
+  .plan-earlier {
+    margin-top: calc(clamp(2.5rem, 2rem + 2vw, 3.5rem) * -0.6);
+    border-radius: 1rem;
+    box-shadow: 0 0 0 1px var(--line);
+  }
+  .plan-earlier summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 3rem;
+    padding: 0 1.125rem;
+    font-weight: 600;
+    cursor: pointer;
+    list-style: none;
+  }
+  .plan-earlier summary::-webkit-details-marker {
+    display: none;
+  }
+  .plan-earlier summary::after {
+    content: "+";
+    font-size: 1.375rem;
+    font-weight: 400;
+    color: var(--muted);
+  }
+  .plan-earlier[open] summary::after {
+    content: "\2212";
+  }
+  .plan-earlier ul {
+    display: grid;
+    gap: 1.25rem;
+    margin: 0;
+    padding: 0.25rem 1.125rem 1.25rem;
+    list-style: none;
+  }
+  .plan-earlier li p {
+    margin: 0;
+    font-size: var(--fs-small);
+    line-height: var(--lh-small);
+    color: var(--muted);
+  }
+  .plan-earlier .plan-earlier-part {
+    font-size: var(--fs-micro);
+    font-weight: 700;
+    color: var(--deep-red);
+  }
+  .plan-earlier .plan-earlier-title {
+    font-weight: 600;
+    color: var(--ink);
+  }
+
+  .plan-section {
+    display: grid;
+    gap: 0.75rem;
+  }
+  /* Everything in the column may shrink to it, so a long row of tabs scrolls inside the column instead of
+     widening the whole page on a phone. */
+  .plan > *,
+  .plan-section > * {
+    min-width: 0;
+  }
+  .plan-section-title {
+    font-family: var(--stack-display);
+    font-size: var(--fs-title);
+    font-weight: 700;
+    line-height: var(--lh-title);
+    letter-spacing: var(--tr-title);
+    color: var(--deep-red);
+    text-wrap: balance;
+  }
+  .plan-section-text {
+    color: var(--muted);
+    text-wrap: pretty;
+  }
+  .plan-earlier .plan-earlier-outcome {
+    font-weight: 600;
+    color: var(--deep-red);
+  }
+
+  /* Today's small moment */
+  .plan-moment {
+    padding: 1.125rem 1.25rem;
+    border-radius: 1.25rem;
+    background: var(--tint);
+    font-size: var(--fs-lead);
+    line-height: var(--lh-lead);
+    letter-spacing: var(--tr-lead);
+    color: var(--ink);
+    text-wrap: pretty;
+  }
+
+  /* All your steps, under Prevent, Pause and Repair */
+  .plan-tools {
+    display: grid;
+    gap: 0.75rem;
+  }
+  .plan-tools-line {
+    color: var(--muted);
+    text-wrap: pretty;
+  }
+  .plan-tool {
+    display: grid;
+    gap: 0.375rem;
+    padding: 1.125rem 1.25rem 1.25rem;
+    border-radius: 1.25rem;
+    background: var(--warm-white);
+    box-shadow: 0 0 0 1px var(--line);
+    color: var(--ink);
+    text-wrap: pretty;
+  }
+  .plan-tool-title {
+    margin-bottom: 0.25rem;
+    font-family: var(--stack-display);
+    font-size: 1.125rem;
+    font-weight: 700;
+    line-height: 1.3;
+    color: var(--deep-red);
+    text-wrap: balance;
+  }
+  .plan-tool .plan-try-label {
+    margin-top: 0.375rem;
+  }
+
+  /* Scripts, by fight topic */
+  .plan-tabs {
+    display: flex;
+    gap: 0.5rem;
+    margin: 0.5rem calc(var(--gutter) * -1) 0;
+    padding: 0.25rem var(--gutter);
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .plan-tabs::-webkit-scrollbar {
+    display: none;
+  }
+  .plan-tab {
+    flex: none;
+    min-height: 2.75rem;
+    padding: 0.5rem 1.05rem;
+    border: 0;
+    border-radius: 999px;
+    background: var(--warm-white);
+    box-shadow: 0 0 0 1px var(--line);
+    color: var(--ink);
+    font: inherit;
+    font-size: var(--fs-small);
+    font-weight: 600;
+    cursor: pointer;
+    transition:
+      background-color 0.2s ease,
+      color 0.2s ease;
+  }
+  .plan-tab[aria-pressed="true"] {
+    background: var(--deep-red);
+    box-shadow: none;
+    color: var(--warm-white);
+  }
+  .plan-script-list {
+    display: grid;
+    gap: 0.75rem;
+    margin-top: 0.75rem;
+  }
+  .plan-script {
+    display: grid;
+    gap: 0.5rem;
+    margin: 0;
+    padding: 1.25rem;
+    border-radius: 1.25rem;
+    background: var(--tint);
+  }
+  .plan-script-label {
+    font-size: var(--fs-micro);
+    font-weight: 700;
+    letter-spacing: var(--tr-micro);
+    color: var(--deep-red);
+  }
+  .plan-script-lead {
+    font-size: var(--fs-small);
+    font-weight: 600;
+    color: var(--ink);
+  }
+  .plan-review blockquote {
+    margin: 0;
+    font-size: var(--fs-lead);
+    line-height: var(--lh-lead);
+    letter-spacing: var(--tr-lead);
+    color: var(--ink);
+    text-wrap: pretty;
+  }
+  .plan-review blockquote::before {
+    content: "“";
+  }
+  .plan-review blockquote::after {
+    content: "”";
+  }
+
+  /* The message check */
+  .plan-check {
+    display: grid;
+    gap: 1rem;
+  }
+  .plan-check-form {
+    display: grid;
+    gap: 0.75rem;
+  }
+  .plan-check-form textarea {
+    width: 100%;
+    min-height: 7.5rem;
+    padding: 0.875rem 1.125rem;
+    border: 0;
+    border-radius: 1rem;
+    background: var(--warm-white);
+    box-shadow:
+      0 0 0 1px var(--line-strong),
+      var(--shadow-1);
+    color: var(--ink);
+    font: inherit;
+    font-size: 1.0625rem;
+    line-height: 1.5;
+    resize: vertical;
+  }
+  .plan-check-form textarea:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px var(--deep-red);
+  }
+  .plan-check .btn {
+    width: 100%;
+  }
+  .plan-review {
+    display: grid;
+    gap: 0.875rem;
+    padding: 1.25rem;
+    border-radius: 1.25rem;
+    background: var(--warm-white);
+    box-shadow: 0 0 0 1px var(--line);
+  }
+  /* Each part of an answer: a small red label, then the words. */
+  .plan-review-part {
+    display: grid;
+    gap: 0.25rem;
+  }
+  .plan-review-label {
+    font-size: var(--fs-micro);
+    font-weight: 700;
+    letter-spacing: var(--tr-micro);
+    color: var(--deep-red);
+  }
+  .plan-review-flags {
+    display: grid;
+    gap: 0.625rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .plan-review-flags li {
+    display: grid;
+    gap: 0.125rem;
+  }
+  .plan-review-quote {
+    font-weight: 700;
+    color: var(--ink);
+    text-wrap: pretty;
+  }
+  .plan-review-why {
+    color: var(--muted);
+    text-wrap: pretty;
+  }
+  .plan-review-note {
+    font-size: var(--fs-small);
+    line-height: var(--lh-small);
+    color: var(--muted);
+    text-wrap: pretty;
+  }
+  .plan-review-verdict {
+    font-family: var(--stack-display);
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--deep-red);
+  }
+  /* A version to send, in a box they can change. */
+  .plan-review-suggestion {
+    display: grid;
+    gap: 0.5rem;
+    padding: 1rem 1.125rem 0.375rem;
+    border-radius: 1rem;
+    background: var(--tint);
+  }
+
+  /* Add my partner */
+  .plan-partner-form {
+    display: grid;
+    gap: 0.75rem;
+  }
+  .plan-partner-form .btn {
+    width: 100%;
+  }
+  .plan-partner-status {
+    color: var(--ink);
+  }
+
+  .plan-foot {
+    display: grid;
+    justify-items: start;
+    gap: 0.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--line);
+    font-size: var(--fs-small);
+    line-height: var(--lh-small);
+    color: var(--muted);
+  }
+}
+
+/* ---------- Help right after a fight (/plan/now, and the page after paying) ---------- */
+/* One screen at a time, in the plan's card. Like apps that time a break, the time left is the biggest thing
+   on its screen, with little around it. Behind the 20 minutes, rings breathe at the pace of the tip under
+   them: in for four, out for six. Parts and questions show where they are with a row of dots. */
+@layer components {
+  /* The back link and the card sit in the middle of the screen, not at the top of an empty one. */
+  .help-page {
+    gap: 1rem;
+    min-height: calc(100dvh - var(--nav-h));
+    align-content: center;
+    align-content: safe center;
+    padding-block: 2rem;
+  }
+  .help {
+    display: grid;
+    gap: 0.75rem;
+  }
+  .help-back {
+    justify-self: start;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    min-height: 2.75rem;
+    padding: 0;
+    border: 0;
+    background: none;
+    color: var(--deep-red);
+    font: inherit;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    touch-action: manipulation;
+  }
+  .help-back:hover {
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+  }
+  .help-back svg {
+    width: 1.125rem;
+    height: 1.125rem;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  .help-card {
+    gap: 1.125rem;
+  }
+  .help-title {
+    font-family: var(--stack-display);
+    font-size: clamp(1.75rem, 1.45rem + 1.4vw, 2.5rem);
+    font-weight: 700;
+    line-height: 1.12;
+    letter-spacing: -0.018em;
+    color: var(--deep-red);
+    text-wrap: balance;
+  }
+  .help-title:focus {
+    outline: none;
+  }
+  .help-subtitle {
+    margin-top: 0.5rem;
+    font-family: var(--stack-display);
+    font-size: var(--fs-title);
+    font-weight: 700;
+    line-height: var(--lh-title);
+    letter-spacing: var(--tr-title);
+    color: var(--ink);
+    text-wrap: balance;
+  }
+  .help-small {
+    font-size: var(--fs-small);
+    line-height: var(--lh-small);
+    color: var(--muted);
+    text-wrap: pretty;
+  }
+  .help-unsafe a {
+    color: var(--deep-red);
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+    white-space: nowrap;
+  }
+  .help-half {
+    color: var(--ink);
+    text-wrap: pretty;
+  }
+  .help-list {
+    display: grid;
+    gap: 0.5rem;
+    padding-left: 1.25rem;
+    list-style: disc;
+    color: var(--ink);
+    text-wrap: pretty;
+  }
+  .help-list li::marker {
+    color: var(--deep-red);
+  }
+  /* Answers and buttons here can run long, so they take the whole width and wrap on a phone. */
+  .help-wide,
+  .help-actions .btn,
+  .help-nav .btn,
+  .help-box .btn,
+  .plan-help-link {
+    white-space: normal;
+    text-align: center;
+  }
+  .help-wide,
+  .help-actions .btn {
+    width: 100%;
+  }
+  .help-actions {
+    display: grid;
+    gap: 0.75rem;
+  }
+  .help-nav {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 0.75rem;
+  }
+  .help-aside {
+    justify-self: start;
+  }
+  .help-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 0 1.5rem;
+    padding-top: 0.25rem;
+    border-top: 1px solid var(--line);
+  }
+
+  /* The 20 minutes */
+  .help-timer {
+    position: relative;
+    isolation: isolate;
+    display: grid;
+    place-items: center;
+    justify-self: center;
+    width: min(100%, 17rem);
+    aspect-ratio: 1;
+    margin-block: 0.25rem;
+  }
+  /* The face stays still, so the time never moves under the eye. */
+  .help-timer::before {
+    content: "";
+    position: absolute;
+    inset: 13%;
+    z-index: 1;
+    border-radius: 50%;
+    background: var(--warm-white);
+    box-shadow: 0 0 0 1px var(--line);
+  }
+  .help-breath,
+  .help-breath::before {
+    position: absolute;
+    border-radius: 50%;
+    background: var(--red-wash);
+  }
+  .help-breath {
+    inset: 0;
+    animation: help-breathe 10s ease-in-out infinite;
+  }
+  .help-breath::before {
+    content: "";
+    inset: 6%;
+  }
+  @keyframes help-breathe {
+    0%,
+    100% {
+      transform: scale(0.86);
+    }
+    40% {
+      transform: scale(1);
+    }
+  }
+  .help-time {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    justify-items: center;
+    font-size: var(--fs-body);
+    font-weight: 600;
+    color: var(--muted);
+  }
+  .help-time-num,
+  .help-time-part {
+    font-family: var(--stack-display);
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    font-variant-numeric: tabular-nums;
+    color: var(--deep-red);
+  }
+  .help-time-num {
+    font-size: clamp(3rem, 2.6rem + 2vw, 3.75rem);
+  }
+
+  /* A part of the 10 minute repair */
+  .help-step {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem 1rem;
+  }
+  .help-step-label {
+    font-size: var(--fs-small);
+    font-weight: 700;
+    letter-spacing: var(--tr-micro);
+    color: var(--ink);
+  }
+  .help-dots {
+    display: flex;
+    gap: 0.375rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .help-dots li {
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 50%;
+    background: var(--line-strong);
+  }
+  .help-dots li[data-on] {
+    background: var(--deep-red);
+  }
+  .help-who {
+    justify-self: start;
+    padding: 0.3rem 0.75rem;
+    border-radius: 999px;
+    background: var(--red-wash);
+    color: var(--deep-red);
+    font-size: var(--fs-small);
+    font-weight: 700;
+  }
+  .help-part-timer {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem 1rem;
+    padding: 0.75rem 0.75rem 0.75rem 1.25rem;
+    border-radius: 1.25rem;
+    background: var(--tint);
+  }
+  .help-time-part {
+    font-size: 2.25rem;
+  }
+  .help-part-timer .btn svg {
+    fill: currentColor;
+    stroke: none;
+  }
+  .help-agree {
+    display: grid;
+    gap: 0.75rem;
+  }
+
+  /* Looking back on your own */
+  .help-feelings {
+    margin: 0;
+  }
+  .help-answer {
+    min-height: 6rem;
+    overflow: hidden;
+    resize: none;
+  }
+  .help-notes {
+    display: grid;
+    gap: 1rem;
+    margin: 0;
+    padding: 1rem 1.125rem;
+    border-radius: 1rem;
+    background: var(--tint);
+  }
+  .help-notes dt {
+    font-size: var(--fs-micro);
+    font-weight: 700;
+    letter-spacing: var(--tr-micro);
+    color: var(--deep-red);
+  }
+  .help-notes dd {
+    margin: 0.25rem 0 0;
+    color: var(--ink);
+    white-space: pre-line;
+    text-wrap: pretty;
+  }
+  .help-copy {
+    justify-self: start;
+  }
+
+  /* At the top of the plan */
+  .help-box {
+    display: grid;
+    gap: 1rem;
+    padding: 1.25rem 1.25rem 1.25rem 1.5rem;
+    border-radius: var(--r-card);
+    background: var(--tint);
+    box-shadow: 0 0 0 1px var(--line);
+  }
+  .help-box .btn {
+    width: 100%;
+  }
+  .help-box-title {
+    font-family: var(--stack-display);
+    font-size: var(--fs-title);
+    font-weight: 700;
+    line-height: var(--lh-title);
+    letter-spacing: var(--tr-title);
+    color: var(--deep-red);
+    text-wrap: balance;
+  }
+  .help-box-text {
+    margin-top: 0.25rem;
+    color: var(--ink);
+    text-wrap: pretty;
+  }
+  .help-box-actions {
+    display: grid;
+    justify-items: center;
+    gap: 0.25rem;
+  }
+  @media (min-width: 36rem) {
+    .help-box {
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 1rem 1.5rem;
+    }
+    .help-box .btn {
+      width: auto;
+    }
+  }
+  .plan-help-link {
+    justify-self: start;
+    margin-top: 0.25rem;
+  }
+
+  /* Right after paying */
+  .page-eyebrow {
+    font-size: var(--fs-lead);
+    font-weight: 600;
+    color: var(--ink);
+  }
+}
+
+/* ---------- Their Couple Standard (/plan/standard) ---------- */
+/* The outcome they paid for, so it reads like a document of their own: the brand's mark, their names, then
+   one card per part with a line for each thing they agree on. Pending items work like requests in other
+   apps: a quiet pill for whoever is waiting, and one filled button for whoever has to answer. */
+@layer components {
+  .plan-standard {
+    display: grid;
+    justify-items: start;
+    gap: 0.625rem;
+    padding: clamp(1.25rem, 1rem + 1vw, 1.75rem);
+    border-radius: var(--r-card);
+    background: var(--warm-white);
+    box-shadow:
+      0 0 0 1px var(--line),
+      var(--shadow-1);
+  }
+  .plan-standard-mark,
+  .standard-mark {
+    width: 2.5rem;
+    height: auto;
+    color: var(--deep-red);
+  }
+  .plan-standard-title {
+    font-family: var(--stack-display);
+    font-size: var(--fs-title);
+    font-weight: 700;
+    line-height: var(--lh-title);
+    letter-spacing: var(--tr-title);
+    color: var(--deep-red);
+  }
+  .plan-standard-text {
+    color: var(--ink);
+    text-wrap: pretty;
+  }
+  .plan-standard-open {
+    margin-top: 0.25rem;
+    max-width: 100%;
+    white-space: normal;
+    text-align: center;
+  }
+  .plan-today .plan-standard-open {
+    justify-self: start;
+  }
+
+  .standard-page {
+    gap: 1rem;
+  }
+  .standard {
+    display: grid;
+    gap: 1.25rem;
+  }
+  .standard-head {
+    display: grid;
+    justify-items: start;
+    gap: 0.5rem;
+    margin-bottom: 0.25rem;
+  }
+  .standard-title {
+    font-family: var(--stack-display);
+    font-size: clamp(2rem, 1.6rem + 2vw, 2.875rem);
+    font-weight: 700;
+    line-height: 1.06;
+    letter-spacing: var(--tr-display);
+    color: var(--deep-red);
+    text-wrap: balance;
+  }
+  .standard-intro {
+    font-size: var(--fs-lead);
+    line-height: var(--lh-lead);
+    letter-spacing: var(--tr-lead);
+    color: var(--ink);
+    text-wrap: pretty;
+  }
+  .standard-invite,
+  .standard-private,
+  .standard-part-text {
+    font-size: var(--fs-small);
+    line-height: var(--lh-small);
+    color: var(--muted);
+    text-wrap: pretty;
+  }
+  .standard-part {
+    display: grid;
+    gap: 0.75rem;
+    padding: clamp(1.25rem, 1rem + 1vw, 1.75rem);
+    border-radius: var(--r-card);
+    background: var(--warm-white);
+    box-shadow:
+      0 0 0 1px var(--line),
+      var(--shadow-1);
+  }
+  .standard-part-title {
+    font-family: var(--stack-display);
+    font-size: var(--fs-title);
+    font-weight: 700;
+    line-height: var(--lh-title);
+    letter-spacing: var(--tr-title);
+    color: var(--deep-red);
+    text-wrap: balance;
+  }
+  .standard-heard {
+    margin: 0;
+  }
+  .standard-lines {
+    display: grid;
+  }
+  .standard-line {
+    display: grid;
+    gap: 0.5rem;
+    padding-block: 1rem;
+    border-top: 1px solid var(--line);
+  }
+  .standard-line:first-child {
+    padding-top: 0.25rem;
+    border-top: 0;
+  }
+  .standard-line:last-child {
+    padding-bottom: 0;
+  }
+  .standard-label {
+    font-size: var(--fs-micro);
+    font-weight: 700;
+    letter-spacing: var(--tr-micro);
+    color: var(--deep-red);
+  }
+  .standard-text {
+    font-size: var(--fs-lead);
+    line-height: var(--lh-lead);
+    letter-spacing: var(--tr-lead);
+    color: var(--ink);
+    text-wrap: pretty;
+  }
+  .standard-hint {
+    color: var(--muted);
+    text-wrap: pretty;
+  }
+  .standard-status {
+    justify-self: start;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    padding: 0.3rem 0.75rem;
+    border-radius: 999px;
+    background: var(--tint);
+    color: var(--muted);
+    font-size: var(--fs-small);
+    font-weight: 700;
+  }
+  .standard-status[data-status="suggested"] {
+    color: var(--ink);
+  }
+  .standard-status[data-status="agreed"] {
+    background: var(--red-wash);
+    color: var(--deep-red);
+  }
+  .standard-status svg {
+    width: 1rem;
+    height: 1rem;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  .standard-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem 1.25rem;
+  }
+  .standard-actions .btn,
+  .standard-write {
+    white-space: normal;
+    text-align: center;
+  }
+  .standard-write {
+    justify-self: start;
+  }
+  .standard-edit {
+    display: grid;
+    gap: 0.5rem;
+  }
+}
+
+/* ---------- The check ins (/plan/check-in) ---------- */
+/* A short ask from us, so the card on the plan is quiet like the help box: a tinted note with one filled
+   button and a plain Not now. The questions look and move exactly like the quiz's. */
+@layer components {
+  .plan-checkin {
+    display: grid;
+    justify-items: start;
+    gap: 0.5rem;
+    padding: 1.25rem 1.25rem 1.25rem 1.5rem;
+    border-radius: var(--r-card);
+    background: var(--tint);
+    box-shadow: 0 0 0 1px var(--line);
+  }
+  .plan-checkin-title {
+    font-family: var(--stack-display);
+    font-size: var(--fs-title);
+    font-weight: 700;
+    line-height: var(--lh-title);
+    letter-spacing: var(--tr-title);
+    color: var(--deep-red);
+    text-wrap: balance;
+  }
+  .plan-checkin-text {
+    color: var(--ink);
+    text-wrap: pretty;
+  }
+  .plan-checkin-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem 1.5rem;
+    margin-top: 0.5rem;
+  }
+  .plan-checkin-actions .btn {
+    white-space: normal;
+    text-align: center;
+  }
+
+  .checkin-page {
+    gap: 1rem;
+  }
+  .checkin {
+    display: grid;
+    gap: 0.75rem;
+  }
+  /* Back and the progress line on one row; the arrow's glyph lines up with the text below. */
+  .checkin-head {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    min-height: 3rem;
+  }
+  .checkin-head .quiz-back {
+    flex: none;
+    margin-left: -0.6875rem;
+  }
+  .checkin-progress {
+    flex: 1;
+    height: 5px;
+    border-radius: 4px;
+    background: var(--line);
+    overflow: hidden;
+  }
+  .checkin-progress span {
+    display: block;
+    height: 100%;
+    border-radius: inherit;
+    background: var(--deep-red);
+    transform-origin: left;
+    transition: transform var(--dur-spring) var(--ease-spring);
+  }
+  .checkin-break {
+    flex-basis: 100%;
+    height: 0.25rem;
+  }
+  /* The tick under what they'd tell another couple. Left unticked; the whole line is the target. */
+  .checkin-consent {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    min-height: 2.75rem;
+    padding-block: 0.5rem;
+    color: var(--ink);
+    font-size: var(--fs-body);
+    line-height: var(--lh-body);
+    cursor: pointer;
+    text-wrap: pretty;
+  }
+  .checkin-consent input {
+    flex: none;
+    width: 1.375rem;
+    height: 1.375rem;
+    margin: calc((var(--lh-body) * 1em - 1.375rem) / 2) 0 0;
+    accent-color: var(--deep-red);
+    cursor: pointer;
+  }
+  .checkin-done {
+    display: grid;
+    gap: 1rem;
+    padding-top: 0.5rem;
+  }
+  .checkin-done .quiz-hint {
+    margin-top: 0;
+  }
+  .checkin-back {
+    justify-self: start;
+    margin-top: 0.5rem;
+    white-space: normal;
+    text-align: center;
+  }
+  .checkin-done .help-box {
+    margin-top: 1.5rem;
+  }
+}
+
+/* ---------- Privacy and terms (/privacy, /terms) ---------- */
+/* Long reading, so one calm column at a comfortable measure: the title and date, then short sections under
+   plain headings. Links are the site's red, underlined, so they read as links in running text. */
+@layer components {
+  .legal-page {
+    max-width: calc(38rem + var(--gutter) * 2);
+    margin-inline: auto;
+    padding: clamp(2.5rem, 1.5rem + 5vw, 5rem) var(--gutter) clamp(3rem, 2rem + 4vw, 5rem);
+  }
+  .legal {
+    display: grid;
+    gap: clamp(1.75rem, 1.4rem + 1.5vw, 2.5rem);
+  }
+  .legal-head {
+    display: grid;
+    gap: 0.75rem;
+  }
+  .legal-updated {
+    font-size: var(--fs-small);
+    line-height: var(--lh-small);
+    color: var(--muted);
+  }
+  .legal-intro {
+    font-size: var(--fs-lead);
+    line-height: var(--lh-lead);
+    letter-spacing: var(--tr-lead);
+    color: var(--ink);
+    text-wrap: pretty;
+  }
+  .legal-section {
+    display: grid;
+    gap: 0.625rem;
+  }
+  .legal-title {
+    font-family: var(--stack-display);
+    font-size: var(--fs-title);
+    font-weight: 700;
+    line-height: var(--lh-title);
+    letter-spacing: var(--tr-title);
+    color: var(--deep-red);
+    text-wrap: balance;
+  }
+  .legal-text,
+  .legal-list {
+    font-size: var(--fs-body);
+    line-height: 1.6;
+    color: var(--ink);
+    text-wrap: pretty;
+  }
+  .legal-list {
+    display: grid;
+    gap: 0.5rem;
+    padding-left: 1.25rem;
+    list-style: disc;
+  }
+  .legal-list li::marker {
+    color: var(--deep-red);
+  }
+  .legal a,
+  .paywall-consent a {
+    color: var(--deep-red);
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+  }
+  .paywall-consent {
+    margin-top: -0.25rem;
+    text-wrap: balance;
+  }
+}
+
+/* ---------- The backdrop behind the quiz and the plan ---------- */
+/* Secondary text sits right on the blooms here, so it is a shade darker to keep 4.5:1 or better. Outside
+   the layers, like the tokens it overrides. */
+:root:has(.backdrop) {
+  --muted: #544a44;
+}
+/* The centered nav's taller bar, matching the quiz's header. Outside the layers, like the --nav-h token
+   it changes, so page offsets that use --nav-h follow it. */
+:root:has(.nav-centered) {
+  --nav-h: 4.5rem;
+}
+@media (min-width: 66.8125rem) {
+  :root:has(.nav-centered) {
+    --nav-h: 5.25rem;
+  }
+}
+/* Big screens: the pages after the landing page grow with the screen, so the column never looks lost in
+   the middle of a large monitor. Everything is sized in rem, so the root size scales it all together, and
+   a reader's own text size setting still applies on top. */
+@media (min-width: 100rem) {
+  :root:has(.backdrop) {
+    font-size: 106.25%;
+  }
+}
+@media (min-width: 120rem) {
+  :root:has(.backdrop) {
+    font-size: 112.5%;
+  }
+}
+@media (min-width: 150rem) {
+  :root:has(.backdrop) {
+    font-size: 125%;
+  }
+}
+/* Desktop: a quiz question and the short pages sit in the middle of the screen, not at the top of an
+   empty one. Phones keep them high, where thumbs reach the answers. Auto margins never push content out
+   of reach when it is taller than the screen. */
+@media (min-width: 66.8125rem) and (min-height: 40rem) {
+  .quiz-main {
+    display: flex;
+    flex-direction: column;
+    min-height: calc(100dvh - var(--quiz-head-h) - 5px);
+    padding-block: 2.5rem 4rem;
+  }
+  .quiz-main > * {
+    width: 100%;
+    margin-block: auto;
+  }
+  .page-narrow {
+    min-height: calc(100dvh - var(--nav-h));
+    align-content: center;
+    align-content: safe center;
+    padding-block: 3rem 6rem;
+  }
+}
+
+/* The landing page's blush aura, brought inside. Four soft blooms sit behind frosted cards, with a fine
+   grain over them so the colour reads as light on paper rather than a flat gradient. It never moves on
+   its own: --stage (0 to 1, set from the quiz's progress or the part of the plan) shifts the light a
+   little, so the background answers to what you do. The landing page is not affected. */
+@layer components {
+  .backdrop {
+    --stage: 0;
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    overflow: hidden;
+    background: var(--warm-white);
+    pointer-events: none;
+  }
+  /* The page's own background would cover the backdrop, so it steps aside while one is on the page. */
+  :root:has(.backdrop) body {
+    background: transparent;
+  }
+  .bloom {
+    position: absolute;
+    border-radius: 50%;
+    transition: transform 1.4s var(--ease-out);
+  }
+  .bloom-red {
+    right: -34vmax;
+    top: -26vmax;
+    width: 96vmax;
+    height: 84vmax;
+    background: radial-gradient(closest-side, var(--bloom-red), rgb(150 4 0 / 0.34) 40%, rgb(150 4 0 / 0.12) 72%, transparent);
+    transform: translate(calc(var(--stage) * -14vmax), calc(var(--stage) * 10vmax));
+  }
+  .bloom-coral {
+    left: -42vmax;
+    top: calc(56% - 50vmax);
+    width: 88vmax;
+    height: 100vmax;
+    background: radial-gradient(closest-side, var(--bloom-coral), rgb(222 128 100 / 0.36) 40%, rgb(222 128 100 / 0.13) 72%, transparent);
+    transform: translate(calc(var(--stage) * 10vmax), calc(var(--stage) * -12vmax));
+  }
+  .bloom-rose {
+    right: -30vmax;
+    bottom: -32vmax;
+    width: 104vmax;
+    height: 80vmax;
+    background: radial-gradient(closest-side, var(--bloom-rose), rgb(170 40 60 / 0.26) 40%, rgb(170 40 60 / 0.09) 72%, transparent);
+    transform: translate(calc(var(--stage) * -18vmax), calc(var(--stage) * -6vmax));
+  }
+  .bloom-light {
+    left: calc(40% - 34vmax);
+    top: -22vmax;
+    width: 68vmax;
+    height: 60vmax;
+    background: radial-gradient(closest-side, var(--bloom-light), transparent);
+    transform: translate(calc(var(--stage) * 12vmax), calc(var(--stage) * 4vmax));
+  }
+  /* Large screens show more of each bloom, so they are a little lighter there. */
+  @media (min-width: 66.8125rem) {
+    .bloom:not(.bloom-light) {
+      opacity: 0.78;
+    }
+  }
+  /* Grain: warm specks at very low strength, multiplied into the colour underneath. */
+  .backdrop::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    opacity: 0.55;
+    mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .35 0 0 0 0 .2 0 0 0 0 .15 0 0 0 .14 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  }
+
+  /* Frosted surfaces: the aura shows through the cards, answers and fields. */
+  .quiz-choice,
+  .quiz-topic:not([data-on]),
+  .quiz-field input,
+  .quiz-story,
+  .quiz-heard,
+  .paywall,
+  .plan-today,
+  .plan-earlier,
+  .plan-check-form textarea,
+  .plan-review,
+  .plan-tool,
+  .plan-say textarea,
+  .plan-tab:not([aria-pressed="true"]),
+  .plan-standard,
+  .standard-part {
+    background: var(--frost);
+    -webkit-backdrop-filter: blur(22px) saturate(150%);
+    backdrop-filter: blur(22px) saturate(150%);
+  }
+  .quiz-choice,
+  .quiz-topic:not([data-on]),
+  .quiz-heard,
+  .paywall,
+  .plan-today,
+  .plan-tool,
+  .plan-review,
+  .plan-standard,
+  .standard-part {
+    box-shadow:
+      0 0 0 1px var(--frost-edge),
+      var(--frost-shadow);
+  }
+  .quiz-choice[aria-pressed="true"] {
+    background: var(--red-wash-hover);
+  }
+  .plan-script,
+  .plan-tip,
+  .plan-try,
+  .plan-moment,
+  .quiz-built,
+  .page-note,
+  .plan-review-suggestion,
+  .help-box,
+  .help-part-timer,
+  .help-notes,
+  .plan-checkin {
+    background: var(--frost-tint);
+    -webkit-backdrop-filter: blur(16px);
+    backdrop-filter: blur(16px);
+  }
+  .quiz-choice:hover,
+  .quiz-topic:not([data-on]):hover {
+    background: rgb(251 247 241 / 0.84);
+  }
+  /* Headers let more of the colour through. */
+  :root:has(.backdrop) .nav,
+  .quiz-head {
+    background: rgb(249 245 237 / 0.5);
+  }
+}
+
+/* ---------- Preferences ---------- */
+@media (prefers-reduced-motion: reduce) {
+  /* Gentler equivalents: things appear in place, presses change colour instead of scale. */
+  .phone,
+  .app-card,
+  .smile::after,
+  .aura-glow,
+  .scene,
+  .demo-progress span,
+  .demo-choices li,
+  .demo-next {
+    animation: none;
+  }
+  /* The phone shows the plan and holds still. */
+  .scene-quiz,
+  .scene-type {
+    visibility: hidden;
+  }
+  /* Nothing moves, so there is nothing to pause. */
+  .motion-toggle {
+    display: none;
+  }
+  /* The Get started bar fades in place instead of rising. */
+  .get-bar {
+    translate: none;
+  }
+  .btn:hover,
+  .btn:active {
+    transform: none;
+  }
+  .btn:hover svg {
+    transform: none;
+  }
+  /* Quiz screens fade in place instead of sliding, and the spinner pulses instead of turning. */
+  .quiz-step {
+    --quiz-from: 0;
+  }
+  /* The rings behind the 20 minutes hold still; the tip under them still gives the pace. */
+  .help-breath {
+    animation: none;
+  }
+  .quiz-spinner {
+    animation: quiz-pulse 1.6s ease-in-out infinite alternate;
+  }
+  .quiz-choice:active,
+  .quiz-topic:active,
+  .taster .topic:active {
+    transform: none;
+  }
+  /* A topic's words fade in place instead of rising. */
+  .taster-card {
+    transform: none;
+  }
+  .quiz-progress span,
+  .checkin-progress span,
+  .quiz-tick svg,
+  .bloom {
+    transition-duration: 0.01ms;
+  }
+  .qa-a,
+  .qa-icon,
+  .qa-icon::before,
+  .qa-icon::after,
+  .btn,
+  .btn svg,
+  .nav::after {
+    transition-duration: 0.01ms;
+  }
+}
+@media (prefers-reduced-transparency: reduce) {
+  .nav,
+  :root:has(.backdrop) .nav,
+  .quiz-head,
+  .motion-toggle {
+    background: var(--warm-white);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+  .quiz-choice,
+  .quiz-topic:not([data-on]),
+  .quiz-field input,
+  .quiz-story,
+  .quiz-heard,
+  .paywall,
+  .plan-today,
+  .plan-earlier,
+  .plan-check-form textarea,
+  .plan-review,
+  .plan-tool,
+  .plan-say textarea,
+  .plan-tab:not([aria-pressed="true"]),
+  .plan-standard,
+  .standard-part {
+    background: var(--warm-white);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+  .plan-script,
+  .plan-tip,
+  .plan-try,
+  .plan-moment,
+  .quiz-built,
+  .page-note,
+  .plan-review-suggestion,
+  .help-box,
+  .help-part-timer,
+  .help-notes,
+  .plan-checkin {
+    background: var(--tint);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+}
+@media (prefers-contrast: more) {
+  .quiz-choice,
+  .quiz-topic:not([data-on]),
+  .quiz-field input,
+  .quiz-story,
+  .quiz-heard,
+  .paywall,
+  .plan-today,
+  .plan-earlier,
+  .plan-check-form textarea,
+  .plan-tool,
+  .plan-say textarea,
+  .plan-review,
+  .plan-standard,
+  .standard-part {
+    background: var(--warm-white);
+  }
+}
+@media (prefers-contrast: more) {
+  :root {
+    --line: rgb(34 29 26 / 0.45);
+    --line-strong: rgb(34 29 26 / 0.65);
+  }
+  .nav {
+    background: var(--warm-white);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    box-shadow: 0 1px 0 var(--line-strong);
+  }
+  .get,
+  .topic,
+  .taster-card,
+  .style-card,
+  .method-card,
+  .quote,
+  .quiz-choice,
+  .quiz-topic {
+    box-shadow: 0 0 0 1px var(--line-strong);
+  }
+  .quiz-choice[aria-pressed="true"] {
+    box-shadow: 0 0 0 2px var(--deep-red);
+  }
+}
+@media (forced-colors: active) {
+  .aura,
+  .backdrop {
+    display: none;
+  }
+  .smile::after {
+    forced-color-adjust: none;
+    background: CanvasText;
+  }
+  .btn,
+  .safety-exit,
+  .quiz-choice,
+  .quiz-topic,
+  .quiz-story,
+  .plan-say textarea,
+  .quiz-field input {
+    border: 1px solid ButtonText;
+  }
+  /* Box shadows are dropped here, so the chosen answer shows with a thicker border in the highlight colour. */
+  .quiz-choice[aria-pressed="true"],
+  .quiz-topic[data-on],
+  .taster .topic[aria-pressed="true"] {
+    border: 3px solid Highlight;
+  }
+  .taster .topic,
+  .taster-card {
+    border: 1px solid ButtonText;
+  }
+}
