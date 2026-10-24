@@ -1,5 +1,6 @@
 import type { CSSProperties } from "react";
 import { Mark } from "@/components/brand/Logo";
+import { DotField } from "@/components/DotField";
 import { Faq } from "@/components/Faq";
 import { GetStarted } from "@/components/GetStarted";
 import { GetStartedBar } from "@/components/GetStartedBar";
@@ -54,7 +55,8 @@ export function Landing({ angle, reviews = landingTestimonials }: { angle: Angle
 
       <main id="main">
         {/* Hero: one centered column. With the phone, copy beside it on desktop, in a band shorter than the screen */}
-        <section className="hero" aria-labelledby="hero-title" data-section="hero" data-motion={heroPhone ? "running" : undefined}>
+        <section className="hero" aria-labelledby="hero-title" data-section="hero" data-motion="running">
+          {heroPhone ? null : <DotField />}
           <div className="wrap hero-grid">
             <div className="hero-copy">
               <h1
@@ -87,7 +89,7 @@ export function Landing({ angle, reviews = landingTestimonials }: { angle: Angle
               </div>
             ) : null}
           </div>
-          {heroPhone ? <MotionToggle /> : null}
+          <MotionToggle name="background" />
         </section>
 
         {/* The problem: her day of asks, the words beside it on desktop */}

@@ -143,7 +143,7 @@ export function Quiz() {
 
   return (
     <div className="quiz">
-      <Backdrop progress={progress} />
+      <Backdrop still />
       <QuizHeader
         progress={progress}
         back={

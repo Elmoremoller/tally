@@ -637,6 +637,20 @@
      about the same space above and below as a band. */
   .hero:not(:has(.hero-visual)) {
     padding-block: clamp(2.5rem, 1.5rem + 4vw, 5.5rem);
+    /* The pause button sits in the bottom space, so on a phone it never covers the line above it */
+    padding-block-end: max(4.75rem, clamp(2.5rem, 1.5rem + 4vw, 5.5rem));
+  }
+  /* The dotted field fills its parent and is only decoration. In the hero it sits behind the copy; in the
+     quiz's backdrop it is simply painted after the blooms and under the grain. */
+  .dots {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+  }
+  .hero > .dots {
+    z-index: -1;
   }
   @media (min-width: 66.8125rem) {
     /* About four fifths of the screen, and always tall enough for the copy. The whole phone fits inside
