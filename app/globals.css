@@ -2652,12 +2652,22 @@
   .quiz-story:focus ~ .quiz-typing::after {
     display: none;
   }
-  /* Under the box: talk instead of typing, where the browser can, then the privacy note. */
-  .quiz-under {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 0.5rem 0.875rem;
+  /* Talk instead of typing sits inside the box, bottom left, the way voice journals and chat boxes put it, so
+     the box itself shows she can type or talk. The box keeps room for it at the bottom either way, so nothing
+     moves when it appears. */
+  .quiz-box > .quiz-story,
+  .quiz-box > .quiz-typing {
+    padding-bottom: 4rem;
+  }
+  .quiz-box > .quiz-mic {
+    position: absolute;
+    left: 0.625rem;
+    bottom: 0.625rem;
+  }
+  /* Listening: the box keeps its focus ring while her words come in. */
+  .quiz-box[data-listening] > .quiz-story {
+    box-shadow: 0 0 0 2px var(--slate);
+    cursor: default;
   }
   .quiz-mic {
     display: inline-flex;
@@ -2698,12 +2708,40 @@
     stroke-linecap: round;
     stroke-linejoin: round;
   }
-  .quiz-mic[aria-pressed="true"] {
+  .quiz-mic[data-listening] {
     background: var(--slate);
     color: var(--off-white);
   }
-  .quiz-mic[aria-pressed="true"] svg {
-    animation: quiz-pulse 0.9s ease-in-out infinite alternate;
+  /* Three bars rising and falling in turn, in place of the mic, so she can see it's listening. */
+  .quiz-mic-bars {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    width: 1.15rem;
+    height: 1.15rem;
+  }
+  .quiz-mic-bars i {
+    width: 3px;
+    height: 100%;
+    border-radius: 2px;
+    background: currentColor;
+    animation: quiz-bars 0.9s ease-in-out infinite;
+  }
+  .quiz-mic-bars i:nth-child(2) {
+    animation-delay: -0.3s;
+  }
+  .quiz-mic-bars i:nth-child(3) {
+    animation-delay: -0.6s;
+  }
+  @keyframes quiz-bars {
+    0%,
+    100% {
+      transform: scaleY(0.35);
+    }
+    50% {
+      transform: scaleY(1);
+    }
   }
 
   /* The two taps on one screen: the second question sits close under its heading. */
@@ -5095,6 +5133,14 @@
   /* The quiz box holds still on its first example, so no caret. */
   .quiz-typing::after {
     display: none;
+  }
+  /* Listening shows as three still bars of different heights. */
+  .quiz-mic-bars i {
+    animation: none;
+    transform: scaleY(0.6);
+  }
+  .quiz-mic-bars i:nth-child(2) {
+    transform: scaleY(1);
   }
   /* The phone shows the plan and holds still. */
   .scene-quiz,

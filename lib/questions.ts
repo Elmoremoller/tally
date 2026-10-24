@@ -46,7 +46,22 @@ export const privacyNote = "No need to name your company or colleagues.";
 export const toolsQuestion = { title: "Which AI tools can you use at work?", hint: "Pick all that fit" };
 export const policyQuestion = { title: "What’s your company’s view on AI?" };
 
-export const micCopy = { start: "Talk instead of typing", stop: "Stop listening", listening: "Listening" }; // DRAFT
+/**
+ * Talking instead of typing. `start` also shows in the landing page's How it works. `speak` sits in the empty box
+ * while listening; `problems` say why it stopped when she didn't stop it. Approved on 2026-10-24.
+ */
+export const micCopy = {
+  start: "Talk instead of typing",
+  stop: "Done",
+  listening: "Listening",
+  speak: "Start talking. Your words show up here as you go.",
+  problems: {
+    blocked: "Your browser didn’t let us use the microphone. Type instead, or tap the mic on your keyboard.",
+    silent: "We didn’t hear anything. Tap Talk instead of typing to try again.",
+    no_mic: "We couldn’t find a microphone. Type instead, or tap the mic on your keyboard.",
+    failed: "Talking isn’t working in this browser. Type instead, or tap the mic on your keyboard.",
+  },
+} as const;
 
 /** While the AI reads her answers. DRAFT */
 export const readingLine = "Reading your week";
