@@ -19,7 +19,7 @@ export type Testimonial = {
   detail?: string;
 };
 
-/** The section's title. DRAFT, waiting for approval. */
+/** The section's title, approved on 2026-10-24. */
 export const reviewsTitle = "In their own words";
 
 /** Fewer than this and the section stays hidden. */

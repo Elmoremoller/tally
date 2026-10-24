@@ -7,7 +7,7 @@ import { hoursText } from "./week";
 export const openQuestions = {
   job: {
     title: "What’s your job, in your own words?",
-    /** Typed out in turn in the empty box. The first is the brief's; the rest are DRAFTS. */
+    /** Typed out in turn in the empty box. The first is the brief's; the rest were approved on 2026-10-24. */
     examples: [
       "Marketing coordinator at a 200 person software company, I handle our events and newsletters.",
       "Executive assistant to two partners at a law firm. I run their calendars, travel and the office.",
@@ -23,7 +23,7 @@ export const openQuestions = {
   /**
    * The work she wants her won back hours to go to, and credit for. Asked as the brief's "What do you wish
    * you were known for at work?" until 2026-10-24; reworded because few people have put that into words.
-   * Still stored as known_for. The title, hint and examples are DRAFTS.
+   * Still stored as known_for. The title, hint and examples were approved on 2026-10-24.
    */
   knownFor: {
     title: "What would you rather spend your time on at work?",
