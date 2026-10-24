@@ -2582,6 +2582,15 @@
   .quiz-field input[aria-invalid] {
     box-shadow: 0 0 0 2px var(--slate);
   }
+  /* The field that opens under the AI tool chips when she picks Other, with a placeholder like the open
+     questions' boxes. */
+  .quiz-other {
+    margin-top: 0.875rem;
+  }
+  .quiz-other input::placeholder {
+    color: var(--muted);
+    opacity: 0.75;
+  }
   .quiz-error {
     font-size: var(--fs-small);
     font-weight: 600;

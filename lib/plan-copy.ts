@@ -1,6 +1,6 @@
 import { planParts } from "./landing";
 import { dollars, offer } from "./offer";
-import { hoursText, toolLabels, type AiTool, type Pile } from "./week";
+import { hoursText, toolLabels, type AiTool, type ChatTool, type Pile } from "./week";
 
 // The words around her plan: the paywall, checkout, the page after paying and the plan page. The paywall's
 // headline, price line and button are the brief's; lines marked DRAFT fill a gap and wait for approval.
@@ -73,8 +73,21 @@ export const planCopy = {
   hoursTitle: (hours: number) => `${hoursText(hours)} a week`,
   hoursNone: "None of your tasks are ones to hand off yet.", // DRAFT
   profileLabel: (tool: AiTool | null) => (tool ? `Your work profile for ${toolLabels[tool]}` : "Your work profile"),
-  profileLead: (tool: AiTool | null) =>
-    tool ? `Paste it where ${toolLabels[tool]} lets you add custom instructions.` : "Paste it into whichever AI tool your company approves.", // DRAFT
+  /** Under the work profile's label when she picked no chat tool, or must check which one is approved. */
+  profileLead: "Paste it into whichever AI tool your company approves.", // DRAFT
+  /** At the top of AI setup when her company restricts AI or she has no idea of its view. DRAFT */
+  checkFirst: "Before you start, check which AI tool your company has approved. There’s a message below you can send to ask.",
+  /** Where to paste her work profile in each chat tool she picked. DRAFT */
+  pasteTitle: (checkFirst: boolean) => (checkFirst ? "Where to paste it, once you know it’s approved" : "Where to paste it"),
+  pasteWhere: {
+    chatgpt: "In ChatGPT, open Settings, then Personalization, and paste it into Custom instructions.",
+    copilot: "In Copilot Chat, open Settings, then Personalization, and paste it into Custom instructions.",
+    gemini: "In Gemini, make a new Gem, paste it into the Gem’s instructions, and start your work chats from that Gem.",
+    claude: "In Claude, open Settings and paste it into the box for your personal preferences.",
+  } satisfies Record<ChatTool, string>,
+  pasteFallback: "Menus change. If you can’t find the spot, paste it at the start of a new chat.",
+  /** Over the plan writer's suggestion, when she picked no chat tool. DRAFT */
+  startTitle: "Which tool to start with",
   rulesTitle: "Safe use rules",
   askLabel: "Ask what’s approved", // DRAFT
   askLead: "Send this to IT or your manager.", // DRAFT

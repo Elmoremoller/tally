@@ -21,20 +21,13 @@ export const openQuestions = {
     placeholder: "Lots of meetings where I end up taking notes, chasing people for updates, fixing slides for my boss...",
   },
   /**
-   * The work she wants her won back hours to go to, and credit for. Asked as the brief's "What do you wish
-   * you were known for at work?" until 2026-10-24; reworded because few people have put that into words.
-   * Still stored as known_for. The title, hint and examples were approved on 2026-10-24.
+   * The extra work she got pulled into, the main input for her hand back pile. Replaced "What would you rather
+   * spend your time on at work?" on 2026-10-24; stored as extra_work. Words from the user's brief.
    */
-  knownFor: {
-    title: "What would you rather spend your time on at work?",
-    hint: "The work you’d like to get credit for. One short line is enough.",
-    examples: [
-      "Strategy, not just being the one who gets things done.",
-      "Planning our campaigns, not just sending them out.",
-      "Leading projects instead of taking the notes in them.",
-      "Growing our client accounts. It’s what I’m best at.",
-      "Building a better way to hire and onboard people.",
-    ],
+  extraWork: {
+    title: "What do you end up doing that isn’t really your job?",
+    hint: "The favors, the extras, the things you got pulled into.",
+    placeholder: "Taking notes in every meeting, running our socials, planning the team lunch.",
   },
 } as const;
 export type OpenQuestion = keyof typeof openQuestions;
@@ -43,7 +36,12 @@ export type OpenQuestion = keyof typeof openQuestions;
 export const privacyNote = "No need to name your company or colleagues.";
 
 /** The two taps, on one screen. */
-export const toolsQuestion = { title: "Which AI tools can you use at work?", hint: "Pick all that fit" };
+export const toolsQuestion = {
+  title: "Which AI tools do you use for work?",
+  hint: "Pick all that fit",
+  /** In the field that opens under the chips when she picks Other. `label` is for screen readers only. DRAFT */
+  other: { label: "Other AI tools you use", placeholder: "Like the AI in Canva, Notion or Grammarly" },
+};
 export const policyQuestion = { title: "What’s your company’s view on AI?" };
 
 /**
@@ -69,12 +67,12 @@ export const readingLine = "Reading your week";
 /** The one follow up question, when her week was too thin. The question itself comes from the AI. */
 export const followUpCopy = { hint: "A line or two is enough." }; // DRAFT
 
-/** Here's what we heard: her role, her tasks with their hours, and what she wants to be known for. */
+/** Here's what we heard: her role, her tasks with their hours, and the extra work she got pulled into. */
 export const heardCopy = {
   title: "Here’s what we heard",
   tasks: "Where your week goes", // DRAFT
   slider: "Move the slider so the hours are yours.", // DRAFT
-  knownFor: "What you’d rather spend your time on", // approved 2026-10-24
+  extra: "What you’ve been pulled into", // DRAFT
   yes: "Looks right",
   edit: "Edit",
   doneEditing: "Done editing",

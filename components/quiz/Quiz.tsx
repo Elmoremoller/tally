@@ -14,10 +14,10 @@ import { QuizHeader } from "./QuizHeader";
 import { TextStep } from "./TextStep";
 import { ToolsStep } from "./ToolsStep";
 
-// One screen at a time: her job, her week, what she wants to be known for, then the two taps. The AI reads
+// One screen at a time: her job, her week, the extra work she got pulled into, then the two taps. The AI reads
 // her answers while "Reading your week" shows; if her week was too thin it asks one follow up, once. Then
 // Here's what we heard, with her hours on sliders, and Looks right shows her free result and the paywall.
-const STEPS = ["job", "week", "known_for", "tools"] as const;
+const STEPS = ["job", "week", "extra_work", "tools"] as const;
 const SCREENS = STEPS.length + 1;
 /** "Reading your week" stays up at least this long, so it can be read. */
 const READING_MIN = 1200;
@@ -33,8 +33,10 @@ export function Quiz() {
   const [direction, setDirection] = useState<"forward" | "back">("forward");
   const [job, setJob] = useState("");
   const [week, setWeek] = useState("");
-  const [knownFor, setKnownFor] = useState("");
+  const [extraWork, setExtraWork] = useState("");
   const [tools, setTools] = useState<AiTool[]>([]);
+  /** What she types under Other. Kept if she unpicks Other, but only sent while it's picked. */
+  const [otherTools, setOtherTools] = useState("");
   const [policy, setPolicy] = useState<AiPolicy | null>(null);
   /** The one follow up question, once it's been asked, and her answer to it. */
   const [followUp, setFollowUp] = useState<string | null>(null);
@@ -107,7 +109,8 @@ export function Quiz() {
   const read = async () => {
     if (!policy) return;
     setError("");
-    const answers: Answers = { job, week, knownFor, aiTools: tools, aiPolicy: policy };
+    const aiToolsOther = tools.includes("other") ? otherTools.trim() : null;
+    const answers: Answers = { job, week, extraWork, aiTools: tools, aiToolsOther, aiPolicy: policy };
     const withFollowUp = followUp && followUpAnswer.trim() ? { question: followUp, answer: followUpAnswer } : undefined;
     const key = JSON.stringify([answers, withFollowUp ?? null]);
     if (lastRead.current?.key === key) return handle(lastRead.current.result);
@@ -166,7 +169,7 @@ export function Quiz() {
           </div>
         ) : phase === "result" ? (
           <FreeResult tasks={tasks} headingRef={headingRef}>
-            <Paywall tasks={tasks} aiTools={tools} aiPolicy={policy} knownFor={heard?.knownFor ?? ""} />
+            <Paywall tasks={tasks} aiTools={tools} aiPolicy={policy} />
           </FreeResult>
         ) : (
           <div key={phase === "questions" ? step : phase} className="quiz-step" data-dir={direction}>
@@ -187,7 +190,6 @@ export function Quiz() {
             ) : phase === "heard" && heard ? (
               <HeardStep
                 role={heard.role}
-                knownFor={heard.knownFor}
                 tasks={tasks}
                 onTasks={setTasks}
                 editing={editing}
@@ -216,9 +218,9 @@ export function Quiz() {
               />
             ) : step === 2 ? (
               <TextStep
-                {...openQuestions.knownFor}
-                value={knownFor}
-                setValue={setKnownFor}
+                {...openQuestions.extraWork}
+                value={extraWork}
+                setValue={setExtraWork}
                 onSubmit={next}
                 headingRef={headingRef}
               />
@@ -226,6 +228,8 @@ export function Quiz() {
               <ToolsStep
                 tools={tools}
                 onTools={setTools}
+                other={otherTools}
+                onOther={setOtherTools}
                 policy={policy}
                 onPolicy={setPolicy}
                 onSubmit={read}

@@ -18,12 +18,10 @@ export function Paywall({
   tasks,
   aiTools,
   aiPolicy,
-  knownFor,
 }: {
   tasks: Pick<WeekTask, "name" | "pile" | "hours">[];
   aiTools: AiTool[];
   aiPolicy: AiPolicy | null;
-  knownFor: string;
 }) {
   const [state, action, pending] = useActionState(startCheckout, null);
 
@@ -33,7 +31,7 @@ export function Paywall({
         {paywallCopy.title}
       </h2>
       <p className="paywall-lead">{paywallCopy.lead}</p>
-      <PlanPreview tasks={tasks} aiTools={aiTools} aiPolicy={aiPolicy} knownFor={knownFor} />
+      <PlanPreview tasks={tasks} aiTools={aiTools} aiPolicy={aiPolicy} />
 
       {/* On a phone the price and the button stay pinned while she reads the cards, and the error shows with them. */}
       <form action={action} className="paywall-form">

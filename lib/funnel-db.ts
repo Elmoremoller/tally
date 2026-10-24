@@ -2,9 +2,10 @@ import { supabaseAdmin } from "./supabase";
 import type { PlanInput } from "./plan-writer";
 import type { AiPolicy, AiTool, Pile } from "./week";
 
-// Tally's tables, as supabase/migrations/20261024120000_worth_her_time.sql makes them, and the
-// calls that write them. Server only: every call uses the secret key. The types are written by hand, since
-// the database lives in an account the type generator here can't reach. Keep them in step with the SQL.
+// Tally's tables, as supabase/migrations/20261024120000_worth_her_time.sql makes them (with
+// 20261024140000_extra_work_and_ai_tools.sql on top), and the calls that write them. Server only: every call
+// uses the secret key. The types are written by hand, since the database lives in an account the type
+// generator here can't reach. Keep them in step with the SQL.
 
 export type { AiPolicy, AiTool, Pile };
 export type SessionStatus = "started" | "completed" | "paid";
@@ -41,12 +42,18 @@ export type IntakeRow = {
   session_id: string;
   job_text: string | null;
   week_text: string | null;
+  /** The third question as it was until 2026-10-24, kept for the answers saved then. */
   known_for_text: string | null;
+  /** The third question since 2026-10-24: what she ends up doing that isn't really her job. */
+  extra_work_text: string | null;
   follow_up_question: string | null;
   follow_up_answer: string | null;
   ai_tools: AiTool[] | null;
+  /** What she typed under Other. */
+  ai_tools_other: string | null;
   ai_policy: AiPolicy | null;
   role_summary: string | null;
+  /** Only on answers to the old third question. */
   known_for_summary: string | null;
   prompt_version: string | null;
   model: string | null;
@@ -61,6 +68,8 @@ export type TaskRow = {
   pile: Pile;
   estimated_hours: number;
   confirmed_hours: number | null;
+  /** True for a task from her extra work answer. */
+  extra: boolean;
   position: number;
 };
 
@@ -114,14 +123,22 @@ export const noteStep = (sessionId: string, step: string) => call<void>("note_st
 
 export const saveAnswers = (
   sessionId: string,
-  answers: { job: string; week: string; knownFor: string; aiTools: AiTool[]; aiPolicy: AiPolicy },
+  answers: {
+    job: string;
+    week: string;
+    extraWork: string;
+    aiTools: AiTool[];
+    aiToolsOther: string | null;
+    aiPolicy: AiPolicy;
+  },
 ) =>
-  call<void>("save_answers", {
+  call<void>("save_quiz_answers", {
     p_session_id: sessionId,
     p_job_text: answers.job,
     p_week_text: answers.week,
-    p_known_for_text: answers.knownFor,
+    p_extra_work_text: answers.extraWork,
     p_ai_tools: answers.aiTools,
+    p_ai_tools_other: answers.aiToolsOther,
     p_ai_policy: answers.aiPolicy,
   });
 
@@ -132,17 +149,17 @@ export const saveIntakeResult = (
   sessionId: string,
   result: {
     roleSummary: string;
-    knownForSummary: string;
     followUpQuestion: string | null;
     promptVersion: string;
     model: string;
-    tasks: { name: string; pile: Pile; estimated_hours: number }[];
+    tasks: { name: string; pile: Pile; estimated_hours: number; extra: boolean }[];
   },
 ) =>
   call<void>("save_intake_result", {
     p_session_id: sessionId,
     p_role_summary: result.roleSummary,
-    p_known_for_summary: result.knownForSummary,
+    // Only the old third question had a summary line.
+    p_known_for_summary: null,
     p_follow_up_question: result.followUpQuestion,
     p_prompt_version: result.promptVersion,
     p_model: result.model,
@@ -233,26 +250,29 @@ export async function orderEmail(orderId: string): Promise<string | null> {
   return (data?.email as string | undefined) ?? null;
 }
 
-/** What the plan writer needs: her answers, her summaries and her tasks with the hours she confirmed. */
+/**
+ * What the plan writer needs: her answers, her role and her tasks with the hours she confirmed. Answers saved
+ * before 2026-10-24 have no extra work answer; their plan is written without one.
+ */
 export async function loadPlanInput(plan: PlanRow): Promise<PlanInput> {
   const { intake, tasks } = await loadWeek(plan.session_id);
-  if (!intake?.job_text || !intake.week_text || !intake.known_for_text || !intake.ai_tools || !intake.ai_policy) {
+  if (!intake?.job_text || !intake.week_text || !intake.ai_tools || !intake.ai_policy) {
     throw new Error("Her answers are missing");
   }
-  if (!intake.role_summary || !intake.known_for_summary || !tasks.length) throw new Error("Her quiz isn't finished");
+  if (!intake.role_summary || !tasks.length) throw new Error("Her quiz isn't finished");
   return {
     job: intake.job_text,
     week: intake.week_text,
-    knownFor: intake.known_for_text,
+    extraWork: intake.extra_work_text,
     followUp:
       intake.follow_up_question && intake.follow_up_answer
         ? { question: intake.follow_up_question, answer: intake.follow_up_answer }
         : null,
     role: intake.role_summary,
-    knownForSummary: intake.known_for_summary,
     aiTools: intake.ai_tools,
+    aiToolsOther: intake.ai_tools_other,
     aiPolicy: intake.ai_policy,
-    tasks: tasks.map((t) => ({ name: t.name, pile: t.pile, hours: t.confirmed_hours ?? t.estimated_hours })),
+    tasks: tasks.map((t) => ({ name: t.name, pile: t.pile, hours: t.confirmed_hours ?? t.estimated_hours, extra: t.extra })),
   };
 }
 
@@ -273,6 +293,8 @@ export async function loadWeek(sessionId: string) {
       ...t,
       estimated_hours: Number(t.estimated_hours),
       confirmed_hours: t.confirmed_hours === null ? null : Number(t.confirmed_hours),
+      // Before the migration that added it, every task was from her week.
+      extra: t.extra === true,
     })),
   };
 }

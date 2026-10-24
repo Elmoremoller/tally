@@ -22,8 +22,10 @@ import {
   AI_TOOLS,
   ANSWER_MAX,
   halfHours,
+  OTHER_TOOLS_MAX,
   PILES,
   SLIDER_MAX,
+  SOLO_TOOLS,
   TASKS_MAX,
   type AiPolicy,
   type AiTool,
@@ -34,9 +36,18 @@ import {
 // answers are checked against the limits and allowed values, and the session always comes from this
 // browser's cookie, never from the page.
 
-export type QuizStep = "job" | "week" | "known_for" | "tools" | "follow_up";
-export type Answers = { job: string; week: string; knownFor: string; aiTools: AiTool[]; aiPolicy: AiPolicy };
-export type Heard = { role: string; knownFor: string; tasks: WeekTask[] };
+export type QuizStep = "job" | "week" | "extra_work" | "tools" | "follow_up";
+export type Answers = {
+  job: string;
+  week: string;
+  /** What she ends up doing that isn't really her job. */
+  extraWork: string;
+  aiTools: AiTool[];
+  /** What she typed under Other; only kept when she picked Other. */
+  aiToolsOther: string | null;
+  aiPolicy: AiPolicy;
+};
+export type Heard = { role: string; tasks: WeekTask[] };
 export type ReadResult =
   | { ok: true; heard: Heard | null; followUp: string | null }
   | { ok: false; error: string; thin?: boolean };
@@ -68,14 +79,18 @@ export async function noteQuizStep(step: QuizStep): Promise<void> {
   }
 }
 
+/** Her answers as the quiz allows them: None yet and Not sure only on their own, and Other only with its text. */
 function cleanAnswers(answers: Answers): Answers | null {
   const job = cleanText(answers?.job, ANSWER_MAX);
   const week = cleanText(answers?.week, ANSWER_MAX);
-  const knownFor = cleanText(answers?.knownFor, ANSWER_MAX);
+  const extraWork = cleanText(answers?.extraWork, ANSWER_MAX);
   const tools = Array.isArray(answers?.aiTools) ? [...new Set(answers.aiTools)] : [];
-  if (!job || !week || !knownFor || !oneOf(AI_POLICIES, answers.aiPolicy)) return null;
+  if (!job || !week || !extraWork || !oneOf(AI_POLICIES, answers.aiPolicy)) return null;
   if (!tools.length || !tools.every((t) => oneOf(AI_TOOLS, t))) return null;
-  return { job, week, knownFor, aiTools: tools, aiPolicy: answers.aiPolicy };
+  if (tools.length > 1 && tools.some((t) => oneOf(SOLO_TOOLS, t))) return null;
+  const other = tools.includes("other") ? cleanText(answers.aiToolsOther, OTHER_TOOLS_MAX) : null;
+  if (tools.includes("other") && !other) return null;
+  return { job, week, extraWork, aiTools: tools, aiToolsOther: other, aiPolicy: answers.aiPolicy };
 }
 
 /**
@@ -109,11 +124,10 @@ export async function readWeek(input: { answers: Answers; followUp?: { question:
 
     await saveIntakeResult(sessionId, {
       roleSummary: result.role_summary,
-      knownForSummary: result.known_for_summary,
       followUpQuestion: followUp?.question ?? result.follow_up_question,
       promptVersion: read.promptVersion,
       model: read.model,
-      tasks: result.tasks.map(({ name, pile, estimated_hours }) => ({ name, pile, estimated_hours })),
+      tasks: result.tasks.map(({ name, pile, estimated_hours, extra }) => ({ name, pile, estimated_hours, extra })),
     });
     if (followUp) await saveFollowUpAnswer(sessionId, followUp.answer);
     await noteStep(sessionId, followUp ? "follow_up" : "tools");
@@ -123,8 +137,7 @@ export async function readWeek(input: { answers: Answers; followUp?: { question:
       ok: true,
       heard: {
         role: result.role_summary,
-        knownFor: result.known_for_summary,
-        tasks: tasks.map((t) => ({ id: t.id, name: t.name, pile: t.pile, hours: t.estimated_hours })),
+        tasks: tasks.map((t) => ({ id: t.id, name: t.name, pile: t.pile, hours: t.estimated_hours, extra: t.extra })),
       },
       followUp: result.needs_follow_up ? result.follow_up_question : null,
     };

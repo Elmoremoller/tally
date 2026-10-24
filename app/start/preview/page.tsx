@@ -37,12 +37,7 @@ async function Preview({ searchParams }: { searchParams: PageProps<"/start/previ
   const tasks = plan.tasks.filter((t) => !dropped.includes(t.pile));
   return (
     <FreeResult tasks={tasks}>
-      <Paywall
-        tasks={tasks}
-        aiTools={plan.tool ? [plan.tool] : ["not_sure"]}
-        aiPolicy={plan.policy}
-        knownFor={plan.knownFor}
-      />
+      <Paywall tasks={tasks} aiTools={plan.tools ?? (plan.tool ? [plan.tool] : ["not_sure"])} aiPolicy={plan.policy} />
     </FreeResult>
   );
 }

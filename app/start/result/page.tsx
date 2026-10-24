@@ -38,12 +38,7 @@ async function SavedResult() {
   const tasks = week.tasks.map((t) => ({ name: t.name, pile: t.pile, hours: t.confirmed_hours ?? t.estimated_hours }));
   return (
     <FreeResult tasks={tasks}>
-      <Paywall
-        tasks={tasks}
-        aiTools={week.intake?.ai_tools ?? []}
-        aiPolicy={week.intake?.ai_policy ?? null}
-        knownFor={week.intake?.known_for_summary ?? ""}
-      />
+      <Paywall tasks={tasks} aiTools={week.intake?.ai_tools ?? []} aiPolicy={week.intake?.ai_policy ?? null} />
     </FreeResult>
   );
 }

@@ -38,7 +38,7 @@ export const privacyPage: LegalPage = {
       blocks: [
         {
           list: [
-            "When you take the quiz: what you write about your job, your week and what you want to be known for, which AI tools you can use, your company’s view on AI, and the tasks and hours we work out with you.",
+            "When you take the quiz: what you write about your job, your week and the work you end up doing that isn’t really your job, which AI tools you use (and any you type in), your company’s view on AI, and the tasks and hours we work out with you.",
             "When you pay: your email, that you paid, how much, and when. Your card details go straight to Stripe, and we never see them.",
             "Your plan, and when it was made.",
             "Where you came from: the ad or link that brought you here, like its campaign name, and which steps of the quiz you finished. [REVIEW]",

@@ -1,7 +1,7 @@
 import { Backdrop } from "@/components/Backdrop";
 import { pileNotes, planCopy } from "@/lib/plan-copy";
 import type { PlanContent } from "@/lib/plan-writer";
-import { hoursNobodyNotices, hoursText, PILES, pileLabels } from "@/lib/week";
+import { checkFirst, hoursNobodyNotices, hoursText, PILES, pileLabels, profileTool } from "@/lib/week";
 import { ResendLink } from "./ResendLink";
 import { SayBox } from "./SayBox";
 import { ScriptTabs } from "./ScriptTabs";
@@ -27,6 +27,9 @@ export function PlanPage({ content, welcome }: { content: PlanContent; welcome?:
   const scripts = new Map(content.handBack.map((h) => [h.task, h.script]));
   const handedOff = content.tasks.filter((t) => t.pile !== "keep_visible").sort((a, b) => b.hours - a.hours);
   const total = hoursNobodyNotices(content.tasks);
+  // Plans written before 2026-10-24 name one tool.
+  const tools = content.tools ?? (content.tool ? [content.tool] : []);
+  const approvedFirst = checkFirst(content.policy);
   return (
     <main id="main" className="plan">
       <Backdrop progress={1} />
@@ -96,17 +99,36 @@ export function PlanPage({ content, welcome }: { content: PlanContent; welcome?:
         )}
       </section>
 
-      {/* 3. AI setup: her work profile, safe use rules, and what to ask when the rules aren't clear */}
+      {/* 3. AI setup: checking what's approved first when she should, her work profile and where to paste it in
+          each chat tool she picked (or which tool to start with), safe use rules, and what to ask */}
       <section className="plan-section" aria-labelledby="setup-title">
         <h2 id="setup-title" className="plan-section-title">
           {planCopy.setup.title}
         </h2>
         <p className="plan-section-text">{planCopy.setup.text}</p>
+        {approvedFirst ? <p className="plan-ack">{planCopy.checkFirst}</p> : null}
         <figure className="plan-script">
-          <p className="plan-script-label">{planCopy.profileLabel(content.tool)}</p>
-          <p className="plan-script-lead">{planCopy.profileLead(content.tool)}</p>
+          <p className="plan-script-label">{planCopy.profileLabel(profileTool(tools))}</p>
+          {approvedFirst || !tools.length ? <p className="plan-script-lead">{planCopy.profileLead}</p> : null}
           <SayBox words={content.workProfile} />
         </figure>
+        {tools.length ? (
+          <div className="plan-tool">
+            <h3 className="plan-tool-title">{planCopy.pasteTitle(approvedFirst)}</h3>
+            <ul className="plan-rules">
+              {tools.map((tool) => (
+                <li key={tool}>{planCopy.pasteWhere[tool]}</li>
+              ))}
+            </ul>
+            <p className="plan-tools-line">{planCopy.pasteFallback}</p>
+          </div>
+        ) : null}
+        {content.startTool ? (
+          <div className="plan-tool">
+            <h3 className="plan-tool-title">{planCopy.startTitle}</h3>
+            <p>{content.startTool}</p>
+          </div>
+        ) : null}
         <div className="plan-tool">
           <h3 className="plan-tool-title">{planCopy.rulesTitle}</h3>
           <ul className="plan-rules">

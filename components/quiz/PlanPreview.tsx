@@ -50,22 +50,13 @@ function Locked() {
 
 /**
  * A look at her plan before she pays: one card per part, in the plan page's order. What comes from her answers
- * shows in clear (her tasks, her hours, her tool, what she'd rather spend her time on); the scripts, profile and
- * prompts, which are only written after checkout, sit behind a lock. The prompt tasks and the ask line come
+ * shows in clear (her tasks, her hours, her tool, her core work); the scripts, profile and prompts, which are
+ * only written after checkout, sit behind a lock. The prompt tasks and the ask line come
  * from the same rules the plan writer uses.
  */
-export function PlanPreview({
-  tasks,
-  aiTools,
-  aiPolicy,
-  knownFor,
-}: {
-  tasks: Task[];
-  aiTools: AiTool[];
-  aiPolicy: AiPolicy | null;
-  knownFor: string;
-}) {
+export function PlanPreview({ tasks, aiTools, aiPolicy }: { tasks: Task[]; aiTools: AiTool[]; aiPolicy: AiPolicy | null }) {
   const handBack = biggest(tasks.filter((t) => t.pile === "hand_back"));
+  const core = tasks.filter((t) => t.pile === "keep_visible");
   const handedOff = biggest(tasks.filter((t) => t.pile !== "keep_visible"));
   const prompts = promptTasks(tasks);
   const rules = aiPolicy === "encouraged" || aiPolicy === "restricted" ? previewCopy.rules[aiPolicy] : null;
@@ -135,7 +126,13 @@ export function PlanPreview({
 
       <Card id="visibility">
         <p className="peek-title">{previewCopy.projectTitle}</p>
-        {knownFor ? <p className="peek-own">{knownFor}</p> : null}
+        {core.length ? (
+          <ul className="peek-chips">
+            {core.map((task) => (
+              <li key={task.name}>{task.name}</li>
+            ))}
+          </ul>
+        ) : null}
         <p className="peek-text">{previewCopy.projectLine}</p>
         <Locked />
       </Card>
