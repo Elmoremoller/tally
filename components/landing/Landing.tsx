@@ -13,7 +13,7 @@ import { Reviews } from "./Reviews";
 import { stepVisuals } from "./StepVisuals";
 import { faqs, planParts, problem, steps, why, whyThis } from "@/lib/landing";
 import { angleFit, angles, offer, type AngleId } from "@/lib/offer";
-import { reviewsMinimum, testimonials, type Testimonial } from "@/lib/testimonials";
+import { landingTestimonials, reviewsMinimum, type Testimonial } from "@/lib/testimonials";
 
 /**
  * The headline with its key phrase in bold and the underline drawn under it. Punctuation right after the
@@ -43,9 +43,9 @@ const heroPhone = false;
 /**
  * The landing page, for one ad angle: only the hero headline changes. Section order follows the brief, and
  * the bands alternate off white and tint as before. LAYOUT.md has the details. `reviews` is only passed by
- * the local preview; the live page shows the real ones from lib/testimonials.ts.
+ * the local preview; otherwise lib/testimonials.ts decides, and the live site only ever shows real ones.
  */
-export function Landing({ angle, reviews = testimonials }: { angle: AngleId; reviews?: readonly Testimonial[] }) {
+export function Landing({ angle, reviews = landingTestimonials }: { angle: AngleId; reviews?: readonly Testimonial[] }) {
   const fit = angleFit(angle);
   return (
     <>
@@ -212,7 +212,7 @@ export function Landing({ angle, reviews = testimonials }: { angle: AngleId; rev
           </div>
         </section>
 
-        {/* Reviews from real buyers, drifting sideways. Hidden until there are enough. */}
+        {/* Reviews drifting sideways: placeholders until there are enough real ones, and never placeholders on the live site. */}
         {reviews.length >= reviewsMinimum ? <Reviews reviews={reviews} /> : null}
 
         {/* Final call to action */}
