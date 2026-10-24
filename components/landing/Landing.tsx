@@ -48,7 +48,7 @@ export function Landing({ angle, reviews = testimonials }: { angle: AngleId; rev
   return (
     <>
       {/* No action in the nav: once the hero's button scrolls away, the Get started bar carries it. */}
-      <SiteNav cta={false} />
+      <SiteNav cta={false} login />
 
       <main id="main">
         {/* Hero: one centered column. With the phone, copy beside it on desktop, in a band shorter than the screen */}

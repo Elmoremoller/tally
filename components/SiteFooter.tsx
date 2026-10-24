@@ -7,8 +7,11 @@ export function SiteFooter() {
     <footer className="footer" data-section="footer">
       <div className="wrap">
         <div className="footer-row">
-          <nav aria-label="Legal">
+          <nav aria-label="Footer">
             <ul className="footer-links">
+              <li>
+                <Link href="/login">{offer.login}</Link>
+              </li>
               <li>
                 <Link href="/privacy">Privacy</Link>
               </li>

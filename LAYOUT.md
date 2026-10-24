@@ -10,7 +10,7 @@ Each section carries a `data-section` attribute in `components/landing/Landing.t
 
 | # | `data-section` | Section | Component it reuses | Layout |
 |---|---|---|---|---|
-| 1 | `nav` | Nav | Nav | Sticky translucent bar with the name in the middle. Take the free quiz lives in the bottom bar. |
+| 1 | `nav` | Nav | Nav | Sticky translucent bar with the name in the middle and Log in at the right end, quiet like the footer links, for someone coming back to her plan (it opens Open your plan). Take the free quiz lives in the bottom bar. The quiz, the paywall, the plan pages and Open your plan itself have no Log in. |
 | 2 | `hero` | Hero | Hero | Off white. The angle's headline with its key phrase in italic and the underline under it, the sentence, and Take the free quiz with the line under it, in one centered column at every width. The phone playing through the product in front of the moving sky blue glow is off for now: set `heroPhone` in `components/landing/Landing.tsx` to true to bring it back, with the copy left and the phone right on desktop. |
 | 3 | `problem` | Sound familiar? | (new) | Tinted band. The brief's ten moments told as one day of hers: a deep slate lock screen wallpaper (no phone) showing Thursday 7:48, and six frosted notifications from her manager, a coworker, HR, a director, the all hands and an overdue reminder. They arrive one by one the first time the panel comes into view; all at once with reduced motion. Two lines beside it carry the rest. Words left and panel right on desktop; one centred column on phones and tablets. |
 | 4 | `why` | Why it happens | (new, after Saidwell) | Off white band, with a short lead line under the heading. Three tinted cards, each led by the finding's own figure set large (200 hours, Almost 50%, 13% vs 6%), then the finding word for word, then its source under a hairline. Stacked on phones, three across from tablets up. |
@@ -20,7 +20,7 @@ Each section carries a `data-section` attribute in `components/landing/Landing.t
 | 8 | `reviews` | In their own words | (new, after Saidwell) | Off white band, shown only once lib/testimonials.ts holds three real reviews. Tinted cards (her words in muted slate with one phrase in bold ink, then an initial, her name and a detail line) in two full width rows drifting sideways in opposite directions, the edges fading out; one row while there are fewer than six. A row rests under the pointer, the pause button under the rows stops both, and they rest off screen. With reduced motion nothing moves and each row scrolls by hand. Local preview with placeholders: /preview/reviews. |
 | 9 | `closing` | Final call to action | Closing band | Full bleed deep slate band. The mark (the T tile from the favicon), the short ad line, Take the free quiz in inverted colours, and Takes about 2 minutes. |
 | 10 | `faq` | Questions | FAQ | Off white band. Six collapsible questions. |
-| 11 | `footer` | Footer | Footer | The Privacy and Terms links, then the wordmark under them, both centred. |
+| 11 | `footer` | Footer | Footer | The Log in, Privacy and Terms links, then the wordmark under them, both centred. |
 
 After the hero the bands go off white, tint, off white, tint, then the deep slate plan band, tint again, off white for the reviews once they show, and the deep slate closing band. Cards follow the band they sit on: tinted on off white, off white on tint and on slate.
 

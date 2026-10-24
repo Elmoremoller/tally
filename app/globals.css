@@ -463,6 +463,40 @@
       height: 3.125rem;
     }
   }
+  /* Log in at the right end of the centred nav, for someone coming back to her plan. Three columns keep the
+     logo on the centre line; the link's padding hangs into the gutter so its words line up with the page.
+     Quiet like the footer's links, so Take the free quiz stays the page's one action. */
+  .nav-centered .nav-inner:has(.nav-login) {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+  }
+  .nav-centered .nav-inner:has(.nav-login) .nav-brand {
+    grid-column: 2;
+  }
+  .nav-login {
+    grid-column: 3;
+    justify-self: end;
+    display: inline-flex;
+    align-items: center;
+    min-height: 2.75rem;
+    margin-right: -0.75rem;
+    padding-inline: 0.75rem;
+    border-radius: 999px;
+    color: var(--ink);
+    font-size: var(--fs-body);
+    font-weight: 600;
+    letter-spacing: var(--tr-body);
+    white-space: nowrap;
+    text-decoration: none;
+    transition: background-color 0.2s ease;
+  }
+  .nav-login:hover {
+    background: var(--slate-wash);
+  }
+  .nav-login:active {
+    background: var(--slate-wash-press);
+    transition-duration: 0.05s;
+  }
 
   /* Get started bar (after Saidwell's): the landing page's action, pinned to the bottom of the screen
      between the hero and the closing band. The whole bar is one button, with how long it takes in a light

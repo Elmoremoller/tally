@@ -15,6 +15,8 @@ export const offer = {
   adLine: "Win back your hours. Get the credit you’ve earned.",
   cta: "Take the free quiz",
   quizTime: "Takes about 2 minutes",
+  /** The way back to her plan, top right of the header and in the footer. It opens Open your plan at /login. */
+  login: "Log in",
   /** Under the hero's button. */
   ctaNote: "Find out how many hours a week you spend on work nobody notices. Takes about 2 minutes.",
   /** The page title, the line search engines and link previews show, and the words on the share image. */

@@ -14,7 +14,7 @@ export default function Page() {
   return (
     <>
       <Backdrop progress={0.15} />
-      <SiteNav cta={false} />
+      <SiteNav cta={false} login />
       <main id="main" className="legal-page">
         <LegalDocument page={termsPage} />
       </main>
