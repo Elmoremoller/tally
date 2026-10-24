@@ -59,7 +59,7 @@ export const heardCopy = {
   title: "Here’s what we heard",
   tasks: "Where your week goes", // DRAFT
   slider: "Move the slider so the hours are yours.", // DRAFT
-  knownFor: "What you’d rather spend your time on", // DRAFT
+  knownFor: "What you’d rather spend your time on", // approved 2026-10-24
   yes: "Looks right",
   edit: "Edit",
   doneEditing: "Done editing",

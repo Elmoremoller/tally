@@ -14,8 +14,7 @@ type Icon = ComponentType<SVGProps<SVGSVGElement>>;
 /**
  * The problem: the brief's ten moments told as one day of hers. Asks land one after another until 7:48 in the
  * evening, when the project she was hired for is still overdue; the two lines beside them say the rest. Each
- * ask's comment names the moments it carries. The title is a DRAFT kept from before; the asks and the lines
- * were approved on 2026-10-24.
+ * ask's comment names the moments it carries. The title, the asks and the lines were approved on 2026-10-24.
  */
 export const problem = {
   title: "Sound familiar?",
