@@ -72,7 +72,7 @@ function describe(input: PlanInput) {
   lines.push(
     "",
     `Her role: ${input.role}`,
-    `What she wants to be known for: ${input.knownForSummary}`,
+    `The work she'd rather spend her time on: ${input.knownForSummary}`,
     "",
     "Her tasks, with the hours a week she confirmed:",
     ...input.tasks.map((t) => `- ${t.name} (${t.pile}, ${t.hours} hours)`),

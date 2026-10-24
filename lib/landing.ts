@@ -11,20 +11,30 @@ import { AI_POLICIES, policyLabels } from "./week";
 
 type Icon = ComponentType<SVGProps<SVGSVGElement>>;
 
-/** The problem: moments she'll recognise, as a row of chips. The title is a DRAFT; the moments are the brief's. */
+/**
+ * The problem: the brief's ten moments told as one day of hers. Asks land one after another until 7:48 in the
+ * evening, when the project she was hired for is still overdue; the two lines beside them say the rest. Each
+ * ask's comment names the moments it carries. The title is a DRAFT kept from before; the asks and the lines
+ * are DRAFTS.
+ */
 export const problem = {
   title: "Sound familiar?",
-  moments: [
-    "Always the one taking notes",
-    "Planning the offsite",
-    "Fixing everyone’s slides",
-    "Working late on stuff nobody notices",
-    "Saying yes to everything",
-    "No time for the real job",
-    "“Can you just run our socials?”",
-    "Using ChatGPT in secret",
-    "Everyone says use AI",
-    "Nobody says what’s allowed",
+  // Saying yes to everything / Working late on stuff nobody notices, No time for the real job, Using ChatGPT in secret
+  lines: ["Every ask is small, so you say yes.", "Your own work waits until everyone’s gone home, with ChatGPT open in a tab nobody sees."],
+  clock: { day: "Thursday", time: "7:48" },
+  asks: [
+    // Always the one taking notes
+    { app: "chat", from: "Your manager", time: "9:02 AM", text: "Can you take notes in the 2pm? You’re so good at it." },
+    // Fixing everyone's slides
+    { app: "chat", from: "Sales lead", time: "10:41 AM", text: "Quick favor. Can you fix my slides before 4?" },
+    // Planning the offsite
+    { app: "mail", from: "Head of people", time: "12:15 PM", text: "Would you plan the offsite again this year?" },
+    // "Can you just run our socials?"
+    { app: "chat", from: "Director", time: "2:30 PM", text: "Can you just run our socials?" },
+    // Everyone says use AI / Nobody says what's allowed
+    { app: "calendar", from: "All hands", time: "4:00 PM", text: "Everyone should be using AI by now. Guidelines to follow." },
+    // No time for the real job
+    { app: "reminder", from: "Reminders", time: "Overdue", text: "Start the project you were hired for." },
   ],
 } as const;
 

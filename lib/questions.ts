@@ -7,15 +7,34 @@ import { hoursText } from "./week";
 export const openQuestions = {
   job: {
     title: "What’s your job, in your own words?",
-    placeholder: "Marketing coordinator at a 200 person software company, I handle our events and newsletters.",
+    /** Typed out in turn in the empty box. The first is the brief's; the rest are DRAFTS. */
+    examples: [
+      "Marketing coordinator at a 200 person software company, I handle our events and newsletters.",
+      "Executive assistant to two partners at a law firm. I run their calendars, travel and the office.",
+      "HR generalist at a 60 person startup. Hiring, onboarding and every team event.",
+      "Project manager at a design agency. I keep client projects on track and on budget.",
+      "Operations coordinator at a nonprofit. Budgets, vendors and keeping the office running.",
+    ],
   },
   week: {
     title: "Walk us through a normal week. What eats your time?",
     placeholder: "Lots of meetings where I end up taking notes, chasing people for updates, fixing slides for my boss...",
   },
+  /**
+   * The work she wants her won back hours to go to, and credit for. Asked as the brief's "What do you wish
+   * you were known for at work?" until 2026-10-24; reworded because few people have put that into words.
+   * Still stored as known_for. The title, hint and examples are DRAFTS.
+   */
   knownFor: {
-    title: "What do you wish you were known for at work?",
-    hint: "One short line is enough.",
+    title: "What would you rather spend your time on at work?",
+    hint: "The work you’d like to get credit for. One short line is enough.",
+    examples: [
+      "Strategy, not just being the one who gets things done.",
+      "Planning our campaigns, not just sending them out.",
+      "Leading projects instead of taking the notes in them.",
+      "Growing our client accounts. It’s what I’m best at.",
+      "Building a better way to hire and onboard people.",
+    ],
   },
 } as const;
 export type OpenQuestion = keyof typeof openQuestions;
@@ -40,7 +59,7 @@ export const heardCopy = {
   title: "Here’s what we heard",
   tasks: "Where your week goes", // DRAFT
   slider: "Move the slider so the hours are yours.", // DRAFT
-  knownFor: "What you want to be known for", // DRAFT
+  knownFor: "What you’d rather spend your time on", // DRAFT
   yes: "Looks right",
   edit: "Edit",
   doneEditing: "Done editing",

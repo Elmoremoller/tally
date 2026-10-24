@@ -1380,30 +1380,164 @@
     font-weight: 600;
   }
 
-  /* Chips: the problem's moments, in one wrapped row */
-  .topics {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 0.625rem;
-    max-width: 46rem;
-    margin-inline: auto;
+  /* The problem: her day of asks. One centred column on phones and tablets; on desktop the words on the left
+     and her day beside them. */
+  .problem {
+    display: grid;
+    justify-items: center;
+    gap: clamp(2.5rem, 2rem + 2.5vw, 3.5rem);
   }
-  .topic {
-    display: inline-flex;
-    align-items: center;
-    min-height: 2.75rem;
-    padding: 0.55rem 1.15rem;
-    border-radius: 999px;
-    background: var(--warm-white);
-    box-shadow:
-      0 0 0 1px var(--line),
-      var(--shadow-1);
-    font-size: var(--fs-lead);
+  .problem-copy {
+    display: grid;
+    justify-items: center;
+    gap: 1rem;
+    max-width: 36rem;
+    text-align: center;
+  }
+  .problem-copy .heading {
+    margin-bottom: 0.25rem;
+  }
+  @media (min-width: 66.8125rem) {
+    .problem {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      align-items: center;
+      gap: 5rem;
+    }
+    .problem-copy {
+      justify-items: start;
+      text-align: left;
+    }
+  }
+  /* Her phone's lock screen, without the phone: a deep red wallpaper with soft light in it, the time, and the
+     asks as frosted notifications. */
+  .day {
+    position: relative;
+    isolation: isolate;
+    width: 100%;
+    max-width: 27rem;
+    padding: clamp(1.75rem, 1.4rem + 1.5vw, 2.5rem) clamp(0.625rem, 0.4rem + 1vw, 1rem) clamp(0.625rem, 0.4rem + 1vw, 1rem);
+    border-radius: 2.25rem;
+    background:
+      radial-gradient(65% 40% at 88% 4%, rgb(222 128 100 / 0.6), transparent 72%),
+      radial-gradient(60% 45% at 8% 100%, rgb(170 40 60 / 0.75), transparent 72%),
+      radial-gradient(80% 55% at 25% 30%, rgb(196 40 18 / 0.55), transparent 75%),
+      var(--deep-red);
+    box-shadow: var(--shadow-3);
+    color: var(--warm-white);
+  }
+  .day-clock {
+    display: grid;
+    justify-items: center;
+    margin-bottom: 1.5rem;
+    text-align: center;
+  }
+  .day-name {
+    font-size: var(--fs-small);
     font-weight: 600;
-    letter-spacing: var(--tr-lead);
-    line-height: 1.2;
+    letter-spacing: 0.01em;
+    opacity: 0.85;
+  }
+  .day-time {
+    font-family: var(--stack-display);
+    font-size: clamp(3.75rem, 3rem + 3vw, 5rem);
+    font-weight: 300;
+    font-variant-numeric: tabular-nums;
+    line-height: 1;
+    letter-spacing: -0.03em;
+  }
+  .asks {
+    display: grid;
+    gap: 0.5rem;
+  }
+  .ask {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    align-items: start;
+    gap: 0.75rem;
+    padding: 0.75rem 0.875rem;
+    border-radius: 1.25rem;
+    background: rgb(251 247 241 / 0.95);
+    -webkit-backdrop-filter: saturate(150%) blur(20px);
+    backdrop-filter: saturate(150%) blur(20px);
+    box-shadow: 0 8px 20px -12px rgb(60 10 5 / 0.5);
     color: var(--ink);
+  }
+  .ask-app {
+    display: grid;
+    place-items: center;
+    width: 2.25rem;
+    height: 2.25rem;
+    border-radius: 0.625rem;
+    background: var(--deep-red);
+    color: var(--warm-white);
+  }
+  .ask[data-app="mail"] .ask-app {
+    background: var(--ink);
+  }
+  .ask[data-app="calendar"] .ask-app,
+  .ask[data-app="reminder"] .ask-app {
+    background: #fff;
+    box-shadow: inset 0 0 0 1px var(--line);
+    color: var(--deep-red);
+  }
+  .ask-app svg {
+    width: 1.25rem;
+    height: 1.25rem;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  .ask-body {
+    display: grid;
+    gap: 0.125rem;
+    min-width: 0;
+  }
+  .ask-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.75rem;
+  }
+  .ask-from {
+    font-size: var(--fs-small);
+    font-weight: 650;
+    line-height: var(--lh-small);
+  }
+  .ask-time {
+    flex: none;
+    font-size: var(--fs-micro);
+    color: var(--muted);
+  }
+  .ask[data-app="reminder"] .ask-time {
+    font-weight: 650;
+    color: var(--deep-red);
+  }
+  .ask-text {
+    font-size: var(--fs-small);
+    line-height: 1.38;
+    letter-spacing: var(--tr-small);
+    text-wrap: pretty;
+  }
+  /* The asks arrive one by one, rising into place; the overdue reminder comes last, after a beat. Waiting is
+     only hidden where scripts run, since a script says when the list is in view. */
+  @media (prefers-reduced-motion: no-preference) {
+    .ask {
+      transition:
+        opacity 0.45s ease,
+        transform var(--dur-spring) var(--ease-spring);
+      transition-delay: calc(var(--i) * 0.42s + 0.15s);
+    }
+    .ask[data-app="reminder"] {
+      transition-delay: calc(var(--i) * 0.42s + 0.75s);
+    }
+  }
+  @media (prefers-reduced-motion: no-preference) and (scripting: enabled) {
+    .asks[data-arrive="waiting"] .ask {
+      opacity: 0;
+      transform: translateY(0.75rem) scale(0.97);
+    }
   }
 
   /* Cards follow the band they sit on: tinted on warm white, warm white on tint. */
@@ -2466,6 +2600,39 @@
   .quiz-story::placeholder {
     color: var(--muted);
     opacity: 0.75;
+  }
+  /* Example answers typed out in turn over an empty box, set exactly where her own words will go, with a
+     caret while the box isn't hers yet. Once she's in the box, her own caret takes over. */
+  .quiz-box {
+    position: relative;
+  }
+  .quiz-box > .quiz-story {
+    display: block;
+  }
+  .quiz-typing {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    padding: 0.875rem 1.125rem;
+    font-size: 1.125rem;
+    line-height: 1.5;
+    color: var(--muted);
+    opacity: 0.75;
+    white-space: pre-wrap;
+    pointer-events: none;
+  }
+  .quiz-typing::after {
+    content: "";
+    display: inline-block;
+    width: 1.5px;
+    height: 1.1em;
+    margin-left: 1px;
+    vertical-align: -0.2em;
+    background: var(--deep-red);
+    animation: shot-caret 1s steps(2, jump-none) infinite;
+  }
+  .quiz-story:focus ~ .quiz-typing::after {
+    display: none;
   }
   /* Under the box: talk instead of typing, where the browser can, then the privacy note. */
   .quiz-under {
@@ -4741,6 +4908,10 @@
   .shot-typing::after {
     animation: none;
   }
+  /* The quiz box holds still on its first example, so no caret. */
+  .quiz-typing::after {
+    display: none;
+  }
   /* The phone shows the plan and holds still. */
   .scene-quiz,
   .scene-type {
@@ -4796,7 +4967,8 @@
   .nav,
   :root:has(.backdrop) .nav,
   .quiz-head,
-  .motion-toggle {
+  .motion-toggle,
+  .ask {
     background: var(--warm-white);
     -webkit-backdrop-filter: none;
     backdrop-filter: none;
@@ -4867,7 +5039,7 @@
   }
   .part,
   .flow-step,
-  .topic,
+  .ask,
   .quiz-choice,
   .quiz-topic {
     box-shadow: 0 0 0 1px var(--line-strong);
@@ -4888,6 +5060,7 @@
   .btn,
   .safety-exit,
   .review,
+  .ask,
   .quiz-choice,
   .quiz-topic,
   .quiz-story,

@@ -7,6 +7,7 @@ import { MotionToggle } from "@/components/MotionToggle";
 import { PhoneMockup } from "@/components/PhoneMockup";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteNav } from "@/components/SiteNav";
+import { DayOfAsks } from "./DayOfAsks";
 import { Reviews } from "./Reviews";
 import { stepVisuals } from "./StepVisuals";
 import { faqs, planParts, priceRow, problem, steps, why, whyThis } from "@/lib/landing";
@@ -77,21 +78,20 @@ export function Landing({ angle, reviews = testimonials }: { angle: AngleId; rev
           <MotionToggle />
         </section>
 
-        {/* The problem: moments she'll recognise */}
+        {/* The problem: her day of asks, the words beside it on desktop */}
         <section className="band bg-tint" aria-labelledby="problem-title" data-section="problem">
-          <div className="wrap">
-            <div className="center-head">
+          <div className="wrap problem">
+            <div className="problem-copy">
               <h2 id="problem-title" className="heading">
                 {problem.title}
               </h2>
-            </div>
-            <ul className="topics">
-              {problem.moments.map((moment) => (
-                <li key={moment} className="topic">
-                  {moment}
-                </li>
+              {problem.lines.map((line) => (
+                <p key={line} className="text-lead text-balance text-muted">
+                  {line}
+                </p>
               ))}
-            </ul>
+            </div>
+            <DayOfAsks />
           </div>
         </section>
 

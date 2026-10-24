@@ -88,6 +88,37 @@ export const Clock = (props: IconProps) => (
   </Icon>
 );
 
+/** A speech bubble: a chat message. */
+export const Chat = (props: IconProps) => (
+  <Icon {...props}>
+    <path d="M4.5 6.5a2 2 0 0 1 2-2h11a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H10l-4 3.5v-3.5h0.5a2 2 0 0 1-2-2z" />
+  </Icon>
+);
+
+/** An envelope: an email. */
+export const Mail = (props: IconProps) => (
+  <Icon {...props}>
+    <rect x="3.5" y="5.5" width="17" height="13" rx="2" />
+    <path d="M4 7l8 6 8-6" />
+  </Icon>
+);
+
+/** A calendar page: a meeting. */
+export const Calendar = (props: IconProps) => (
+  <Icon {...props}>
+    <rect x="3.5" y="5" width="17" height="15" rx="2" />
+    <path d="M3.5 10h17M8 3v4M16 3v4" />
+  </Icon>
+);
+
+/** A bell: a reminder. */
+export const Bell = (props: IconProps) => (
+  <Icon {...props}>
+    <path d="M6 16.5V11a6 6 0 0 1 12 0v5.5l1.5 1.5h-15z" />
+    <path d="M10 20.5a2 2 0 0 0 4 0" />
+  </Icon>
+);
+
 /** Copy: two sheets, one over the other. */
 export const Copy = (props: IconProps) => (
   <Icon {...props}>
