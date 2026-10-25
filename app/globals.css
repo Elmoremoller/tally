@@ -657,13 +657,13 @@
     margin-top: calc(-1 * var(--nav-h));
     padding-block: calc(var(--hero-pad) + var(--nav-h)) var(--hero-pad-end);
   }
-  /* The hero is a picture the shape of the screen it was designed on: nav plus hero is 16:9 (1920x1080) on a
-     landscape screen and 9:16 (1080x1920) on a portrait one, scaled to the width, so its height follows the
-     width, not the window. Never under 28rem, and capped (90rem landscape, 70rem portrait) so an ultrawide or
-     tall monitor isn't mostly empty. The copy is centred in it. The grid takes the band's height less the
-     hero's own padding. */
+  /* On a landscape screen (desktop) nav plus hero fills exactly the visible window, whatever the browser's
+     toolbars leave, so the first screen always ends at the bottom of the screen. On a portrait one it is a
+     9:16 picture (1080x1920) scaled to the width, capped at 70rem so a tall monitor isn't mostly empty.
+     Never under 28rem, so the copy always fits. The copy is centred in it. The grid takes the band's height
+     less the hero's own padding. */
   .hero:not(:has(.hero-visual)) .hero-grid {
-    --hero-h: clamp(28rem, calc(100vw * 9 / 16 - var(--nav-h)), 90rem);
+    --hero-h: max(28rem, calc(100svh - var(--nav-h)));
     min-height: calc(var(--hero-h) - var(--hero-pad) - var(--hero-pad-end));
     align-content: center;
   }
