@@ -105,6 +105,19 @@ test("cleanQAs keeps good screens and enforces the limits", () => {
   assert.equal(cleanQAs(long)?.length, QAS_MAX);
 });
 
+test("cleanQAs keeps the choices she was shown, with the same limits as picks", () => {
+  const shown = Array.from({ length: 10 }, (_, i) => `choice ${i}`).concat(["y".repeat(PICK_MAX + 1)]);
+  const out = cleanQAs([{ id: "repeats", title: "Title", picked: ["choice 1"], text: null, shown }]);
+  assert.deepEqual(out?.[0].shown, shown.slice(0, PICKS_MAX));
+  const long = cleanQAs([{ id: "most", title: "T", picked: [], text: null, shown: ["y".repeat(PICK_MAX + 1), "Ok"] }]);
+  assert.deepEqual(long?.[0].shown, ["Ok"]);
+});
+
+test("cleanQAs leaves shown out when a screen had no choices", () => {
+  const out = cleanQAs([{ id: "picture", title: "Title", picked: [], text: "Drafts" }]);
+  assert.ok(out && !("shown" in out[0]));
+});
+
 test("cleanQAs rejects a bad id or a non array", () => {
   assert.equal(cleanQAs([{ id: "Bad Id", title: "T", picked: [], text: null }]), null);
   assert.equal(cleanQAs([{ id: "x".repeat(21), title: "T", picked: [], text: null }]), null);

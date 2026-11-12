@@ -22,8 +22,11 @@ export type AskedKind = "one" | "many" | "text";
 /** A question the AI wrote for her. */
 export type AskedQuestion = { id: string; title: string; kind: AskedKind; choices: string[]; hint: string | null };
 
-/** One answered screen. `id` matches ^[a-z0-9_]{1,20}$. */
-export type QA = { id: string; title: string; picked: string[]; text: string | null };
+/**
+ * One answered screen. `id` matches ^[a-z0-9_]{1,20}$. `shown` is the choices that screen offered her, so we
+ * can read what she saw as well as what she picked; absent on a type or talk screen.
+ */
+export type QA = { id: string; title: string; picked: string[]; text: string | null; shown?: string[] };
 
 export type QuizStep =
   | "job"
@@ -96,21 +99,26 @@ export function digest(qas: QA[]): string {
     .slice(0, ANSWER_MAX);
 }
 
+/** Short choices as the browser sends them: at most PICKS_MAX, each at most PICK_MAX characters, longer ones dropped. */
+const cleanPicks = (raw: unknown) =>
+  (Array.isArray(raw) ? raw : [])
+    .map((p) => cleanText(p, PICK_MAX))
+    .filter((p): p is string => p !== null)
+    .slice(0, PICKS_MAX);
+
 /** Checks the answered screens the browser sends. Null when the shape is wrong; long input is dropped or cut. */
 export function cleanQAs(raw: unknown): QA[] | null {
   if (!Array.isArray(raw)) return null;
   const qas: QA[] = [];
   for (const item of raw.slice(0, QAS_MAX)) {
     if (!item || typeof item !== "object") return null;
-    const { id, title, picked, text } = item as Record<string, unknown>;
+    const { id, title, picked, text, shown } = item as Record<string, unknown>;
     const cleanTitle = cleanText(title, TITLE_MAX);
     if (typeof id !== "string" || !ID_PATTERN.test(id) || !cleanTitle) return null;
-    const picks = (Array.isArray(picked) ? picked : [])
-      .map((p) => cleanText(p, PICK_MAX))
-      .filter((p): p is string => p !== null)
-      .slice(0, PICKS_MAX);
     const cleanAnswer = typeof text === "string" ? cleanText(text.trim().slice(0, ANSWER_MAX), ANSWER_MAX) : null;
-    qas.push({ id, title: cleanTitle, picked: picks, text: cleanAnswer });
+    const qa: QA = { id, title: cleanTitle, picked: cleanPicks(picked), text: cleanAnswer };
+    if (Array.isArray(shown)) qa.shown = cleanPicks(shown);
+    qas.push(qa);
   }
   return qas;
 }

@@ -2,6 +2,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import {
   beginnerHers,
+  BEGINNER_INTAKE_SYSTEM,
   BEGINNER_INTAKE_VERSION,
   checkBeginnerIntake,
   describeBeginnerIntake,
@@ -66,6 +67,23 @@ test("checkBeginnerIntake accepts tasks quoted from her screen 3 picks and typed
     ["Writing quotes", "Texting homeowners", "Attic work", "Chasing payments"],
   );
   assert.equal(result?.first_win?.task, "Writing quotes");
+});
+
+test("checkBeginnerIntake accepts a task quoting what she most wants, even when no screen holds it", () => {
+  const fromFallback = input({
+    qas: input().qas.filter((qa) => qa.id !== "most"),
+    mostWanted: ["Quote follow up texts"],
+  });
+  const made = raw();
+  made.tasks.push({ quote: "Quote follow up texts", name: "Quote follow up texts", ai: true, private: false });
+  made.first_win = { ...made.first_win, task: "Quote follow up texts" };
+  const result = checkBeginnerIntake(made, { followUpAsked: false, hers: beginnerHers(fromFallback) });
+  assert.ok(result?.tasks.some((t) => t.name === "Quote follow up texts"));
+  assert.equal(result?.first_win?.task, "Quote follow up texts");
+});
+
+test("the prompt counts what she most wants to make easier as one of her tasks", () => {
+  assert.ok(BEGINNER_INTAKE_SYSTEM.includes("What she most wants to make easier always counts as one of her tasks."));
 });
 
 test("checkBeginnerIntake drops a task she never gave", () => {
