@@ -112,6 +112,7 @@ Copy rules:
 - It's always "your plan", never a course, guide, template or prompt pack.
 - No hype words like "10x", "supercharge" or "game changer". No promises of time saved, raises or results, and no numbers of hours or minutes.
 - Never use names of people or companies; use roles like "my manager" or "a client".
+- Never state a fact about her workplace she didn't give, like discounts, perks, policies or procedures. Use square brackets instead.
 - Plain US English. Never use a dash or hyphen: write "follow ups", "day to day", "first drafts". No colons in titles. No emoji. These are rules for your writing: never mention dashes, hyphens or emoji inside a prompt she pastes.
 - Never write medical, legal or financial advice. Where her work touches it, the prompt asks for a draft she checks against her own approved sources.
 - Speak to her as "you", except in the prompts, the example, the fixes, the work profile and the at work messages, which are in her own voice.`;

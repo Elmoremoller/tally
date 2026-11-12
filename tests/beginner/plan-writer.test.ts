@@ -149,6 +149,14 @@ test("describeBeginnerPlan takes our tags out of her words", () => {
   assert.equal(text.split("</job>").length, 2);
 });
 
+test("the prompt never invents a fact about her workplace", () => {
+  assert.ok(
+    BEGINNER_PLAN_SYSTEM.includes(
+      "Never state a fact about her workplace she didn't give, like discounts, perks, policies or procedures. Use square brackets instead.",
+    ),
+  );
+});
+
 test("the prompt opens with what she most wants, keeps her apps as context, and merges near duplicates", () => {
   assert.ok(BEGINNER_PLAN_SYSTEM.includes("What she most wants to make easier"));
   assert.ok(BEGINNER_PLAN_SYSTEM.includes("paste it into Notion"));
