@@ -124,6 +124,28 @@ test("checkBeginnerPlan still needs IDEAS_MIN ideas after the merge", () => {
   assert.equal(checkBeginnerPlan(short, input()), null);
 });
 
+test("checkBeginnerPlan picks ten ideas that hold every shown title and her daily life ideas", () => {
+  const extra = [
+    "Replies to customer reviews",
+    "A weekly staff schedule",
+    "Texting regulars about sales",
+    "A script for slow afternoons",
+    "Thank you notes for big orders",
+    "Ideas for a loyalty card",
+    "Questions for a new hire",
+    "Talking points for a team meeting",
+  ];
+  // Thirteen written, the shown titles after eight others, so a plain cut at ten would drop them and both life ideas.
+  const many = raw();
+  many.ideas = [...extra.map((title) => idea(title)), ...SHOWN.map((title) => idea(title)), ...many.ideas.filter((i) => i.life)];
+  const plan = checkBeginnerPlan(many, input());
+  assert.ok(plan);
+  assert.deepEqual(
+    plan.ideas.map((i) => i.title),
+    [...extra.slice(0, 5), ...SHOWN, "Meals around late shifts", "A packing list for a weekend trip"],
+  );
+});
+
 test("checkBeginnerPlan keeps two shown ideas even when they are near copies of each other", () => {
   const shown = [...SHOWN, "Instagram posts for new arrivals"];
   const plan = checkBeginnerPlan(raw(), input({ shownIdeas: shown }));

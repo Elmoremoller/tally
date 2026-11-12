@@ -84,12 +84,12 @@ first_win: she saw a draft of her first win task on her free result. Now she mak
 - example: what a good answer looks like, written out, so she can tell when she got one. 30 to 90 words. No made up names of people or companies.
 - fixes: exactly three short lines she can send next when the answer is off, each at most 12 words, like "Shorter." or "Warmer, like I’m texting a regular."
 
-ideas: between 8 and 10 more things AI can do for her, each with a prompt ready to paste.
+ideas: between 8 and 10 more things AI can do for her in all, each with a prompt ready to paste.
 - One idea for each title listed under "Ideas she was shown", using the exact title. She saw these before she paid, so every one must be there.
 - One idea for each task listed under "Her other tasks", using its exact name as the title.
 - When one of her tasks and a shown idea are about the same thing, write one idea using the shown idea's exact title.
 - Never write two ideas about the same thing, like "Instagram captions for new arrivals" next to "Instagram posts for new arrivals".
-- Then ideas she didn't name: things in her kind of job where a chat assistant helps. At least as many as the named ones.
+- Then ideas she didn't name: things in her kind of job where a chat assistant helps, to fill the rest. Never go past 10 ideas in all.
 - Exactly two from daily life outside work, with life set to true. Choose them for her: think about what someone with her job and her hours deals with at home, like meals around shift work, a packing list, a budget for a trip, a complaint to a company, a birthday message, or a plan for a free weekend. Don't default to the same two for everyone, and don't assume a partner or children.
 - title: at most 8 words, no full stop. why: one short line on what it saves her or makes easier.
 - prompt: 30 to 100 words, in her voice, her situation filled in, square brackets for what she adds.
@@ -223,6 +223,10 @@ const schema = {
   additionalProperties: false,
 } as const;
 
+/** Her plan holds at most IDEAS_MAX ideas, and at most LIFE_IDEAS of them from daily life, as the prompt asks. */
+const IDEAS_MAX = 10;
+const LIFE_IDEAS = 2;
+
 const SMALL_WORDS = new Set(["a", "an", "the", "for", "of", "to", "and", "my", "your"]);
 
 /** A title's words in lower case, without small words and with a trailing s dropped, so plurals match. */
@@ -290,9 +294,15 @@ export function checkBeginnerPlan(raw: unknown, input: BeginnerPlanInput): Begin
     );
     if (!copy) kept.push(w);
   }
+  // Her plan holds at most IDEAS_MAX: every shown title, then her two daily life ideas, then the other work
+  // ideas in the order written, so the cut never drops what her free result promised or her life ideas.
+  const shown = kept.filter((k) => k.shown);
+  const life = kept.filter((k) => !k.shown && k.idea.life).slice(0, LIFE_IDEAS);
+  const room = Math.max(0, IDEAS_MAX - shown.length - life.length);
+  const picked = [...shown, ...life, ...kept.filter((k) => !k.shown && !k.idea.life).slice(0, room)];
   // Work first, daily life last, each in the order written.
-  kept.sort((a, b) => Number(a.idea.life) - Number(b.idea.life) || a.order - b.order);
-  const ideas = kept.map((k) => k.idea);
+  picked.sort((a, b) => Number(a.idea.life) - Number(b.idea.life) || a.order - b.order);
+  const ideas = picked.map((k) => k.idea);
   const seen = new Set(ideas.map((i) => i.title.toLowerCase()));
 
   let atWork: BeginnerPlan["atWork"] = null;
@@ -316,7 +326,7 @@ export function checkBeginnerPlan(raw: unknown, input: BeginnerPlanInput): Begin
     worksFor: input.worksFor,
     policy: input.aiPolicy,
     firstWin: { task: input.firstWin.task, prompt, example, fixes },
-    ideas: ideas.slice(0, 10),
+    ideas,
     safeUse,
     workProfile,
     atWork,
