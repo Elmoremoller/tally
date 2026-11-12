@@ -63,7 +63,7 @@ export type PlanContent = {
   aiTalk: string;
 };
 
-const fence = (text: string) => text.replace(/<\/?\s*[a-z_]+\s*>/gi, "");
+export const fence = (text: string) => text.replace(/<\/?\s*[a-z_]+\s*>/gi, "");
 
 /** She picked no chat tool (None yet, Not sure, or only Other), so her plan says which one to start with. */
 const needsStartTool = (input: PlanInput) => !chatTools(input.aiTools).length;
@@ -142,7 +142,7 @@ const schema = {
 } as const;
 
 /** The site's style: no dash or hyphen characters, curly apostrophes and quotes, tidy spaces. */
-const tidy = (text: string) =>
+export const tidy = (text: string) =>
   text
     .replace(/\s*[—–]\s*|\s+-\s+/g, ", ")
     .replace(/(\p{L})-(?=\p{L})/gu, "$1 ")
@@ -152,7 +152,7 @@ const tidy = (text: string) =>
     .replace(/ *\n */g, "\n")
     .trim();
 
-const text = (value: unknown, max: number) => {
+export const text = (value: unknown, max: number) => {
   const t = typeof value === "string" ? tidy(value) : "";
   return t && t.length <= max ? t : null;
 };
