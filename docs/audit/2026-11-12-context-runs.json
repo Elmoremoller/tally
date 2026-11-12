@@ -1,5 +1,5 @@
 {
- "ranAt": "2026-11-12T20:34:02.458Z",
+ "ranAt": "2026-11-12T20:47:16.516Z",
  "levels": {
   "not_yet": "I haven’t tried it yet",
   "tried": "I’ve tried it, but it didn’t stick",
@@ -2281,27 +2281,27 @@
     "plan": "beginner-plan-v3"
    },
    "seconds": {
-    "jobRead": 1.7,
-    "questions": 2.5,
-    "intake": 2.9,
-    "plan": 25.3
+    "jobRead": 1.6,
+    "questions": 1.7,
+    "intake": 3.1,
+    "plan": 19.6
    },
    "jobRead": {
     "repeats": [
      {
+      "label": "Writing product descriptions",
+      "ai": true
+     },
+     {
+      "label": "Posting to Instagram",
+      "ai": true
+     },
+     {
+      "label": "Replying to customer messages",
+      "ai": true
+     },
+     {
       "label": "Folding and restocking racks",
-      "ai": false
-     },
-     {
-      "label": "Writing Instagram captions",
-      "ai": true
-     },
-     {
-      "label": "Texting customers new arrivals",
-      "ai": true
-     },
-     {
-      "label": "Ordering stock from vendors",
       "ai": false
      },
      {
@@ -2314,18 +2314,18 @@
      }
     ],
     "aiFallback": [
-     "Product descriptions",
-     "Sale announcement posts",
-     "Shift swap messages",
-     "Return policy replies"
+     "Social post captions",
+     "Sale announcement texts",
+     "Staff schedule plans",
+     "Return policy wording"
     ],
     "apps": [
-     "Texts",
      "Instagram",
-     "Facebook",
+     "Texts",
      "WhatsApp",
-     "Square",
-     "Venmo"
+     "Facebook",
+     "Venmo",
+     "Square"
     ],
     "worksFor": "self"
    },
@@ -2338,34 +2338,41 @@
      "choices": [
       "From scratch each time",
       "Copy an old one",
-      "Ask a friend",
-      "Use a notes app"
+      "Ask a part timer",
+      "Batch them weekly"
      ],
      "hint": null
     },
     {
      "id": "asked_2",
-     "title": "Who do you mostly text about new arrivals?",
-     "kind": "one",
+     "title": "Where do most size questions come in?",
+     "kind": "many",
      "choices": [
-      "Your whole list",
-      "Regular customers",
-      "Certain sizes",
-      "VIP shoppers"
+      "Instagram DMs",
+      "Texts",
+      "Comments",
+      "In store"
      ],
-     "hint": "Pick the group you reach most often."
+     "hint": "Pick every one that applies."
     },
     {
      "id": "asked_3",
-     "title": "What makes the size questions take so long?",
-     "kind": "many",
+     "title": "What do you usually tell someone asking about sizing?",
+     "kind": "one",
      "choices": [
-      "Same question repeated",
-      "Checking stock by hand",
-      "Long back and forth",
-      "Finding the right photo"
+      "Measurements chart",
+      "Describe the fit",
+      "Ask their usual size",
+      "Send a photo"
      ],
-     "hint": "Pick every one that fits."
+     "hint": null
+    },
+    {
+     "id": "asked_4",
+     "title": "What still feels slow about your Instagram posts?",
+     "kind": "text",
+     "choices": [],
+     "hint": "A sentence or two is plenty."
     }
    ],
    "worksForFromJob": "self",
@@ -2377,17 +2384,16 @@
       "id": "repeats",
       "title": "What do you do over and over, every day or every week?",
       "picked": [
-       "Writing Instagram captions",
-       "Texting customers new arrivals",
-       "Ordering stock from vendors",
-       "Scheduling part timer shifts"
+       "Posting to Instagram",
+       "Replying to customer messages",
+       "Folding and restocking racks"
       ],
       "text": null,
       "shown": [
+       "Writing product descriptions",
+       "Posting to Instagram",
+       "Replying to customer messages",
        "Folding and restocking racks",
-       "Writing Instagram captions",
-       "Texting customers new arrivals",
-       "Ordering stock from vendors",
        "Scheduling part timer shifts",
        "Dressing the mannequins"
       ]
@@ -2396,39 +2402,37 @@
       "id": "most",
       "title": "Which would save you the most time if it got easier?",
       "picked": [
-       "Writing Instagram captions",
-       "Texting customers new arrivals"
+       "Posting to Instagram",
+       "Replying to customer messages"
       ],
       "text": null,
       "shown": [
-       "Writing Instagram captions",
-       "Texting customers new arrivals",
-       "Scheduling part timer shifts"
+       "Posting to Instagram",
+       "Replying to customer messages"
       ]
      },
      {
       "id": "picture",
       "title": "How do you picture AI helping with it?",
       "picked": [],
-      "text": "Mostly the captions and the DM replies about sizes. That's where my time goes."
+      "text": "Captions and replies to DMs about sizes. Those eat the most of my day."
      },
      {
       "id": "apps",
       "title": "Which apps do you use every week?",
       "picked": [
-       "Texts",
        "Instagram",
-       "Square",
-       "Venmo"
+       "Texts",
+       "Square"
       ],
       "text": null,
       "shown": [
-       "Texts",
        "Instagram",
-       "Facebook",
+       "Texts",
        "WhatsApp",
-       "Square",
-       "Venmo"
+       "Facebook",
+       "Venmo",
+       "Square"
       ]
      },
      {
@@ -2441,43 +2445,49 @@
       "shown": [
        "From scratch each time",
        "Copy an old one",
-       "Ask a friend",
-       "Use a notes app"
+       "Ask a part timer",
+       "Batch them weekly"
       ]
      },
      {
       "id": "asked_2",
-      "title": "Who do you mostly text about new arrivals?",
+      "title": "Where do most size questions come in?",
       "picked": [
-       "Regular customers"
+       "Instagram DMs",
+       "Comments"
       ],
       "text": null,
       "shown": [
-       "Your whole list",
-       "Regular customers",
-       "Certain sizes",
-       "VIP shoppers"
+       "Instagram DMs",
+       "Texts",
+       "Comments",
+       "In store"
       ]
      },
      {
       "id": "asked_3",
-      "title": "What makes the size questions take so long?",
+      "title": "What do you usually tell someone asking about sizing?",
       "picked": [
-       "Checking stock by hand",
-       "Long back and forth"
+       "Measurements chart"
       ],
       "text": null,
       "shown": [
-       "Same question repeated",
-       "Checking stock by hand",
-       "Long back and forth",
-       "Finding the right photo"
+       "Measurements chart",
+       "Describe the fit",
+       "Ask their usual size",
+       "Send a photo"
       ]
+     },
+     {
+      "id": "asked_4",
+      "title": "What still feels slow about your Instagram posts?",
+      "picked": [],
+      "text": "Writing captions from scratch each time. Sizing questions in DMs eat up my whole evening."
      }
     ],
     "mostWanted": [
-     "Writing Instagram captions",
-     "Texting customers new arrivals"
+     "Posting to Instagram",
+     "Replying to customer messages"
     ],
     "worksFor": "self",
     "aiTools": [
@@ -2486,139 +2496,148 @@
     "aiToolsOther": null,
     "aiPolicy": null
    },
-   "digest": "What do you do over and over, every day or every week? Writing Instagram captions, Texting customers new arrivals, Ordering stock from vendors, Scheduling part timer shifts\nWhich would save you the most time if it got easier? Writing Instagram captions, Texting customers new arrivals\nHow do you picture AI helping with it? Mostly the captions and the DM replies about sizes. That's where my time goes.\nWhich apps do you use every week? Texts, Instagram, Square, Venmo\nHow do you write your Instagram captions today? From scratch each time\nWho do you mostly text about new arrivals? Regular customers\nWhat makes the size questions take so long? Checking stock by hand, Long back and forth",
+   "digest": "What do you do over and over, every day or every week? Posting to Instagram, Replying to customer messages, Folding and restocking racks\nWhich would save you the most time if it got easier? Posting to Instagram, Replying to customer messages\nHow do you picture AI helping with it? Captions and replies to DMs about sizes. Those eat the most of my day.\nWhich apps do you use every week? Instagram, Texts, Square\nHow do you write your Instagram captions today? From scratch each time\nWhere do most size questions come in? Instagram DMs, Comments\nWhat do you usually tell someone asking about sizing? Measurements chart\nWhat still feels slow about your Instagram posts? Writing captions from scratch each time. Sizing questions in DMs eat up my whole evening.",
    "intake": {
-    "role_summary": "You own a small women’s clothing boutique with two part timers, handling captions, customer texts, stock orders and shift schedules.",
+    "role_summary": "You own a small women’s clothing boutique with two part time staff, handling Instagram posts, customer messages and restocking.",
     "tasks": [
      {
-      "name": "Instagram captions",
+      "name": "Instagram posts",
       "ai": true,
       "private": false
      },
      {
-      "name": "Texts about new arrivals",
+      "name": "Customer message replies",
       "ai": true,
       "private": true
      },
      {
-      "name": "Ordering stock from vendors",
-      "ai": true,
-      "private": true
-     },
-     {
-      "name": "Scheduling part timer shifts",
-      "ai": true,
-      "private": true
+      "name": "Folding and restocking racks",
+      "ai": false,
+      "private": false
      }
     ],
     "first_win": {
-     "task": "Instagram captions",
-     "intro": "You said captions take a lot of your time. Here is one you can reuse for any new arrival.",
-     "draft": "New in the shop: [item name] in [color]. Soft, easy to wear, and made for those days when you want to look put together without trying too hard. Sizes [size range], and only a few in stock, so come see us before they go. Tap the link in our bio or stop by [shop hours]. #[shop name] #newarrivals #[city]Fashion"
+     "task": "Instagram posts",
+     "intro": "You said Instagram captions take you from scratch each time. Here is a reusable one you can fill in.",
+     "draft": "New in: [item name] in [colour], now in our [collection name] edit. Soft, easy to layer and made for everyday wear. Shop the look in store or [link in bio]. Sizes [size range] available, and [stock note]. Tag a friend who needs this in her closet!"
     },
     "ideas": [
-     "Size guide replies for Instagram DMs",
-     "A text template for restock alerts",
-     "Monthly sale announcement posts",
-     "Shift swap messages for part timers",
-     "Vendor reorder emails",
-     "Weekly new arrivals roundup for customers"
+     "Sizing chart post for the feed",
+     "Weekly new arrivals roundup",
+     "Story captions for restocks",
+     "A reply template for size questions",
+     "Hashtag sets for each collection",
+     "Behind the scenes posts for the shop"
     ],
     "needs_follow_up": false,
     "follow_up_question": null
    },
    "plan": {
     "version": 2,
-    "role": "You own a small women’s clothing boutique with two part timers, handling captions, customer texts, stock orders and shift schedules.",
+    "role": "You own a small women’s clothing boutique with two part time staff, handling Instagram posts, customer messages and restocking.",
     "tool": "chatgpt",
-    "toolWhy": "You said Instagram captions and texting customers about new arrivals take up your time, and ChatGPT is a good place to start on both. The free version is enough to begin, it works in a browser or a phone app, and you type to it like a text message.",
+    "toolWhy": "You said writing Instagram captions from scratch each time and sizing questions in DMs eat up your evenings. ChatGPT is a good place to start because the free version is enough to begin, it works in a browser or a phone app, and you type to it like a text message.",
     "worksFor": "self",
     "policy": null,
     "firstWin": {
-     "task": "Instagram captions",
-     "prompt": "I own a small women’s clothing boutique with two part timers. Write 3 Instagram captions for a new arrival: [item name] in [color], sizes [size range]. The shop is open [shop hours]. Keep the tone warm and friendly, like I’m talking to a regular customer, not pushy. Each caption should be 2 to 3 sentences, end with an easy invite to stop by or message us, and include 3 hashtags, one of them #[shop name]. Don’t make up prices, discounts or details I didn’t give you.",
-     "example": "1. Just in: [item name] in [color]. It’s the kind of piece you’ll reach for again and again. Sizes [size range], come try it on. We’re open [shop hours]. #[shop name] #newarrivals #boutiquestyle\n\n2. Regulars, this one’s for you. [item name] in [color] just landed. Message us if you want your size set aside. #[shop name] #newarrivals #shopsmall",
+     "task": "Instagram posts",
+     "prompt": "I own a small women’s clothing boutique and I write my own Instagram captions. Write one Instagram caption for a new piece we just got in. The item is [item name] in [colour]. Sizes available: [size range]. Stock note: [stock note]. Keep it friendly and warm, like I’m talking to a regular customer. Make it under 60 words, with a short opening line, one line on how it wears, and a closing line telling people to shop in store or at [link in bio]. Use no more than two hashtags.",
+     "example": "Just landed: our [item name] in [colour]. It’s soft, easy to throw on, and looks great layered for everyday wear. Sizes [size range] are here, and [stock note]. Come try it on in store or tap [link in bio]. Tag a friend who needs this one! #newarrivals #boutiquestyle",
      "fixes": [
       "Shorter.",
       "Warmer, like I’m texting a regular.",
-      "Less salesy, more like a friend."
+      "Make the first line more eye catching."
      ]
     },
     "ideas": [
      {
-      "title": "Size guide replies for Instagram DMs",
-      "why": "Gives you a friendly reply ready for the size questions that come in again and again.",
-      "prompt": "I own a small women’s clothing boutique. Write 3 short, friendly replies I can send when someone asks on Instagram DMs what size to get. Each reply should ask for [the measurements or fit info I need] and mention that I’ll check what we have in stock. Keep each one under 40 words and warm, like I’m chatting with a regular. Don’t invent sizing charts or stock. Leave out customer names.",
+      "title": "Customer message replies",
+      "why": "Gets you through DMs and texts without rewriting the same answer.",
+      "prompt": "I own a small women’s clothing boutique. A customer sent me this message: [paste her message, leave out her name]. Write a short, friendly reply I can send by text or Instagram DM. Answer her question using this info: [what you want to tell her]. Keep it under 50 words, warm and helpful, and end by inviting her to stop by the store.",
       "life": false,
       "mark": "safe_today"
      },
      {
-      "title": "A text template for restock alerts",
-      "why": "One ready message you can reuse whenever a favorite comes back in.",
-      "prompt": "I own a small women’s clothing boutique and I text regular customers. Write a short text template I can reuse when a popular item is back in stock. Include blanks for [item name], [color] and [sizes available], and an easy way to reply to hold one. Keep it under 40 words, friendly and personal, with no pressure. Give me 2 versions.",
+      "title": "Sizing chart post for the feed",
+      "why": "Turns your measurements chart into a post people can save.",
+      "prompt": "I own a women’s clothing boutique. Write an Instagram caption to go with a photo of my sizing chart. Our sizes run [size range] and the chart shows [measurements, like bust, waist, hips]. Explain how to measure at home in three simple steps and invite people to DM me with questions. Keep it friendly, under 90 words, with a line to save the post.",
       "life": false,
       "mark": "safe_today"
      },
      {
-      "title": "Monthly sale announcement posts",
-      "why": "Gets a clear post drafted so you only fill in the details.",
-      "prompt": "I own a small women’s clothing boutique. Write an Instagram post announcing [sale details] running [dates]. Make it friendly and clear, 3 to 4 sentences, with a simple invite to visit us during [shop hours] or message us. Add 3 hashtags including #[shop name]. Don’t make up any discounts, items or dates. Use only what I gave you in brackets.",
+      "title": "Weekly new arrivals roundup",
+      "why": "Puts the week’s new pieces into one post instead of many.",
+      "prompt": "I own a women’s clothing boutique. Write one Instagram caption that rounds up this week’s new arrivals: [list of items and colours]. Sizes are [size range]. Keep it upbeat and chatty, under 100 words, with one short line per item, and end by telling people to visit the store or [link in bio]. Add no more than three hashtags.",
       "life": false,
       "mark": "safe_today"
      },
      {
-      "title": "Texts about new arrivals",
-      "why": "Helps you send a personal heads up to regulars without starting from scratch.",
-      "prompt": "I own a small women’s clothing boutique and I text my regular customers about new arrivals. Write 3 short text messages about [item name] in [color], sizes [size range]. Make them sound like a note from a friend who runs the shop, under 45 words each, with an easy way to reply to hold one. Leave a spot for [customer first name] and don’t invent prices or discounts.",
+      "title": "Story captions for restocks",
+      "why": "Gives you quick short lines for restock Stories.",
+      "prompt": "I own a women’s clothing boutique. Write five short Instagram Story captions, each under 12 words, announcing that [item name] is back in stock in [sizes]. Make them playful and urgent but not pushy, like I’m talking to regulars. Vary the wording so I can use one for each Story slide.",
       "life": false,
       "mark": "safe_today"
      },
      {
-      "title": "Ordering stock from vendors",
-      "why": "Makes your order messages clear so nothing gets missed or misread.",
-      "prompt": "I own a small women’s clothing boutique and I order stock from vendors. Write a short, polite message to a vendor placing an order for [items and quantities], asking about [delivery date or availability]. Keep it clear and professional but friendly, under 100 words. Also give me a quick checklist of things to confirm before I send it. Don’t invent prices or terms.",
+      "title": "Saved replies for common size questions",
+      "why": "Gives you ready answers for the questions you get most.",
+      "prompt": "I own a women’s clothing boutique and get many DMs and comments about sizing. I usually send my measurements chart. Write six short, friendly replies I can save and reuse, covering: what size should I get, does it run small, between sizes, how to measure, is my size in stock, and can I try it in store. Use [chart link] and [store details] where needed. Under 40 words each.",
       "life": false,
       "mark": "safe_today"
      },
      {
-      "title": "Scheduling part timer shifts",
-      "why": "Turns your shift needs into a clear schedule you can share.",
-      "prompt": "I own a small women’s clothing boutique with two part timers. Help me make a weekly shift schedule. Our open days and hours are [days and hours]. Part timer 1 can work [availability]. Part timer 2 can work [availability]. I will cover the rest. Show it as a simple table, then write a short friendly text I can send to both of them to share it.",
+      "title": "Comment replies on Instagram posts",
+      "why": "Helps you answer public comments quickly and kindly.",
+      "prompt": "I own a women’s clothing boutique. Write eight short replies I can use for Instagram comments, like thanks, where can I buy this, what sizes do you have, and is it still available. Keep each under 20 words, warm, and different from each other. Use [store details] where needed and point sizing questions to my DMs.",
       "life": false,
       "mark": "safe_today"
      },
      {
-      "title": "Easy dinners for late closing nights",
-      "why": "Gives you simple meal ideas for days you get home tired.",
-      "prompt": "I run a small shop and often get home late and tired. Give me 5 easy dinner ideas I can make in about the time it takes to unwind, using simple ingredients. My food preferences are [preferences or things to avoid]. Add a short shopping list for all five and say which ones I can prep ahead on my day off.",
+      "title": "Instagram content calendar for a month",
+      "why": "Gives you post ideas ready before you sit down to write.",
+      "prompt": "I own a small women’s clothing boutique with two part time staff. Plan a simple month of Instagram posts, about [number] posts a week. Mix new arrivals, styling ideas, sizing help, behind the scenes, and customer favorites. For each post give a one line idea. Keep it easy to do with just my phone in the store.",
+      "life": false,
+      "mark": "safe_today"
+     },
+     {
+      "title": "Quick shift notes for part timers",
+      "why": "Makes restocking and folding tasks clear for your team.",
+      "prompt": "I own a boutique with two part time staff. Write a short, friendly text I can send them about today’s restocking and folding. Tasks: [list of tasks]. Shift times: [day and time]. Keep it clear, under 70 words, as a short list, with a thank you at the end.",
+      "life": false,
+      "mark": "safe_today"
+     },
+     {
+      "title": "Meal plan for busy shop weeks",
+      "why": "Helps you eat well when you’re on your feet all day.",
+      "prompt": "I work long days on my feet running my own shop. Plan five easy dinners I can make in about [cooking time] with few ingredients. I eat [food preferences or limits]. Give me a short grocery list at the end and keep everything simple.",
       "life": true,
       "mark": "safe_today"
      },
      {
-      "title": "Plan a free weekend",
-      "why": "Helps you make the most of a rare day off.",
-      "prompt": "I own a small shop, so free weekends are rare. Help me plan [one or two days] in [my city] that mix rest and something fun. I like [things I enjoy] and my budget is [amount]. Give me a simple plan by time of day, with a backup idea in case of bad weather. Keep it relaxed, not packed.",
+      "title": "Plan for a free weekend",
+      "why": "Helps you use your days off for real rest.",
+      "prompt": "I run my own shop and have a free weekend on [dates]. I want to [what you’d like, like rest, see friends, or get out of town] on a budget of [amount]. I live in [town or area]. Suggest a simple plan for Saturday and Sunday with a mix of rest and one or two fun things.",
       "life": true,
       "mark": "safe_today"
      }
     ],
     "safeUse": [
-     "Read and check everything before it goes out, whether it’s a caption, a text or a vendor message.",
-     "AI can be confidently wrong about facts, dates and numbers, so check sizes, prices, stock counts and order quantities yourself.",
-     "Never type in customer names, phone numbers, addresses or payment details, including anything from Square or Venmo.",
-     "Leave out your part timers’ personal details, like home addresses or private reasons for time off, when you plan shifts.",
-     "Don’t share vendor contracts, account numbers or login details in a chat.",
-     "Only promise what’s true in the shop. Add real prices, sales and hours yourself."
+     "Read and check everything before it goes out, whether it’s a caption or a reply.",
+     "AI can be confidently wrong about facts, dates and numbers, so check sizes, prices and stock yourself.",
+     "Never type in customer names, phone numbers, addresses or order details.",
+     "Never paste card numbers or anything from your Square sales records.",
+     "Leave out your staff’s personal details, like pay or schedules with full names.",
+     "Keep your measurements chart as the final word on sizing, and check what AI writes against it."
     ],
-    "workProfile": "I own a small women’s clothing boutique with two part timers. I write Instagram captions, text regular customers about new arrivals, answer size questions in Instagram DMs, order stock from vendors and schedule shifts. My customers are mostly regulars, so I like a warm, friendly tone, like a note from a friend who runs the shop. Keep captions short, usually 2 to 3 sentences, and texts shorter than that. Never invent prices, discounts, sales or hours. Leave a square bracket for anything you don’t know, and I’ll fill it in. Plain words, please.",
+    "workProfile": "I own a small women’s clothing boutique with two part time staff. I write Instagram captions, reply to customers in Instagram DMs, comments and texts, and share sizing help from my measurements chart. My customers are mostly women who shop in store and online. I like drafts that sound warm and friendly, like I’m talking to a regular. Keep captions short, with a clear first line and an easy closing invitation. Replies should be brief, helpful and kind. Use plain words, no hype, and keep hashtags to a minimum. I’ll fill in details like sizes and stock myself.",
     "atWork": null
    },
    "checks": {
     "firstWinIsMostWanted": false,
-    "firstWinTask": "Instagram captions",
+    "firstWinTask": "Instagram posts",
     "mostWanted": [
-     "Writing Instagram captions",
-     "Texting customers new arrivals"
+     "Posting to Instagram",
+     "Replying to customer messages"
     ],
     "toolWhyNamesMostWanted": false,
     "questionsOver10Words": [],
@@ -2628,7 +2647,7 @@
     "deskWordsInPlan": [],
     "moneyOrPercentInPlan": [],
     "nearDuplicateIdeas": [],
-    "ideaCount": 8
+    "ideaCount": 10
    }
   },
   "beauty": {

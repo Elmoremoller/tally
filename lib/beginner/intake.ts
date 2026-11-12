@@ -57,7 +57,7 @@ Tasks:
 first_win: one of her tasks, done for her now.
 - task: the exact name of one of the tasks above, with ai true. Pick what she most wants to make easier whenever a chat assistant can help with it and it needs no private details. When doing it in full would need private details, still pick it and draft a version that needs none: a text, reply or message she can reuse, with blanks like [first name], [day] or [item]. Pick another task only when no such version would help her. Otherwise pick one that needs no private details, is about writing or planning, and that she does often. If every task is private, pick the one that works best as a template with blanks.
 - intro: one line to her, like "You said you spend time on appointment reminders. Here is one, written for a dental office." At most 30 words.
-- draft: the finished thing itself, ready to use, written for her job. 30 to 90 words. Fit it to what her answers say about how she does it, like who it's for and how she sends it: a text when she texts, never an email she didn't mention. Use square brackets for details only she knows, like [first name] or [day]. No private details, no made up names of people or companies, no made up facts or prices. Never make up products, what a product does, prices, discounts, sales, opening hours or dates: put them in square brackets, like [new arrivals] or [sale details]. When the draft touches her workplace's rules, like returns, refunds, holds, deposits, a size chart or shift swaps, put each rule in square brackets, like [return window] or [hold rules]. Never write a rule yourself, even a common one like needing a receipt or the tags on. It is the thing, not advice about the thing and not a prompt.
+- draft: the finished thing itself, ready to use, written for her job. 30 to 90 words. Fit it to what her answers say about how she does it, like who it's for and how she sends it: a text when she texts, never an email she didn't mention. Use square brackets for details only she knows, like [first name] or [day]. No private details, no made up names of people or companies, no made up facts or prices. Never make up products, what a product does, prices, discounts, sales, opening hours or dates: put them in square brackets, like [new arrivals] or [sale details]. When the draft touches her workplace's rules, like returns, refunds, holds, deposits, a size chart or shift swaps, put each rule in square brackets, like [return window] or [hold rules]. Never write a rule yourself, even a common one like needing a receipt or the tags on. Never say how many are left, how an item feels or fits, or what it is made of: put it in square brackets, like [stock note] or [fit note]. It is the thing, not advice about the thing and not a prompt.
 - Never state a fact about her workplace she didn't give, like discounts, perks, policies or procedures. Use square brackets instead.
 - Never draft medical, legal or financial advice or instructions. If her task is of that kind, like patient teaching, pick another task, or draft something around it that carries no advice, like a checklist for herself or a message to set up a time.
 - If no task has ai true, first_win is null.
@@ -187,13 +187,51 @@ export const beginnerHers = ({ job, qas, mostWanted, followUp }: BeginnerIntakeI
 const same = (a: string, b: string) => a.trim().toLowerCase() === b.trim().toLowerCase();
 
 /**
+ * Scarcity and urgency lines a first win draft must never carry: they state how much stock she has, which
+ * she never told us. The prompt forbids them too; this catches what slips through. Apostrophes may be curly,
+ * since the draft is tidied first.
+ */
+export const SCARCITY_PATTERNS: readonly RegExp[] = [
+  /\bsells? out\b/i,
+  /\bsold out\b/i,
+  /\b(sells?|selling) fast\b/i,
+  /\bbefore (it['’]s|they['’]re|it is|they are) gone\b/i,
+  /\bbefore they go\b/i,
+  /\bonly a few\b/i,
+  /\bfew left\b/i,
+  /\blimited stock\b/i,
+  /\bwhile supplies last\b/i,
+  /\b(go|goes|going) fast\b/i,
+  /\bwon['’]t last\b/i,
+];
+
+const scarce = (text: string) => SCARCITY_PATTERNS.some((pattern) => pattern.test(text));
+
+/** The draft without any sentence that carries a scarcity line. Lines left empty go; the rest keep their breaks. */
+function withoutScarcity(draft: string): string {
+  if (!scarce(draft)) return draft;
+  return draft
+    .split("\n")
+    .flatMap((row) => {
+      if (!row.trim()) return [row];
+      const kept = row.split(/(?<=[.!?])\s+/).filter((sentence) => !scarce(sentence));
+      return kept.length ? [kept.join(" ")] : [];
+    })
+    .join("\n")
+    .trim();
+}
+
+/**
  * Holds the answer to the rules, or returns null when it breaks them: a one line role, up to six tasks she
  * really named, a first win for one of her AI tasks with a draft of a sensible length, and a few idea titles.
- * With tasks but no usable first win it returns null, so the model is asked once more.
+ * With tasks but no usable first win it returns null, so the model is asked once more. A draft with a
+ * scarcity line also returns null, unless this is the last attempt: then those sentences are taken out, and
+ * the first win stays only if what is left is still long enough. `lastAttempt` defaults to true, so a caller
+ * that asks only once never loses a result to this check.
  */
 export function checkBeginnerIntake(
   raw: unknown,
-  { followUpAsked, hers }: { followUpAsked: boolean; hers: string },
+  { followUpAsked, hers, lastAttempt = true }: { followUpAsked: boolean; hers: string; lastAttempt?: boolean },
 ): BeginnerIntakeResult | null {
   const r = (raw ?? {}) as Record<string, unknown>;
   const role = line(r.role_summary, 300);
@@ -214,7 +252,9 @@ export function checkBeginnerIntake(
   const w = (r.first_win ?? null) as Record<string, unknown> | null;
   const task = w && typeof w.task === "string" ? tasks.find((t) => t.ai && same(t.name, w.task as string)) : undefined;
   const intro = w ? line(w.intro, 300) : null;
-  const draftText = w && typeof w.draft === "string" ? tidyLines(w.draft) : "";
+  const tidied = w && typeof w.draft === "string" ? tidyLines(w.draft) : "";
+  if (!lastAttempt && scarce(tidied)) return null;
+  const draftText = withoutScarcity(tidied);
   const draft = draftText.length >= 60 && draftText.length <= 900 ? draftText : null;
   const firstWin = task && intro && draft ? { task: task.name, intro, draft } : null;
 
@@ -289,6 +329,7 @@ export async function readBeginnerIntake(
     const result = checkBeginnerIntake(raw, {
       followUpAsked: Boolean(input.followUp),
       hers: beginnerHers(input),
+      lastAttempt: attempt === 1,
     });
     if (result) return { result, model, promptVersion: BEGINNER_INTAKE_VERSION };
   }

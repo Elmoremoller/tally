@@ -122,3 +122,59 @@ test("the prompt keeps her first win on what she most wants, and her workplace's
   assert.ok(BEGINNER_INTAKE_SYSTEM.includes("When doing it in full would need private details, still pick it and draft a version that needs none"));
   assert.ok(BEGINNER_INTAKE_SYSTEM.includes("Never write a rule yourself, even a common one like needing a receipt or the tags on."));
 });
+
+test("the prompt keeps stock levels and product qualities in square brackets", () => {
+  assert.ok(BEGINNER_INTAKE_SYSTEM.includes("Never say how many are left, how an item feels or fits, or what it is made of"));
+});
+
+const scarceDraft = `${draft} Come try it on before it sells out.`;
+const withDraft = (text: string) => {
+  const made = raw();
+  made.first_win = { ...made.first_win, draft: text };
+  return made;
+};
+
+test("a first attempt draft with a scarcity line is asked again", () => {
+  const result = checkBeginnerIntake(withDraft(scarceDraft), {
+    followUpAsked: false,
+    hers: beginnerHers(input()),
+    lastAttempt: false,
+  });
+  assert.equal(result, null);
+});
+
+test("on the last attempt the scarcity sentence is taken out and the rest kept", () => {
+  const result = checkBeginnerIntake(withDraft(scarceDraft), {
+    followUpAsked: false,
+    hers: beginnerHers(input()),
+    lastAttempt: true,
+  });
+  assert.equal(result?.first_win?.draft, draft);
+});
+
+test("on the last attempt a draft left too short loses its first win", () => {
+  const result = checkBeginnerIntake(withDraft("Only a few left in your size. Come try it on before it sells out."), {
+    followUpAsked: false,
+    hers: beginnerHers(input()),
+    lastAttempt: true,
+  });
+  assert.equal(result?.first_win ?? null, null);
+});
+
+test("a clean draft is untouched on either attempt", () => {
+  for (const lastAttempt of [false, true]) {
+    const result = checkBeginnerIntake(raw(), { followUpAsked: false, hers: beginnerHers(input()), lastAttempt });
+    assert.equal(result?.first_win?.draft, draft);
+  }
+});
+
+test("scarcity lines match with curly apostrophes and any case", () => {
+  for (const line of ["Before they’re gone!", "Pieces like this SELL FAST.", "It won’t last.", "While supplies last.", "Pieces like this tend to go fast, so stop by soon."]) {
+    const result = checkBeginnerIntake(withDraft(`${draft} ${line}`), {
+      followUpAsked: false,
+      hers: beginnerHers(input()),
+      lastAttempt: false,
+    });
+    assert.equal(result, null, line);
+  }
+});
