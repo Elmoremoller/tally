@@ -1,5 +1,6 @@
 import { cleanText } from "../clean";
 import { ANSWER_MAX } from "../week";
+import { FALLBACK_JOB_READ } from "./copy";
 import type { Experience, WorksFor } from "./types";
 
 // The context quiz's shapes and the pure helpers behind its screens. Imports nothing from the server, so the
@@ -112,4 +113,9 @@ export function cleanQAs(raw: unknown): QA[] | null {
     qas.push({ id, title: cleanTitle, picked: picks, text: cleanAnswer });
   }
   return qas;
+}
+
+/** The read to show: the AI's when it gave one, else the fixed list, with `fallback` saying which. */
+export function jobReadOrFallback(read: JobRead | null): { read: JobRead; fallback: boolean } {
+  return read ? { read, fallback: false } : { read: FALLBACK_JOB_READ, fallback: true };
 }
