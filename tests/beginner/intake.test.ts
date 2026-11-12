@@ -1,6 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import {
+  attemptTwice,
   beginnerHers,
   BEGINNER_INTAKE_SYSTEM,
   BEGINNER_INTAKE_VERSION,
@@ -9,6 +10,7 @@ import {
   type BeginnerIntakeInput,
 } from "../../lib/beginner/intake";
 import { beginnerFollowUp } from "../../lib/beginner/quiz-copy";
+import { IntakeLimitError } from "../../lib/intake";
 
 const input = (over: Partial<BeginnerIntakeInput> = {}): BeginnerIntakeInput => ({
   job: "Electrician, I run my own business",
@@ -177,4 +179,73 @@ test("scarcity lines match with curly apostrophes and any case", () => {
     });
     assert.equal(result, null, line);
   }
+});
+
+// The two attempts, with the request stubbed: each test hands over the answers the model would give, in order.
+// A string stands for a request that fails with that message.
+const check = (raw: unknown, lastAttempt: boolean) =>
+  checkBeginnerIntake(raw, { followUpAsked: false, hers: beginnerHers(input()), lastAttempt });
+
+function attempts(answers: unknown[], { callsAllowed = 2 } = {}) {
+  let calls = 0;
+  let requests = 0;
+  const run = attemptTwice({
+    allowCall: async () => ++calls <= callsAllowed,
+    request: async () => {
+      const answer = answers[requests++];
+      if (typeof answer === "string") throw new Error(answer);
+      return answer;
+    },
+    check,
+  });
+  return { run, requests: () => requests };
+}
+
+const brokenAnswer = () => ({ ...raw(), role_summary: "" });
+
+test("a clean first answer is used without a second request", async () => {
+  const { run, requests } = attempts([raw()]);
+  assert.equal((await run)?.first_win?.draft, draft);
+  assert.equal(requests(), 1);
+});
+
+test("a first answer with a scarcity line is asked again, and a good second answer wins", async () => {
+  const second = withDraft(`${draft} Thanks again.`);
+  const { run, requests } = attempts([withDraft(scarceDraft), second]);
+  assert.equal((await run)?.first_win?.draft, `${draft} Thanks again.`);
+  assert.equal(requests(), 2);
+});
+
+test("when the second attempt has no calls left, the first answer is used without its scarcity line", async () => {
+  const { run, requests } = attempts([withDraft(scarceDraft)], { callsAllowed: 1 });
+  assert.equal((await run)?.first_win?.draft, draft);
+  assert.equal(requests(), 1);
+});
+
+test("when the second request fails, the first answer is used without its scarcity line", async () => {
+  const { run } = attempts([withDraft(scarceDraft), "network down"]);
+  assert.equal((await run)?.first_win?.draft, draft);
+});
+
+test("when the second answer stopped early or wasn't JSON, the first answer is used without its scarcity line", async () => {
+  const { run } = attempts([withDraft(scarceDraft), undefined]);
+  assert.equal((await run)?.first_win?.draft, draft);
+});
+
+test("when the second answer breaks the rules, the first answer is used without its scarcity line", async () => {
+  const { run } = attempts([withDraft(scarceDraft), brokenAnswer()]);
+  assert.equal((await run)?.first_win?.draft, draft);
+});
+
+test("a first answer left too short without its scarcity line is not kept", async () => {
+  const { run } = attempts([withDraft("Only a few left in your size. Come try it on before it sells out."), undefined]);
+  assert.equal(await run, null);
+});
+
+test("without a kept answer, the attempts behave as before", async () => {
+  await assert.rejects(attempts([raw()], { callsAllowed: 0 }).run, IntakeLimitError);
+  await assert.rejects(attempts([brokenAnswer()], { callsAllowed: 1 }).run, IntakeLimitError);
+  await assert.rejects(attempts(["network down"]).run, /network down/);
+  assert.equal(await attempts([brokenAnswer(), undefined]).run, null);
+  assert.equal((await attempts([brokenAnswer(), raw()]).run)?.first_win?.draft, draft);
 });

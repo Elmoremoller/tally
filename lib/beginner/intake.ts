@@ -279,6 +279,44 @@ export function checkBeginnerIntake(
   };
 }
 
+/**
+ * The two attempts behind readBeginnerIntake, apart from the request so they can be tested. `request` gives the
+ * parsed answer, or undefined when it stopped early or wasn't JSON. A first answer turned down only for a
+ * scarcity line is kept with those sentences taken out, and the model is asked once more; if that second try
+ * can't give a result for any reason (no calls left, a failed request, an unusable or rule breaking answer),
+ * the kept answer is used, so the quiz never ends up worse off than without the check. Without a kept answer,
+ * everything behaves as before: no calls left throws IntakeLimitError, a failed request throws, and two
+ * unusable answers give null.
+ */
+export async function attemptTwice<T>({
+  allowCall,
+  request,
+  check,
+}: {
+  allowCall: () => Promise<boolean>;
+  request: () => Promise<unknown>;
+  check: (raw: unknown, lastAttempt: boolean) => T | null;
+}): Promise<T | null> {
+  let held: T | null = null;
+  for (let attempt = 0; attempt < 2; attempt++) {
+    const last = attempt === 1;
+    try {
+      if (!(await allowCall())) throw new IntakeLimitError("No AI readings left for this session");
+      const raw = await request();
+      if (raw === undefined) continue;
+      const result = check(raw, last);
+      if (result) return result;
+      // Turned down on the first attempt: with the scarcity sentences taken out it may pass, and then it is
+      // kept in case the second attempt gives nothing better.
+      if (!last) held = check(raw, true);
+    } catch (error) {
+      if (held) return held;
+      throw error;
+    }
+  }
+  return held;
+}
+
 let client: Anthropic | undefined;
 
 /** As readIntake in lib/intake.ts: counted against the allowance, asked once more when it breaks the rules. */
@@ -299,39 +337,39 @@ export async function readBeginnerIntake(
   promptVersion: string;
 } | null> {
   client ??= new Anthropic();
+  const api = client;
   const model = intakeModel();
-  for (let attempt = 0; attempt < 2; attempt++) {
-    if (!(await allowCall())) throw new IntakeLimitError("No AI readings left for this session");
-    const response = await client.messages.create(
-      {
-        model,
-        max_tokens: 2500,
-        thinking: { type: "disabled" },
-        output_config: {
-          effort: "low",
-          format: { type: "json_schema", schema },
+  const result = await attemptTwice({
+    allowCall,
+    request: async () => {
+      const response = await api.messages.create(
+        {
+          model,
+          max_tokens: 2500,
+          thinking: { type: "disabled" },
+          output_config: {
+            effort: "low",
+            format: { type: "json_schema", schema },
+          },
+          system: input.followUp ? `${BEGINNER_INTAKE_SYSTEM}\n\n${AFTER_FOLLOW_UP}` : BEGINNER_INTAKE_SYSTEM,
+          messages: [{ role: "user", content: describeBeginnerIntake(input) }],
         },
-        system: input.followUp ? `${BEGINNER_INTAKE_SYSTEM}\n\n${AFTER_FOLLOW_UP}` : BEGINNER_INTAKE_SYSTEM,
-        messages: [{ role: "user", content: describeBeginnerIntake(input) }],
-      },
-      { timeout: timeoutMs, maxRetries: 1 },
-    );
-    if (response.stop_reason !== "end_turn") continue;
-    const block = response.content.find((b) => b.type === "text");
-    if (!block || block.type !== "text") continue;
-    let raw: unknown;
-    try {
-      raw = JSON.parse(block.text);
-    } catch {
-      continue;
-    }
-    onRaw?.(raw);
-    const result = checkBeginnerIntake(raw, {
-      followUpAsked: Boolean(input.followUp),
-      hers: beginnerHers(input),
-      lastAttempt: attempt === 1,
-    });
-    if (result) return { result, model, promptVersion: BEGINNER_INTAKE_VERSION };
-  }
-  return null;
+        { timeout: timeoutMs, maxRetries: 1 },
+      );
+      if (response.stop_reason !== "end_turn") return undefined;
+      const block = response.content.find((b) => b.type === "text");
+      if (!block || block.type !== "text") return undefined;
+      let raw: unknown;
+      try {
+        raw = JSON.parse(block.text);
+      } catch {
+        return undefined;
+      }
+      onRaw?.(raw);
+      return raw;
+    },
+    check: (raw, lastAttempt) =>
+      checkBeginnerIntake(raw, { followUpAsked: Boolean(input.followUp), hers: beginnerHers(input), lastAttempt }),
+  });
+  return result ? { result, model, promptVersion: BEGINNER_INTAKE_VERSION } : null;
 }
