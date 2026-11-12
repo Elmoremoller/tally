@@ -30,7 +30,7 @@ import {
   type WorksFor,
 } from "@/lib/beginner/types";
 import { followUpCopy, policyQuestion, quizErrors, readingLine } from "@/lib/questions";
-import { AI_POLICIES, policyLabels, type AiPolicy, type AiTool } from "@/lib/week";
+import { AI_POLICIES, AI_TOOLS, policyLabels, toolLabels, type AiPolicy, type AiTool } from "@/lib/week";
 import { ChoiceStep } from "./ChoiceStep";
 import { BeginnerPaywall, FirstWinResult } from "./FirstWinResult";
 import { PICK_BEAT, PickStep } from "./PickStep";
@@ -71,6 +71,19 @@ const NO_PICKS: Picks = { picked: [], other: null };
 
 const wait = (ms: number) => new Promise<void>((resolve) => window.setTimeout(resolve, ms));
 
+/** A one tap screen as an answered screen: every choice it showed, and hers. */
+const choiceQA = <T extends string>(id: string, title: string, options: readonly T[], labels: Record<T, string>, value: T): QA => ({
+  id,
+  title,
+  picked: [labels[value]],
+  text: null,
+  shown: options.map((o) => labels[o]),
+});
+
+/** Her answers as Call B gets them, with her words on screen 5 left out, so editing them alone writes no new questions. */
+const questionsKey = (input: { qas: QA[] }) =>
+  JSON.stringify({ ...input, qas: input.qas.map((qa) => (qa.id === "picture" ? { ...qa, text: null } : qa)) });
+
 /** A chips screen as an answered screen: what it showed, what she tapped and what she wrote. */
 const pickedQA = (id: string, title: string, shown: readonly string[], picks: Picks): QA => ({
   id,
@@ -110,6 +123,8 @@ export function BeginnerQuiz({ home }: { home: string }) {
   const beat = useRef<number | undefined>(undefined);
   const jobCall = useRef<JobCall | null>(null);
   const lastRead = useRef<{ key: string; result: BeginnerRead } | null>(null);
+  /** Her questions on their way, kept for the answers they were asked from, so going back and on again waits for the same call. */
+  const questionsCall = useRef<{ key: string; promise: Promise<AskedQuestion[]> } | null>(null);
 
   useEffect(() => {
     if (moved.current) headingRef.current?.focus({ preventScroll: true });
@@ -125,10 +140,14 @@ export function BeginnerQuiz({ home }: { home: string }) {
   // Changing her picks on screen 3 keeps only the screen 4 picks that are still offered.
   const wanted = mostWanted.filter((m) => most.options.includes(m));
 
-  /** The screens before the AI's questions. Screens 3 and 4 are always there: the first win is found through them. */
-  const baseQas = (): QA[] =>
-    jobRead
+  /**
+   * The screens before the AI's questions, in order: her level, then screens 3 to 6, then the AI she has used when
+   * she was asked. Screens 3 and 4 are always there: the first win is found through them.
+   */
+  const baseQas = (s: Snapshot): QA[] =>
+    jobRead && s.level
       ? [
+          choiceQA("level", questions.level.title, EXPERIENCE, experienceLabels, s.level),
           pickedQA("repeats", questions.repeats.title, jobRead.read.repeats.map((r) => r.label), repeats),
           {
             id: "most",
@@ -139,8 +158,23 @@ export function BeginnerQuiz({ home }: { home: string }) {
           },
           { id: "picture", title: questions.picture.title, picked: [], text: picture.trim() || null },
           pickedQA("apps", questions.apps.title, jobRead.read.apps, apps),
+          ...(s.level === "not_yet"
+            ? []
+            : [
+                pickedQA(
+                  "tools",
+                  questions.tools.title,
+                  AI_TOOLS.map((t) => toolLabels[t]),
+                  { picked: tools.map((t) => toolLabels[t]), other: tools.includes("other") ? otherTools : null },
+                ),
+              ]),
         ]
       : [];
+  /** The screens after the AI's questions, when she was shown them: who she works for, and her company's view. */
+  const workQas = (s: Snapshot, who: WorksFor): QA[] => [
+    ...(fromJob ? [] : [choiceQA("works_for", questions.worksFor.title, WORKS_FOR, worksForLabels, who)]),
+    ...(hasEmployer(who) && s.policy ? [choiceQA("policy", policyQuestion.title, AI_POLICIES, policyLabels, s.policy)] : []),
+  ];
   const askedQas = (): QA[] =>
     (asked?.questions ?? []).map((q) =>
       q.kind === "text"
@@ -202,20 +236,32 @@ export function BeginnerQuiz({ home }: { home: string }) {
   /** Has the AI write her questions from what she has said so far, unless it already has for the same answers. */
   const toAsked = async (from: QuizStep, s: Snapshot) => {
     if (!s.level) return;
-    const input = { job: job.trim(), experience: s.level, qas: baseQas(), mostWanted: wanted };
-    const key = JSON.stringify(input);
+    const input = { job: job.trim(), experience: s.level, qas: baseQas(s), mostWanted: wanted };
+    const key = questionsKey(input);
     let written = asked?.key === key ? asked.questions : null;
     if (!written) {
+      // A call already on its way for the same answers is waited for, not asked again.
+      if (questionsCall.current?.key !== key) {
+        const promise = Promise.race([
+          notes.current.then(() => writeQuestionsAction(input)).catch((): AskedQuestion[] => []),
+          wait(QUESTIONS_WAIT).then((): AskedQuestion[] => []),
+        ]);
+        questionsCall.current = { key, promise };
+      }
+      const call = questionsCall.current;
       const ticket = ++pending.current;
       show("waiting", from);
-      written = await Promise.race([
-        notes.current.then(() => writeQuestionsAction(input)).catch((): AskedQuestion[] => []),
-        wait(QUESTIONS_WAIT).then((): AskedQuestion[] => []),
-      ]);
+      const fresh = await call.promise;
       if (ticket !== pending.current) return;
+      if (fresh.length || !asked?.questions.length) {
+        written = fresh;
+        setAskedPicks({});
+        setAskedText({});
+      } else {
+        // No new questions: the ones she has already seen stay, with her answers to them.
+        written = asked.questions;
+      }
       setAsked({ key, questions: written });
-      setAskedPicks({});
-      setAskedText({});
     }
     moveOn(from, { ...s, askedCount: written.length });
   };
@@ -284,7 +330,7 @@ export function BeginnerQuiz({ home }: { home: string }) {
     const answers: BeginnerAnswers = {
       job,
       experience: s.level,
-      qas: [...baseQas(), ...askedQas()],
+      qas: [...baseQas(s), ...askedQas(), ...workQas(s, who)],
       mostWanted: wanted,
       worksFor: who,
       aiTools: s.level === "not_yet" ? ["none_yet"] : tools,
