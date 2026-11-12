@@ -8,6 +8,7 @@ import {
   describeBeginnerIntake,
   type BeginnerIntakeInput,
 } from "../../lib/beginner/intake";
+import { beginnerFollowUp } from "../../lib/beginner/quiz-copy";
 
 const input = (over: Partial<BeginnerIntakeInput> = {}): BeginnerIntakeInput => ({
   job: "Electrician, I run my own business",
@@ -108,4 +109,11 @@ test("describeBeginnerIntake takes our tags out of her words", () => {
   const text = describeBeginnerIntake(sneaky);
   assert.equal(text.split("</answers>").length, 2);
   assert.equal(text.split("</job>").length, 2);
+});
+
+test("checkBeginnerIntake falls back to the beginner follow up, which assumes no desk, when the AI writes none", () => {
+  const made = { ...raw(), tasks: raw().tasks.slice(0, 1), needs_follow_up: true, follow_up_question: null };
+  const result = checkBeginnerIntake(made, { followUpAsked: false, hers: beginnerHers(input()) });
+  assert.equal(result?.follow_up_question, beginnerFollowUp);
+  assert.equal(result?.needs_follow_up, true);
 });

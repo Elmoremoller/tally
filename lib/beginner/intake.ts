@@ -1,5 +1,6 @@
 import Anthropic from "@anthropic-ai/sdk";
-import { DEFAULT_FOLLOW_UP, fenced, IntakeLimitError, intakeModel, isHers, line, plain } from "../intake";
+import { fenced, IntakeLimitError, intakeModel, isHers, line, plain } from "../intake";
+import { beginnerFollowUp } from "./quiz-copy";
 import { tidy as tidyLines } from "../plan-writer";
 import { policyLabels, TASKS_MAX, toolLabels, type AiPolicy, type AiTool } from "../week";
 import type { QA } from "./quiz";
@@ -224,7 +225,7 @@ export function checkBeginnerIntake(
     .slice(0, 8);
 
   let question: string | null = null;
-  if (!followUpAsked && tasks.length < 3) question = line(r.follow_up_question, 300) ?? DEFAULT_FOLLOW_UP;
+  if (!followUpAsked && tasks.length < 3) question = line(r.follow_up_question, 300) ?? beginnerFollowUp;
 
   // Enough to go on, but nothing drafted or too few ideas: ask again rather than show her a thin result.
   if (!question && tasks.length && (!firstWin || ideas.length < 3)) return null;

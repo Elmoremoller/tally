@@ -9,7 +9,6 @@ export const thinAnswers = "We need a little more to go on. Add another thing yo
 
 /**
  * The follow up question for this quiz when the AI asks for more but writes no question of its own. It assumes
- * no desk, inbox or computer. The server picks the follow up (lib/beginner/intake.ts uses DEFAULT_FOLLOW_UP from
- * lib/intake.ts), so this waits for that file to use it.
+ * no desk, inbox or computer. lib/beginner/intake.ts uses it in place of the /start quiz's DEFAULT_FOLLOW_UP.
  */
 export const beginnerFollowUp = "What else do you do over and over in your job?"; // DRAFT
