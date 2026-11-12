@@ -291,15 +291,19 @@ export async function loadPlanInput(plan: PlanRow): Promise<PlanInput> {
   };
 }
 
-/** What the beginner plan writer needs. Her tasks to hand to AI are the ones a chat assistant can help with. */
+/**
+ * What the beginner plan writer needs: every screen she answered and what she most wants to make easier, from
+ * the context quiz (v2). Her tasks to hand to AI are the ones a chat assistant can help with.
+ */
 export async function loadBeginnerPlanInput(plan: PlanRow): Promise<BeginnerPlanInput> {
   const { intake, tasks } = await loadWeek(plan.session_id);
   const beginner = intake?.beginner;
-  if (!intake?.job_text || !intake.week_text || !intake.ai_tools || !beginner) throw new Error("Her answers are missing");
+  if (!intake?.job_text || !intake.ai_tools || beginner?.v !== 2) throw new Error("Her answers are missing");
   if (!intake.role_summary || !tasks.length) throw new Error("Her quiz isn't finished");
   return {
     job: intake.job_text,
-    week: intake.week_text,
+    qas: beginner.qas,
+    mostWanted: beginner.mostWanted,
     followUp:
       intake.follow_up_question && intake.follow_up_answer
         ? { question: intake.follow_up_question, answer: intake.follow_up_answer }

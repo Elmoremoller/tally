@@ -1,6 +1,7 @@
 import Anthropic from "@anthropic-ai/sdk";
 import { oneOf } from "../clean";
 import { fenced, intakeModel, line } from "../intake";
+import { STYLE } from "./intake";
 import { PICK_MAX, type AskedKind, type AskedQuestion, type JobRead, type QA } from "./quiz";
 import { experienceLabels, WORKS_FOR, type Experience } from "./types";
 
@@ -17,9 +18,6 @@ const QUESTION_WORDS = 10;
 const CHOICE_WORDS = 4;
 const HINT_MAX = 120;
 const TITLE_MAX = 120;
-
-// The house style, word for word as in lib/beginner/intake.ts.
-const STYLE = `Style: plain US English, warm and practical. She is new to this, so no jargon: never say "prompt engineering", "LLM", "workflow" or "leverage". Never use a dash or hyphen: write "follow ups", "day to day", "first drafts". No emoji, and no hype words like "supercharge" or "game changer".`;
 
 const JOB_SYSTEM = `You read one answer from a woman starting a short quiz about using AI in her work: her job, in her own words. She can have any job: on her feet in a shop, in a truck, in a clinic, in a classroom, at a desk, running her own business. From her job alone, write the choices for the next screens of her quiz. She taps them, so they must sound like her job, not like a form.
 
