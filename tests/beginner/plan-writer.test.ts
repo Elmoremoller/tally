@@ -89,8 +89,8 @@ const raw = (extra: ReturnType<typeof idea>[] = []) => ({
   },
 });
 
-test("the prompt version is v2", () => {
-  assert.equal(BEGINNER_PLAN_VERSION, "beginner-plan-v2");
+test("the prompt version is v3", () => {
+  assert.equal(BEGINNER_PLAN_VERSION, "beginner-plan-v3");
 });
 
 test("nearSame matches titles that differ by one word, ignoring small words and plurals", () => {
@@ -187,4 +187,10 @@ test("the prompt opens with what she most wants, keeps her apps as context, and 
       "When one of her tasks and a shown idea are about the same thing, write one idea using the shown idea's exact title.",
     ),
   );
+});
+
+test("the prompt never assumes a desk and never makes up products, prices or hours", () => {
+  assert.ok(BEGINNER_PLAN_SYSTEM.includes("Never assume a desk, a computer or email in her work unless her answers say so."));
+  assert.ok(BEGINNER_PLAN_SYSTEM.includes("Never make up products, what a product does, prices, discounts, sales, opening hours, dates or her workplace's rules"));
+  assert.ok(BEGINNER_PLAN_SYSTEM.includes("Keep the prompt's square brackets as they are"));
 });

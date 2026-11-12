@@ -20,7 +20,7 @@ import {
 // and say at work. The tool, the marks and the seven days are decided in code; the model writes the words.
 // Versioned like the first plan: change BEGINNER_PLAN_VERSION whenever the words of the prompt change.
 
-export const BEGINNER_PLAN_VERSION = "beginner-plan-v2";
+export const BEGINNER_PLAN_VERSION = "beginner-plan-v3";
 
 export type BeginnerPlanInput = {
   job: string;
@@ -81,7 +81,7 @@ tool_why: one or two sentences to her on why the named tool is a good place to s
 
 first_win: she saw a draft of her first win task on her free result. Now she makes it herself.
 - prompt: what she pastes to get it. Written in her voice, with her job and situation already filled in from her answers, so she changes as little as possible. Square brackets only for today's details, like [day and time]. Say the format, length and tone she needs. 40 to 110 words.
-- example: what a good answer looks like, written out, so she can tell when she got one. 30 to 90 words. No made up names of people or companies.
+- example: what a good answer looks like, written out, so she can tell when she got one. 30 to 90 words. Keep the prompt's square brackets as they are, never fill one with a made up name, product, price, discount, sale, opening hours or date, and add no rule of her workplace beside them.
 - fixes: exactly three short lines she can send next when the answer is off, each at most 12 words, like "Shorter." or "Warmer, like I’m texting a regular."
 
 ideas: between 8 and 10 more things AI can do for her in all, each with a prompt ready to paste.
@@ -113,6 +113,8 @@ Copy rules:
 - No hype words like "10x", "supercharge" or "game changer". No promises of time saved, raises or results, and no numbers of hours or minutes.
 - Never use names of people or companies; use roles like "my manager" or "a client".
 - Never state a fact about her workplace she didn't give, like discounts, perks, policies or procedures. Use square brackets instead.
+- Never make up products, what a product does, prices, discounts, sales, opening hours, dates or her workplace's rules, like needing a receipt or the tags on, anywhere in her plan. Use square brackets instead.
+- Never assume a desk, a computer or email in her work unless her answers say so. When she works on her feet or on the road, her work writing goes by text, in person, or in the apps she picked.
 - Plain US English. Never use a dash or hyphen: write "follow ups", "day to day", "first drafts". No colons in titles. No emoji. These are rules for your writing: never mention dashes, hyphens or emoji inside a prompt she pastes.
 - Never write medical, legal or financial advice. Where her work touches it, the prompt asks for a draft she checks against her own approved sources.
 - Speak to her as "you", except in the prompts, the example, the fixes, the work profile and the at work messages, which are in her own voice.`;

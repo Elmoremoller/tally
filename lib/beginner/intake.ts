@@ -11,7 +11,7 @@ import { experienceLabels, worksForLabels, type Experience, type FirstWin, type 
 // free result is something real instead of a number. It also lists a few other things AI can do in her job,
 // as titles. The answer is checked in code before anything is saved. Same model and key as lib/intake.ts.
 
-export const BEGINNER_INTAKE_VERSION = "beginner-intake-v2";
+export const BEGINNER_INTAKE_VERSION = "beginner-intake-v3";
 
 export type BeginnerIntakeInput = {
   job: string;
@@ -55,9 +55,9 @@ Tasks:
 - private: true when doing it with AI would mean typing in private details about other people, like patients, students, clients, customers or staff, or confidential company information like financials. False when a version with no names and no private details works just as well, like a template with blanks.
 
 first_win: one of her tasks, done for her now.
-- task: the exact name of one of the tasks above, with ai true. Pick what she most wants to make easier whenever a chat assistant can help with it and it needs no private details. Otherwise pick one that needs no private details, is about writing or planning, and that she does often. If every task is private, pick the one that works best as a template with blanks.
+- task: the exact name of one of the tasks above, with ai true. Pick what she most wants to make easier whenever a chat assistant can help with it and it needs no private details. When doing it in full would need private details, still pick it and draft a version that needs none: a text, reply or message she can reuse, with blanks like [first name], [day] or [item]. Pick another task only when no such version would help her. Otherwise pick one that needs no private details, is about writing or planning, and that she does often. If every task is private, pick the one that works best as a template with blanks.
 - intro: one line to her, like "You said you spend time on appointment reminders. Here is one, written for a dental office." At most 30 words.
-- draft: the finished thing itself, ready to use, written for her job. 30 to 90 words. Fit it to what her answers say about how she does it, like who it's for and how she sends it: a text when she texts, never an email she didn't mention. Use square brackets for details only she knows, like [first name] or [day]. No private details, no made up names of people or companies, no made up facts or prices. It is the thing, not advice about the thing and not a prompt.
+- draft: the finished thing itself, ready to use, written for her job. 30 to 90 words. Fit it to what her answers say about how she does it, like who it's for and how she sends it: a text when she texts, never an email she didn't mention. Use square brackets for details only she knows, like [first name] or [day]. No private details, no made up names of people or companies, no made up facts or prices. Never make up products, what a product does, prices, discounts, sales, opening hours or dates: put them in square brackets, like [new arrivals] or [sale details]. When the draft touches her workplace's rules, like returns, refunds, holds, deposits, a size chart or shift swaps, put each rule in square brackets, like [return window] or [hold rules]. Never write a rule yourself, even a common one like needing a receipt or the tags on. It is the thing, not advice about the thing and not a prompt.
 - Never state a fact about her workplace she didn't give, like discounts, perks, policies or procedures. Use square brackets instead.
 - Never draft medical, legal or financial advice or instructions. If her task is of that kind, like patient teaching, pick another task, or draft something around it that carries no advice, like a checklist for herself or a message to set up a time.
 - If no task has ai true, first_win is null.

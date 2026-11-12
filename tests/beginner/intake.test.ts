@@ -48,8 +48,8 @@ const raw = () => ({
   follow_up_question: null,
 });
 
-test("the prompt version is v2", () => {
-  assert.equal(BEGINNER_INTAKE_VERSION, "beginner-intake-v2");
+test("the prompt version is v3", () => {
+  assert.equal(BEGINNER_INTAKE_VERSION, "beginner-intake-v3");
 });
 
 test("beginnerHers holds her job, every pick and typed answer, and the follow up answer, but not the titles", () => {
@@ -116,4 +116,9 @@ test("checkBeginnerIntake falls back to the beginner follow up, which assumes no
   const result = checkBeginnerIntake(made, { followUpAsked: false, hers: beginnerHers(input()) });
   assert.equal(result?.follow_up_question, beginnerFollowUp);
   assert.equal(result?.needs_follow_up, true);
+});
+
+test("the prompt keeps her first win on what she most wants, and her workplace's rules in square brackets", () => {
+  assert.ok(BEGINNER_INTAKE_SYSTEM.includes("When doing it in full would need private details, still pick it and draft a version that needs none"));
+  assert.ok(BEGINNER_INTAKE_SYSTEM.includes("Never write a rule yourself, even a common one like needing a receipt or the tags on."));
 });
