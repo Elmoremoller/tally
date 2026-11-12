@@ -208,7 +208,7 @@ export const SCARCITY_PATTERNS: readonly RegExp[] = [
 const scarce = (text: string) => SCARCITY_PATTERNS.some((pattern) => pattern.test(text));
 
 /** The draft without any sentence that carries a scarcity line. Lines left empty go; the rest keep their breaks. */
-function withoutScarcity(draft: string): string {
+export function withoutScarcity(draft: string): string {
   if (!scarce(draft)) return draft;
   return draft
     .split("\n")
@@ -261,6 +261,8 @@ export function checkBeginnerIntake(
   const ideas = (Array.isArray(r.ideas) ? r.ideas : [])
     .map((idea) => line(idea, 90)?.replace(/\.$/, ""))
     .filter((idea): idea is string => Boolean(idea))
+    // A square bracket belongs in a draft, never in a title she sees on her result.
+    .filter((idea) => !idea.includes("["))
     .filter((idea) => !firstWin || !same(idea, firstWin.task))
     .slice(0, 8);
 

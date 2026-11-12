@@ -194,3 +194,36 @@ test("the prompt never assumes a desk and never makes up products, prices or hou
   assert.ok(BEGINNER_PLAN_SYSTEM.includes("Never make up products, what a product does, prices, discounts, sales, opening hours, dates or her workplace's rules"));
   assert.ok(BEGINNER_PLAN_SYSTEM.includes("Keep the prompt's square brackets as they are"));
 });
+
+const withExample = (example: string) => {
+  const made = raw();
+  made.first_win = { ...made.first_win, example };
+  return made;
+};
+const cleanExample = raw().first_win.example;
+
+test("checkBeginnerPlan takes a scarcity sentence out of the first win example and keeps the plan", () => {
+  for (const line of ["Reserve yours before it’s gone.", "These sell out fast!", "Only a few left in each size."]) {
+    const plan = checkBeginnerPlan(withExample(`${cleanExample} ${line}`), input());
+    assert.equal(plan?.firstWin.example, cleanExample, line);
+  }
+});
+
+test("checkBeginnerPlan keeps the line breaks of an example once a scarcity sentence is out", () => {
+  const example = `${cleanExample}\nWhile supplies last, so stop by soon.\nSee you there, [your name]`;
+  const plan = checkBeginnerPlan(withExample(example), input());
+  assert.equal(plan?.firstWin.example, `${cleanExample}\nSee you there, [your name]`);
+});
+
+test("checkBeginnerPlan fails a plan whose example is left too short without its scarcity lines", () => {
+  assert.equal(checkBeginnerPlan(withExample("New in today. Only a few left. They won’t last."), input()), null);
+});
+
+test("checkBeginnerPlan leaves a clean example as it is", () => {
+  assert.equal(checkBeginnerPlan(raw(), input())?.firstWin.example, cleanExample);
+});
+
+test("the prompt quotes what she most wants without putting words in her mouth", () => {
+  assert.ok(BEGINNER_PLAN_SYSTEM.includes(`"You said you'd most like help with Instagram posts for new arrivals."`));
+  assert.ok(!BEGINNER_PLAN_SYSTEM.includes("take up your week"));
+});

@@ -249,3 +249,10 @@ test("without a kept answer, the attempts behave as before", async () => {
   assert.equal(await attempts([brokenAnswer(), undefined]).run, null);
   assert.equal((await attempts([brokenAnswer(), raw()]).run)?.first_win?.draft, draft);
 });
+
+test("idea titles with a square bracket are dropped", () => {
+  const made = raw();
+  made.ideas = ["Review request texts", "A thank you note for [customer name]", "Payment reminder texts", "Job notes for your records"];
+  const result = checkBeginnerIntake(made, { followUpAsked: false, hers: beginnerHers(input()) });
+  assert.deepEqual(result?.ideas, ["Review request texts", "Payment reminder texts", "Job notes for your records"]);
+});

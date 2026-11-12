@@ -1,6 +1,7 @@
 import Anthropic from "@anthropic-ai/sdk";
 import { fence, planModel, text } from "../plan-writer";
 import { policyLabels, toolLabels, type AiPolicy, type AiTool, type ChatTool } from "../week";
+import { withoutScarcity } from "./intake";
 import type { QA } from "./quiz";
 import {
   beginnerTool,
@@ -21,6 +22,9 @@ import {
 // Versioned like the first plan: change BEGINNER_PLAN_VERSION whenever the words of the prompt change.
 
 export const BEGINNER_PLAN_VERSION = "beginner-plan-v3";
+
+/** The shortest first win example worth showing her, the same as the intake's first win draft. */
+const EXAMPLE_MIN = 60;
 
 export type BeginnerPlanInput = {
   job: string;
@@ -71,7 +75,7 @@ You get her job, her answer to every screen of the quiz, what she most wants to 
 
 Assume she has never written a prompt. Every prompt you write must work when pasted as it is into a free chat assistant, with no setup.
 
-Open her plan with what she most wants to make easier, given under "What she most wants to make easier". Start tool_why by naming it in her own words, like "You said Instagram posts for new arrivals take up your week.", then say why the named tool is a good place to start on it. When her first win task is that same thing, the first win is how she starts on it.
+Open her plan with what she most wants to make easier, given under "What she most wants to make easier". Start tool_why by naming it in her own words, like "You said you'd most like help with Instagram posts for new arrivals.", then say why the named tool is a good place to start on it. When her first win task is that same thing, the first win is how she starts on it.
 
 Her plan names one chat tool, and everything in it happens there. The apps she said she uses are where its results go, like "write it here, paste it into Notion" or "post it on Instagram". Mention her apps only that way. Never make one of them, or the AI built into it, something to learn on its own.
 
@@ -260,7 +264,10 @@ export function checkBeginnerPlan(raw: unknown, input: BeginnerPlanInput): Begin
   const toolWhy = text(r.tool_why, 500);
   const w = (r.first_win ?? {}) as Record<string, unknown>;
   const prompt = text(w.prompt, 1200);
-  const example = text(w.example, 1200);
+  // The prompt forbids stock and urgency lines, but one can slip through, as in the intake's first win draft:
+  // those sentences are taken out, and the example stays only if what is left is still long enough to use.
+  const cleaned = withoutScarcity(text(w.example, 1200) ?? "");
+  const example = cleaned.length >= EXAMPLE_MIN ? cleaned : null;
   // A stray closing quote or bracket sometimes trails the last line.
   const fixes = strings(w.fixes, 120)
     .map((fix) => fix.replace(/[\s’”"\]]+$/, ""))
