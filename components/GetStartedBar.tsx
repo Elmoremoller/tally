@@ -10,12 +10,15 @@ import { ArrowRight } from "./icons";
 const time = offer.quizTime.split(" ");
 const timeLines = [time.slice(0, -2).join(" "), time.slice(-2).join(" ")];
 
+/** `href` is the quiz it opens: the first version's, unless the page is the beginner version's. */
+type GetStartedBarProps = { href?: string };
+
 /**
  * The landing page's action, pinned to the bottom of the screen. The whole bar is the button. It rises
  * once the hero's Get started has scrolled away under the nav, and steps aside while the closing band or
  * the footer is on screen, so there is only ever one Get started in reach. While hidden it is inert.
  */
-export function GetStartedBar() {
+export function GetStartedBar({ href = START_HREF }: GetStartedBarProps) {
   const [shown, setShown] = useState(false);
 
   useEffect(() => {
@@ -57,7 +60,7 @@ export function GetStartedBar() {
 
   return (
     <div className="get-bar" data-shown={shown || undefined} inert={!shown}>
-      <Link href={START_HREF} className="btn get-bar-link" data-cta="get-started-bar">
+      <Link href={href} className="btn get-bar-link" data-cta="get-started-bar">
         <span className="get-bar-label">
           {offer.cta}
           <ArrowRight />

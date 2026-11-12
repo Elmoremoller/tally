@@ -1,0 +1,1673 @@
+{
+ "teacher": {
+  "intake": {
+   "role_summary": "You’re a 4th grade teacher at a public elementary school with 26 students.",
+   "tasks": [
+    {
+     "name": "Lesson planning",
+     "pile": "keep_visible",
+     "estimated_hours": 4,
+     "why": "Core teaching work that shows your skill and judgment with students.",
+     "extra": false
+    },
+    {
+     "name": "Grading",
+     "pile": "hand_to_ai",
+     "estimated_hours": 2,
+     "why": "Routine grading tasks AI can help draft and organize.",
+     "extra": false
+    },
+    {
+     "name": "Writing emails to parents",
+     "pile": "hand_to_ai",
+     "estimated_hours": 1.5,
+     "why": "Drafting routine parent emails is busywork AI can speed up.",
+     "extra": false
+    },
+    {
+     "name": "Making worksheets",
+     "pile": "hand_to_ai",
+     "estimated_hours": 1.5,
+     "why": "First drafts of worksheets are busywork AI can produce quickly.",
+     "extra": false
+    },
+    {
+     "name": "Report card comments",
+     "pile": "hand_to_ai",
+     "estimated_hours": 2,
+     "why": "Drafting comments from your notes is repetitive work AI can help with.",
+     "extra": false
+    },
+    {
+     "name": "Running the school newsletter",
+     "pile": "hand_back",
+     "estimated_hours": 1,
+     "why": "Extra work on top of teaching that could be shared or handed to another staff member.",
+     "extra": true
+    },
+    {
+     "name": "Social committee",
+     "pile": "hand_back",
+     "estimated_hours": 0.5,
+     "why": "Extra committee work that others on staff could take a turn with.",
+     "extra": true
+    }
+   ],
+   "needs_follow_up": false,
+   "follow_up_question": null
+  },
+  "plan": {
+   "version": 1,
+   "role": "You’re a 4th grade teacher at a public elementary school with 26 students.",
+   "tools": [],
+   "toolsOther": null,
+   "startTool": "Before you start, check which chat tool your school or district has approved, using the message in your plan, and paste your work profile into that one. Don’t pick a tool on your own, since public schools often have firm rules about student information.",
+   "policy": "no_idea",
+   "tasks": [
+    {
+     "name": "Lesson planning",
+     "pile": "keep_visible",
+     "hours": 4
+    },
+    {
+     "name": "Grading",
+     "pile": "hand_to_ai",
+     "hours": 2
+    },
+    {
+     "name": "Writing emails to parents",
+     "pile": "hand_to_ai",
+     "hours": 1.5
+    },
+    {
+     "name": "Making worksheets",
+     "pile": "hand_to_ai",
+     "hours": 1.5
+    },
+    {
+     "name": "Report card comments",
+     "pile": "hand_to_ai",
+     "hours": 2
+    },
+    {
+     "name": "Running the school newsletter",
+     "pile": "hand_back",
+     "hours": 1
+    },
+    {
+     "name": "Social committee",
+     "pile": "hand_back",
+     "hours": 0.5
+    }
+   ],
+   "handBack": [
+    {
+     "task": "Running the school newsletter",
+     "script": "I’ve been running the newsletter, and I want to make sure it keeps going well. Since it sits outside my teaching, I’d like to hand it to the front office or a communications lead, or set up a rotation where each grade level takes a turn. I can share my current layout and a list of what goes in each issue so the handoff is easy. I’ll finish this month’s issue and then step back."
+    },
+    {
+     "task": "Social committee",
+     "script": "Thank you for including me on the social committee. To protect my planning and grading time, I’m stepping off the committee after this month. If it helps, I can stay available for one or two events a year, or we could rotate the work among staff so it doesn’t fall on the same few people. I’ll pass along my notes and contacts so the next person can start easily."
+    }
+   ],
+   "workProfile": "I’m a 4th grade teacher at a public elementary school with 26 students. My core work is planning strong lessons that fit my students’ needs and knowing where each child is in their learning. I want help with the busywork around that: grading feedback, report card comments, parent emails, and worksheets. I like drafts in a warm, clear, professional tone, written at a level families can easily read. Keep emails short, with a friendly opening, the key point, and a clear next step. Keep worksheets age appropriate for 9 and 10 year olds, with simple directions and a mix of easy and harder questions. Give comments in plain language that is specific and kind, never generic. Use bullet points when it helps me scan. I will never share student names or private details, so use placeholders like [student] instead. Before you draft anything, check what’s missing and ask me any questions you need answered.",
+   "rules": [
+    "Check which AI tool your school or district approves before you start, and use AI only where it’s approved.",
+    "Use only approved tools, including the AI built into other apps you already use.",
+    "Never paste student names, grades, or family details into a tool your school hasn’t approved. Use placeholders like [student] instead.",
+    "Read and check every draft before it goes to a family or into a report card. Make sure it sounds like you and is accurate.",
+    "Be open with your principal or manager about using AI and what you use it for.",
+    "If the answer on approved tools is no, keep going with your hand back scripts and your lesson planning project."
+   ],
+   "askMessage": "Hi, I’m a 4th grade teacher and I’d like to know which AI tools are approved for school use, if any. I’m thinking of using one to help draft parent emails, worksheets, grading feedback, and report card comments. I would not enter student names or personal details. Could you also tell me what I may and may not use an approved tool for? Thank you for your help.",
+   "prompts": [
+    {
+     "task": "Grading",
+     "prompt": "I’m a 4th grade teacher. Here is the rubric for this assignment: [paste your rubric]. Here is an anonymous student response with no name: [paste the response]. Suggest a score based on the rubric, then write two sentences of feedback for the student: one thing they did well and one next step. Use simple, encouraging language a 9 year old can understand.",
+     "how": "Use it when you have a stack of short written work to score and comment on, with student names removed."
+    },
+    {
+     "task": "Report card comments",
+     "prompt": "I’m a 4th grade teacher writing a report card comment. Here are my notes about the student, with no name: [paste your notes on strengths, growth areas, and next steps]. Write a 3 to 4 sentence comment in a warm, professional tone. Start with a real strength, name one area for growth in a kind and specific way, and end with a next step at home or school. Avoid generic phrases. Use [student] in place of the name.",
+     "how": "Use it for each child, working from your own quick notes, then add the name and edit it yourself."
+    },
+    {
+     "task": "Writing emails to parents",
+     "prompt": "I’m a 4th grade teacher writing to a parent. The situation is: [describe what happened or what you need to share]. Write a short, friendly email of under 150 words. Open with something positive, state the main point clearly, and end with one clear next step and an invitation to reply. Keep the tone calm and respectful. Use [parent] and [student] as placeholders.",
+     "how": "Use it for routine updates, concerns, and follow ups, and for any message where you want the tone right."
+    },
+    {
+     "task": "Making worksheets",
+     "prompt": "I’m a 4th grade teacher. Create a one page worksheet on [topic] for 9 and 10 year olds, matching this standard or goal: [paste your learning goal]. Include simple directions, 8 questions that go from easy to challenging, and one short challenge question at the end. Add an answer key on a separate section. Keep the language clear and the layout easy to print.",
+     "how": "Use it when you need a practice sheet or a quick extra for students who need more support or more challenge."
+    }
+   ],
+   "project": {
+    "title": "Share Your Lesson Plans",
+    "why": "Your lesson planning is the heart of your job, and sharing it makes your strength visible to your principal and your grade level team. It shows the thinking behind what your students are learning.",
+    "steps": [
+     "Pick one unit you’re proud of and write a one page summary of the goal, key activities, and how you check understanding.",
+     "Share it with your grade level team and offer to talk it through at the next planning meeting.",
+     "Ask your principal if you can present it or add it to the shared school planning folder."
+    ]
+   },
+   "aiTalk": "I want to tell you how I’m using AI, and I’m only using tools the school approves. It helps me with first drafts of parent emails, worksheets, and report card comments, and I check and edit every one before it goes out. I never enter student names or private information. That time goes back into planning stronger lessons for my students. I’m happy to share what’s working if it would help the team."
+  },
+  "planSeconds": 17,
+  "toolkitIntake": {
+   "role_summary": "You’re a 4th grade teacher at a public elementary school with 26 kids, juggling lesson planning, grading and parent emails.",
+   "tasks": [
+    {
+     "name": "Lesson planning",
+     "pile": "keep_visible",
+     "estimated_hours": 5,
+     "why": "This is your core teaching work and shows your skill, so keep it in your hands.",
+     "extra": false,
+     "tag": "extra_work"
+    },
+    {
+     "name": "Grading",
+     "pile": "hand_to_ai",
+     "estimated_hours": 3,
+     "why": "Grading is repetitive checking AI can help with, while you keep the judgment calls.",
+     "extra": false,
+     "tag": "reporting"
+    },
+    {
+     "name": "Parent emails",
+     "pile": "hand_to_ai",
+     "estimated_hours": 2,
+     "why": "AI can draft routine parent emails, and you review them before sending.",
+     "extra": false,
+     "tag": "customer_emails"
+    },
+    {
+     "name": "Making worksheets",
+     "pile": "hand_to_ai",
+     "estimated_hours": 2,
+     "why": "AI can produce first drafts of worksheets that you then tailor to your class.",
+     "extra": false,
+     "tag": "extra_work"
+    },
+    {
+     "name": "Report card comments",
+     "pile": "hand_to_ai",
+     "estimated_hours": 3,
+     "why": "AI can draft comment starters from your notes, and you personalize each one.",
+     "extra": false,
+     "tag": "reporting"
+    },
+    {
+     "name": "School newsletter",
+     "pile": "hand_back",
+     "estimated_hours": 1,
+     "why": "This extra job isn’t part of your teaching role, so ask to hand it to someone else.",
+     "extra": true,
+     "tag": "newsletters"
+    },
+    {
+     "name": "Social committee",
+     "pile": "hand_back",
+     "estimated_hours": 1,
+     "why": "Committee work outside your classroom duties can be shared or passed on.",
+     "extra": true,
+     "tag": "meetings"
+    }
+   ],
+   "needs_follow_up": false,
+   "follow_up_question": null,
+   "role_level": "coordinator",
+   "brand_type": null
+  },
+  "toolkit": {
+   "hours": 2,
+   "start": [
+    "ask-whats-approved",
+    "brand-voice-writer",
+    "meeting-actions"
+   ],
+   "items": [
+    {
+     "id": "brand-voice-writer",
+     "title": "Your brand voice writer",
+     "counts": true,
+     "task": "School newsletter",
+     "minutes": 25
+    },
+    {
+     "id": "launch-kit-writer",
+     "title": "Your launch kit writer",
+     "counts": false,
+     "task": null,
+     "minutes": 40
+    },
+    {
+     "id": "supplier-sheet-cleanup",
+     "title": "Clean up a supplier’s product sheet",
+     "counts": false,
+     "task": null,
+     "minutes": 30
+    },
+    {
+     "id": "customer-reply-assistant",
+     "title": "Your customer reply assistant",
+     "counts": true,
+     "task": "Parent emails",
+     "minutes": 50
+    },
+    {
+     "id": "review-themes",
+     "title": "Find what your reviews keep saying",
+     "counts": false,
+     "task": null,
+     "minutes": 20
+    },
+    {
+     "id": "why-sales-moved",
+     "title": "Explain why sales moved last week",
+     "counts": true,
+     "task": "Grading",
+     "minutes": 10
+    },
+    {
+     "id": "win-back-flow",
+     "title": "Win back customers who went quiet",
+     "counts": false,
+     "task": null,
+     "minutes": 45
+    },
+    {
+     "id": "margin-leaks",
+     "title": "Spot where discounts and returns eat your margin",
+     "counts": false,
+     "task": null,
+     "minutes": 15
+    },
+    {
+     "id": "instagram-captions",
+     "title": "A month of Instagram captions",
+     "counts": false,
+     "task": null,
+     "minutes": 25
+    },
+    {
+     "id": "ask-whats-approved",
+     "title": "Ask which AI tools you can use",
+     "counts": false,
+     "task": null,
+     "minutes": 5
+    },
+    {
+     "id": "untangle-a-thread",
+     "title": "Untangle a long email thread",
+     "counts": true,
+     "task": "Social committee",
+     "minutes": 18
+    },
+    {
+     "id": "meeting-actions",
+     "title": "Meeting notes into actions and a follow up",
+     "counts": true,
+     "task": "Social committee",
+     "minutes": 18
+    },
+    {
+     "id": "supplier-follow-up",
+     "title": "A supplier follow up that gets a date",
+     "counts": false,
+     "task": null,
+     "minutes": 20
+    },
+    {
+     "id": "hand-back-instagram",
+     "title": "A polite way to hand back the Instagram",
+     "counts": false,
+     "task": null,
+     "minutes": 60
+    }
+   ]
+  }
+ },
+ "nurse": {
+  "intake": {
+   "role_summary": "You’re a registered nurse on a med surg floor at a hospital, handling patient care, charting, and precepting new nurses.",
+   "tasks": [
+    {
+     "name": "Charting",
+     "pile": "hand_to_ai",
+     "estimated_hours": 5,
+     "why": "Charting is documentation work that AI could help draft, within your hospital’s rules.",
+     "extra": false
+    },
+    {
+     "name": "Shift handoff reports",
+     "pile": "hand_to_ai",
+     "estimated_hours": 2,
+     "why": "Handoff reports are repeatable summaries that AI could help structure, within your hospital’s rules.",
+     "extra": false
+    },
+    {
+     "name": "Patient education",
+     "pile": "keep_visible",
+     "estimated_hours": 2,
+     "why": "Patient education needs your clinical judgment and builds trust with patients.",
+     "extra": false
+    },
+    {
+     "name": "Precepting new nurses",
+     "pile": "keep_visible",
+     "estimated_hours": 2,
+     "why": "Precepting uses your expertise and shapes the next generation of nurses.",
+     "extra": false
+    },
+    {
+     "name": "Unit schedule swaps",
+     "pile": "hand_back",
+     "estimated_hours": 1,
+     "why": "Schedule swaps can be handed to a charge nurse or scheduler to own.",
+     "extra": true
+    },
+    {
+     "name": "Planning potlucks",
+     "pile": "hand_back",
+     "estimated_hours": 1,
+     "why": "Potluck planning is social work that can be shared or handed to a volunteer.",
+     "extra": true
+    }
+   ],
+   "needs_follow_up": false,
+   "follow_up_question": null
+  },
+  "plan": {
+   "version": 1,
+   "role": "You’re a registered nurse on a med surg floor at a hospital, handling patient care, charting, and precepting new nurses.",
+   "tools": [],
+   "toolsOther": null,
+   "startTool": "Check which chat tool your hospital has approved before you start, using the message in your plan, and paste your work profile into that one. Don’t use any other tool for work until it’s confirmed.",
+   "policy": "restricted",
+   "tasks": [
+    {
+     "name": "Charting",
+     "pile": "hand_to_ai",
+     "hours": 5
+    },
+    {
+     "name": "Shift handoff reports",
+     "pile": "hand_to_ai",
+     "hours": 2
+    },
+    {
+     "name": "Patient education",
+     "pile": "keep_visible",
+     "hours": 2
+    },
+    {
+     "name": "Precepting new nurses",
+     "pile": "keep_visible",
+     "hours": 2
+    },
+    {
+     "name": "Unit schedule swaps",
+     "pile": "hand_back",
+     "hours": 1
+    },
+    {
+     "name": "Planning potlucks",
+     "pile": "hand_back",
+     "hours": 1
+    }
+   ],
+   "handBack": [
+    {
+     "task": "Unit schedule swaps",
+     "script": "I’ve been handling the unit schedule swaps on top of my patient assignment, and I need to hand that back so I can put my time into patient care and precepting. I’d like the charge nurse or the unit scheduler to own it going forward. If it helps, I can share the swap request steps I’ve been following so the handoff is smooth."
+    },
+    {
+     "task": "Planning potlucks",
+     "script": "I’ve enjoyed helping with the potlucks, but I can’t keep planning them on top of my clinical work. I’d suggest we rotate the planning each time, with a simple sign up sheet in the break room. I’m happy to take my turn in the rotation."
+    }
+   ],
+   "workProfile": "I’m a registered nurse on a med surg floor at a hospital. My core work is patient care, patient education, and precepting new nurses. The busywork I want help with is charting and shift handoff reports. I never share patient names, identifiers, or any protected health information with you, so I’ll use placeholders like [patient] or [room] and fill in details myself. I like drafts in a clear, professional, plain tone. Keep them short and easy to scan, with bullet points for handoff reports and short paragraphs for charting language. Use standard clinical wording, and don’t add facts I haven’t given you. If something is unclear, leave a bracket for me to fill in. I will check every draft against my own assessment before it goes anywhere. Before you draft anything, ask me what’s missing, such as the setting, the key findings, or the format I need.",
+   "rules": [
+    "Check which tool your hospital has approved before you start, and use AI only where it’s approved.",
+    "Use only tools your hospital approves, including the AI built into other apps.",
+    "Never paste patient information or any personal data about colleagues into a tool that isn’t approved for it.",
+    "Read and check every draft against your own assessment before it goes into a chart or out to anyone.",
+    "Be open with your manager about using AI.",
+    "If you’re unsure whether something is allowed, ask before you try it."
+   ],
+   "askMessage": "Hi, I’d like to find out which AI tools, if any, are approved for use at work. I’m hoping to use one to help draft charting language and shift handoff report outlines, without any patient identifiers. Could you tell me which tools are approved and what I’m allowed to use them for? If there’s a policy I should read first, I’d appreciate a link. Thank you.",
+   "prompts": [
+    {
+     "task": "Charting",
+     "prompt": "Help me turn my shorthand notes into clear, professional charting language for a med surg patient. Do not include any names or identifiers. Here are my notes: [paste your de identified notes]. Use objective, factual wording, keep it concise, and organize it by [assessment, interventions, patient response]. Don’t add anything I didn’t write. If something is missing or unclear, list your questions at the end instead of guessing.",
+     "how": "Use it after a patient assessment to polish your notes, only in an approved tool and with no identifiers."
+    },
+    {
+     "task": "Shift handoff reports",
+     "prompt": "Help me organize a shift handoff report from my de identified notes: [paste your notes, with no names or identifiers]. Format it as a short scannable list for each patient by room label: [room label], reason for admission, key changes this shift, pending tasks, and things to watch. Keep it brief and use only what I’ve given you. Flag anything missing as a question for me.",
+     "how": "Use it near the end of your shift to turn rough notes into a clean handoff, only in an approved tool."
+    }
+   ],
+   "project": {
+    "title": "Precepting Quick Reference",
+    "why": "Precepting is core work that rarely gets seen. A simple resource for new nurses shows your leadership and makes your teaching visible to your manager and the unit.",
+    "steps": [
+     "Write down the five questions new nurses ask you most often.",
+     "Draft one page answers from your own experience, with no patient information, and check it against unit policy.",
+     "Share it with your manager and ask whether the unit educator can add it to onboarding."
+    ]
+   },
+   "aiTalk": "I wanted to let you know how I’m using AI at work. Once our hospital confirmed which tool is approved, I started using it only for drafting charting language and handoff outlines, with no patient identifiers. It frees up time for patient education and precepting new nurses, which is where I want my focus. I check every draft myself and follow the hospital’s rules. I’m happy to walk you through it if that would help."
+  },
+  "planSeconds": 14,
+  "toolkitIntake": {
+   "role_summary": "You’re a registered nurse on a med surg floor at a hospital, handling charting, handoffs and patient care while also precepting new nurses.",
+   "tasks": [
+    {
+     "name": "Charting",
+     "pile": "hand_to_ai",
+     "estimated_hours": 5,
+     "why": "Charting is documentation work that AI could help draft, though your facility’s AI rules come first.",
+     "extra": false,
+     "tag": "inbox_overload"
+    },
+    {
+     "name": "Shift handoff reports",
+     "pile": "hand_to_ai",
+     "estimated_hours": 2,
+     "why": "Handoff summaries follow a repeatable structure that AI could help draft for your review.",
+     "extra": false,
+     "tag": "reporting"
+    },
+    {
+     "name": "Patient education",
+     "pile": "keep_visible",
+     "estimated_hours": 2,
+     "why": "Teaching patients directly is core clinical work that shows your skill and judgment.",
+     "extra": false,
+     "tag": "customer_emails"
+    },
+    {
+     "name": "Precepting new nurses",
+     "pile": "keep_visible",
+     "estimated_hours": 2,
+     "why": "Mentoring new nurses is a core part of your role and builds your reputation.",
+     "extra": false,
+     "tag": "meetings"
+    },
+    {
+     "name": "Calling families",
+     "pile": "keep_visible",
+     "estimated_hours": 1,
+     "why": "Family communication is part of your core patient care role and needs your judgment.",
+     "extra": false,
+     "tag": "customer_emails"
+    },
+    {
+     "name": "Unit schedule swaps",
+     "pile": "hand_back",
+     "estimated_hours": 1,
+     "why": "Schedule swaps are administrative work that could go to a unit scheduler or charge nurse.",
+     "extra": true,
+     "tag": "extra_work"
+    },
+    {
+     "name": "Planning potlucks",
+     "pile": "hand_back",
+     "estimated_hours": 1,
+     "why": "Planning social events is not part of your nursing role and could be handed to a volunteer.",
+     "extra": true,
+     "tag": "extra_work"
+    }
+   ],
+   "needs_follow_up": false,
+   "follow_up_question": null,
+   "role_level": "specialist",
+   "brand_type": null
+  },
+  "toolkit": {
+   "hours": 0.6666666666666666,
+   "start": [
+    "ask-whats-approved",
+    "why-sales-moved",
+    "launch-kit-writer"
+   ],
+   "items": [
+    {
+     "id": "brand-voice-writer",
+     "title": "Your brand voice writer",
+     "counts": false,
+     "task": null,
+     "minutes": 25
+    },
+    {
+     "id": "launch-kit-writer",
+     "title": "Your launch kit writer",
+     "counts": false,
+     "task": null,
+     "minutes": 40
+    },
+    {
+     "id": "supplier-sheet-cleanup",
+     "title": "Clean up a supplier’s product sheet",
+     "counts": false,
+     "task": null,
+     "minutes": 30
+    },
+    {
+     "id": "customer-reply-assistant",
+     "title": "Your customer reply assistant",
+     "counts": false,
+     "task": null,
+     "minutes": 50
+    },
+    {
+     "id": "review-themes",
+     "title": "Find what your reviews keep saying",
+     "counts": false,
+     "task": null,
+     "minutes": 20
+    },
+    {
+     "id": "why-sales-moved",
+     "title": "Explain why sales moved last week",
+     "counts": true,
+     "task": "Shift handoff reports",
+     "minutes": 10
+    },
+    {
+     "id": "win-back-flow",
+     "title": "Win back customers who went quiet",
+     "counts": false,
+     "task": null,
+     "minutes": 45
+    },
+    {
+     "id": "margin-leaks",
+     "title": "Spot where discounts and returns eat your margin",
+     "counts": false,
+     "task": null,
+     "minutes": 15
+    },
+    {
+     "id": "instagram-captions",
+     "title": "A month of Instagram captions",
+     "counts": false,
+     "task": null,
+     "minutes": 25
+    },
+    {
+     "id": "ask-whats-approved",
+     "title": "Ask which AI tools you can use",
+     "counts": false,
+     "task": null,
+     "minutes": 5
+    },
+    {
+     "id": "untangle-a-thread",
+     "title": "Untangle a long email thread",
+     "counts": true,
+     "task": "Charting",
+     "minutes": 30
+    },
+    {
+     "id": "meeting-actions",
+     "title": "Meeting notes into actions and a follow up",
+     "counts": false,
+     "task": null,
+     "minutes": 30
+    },
+    {
+     "id": "supplier-follow-up",
+     "title": "A supplier follow up that gets a date",
+     "counts": false,
+     "task": null,
+     "minutes": 20
+    },
+    {
+     "id": "hand-back-instagram",
+     "title": "A polite way to hand back the Instagram",
+     "counts": false,
+     "task": null,
+     "minutes": 60
+    }
+   ]
+  }
+ },
+ "salon": {
+  "intake": {
+   "role_summary": "You own a small hair salon with three stylists, and you also cut hair five days a week.",
+   "tasks": [
+    {
+     "name": "Answering DMs and booking questions",
+     "pile": "hand_to_ai",
+     "estimated_hours": 3,
+     "why": "Routine replies and booking questions can be drafted with AI, freeing your time.",
+     "extra": false
+    },
+    {
+     "name": "Posting on Instagram",
+     "pile": "hand_to_ai",
+     "estimated_hours": 2,
+     "why": "Captions and post scheduling are busywork AI can draft for you.",
+     "extra": false
+    },
+    {
+     "name": "Ordering product",
+     "pile": "hand_to_ai",
+     "estimated_hours": 1,
+     "why": "Reorder lists and order drafts are admin AI can set up for you.",
+     "extra": false
+    },
+    {
+     "name": "Payroll and the schedule",
+     "pile": "hand_to_ai",
+     "estimated_hours": 2,
+     "why": "Schedule drafts and payroll summaries are admin AI can handle first.",
+     "extra": false
+    },
+    {
+     "name": "Cutting hair",
+     "pile": "keep_visible",
+     "estimated_hours": 8,
+     "why": "Your cutting is your core skill and what keeps clients coming back.",
+     "extra": false
+    }
+   ],
+   "needs_follow_up": false,
+   "follow_up_question": null
+  },
+  "plan": {
+   "version": 1,
+   "role": "You own a small hair salon with three stylists, and you also cut hair five days a week.",
+   "tools": [],
+   "toolsOther": null,
+   "startTool": "You can start with ChatGPT, since it is a simple place to begin and works well for short replies, captions and lists. Send the message in your plan first so you know what is approved for your salon, then paste your work profile into it.",
+   "policy": "encouraged",
+   "tasks": [
+    {
+     "name": "Answering DMs and booking questions",
+     "pile": "hand_to_ai",
+     "hours": 3
+    },
+    {
+     "name": "Posting on Instagram",
+     "pile": "hand_to_ai",
+     "hours": 2
+    },
+    {
+     "name": "Ordering product",
+     "pile": "hand_to_ai",
+     "hours": 1
+    },
+    {
+     "name": "Payroll and the schedule",
+     "pile": "hand_to_ai",
+     "hours": 2
+    },
+    {
+     "name": "Cutting hair",
+     "pile": "keep_visible",
+     "hours": 8
+    }
+   ],
+   "handBack": [],
+   "workProfile": "I own a small hair salon with three stylists, and I still cut hair five days a week. Cutting and styling clients is my core work and what I want most of my time for. I need help with the business side that crowds it out: replying to booking questions and DMs, writing Instagram posts, planning the staff schedule, preparing payroll information, and drafting product orders. My tone is warm, friendly and professional, like a salon owner who knows her regulars. Keep drafts short and easy to scan. Replies to clients should be a few sentences. Instagram captions should be brief, with a clear call to book. Schedules and order lists should be simple tables or bullet lists I can copy straight into my systems. Use plain US English and skip jargon and hype. I will never share client or staff personal details, so use placeholders where needed. Before you draft anything, check what is missing and ask me for the details you need, such as service names, prices, opening hours, stylist availability, or product quantities.",
+   "rules": [
+    "Use only AI tools that are approved for your salon, including the AI built into other apps like your booking system or Instagram.",
+    "Never paste client details or staff personal data, like names, phone numbers, pay rates or bank details, into a tool that isn’t approved. Use placeholders instead.",
+    "Read and check every draft before it goes out, especially prices, dates, times and pay figures.",
+    "Be open about using AI. Tell your stylists and your accountant how you use it to draft and organize.",
+    "Keep your own voice on client replies and posts so they still sound like your salon."
+   ],
+   "askMessage": "Hi, I run a small hair salon and I’d like to use an AI chat assistant for the business side of my week. I have in mind drafting replies to booking questions, writing Instagram captions, planning the stylist schedule and putting together product orders. I would not share client names, contact details or payroll data in it. Could you tell me which AI tools are approved for this and what I may use them for? If you’re not sure, I’d also like to know whether the AI features built into my booking and social media apps are fine to use.",
+   "prompts": [
+    {
+     "task": "Answering DMs and booking questions",
+     "prompt": "I own a small hair salon. Draft a warm, short reply to this client message: [paste the message without names or phone numbers]. Our opening hours are [your hours], our prices are [relevant prices], and these slots are open: [open times]. Keep it to three or four sentences, friendly and clear, and end by asking which slot works for them. If anything in my message is missing, ask me before you write the reply.",
+     "how": "Use it when a DM or booking question comes in and you want a quick reply you can check and send."
+    },
+    {
+     "task": "Posting on Instagram",
+     "prompt": "I own a small hair salon. Write three Instagram caption options for this post: [describe the photo, service or news, like a color transformation or a free slot this week]. Tone is warm and friendly, no hype. Keep each caption under 50 words, add a clear invitation to book, and suggest five relevant hashtags for each. Do not include client names. Ask me if you need more details first.",
+     "how": "Use it when you have a photo or news to post and want captions you can pick from in a minute."
+    },
+    {
+     "task": "Payroll and the schedule",
+     "prompt": "Help me prepare next week’s salon schedule and payroll summary. Here are the opening hours: [your hours]. Here are each stylist’s availability and hours, using Stylist A, B and C instead of names: [paste availability and hours]. Booked appointments and busy times: [paste]. Make a simple weekly schedule table, flag any gaps or overlaps, and list the hours per stylist in a table I can copy into my payroll system. Remind me which figures to double check.",
+     "how": "Use it when you build the weekly schedule and gather hours for payroll, then check every figure yourself."
+    },
+    {
+     "task": "Ordering product",
+     "prompt": "I own a small hair salon and need to reorder product. Here is what we have on hand and what we used recently: [paste product, quantity on hand, quantity used]. Our usual minimum stock for each item is [paste minimums]. Make a reorder list with suggested quantities, grouped by supplier [list suppliers], and flag anything running low soon. Then draft a short, polite order message I can send to each supplier. Ask me if anything is unclear.",
+     "how": "Use it when you do your regular stock check and want a ready reorder list and supplier message."
+    }
+   ],
+   "project": {
+    "title": "Your signature work showcase",
+    "why": "With time back from the business side, you can show clients and your community the cutting and styling you are known for. Steady, visible proof of your craft helps new clients find you and gives regulars a reason to rebook and refer.",
+    "steps": [
+     "Pick three of your best recent cuts or color results and get client permission to share them.",
+     "Take clear before and after photos in good light, and write a short note on what you did and why.",
+     "Plan one weekly post or highlight that shows your work, and book time in your week to protect it."
+    ]
+   },
+   "aiTalk": "I want to be open with you about how I use AI in the salon. I use it to draft booking replies, captions, schedules and product orders, so I spend more of my week cutting hair and with clients. I read and check everything before it goes out, and I never put client or staff personal details into a tool that isn’t approved. I’m using only approved tools, and I’m happy to show you how it works if you’re curious."
+  },
+  "planSeconds": 24,
+  "toolkitIntake": {
+   "role_summary": "You own a small hair salon with three stylists, and you also cut hair five days a week.",
+   "tasks": [
+    {
+     "name": "Answering DMs and booking questions",
+     "pile": "hand_to_ai",
+     "estimated_hours": 2,
+     "why": "AI can draft replies to common DMs and booking questions for you to approve.",
+     "extra": false,
+     "tag": "customer_emails"
+    },
+    {
+     "name": "Posting on Instagram",
+     "pile": "hand_to_ai",
+     "estimated_hours": 1.5,
+     "why": "AI can draft captions and post ideas so you only review and publish.",
+     "extra": false,
+     "tag": "social_content"
+    },
+    {
+     "name": "Ordering product",
+     "pile": "hand_to_ai",
+     "estimated_hours": 1,
+     "why": "AI can build reorder lists from your stock levels so ordering takes less time.",
+     "extra": false,
+     "tag": "supplier_data"
+    },
+    {
+     "name": "Payroll and the schedule",
+     "pile": "hand_to_ai",
+     "estimated_hours": 2,
+     "why": "AI can prep payroll summaries and draft schedules for you to check.",
+     "extra": false,
+     "tag": "reporting"
+    },
+    {
+     "name": "Cutting hair",
+     "pile": "keep_visible",
+     "estimated_hours": 8,
+     "why": "Your cutting is your core skill and what keeps clients coming back to you.",
+     "extra": false,
+     "tag": "extra_work"
+    }
+   ],
+   "needs_follow_up": false,
+   "follow_up_question": null,
+   "role_level": "owner",
+   "brand_type": "a small hair salon"
+  },
+  "toolkit": {
+   "hours": 2,
+   "start": [
+    "customer-reply-assistant",
+    "brand-voice-writer",
+    "instagram-captions"
+   ],
+   "items": [
+    {
+     "id": "brand-voice-writer",
+     "title": "Your brand voice writer",
+     "counts": true,
+     "task": "Posting on Instagram",
+     "minutes": 25
+    },
+    {
+     "id": "launch-kit-writer",
+     "title": "Your launch kit writer",
+     "counts": false,
+     "task": null,
+     "minutes": 40
+    },
+    {
+     "id": "supplier-sheet-cleanup",
+     "title": "Clean up a supplier’s product sheet",
+     "counts": true,
+     "task": "Ordering product",
+     "minutes": 21
+    },
+    {
+     "id": "customer-reply-assistant",
+     "title": "Your customer reply assistant",
+     "counts": true,
+     "task": "Answering DMs and booking questions",
+     "minutes": 50
+    },
+    {
+     "id": "review-themes",
+     "title": "Find what your reviews keep saying",
+     "counts": false,
+     "task": null,
+     "minutes": 20
+    },
+    {
+     "id": "why-sales-moved",
+     "title": "Explain why sales moved last week",
+     "counts": true,
+     "task": "Payroll and the schedule",
+     "minutes": 10
+    },
+    {
+     "id": "win-back-flow",
+     "title": "Win back customers who went quiet",
+     "counts": false,
+     "task": null,
+     "minutes": 45
+    },
+    {
+     "id": "margin-leaks",
+     "title": "Spot where discounts and returns eat your margin",
+     "counts": false,
+     "task": null,
+     "minutes": 15
+    },
+    {
+     "id": "instagram-captions",
+     "title": "A month of Instagram captions",
+     "counts": true,
+     "task": "Posting on Instagram",
+     "minutes": 25
+    },
+    {
+     "id": "ask-whats-approved",
+     "title": "Ask which AI tools you can use",
+     "counts": false,
+     "task": null,
+     "minutes": 5
+    },
+    {
+     "id": "supplier-follow-up",
+     "title": "A supplier follow up that gets a date",
+     "counts": true,
+     "task": "Ordering product",
+     "minutes": 14
+    },
+    {
+     "id": "untangle-a-thread",
+     "title": "Untangle a long email thread",
+     "counts": false,
+     "task": null,
+     "minutes": 30
+    },
+    {
+     "id": "meeting-actions",
+     "title": "Meeting notes into actions and a follow up",
+     "counts": false,
+     "task": null,
+     "minutes": 30
+    }
+   ]
+  }
+ },
+ "realtor": {
+  "intake": {
+   "role_summary": "You’re a residential real estate agent working for yourself under a brokerage.",
+   "tasks": [
+    {
+     "name": "Writing listing descriptions",
+     "pile": "keep_visible",
+     "estimated_hours": 3,
+     "why": "This is your creative, marketing skill that helps sell homes and build your reputation.",
+     "extra": false
+    },
+    {
+     "name": "Following up with leads",
+     "pile": "keep_visible",
+     "estimated_hours": 3,
+     "why": "Relationship work with leads drives your business and shows your personal judgment.",
+     "extra": false
+    },
+    {
+     "name": "Emails with clients and lenders",
+     "pile": "hand_to_ai",
+     "estimated_hours": 2.5,
+     "why": "Routine correspondence like this can be drafted quickly with AI help.",
+     "extra": false
+    },
+    {
+     "name": "Scheduling showings",
+     "pile": "hand_to_ai",
+     "estimated_hours": 2,
+     "why": "Scheduling is coordination busywork that AI tools can help organize.",
+     "extra": false
+    },
+    {
+     "name": "Social media posts",
+     "pile": "hand_to_ai",
+     "estimated_hours": 1.5,
+     "why": "First drafts of social posts are a good fit for AI to speed up.",
+     "extra": false
+    },
+    {
+     "name": "Helping newer agents with paperwork",
+     "pile": "hand_back",
+     "estimated_hours": 2,
+     "why": "This is extra help beyond your own business, so it can be shared or handed to office staff.",
+     "extra": true
+    }
+   ],
+   "needs_follow_up": false,
+   "follow_up_question": null
+  },
+  "plan": {
+   "version": 1,
+   "role": "You’re a residential real estate agent working for yourself under a brokerage.",
+   "tools": [
+    "chatgpt"
+   ],
+   "toolsOther": null,
+   "startTool": null,
+   "policy": "unclear",
+   "tasks": [
+    {
+     "name": "Writing listing descriptions",
+     "pile": "keep_visible",
+     "hours": 3
+    },
+    {
+     "name": "Following up with leads",
+     "pile": "keep_visible",
+     "hours": 3
+    },
+    {
+     "name": "Emails with clients and lenders",
+     "pile": "hand_to_ai",
+     "hours": 2.5
+    },
+    {
+     "name": "Scheduling showings",
+     "pile": "hand_to_ai",
+     "hours": 2
+    },
+    {
+     "name": "Social media posts",
+     "pile": "hand_to_ai",
+     "hours": 1.5
+    },
+    {
+     "name": "Helping newer agents with paperwork",
+     "pile": "hand_back",
+     "hours": 2
+    }
+   ],
+   "handBack": [
+    {
+     "task": "Helping newer agents with paperwork",
+     "script": "I’ve been glad to help newer agents get started, and I want to make sure it gets done well. I can’t keep taking paperwork questions as they come, because that time is needed for my own clients. Could the office manager or a designated mentor own this? If it helps, I can share a short checklist of the common mistakes I see, or hold one open question time each month."
+    }
+   ],
+   "workProfile": "I’m a residential real estate agent. I work for myself under a brokerage. My core work is writing listing descriptions and following up with leads, because that is how I win clients and sell homes. I want help with the busywork around that: emails with clients and lenders, scheduling showings, and social media posts. I like drafts that sound warm, professional and plain spoken, never pushy or full of clichés. Keep emails short, with a clear ask or next step at the end. For scheduling, give me a quick message I can send with a couple of time options. For social posts, give me a short caption and a few options to choose from. Use plain US English and skip jargon unless the reader is a lender or another agent. Don’t invent facts about a property, a price or a deal term. Leave a bracket where something is missing. Before you write anything, check what’s missing and ask me for those details first.",
+   "rules": [
+    "Check which AI tools your company approves before you rely on any of them, including the AI built into other apps. Your company’s view is unclear, so use the message in your plan to ask.",
+    "Use AI only for the kinds of tasks your company says are okay until you hear back.",
+    "Never paste confidential information into a tool your company hasn’t approved. That includes client names, financials, loan details and personal data about colleagues.",
+    "Read and check every draft before it goes out, especially prices, dates, addresses and terms.",
+    "Be open about using AI with your manager and the people you work with.",
+    "Keep sensitive deal details out of prompts and use brackets or general wording instead."
+   ],
+   "askMessage": "Hi, I’d like to check which AI tools are approved for my work and what I’m allowed to use them for. I’d like help drafting routine client and lender emails, writing scheduling messages for showings, and drafting social media posts. I would not put confidential client details into any tool unless it’s approved for that. Is ChatGPT approved, and are there any rules I should follow? Thanks for letting me know.",
+   "prompts": [
+    {
+     "task": "Emails with clients and lenders",
+     "prompt": "Draft a short, friendly and professional email from me, a residential real estate agent, to [a client or a lender]. The purpose is [what you need, such as a status update, a document request or a follow up]. Key points to include: [paste your bullet points, without confidential details]. Keep it under 150 words, with a clear next step and a deadline if one applies. Before you write, tell me if anything is missing.",
+     "how": "Use for routine updates, document requests and follow ups once you’ve removed confidential details."
+    },
+    {
+     "task": "Scheduling showings",
+     "prompt": "Write a short message I can send to [a buyer or another agent] to set up a showing at [general location or listing]. Offer these time options: [paste your available times]. Mention [any access notes, like lockbox or needing notice]. Keep it friendly and brief, and ask them to reply with the time that works. Also write a short version for a text message.",
+     "how": "Use when you’re lining up showings and want a message ready to send in a minute."
+    },
+    {
+     "task": "Social media posts",
+     "prompt": "Write three short social media captions for [a new listing, a just sold, an open house or a local tip]. Details to use: [paste the facts, such as neighborhood, features, date and time]. Tone: warm and local, not salesy. Keep each under 60 words and add a simple call to action. Suggest a few hashtags for each. Don’t add any facts I haven’t given you.",
+     "how": "Use when you need a batch of posts for a listing or event, then pick one and add your own touch."
+    }
+   ],
+   "project": {
+    "title": "Listing descriptions that win leads",
+    "why": "Your listing descriptions and lead follow ups are the heart of your work, and showing what they achieve makes your skill easy to see. A small collection of your best work gives sellers and your brokerage a clear picture of how you market homes.",
+    "steps": [
+     "Pick your three strongest listing descriptions and note what made each one work.",
+     "Write a short, simple follow up routine for leads, and use the time you get back to stick to it.",
+     "Share your best listing and a short note on your approach with your manager or broker and with past clients."
+    ]
+   },
+   "aiTalk": "I wanted to tell you how I’m using AI in my work. I use it to draft routine emails, showing scheduling messages and social posts, and I check everything before it goes out. That gives me more time for listing descriptions and following up with leads, which is where I add the most value. I’m following the company’s rules on approved tools and I keep confidential information out of anything that isn’t approved. If there’s guidance I should know about, I’d like to hear it."
+  },
+  "planSeconds": 16,
+  "toolkitIntake": {
+   "role_summary": "You’re a residential real estate agent working for yourself under a brokerage, juggling listings, leads and client communication.",
+   "tasks": [
+    {
+     "name": "Listing descriptions",
+     "pile": "keep_visible",
+     "estimated_hours": 3,
+     "why": "Listing copy shows your local knowledge and sells the property, so it’s your core work.",
+     "extra": false,
+     "tag": "product_copy"
+    },
+    {
+     "name": "Lead follow ups",
+     "pile": "hand_to_ai",
+     "estimated_hours": 3,
+     "why": "Routine follow up messages are repetitive and AI can draft solid first versions for you.",
+     "extra": false,
+     "tag": "customer_emails"
+    },
+    {
+     "name": "Client and lender emails",
+     "pile": "hand_to_ai",
+     "estimated_hours": 3,
+     "why": "Routine email replies to clients and lenders can be drafted quickly with AI.",
+     "extra": false,
+     "tag": "inbox_overload"
+    },
+    {
+     "name": "Social media posts",
+     "pile": "hand_to_ai",
+     "estimated_hours": 1.5,
+     "why": "Social posts are repetitive content AI can draft, leaving you to approve and personalize.",
+     "extra": false,
+     "tag": "social_content"
+    },
+    {
+     "name": "Paperwork help for newer agents",
+     "pile": "hand_back",
+     "estimated_hours": 1.5,
+     "why": "Helping newer agents with paperwork is extra work outside your own job and could go to the office.",
+     "extra": true,
+     "tag": "extra_work"
+    }
+   ],
+   "needs_follow_up": false,
+   "follow_up_question": null,
+   "role_level": "specialist",
+   "brand_type": null
+  },
+  "toolkit": {
+   "hours": 2,
+   "start": [
+    "customer-reply-assistant",
+    "untangle-a-thread",
+    "hand-back-instagram"
+   ],
+   "items": [
+    {
+     "id": "brand-voice-writer",
+     "title": "Your brand voice writer",
+     "counts": true,
+     "task": "Social media posts",
+     "minutes": 12
+    },
+    {
+     "id": "launch-kit-writer",
+     "title": "Your launch kit writer",
+     "counts": false,
+     "task": null,
+     "minutes": 40
+    },
+    {
+     "id": "supplier-sheet-cleanup",
+     "title": "Clean up a supplier’s product sheet",
+     "counts": false,
+     "task": null,
+     "minutes": 30
+    },
+    {
+     "id": "customer-reply-assistant",
+     "title": "Your customer reply assistant",
+     "counts": true,
+     "task": "Lead follow ups",
+     "minutes": 50
+    },
+    {
+     "id": "review-themes",
+     "title": "Find what your reviews keep saying",
+     "counts": false,
+     "task": null,
+     "minutes": 20
+    },
+    {
+     "id": "why-sales-moved",
+     "title": "Explain why sales moved last week",
+     "counts": false,
+     "task": null,
+     "minutes": 10
+    },
+    {
+     "id": "win-back-flow",
+     "title": "Win back customers who went quiet",
+     "counts": false,
+     "task": null,
+     "minutes": 45
+    },
+    {
+     "id": "margin-leaks",
+     "title": "Spot where discounts and returns eat your margin",
+     "counts": false,
+     "task": null,
+     "minutes": 15
+    },
+    {
+     "id": "instagram-captions",
+     "title": "A month of Instagram captions",
+     "counts": true,
+     "task": "Social media posts",
+     "minutes": 12
+    },
+    {
+     "id": "ask-whats-approved",
+     "title": "Ask which AI tools you can use",
+     "counts": false,
+     "task": null,
+     "minutes": 5
+    },
+    {
+     "id": "untangle-a-thread",
+     "title": "Untangle a long email thread",
+     "counts": true,
+     "task": "Client and lender emails",
+     "minutes": 30
+    },
+    {
+     "id": "meeting-actions",
+     "title": "Meeting notes into actions and a follow up",
+     "counts": false,
+     "task": null,
+     "minutes": 30
+    },
+    {
+     "id": "supplier-follow-up",
+     "title": "A supplier follow up that gets a date",
+     "counts": false,
+     "task": null,
+     "minutes": 20
+    },
+    {
+     "id": "hand-back-instagram",
+     "title": "A polite way to hand back the Instagram",
+     "counts": true,
+     "task": "Social media posts",
+     "minutes": 29
+    }
+   ]
+  }
+ },
+ "dental": {
+  "intake": {
+   "role_summary": "You’re a front desk receptionist at a dental office, handling phones, scheduling, insurance, and billing questions.",
+   "tasks": [
+    {
+     "name": "Answering phones",
+     "pile": "keep_visible",
+     "estimated_hours": 7.5,
+     "why": "Direct patient contact is core front desk work that shows your skill and judgment.",
+     "extra": false
+    },
+    {
+     "name": "Scheduling appointments",
+     "pile": "keep_visible",
+     "estimated_hours": 5.5,
+     "why": "Managing the calendar well keeps the practice running and reflects your organizing skill.",
+     "extra": false
+    },
+    {
+     "name": "Insurance verification",
+     "pile": "hand_to_ai",
+     "estimated_hours": 2.5,
+     "why": "Checking coverage details is routine lookup work that AI can help draft and organize.",
+     "extra": false
+    },
+    {
+     "name": "Reminder calls and texts",
+     "pile": "hand_to_ai",
+     "estimated_hours": 1.5,
+     "why": "Reminder messages follow a set pattern, so AI can draft and schedule them for you.",
+     "extra": false
+    },
+    {
+     "name": "Ordering office supplies",
+     "pile": "hand_back",
+     "estimated_hours": 0.5,
+     "why": "Supply ordering can be shared or handed to whoever manages office purchasing.",
+     "extra": true
+    },
+    {
+     "name": "Running the Facebook page",
+     "pile": "hand_back",
+     "estimated_hours": 0.5,
+     "why": "Social media posting sits outside your front desk role and could go to someone who owns marketing.",
+     "extra": true
+    }
+   ],
+   "needs_follow_up": false,
+   "follow_up_question": null
+  },
+  "plan": {
+   "version": 1,
+   "role": "You’re a front desk receptionist at a dental office, handling phones, scheduling, insurance, and billing questions.",
+   "tools": [],
+   "toolsOther": null,
+   "startTool": "Check which chat tool your office has approved first, using the message in your plan, and paste your work profile into that one once you have the answer.",
+   "policy": "no_idea",
+   "tasks": [
+    {
+     "name": "Answering phones",
+     "pile": "keep_visible",
+     "hours": 7.5
+    },
+    {
+     "name": "Scheduling appointments",
+     "pile": "keep_visible",
+     "hours": 5.5
+    },
+    {
+     "name": "Insurance verification",
+     "pile": "hand_to_ai",
+     "hours": 2.5
+    },
+    {
+     "name": "Reminder calls and texts",
+     "pile": "hand_to_ai",
+     "hours": 1.5
+    },
+    {
+     "name": "Ordering office supplies",
+     "pile": "hand_back",
+     "hours": 0.5
+    },
+    {
+     "name": "Running the Facebook page",
+     "pile": "hand_back",
+     "hours": 0.5
+    }
+   ],
+   "handBack": [
+    {
+     "task": "Ordering office supplies",
+     "script": "I’ve been handling supply orders on top of the front desk, and I’d like to hand it off so I can stay focused on phones and scheduling. Could we assign it to the office manager or rotate it among the team each month? I’m happy to share the current vendor list and a simple reorder checklist so the handoff is easy."
+    },
+    {
+     "task": "Running the Facebook page",
+     "script": "I’ve been running the practice’s Facebook page, and it’s become its own job next to the front desk. I’d like to stop owning it from now on. Could we hand it to whoever handles marketing, or rotate posting among the team? If it helps, I can share the login process and a short list of the posts that work well, and keep it simple at one post a week."
+    }
+   ],
+   "workProfile": "I work the front desk at a dental office. My core work is answering phones and scheduling appointments, and I want patients to get a warm, clear, quick experience every time. I want help with the busywork around that, mainly insurance verification steps and appointment reminder calls and texts. I like drafts that are friendly, calm and professional, in plain US English. Keep messages short, ideally two to four sentences for texts and under 150 words for emails or call scripts. Use simple bullet lists or checklists when I’m working through steps. Never include real patient names, birthdates, insurance IDs or other personal details; I will use placeholders in brackets and fill them in myself. Before you draft anything, check what’s missing and ask me up to three short questions about the audience, the goal and any details I forgot to include.",
+   "rules": [
+    "Before you start, check which AI tool your office approves, and use AI only where it’s approved, including the AI built into other apps.",
+    "Never paste patient details, insurance IDs, financial information or other personal data into any tool your office hasn’t approved.",
+    "Even in an approved tool, use placeholders in brackets for patient information and fill in the real details yourself.",
+    "Read and check every draft before it goes out, especially anything a patient will see.",
+    "Be open with your manager about how you use AI and what it helps you do.",
+    "If you’re unsure whether a task is okay to use AI for, ask before you do it."
+   ],
+   "askMessage": "Hi, I’d like to find out which AI tools, if any, our office has approved for work. I’m hoping to use one for drafting reminder messages and organizing insurance verification steps, without ever entering patient details. Could you tell me which tools are approved and what I’m allowed to use them for? If there’s a policy I should read, I’d be glad to have it. Thank you!",
+   "prompts": [
+    {
+     "task": "Insurance verification",
+     "prompt": "I work the front desk at a dental office. Create a step by step checklist I can use to verify a patient’s dental insurance before an appointment. Include what to confirm, such as active coverage, benefits, deductible, annual maximum, waiting periods and frequency limits, and what to note in the record. Then write a short, polite script for calling the insurance company. Leave placeholders in brackets for [patient name], [insurance company] and [procedure]. Format it as a checklist followed by the script.",
+     "how": "Use it to build a repeatable checklist before you start your verification calls."
+    },
+    {
+     "task": "Reminder calls and texts",
+     "prompt": "Write three versions of an appointment reminder text for a dental office: one for two days before, one for the day before, and one for a patient who hasn’t confirmed. Each should be friendly, under 300 characters, and include [appointment date and time], [office phone number] and a way to reply to confirm or reschedule. Then write a short voicemail script of about 30 seconds for reminder calls. Keep a warm, professional tone and use no patient details beyond [first name].",
+     "how": "Use it to set up reminder templates once, then reuse them each week."
+    }
+   ],
+   "project": {
+    "title": "Front desk patient experience",
+    "why": "Phones and scheduling are where patients first meet the practice, so showing how smoothly you run them puts your core work in front of the people who matter. A clear record of what you’ve improved makes your impact easy to see.",
+    "steps": [
+     "Write down the three most common patient questions you answer and a short, friendly reply for each.",
+     "Note how reminders and verification now run, and what has improved for patients or the schedule.",
+     "Share a one page summary with your manager and suggest one change to make the front desk run even better."
+    ]
+   },
+   "aiTalk": "I wanted to share how I’m using AI at the front desk, now that I’ve checked which tool is approved. I use it to draft reminder messages and organize my insurance verification steps, and I never enter patient details. That frees up time for patients on the phones and for scheduling, which is my core work. I read and check everything before it goes out, and I’ll follow whatever rules the office sets."
+  },
+  "planSeconds": 15,
+  "toolkitIntake": {
+   "role_summary": "You’re a front desk receptionist at a dental office, handling the phones, scheduling and patient questions.",
+   "tasks": [
+    {
+     "name": "Scheduling and phones",
+     "pile": "keep_visible",
+     "estimated_hours": 8,
+     "why": "Scheduling and patient contact is the core of your front desk role and shows your judgment.",
+     "extra": false,
+     "tag": "meetings"
+    },
+    {
+     "name": "Reminder calls and texts",
+     "pile": "hand_to_ai",
+     "estimated_hours": 3,
+     "why": "Reminder messages follow a set pattern, so AI can draft the wording for you.",
+     "extra": false,
+     "tag": "customer_emails"
+    },
+    {
+     "name": "Facebook page",
+     "pile": "hand_back",
+     "estimated_hours": 2,
+     "why": "Running the Facebook page sits outside your front desk job and could go to someone else.",
+     "extra": true,
+     "tag": "social_content"
+    },
+    {
+     "name": "Office supply orders",
+     "pile": "hand_to_ai",
+     "estimated_hours": 1,
+     "why": "Supply reorders are repetitive admin that AI can help you track and draft.",
+     "extra": true,
+     "tag": "supplier_data"
+    }
+   ],
+   "needs_follow_up": true,
+   "follow_up_question": "Roughly how many hours a week go to insurance verification and billing questions?",
+   "role_level": "coordinator",
+   "brand_type": "a dental office"
+  },
+  "toolkit": {
+   "hours": 2.5,
+   "start": [
+    "ask-whats-approved",
+    "hand-back-instagram",
+    "brand-voice-writer"
+   ],
+   "items": [
+    {
+     "id": "brand-voice-writer",
+     "title": "Your brand voice writer",
+     "counts": true,
+     "task": "Facebook page",
+     "minutes": 16
+    },
+    {
+     "id": "supplier-sheet-cleanup",
+     "title": "Clean up a supplier’s product sheet",
+     "counts": true,
+     "task": "Office supply orders",
+     "minutes": 21
+    },
+    {
+     "id": "launch-kit-writer",
+     "title": "Your launch kit writer",
+     "counts": false,
+     "task": null,
+     "minutes": 40
+    },
+    {
+     "id": "customer-reply-assistant",
+     "title": "Your customer reply assistant",
+     "counts": true,
+     "task": "Reminder calls and texts",
+     "minutes": 50
+    },
+    {
+     "id": "review-themes",
+     "title": "Find what your reviews keep saying",
+     "counts": false,
+     "task": null,
+     "minutes": 20
+    },
+    {
+     "id": "why-sales-moved",
+     "title": "Explain why sales moved last week",
+     "counts": false,
+     "task": null,
+     "minutes": 10
+    },
+    {
+     "id": "win-back-flow",
+     "title": "Win back customers who went quiet",
+     "counts": false,
+     "task": null,
+     "minutes": 45
+    },
+    {
+     "id": "margin-leaks",
+     "title": "Spot where discounts and returns eat your margin",
+     "counts": false,
+     "task": null,
+     "minutes": 15
+    },
+    {
+     "id": "instagram-captions",
+     "title": "A month of Instagram captions",
+     "counts": true,
+     "task": "Facebook page",
+     "minutes": 16
+    },
+    {
+     "id": "ask-whats-approved",
+     "title": "Ask which AI tools you can use",
+     "counts": false,
+     "task": null,
+     "minutes": 5
+    },
+    {
+     "id": "supplier-follow-up",
+     "title": "A supplier follow up that gets a date",
+     "counts": true,
+     "task": "Office supply orders",
+     "minutes": 14
+    },
+    {
+     "id": "untangle-a-thread",
+     "title": "Untangle a long email thread",
+     "counts": false,
+     "task": null,
+     "minutes": 30
+    },
+    {
+     "id": "meeting-actions",
+     "title": "Meeting notes into actions and a follow up",
+     "counts": false,
+     "task": null,
+     "minutes": 30
+    },
+    {
+     "id": "hand-back-instagram",
+     "title": "A polite way to hand back the Instagram",
+     "counts": true,
+     "task": "Facebook page",
+     "minutes": 39
+    }
+   ]
+  }
+ },
+ "vague": {
+  "intake": {
+   "role_summary": "You’re an office admin whose week is mostly emails and meetings.",
+   "tasks": [
+    {
+     "name": "Emails and meetings",
+     "pile": "hand_to_ai",
+     "estimated_hours": 6,
+     "why": "Email triage and meeting prep is busywork AI can draft and speed up for you.",
+     "extra": false
+    }
+   ],
+   "needs_follow_up": true,
+   "follow_up_question": "What else fills your week, and which tasks take the most time?"
+  },
+  "plan": {
+   "version": 1,
+   "role": "You’re an office admin whose week is mostly emails and meetings.",
+   "tools": [],
+   "toolsOther": null,
+   "startTool": "Your company’s view on AI is unclear to you right now, so don’t pick a tool yet. Check which tool is approved first, using the message in your plan, then paste your work profile into that one.",
+   "policy": "no_idea",
+   "tasks": [
+    {
+     "name": "Emails and meetings",
+     "pile": "hand_to_ai",
+     "hours": 6
+    }
+   ],
+   "handBack": [],
+   "workProfile": "I work as an office admin. My week is mostly emails and meetings, so my core work is keeping the office running smoothly: handling incoming requests, coordinating schedules, and making sure people know what is happening and what they need to do next. I want help with the busywork around that, like drafting replies to routine emails, turning meeting notes into clear summaries and action items, and writing agendas and follow ups. I like drafts that are friendly, clear and professional, without sounding stiff. Keep emails short, usually under 150 words, with a plain subject line and the main point in the first sentence. For meeting summaries, use short bullet points with action items listed by role and due date. Use plain US English and avoid jargon. Before you draft anything, check what is missing, such as who the message is for, the deadline, or the tone I need, and ask me those questions first.",
+   "rules": [
+    "Check which AI tool your company approves before you start, and use AI only where it is approved.",
+    "Use only approved tools, including the AI built into other apps like email, calendars or document editors.",
+    "Never paste confidential information, like client details, financials or personal data about colleagues, into a tool your company hasn’t approved.",
+    "Read and check every draft before it goes out, including names, dates and times.",
+    "Be open about using AI with your manager and your team.",
+    "If you’re unsure whether something is okay to share with a tool, ask first or leave it out."
+   ],
+   "askMessage": "Hi, I’m looking at ways to save time on routine parts of my work, like drafting emails, summarizing meeting notes and writing agendas and follow ups. Could you tell me which AI tools, if any, are approved for work use? I’d also like to know what I’m allowed to use them for and what information I should never put into them. Once I know, I’ll stick to the approved tool and those guidelines. Thank you!",
+   "prompts": [
+    {
+     "task": "Emails and meetings",
+     "prompt": "I’m an office admin. Please turn these meeting notes into a short summary I can send to attendees. Include: a two sentence overview, decisions made, and action items listed by role with due dates. Keep it under 200 words and use plain, friendly language. If anything is unclear or missing, ask me before you write. Notes: [paste your meeting notes]. Attendees by role: [list roles]. Next meeting date: [add date or write none].",
+     "how": "Use right after a meeting to send a clear recap and follow ups quickly."
+    }
+   ],
+   "project": {
+    "title": "The office rhythm",
+    "why": "Your work keeps everything moving, but much of it goes unseen. A simple, shared view of what you coordinate makes that work visible to the people who matter and shows how much runs through you.",
+    "steps": [
+     "Keep a running list for two weeks of the requests, meetings and follow ups you coordinate.",
+     "Turn the list into a one page summary of what you handle and where things get stuck.",
+     "Share it with your manager and suggest one change that would make the office run more smoothly."
+    ]
+   },
+   "aiTalk": "I wanted to share how I’m approaching my day to day work. Once I’ve confirmed which tool the company approves, I plan to use it for first drafts of routine emails and meeting summaries, so I can spend more time on coordination and on keeping the office running well. I’ll read and check everything before it goes out, and I won’t put confidential information into any tool that isn’t approved. I’m happy to show you what that looks like and adjust if you’d like me to do it differently."
+  },
+  "planSeconds": 12,
+  "toolkitIntake": {
+   "role_summary": "You’re an office admin at an ecommerce business, buried in emails and meetings.",
+   "tasks": [
+    {
+     "name": "Emails",
+     "pile": "hand_to_ai",
+     "estimated_hours": 6,
+     "why": "Email replies and first drafts are busywork AI can draft for you.",
+     "extra": false,
+     "tag": "inbox_overload"
+    },
+    {
+     "name": "Meetings",
+     "pile": "keep_visible",
+     "estimated_hours": 3,
+     "why": "Running meetings and follow ups is core to your role and shows your judgment.",
+     "extra": false,
+     "tag": "meetings"
+    }
+   ],
+   "needs_follow_up": true,
+   "follow_up_question": "What do you spend most of your time on day to day, beyond emails and meetings?",
+   "role_level": "coordinator",
+   "brand_type": null
+  },
+  "toolkit": {
+   "hours": 0.5,
+   "start": [
+    "ask-whats-approved",
+    "launch-kit-writer",
+    "brand-voice-writer"
+   ],
+   "items": [
+    {
+     "id": "brand-voice-writer",
+     "title": "Your brand voice writer",
+     "counts": false,
+     "task": null,
+     "minutes": 25
+    },
+    {
+     "id": "launch-kit-writer",
+     "title": "Your launch kit writer",
+     "counts": false,
+     "task": null,
+     "minutes": 40
+    },
+    {
+     "id": "supplier-sheet-cleanup",
+     "title": "Clean up a supplier’s product sheet",
+     "counts": false,
+     "task": null,
+     "minutes": 30
+    },
+    {
+     "id": "customer-reply-assistant",
+     "title": "Your customer reply assistant",
+     "counts": false,
+     "task": null,
+     "minutes": 50
+    },
+    {
+     "id": "review-themes",
+     "title": "Find what your reviews keep saying",
+     "counts": false,
+     "task": null,
+     "minutes": 20
+    },
+    {
+     "id": "why-sales-moved",
+     "title": "Explain why sales moved last week",
+     "counts": false,
+     "task": null,
+     "minutes": 10
+    },
+    {
+     "id": "win-back-flow",
+     "title": "Win back customers who went quiet",
+     "counts": false,
+     "task": null,
+     "minutes": 45
+    },
+    {
+     "id": "margin-leaks",
+     "title": "Spot where discounts and returns eat your margin",
+     "counts": false,
+     "task": null,
+     "minutes": 15
+    },
+    {
+     "id": "instagram-captions",
+     "title": "A month of Instagram captions",
+     "counts": false,
+     "task": null,
+     "minutes": 25
+    },
+    {
+     "id": "ask-whats-approved",
+     "title": "Ask which AI tools you can use",
+     "counts": false,
+     "task": null,
+     "minutes": 5
+    },
+    {
+     "id": "untangle-a-thread",
+     "title": "Untangle a long email thread",
+     "counts": true,
+     "task": "Emails",
+     "minutes": 30
+    },
+    {
+     "id": "meeting-actions",
+     "title": "Meeting notes into actions and a follow up",
+     "counts": false,
+     "task": null,
+     "minutes": 30
+    },
+    {
+     "id": "supplier-follow-up",
+     "title": "A supplier follow up that gets a date",
+     "counts": false,
+     "task": null,
+     "minutes": 20
+    }
+   ]
+  }
+ }
+}

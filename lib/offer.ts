@@ -44,8 +44,16 @@ export const angles = {
   always_yes: { headline: "Said yes to everything? Get time back for your real job.", key: "your real job" },
   socials_add_on: { headline: "“Can you just run our socials?” Take your hours back.", key: "your hours" },
   secret_ai: { headline: "Use AI at work openly and get the credit for it.", key: "the credit" },
-  vague_policy: { headline: "Everyone says use AI. Here’s what you can actually do.", key: "actually do" },
+  // The beginner version (lib/beginner): these three open the page, quiz and plan for women new to AI.
+  // new_to_ai took the place of vague_policy, whose headline was close to it, on 2026-11-10.
+  new_to_ai: { headline: "Everyone says use AI. Nobody shows you where to start.", key: "where to start" },
+  own_job: { headline: "New to AI? Start with your own job.", key: "your own job" },
+  first_try: { headline: "You don’t need to be technical. You need one good first try.", key: "one good first try" },
 } as const satisfies Record<string, Angle>;
+
+/** The angles that open the beginner version instead of the first one. */
+export const BEGINNER_ANGLES: readonly AngleId[] = ["new_to_ai", "own_job", "first_try"];
+export const isBeginner = (angle: AngleId) => BEGINNER_ANGLES.includes(angle);
 
 type Angle = { headline: string; key: string; fit?: number };
 

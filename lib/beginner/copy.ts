@@ -81,11 +81,50 @@ export const beginnerWhy = {
   ],
 } as const;
 
+/**
+ * How it works, reworded on 2026-11-12 to say what Tally is: a path she follows, not a set of prompts. The line
+ * under the steps says so. DRAFT
+ */
 export const beginnerSteps = [
-  "Tell us about your job and what you do over and over.", // DRAFT
-  "See your first AI win, drafted for you.",
-  "Get your plan, with your tool, your prompts and your seven days.",
+  "Tell us your job, the apps you use and where you are with AI.",
+  "See where AI fits in your week, with the first task done for you, free.",
+  "Get your plan. The tools to use, the skills to learn, and how to do each one.",
 ] as const;
+export const beginnerStepsAfter = "Not a list of prompts. A path built around your job and your level.";
+
+/**
+ * Two paths, side by side: where she starts decides what Tally walks her through. The user's direction on
+ * 2026-11-12: Tally recommends whatever tool fits her work, with the steps to set it up, and a beginner and
+ * someone who uses AI every day get different paths. The page shows this ahead of the plan itself, which
+ * today stays on one chat tool, so this section must not go live before the plan does it. DRAFT
+ */
+export const beginnerPaths = {
+  title: "Your path starts where you are",
+  lead: "Tally works out what’s worth using for your job, then walks you through it. No research, no trial and error.",
+  paths: [
+    {
+      label: "If you’re just starting",
+      steps: [
+        "Open your first AI tool. We show you where to click.",
+        "One task from your job to try today.",
+        "Exactly what to type, and why.",
+        "What a good answer looks like, and how to fix a bad one.",
+        "The next skill to learn, and where to find it.",
+      ],
+    },
+    {
+      label: "If you already use AI",
+      steps: [
+        "We find where your hours go. Email, reports, content.",
+        "The right tool for it, not just a better prompt.",
+        "How to set it up, step by step.",
+        "How to connect it to the apps you already use.",
+        "Getting it running on your real work.",
+      ],
+    },
+  ],
+  after: "As you get better, your path moves on with you.",
+} as const;
 
 export const beginnerParts = {
   title: "What’s in your plan",
@@ -144,9 +183,177 @@ export const beginnerFaqs = [
   },
   {
     q: "Why not just ask ChatGPT?",
-    a: "You can, once you know what to ask. Your plan gives you the first questions, written for your job, and shows you what a good answer looks like.",
+    a: "ChatGPT answers what you ask. Tally works out what’s worth asking in your job, which tools fit it, and walks you through setting them up.", // DRAFT
   },
 ] as const;
+
+/**
+ * The beginner landing page under the hero, approved on 2026-11-12 (docs/audit/2026-11-12-landing-rework-draft.md):
+ * the work she hates, which of two women she is, what AI could take off her plate in her job, and what changes.
+ * It took the place of Sound familiar, How it works, It's not you and the reviews, whose words further down are
+ * no longer on the page. No number of hours and no promise of a raise: neither has been measured. Each job's
+ * list comes from a plan the product wrote for that job in the test runs, shortened.
+ */
+export const beginnerPage = {
+  pain: {
+    title: "You didn’t take this job to do this.",
+    lead: "The same email for the tenth time. The report due Friday. The post you still have to write tonight.",
+    tags: [
+      "The same reply, again",
+      "Notes from every meeting",
+      "The weekly report",
+      "Scheduling back and forth",
+      "Posts for the page",
+      "Forms and follow ups",
+    ],
+    lines: [
+      "It follows you home, and it eats your evenings.",
+      "Nearly all of it is writing. Writing is exactly what AI is good at.",
+    ],
+  },
+  which: {
+    title: "Which one sounds like you?",
+    cards: [
+      {
+        title: "I’ve never really opened it",
+        lines: [
+          "I’ve heard of ChatGPT and Claude. I couldn’t tell you what I’d use them for.",
+          "I don’t know what’s safe to type in.",
+          "So I still do all of it by hand.",
+        ],
+      },
+      {
+        title: "I’m interested, but I can’t make it useful in my job",
+        lines: [
+          "I use it like Google. A recipe, a quick question.",
+          "It rewords an email for me now and then.",
+          "I’m still at it late, so I know I’m missing something.",
+        ],
+      },
+    ],
+    /** The small pictures above each card: a chat she never started, and the small things she uses it for. DRAFT */
+    shots: {
+      blank: { title: "New chat", field: "Ask anything" },
+      small: { title: "Your chats", rows: ["Chicken thigh recipe", "Reword email to landlord", "Another word for “also”"] },
+    },
+    button: "That’s me",
+    after: "Either way, the same work is eating your time. Start with your own job.",
+  },
+  /**
+   * Reframed on 2026-11-12 from job titles to kinds of work: a list of six jobs told everyone else the page
+   * wasn't for her, and every job has these. Each line carries what kind of help it is, so it reads as more
+   * than things to write. The plan does not set up automations yet, so this goes live with that work. DRAFT
+   */
+  jobs: {
+    title: "What it could take off your plate",
+    lead: "Every job is made of the same few kinds of work. Pick the one you’d most like off your plate.",
+    label: "Kinds of work",
+    list: [
+      {
+        id: "email",
+        name: "Email and messages",
+        items: [
+          { text: "Reply drafts that sound like you", kind: "Skill" },
+          { text: "Your inbox sorted by what needs you", kind: "Automation" },
+          { text: "A nudge for anything left unanswered", kind: "Automation" },
+          { text: "Saved answers to the questions you get every week", kind: "Tool" },
+        ],
+      },
+      {
+        id: "planning",
+        name: "Scheduling and planning",
+        items: [
+          { text: "A time found without the back and forth", kind: "Tool" },
+          { text: "Your week planned from your calendar", kind: "Workflow" },
+          { text: "Reminders written and lined up to send", kind: "Automation" },
+          { text: "A checklist for anything you run twice", kind: "Skill" },
+        ],
+      },
+      {
+        id: "reports",
+        name: "Reports and numbers",
+        items: [
+          { text: "A weekly summary straight from your spreadsheet", kind: "Automation" },
+          { text: "Raw numbers turned into charts and plain words", kind: "Tool" },
+          { text: "One report you never rebuild from scratch", kind: "Skill" },
+          { text: "What changed since last week, pointed out", kind: "Workflow" },
+        ],
+      },
+      {
+        id: "content",
+        name: "Posts and content",
+        items: [
+          { text: "A month of posts planned in one sitting", kind: "Workflow" },
+          { text: "Captions in your own voice", kind: "Skill" },
+          { text: "One idea turned into every format you post", kind: "Workflow" },
+          { text: "Images and layouts started for you", kind: "Tool" },
+        ],
+      },
+      {
+        id: "admin",
+        name: "Paperwork and admin",
+        items: [
+          { text: "Forms filled from what you already have", kind: "Automation" },
+          { text: "Quotes and invoices from a few details", kind: "Workflow" },
+          { text: "How tos written once, not explained again", kind: "Skill" },
+          { text: "Long documents searched and summed up", kind: "Tool" },
+        ],
+      },
+      {
+        id: "meetings",
+        name: "Meetings and notes",
+        items: [
+          { text: "Notes taken for you", kind: "Tool" },
+          { text: "A recap and next steps sent afterward", kind: "Automation" },
+          { text: "An agenda from a rough list", kind: "Skill" },
+          { text: "Prep pulled from your past notes", kind: "Workflow" },
+        ],
+      },
+    ],
+    after: "Your plan is built from your own job and your own week, not from a list like this.",
+  },
+  /**
+   * What changes, reframed on 2026-11-12 from three soft promises to a before and after: one row for each
+   * thing that changes, the way it goes now beside the way it goes once it is set up, tagged with the kind of
+   * help that did it. No hours and no numbers: nothing here has been measured. The plan does not set up automations yet, so
+   * this goes live with that work. DRAFT
+   */
+  changes: {
+    title: "Your work, before and after",
+    lead: "Same job. Same hours in the day. Less of it spent on the work you hate.",
+    before: "Today",
+    after: "With Tally",
+    /** General on purpose (the user's call, 2026-11-12): things true of any job, not one person's week. */
+    days: [
+      {
+        what: "The same task, again",
+        before: "Starting from scratch every time",
+        after: "Set up once, then it takes minutes",
+        kind: "Automation",
+      },
+      {
+        what: "Writing",
+        before: "Every email, post and report typed by hand",
+        after: "A first draft waiting for you to check",
+        kind: "Skill",
+      },
+      {
+        what: "Finding the right tool",
+        before: "Ten tabs open, still not sure which one",
+        after: "The one that fits your work, picked for you",
+        kind: "Tool",
+      },
+      {
+        what: "Getting it to work",
+        before: "Trying it once and giving up",
+        after: "Step by step, until it runs",
+        kind: "How to",
+      },
+      { what: "The end of the day", before: "Work that follows you home", after: "Done before you leave", kind: null },
+    ],
+    close: ["The busywork takes minutes.", "Your evening is yours.", "You become the one who knows how."],
+  },
+} as const;
 
 /** The pictures in How it works on the landing page. A sample for a dental office receptionist. DRAFT */
 export const beginnerSample = {
@@ -162,6 +369,48 @@ export const beginnerSample = {
   prompt: "I’m a receptionist at a dental office. Write a reminder text for an appointment on [day and time].",
   daysLabel: "Your seven days",
   daysDone: 2,
+  /**
+   * How it works, redrawn on 2026-11-12 for an event coordinator who already uses AI a little, to show what
+   * Tally does beyond prompts: it learns her apps, maps where AI fits in her week and walks her through
+   * setting a workflow up. The plan does not do the last two yet, so these go live with it, not before.
+   */
+  /** Step 1's picture: what Tally has learned about her, filling in as she answers. */
+  profileTitle: "Your profile",
+  profileProgress: "5 of 7",
+  profile: [
+    { label: "Role", value: "Event coordinator, restaurant group" },
+    { label: "Apps", chips: ["Gmail", "Google Sheets", "Slack"] },
+    { label: "With AI", value: "Uses it, wants more from it" },
+    { label: "Biggest time sink", value: "Vendor emails" },
+    { label: "Over and over", chips: ["Run of show", "Headcounts", "Recaps"] },
+  ],
+  profileNext: "Which would save you the most time?",
+  mapTitle: "Where AI fits in your week",
+  mapRole: "Event coordinator · 5 found",
+  map: [
+    { task: "Vendor emails", fix: "Reply drafts inside Gmail", kind: "Tool" },
+    { task: "Run of show", fix: "Built from your sheet", kind: "Workflow" },
+    { task: "Weekly headcounts", fix: "Summary sent every Monday", kind: "Automation" },
+    { task: "Client recaps", fix: "Notes to recap in one step", kind: "Skill" },
+    { task: "Banquet orders", fix: "Filled in from the client’s email", kind: "Automation" },
+  ],
+  mapFree: "First one done for you, free",
+  /** Step 3's picture: one workflow from her plan, open on the step she is doing. */
+  pathTitle: "Workflow 1 of 4",
+  pathName: "Vendor email replies",
+  pathDoneStep: "Connect Claude to Gmail",
+  pathNow: {
+    title: "Create a project for your vendors",
+    lines: [
+      "In Claude, open Projects and choose New project.",
+      "Name it Vendor replies.",
+      "Paste in your tone notes and vendor list. We wrote both for you.",
+    ],
+    copy: "Copy tone notes",
+    next: "Done, next step",
+  },
+  pathLater: ["Save the reply as a reusable skill", "Test it on five real emails", "Turn it on for your inbox"],
+  pathSteps: 5,
 } as const;
 
 /** The pictures on the It's not you cards, in the cards' order. DRAFT */
@@ -215,16 +464,7 @@ export const FALLBACK_JOB_READ: JobRead = {
     { label: "Keeping records", ai: true },
   ],
   aiFallback: ["Answering messages", "Writing emails", "Planning my week", "Keeping records"],
-  apps: [
-    "Texts",
-    "Email",
-    "WhatsApp",
-    "Instagram",
-    "Facebook",
-    "Google Docs or Word",
-    "Google Sheets or Excel",
-    "Canva",
-  ],
+  apps: ["Texts", "Email", "WhatsApp", "Instagram", "Facebook", "Google Docs or Word", "Google Sheets or Excel", "Canva"],
   worksFor: "unclear",
 };
 

@@ -1,6 +1,6 @@
 import type { CSSProperties } from "react";
 import { Bell, Calendar, Chat, Mail } from "@/components/icons";
-import { problem } from "@/lib/landing";
+import { problem as firstProblem } from "@/lib/landing";
 import { Arrive } from "./Arrive";
 
 // Her day as it lands on her phone: the time it is now, late, and the asks that came in since morning, each
@@ -9,7 +9,11 @@ import { Arrive } from "./Arrive";
 
 const apps = { chat: Chat, mail: Mail, calendar: Calendar, reminder: Bell };
 
-export function DayOfAsks() {
+type Ask = { app: keyof typeof apps; from: string; time: string; text: string; phone?: false };
+export type Problem = { clock: { day: string; time: string }; asks: readonly Ask[] };
+
+/** `problem` is the day to show: the first version's, unless the page passes its own. */
+export function DayOfAsks({ problem = firstProblem }: { problem?: Problem }) {
   return (
     <div className="day">
       <p className="day-clock">

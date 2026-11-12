@@ -7,10 +7,11 @@ import { PauseBars, Play } from "./icons";
  * Pause and play for a section's motion: the hero's moving background and the phone playing through the
  * product, or the drifting reviews. Like the control on Apple's moving heroes. It also stops the motion while
  * the section is off screen. Hidden when the visitor prefers reduced motion, because then nothing moves.
- * `name` says what it stops, for screen readers, when a page has more than one.
+ * `name` says what it stops, for screen readers, when a page has more than one. With `control` false there is
+ * no button: the motion always plays, and still stops while the section is off screen.
  */
-export function MotionToggle({ name = "motion" }: { name?: string }) {
-  const button = useRef<HTMLButtonElement>(null);
+export function MotionToggle({ name = "motion", control = true }: { name?: string; control?: boolean }) {
+  const button = useRef<HTMLButtonElement & HTMLSpanElement>(null);
   const [paused, setPaused] = useState(false);
 
   useEffect(() => {
@@ -27,6 +28,7 @@ export function MotionToggle({ name = "motion" }: { name?: string }) {
   }, [paused]);
 
   const label = paused ? `Play ${name}` : `Pause ${name}`;
+  if (!control) return <span ref={button} hidden />;
   return (
     <button
       ref={button}

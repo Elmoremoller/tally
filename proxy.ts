@@ -1,6 +1,7 @@
 import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
-import { SOURCE_COOKIE, SOURCE_MAX_AGE, sourceFrom, writeSource } from "@/lib/source";
+import { isBeginner } from "@/lib/offer";
+import { readSource, SOURCE_COOKIE, SOURCE_MAX_AGE, sourceFrom, writeSource } from "@/lib/source";
 
 export async function proxy(request: NextRequest) {
   if (request.nextUrl.pathname === "/") return landing(request);
@@ -14,9 +15,13 @@ export async function proxy(request: NextRequest) {
  */
 function landing(request: NextRequest) {
   const source = sourceFrom(request.nextUrl.searchParams);
+  // Someone who came in on a beginner angle keeps the beginner page when she comes back to / without it, from
+  // the logo or a bookmark: it's a different page, not just a different headline.
+  const kept = source ? null : readSource(request.cookies.get(SOURCE_COOKIE)?.value).angle;
+  const angle = source?.angle ?? (kept && isBeginner(kept) ? kept : "default");
   const response =
-    source && source.angle !== "default"
-      ? NextResponse.rewrite(new URL(`/angle/${source.angle}${request.nextUrl.search}`, request.url))
+    angle !== "default"
+      ? NextResponse.rewrite(new URL(`/angle/${angle}${request.nextUrl.search}`, request.url))
       : NextResponse.next();
   if (source) {
     response.cookies.set(SOURCE_COOKIE, writeSource(source), {
