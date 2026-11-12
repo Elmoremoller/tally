@@ -65,6 +65,11 @@ type Snapshot = {
   worksFor: WorksFor | null;
   policy: AiPolicy | null;
   askedCount: number | null;
+  /**
+   * The type or talk screen she has just skipped. Its words count as cleared in this click, since clearing
+   * them in state only lands on the next render, after the final read may already have been sent.
+   */
+  skipped?: string;
 };
 
 const NO_PICKS: Picks = { picked: [], other: null };
@@ -156,7 +161,12 @@ export function BeginnerQuiz({ home }: { home: string }) {
             text: null,
             shown: most.options,
           },
-          { id: "picture", title: questions.picture.title, picked: [], text: picture.trim() || null },
+          {
+            id: "picture",
+            title: questions.picture.title,
+            picked: [],
+            text: s.skipped === "picture" ? null : picture.trim() || null,
+          },
           pickedQA("apps", questions.apps.title, jobRead.read.apps, apps),
           ...(s.level === "not_yet"
             ? []
@@ -175,10 +185,10 @@ export function BeginnerQuiz({ home }: { home: string }) {
     ...(fromJob ? [] : [choiceQA("works_for", questions.worksFor.title, WORKS_FOR, worksForLabels, who)]),
     ...(hasEmployer(who) && s.policy ? [choiceQA("policy", policyQuestion.title, AI_POLICIES, policyLabels, s.policy)] : []),
   ];
-  const askedQas = (): QA[] =>
+  const askedQas = (s: Snapshot): QA[] =>
     (asked?.questions ?? []).map((q) =>
       q.kind === "text"
-        ? { id: q.id, title: q.title, picked: [], text: askedText[q.id]?.trim() || null }
+        ? { id: q.id, title: q.title, picked: [], text: s.skipped === q.id ? null : askedText[q.id]?.trim() || null }
         : pickedQA(q.id, q.title, q.choices, askedPicks[q.id] ?? NO_PICKS),
     );
 
@@ -330,7 +340,7 @@ export function BeginnerQuiz({ home }: { home: string }) {
     const answers: BeginnerAnswers = {
       job,
       experience: s.level,
-      qas: [...baseQas(s), ...askedQas(), ...workQas(s, who)],
+      qas: [...baseQas(s), ...askedQas(s), ...workQas(s, who)],
       mostWanted: wanted,
       worksFor: who,
       aiTools: s.level === "not_yet" ? ["none_yet"] : tools,
@@ -353,15 +363,15 @@ export function BeginnerQuiz({ home }: { home: string }) {
   const setAskedTextFor = (id: string) => (value: SetStateAction<string>) =>
     setAskedText((all) => ({ ...all, [id]: typeof value === "function" ? value(all[id] ?? "") : value }));
 
-  /** Skip under a type or talk question: her words there are cleared, and the quiz moves on. */
-  const skipButton = (clear: () => void) => (
+  /** Skip under a type or talk question: her words there are cleared, and the quiz moves on without them. */
+  const skipButton = (id: string, clear: () => void) => (
     <button
       type="button"
       className="btn btn-lg btn-quiet quiz-next"
       style={{ marginTop: "0.75rem" }}
       onClick={() => {
         clear();
-        advance();
+        advance({ skipped: id });
       }}
     >
       {questions.picture.skip}
@@ -454,7 +464,7 @@ export function BeginnerQuiz({ home }: { home: string }) {
               error={error}
               headingRef={headingRef}
             />
-            {skipButton(() => setPicture(""))}
+            {skipButton("picture", () => setPicture(""))}
           </>
         );
       case "apps":
@@ -533,7 +543,7 @@ export function BeginnerQuiz({ home }: { home: string }) {
             error={error}
             headingRef={headingRef}
           />
-          {skipButton(() => setAskedText((all) => ({ ...all, [question.id]: "" })))}
+          {skipButton(question.id, () => setAskedText((all) => ({ ...all, [question.id]: "" })))}
         </>
       );
     }
