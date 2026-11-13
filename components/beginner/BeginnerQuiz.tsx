@@ -13,10 +13,13 @@ import { beginnerQuestions as questions } from "@/lib/beginner/copy";
 import {
   experienceFor,
   jobReadOrFallback,
+  hasKind,
   mostOptions,
+  repeatChoices,
   skipsMost,
   softwareOptions,
   stepsFor,
+  toggleKind,
   type AskedQuestion,
   type JobRead,
   type QA,
@@ -27,6 +30,7 @@ import {
   DEVICES,
   deviceQuestion,
   heldBack,
+  jobKinds,
   levelOther as levelOtherCopy,
   pictureNoIdea,
   questionsWait,
@@ -222,7 +226,7 @@ export function BeginnerQuiz({ home }: { home: string }) {
               }
             : choiceQA("level", questions.level.title, EXPERIENCE, experienceLabels, s.level),
           ...(usesAi(s.level) ? [] : [pickedQA("held_back", heldBack.title, heldBack.choices, held)]),
-          pickedQA("repeats", questions.repeats.title, jobRead.read.repeats.map((r) => r.label), repeats),
+          pickedQA("repeats", questions.repeats.title, repeatChoices(jobRead.read).map((r) => r.label), repeats),
           {
             id: "most",
             title: most.fallback ? questions.most.fallbackTitle : questions.most.title,
@@ -291,7 +295,7 @@ export function BeginnerQuiz({ home }: { home: string }) {
 
   /** The read her screens use from now on. Picks that aren't on its screens any more are dropped. */
   const keepRead = (text: string, result: Read) => {
-    const labels = result.read.repeats.map((r) => r.label);
+    const labels = repeatChoices(result.read).map((r) => r.label);
     const names = softwareOptions(result.read);
     setRepeats((p) => ({ ...p, picked: p.picked.filter((l) => labels.includes(l)) }));
     setApps((p) => ({ ...p, picked: p.picked.filter((a) => names.includes(a)) }));
@@ -485,7 +489,40 @@ export function BeginnerQuiz({ home }: { home: string }) {
     }
     switch (step) {
       case "job":
-        return <TextStep {...questions.job} value={job} setValue={setJob} onSubmit={() => advance()} headingRef={headingRef} />;
+        return (
+          <TextStep
+            {...questions.job}
+            value={job}
+            setValue={setJob}
+            onSubmit={() => advance()}
+            headingRef={headingRef}
+            afterHint={
+              <div className="quiz-kinds">
+                <p className="quiz-hint" id="q-kinds">
+                  {jobKinds.hint}
+                </p>
+                <div className="quiz-topics" role="group" aria-labelledby="q-kinds">
+                  {jobKinds.list.map((kind) => {
+                    const on = hasKind(job, kind);
+                    return (
+                      <button
+                        key={kind}
+                        type="button"
+                        className="quiz-topic"
+                        aria-pressed={on}
+                        data-on={on || undefined}
+                        onClick={() => setJob((text) => toggleKind(text, kind))}
+                      >
+                        {on ? <Check /> : null}
+                        {kind}
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+            }
+          />
+        );
       case "level":
         return (
           <ChoiceStep
@@ -535,7 +572,7 @@ export function BeginnerQuiz({ home }: { home: string }) {
           <PickStep
             title={questions.repeats.title}
             hint={questions.repeats.hint}
-            options={jobRead.read.repeats.map((r) => r.label)}
+            options={repeatChoices(jobRead.read).map((r) => r.label)}
             picked={repeats.picked}
             onPicked={(picked) => setRepeats((p) => ({ ...p, picked }))}
             many
@@ -712,16 +749,16 @@ export function BeginnerQuiz({ home }: { home: string }) {
         </>
       );
     }
+    // Every tap question lets her pick as many as fit, even one the AI wrote for one answer: real answers overlap.
     const picks = askedPicks[question.id] ?? NO_PICKS;
-    const many = question.kind === "many";
     return (
       <PickStep
         title={question.title}
-        hint={question.hint ?? (many ? questions.repeats.hint : undefined)}
+        hint={question.hint ?? questions.repeats.hint}
         options={question.choices}
         picked={picks.picked}
         onPicked={(picked) => setAskedPicks((all) => ({ ...all, [question.id]: { ...(all[question.id] ?? NO_PICKS), picked } }))}
-        many={many}
+        many
         other={picks.other}
         onOther={(other) => setAskedPicks((all) => ({ ...all, [question.id]: { ...(all[question.id] ?? NO_PICKS), other } }))}
         onSubmit={() => advance()}

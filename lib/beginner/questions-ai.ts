@@ -12,8 +12,8 @@ import { experienceLabels, WORKS_FOR, type Experience } from "./types";
 // held to the rules in code before she sees it. Any problem gives null or no questions, never an error, so
 // the quiz falls back to fixed choices and carries on. Same model and key as lib/intake.ts.
 
-export const JOB_PROMPT_VERSION = "beginner-job-v3";
-export const QUESTIONS_PROMPT_VERSION = "beginner-questions-v3";
+export const JOB_PROMPT_VERSION = "beginner-job-v4";
+export const QUESTIONS_PROMPT_VERSION = "beginner-questions-v4";
 
 const QUESTION_WORDS = 10;
 const CHOICE_WORDS = 4;
@@ -30,6 +30,7 @@ repeats: 6 things she most likely does over and over, every day or every week.
 - ai: true when a free chat assistant like ChatGPT or Claude could help her with it by drafting, planning, summarizing, rewriting or thinking it through with her. Writing the texts, messages, captions or reminders she sends from her phone counts as true. False for work done with her hands, in person or on phone calls.
 - Most jobs have both kinds. Include at least two with ai true whenever her job has them.
 - Each one different from the others.
+- Always write 6, however short or vague her answer is. When it says little, like a kind of work and nothing more, write the 6 things most common in that kind of work. When it says almost nothing, write concrete everyday work most jobs share. Never fewer because she said little.
 
 aiFallback: 4 things a free chat assistant could do for someone in her job, 2 to 4 words each, like "Quote templates" or "Payment reminder texts". She sees these only if none of the repeats she picks are things AI can help with, so make them different from the repeats where you can. Each must work without private details about other people. Unless her job is at a desk, make them texts, posts, replies or plans, not emails.
 
@@ -60,7 +61,7 @@ What to ask:
 
 Each question:
 - title: at most 9 words, ending with a question mark, like "How do you send a quote today?", which has 7. Count the words before you write one: a longer title is thrown away. Speak to her as "you". One thing per question. No colon.
-- kind: "one" when she should tap one answer, "many" when several can be true at once, "text" when only her own words will do, which she can type or say out loud.
+- kind: "many" for a tap question, "text" when only her own words will do, which she can type or say out loud. She can tap as many choices as fit on every tap question, so write choices that can be true together, and never a hint that tells her to pick one. "one" is still accepted and shown the same way as "many".
 - choices: for "one" and "many", 4 or 5 short answers she can tap, 1 to 4 words each, never more, in her words where she gave them. Most should be 2 or 3 words, like "Ask a manager" or "Paper notebook". Count the words before you write one: "Text the group" is right, "Text the group one by one" is too long and is thrown away, and so is a question left with fewer than 3 choices. Never write "Something else" or "Other": the quiz adds that itself. For "text", an empty list.
 - At most one "text" question in the whole set, and most should be taps: tapping is faster.
 - hint: one short line under the question, at most 15 words, only when it helps her answer, like "Any guess is fine." Otherwise null.

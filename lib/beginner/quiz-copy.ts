@@ -67,3 +67,27 @@ export const questionsWait = "Writing a few questions for your job";
 
 /** Shown in turn while her answers are read and her first win is written, ending where her result begins. */
 export const readingLines = ["Reading your answers", "Finding the easiest place to start", "Writing your first win"];
+
+// Added 2026-11-13 after Elmore's note that a short first answer leaves the next screens thin: people like
+// taking more than giving, so every screen should offer plenty to tap whatever she typed.
+
+/**
+ * Work almost every job has, always offered on the repeats screen after what the read of her job names, so
+ * the screen is never thin. Each is something AI can help with.
+ */
+export const EVERYDAY_TASKS = [
+  "Answering messages",
+  "Writing emails",
+  "Planning my week",
+  "Making lists",
+  "Social posts",
+  "Meeting notes",
+  "Looking things up",
+  "Keeping records",
+];
+
+/** Kinds of work she can tap on the job screen. Each tap adds its words to her answer, so a short answer still says enough. */
+export const jobKinds = {
+  hint: "Tap what fits, then add a few words if you like.",
+  list: ["Office and admin", "Shop or salon", "Health care", "Teaching", "My own business", "Social media and marketing"],
+};

@@ -1,7 +1,7 @@
 import { cleanText } from "../clean";
 import { ANSWER_MAX } from "../week";
 import { FALLBACK_JOB_READ } from "./copy";
-import { EVERYDAY_SOFTWARE } from "./quiz-copy";
+import { EVERYDAY_SOFTWARE, EVERYDAY_TASKS } from "./quiz-copy";
 import type { AiTool } from "../week";
 import { usesAi, type Experience, type WorksFor } from "./types";
 
@@ -55,6 +55,8 @@ export const PICK_MAX = 60;
 /** How many asked screens the progress bar assumes while the AI is still writing them. */
 export const ASKED_ASSUMED = 3;
 const MOST_MAX = 6;
+/** The repeats screen shows this many choices: her job's first, then everyday work. */
+export const REPEATS_SHOWN = 10;
 const TITLE_MAX = 200;
 const ID_PATTERN = /^[a-z0-9_]{1,20}$/;
 
@@ -68,13 +70,48 @@ export function mostOptions(
   picked: string[],
   typed: string | null,
 ): { options: string[]; fallback: boolean } {
-  const hers = read.repeats.filter((r) => picked.includes(r.label));
+  const hers = repeatChoices(read).filter((r) => picked.includes(r.label));
   const extra = cleanText(typed, PICK_MAX);
   if (!extra && !hers.some((r) => r.ai)) return { options: read.aiFallback, fallback: true };
   const options = hers.map((r) => r.label);
   if (extra && !options.includes(extra)) options.push(extra);
   return { options: options.slice(0, MOST_MAX), fallback: false };
 }
+
+/**
+ * The repeats screen's choices: what the read of her job names first, then everyday work almost every job has,
+ * each once whatever its case, REPEATS_SHOWN in all. However little her job answer said, the screen is full.
+ */
+export function repeatChoices(read: JobRead): JobChoice[] {
+  const seen = new Set<string>();
+  return [...read.repeats, ...EVERYDAY_TASKS.map((label) => ({ label, ai: true }))]
+    .filter((r) => {
+      const key = r.label.toLowerCase();
+      if (seen.has(key)) return false;
+      seen.add(key);
+      return true;
+    })
+    .slice(0, Math.max(REPEATS_SHOWN, read.repeats.length));
+}
+
+/**
+ * Her job answer with a kind of work added or taken out: a tap on the job screen's chips. Added at the end,
+ * after a comma when there is text before it.
+ */
+export function toggleKind(job: string, kind: string): string {
+  if (hasKind(job, kind)) {
+    return job
+      .split(/,\s*/)
+      .filter((part) => part.trim().toLowerCase() !== kind.toLowerCase())
+      .join(", ");
+  }
+  const text = job.trimEnd().replace(/[,.]$/, "");
+  return text ? `${text}, ${kind}` : kind;
+}
+
+/** Whether her job answer holds that kind of work as one of its comma parts. */
+export const hasKind = (job: string, kind: string) =>
+  job.split(/,\s*/).some((part) => part.trim().toLowerCase() === kind.toLowerCase());
 
 /** A list of one needs no question: that one is her answer, and the screen is skipped. */
 export const skipsMost = (most: { options: string[]; fallback: boolean }) => !most.fallback && most.options.length === 1;

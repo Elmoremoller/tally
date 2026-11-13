@@ -8,7 +8,11 @@ import {
   cleanQAs,
   digest,
   experienceFor,
+  hasKind,
   levelWords,
+  repeatChoices,
+  REPEATS_SHOWN,
+  toggleKind,
   mostOptions,
   skipsMost,
   softwareOptions,
@@ -35,6 +39,24 @@ test("mostOptions offers every pick she made, hands on work included", () => {
     options: ["Writing quotes", "Attic work"],
     fallback: false,
   });
+});
+
+test("repeatChoices fills the screen with everyday work after her job's, each once", () => {
+  const choices = repeatChoices(read);
+  assert.equal(choices.length, REPEATS_SHOWN);
+  assert.deepEqual(choices.slice(0, 2), read.repeats);
+  assert.ok(choices.slice(2).every((c) => c.ai));
+  const thin: JobRead = { ...read, repeats: [{ label: "writing emails", ai: true }] };
+  assert.equal(repeatChoices(thin).filter((c) => c.label.toLowerCase() === "writing emails").length, 1);
+});
+
+test("toggleKind adds a kind of work to her answer and takes it out again", () => {
+  assert.equal(toggleKind("", "Teaching"), "Teaching");
+  assert.equal(toggleKind("Fourth grade.", "Teaching"), "Fourth grade, Teaching");
+  assert.equal(toggleKind("Teaching, Office and admin", "Teaching"), "Office and admin");
+  assert.equal(toggleKind("Fourth grade, teaching", "Teaching"), "Fourth grade");
+  assert.ok(hasKind("Fourth grade, Teaching", "Teaching"));
+  assert.ok(!hasKind("Teaching assistant", "Teaching"));
 });
 
 test("skipsMost skips a list of one, never the fallback list", () => {

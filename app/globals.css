@@ -2567,6 +2567,14 @@
     box-shadow: none;
     color: var(--off-white);
   }
+  /* The kinds of work on the job screen: a line, then chips, between the title and the box. */
+  .quiz-kinds .quiz-topics {
+    margin-top: 0.875rem;
+  }
+  .quiz-kinds button.quiz-topic {
+    border: 0;
+    font-family: inherit;
+  }
   /* The I have no idea yet chip on the picture screen: a chip that answers for her, between hint and box. */
   .quiz-no-idea {
     margin-top: 1rem;
