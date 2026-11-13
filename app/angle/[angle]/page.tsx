@@ -1,11 +1,20 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Landing } from "@/components/landing/Landing";
-import { angleFor, angles } from "@/lib/offer";
+import { beginnerOffer } from "@/lib/beginner/copy";
+import { angleFor, angles, isBeginner, offer } from "@/lib/offer";
 
 // The landing page for one ad angle, built ahead of time for every angle in lib/offer.ts. proxy.ts serves it
 // for /?angle=<id>, so the address people see stays the landing page's. Search engines are pointed at /.
-export const metadata: Metadata = { alternates: { canonical: "/" } };
+// A beginner angle also gets the beginner version's title and description.
+export async function generateMetadata({ params }: PageProps<"/angle/[angle]">): Promise<Metadata> {
+  const { angle } = await params;
+  const canonical = { alternates: { canonical: "/" } };
+  if (!isBeginner(angleFor(angle))) return canonical;
+  const title = `${offer.name} | ${beginnerOffer.meta.title}`;
+  const { description } = beginnerOffer.meta;
+  return { ...canonical, title, description, openGraph: { title, description, siteName: offer.name, type: "website" } };
+}
 
 export function generateStaticParams() {
   return Object.keys(angles)

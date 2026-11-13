@@ -19,7 +19,7 @@ export async function startCheckout(): Promise<CheckoutState> {
 
   let url: string;
   try {
-    const { session } = await loadWeek(sessionId);
+    const { session, intake } = await loadWeek(sessionId);
     if (!session || session.status === "started") return { error: paywallCopy.quizFirst };
     // Already paid for: back to her plan rather than paying twice.
     if (session.status === "paid") {
@@ -29,7 +29,7 @@ export async function startCheckout(): Promise<CheckoutState> {
     } else {
       // So the privacy cleanup never removes her answers while she's paying.
       await noteSessionCheckout(sessionId).catch((error) => console.error("note_session_checkout failed", error));
-      url = await createCheckout(sessionId);
+      url = await createCheckout(sessionId, { beginner: Boolean(intake?.beginner) });
     }
   } catch (error) {
     console.error("Checkout failed", error);

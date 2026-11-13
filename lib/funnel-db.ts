@@ -1,4 +1,6 @@
 import { supabaseAdmin } from "./supabase";
+import type { BeginnerPlanInput } from "./beginner/plan-writer";
+import { IDEAS_SHOWN, type BeginnerIntake } from "./beginner/types";
 import type { PlanInput } from "./plan-writer";
 import type { AiPolicy, AiTool, Pile } from "./week";
 
@@ -57,6 +59,8 @@ export type IntakeRow = {
   known_for_summary: string | null;
   prompt_version: string | null;
   model: string | null;
+  /** Only on the beginner version's answers (supabase/migrations/20261110120000_beginner.sql). */
+  beginner?: BeginnerIntake | null;
   created_at: string;
   updated_at: string;
 };
@@ -126,10 +130,12 @@ export const saveAnswers = (
   answers: {
     job: string;
     week: string;
-    extraWork: string;
+    /** Null on the beginner version, which doesn't ask it. */
+    extraWork: string | null;
     aiTools: AiTool[];
     aiToolsOther: string | null;
-    aiPolicy: AiPolicy;
+    /** Null on the beginner version when she works for herself. */
+    aiPolicy: AiPolicy | null;
   },
 ) =>
   call<void>("save_quiz_answers", {
@@ -144,6 +150,9 @@ export const saveAnswers = (
 
 /** False once the session has had its three AI readings. */
 export const spendIntakeCall = (sessionId: string) => call<boolean>("use_intake_call", { p_session_id: sessionId });
+
+/** False once the session has had its four calls for the beginner quiz's job reading and questions. */
+export const spendQuestionCall = (sessionId: string) => call<boolean>("use_question_call", { p_session_id: sessionId });
 
 export const saveIntakeResult = (
   sessionId: string,
@@ -165,6 +174,12 @@ export const saveIntakeResult = (
     p_model: result.model,
     p_tasks: result.tasks,
   });
+
+/** The beginner version's extras beside her answers: who she works for, her first win and her idea titles. */
+export async function saveBeginner(sessionId: string, beginner: BeginnerIntake) {
+  const { error } = await supabaseAdmin().from("intake").update({ beginner }).eq("session_id", sessionId);
+  if (error) throw new Error(`Saving the first win failed: ${error.message}`);
+}
 
 export const saveFollowUpAnswer = (sessionId: string, answer: string) =>
   call<void>("save_follow_up_answer", { p_session_id: sessionId, p_answer: answer });
@@ -273,6 +288,35 @@ export async function loadPlanInput(plan: PlanRow): Promise<PlanInput> {
     aiToolsOther: intake.ai_tools_other,
     aiPolicy: intake.ai_policy,
     tasks: tasks.map((t) => ({ name: t.name, pile: t.pile, hours: t.confirmed_hours ?? t.estimated_hours, extra: t.extra })),
+  };
+}
+
+/**
+ * What the beginner plan writer needs: every screen she answered and what she most wants to make easier, from
+ * the context quiz (v2). Her tasks to hand to AI are the ones a chat assistant can help with.
+ */
+export async function loadBeginnerPlanInput(plan: PlanRow): Promise<BeginnerPlanInput> {
+  const { intake, tasks } = await loadWeek(plan.session_id);
+  const beginner = intake?.beginner;
+  if (!intake?.job_text || !intake.ai_tools || beginner?.v !== 2) throw new Error("Her answers are missing");
+  if (!intake.role_summary || !tasks.length) throw new Error("Her quiz isn't finished");
+  return {
+    job: intake.job_text,
+    qas: beginner.qas,
+    mostWanted: beginner.mostWanted,
+    followUp:
+      intake.follow_up_question && intake.follow_up_answer
+        ? { question: intake.follow_up_question, answer: intake.follow_up_answer }
+        : null,
+    role: intake.role_summary,
+    worksFor: beginner.worksFor,
+    experience: beginner.experience,
+    aiTools: intake.ai_tools,
+    aiToolsOther: intake.ai_tools_other,
+    aiPolicy: intake.ai_policy,
+    tasks: tasks.map((t) => ({ name: t.name, ai: t.pile === "hand_to_ai", private: beginner.privateTasks.includes(t.name) })),
+    firstWin: beginner.firstWin,
+    shownIdeas: beginner.ideas.slice(0, IDEAS_SHOWN),
   };
 }
 

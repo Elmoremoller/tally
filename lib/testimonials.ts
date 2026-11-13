@@ -82,8 +82,15 @@ export const placeholderTestimonials: readonly Testimonial[] = [
   },
 ];
 
+/** Real reviews of the beginner version (lib/beginner), added the same way. Its page shows these, never the first version's. */
+export const beginnerTestimonials: readonly Testimonial[] = [];
+
 /** The live site: a production deploy on Vercel. Local setups and Vercel preview links are not. */
 const live = process.env.VERCEL_ENV === "production";
 
 /** What the landing page shows: the real reviews once there are enough, the placeholders before that, but never on the live site. */
 export const landingTestimonials = testimonials.length >= reviewsMinimum || live ? testimonials : placeholderTestimonials;
+
+/** The same rule for the beginner page, with its own real reviews. Until it has them it borrows the placeholders above (the user's call, 2026-11-11). */
+export const beginnerLandingTestimonials =
+  beginnerTestimonials.length >= reviewsMinimum || live ? beginnerTestimonials : placeholderTestimonials;

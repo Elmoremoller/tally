@@ -1,0 +1,1526 @@
+{
+ "teacher": {
+  "rawIntake": {
+   "role_summary": "You're a 4th grade teacher at a public elementary school with 26 students.",
+   "tasks": [
+    {
+     "quote": "Lesson planning every evening",
+     "name": "Lesson planning",
+     "ai": true,
+     "private": false
+    },
+    {
+     "quote": "grading",
+     "name": "Grading",
+     "ai": false,
+     "private": true
+    },
+    {
+     "quote": "writing emails to parents",
+     "name": "Emails to parents",
+     "ai": true,
+     "private": true
+    },
+    {
+     "quote": "making worksheets",
+     "name": "Making worksheets",
+     "ai": true,
+     "private": false
+    },
+    {
+     "quote": "report card comments take forever",
+     "name": "Report card comments",
+     "ai": true,
+     "private": true
+    }
+   ],
+   "first_win": {
+    "task": "Making worksheets",
+    "intro": "You said making worksheets takes a lot of your time. Here is a starter worksheet for 4th graders.",
+    "draft": "4th Grade Math Practice: Multi Digit Multiplication\n\nName: ____________ Date: [date]\n\nDirections: Solve each problem. Show your work in the space provided.\n\n1. 34 x 6 = ____\n2. 52 x 4 = ____\n3. 78 x 3 = ____\n4. 125 x 5 = ____\n5. 63 x 7 = ____\n\nBonus: A classroom has [number] rows of desks with [number] desks in each row. How many desks are in the room?"
+   },
+   "ideas": [
+    "Parent newsletter drafts",
+    "Differentiated reading questions",
+    "Class schedule templates",
+    "Rubrics for projects",
+    "Quick feedback phrases for student work",
+    "Vocabulary word lists by unit"
+   ],
+   "needs_follow_up": false,
+   "follow_up_question": null
+  },
+  "intakeSeconds": 3.562,
+  "intake": {
+   "role_summary": "You’re a 4th grade teacher at a public elementary school with 26 students.",
+   "tasks": [
+    {
+     "name": "Lesson planning",
+     "ai": true,
+     "private": false
+    },
+    {
+     "name": "Grading",
+     "ai": false,
+     "private": true
+    },
+    {
+     "name": "Emails to parents",
+     "ai": true,
+     "private": true
+    },
+    {
+     "name": "Making worksheets",
+     "ai": true,
+     "private": false
+    },
+    {
+     "name": "Report card comments",
+     "ai": true,
+     "private": true
+    }
+   ],
+   "first_win": {
+    "task": "Making worksheets",
+    "intro": "You said making worksheets takes a lot of your time. Here is a starter worksheet for 4th graders.",
+    "draft": "4th Grade Math Practice: Multi Digit Multiplication\n\nName: ____________ Date: [date]\n\nDirections: Solve each problem. Show your work in the space provided.\n\n1. 34 x 6 = ____\n2. 52 x 4 = ____\n3. 78 x 3 = ____\n4. 125 x 5 = ____\n5. 63 x 7 = ____\n\nBonus: A classroom has [number] rows of desks with [number] desks in each row. How many desks are in the room?"
+   },
+   "ideas": [
+    "Parent newsletter drafts",
+    "Differentiated reading questions",
+    "Class schedule templates",
+    "Rubrics for projects",
+    "Quick feedback phrases for student work",
+    "Vocabulary word lists by unit"
+   ],
+   "needs_follow_up": false,
+   "follow_up_question": null
+  },
+  "rawPlan": {
+   "tool_why": "Claude is a good place to start because the free version is enough to begin, and it works in a browser or a phone app. You type to it like a text message, so there is nothing to set up or learn first.",
+   "first_win": {
+    "prompt": "I teach 4th grade at a public elementary school with 26 students. Please make me a one page math worksheet on [topic, like multi digit multiplication]. Include a name and date line, short directions, 8 practice problems that start easier and get harder, and one word problem as a bonus. Keep the language simple for 9 and 10 year olds and leave space to show work. Put the answer key at the very end, separate from the worksheet.",
+    "example": "4th Grade Math Practice: Multi Digit Multiplication. Name and date lines at the top. Directions: Solve each problem and show your work. Problems 1 to 8 move from 34 x 6 up to 125 x 5. Bonus: A class has 6 rows of desks with 4 desks in each row. How many desks are there? The answer key follows on its own section at the bottom.",
+    "fixes": [
+     "Make it easier.",
+     "Add four more problems.",
+     "Make the word problems about animals."
+    ]
+   },
+   "ideas": [
+    {
+     "title": "Parent newsletter drafts",
+     "why": "Gives you a starting draft instead of a blank page each time.",
+     "prompt": "I'm a 4th grade teacher writing a newsletter for families. Please draft a friendly one page newsletter with a short welcome, a section on what we are learning in [subjects], upcoming dates [list dates], and a reminder about [reminder]. Keep it warm, clear and under 250 words, with short headings. Do not include any student names.",
+     "private": false,
+     "life": false
+    },
+    {
+     "title": "Differentiated reading questions",
+     "why": "Lets you get questions at several levels for one text quickly.",
+     "prompt": "I teach 4th grade. For a story about [topic or title], write reading questions at three levels: support, on level, and challenge. Give 5 questions for each level. Use simple wording for 9 and 10 year olds. Include a mix of recall, inference and vocabulary questions. Add a short answer guide at the end that I will check myself.",
+     "private": false,
+     "life": false
+    },
+    {
+     "title": "Class schedule templates",
+     "why": "Gives you a clean layout you can adjust to your day.",
+     "prompt": "I teach 4th grade with 26 students. Please make a simple daily class schedule template I can print, with time blocks for [subjects and special classes]. Use a table with columns for time, subject and notes. Make it easy to read and leave a few blank rows I can edit. Also suggest a kid friendly version with pictures described in words.",
+     "private": false,
+     "life": false
+    },
+    {
+     "title": "Lesson planning",
+     "why": "Helps you get a first outline of a lesson to shape yourself.",
+     "prompt": "I teach 4th grade at a public elementary school with 26 students. Please draft a lesson plan on [topic] for [length] minutes. Include a learning goal, a short warm up, direct teaching, guided practice, independent practice, and a quick check for understanding. Keep it simple and practical, and note where I should adjust for my own standards, which I will check.",
+     "private": false,
+     "life": false
+    },
+    {
+     "title": "Emails to parents",
+     "why": "Helps you find the right tone for tricky or routine messages.",
+     "prompt": "I'm a 4th grade teacher. Please write a short, kind email to a parent about [situation, like a missed homework streak]. Keep it under 150 words, with a warm opening, one clear next step, and a respectful close. Do not include the child's name; I will add it. Use plain language and no jargon.",
+     "private": true,
+     "life": false
+    },
+    {
+     "title": "Report card comments",
+     "why": "Gives you comment starters you personalize for each child.",
+     "prompt": "I'm a 4th grade teacher writing report card comments. Please write 3 different positive, honest comment starters about a student who [general strength] and is working on [general area to grow]. Each should be 2 to 3 sentences, in a professional and encouraging tone. Leave out names and personal details. I will add the specifics myself.",
+     "private": true,
+     "life": false
+    },
+    {
+     "title": "Quick exit ticket questions",
+     "why": "Gives you fast ways to see what students understood.",
+     "prompt": "I teach 4th grade. Please write 5 exit ticket questions for a lesson on [topic]. Make them short, answerable in one or two minutes, and written in simple language. Include a mix of one multiple choice, two short answer, and one drawing or explain it question. Add a note on what a good answer looks like.",
+     "private": false,
+     "life": false
+    },
+    {
+     "title": "Classroom reward and behavior chart ideas",
+     "why": "Offers fresh ideas when your current routines feel stale.",
+     "prompt": "I teach 4th grade with 26 students. Please give me 6 ideas for positive classroom routines or reward systems that are low cost and easy to run. For each, explain how it works in two sentences and what to watch out for. Keep the tone encouraging and focus on teamwork rather than competition.",
+     "private": false,
+     "life": false
+    },
+    {
+     "title": "Easy dinners for busy school nights",
+     "why": "Takes the guesswork out of what to cook after a long day.",
+     "prompt": "I'm a teacher who plans lessons most evenings, so I need easy weeknight dinners. Please give me a 5 day dinner plan with simple recipes that take about [cooking time] and use few ingredients. I eat [preferences or restrictions]. Include a combined shopping list organized by store section.",
+     "private": false,
+     "life": true
+    },
+    {
+     "title": "Plan a relaxing free weekend",
+     "why": "Helps you actually rest after a busy school week.",
+     "prompt": "I'm a 4th grade teacher and I have a free weekend coming up on [dates]. I live near [area] and my budget is about [amount]. Please suggest a relaxed plan for Saturday and Sunday that includes some rest, something fun and one easy outing. Keep it simple, with no packed schedule.",
+     "private": false,
+     "life": true
+    }
+   ],
+   "safe_use": [
+    "Never type student names, grades, IEP details or behavior records into AI.",
+    "Leave out parent names, addresses and phone numbers in emails you draft.",
+    "Read and check everything before it goes to a student or family.",
+    "AI can be confidently wrong about facts, dates and numbers, so check answer keys yourself.",
+    "Check any standards or district policy wording against your own approved sources.",
+    "Ask your school which AI tools are allowed before using AI with school materials."
+   ],
+   "work_profile": "I'm a 4th grade teacher at a public elementary school with 26 students. I write to parents, my students and my colleagues. I spend a lot of time on lesson plans, worksheets, grading and report card comments. I like drafts that are warm, clear and in plain language, with short sentences. Emails should be brief and kind, and worksheets should be simple enough for 9 and 10 year olds. Give me a first draft I can edit, and tell me if you are unsure about a fact.",
+   "at_work": {
+    "ask_message": "Hi, I'd like to know which AI tools, if any, are approved for teachers at our school. I'm interested in using one for things like drafting worksheets, lesson outlines, and generic email wording. I would not enter student names or records. Could you tell me what I'm allowed to use it for, and whether there are any rules I should follow?",
+    "ai_talk": "I've started using AI to help with first drafts of worksheets, lesson outlines and parent email wording. I don't put student names or records into it. I read and check everything myself before it reaches students or families. It helps me spend less time on blank pages so I can put more energy into teaching. I'm happy to share how I use it if that would be useful."
+   }
+  },
+  "plan": {
+   "version": 2,
+   "role": "You’re a 4th grade teacher at a public elementary school with 26 students.",
+   "tool": "claude",
+   "toolWhy": "Claude is a good place to start because the free version is enough to begin, and it works in a browser or a phone app. You type to it like a text message, so there is nothing to set up or learn first.",
+   "worksFor": "employer",
+   "policy": "no_idea",
+   "firstWin": {
+    "task": "Making worksheets",
+    "prompt": "I teach 4th grade at a public elementary school with 26 students. Please make me a one page math worksheet on [topic, like multi digit multiplication]. Include a name and date line, short directions, 8 practice problems that start easier and get harder, and one word problem as a bonus. Keep the language simple for 9 and 10 year olds and leave space to show work. Put the answer key at the very end, separate from the worksheet.",
+    "example": "4th Grade Math Practice: Multi Digit Multiplication. Name and date lines at the top. Directions: Solve each problem and show your work. Problems 1 to 8 move from 34 x 6 up to 125 x 5. Bonus: A class has 6 rows of desks with 4 desks in each row. How many desks are there? The answer key follows on its own section at the bottom.",
+    "fixes": [
+     "Make it easier.",
+     "Add four more problems.",
+     "Make the word problems about animals."
+    ]
+   },
+   "ideas": [
+    {
+     "title": "Parent newsletter drafts",
+     "why": "Gives you a starting draft instead of a blank page each time.",
+     "prompt": "I’m a 4th grade teacher writing a newsletter for families. Please draft a friendly one page newsletter with a short welcome, a section on what we are learning in [subjects], upcoming dates [list dates], and a reminder about [reminder]. Keep it warm, clear and under 250 words, with short headings. Do not include any student names.",
+     "life": false,
+     "mark": "safe_today"
+    },
+    {
+     "title": "Differentiated reading questions",
+     "why": "Lets you get questions at several levels for one text quickly.",
+     "prompt": "I teach 4th grade. For a story about [topic or title], write reading questions at three levels: support, on level, and challenge. Give 5 questions for each level. Use simple wording for 9 and 10 year olds. Include a mix of recall, inference and vocabulary questions. Add a short answer guide at the end that I will check myself.",
+     "life": false,
+     "mark": "safe_today"
+    },
+    {
+     "title": "Class schedule templates",
+     "why": "Gives you a clean layout you can adjust to your day.",
+     "prompt": "I teach 4th grade with 26 students. Please make a simple daily class schedule template I can print, with time blocks for [subjects and special classes]. Use a table with columns for time, subject and notes. Make it easy to read and leave a few blank rows I can edit. Also suggest a kid friendly version with pictures described in words.",
+     "life": false,
+     "mark": "safe_today"
+    },
+    {
+     "title": "Lesson planning",
+     "why": "Helps you get a first outline of a lesson to shape yourself.",
+     "prompt": "I teach 4th grade at a public elementary school with 26 students. Please draft a lesson plan on [topic] for [length] minutes. Include a learning goal, a short warm up, direct teaching, guided practice, independent practice, and a quick check for understanding. Keep it simple and practical, and note where I should adjust for my own standards, which I will check.",
+     "life": false,
+     "mark": "safe_today"
+    },
+    {
+     "title": "Emails to parents",
+     "why": "Helps you find the right tone for tricky or routine messages.",
+     "prompt": "I’m a 4th grade teacher. Please write a short, kind email to a parent about [situation, like a missed homework streak]. Keep it under 150 words, with a warm opening, one clear next step, and a respectful close. Do not include the child’s name; I will add it. Use plain language and no jargon.",
+     "life": false,
+     "mark": "check_first"
+    },
+    {
+     "title": "Report card comments",
+     "why": "Gives you comment starters you personalize for each child.",
+     "prompt": "I’m a 4th grade teacher writing report card comments. Please write 3 different positive, honest comment starters about a student who [general strength] and is working on [general area to grow]. Each should be 2 to 3 sentences, in a professional and encouraging tone. Leave out names and personal details. I will add the specifics myself.",
+     "life": false,
+     "mark": "check_first"
+    },
+    {
+     "title": "Quick exit ticket questions",
+     "why": "Gives you fast ways to see what students understood.",
+     "prompt": "I teach 4th grade. Please write 5 exit ticket questions for a lesson on [topic]. Make them short, answerable in one or two minutes, and written in simple language. Include a mix of one multiple choice, two short answer, and one drawing or explain it question. Add a note on what a good answer looks like.",
+     "life": false,
+     "mark": "safe_today"
+    },
+    {
+     "title": "Classroom reward and behavior chart ideas",
+     "why": "Offers fresh ideas when your current routines feel stale.",
+     "prompt": "I teach 4th grade with 26 students. Please give me 6 ideas for positive classroom routines or reward systems that are low cost and easy to run. For each, explain how it works in two sentences and what to watch out for. Keep the tone encouraging and focus on teamwork rather than competition.",
+     "life": false,
+     "mark": "safe_today"
+    },
+    {
+     "title": "Easy dinners for busy school nights",
+     "why": "Takes the guesswork out of what to cook after a long day.",
+     "prompt": "I’m a teacher who plans lessons most evenings, so I need easy weeknight dinners. Please give me a 5 day dinner plan with simple recipes that take about [cooking time] and use few ingredients. I eat [preferences or restrictions]. Include a combined shopping list organized by store section.",
+     "life": true,
+     "mark": "safe_today"
+    },
+    {
+     "title": "Plan a relaxing free weekend",
+     "why": "Helps you actually rest after a busy school week.",
+     "prompt": "I’m a 4th grade teacher and I have a free weekend coming up on [dates]. I live near [area] and my budget is about [amount]. Please suggest a relaxed plan for Saturday and Sunday that includes some rest, something fun and one easy outing. Keep it simple, with no packed schedule.",
+     "life": true,
+     "mark": "safe_today"
+    }
+   ],
+   "safeUse": [
+    "Never type student names, grades, IEP details or behavior records into AI.",
+    "Leave out parent names, addresses and phone numbers in emails you draft.",
+    "Read and check everything before it goes to a student or family.",
+    "AI can be confidently wrong about facts, dates and numbers, so check answer keys yourself.",
+    "Check any standards or district policy wording against your own approved sources.",
+    "Ask your school which AI tools are allowed before using AI with school materials."
+   ],
+   "workProfile": "I’m a 4th grade teacher at a public elementary school with 26 students. I write to parents, my students and my colleagues. I spend a lot of time on lesson plans, worksheets, grading and report card comments. I like drafts that are warm, clear and in plain language, with short sentences. Emails should be brief and kind, and worksheets should be simple enough for 9 and 10 year olds. Give me a first draft I can edit, and tell me if you are unsure about a fact.",
+   "atWork": {
+    "askMessage": "Hi, I’d like to know which AI tools, if any, are approved for teachers at our school. I’m interested in using one for things like drafting worksheets, lesson outlines, and generic email wording. I would not enter student names or records. Could you tell me what I’m allowed to use it for, and whether there are any rules I should follow?",
+    "aiTalk": "I’ve started using AI to help with first drafts of worksheets, lesson outlines and parent email wording. I don’t put student names or records into it. I read and check everything myself before it reaches students or families. It helps me spend less time on blank pages so I can put more energy into teaching. I’m happy to share how I use it if that would be useful."
+   }
+  },
+  "planSeconds": 21
+ },
+ "nurse": {
+  "rawIntake": {
+   "role_summary": "You're a registered nurse on a med surg floor at a hospital, handling charting, shift handoffs, patient education, family calls and precepting new nurses.",
+   "tasks": [
+    {
+     "quote": "Charting takes hours.",
+     "name": "Charting",
+     "ai": true,
+     "private": true
+    },
+    {
+     "quote": "Shift handoff reports",
+     "name": "Shift handoff reports",
+     "ai": true,
+     "private": true
+    },
+    {
+     "quote": "patient education",
+     "name": "Patient education",
+     "ai": true,
+     "private": true
+    },
+    {
+     "quote": "calling families",
+     "name": "Calling families",
+     "ai": false,
+     "private": true
+    },
+    {
+     "quote": "I precept the new nurses.",
+     "name": "Precepting new nurses",
+     "ai": true,
+     "private": false
+    }
+   ],
+   "first_win": {
+    "task": "Precepting new nurses",
+    "intro": "You said you precept the new nurses. Here is a first week checklist you can adapt for them.",
+    "draft": "New nurse first week checklist\n\nDay 1: Tour the unit, meet the charge nurse, review unit policies and where supplies are kept, and set up your login and charting access.\n\nDay 2: Shadow a full shift with [preceptor name], practice a shift handoff report, and review how the floor's medication process works.\n\nDay 3: Take on one or two patients with close guidance, and go over your documentation checklist.\n\nDay 4 and 5: Take a larger patient load step by step, ask questions after each task, and set one learning goal for next week."
+   },
+   "ideas": [
+    "Shift handoff summary template",
+    "Patient education handout outlines",
+    "A script for calling families",
+    "Charting time saving checklist",
+    "Precepting feedback notes",
+    "Questions to ask after a difficult shift"
+   ],
+   "needs_follow_up": false,
+   "follow_up_question": null
+  },
+  "intakeSeconds": 3.646,
+  "intake": {
+   "role_summary": "You’re a registered nurse on a med surg floor at a hospital, handling charting, shift handoffs, patient education, family calls and precepting new nurses.",
+   "tasks": [
+    {
+     "name": "Charting",
+     "ai": true,
+     "private": true
+    },
+    {
+     "name": "Shift handoff reports",
+     "ai": true,
+     "private": true
+    },
+    {
+     "name": "Patient education",
+     "ai": true,
+     "private": true
+    },
+    {
+     "name": "Calling families",
+     "ai": false,
+     "private": true
+    },
+    {
+     "name": "Precepting new nurses",
+     "ai": true,
+     "private": false
+    }
+   ],
+   "first_win": {
+    "task": "Precepting new nurses",
+    "intro": "You said you precept the new nurses. Here is a first week checklist you can adapt for them.",
+    "draft": "New nurse first week checklist\n\nDay 1: Tour the unit, meet the charge nurse, review unit policies and where supplies are kept, and set up your login and charting access.\n\nDay 2: Shadow a full shift with [preceptor name], practice a shift handoff report, and review how the floor’s medication process works.\n\nDay 3: Take on one or two patients with close guidance, and go over your documentation checklist.\n\nDay 4 and 5: Take a larger patient load step by step, ask questions after each task, and set one learning goal for next week."
+   },
+   "ideas": [
+    "Shift handoff summary template",
+    "Patient education handout outlines",
+    "A script for calling families",
+    "Charting time saving checklist",
+    "Precepting feedback notes",
+    "Questions to ask after a difficult shift"
+   ],
+   "needs_follow_up": false,
+   "follow_up_question": null
+  },
+  "rawPlan": {
+   "tool_why": "Claude is a good place to start because the free version is enough to begin, and it works in a browser or a phone app. You type to it like a text message, so there is nothing to set up or learn first.",
+   "first_win": {
+    "prompt": "I'm a registered nurse on a med surg floor at a hospital, and I precept new nurses. Write a checklist for a new nurse's first week on the floor, with one short section for each day, Monday to Friday. Cover getting oriented, shadowing, handoff practice, charting practice, and setting a learning goal. Use plain words and a friendly, encouraging tone, and keep it under 200 words. Put blanks like [preceptor name] where my unit's details go, and don't include any patient information.",
+    "example": "Monday: Tour the unit, meet the charge nurse, and get comfortable with where supplies are kept. Tuesday: Shadow your preceptor for the full shift and listen closely during handoff. Wednesday: Practice giving a handoff report and a few charting entries with guidance. Thursday: Care for a small group of patients with support. Friday: Review your week and choose one learning goal.",
+    "fixes": [
+     "Shorter.",
+     "Warmer, like I'm welcoming a friend.",
+     "Make it a simple list I can print."
+    ]
+   },
+   "ideas": [
+    {
+     "title": "Shift handoff summary template",
+     "why": "Gives you a steady order to follow so nothing gets skipped at the end of a long shift.",
+     "prompt": "I'm a registered nurse on a med surg floor. Create a simple handoff summary template I can use to organize my thoughts before giving report. Use short headings in a logical order, with blank spaces for me to fill in. Keep it to one page and easy to scan. Do not include any real patient information. I will check it against my unit's own handoff format before using it.",
+     "private": false,
+     "life": false
+    },
+    {
+     "title": "Patient education handout outlines",
+     "why": "Gets you a clear starting outline so you are not facing a blank page.",
+     "prompt": "I'm a registered nurse on a med surg floor. Write an outline for a patient handout on [general topic, like getting up safely after surgery]. Use plain words at about a sixth grade reading level, short sections, and a friendly tone. Keep it to one page. This is a first draft only, and I will check every detail against my hospital's approved materials before sharing anything.",
+     "private": false,
+     "life": false
+    },
+    {
+     "title": "A script for calling families",
+     "why": "Helps you find calm, clear words for calls that can feel hard to start.",
+     "prompt": "I'm a registered nurse on a med surg floor. Write a short, caring script for a phone call to a family member about [general situation, like a patient being moved to another unit]. Use a warm, calm tone and plain words, in about five sentences. Leave out all names and medical details. I will adjust it to follow my hospital's rules on what I can share.",
+     "private": true,
+     "life": false
+    },
+    {
+     "title": "Charting",
+     "why": "Helps you practice clear, well organized wording for your notes.",
+     "prompt": "I'm a registered nurse on a med surg floor. Give me a general guide to writing clear, objective charting notes, with a few made up sample phrases showing the difference between vague and specific wording. Use short bullet points. Do not use any real patient details, and leave out names. I will compare everything with my hospital's charting standards.",
+     "private": true,
+     "life": false
+    },
+    {
+     "title": "Shift handoff reports",
+     "why": "Helps you practice giving a short, confident report in a steady order.",
+     "prompt": "I'm a registered nurse on a med surg floor. Help me practice giving a handoff report. Make up a fictional patient with a general situation, then ask me questions one at a time as the incoming nurse would. After I answer, tell me what I could say more clearly. Keep your tone encouraging. I will not type in any real patient information.",
+     "private": true,
+     "life": false
+    },
+    {
+     "title": "Patient education",
+     "why": "Helps you explain things in plain words that patients can follow.",
+     "prompt": "I'm a registered nurse on a med surg floor. Take this general explanation, [paste a sentence you often say to patients, with no names], and rewrite it in plain words at about a sixth grade reading level. Give me a short version and a slightly longer one, in a warm tone. I will check it against my hospital's approved education materials before using it.",
+     "private": false,
+     "life": false
+    },
+    {
+     "title": "Questions to ask a new nurse",
+     "why": "Helps you check in on a new nurse's learning without it feeling like a quiz.",
+     "prompt": "I'm a registered nurse on a med surg floor and I precept new nurses. Write a list of friendly questions I can ask at the end of a shift to see how a new nurse is feeling and what they want to practice next. Keep them open ended and encouraging, and keep the list under ten questions. Do not include any names or patient details.",
+     "private": false,
+     "life": false
+    },
+    {
+     "title": "Feedback for a new nurse",
+     "why": "Helps you say honest feedback kindly and clearly.",
+     "prompt": "I'm a registered nurse and I precept new nurses. Help me give feedback on [a general skill, like organizing the shift]. Write three sentences: one on what went well, one on what to work on, and one that encourages next steps. Use a kind, direct tone. Leave out names. I will change the wording so it sounds like me.",
+     "private": false,
+     "life": false
+    },
+    {
+     "title": "Easy meals for after a long shift",
+     "why": "Gives you ideas for dinner when you are tired and don't want to think about it.",
+     "prompt": "I work long twelve hour shifts as a nurse and I'm tired when I get home. Give me a plan for five simple dinners that need very little effort and few dishes. I like [foods you enjoy] and I don't eat [foods to avoid]. Include a short shopping list. Keep the recipes casual and easy to follow.",
+     "private": false,
+     "life": true
+    },
+    {
+     "title": "A plan for a free weekend",
+     "why": "Helps you use days off to rest and still enjoy yourself.",
+     "prompt": "I'm a nurse who works a lot of long shifts, and I have a free weekend on [dates]. Help me plan it so I get real rest and also do one thing I enjoy. I like [things you enjoy] and my budget is [amount]. Give me a simple plan for Saturday and Sunday, with a few options for each day.",
+     "private": false,
+     "life": true
+    }
+   ],
+   "safe_use": [
+    "Until your employer says which tools are approved, practice only with made up examples and general topics on your own device.",
+    "Never type in patient names, dates of birth, medical record numbers, room numbers or any details that could identify a patient.",
+    "Never type in family member names, phone numbers or anything a family member told you.",
+    "Read and check everything before it goes out, especially anything a patient or a new nurse will rely on.",
+    "AI can be confidently wrong about facts, dates and numbers, so check anything clinical against your hospital's approved sources.",
+    "Do not use it for medication doses or clinical decisions, and keep your own judgment as the final word."
+   ],
+   "work_profile": "I'm a registered nurse on a med surg floor at a hospital. My days include charting, giving shift handoff reports, teaching patients, calling families, and precepting new nurses. I write to patients, families, coworkers and new nurses. I like drafts in plain, warm words that are short and easy to scan. I prefer a calm, encouraging tone, with simple headings or short lists when it helps. I never share real patient details, so please use general examples and leave blanks for specifics. Treat everything as a first draft that I will check against my hospital's own policies and approved materials.",
+   "at_work": {
+    "ask_message": "Hi, I'd like to understand which AI tools, if any, are approved for use here and what I'm allowed to use them for. I'm thinking about general tasks like drafting a checklist for new nurses, outlining patient education in plain words, and practicing how to explain things. I would not enter patient information or anything confidential. Could you let me know the policy and who I should ask if I have questions? Thank you.",
+    "ai_talk": "I wanted to let you know that I've started using AI on my own time to practice writing and organizing my thoughts. I use it for things like first drafts of checklists for new nurses and plain language outlines for patient education, with no patient information involved. I read and check everything myself before using any of it. I'm happy to share what I learn and to follow whatever guidelines we have here."
+   }
+  },
+  "plan": {
+   "version": 2,
+   "role": "You’re a registered nurse on a med surg floor at a hospital, handling charting, shift handoffs, patient education, family calls and precepting new nurses.",
+   "tool": "claude",
+   "toolWhy": "Claude is a good place to start because the free version is enough to begin, and it works in a browser or a phone app. You type to it like a text message, so there is nothing to set up or learn first.",
+   "worksFor": "employer",
+   "policy": "restricted",
+   "firstWin": {
+    "task": "Precepting new nurses",
+    "prompt": "I’m a registered nurse on a med surg floor at a hospital, and I precept new nurses. Write a checklist for a new nurse’s first week on the floor, with one short section for each day, Monday to Friday. Cover getting oriented, shadowing, handoff practice, charting practice, and setting a learning goal. Use plain words and a friendly, encouraging tone, and keep it under 200 words. Put blanks like [preceptor name] where my unit’s details go, and don’t include any patient information.",
+    "example": "Monday: Tour the unit, meet the charge nurse, and get comfortable with where supplies are kept. Tuesday: Shadow your preceptor for the full shift and listen closely during handoff. Wednesday: Practice giving a handoff report and a few charting entries with guidance. Thursday: Care for a small group of patients with support. Friday: Review your week and choose one learning goal.",
+    "fixes": [
+     "Shorter.",
+     "Warmer, like I’m welcoming a friend.",
+     "Make it a simple list I can print."
+    ]
+   },
+   "ideas": [
+    {
+     "title": "Shift handoff summary template",
+     "why": "Gives you a steady order to follow so nothing gets skipped at the end of a long shift.",
+     "prompt": "I’m a registered nurse on a med surg floor. Create a simple handoff summary template I can use to organize my thoughts before giving report. Use short headings in a logical order, with blank spaces for me to fill in. Keep it to one page and easy to scan. Do not include any real patient information. I will check it against my unit’s own handoff format before using it.",
+     "life": false,
+     "mark": "check_first"
+    },
+    {
+     "title": "Patient education handout outlines",
+     "why": "Gets you a clear starting outline so you are not facing a blank page.",
+     "prompt": "I’m a registered nurse on a med surg floor. Write an outline for a patient handout on [general topic, like getting up safely after surgery]. Use plain words at about a sixth grade reading level, short sections, and a friendly tone. Keep it to one page. This is a first draft only, and I will check every detail against my hospital’s approved materials before sharing anything.",
+     "life": false,
+     "mark": "check_first"
+    },
+    {
+     "title": "A script for calling families",
+     "why": "Helps you find calm, clear words for calls that can feel hard to start.",
+     "prompt": "I’m a registered nurse on a med surg floor. Write a short, caring script for a phone call to a family member about [general situation, like a patient being moved to another unit]. Use a warm, calm tone and plain words, in about five sentences. Leave out all names and medical details. I will adjust it to follow my hospital’s rules on what I can share.",
+     "life": false,
+     "mark": "check_first"
+    },
+    {
+     "title": "Charting",
+     "why": "Helps you practice clear, well organized wording for your notes.",
+     "prompt": "I’m a registered nurse on a med surg floor. Give me a general guide to writing clear, objective charting notes, with a few made up sample phrases showing the difference between vague and specific wording. Use short bullet points. Do not use any real patient details, and leave out names. I will compare everything with my hospital’s charting standards.",
+     "life": false,
+     "mark": "check_first"
+    },
+    {
+     "title": "Shift handoff reports",
+     "why": "Helps you practice giving a short, confident report in a steady order.",
+     "prompt": "I’m a registered nurse on a med surg floor. Help me practice giving a handoff report. Make up a fictional patient with a general situation, then ask me questions one at a time as the incoming nurse would. After I answer, tell me what I could say more clearly. Keep your tone encouraging. I will not type in any real patient information.",
+     "life": false,
+     "mark": "check_first"
+    },
+    {
+     "title": "Patient education",
+     "why": "Helps you explain things in plain words that patients can follow.",
+     "prompt": "I’m a registered nurse on a med surg floor. Take this general explanation, [paste a sentence you often say to patients, with no names], and rewrite it in plain words at about a sixth grade reading level. Give me a short version and a slightly longer one, in a warm tone. I will check it against my hospital’s approved education materials before using it.",
+     "life": false,
+     "mark": "check_first"
+    },
+    {
+     "title": "Questions to ask a new nurse",
+     "why": "Helps you check in on a new nurse’s learning without it feeling like a quiz.",
+     "prompt": "I’m a registered nurse on a med surg floor and I precept new nurses. Write a list of friendly questions I can ask at the end of a shift to see how a new nurse is feeling and what they want to practice next. Keep them open ended and encouraging, and keep the list under ten questions. Do not include any names or patient details.",
+     "life": false,
+     "mark": "check_first"
+    },
+    {
+     "title": "Feedback for a new nurse",
+     "why": "Helps you say honest feedback kindly and clearly.",
+     "prompt": "I’m a registered nurse and I precept new nurses. Help me give feedback on [a general skill, like organizing the shift]. Write three sentences: one on what went well, one on what to work on, and one that encourages next steps. Use a kind, direct tone. Leave out names. I will change the wording so it sounds like me.",
+     "life": false,
+     "mark": "check_first"
+    },
+    {
+     "title": "Easy meals for after a long shift",
+     "why": "Gives you ideas for dinner when you are tired and don’t want to think about it.",
+     "prompt": "I work long twelve hour shifts as a nurse and I’m tired when I get home. Give me a plan for five simple dinners that need very little effort and few dishes. I like [foods you enjoy] and I don’t eat [foods to avoid]. Include a short shopping list. Keep the recipes casual and easy to follow.",
+     "life": true,
+     "mark": "safe_today"
+    },
+    {
+     "title": "A plan for a free weekend",
+     "why": "Helps you use days off to rest and still enjoy yourself.",
+     "prompt": "I’m a nurse who works a lot of long shifts, and I have a free weekend on [dates]. Help me plan it so I get real rest and also do one thing I enjoy. I like [things you enjoy] and my budget is [amount]. Give me a simple plan for Saturday and Sunday, with a few options for each day.",
+     "life": true,
+     "mark": "safe_today"
+    }
+   ],
+   "safeUse": [
+    "Until your employer says which tools are approved, practice only with made up examples and general topics on your own device.",
+    "Never type in patient names, dates of birth, medical record numbers, room numbers or any details that could identify a patient.",
+    "Never type in family member names, phone numbers or anything a family member told you.",
+    "Read and check everything before it goes out, especially anything a patient or a new nurse will rely on.",
+    "AI can be confidently wrong about facts, dates and numbers, so check anything clinical against your hospital’s approved sources.",
+    "Do not use it for medication doses or clinical decisions, and keep your own judgment as the final word."
+   ],
+   "workProfile": "I’m a registered nurse on a med surg floor at a hospital. My days include charting, giving shift handoff reports, teaching patients, calling families, and precepting new nurses. I write to patients, families, coworkers and new nurses. I like drafts in plain, warm words that are short and easy to scan. I prefer a calm, encouraging tone, with simple headings or short lists when it helps. I never share real patient details, so please use general examples and leave blanks for specifics. Treat everything as a first draft that I will check against my hospital’s own policies and approved materials.",
+   "atWork": {
+    "askMessage": "Hi, I’d like to understand which AI tools, if any, are approved for use here and what I’m allowed to use them for. I’m thinking about general tasks like drafting a checklist for new nurses, outlining patient education in plain words, and practicing how to explain things. I would not enter patient information or anything confidential. Could you let me know the policy and who I should ask if I have questions? Thank you.",
+    "aiTalk": "I wanted to let you know that I’ve started using AI on my own time to practice writing and organizing my thoughts. I use it for things like first drafts of checklists for new nurses and plain language outlines for patient education, with no patient information involved. I read and check everything myself before using any of it. I’m happy to share what I learn and to follow whatever guidelines we have here."
+   }
+  },
+  "planSeconds": 31
+ },
+ "salon": {
+  "rawIntake": {
+   "role_summary": "You own a small hair salon with three stylists, and you still cut hair five days a week while handling bookings, social media, ordering and payroll.",
+   "tasks": [
+    {
+     "quote": "Answering DMs and booking questions",
+     "name": "Answering DMs and booking questions",
+     "ai": true,
+     "private": false
+    },
+    {
+     "quote": "posting on Instagram",
+     "name": "Instagram posts",
+     "ai": true,
+     "private": false
+    },
+    {
+     "quote": "ordering product",
+     "name": "Ordering product",
+     "ai": false,
+     "private": false
+    },
+    {
+     "quote": "doing payroll and the schedule",
+     "name": "Payroll and the schedule",
+     "ai": false,
+     "private": true
+    }
+   ],
+   "first_win": {
+    "task": "Instagram posts",
+    "intro": "You said you spend time on posting on Instagram. Here is one caption for your salon.",
+    "draft": "Fresh color, fresh start. This week we are booking balayage and trims for [month]. Tell us your dream look in the comments or send us a DM, and we will help you find the right cut for your face and routine. Spots fill fast, so reserve yours today at [salon name] or link in bio. Book your next chair with us!"
+   },
+   "ideas": [
+    "Auto replies for common DM questions",
+    "A simple FAQ for booking and cancellations",
+    "Weekly content calendar for Instagram",
+    "Stories ideas for behind the chair moments",
+    "Reminder texts for upcoming appointments",
+    "Product description ideas for your retail shelf"
+   ],
+   "needs_follow_up": false,
+   "follow_up_question": null
+  },
+  "intakeSeconds": 3.312,
+  "intake": {
+   "role_summary": "You own a small hair salon with three stylists, and you still cut hair five days a week while handling bookings, social media, ordering and payroll.",
+   "tasks": [
+    {
+     "name": "Answering DMs and booking questions",
+     "ai": true,
+     "private": false
+    },
+    {
+     "name": "Instagram posts",
+     "ai": true,
+     "private": false
+    },
+    {
+     "name": "Ordering product",
+     "ai": false,
+     "private": false
+    },
+    {
+     "name": "Payroll and the schedule",
+     "ai": false,
+     "private": true
+    }
+   ],
+   "first_win": {
+    "task": "Instagram posts",
+    "intro": "You said you spend time on posting on Instagram. Here is one caption for your salon.",
+    "draft": "Fresh color, fresh start. This week we are booking balayage and trims for [month]. Tell us your dream look in the comments or send us a DM, and we will help you find the right cut for your face and routine. Spots fill fast, so reserve yours today at [salon name] or link in bio. Book your next chair with us!"
+   },
+   "ideas": [
+    "Auto replies for common DM questions",
+    "A simple FAQ for booking and cancellations",
+    "Weekly content calendar for Instagram",
+    "Stories ideas for behind the chair moments",
+    "Reminder texts for upcoming appointments",
+    "Product description ideas for your retail shelf"
+   ],
+   "needs_follow_up": false,
+   "follow_up_question": null
+  },
+  "rawPlan": {
+   "tool_why": "Claude is a good place to start because the free version is enough to begin, and it works in a browser or a phone app. You type to it like a text message, so you can ask for a post between clients.",
+   "first_win": {
+    "prompt": "I own a small hair salon with three stylists, and I still cut hair five days a week. Write one Instagram caption for my salon about [what you want to promote, like balayage or openings this week]. Make it warm and friendly, like I'm talking to a regular. Keep it under 60 words, with a clear line at the end telling people to DM me or use the link in my bio to book. Add 5 hashtags at the bottom. Give me two versions so I can pick.",
+    "example": "Version 1: Ready for a fresh look? We have a few openings this week for balayage and trims. Tell us what you are dreaming of and we will help you find the right fit for your hair and your routine. DM us or tap the link in our bio to grab your spot. #balayage #haircolor #salonlife #freshcut #booknow",
+    "fixes": [
+     "Shorter.",
+     "Warmer, like I'm texting a regular.",
+     "Make the last line a stronger invite to book."
+    ]
+   },
+   "ideas": [
+    {
+     "title": "Auto replies for common DM questions",
+     "why": "Gives you ready answers for the questions you get every day.",
+     "prompt": "I own a small hair salon with three stylists. Write short, friendly replies I can save for the DM questions I get most: prices, availability, how to book, and whether we take walk ins. Use placeholders like [price range] and [booking link] for details I will fill in. Keep each reply under 40 words, warm and professional, like I'm texting a regular client.",
+     "private": false,
+     "life": false
+    },
+    {
+     "title": "A simple FAQ for booking and cancellations",
+     "why": "Puts your policies in one clear place you can share.",
+     "prompt": "I own a small hair salon. Help me write a simple FAQ for clients about booking, rescheduling, late arrivals, and cancellations. My rules are: [your cancellation window], [deposit rule if any], and [late policy]. Write it in friendly, clear language, with short answers of two sentences or less, and keep it kind but firm.",
+     "private": false,
+     "life": false
+    },
+    {
+     "title": "Weekly content calendar for Instagram",
+     "why": "Takes the guesswork out of what to post each week.",
+     "prompt": "I own a small hair salon with three stylists, and I post on Instagram. Make a one week content calendar with one post idea per day, mixing before and after photos, a stylist spotlight, a hair care tip, and a booking reminder. This week I want to feature [service or product]. For each day, give a short idea and a photo suggestion. Keep the tone friendly and relaxed.",
+     "private": false,
+     "life": false
+    },
+    {
+     "title": "Answering DMs and booking questions",
+     "why": "Helps you reply quickly when a message needs more than a template.",
+     "prompt": "I own a small hair salon and I answer client DMs between appointments. A client wrote: [paste the message, leave out their name and phone number]. Write a short, warm reply that answers it and invites them to book. Our opening hours are [hours]. Keep it under 50 words and friendly, like texting a regular.",
+     "private": true,
+     "life": false
+    },
+    {
+     "title": "Polite reply to a late cancellation",
+     "why": "Helps you stay kind while holding your policy.",
+     "prompt": "I own a small hair salon. A client canceled [how late] before their appointment, and my policy is [your policy]. Write a short, polite message reminding them of the policy and offering to rebook. Leave out their name. Keep it under 60 words, kind but clear, with no guilt trip.",
+     "private": true,
+     "life": false
+    },
+    {
+     "title": "Product reorder checklist",
+     "why": "Keeps your ordering organized so nothing runs out.",
+     "prompt": "I own a small hair salon with three stylists. Help me build a simple reorder checklist for salon supplies, grouped into color, styling products, retail products, and towels and disposables. Leave room for me to add [current stock] and [reorder level] beside each item. Make it a clean table I can copy into a note or spreadsheet.",
+     "private": false,
+     "life": false
+    },
+    {
+     "title": "Message to my stylists about the schedule",
+     "why": "Makes schedule changes clear and friendly for your team.",
+     "prompt": "I own a small hair salon with three stylists. Write a short team message about next week's schedule change: [what is changing, like a new day off or a swapped shift]. Ask them to reply by [day] if there is a problem. Keep it friendly, clear, and under 80 words. Do not include any pay details.",
+     "private": true,
+     "life": false
+    },
+    {
+     "title": "Stylist spotlight posts for Instagram",
+     "why": "Lets clients get to know your team before they book.",
+     "prompt": "I own a small hair salon with three stylists. Write a short Instagram caption introducing one of my stylists. Here is what I want to highlight: [their specialty, like color or short cuts] and [one fun fact]. Keep it warm, under 60 words, and end with a line inviting people to book with them.",
+     "private": false,
+     "life": false
+    },
+    {
+     "title": "A weeknight dinner plan for long days on my feet",
+     "why": "Gives you easy meals for days when you are tired after cutting hair.",
+     "prompt": "I stand and cut hair most of the day and get home tired. Make a plan for five weeknight dinners that take little effort and use simple ingredients. I like [foods you like] and avoid [foods you avoid]. Give me a short grocery list at the end, grouped by store section.",
+     "private": false,
+     "life": true
+    },
+    {
+     "title": "A plan for a free weekend",
+     "why": "Helps you actually rest when a weekend opens up.",
+     "prompt": "I work on my feet most of the week and have a free weekend coming up on [dates]. I live in [city or area] and want to feel rested, with a few fun things to do. My budget is [amount]. Suggest a simple plan for Saturday and Sunday with one relaxing option and one outing each day.",
+     "private": false,
+     "life": true
+    }
+   ],
+   "safe_use": [
+    "Read and check everything before it goes out, including every Instagram caption and client message.",
+    "AI can be confidently wrong about facts, dates and numbers, so double check prices, hours and policies.",
+    "Never type in client names, phone numbers, emails, or appointment details.",
+    "Never type in your staff's pay, payroll details, or personal information.",
+    "Keep bank details, login passwords and supplier account numbers out of the chat.",
+    "Only post photos of clients you have permission to share, and don't upload client photos to the chat."
+   ],
+   "work_profile": "I own a small hair salon with three stylists, and I still cut hair five days a week. I write to clients through Instagram DMs and booking messages, to my stylists about the schedule, and to suppliers about orders. I also write social media posts for the salon. I like drafts that are warm, friendly and relaxed, like I'm talking to a regular client. Keep them short, with clear next steps like how to book. Use plain words, no hype and no corporate language. When I ask for a post, give me two versions to choose from. If you need details like prices or hours, leave a bracket for me to fill in.",
+   "at_work": null
+  },
+  "plan": {
+   "version": 2,
+   "role": "You own a small hair salon with three stylists, and you still cut hair five days a week while handling bookings, social media, ordering and payroll.",
+   "tool": "claude",
+   "toolWhy": "Claude is a good place to start because the free version is enough to begin, and it works in a browser or a phone app. You type to it like a text message, so you can ask for a post between clients.",
+   "worksFor": "self",
+   "policy": null,
+   "firstWin": {
+    "task": "Instagram posts",
+    "prompt": "I own a small hair salon with three stylists, and I still cut hair five days a week. Write one Instagram caption for my salon about [what you want to promote, like balayage or openings this week]. Make it warm and friendly, like I’m talking to a regular. Keep it under 60 words, with a clear line at the end telling people to DM me or use the link in my bio to book. Add 5 hashtags at the bottom. Give me two versions so I can pick.",
+    "example": "Version 1: Ready for a fresh look? We have a few openings this week for balayage and trims. Tell us what you are dreaming of and we will help you find the right fit for your hair and your routine. DM us or tap the link in our bio to grab your spot. #balayage #haircolor #salonlife #freshcut #booknow",
+    "fixes": [
+     "Shorter.",
+     "Warmer, like I’m texting a regular.",
+     "Make the last line a stronger invite to book."
+    ]
+   },
+   "ideas": [
+    {
+     "title": "Auto replies for common DM questions",
+     "why": "Gives you ready answers for the questions you get every day.",
+     "prompt": "I own a small hair salon with three stylists. Write short, friendly replies I can save for the DM questions I get most: prices, availability, how to book, and whether we take walk ins. Use placeholders like [price range] and [booking link] for details I will fill in. Keep each reply under 40 words, warm and professional, like I’m texting a regular client.",
+     "life": false,
+     "mark": "safe_today"
+    },
+    {
+     "title": "A simple FAQ for booking and cancellations",
+     "why": "Puts your policies in one clear place you can share.",
+     "prompt": "I own a small hair salon. Help me write a simple FAQ for clients about booking, rescheduling, late arrivals, and cancellations. My rules are: [your cancellation window], [deposit rule if any], and [late policy]. Write it in friendly, clear language, with short answers of two sentences or less, and keep it kind but firm.",
+     "life": false,
+     "mark": "safe_today"
+    },
+    {
+     "title": "Weekly content calendar for Instagram",
+     "why": "Takes the guesswork out of what to post each week.",
+     "prompt": "I own a small hair salon with three stylists, and I post on Instagram. Make a one week content calendar with one post idea per day, mixing before and after photos, a stylist spotlight, a hair care tip, and a booking reminder. This week I want to feature [service or product]. For each day, give a short idea and a photo suggestion. Keep the tone friendly and relaxed.",
+     "life": false,
+     "mark": "safe_today"
+    },
+    {
+     "title": "Answering DMs and booking questions",
+     "why": "Helps you reply quickly when a message needs more than a template.",
+     "prompt": "I own a small hair salon and I answer client DMs between appointments. A client wrote: [paste the message, leave out their name and phone number]. Write a short, warm reply that answers it and invites them to book. Our opening hours are [hours]. Keep it under 50 words and friendly, like texting a regular.",
+     "life": false,
+     "mark": null
+    },
+    {
+     "title": "Polite reply to a late cancellation",
+     "why": "Helps you stay kind while holding your policy.",
+     "prompt": "I own a small hair salon. A client canceled [how late] before their appointment, and my policy is [your policy]. Write a short, polite message reminding them of the policy and offering to rebook. Leave out their name. Keep it under 60 words, kind but clear, with no guilt trip.",
+     "life": false,
+     "mark": null
+    },
+    {
+     "title": "Product reorder checklist",
+     "why": "Keeps your ordering organized so nothing runs out.",
+     "prompt": "I own a small hair salon with three stylists. Help me build a simple reorder checklist for salon supplies, grouped into color, styling products, retail products, and towels and disposables. Leave room for me to add [current stock] and [reorder level] beside each item. Make it a clean table I can copy into a note or spreadsheet.",
+     "life": false,
+     "mark": "safe_today"
+    },
+    {
+     "title": "Message to my stylists about the schedule",
+     "why": "Makes schedule changes clear and friendly for your team.",
+     "prompt": "I own a small hair salon with three stylists. Write a short team message about next week’s schedule change: [what is changing, like a new day off or a swapped shift]. Ask them to reply by [day] if there is a problem. Keep it friendly, clear, and under 80 words. Do not include any pay details.",
+     "life": false,
+     "mark": null
+    },
+    {
+     "title": "Stylist spotlight posts for Instagram",
+     "why": "Lets clients get to know your team before they book.",
+     "prompt": "I own a small hair salon with three stylists. Write a short Instagram caption introducing one of my stylists. Here is what I want to highlight: [their specialty, like color or short cuts] and [one fun fact]. Keep it warm, under 60 words, and end with a line inviting people to book with them.",
+     "life": false,
+     "mark": "safe_today"
+    },
+    {
+     "title": "A weeknight dinner plan for long days on my feet",
+     "why": "Gives you easy meals for days when you are tired after cutting hair.",
+     "prompt": "I stand and cut hair most of the day and get home tired. Make a plan for five weeknight dinners that take little effort and use simple ingredients. I like [foods you like] and avoid [foods you avoid]. Give me a short grocery list at the end, grouped by store section.",
+     "life": true,
+     "mark": "safe_today"
+    },
+    {
+     "title": "A plan for a free weekend",
+     "why": "Helps you actually rest when a weekend opens up.",
+     "prompt": "I work on my feet most of the week and have a free weekend coming up on [dates]. I live in [city or area] and want to feel rested, with a few fun things to do. My budget is [amount]. Suggest a simple plan for Saturday and Sunday with one relaxing option and one outing each day.",
+     "life": true,
+     "mark": "safe_today"
+    }
+   ],
+   "safeUse": [
+    "Read and check everything before it goes out, including every Instagram caption and client message.",
+    "AI can be confidently wrong about facts, dates and numbers, so double check prices, hours and policies.",
+    "Never type in client names, phone numbers, emails, or appointment details.",
+    "Never type in your staff’s pay, payroll details, or personal information.",
+    "Keep bank details, login passwords and supplier account numbers out of the chat.",
+    "Only post photos of clients you have permission to share, and don’t upload client photos to the chat."
+   ],
+   "workProfile": "I own a small hair salon with three stylists, and I still cut hair five days a week. I write to clients through Instagram DMs and booking messages, to my stylists about the schedule, and to suppliers about orders. I also write social media posts for the salon. I like drafts that are warm, friendly and relaxed, like I’m talking to a regular client. Keep them short, with clear next steps like how to book. Use plain words, no hype and no corporate language. When I ask for a post, give me two versions to choose from. If you need details like prices or hours, leave a bracket for me to fill in.",
+   "atWork": null
+  },
+  "planSeconds": 19
+ },
+ "realtor": {
+  "rawIntake": {
+   "role_summary": "You're a residential real estate agent working for yourself under a brokerage, handling listings, leads, client and lender emails, showings and social media.",
+   "tasks": [
+    {
+     "quote": "Writing listing descriptions",
+     "name": "Listing descriptions",
+     "ai": true,
+     "private": false
+    },
+    {
+     "quote": "following up with leads",
+     "name": "Lead follow ups",
+     "ai": true,
+     "private": true
+    },
+    {
+     "quote": "emails back and forth with clients and lenders",
+     "name": "Client and lender emails",
+     "ai": true,
+     "private": true
+    },
+    {
+     "quote": "scheduling showings",
+     "name": "Scheduling showings",
+     "ai": false,
+     "private": true
+    },
+    {
+     "quote": "social media posts",
+     "name": "Social media posts",
+     "ai": true,
+     "private": false
+    }
+   ],
+   "first_win": {
+    "task": "Listing descriptions",
+    "intro": "You said writing listing descriptions takes your time. Here is one you can adapt for a home.",
+    "draft": "Welcome to this bright three bedroom home on a quiet street in [neighborhood]. Sunlight fills the open kitchen, which flows into a comfortable living area perfect for everyday life or hosting friends. The primary bedroom offers a peaceful retreat, and the backyard is ready for summer evenings. Close to parks, schools and shops, this home combines easy living with a welcoming feel. Schedule your showing today with [your name] at [phone number]."
+   },
+   "ideas": [
+    "Facebook posts for new listings",
+    "Open house announcement templates",
+    "Thank you notes after showings",
+    "Market update newsletter drafts",
+    "A script for lead follow up calls",
+    "Checklist for prepping a home before a showing"
+   ],
+   "needs_follow_up": false,
+   "follow_up_question": null
+  },
+  "intakeSeconds": 3.967,
+  "intake": {
+   "role_summary": "You’re a residential real estate agent working for yourself under a brokerage, handling listings, leads, client and lender emails, showings and social media.",
+   "tasks": [
+    {
+     "name": "Listing descriptions",
+     "ai": true,
+     "private": false
+    },
+    {
+     "name": "Lead follow ups",
+     "ai": true,
+     "private": true
+    },
+    {
+     "name": "Client and lender emails",
+     "ai": true,
+     "private": true
+    },
+    {
+     "name": "Scheduling showings",
+     "ai": false,
+     "private": true
+    },
+    {
+     "name": "Social media posts",
+     "ai": true,
+     "private": false
+    }
+   ],
+   "first_win": {
+    "task": "Listing descriptions",
+    "intro": "You said writing listing descriptions takes your time. Here is one you can adapt for a home.",
+    "draft": "Welcome to this bright three bedroom home on a quiet street in [neighborhood]. Sunlight fills the open kitchen, which flows into a comfortable living area perfect for everyday life or hosting friends. The primary bedroom offers a peaceful retreat, and the backyard is ready for summer evenings. Close to parks, schools and shops, this home combines easy living with a welcoming feel. Schedule your showing today with [your name] at [phone number]."
+   },
+   "ideas": [
+    "Facebook posts for new listings",
+    "Open house announcement templates",
+    "Thank you notes after showings",
+    "Market update newsletter drafts",
+    "A script for lead follow up calls",
+    "Checklist for prepping a home before a showing"
+   ],
+   "needs_follow_up": false,
+   "follow_up_question": null
+  },
+  "rawPlan": {
+   "tool_why": "ChatGPT is a good place to start because the free version is enough to begin, and it works in a browser or a phone app. You type to it like a text message, so you can try it between showings.",
+   "first_win": {
+    "prompt": "I'm a residential real estate agent. Write a listing description for a [number] bedroom, [number] bathroom home at [neighborhood]. Key features: [three or four things, like updated kitchen, big backyard, near a park]. Write about 120 words in a warm, welcoming tone that sounds like a real person, not a brochure. One paragraph, no all caps, no exclamation points. Only mention features I listed. End with an invitation to schedule a showing with [your name] at [phone number].",
+    "example": "Welcome to this sunny three bedroom, two bath home on a quiet street in [neighborhood]. The updated kitchen opens to a relaxed living area that works for weeknight dinners or weekend company. Out back, the big yard is ready for summer evenings. A short walk takes you to the park. Come see how easy it is to feel at home here. Schedule your showing with [your name] at [phone number].",
+    "fixes": [
+     "Shorter.",
+     "Warmer, like I'm talking to a neighbor.",
+     "Less salesy, more specific about the yard."
+    ]
+   },
+   "ideas": [
+    {
+     "title": "Facebook posts for new listings",
+     "why": "Gives you a ready first draft for each new listing.",
+     "prompt": "I'm a residential real estate agent. Write a Facebook post announcing a new listing: [number] bedroom home in [neighborhood], listed at [price]. Highlights: [three features]. Keep it under 80 words, friendly and upbeat, with a short call to message me for details. Add three simple hashtags. Give me two versions so I can pick.",
+     "private": false,
+     "life": false
+    },
+    {
+     "title": "Open house announcement templates",
+     "why": "One reusable announcement you only have to fill in.",
+     "prompt": "I'm a residential real estate agent. Write a short open house announcement I can reuse. Include blanks for [address], [date], [time] and [one standout feature]. Make three versions: one for a text message, one for an email, and one for a social media caption. Friendly, welcoming tone, no pressure, each under 70 words.",
+     "private": false,
+     "life": false
+    },
+    {
+     "title": "Thank you notes after showings",
+     "why": "Makes a personal follow up easier to start.",
+     "prompt": "I'm a residential real estate agent. Write a short thank you note I can send after a showing. Blanks: [first name], [one thing they liked about the home] and [next step]. Warm and genuine, not pushy, 50 to 70 words. Give me a text version and an email version. Leave out any private details about their finances.",
+     "private": true,
+     "life": false
+    },
+    {
+     "title": "Lead follow ups",
+     "why": "Helps you keep in touch with leads without starting from a blank page.",
+     "prompt": "I'm a residential real estate agent. Write three follow up messages for a lead who asked about homes in [neighborhood] [number] days ago and hasn't replied. Make each one a little different: a friendly check in, one with a helpful local tip, and one offering a quick call. Each under 60 words, warm and low pressure. Leave out names and personal details.",
+     "private": true,
+     "life": false
+    },
+    {
+     "title": "Client and lender emails",
+     "why": "Gets clear, polite emails started faster.",
+     "prompt": "I'm a residential real estate agent. Draft a clear, polite email to a lender asking for an update on [a general status, like a pending loan approval] before [date]. Keep it under 100 words, professional but friendly, with a clear ask and a thank you. Leave out names, loan numbers and financial details. I'll add those myself and check everything.",
+     "private": true,
+     "life": false
+    },
+    {
+     "title": "Social media posts",
+     "why": "Helps you keep a steady stream of post ideas.",
+     "prompt": "I'm a residential real estate agent in [area]. Give me ten social media post ideas for the next month that show my local knowledge and help buyers and sellers. Mix tips, neighborhood spots and simple questions. For three of them, write a full caption of under 60 words in a friendly, down to earth tone.",
+     "private": false,
+     "life": false
+    },
+    {
+     "title": "Showing schedule confirmation messages",
+     "why": "Saves rewriting the same confirmation each time.",
+     "prompt": "I'm a residential real estate agent. Write a short text message confirming a showing on [day and time] at [address]. Include a friendly line about where to meet and a way to reach me if plans change. Under 50 words, warm and clear. Also write a version for rescheduling politely.",
+     "private": false,
+     "life": false
+    },
+    {
+     "title": "Neighborhood guide for buyers",
+     "why": "Turns what you know into something you can share.",
+     "prompt": "I'm a residential real estate agent. Write a one page neighborhood overview for [neighborhood] for first time buyers. Use sections for parks, food, schools and getting around, with blanks like [local park name] for me to fill in. Friendly tone. Don't state facts you can't know. I'll check and add real details myself.",
+     "private": false,
+     "life": false
+    },
+    {
+     "title": "Plan meals around a busy showing week",
+     "why": "Makes evenings easier when your hours change.",
+     "prompt": "I work as a real estate agent and my evenings change a lot with showings. Plan five simple dinners I can make in about the time it takes to answer a few emails. Include a short grocery list. I like [food preferences] and want to avoid [foods to skip]. Keep recipes short and easy to repeat.",
+     "private": false,
+     "life": true
+    },
+    {
+     "title": "Plan a free weekend",
+     "why": "Gives you a ready plan for your rare days off.",
+     "prompt": "I'm a self employed real estate agent and I finally have a free weekend in [city or area]. Plan a relaxing Saturday and Sunday with a mix of rest and one fun outing. Budget: about [amount]. I like [interests]. Keep it simple, with a short list of options I can choose from, and a rainy day backup.",
+     "private": false,
+     "life": true
+    }
+   ],
+   "safe_use": [
+    "Never type in client names, addresses, phone numbers or emails.",
+    "Leave out lender details, loan numbers, income and credit information.",
+    "Keep offers, contract terms and signed documents out of the chat.",
+    "Read and check everything before it goes out.",
+    "AI can be confidently wrong about facts, dates and numbers, so confirm square footage, taxes and local rules yourself.",
+    "For fair housing wording or legal questions, ask for a draft and check it against your brokerage's guidance."
+   ],
+   "work_profile": "I'm a residential real estate agent. I work for myself under a brokerage. I write listing descriptions, social media posts, and emails and texts to buyers, sellers, leads and lenders. My readers are everyday people, many of them buying or selling a home for the first time. I like drafts that sound warm, friendly and down to earth, never pushy or full of hype. Keep emails short, usually under 120 words, with a clear next step. Use plain words, and leave blanks in square brackets for details I need to add.",
+   "at_work": {
+    "ask_message": "Hi [manager or broker], I've started using AI tools to help with first drafts and I want to make sure I'm following brokerage guidance. Could you tell me which AI tools are approved, if any? I'm thinking of using them for listing descriptions, social media posts, and drafting follow up emails. I would not enter client names or personal details. Please let me know what is allowed and anything I should avoid.",
+    "ai_talk": "I've started using AI to help me write first drafts of things like listing descriptions, social posts and follow up emails. It gets me past the blank page, and then I edit everything in my own voice. I read and check every detail before anything goes out, and I keep client information out of it. I'm happy to show you how I use it, and I'll follow any guidance the brokerage has."
+   }
+  },
+  "plan": {
+   "version": 2,
+   "role": "You’re a residential real estate agent working for yourself under a brokerage, handling listings, leads, client and lender emails, showings and social media.",
+   "tool": "chatgpt",
+   "toolWhy": "ChatGPT is a good place to start because the free version is enough to begin, and it works in a browser or a phone app. You type to it like a text message, so you can try it between showings.",
+   "worksFor": "both",
+   "policy": "unclear",
+   "firstWin": {
+    "task": "Listing descriptions",
+    "prompt": "I’m a residential real estate agent. Write a listing description for a [number] bedroom, [number] bathroom home at [neighborhood]. Key features: [three or four things, like updated kitchen, big backyard, near a park]. Write about 120 words in a warm, welcoming tone that sounds like a real person, not a brochure. One paragraph, no all caps, no exclamation points. Only mention features I listed. End with an invitation to schedule a showing with [your name] at [phone number].",
+    "example": "Welcome to this sunny three bedroom, two bath home on a quiet street in [neighborhood]. The updated kitchen opens to a relaxed living area that works for weeknight dinners or weekend company. Out back, the big yard is ready for summer evenings. A short walk takes you to the park. Come see how easy it is to feel at home here. Schedule your showing with [your name] at [phone number].",
+    "fixes": [
+     "Shorter.",
+     "Warmer, like I’m talking to a neighbor.",
+     "Less salesy, more specific about the yard."
+    ]
+   },
+   "ideas": [
+    {
+     "title": "Facebook posts for new listings",
+     "why": "Gives you a ready first draft for each new listing.",
+     "prompt": "I’m a residential real estate agent. Write a Facebook post announcing a new listing: [number] bedroom home in [neighborhood], listed at [price]. Highlights: [three features]. Keep it under 80 words, friendly and upbeat, with a short call to message me for details. Add three simple hashtags. Give me two versions so I can pick.",
+     "life": false,
+     "mark": "safe_today"
+    },
+    {
+     "title": "Open house announcement templates",
+     "why": "One reusable announcement you only have to fill in.",
+     "prompt": "I’m a residential real estate agent. Write a short open house announcement I can reuse. Include blanks for [address], [date], [time] and [one standout feature]. Make three versions: one for a text message, one for an email, and one for a social media caption. Friendly, welcoming tone, no pressure, each under 70 words.",
+     "life": false,
+     "mark": "safe_today"
+    },
+    {
+     "title": "Thank you notes after showings",
+     "why": "Makes a personal follow up easier to start.",
+     "prompt": "I’m a residential real estate agent. Write a short thank you note I can send after a showing. Blanks: [first name], [one thing they liked about the home] and [next step]. Warm and genuine, not pushy, 50 to 70 words. Give me a text version and an email version. Leave out any private details about their finances.",
+     "life": false,
+     "mark": "check_first"
+    },
+    {
+     "title": "Lead follow ups",
+     "why": "Helps you keep in touch with leads without starting from a blank page.",
+     "prompt": "I’m a residential real estate agent. Write three follow up messages for a lead who asked about homes in [neighborhood] [number] days ago and hasn’t replied. Make each one a little different: a friendly check in, one with a helpful local tip, and one offering a quick call. Each under 60 words, warm and low pressure. Leave out names and personal details.",
+     "life": false,
+     "mark": "check_first"
+    },
+    {
+     "title": "Client and lender emails",
+     "why": "Gets clear, polite emails started faster.",
+     "prompt": "I’m a residential real estate agent. Draft a clear, polite email to a lender asking for an update on [a general status, like a pending loan approval] before [date]. Keep it under 100 words, professional but friendly, with a clear ask and a thank you. Leave out names, loan numbers and financial details. I’ll add those myself and check everything.",
+     "life": false,
+     "mark": "check_first"
+    },
+    {
+     "title": "Social media posts",
+     "why": "Helps you keep a steady stream of post ideas.",
+     "prompt": "I’m a residential real estate agent in [area]. Give me ten social media post ideas for the next month that show my local knowledge and help buyers and sellers. Mix tips, neighborhood spots and simple questions. For three of them, write a full caption of under 60 words in a friendly, down to earth tone.",
+     "life": false,
+     "mark": "safe_today"
+    },
+    {
+     "title": "Showing schedule confirmation messages",
+     "why": "Saves rewriting the same confirmation each time.",
+     "prompt": "I’m a residential real estate agent. Write a short text message confirming a showing on [day and time] at [address]. Include a friendly line about where to meet and a way to reach me if plans change. Under 50 words, warm and clear. Also write a version for rescheduling politely.",
+     "life": false,
+     "mark": "safe_today"
+    },
+    {
+     "title": "Neighborhood guide for buyers",
+     "why": "Turns what you know into something you can share.",
+     "prompt": "I’m a residential real estate agent. Write a one page neighborhood overview for [neighborhood] for first time buyers. Use sections for parks, food, schools and getting around, with blanks like [local park name] for me to fill in. Friendly tone. Don’t state facts you can’t know. I’ll check and add real details myself.",
+     "life": false,
+     "mark": "safe_today"
+    },
+    {
+     "title": "Plan meals around a busy showing week",
+     "why": "Makes evenings easier when your hours change.",
+     "prompt": "I work as a real estate agent and my evenings change a lot with showings. Plan five simple dinners I can make in about the time it takes to answer a few emails. Include a short grocery list. I like [food preferences] and want to avoid [foods to skip]. Keep recipes short and easy to repeat.",
+     "life": true,
+     "mark": "safe_today"
+    },
+    {
+     "title": "Plan a free weekend",
+     "why": "Gives you a ready plan for your rare days off.",
+     "prompt": "I’m a self employed real estate agent and I finally have a free weekend in [city or area]. Plan a relaxing Saturday and Sunday with a mix of rest and one fun outing. Budget: about [amount]. I like [interests]. Keep it simple, with a short list of options I can choose from, and a rainy day backup.",
+     "life": true,
+     "mark": "safe_today"
+    }
+   ],
+   "safeUse": [
+    "Never type in client names, addresses, phone numbers or emails.",
+    "Leave out lender details, loan numbers, income and credit information.",
+    "Keep offers, contract terms and signed documents out of the chat.",
+    "Read and check everything before it goes out.",
+    "AI can be confidently wrong about facts, dates and numbers, so confirm square footage, taxes and local rules yourself.",
+    "For fair housing wording or legal questions, ask for a draft and check it against your brokerage’s guidance."
+   ],
+   "workProfile": "I’m a residential real estate agent. I work for myself under a brokerage. I write listing descriptions, social media posts, and emails and texts to buyers, sellers, leads and lenders. My readers are everyday people, many of them buying or selling a home for the first time. I like drafts that sound warm, friendly and down to earth, never pushy or full of hype. Keep emails short, usually under 120 words, with a clear next step. Use plain words, and leave blanks in square brackets for details I need to add.",
+   "atWork": {
+    "askMessage": "Hi [manager or broker], I’ve started using AI tools to help with first drafts and I want to make sure I’m following brokerage guidance. Could you tell me which AI tools are approved, if any? I’m thinking of using them for listing descriptions, social media posts, and drafting follow up emails. I would not enter client names or personal details. Please let me know what is allowed and anything I should avoid.",
+    "aiTalk": "I’ve started using AI to help me write first drafts of things like listing descriptions, social posts and follow up emails. It gets me past the blank page, and then I edit everything in my own voice. I read and check every detail before anything goes out, and I keep client information out of it. I’m happy to show you how I use it, and I’ll follow any guidance the brokerage has."
+   }
+  },
+  "planSeconds": 21
+ },
+ "dental": {
+  "rawIntake": {
+   "role_summary": "You're the front desk receptionist at a dental office, handling phones, scheduling, insurance verification, reminder calls and texts, and billing questions.",
+   "tasks": [
+    {
+     "quote": "reminder calls and texts",
+     "name": "Appointment reminders",
+     "ai": true,
+     "private": false
+    },
+    {
+     "quote": "Phones, scheduling",
+     "name": "Scheduling and phone calls",
+     "ai": false,
+     "private": false
+    },
+    {
+     "quote": "insurance verification",
+     "name": "Insurance verification",
+     "ai": false,
+     "private": true
+    },
+    {
+     "quote": "dealing with billing questions",
+     "name": "Billing questions",
+     "ai": true,
+     "private": true
+    }
+   ],
+   "first_win": {
+    "task": "Appointment reminders",
+    "intro": "You said you spend time on reminder calls and texts. Here is a text you can adapt for any patient.",
+    "draft": "Hi [first name], this is a friendly reminder from [office name] about your appointment on [day] at [time]. If you need to reschedule, please call us at [phone number] at least 24 hours ahead so we can offer the time to someone else. We look forward to seeing you. Reply to this text with any questions."
+   },
+   "ideas": [
+    "A script for confirming appointments by phone",
+    "Friendly follow up texts for missed visits",
+    "Template for new patient welcome emails",
+    "Checklist for a smooth check in routine",
+    "Plain language answers to common billing questions",
+    "Office newsletter ideas for patients"
+   ],
+   "needs_follow_up": false,
+   "follow_up_question": null
+  },
+  "intakeSeconds": 3.635,
+  "intake": {
+   "role_summary": "You’re the front desk receptionist at a dental office, handling phones, scheduling, insurance verification, reminder calls and texts, and billing questions.",
+   "tasks": [
+    {
+     "name": "Appointment reminders",
+     "ai": true,
+     "private": false
+    },
+    {
+     "name": "Scheduling and phone calls",
+     "ai": false,
+     "private": false
+    },
+    {
+     "name": "Insurance verification",
+     "ai": false,
+     "private": true
+    },
+    {
+     "name": "Billing questions",
+     "ai": true,
+     "private": true
+    }
+   ],
+   "first_win": {
+    "task": "Appointment reminders",
+    "intro": "You said you spend time on reminder calls and texts. Here is a text you can adapt for any patient.",
+    "draft": "Hi [first name], this is a friendly reminder from [office name] about your appointment on [day] at [time]. If you need to reschedule, please call us at [phone number] at least 24 hours ahead so we can offer the time to someone else. We look forward to seeing you. Reply to this text with any questions."
+   },
+   "ideas": [
+    "A script for confirming appointments by phone",
+    "Friendly follow up texts for missed visits",
+    "Template for new patient welcome emails",
+    "Checklist for a smooth check in routine",
+    "Plain language answers to common billing questions",
+    "Office newsletter ideas for patients"
+   ],
+   "needs_follow_up": false,
+   "follow_up_question": null
+  },
+  "rawPlan": {
+   "tool_why": "Claude is a good place to start because the free version is enough to begin, and it works in a browser or a phone app. You type to it like a text message, so there is nothing to set up or learn first.",
+   "first_win": {
+    "prompt": "I'm a front desk receptionist at a dental office. Write a short appointment reminder text I can send to patients. It should say the appointment is on [day] at [time], ask them to call [phone number] if they need to reschedule, and mention we need 24 hours notice so we can offer the time to someone else. Keep it under 50 words, warm and polite, in plain language. Start with Hi [first name] and sign off with the office name [office name]. Don't include any medical details.",
+    "example": "Hi [first name], this is a reminder from [office name] about your visit on [day] at [time]. If you need to change it, please call us at [phone number] at least 24 hours ahead so we can offer the spot to someone else. We look forward to seeing you!",
+    "fixes": [
+     "Shorter.",
+     "Warmer, like I'm texting a regular.",
+     "Make it sound a bit more formal."
+    ]
+   },
+   "ideas": [
+    {
+     "title": "A script for confirming appointments by phone",
+     "why": "Gives you calm, clear words for every confirmation call.",
+     "prompt": "I'm a front desk receptionist at a dental office. Write a short phone script for confirming an appointment the day before. It should greet the patient, confirm the day and time [day and time], ask if they can still make it, and offer to reschedule if not. Add a version for leaving a voicemail that does not mention any treatment details. Keep it friendly and under 120 words each.",
+     "private": false,
+     "life": false
+    },
+    {
+     "title": "Friendly follow up texts for missed visits",
+     "why": "Helps you reach out kindly without sounding annoyed.",
+     "prompt": "I'm a front desk receptionist at a dental office. Write three short follow up texts for a patient who missed their appointment. One should be gentle, one more direct, and one for a second attempt. Each should offer to rebook by calling [phone number], leave out any treatment details, and stay under 45 words. Tone: warm, not scolding.",
+     "private": false,
+     "life": false
+    },
+    {
+     "title": "Template for new patient welcome emails",
+     "why": "Gives every new patient the same warm first impression.",
+     "prompt": "I'm a front desk receptionist at a dental office. Write a welcome email for a new patient before their first visit. Include where to park or find us [directions], what to bring such as ID and insurance card, and that they can arrive a little early for paperwork. Warm and professional, under 150 words, with a place for [first name] and [office name]. No medical advice.",
+     "private": false,
+     "life": false
+    },
+    {
+     "title": "Billing questions",
+     "why": "Helps you explain charges in plain, kind words.",
+     "prompt": "I'm a front desk receptionist at a dental office. Write a calm, clear reply I can adapt when a patient asks why they received a bill. Explain in general terms that insurance pays its portion and the patient may owe the rest, and invite them to call [phone number] to go over their account. Leave out names and account numbers. I will check it against our office billing policy before using it. Under 120 words.",
+     "private": false,
+     "life": false
+    },
+    {
+     "title": "Explaining insurance basics to patients",
+     "why": "Turns confusing insurance terms into simple words.",
+     "prompt": "I'm a front desk receptionist at a dental office. Explain in plain, friendly language what a deductible, a copay and an annual maximum mean, in two sentences each, so I can use it when talking with patients. Keep it general and don't give any specifics about any plan. I'll check it against our office's approved information before sharing.",
+     "private": false,
+     "life": false
+    },
+    {
+     "title": "Voicemail greeting for after hours",
+     "why": "Gives callers clear next steps when the office is closed.",
+     "prompt": "I'm a front desk receptionist at a dental office. Write an after hours voicemail greeting. It should say our office hours are [hours], tell callers to leave their name and number, and say we will call back on the next business day. Add one line about what to do in an emergency, reading as [our office's emergency instructions]. Warm, clear, under 60 words.",
+     "private": false,
+     "life": false
+    },
+    {
+     "title": "Handling an upset caller",
+     "why": "Gives you calm words ready for tense moments.",
+     "prompt": "I'm a front desk receptionist at a dental office. Give me five short, calm phrases I can say to a caller who is frustrated about [a long wait, a bill, or a schedule change]. They should show I'm listening, stay polite, and move toward a next step. Keep each under 20 words. Leave out any names or personal details.",
+     "private": false,
+     "life": false
+    },
+    {
+     "title": "Cancellation and reschedule reply messages",
+     "why": "Makes it quick to answer change requests kindly.",
+     "prompt": "I'm a front desk receptionist at a dental office. Write three short reply texts for when a patient asks to cancel or reschedule: one when we have openings this week [days], one when the schedule is full, and one for a last minute cancellation. Keep each under 50 words, friendly, and mention our 24 hour notice policy gently.",
+     "private": false,
+     "life": false
+    },
+    {
+     "title": "Easy weeknight dinners after a busy day",
+     "why": "Gives you meal ideas when you're tired after a long shift.",
+     "prompt": "I work a full day at a front desk and I'm usually tired when I get home. Give me five dinner ideas that take little effort and use simple ingredients. I like [foods I like] and I don't eat [foods to avoid]. For each, give a short ingredient list and three quick steps. Keep it plain and practical.",
+     "private": false,
+     "life": true
+    },
+    {
+     "title": "Plan for a free weekend",
+     "why": "Helps you use days off without much planning effort.",
+     "prompt": "I have a free weekend on [dates] and I work a busy front desk job during the week. Help me plan two relaxed days. I live in [city or area], my budget is about [amount], and I enjoy [things I enjoy]. Give me a simple plan for each day with one restful option and one outing. Keep it short and easy to follow.",
+     "private": false,
+     "life": true
+    }
+   ],
+   "safe_use": [
+    "Never type in patient names, birth dates, phone numbers, addresses or insurance ID numbers.",
+    "Leave out anything from a patient's chart, treatment notes or account details.",
+    "Read and check everything before it goes out to a patient.",
+    "AI can be confidently wrong about facts, dates and numbers, so check them against your own sources.",
+    "Check anything about insurance or billing against your office's approved information.",
+    "Until you know your office's AI rules, practice with made up examples on your own device."
+   ],
+   "work_profile": "I work the front desk at a dental office. I answer phones, schedule appointments, verify insurance, send reminder calls and texts, and answer patient billing questions. I write mostly to patients, and sometimes to my office manager or insurance offices. I like drafts that are warm, polite and clear, in plain words with no jargon. Keep texts short, usually under 50 words, and emails under 150 words. Always leave blanks in square brackets for names, dates and numbers so I can fill them in myself. Don't give medical advice.",
+   "at_work": {
+    "ask_message": "Hi [manager or IT contact], I'd like to ask which AI tools, if any, the office approves for staff use. I'm thinking about using one to help draft appointment reminder texts, phone scripts and welcome emails, without entering any patient information. Could you let me know what I'm allowed to use it for and what's off limits? I want to make sure I follow our office policies. Thank you!",
+    "ai_talk": "Hi [manager], I wanted to let you know I've started using an AI assistant to help me write first drafts, like reminder texts, phone scripts and welcome emails. I never type in patient names or details, and I read and edit everything myself before it goes out. It helps me keep our messages clear and friendly. I'm happy to show you how I use it if you'd like."
+   }
+  },
+  "plan": {
+   "version": 2,
+   "role": "You’re the front desk receptionist at a dental office, handling phones, scheduling, insurance verification, reminder calls and texts, and billing questions.",
+   "tool": "claude",
+   "toolWhy": "Claude is a good place to start because the free version is enough to begin, and it works in a browser or a phone app. You type to it like a text message, so there is nothing to set up or learn first.",
+   "worksFor": "employer",
+   "policy": "no_idea",
+   "firstWin": {
+    "task": "Appointment reminders",
+    "prompt": "I’m a front desk receptionist at a dental office. Write a short appointment reminder text I can send to patients. It should say the appointment is on [day] at [time], ask them to call [phone number] if they need to reschedule, and mention we need 24 hours notice so we can offer the time to someone else. Keep it under 50 words, warm and polite, in plain language. Start with Hi [first name] and sign off with the office name [office name]. Don’t include any medical details.",
+    "example": "Hi [first name], this is a reminder from [office name] about your visit on [day] at [time]. If you need to change it, please call us at [phone number] at least 24 hours ahead so we can offer the spot to someone else. We look forward to seeing you!",
+    "fixes": [
+     "Shorter.",
+     "Warmer, like I’m texting a regular.",
+     "Make it sound a bit more formal."
+    ]
+   },
+   "ideas": [
+    {
+     "title": "A script for confirming appointments by phone",
+     "why": "Gives you calm, clear words for every confirmation call.",
+     "prompt": "I’m a front desk receptionist at a dental office. Write a short phone script for confirming an appointment the day before. It should greet the patient, confirm the day and time [day and time], ask if they can still make it, and offer to reschedule if not. Add a version for leaving a voicemail that does not mention any treatment details. Keep it friendly and under 120 words each.",
+     "life": false,
+     "mark": "safe_today"
+    },
+    {
+     "title": "Friendly follow up texts for missed visits",
+     "why": "Helps you reach out kindly without sounding annoyed.",
+     "prompt": "I’m a front desk receptionist at a dental office. Write three short follow up texts for a patient who missed their appointment. One should be gentle, one more direct, and one for a second attempt. Each should offer to rebook by calling [phone number], leave out any treatment details, and stay under 45 words. Tone: warm, not scolding.",
+     "life": false,
+     "mark": "safe_today"
+    },
+    {
+     "title": "Template for new patient welcome emails",
+     "why": "Gives every new patient the same warm first impression.",
+     "prompt": "I’m a front desk receptionist at a dental office. Write a welcome email for a new patient before their first visit. Include where to park or find us [directions], what to bring such as ID and insurance card, and that they can arrive a little early for paperwork. Warm and professional, under 150 words, with a place for [first name] and [office name]. No medical advice.",
+     "life": false,
+     "mark": "safe_today"
+    },
+    {
+     "title": "Billing questions",
+     "why": "Helps you explain charges in plain, kind words.",
+     "prompt": "I’m a front desk receptionist at a dental office. Write a calm, clear reply I can adapt when a patient asks why they received a bill. Explain in general terms that insurance pays its portion and the patient may owe the rest, and invite them to call [phone number] to go over their account. Leave out names and account numbers. I will check it against our office billing policy before using it. Under 120 words.",
+     "life": false,
+     "mark": "safe_today"
+    },
+    {
+     "title": "Explaining insurance basics to patients",
+     "why": "Turns confusing insurance terms into simple words.",
+     "prompt": "I’m a front desk receptionist at a dental office. Explain in plain, friendly language what a deductible, a copay and an annual maximum mean, in two sentences each, so I can use it when talking with patients. Keep it general and don’t give any specifics about any plan. I’ll check it against our office’s approved information before sharing.",
+     "life": false,
+     "mark": "safe_today"
+    },
+    {
+     "title": "Voicemail greeting for after hours",
+     "why": "Gives callers clear next steps when the office is closed.",
+     "prompt": "I’m a front desk receptionist at a dental office. Write an after hours voicemail greeting. It should say our office hours are [hours], tell callers to leave their name and number, and say we will call back on the next business day. Add one line about what to do in an emergency, reading as [our office’s emergency instructions]. Warm, clear, under 60 words.",
+     "life": false,
+     "mark": "safe_today"
+    },
+    {
+     "title": "Handling an upset caller",
+     "why": "Gives you calm words ready for tense moments.",
+     "prompt": "I’m a front desk receptionist at a dental office. Give me five short, calm phrases I can say to a caller who is frustrated about [a long wait, a bill, or a schedule change]. They should show I’m listening, stay polite, and move toward a next step. Keep each under 20 words. Leave out any names or personal details.",
+     "life": false,
+     "mark": "safe_today"
+    },
+    {
+     "title": "Cancellation and reschedule reply messages",
+     "why": "Makes it quick to answer change requests kindly.",
+     "prompt": "I’m a front desk receptionist at a dental office. Write three short reply texts for when a patient asks to cancel or reschedule: one when we have openings this week [days], one when the schedule is full, and one for a last minute cancellation. Keep each under 50 words, friendly, and mention our 24 hour notice policy gently.",
+     "life": false,
+     "mark": "safe_today"
+    },
+    {
+     "title": "Easy weeknight dinners after a busy day",
+     "why": "Gives you meal ideas when you’re tired after a long shift.",
+     "prompt": "I work a full day at a front desk and I’m usually tired when I get home. Give me five dinner ideas that take little effort and use simple ingredients. I like [foods I like] and I don’t eat [foods to avoid]. For each, give a short ingredient list and three quick steps. Keep it plain and practical.",
+     "life": true,
+     "mark": "safe_today"
+    },
+    {
+     "title": "Plan for a free weekend",
+     "why": "Helps you use days off without much planning effort.",
+     "prompt": "I have a free weekend on [dates] and I work a busy front desk job during the week. Help me plan two relaxed days. I live in [city or area], my budget is about [amount], and I enjoy [things I enjoy]. Give me a simple plan for each day with one restful option and one outing. Keep it short and easy to follow.",
+     "life": true,
+     "mark": "safe_today"
+    }
+   ],
+   "safeUse": [
+    "Never type in patient names, birth dates, phone numbers, addresses or insurance ID numbers.",
+    "Leave out anything from a patient’s chart, treatment notes or account details.",
+    "Read and check everything before it goes out to a patient.",
+    "AI can be confidently wrong about facts, dates and numbers, so check them against your own sources.",
+    "Check anything about insurance or billing against your office’s approved information.",
+    "Until you know your office’s AI rules, practice with made up examples on your own device."
+   ],
+   "workProfile": "I work the front desk at a dental office. I answer phones, schedule appointments, verify insurance, send reminder calls and texts, and answer patient billing questions. I write mostly to patients, and sometimes to my office manager or insurance offices. I like drafts that are warm, polite and clear, in plain words with no jargon. Keep texts short, usually under 50 words, and emails under 150 words. Always leave blanks in square brackets for names, dates and numbers so I can fill them in myself. Don’t give medical advice.",
+   "atWork": {
+    "askMessage": "Hi [manager or IT contact], I’d like to ask which AI tools, if any, the office approves for staff use. I’m thinking about using one to help draft appointment reminder texts, phone scripts and welcome emails, without entering any patient information. Could you let me know what I’m allowed to use it for and what’s off limits? I want to make sure I follow our office policies. Thank you!",
+    "aiTalk": "Hi [manager], I wanted to let you know I’ve started using an AI assistant to help me write first drafts, like reminder texts, phone scripts and welcome emails. I never type in patient names or details, and I read and edit everything myself before it goes out. It helps me keep our messages clear and friendly. I’m happy to show you how I use it if you’d like."
+   }
+  },
+  "planSeconds": 21
+ },
+ "vague": {
+  "rawIntake": {
+   "role_summary": "You're an office admin, and your week is mostly emails and meetings.",
+   "tasks": [
+    {
+     "quote": "Emails and meetings mostly.",
+     "name": "Emails",
+     "ai": true,
+     "private": true
+    },
+    {
+     "quote": "Emails and meetings mostly.",
+     "name": "Meetings",
+     "ai": true,
+     "private": true
+    }
+   ],
+   "first_win": null,
+   "ideas": [
+    "Meeting agendas from a rough topic list",
+    "Summaries of long email threads",
+    "Polite replies to common requests",
+    "A checklist for your weekly routine",
+    "Follow up reminders for open items",
+    "Clearer subject lines for your emails"
+   ],
+   "needs_follow_up": true,
+   "follow_up_question": "What takes up most of your time in those emails and meetings?"
+  },
+  "intakeSeconds": 3.051,
+  "intake": {
+   "role_summary": "You’re an office admin, and your week is mostly emails and meetings.",
+   "tasks": [
+    {
+     "name": "Emails",
+     "ai": true,
+     "private": true
+    },
+    {
+     "name": "Meetings",
+     "ai": true,
+     "private": true
+    }
+   ],
+   "first_win": null,
+   "ideas": [
+    "Meeting agendas from a rough topic list",
+    "Summaries of long email threads",
+    "Polite replies to common requests",
+    "A checklist for your weekly routine",
+    "Follow up reminders for open items",
+    "Clearer subject lines for your emails"
+   ],
+   "needs_follow_up": true,
+   "follow_up_question": "What takes up most of your time in those emails and meetings?"
+  }
+ }
+}

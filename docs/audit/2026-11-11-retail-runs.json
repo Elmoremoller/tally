@@ -1,0 +1,1049 @@
+{
+ "associate": {
+  "persona": {
+   "job": "Sales associate at a clothing store in the mall. Part time, about 28 hours.",
+   "week": "On the floor helping customers, folding and refolding tables, fitting rooms, the register, unloading the truck on Tuesdays, putting out new stock. We have to push the store card at every sale. I don't have a computer at work, just my phone.",
+   "extraWork": "I end up training every new hire and fixing the schedule when people swap shifts in the group chat.",
+   "worksFor": "employer",
+   "experience": "never",
+   "aiTools": [
+    "none_yet"
+   ],
+   "aiPolicy": "no_idea",
+   "followUpAnswer": "The fitting rooms and folding take most of the day. Also answering the same questions about returns and sizes."
+  },
+  "beginnerIntakeSeconds": 3.016,
+  "beginnerIntake": {
+   "role_summary": "You’re a part time sales associate at a clothing store in the mall, helping customers, keeping the floor and fitting rooms tidy, running the register, and handling new stock.",
+   "tasks": [
+    {
+     "name": "Customer help on the floor",
+     "ai": false,
+     "private": false
+    },
+    {
+     "name": "Keeping tables neat",
+     "ai": false,
+     "private": false
+    },
+    {
+     "name": "Store card pitches",
+     "ai": true,
+     "private": false
+    },
+    {
+     "name": "Setting out new stock",
+     "ai": false,
+     "private": false
+    }
+   ],
+   "first_win": {
+    "task": "Store card pitches",
+    "intro": "You said you have to push the store card at every sale. Here is a short, friendly way to say it.",
+    "draft": "Hi there, would you like to save 10 percent on today’s purchase and get early word on new arrivals? Our store card takes about two minutes to sign up for, and you can start using it right away. Would you like me to sign you up now? No pressure at all if you’d rather hold off, and you’re welcome to ask me anything about it first."
+   },
+   "ideas": [
+    "Short thank you notes for loyal customers",
+    "A list of outfit pairing tips for the floor",
+    "Simple product descriptions for the racks",
+    "Quick answers to common return questions",
+    "A weekly checklist for tidying the floor",
+    "Friendly sign text for sales and new arrivals"
+   ],
+   "needs_follow_up": false,
+   "follow_up_question": null
+  },
+  "beginnerPlan": {
+   "content": {
+    "version": 2,
+    "role": "You’re a part time sales associate at a clothing store in the mall, helping customers, keeping the floor and fitting rooms tidy, running the register, and handling new stock.",
+    "tool": "claude",
+    "toolWhy": "Claude is a good place to start because the free version is enough to begin. It works in a browser or a phone app, so you can use it right on your phone, and you type to it like a text message.",
+    "worksFor": "employer",
+    "policy": "no_idea",
+    "firstWin": {
+     "task": "Store card pitches",
+     "prompt": "I’m a part time sales associate at a clothing store in the mall. I have to offer the store card at every sale, and I want it to sound friendly, not pushy. Write me three different short pitches I can say out loud at the register, each two or three sentences, in a warm, casual tone. The card’s main perk is [the perk, in my own words]. End each pitch with an easy question, and make it clear it’s fine for the customer to say no.",
+     "example": "Before I ring you up, did you know our store card gets you a little something back on today’s purchase? It’s quick to sign up for and works right away. Want me to set it up for you? No worries at all if not, I just like to mention it.",
+     "fixes": [
+      "Shorter.",
+      "Warmer, like I’m talking to a regular.",
+      "Make the question easier to say no to."
+     ]
+    },
+    "ideas": [
+     {
+      "title": "Short thank you notes for loyal customers",
+      "why": "Gives you warm, personal sounding notes without staring at a blank page.",
+      "prompt": "I work at a clothing store in the mall and I’d like to write short thank you notes for customers who come back often. Write five different notes, two or three sentences each, warm and sincere, not salesy. Leave out any names and details about customers, I’ll add the name by hand. Make them sound like a real person wrote them.",
+      "life": false,
+      "mark": "check_first"
+     },
+     {
+      "title": "A list of outfit pairing tips for the floor",
+      "why": "Helps you suggest full looks quickly when a customer is unsure.",
+      "prompt": "I’m a sales associate at a clothing store. Give me a list of ten simple outfit pairing tips I can use when helping customers on the floor, like what goes with [type of item, for example wide leg pants]. Keep each tip to one short sentence, in plain words I can say out loud, and make them friendly rather than pushy.",
+      "life": false,
+      "mark": "safe_today"
+     },
+     {
+      "title": "Simple product descriptions for the racks",
+      "why": "Turns a few details into clear, friendly text for signs or shelf cards.",
+      "prompt": "I work at a clothing store and need short descriptions for rack signs. Write three versions of a two sentence description for [item, fabric, fit and colors]. Keep the tone casual and clear, with no big claims. Don’t invent details I didn’t give you. I’ll check everything against the tag before using it.",
+      "life": false,
+      "mark": "safe_today"
+     },
+     {
+      "title": "Practice talking with hesitant customers",
+      "why": "Lets you rehearse tricky moments on your own phone before the shift.",
+      "prompt": "I’m a part time sales associate at a clothing store. Pretend to be a customer who is hesitant about signing up for a store card, and I’ll answer you as the associate. Keep your replies short, like a real person in a hurry. After five back and forths, tell me what I did well and one thing I could say differently.",
+      "life": false,
+      "mark": "safe_today"
+     },
+     {
+      "title": "Friendly fitting room greetings and check ins",
+      "why": "Gives you fresh lines so you don’t repeat yourself all day.",
+      "prompt": "I run the fitting rooms at a clothing store in the mall. Give me ten short, friendly things I can say when I greet someone going in, and when I check on them while they try things on. Keep each one casual and under fifteen words, and don’t be pushy about buying.",
+      "life": false,
+      "mark": "safe_today"
+     },
+     {
+      "title": "A Tuesday truck day checklist",
+      "why": "Helps you keep unloading and putting out new stock in a clear order.",
+      "prompt": "I unload the truck every Tuesday at a clothing store in the mall and then put out new stock. Make me a simple checklist I can use on my phone, with the steps in a sensible order, from unloading to getting items onto the floor. Leave space for me to add [store specific steps], since I’ll check with my manager about how we do things.",
+      "life": false,
+      "mark": "safe_today"
+     },
+     {
+      "title": "A polite shift swap message to a coworker",
+      "why": "Helps you ask for a swap in a clear, friendly way.",
+      "prompt": "I’m a part time sales associate and I need to ask a coworker to swap a shift on [day and time]. Write a short, friendly text, three or four sentences, that explains I’m asking nicely, offers to cover [my shift or day] in return, and makes it easy for them to say no. Keep it casual.",
+      "life": false,
+      "mark": "safe_today"
+     },
+     {
+      "title": "Easy dinners after a long shift on my feet",
+      "why": "Gives you simple meal ideas for days when you’re tired after closing.",
+      "prompt": "I work part time in retail and I’m on my feet for most of my shifts. Give me a week of easy dinner ideas I can make with very little effort after a long day, using ingredients like [what I usually have]. Keep each idea to two lines, and mention any that reheat well for the next day.",
+      "life": true,
+      "mark": "safe_today"
+     },
+     {
+      "title": "A complaint message for an online order",
+      "why": "Helps you write a calm, clear message when something arrives wrong.",
+      "prompt": "I ordered [item] online and it arrived [what went wrong]. Help me write a polite but firm message to the company asking for [a refund, a replacement or something else]. Keep it short, list the facts clearly, and don’t sound angry. I’ll add my order details myself and check the message before sending.",
+      "life": true,
+      "mark": "safe_today"
+     }
+    ],
+    "safeUse": [
+     "Read and check everything before it goes out or you say it to a customer.",
+     "AI can be confidently wrong about facts, dates and numbers, so check store details yourself.",
+     "Never type in customer names, phone numbers, emails, addresses or card details.",
+     "Don’t type in store sales numbers, staff schedules or anything your employer treats as private.",
+     "Check return rules, discounts and store card terms against what your manager gives you, not what AI says.",
+     "Use only the tools your employer allows for work, and ask first if you’re not sure."
+    ],
+    "workProfile": "I’m a part time sales associate at a clothing store in the mall, about 28 hours a week. I help customers on the floor, work the fitting rooms and register, and put out new stock. I mostly use my phone. When I write, it’s for customers, coworkers and my manager. I like drafts that are friendly, casual and short, in plain words I can say out loud. Please don’t sound pushy or too formal, and don’t invent details I haven’t given you.",
+    "atWork": {
+     "askMessage": "Hi, I’d like to ask whether the company has any approved AI tools, and what I’m allowed to use them for. I’m thinking of using one on my own phone for things like practicing how I talk to customers, writing simple product descriptions and thank you notes, and planning my stocking work. I wouldn’t put in customer details or private store information. Could you let me know what’s okay and what isn’t? Thank you.",
+     "aiTalk": "I wanted to let you know I’ve started using an AI assistant to help with the written side of my job. I use it for ideas on how to greet customers, outfit pairing tips and drafts of short notes. I read and check everything myself before I use it, and I never put in customer or store details. It helps me show up more prepared on the floor, and I’m happy to show you how I use it."
+    }
+   },
+   "model": "claude-sonnet-5-5",
+   "promptVersion": "beginner-plan-v1"
+  },
+  "beginnerPlanSeconds": 30.221,
+  "originalIntake": {
+   "role_summary": "You’re a part time sales associate at a clothing store in the mall, working about 28 hours a week on the floor and at the register.",
+   "tasks": [
+    {
+     "name": "Helping customers on the floor",
+     "pile": "keep_visible",
+     "estimated_hours": 8,
+     "why": "Helping customers is the core of your sales job and shows your skill and judgment.",
+     "extra": false
+    },
+    {
+     "name": "Unloading the truck",
+     "pile": "hand_to_ai",
+     "estimated_hours": 2,
+     "why": "Truck unloading is physical busywork that AI cannot do, so it stays as routine admin rather than skilled work.",
+     "extra": false
+    },
+    {
+     "name": "Folding and refolding tables",
+     "pile": "hand_to_ai",
+     "estimated_hours": 3,
+     "why": "Folding tables is routine upkeep that doesn’t build your sales reputation.",
+     "extra": false
+    },
+    {
+     "name": "Training new hires",
+     "pile": "hand_back",
+     "estimated_hours": 2,
+     "why": "Training new hires could be shared with other experienced staff rather than always falling to you.",
+     "extra": true
+    },
+    {
+     "name": "Fixing the schedule for shift swaps",
+     "pile": "hand_back",
+     "estimated_hours": 1,
+     "why": "Shift swap fixes could go to a manager or a rotating person instead of always to you.",
+     "extra": true
+    }
+   ],
+   "needs_follow_up": false,
+   "follow_up_question": null
+  }
+ },
+ "grocery": {
+  "persona": {
+   "job": "Assistant store manager at a grocery store, about 40 people on staff.",
+   "week": "I'm on my feet 10 hours a day. Covering call outs, building the schedule every week, inventory counts, receiving deliveries, handling customer complaints, training cashiers, walking the store for the district manager visit. The schedule is done on the store tablet, everything else is in my head or on paper.",
+   "extraWork": "I plan the staff birthday stuff and I'm the one everyone texts when they need a shift covered.",
+   "worksFor": "employer",
+   "experience": "once",
+   "aiTools": [
+    "chatgpt"
+   ],
+   "aiPolicy": "unclear",
+   "followUpAnswer": "Call outs and the schedule eat the most time. Then complaints."
+  },
+  "beginnerIntakeSeconds": 3.722,
+  "beginnerIntake": {
+   "role_summary": "You’re the assistant store manager at a grocery store with about 40 people on staff, covering call outs, scheduling, inventory, deliveries, complaints and cashier training.",
+   "tasks": [
+    {
+     "name": "Weekly staff schedule",
+     "ai": true,
+     "private": true
+    },
+    {
+     "name": "Customer complaint replies",
+     "ai": true,
+     "private": false
+    },
+    {
+     "name": "Cashier training notes",
+     "ai": true,
+     "private": false
+    },
+    {
+     "name": "District visit checklist",
+     "ai": true,
+     "private": false
+    },
+    {
+     "name": "Inventory count checklist",
+     "ai": true,
+     "private": false
+    }
+   ],
+   "first_win": {
+    "task": "Customer complaint replies",
+    "intro": "You said you handle customer complaints. Here is a reply you can adapt for a grocery store.",
+    "draft": "Hi [customer first name], thank you for taking the time to tell us about your experience with [product or issue]. I’m sorry it didn’t meet your expectations, and I understand how frustrating that can be. I’ve shared your feedback with our team so we can look into what happened. If you’d like, you can reach me directly at [phone or email], and I’ll make sure you get a clear answer. We appreciate you shopping with us and giving us the chance to make it right. Warm regards, [your name], Assistant Store Manager, [store name]"
+   },
+   "ideas": [
+    "A cashier training checklist for new hires",
+    "Talking points for the district manager visit",
+    "A short weekly team update message",
+    "Reminders for covering call outs fairly",
+    "A quick guide for receiving deliveries",
+    "Shift handover notes for the next manager"
+   ],
+   "needs_follow_up": false,
+   "follow_up_question": null
+  },
+  "beginnerPlan": {
+   "content": {
+    "version": 2,
+    "role": "You’re the assistant store manager at a grocery store with about 40 people on staff, covering call outs, scheduling, inventory, deliveries, complaints and cashier training.",
+    "tool": "chatgpt",
+    "toolWhy": "ChatGPT is a good place to start because the free version is enough to begin, and it works in a browser or a phone app. You type to it like a text message, so you can try it between tasks on the floor.",
+    "worksFor": "employer",
+    "policy": "unclear",
+    "firstWin": {
+     "task": "Customer complaint replies",
+     "prompt": "I’m an assistant store manager at a grocery store. A customer contacted us unhappy about [the issue, like a spoiled item, a long wait, or a rude interaction]. Write a reply email from me. Start with a sincere apology, say I’m looking into it, and offer my direct contact at [phone or email]. Don’t promise a refund or anything I haven’t approved. Keep it under 120 words, warm and professional, like a manager who cares about regulars. Leave out any customer last names.",
+     "example": "Hi [customer first name], thank you for letting us know about the spoiled produce you bought. I’m sorry that happened, and I understand how frustrating it is. I’m looking into it with my team so we can find out what went wrong. Please reach me directly at [phone or email] and I’ll follow up with you. We value having you as a customer. Warm regards, [your name], Assistant Store Manager",
+     "fixes": [
+      "Shorter.",
+      "Warmer, like I’m talking to a regular.",
+      "Remove the promise, I haven’t approved that."
+     ]
+    },
+    "ideas": [
+     {
+      "title": "A cashier training checklist for new hires",
+      "why": "Gives you one clear list to train from instead of remembering everything.",
+      "prompt": "I’m an assistant store manager at a grocery store and I train new cashiers. Make a checklist for a new cashier’s first week. Include register basics, handling cash and cards, bagging, age restricted items, returns, and being friendly with customers. Use short checkbox lines, grouped by day. Leave a spot to note what my store’s own policy says, since I’ll fill that in myself.",
+      "life": false,
+      "mark": "safe_today"
+     },
+     {
+      "title": "Talking points for the district manager visit",
+      "why": "Helps you walk in with your points organized instead of in your head.",
+      "prompt": "I’m an assistant store manager at a grocery store with about 40 staff. My district manager is visiting on [day]. Write talking points I can say while walking the store. Cover store appearance, freshness, staffing, deliveries, customer service, and what we’ve improved lately: [add two or three things]. Keep it to short bullets I can read at a glance. Leave out staff names.",
+      "life": false,
+      "mark": "safe_today"
+     },
+     {
+      "title": "A short weekly team update message",
+      "why": "Makes it easier to keep all 40 people on the same page.",
+      "prompt": "I’m an assistant store manager at a grocery store with about 40 team members. Write a short weekly update message to the whole team. Include this week’s reminders: [add reminders, like a delivery day, a store visit, or a focus area]. Add one line thanking the team. Keep it under 120 words, friendly and clear, easy to read on a phone or post in the break room.",
+      "life": false,
+      "mark": "safe_today"
+     },
+     {
+      "title": "Weekly staff schedule",
+      "why": "Helps you think through coverage before you build it on the tablet.",
+      "prompt": "I’m an assistant store manager and I build the weekly schedule for about 40 people at a grocery store. Help me make a planning guide for coverage. Busy times are [add busy days and hours]. Departments are [add departments]. Give me a simple list of questions to check before I build the schedule, like opening and closing, breaks, and call out backup. Don’t use real employee names.",
+      "life": false,
+      "mark": "safe_today"
+     },
+     {
+      "title": "Cashier training notes",
+      "why": "Turns what you already know into notes a new cashier can follow.",
+      "prompt": "I’m an assistant store manager who trains cashiers at a grocery store. Turn these rough thoughts into clear training notes for a new cashier: [type what you usually tell them]. Use short, plain sentences, with headings. Add three practice questions I can ask them at the end. Keep a friendly tone and leave out any employee names.",
+      "life": false,
+      "mark": "safe_today"
+     },
+     {
+      "title": "District visit checklist",
+      "why": "Gives you a walk through list so nothing gets missed.",
+      "prompt": "I’m an assistant store manager at a grocery store getting ready for a district manager visit on [day]. Make a walk through checklist by area: front end, aisles, produce, dairy and frozen, back room, and receiving. Use short checkbox lines for what to check, like cleanliness, signs, and stock. Keep it easy to carry and read on a tablet or on paper.",
+      "life": false,
+      "mark": "safe_today"
+     },
+     {
+      "title": "Inventory count checklist",
+      "why": "Keeps count day steps in order so it’s less to hold in your head.",
+      "prompt": "I’m an assistant store manager at a grocery store and I’m running an inventory count on [day]. Make a step by step checklist for before, during, and after the count. Include prep, assigning areas, double checking counts, and writing down differences to follow up on. Keep it short, with checkboxes, and easy to print or read on a tablet.",
+      "life": false,
+      "mark": "safe_today"
+     },
+     {
+      "title": "A call out coverage message to the team",
+      "why": "Helps you ask for coverage quickly and politely.",
+      "prompt": "I’m an assistant store manager at a grocery store and someone called out for [shift and department]. Write a short text message to the team asking if anyone can cover. Be friendly, clear about the shift time, and not pushy. Give me two versions, one casual and one more formal. Leave out the name of the person who called out.",
+      "life": false,
+      "mark": "safe_today"
+     },
+     {
+      "title": "Easy dinners for long shift days",
+      "why": "Takes the guesswork out of eating after ten hours on your feet.",
+      "prompt": "I’m on my feet about ten hours a day at work and I’m tired when I get home. Give me five dinner ideas that take little effort and use ingredients I can easily get. I like [add foods you like] and I don’t eat [add anything to avoid]. Include a short shopping list. Keep it simple and plain.",
+      "life": true,
+      "mark": "safe_today"
+     },
+     {
+      "title": "A plan for a free weekend",
+      "why": "Helps you actually rest and enjoy your time off.",
+      "prompt": "I work long days on my feet at a grocery store and I have a free weekend on [dates]. Help me plan it so I get real rest and a little fun. I like [add what you enjoy] and my budget is about [amount]. Give me a simple plan for Saturday and Sunday with options, not a packed schedule.",
+      "life": true,
+      "mark": "safe_today"
+     }
+    ],
+    "safeUse": [
+     "Read and check everything before it goes out, every time.",
+     "AI can be confidently wrong about facts, dates and numbers, so double check them yourself.",
+     "Never type in customer names, phone numbers, emails or addresses from complaints.",
+     "Never type in employee names, schedules tied to real people, or reasons for call outs.",
+     "Keep sales figures, inventory numbers and internal store reports out of the chat.",
+     "Check food safety, pay and labor questions against your company’s own policies, not AI."
+    ],
+    "workProfile": "I’m an assistant store manager at a grocery store with about 40 team members. My days are busy and I’m on my feet most of the time, so I need answers I can read quickly. I write to customers, my team, and my district manager. I like drafts that are warm, plain and professional, without fancy words. Keep messages short unless I ask for more. Use bullet points or checklists when it helps. If you’re not sure of something, tell me so I can check it myself.",
+    "atWork": {
+     "askMessage": "Hi [manager or IT contact], I’ve started looking at AI tools to help with my day to day work as assistant store manager. Before I use anything, could you tell me which tools, if any, are approved by the company? I’d like to know what I may use them for. I’m thinking of things like drafting replies to customer complaints, team update messages, training checklists and visit prep. I’ll keep customer and employee details out of it either way.",
+     "aiTalk": "I wanted to let you know I’ve started using AI to help with some of my writing, like first drafts of customer replies, training checklists and team updates. It helps me get started faster, and I read and edit everything myself before it goes out. I don’t put customer or employee details into it. I’m happy to show you what I’m doing and hear any guidelines you’d like me to follow."
+    }
+   },
+   "model": "claude-sonnet-5-5",
+   "promptVersion": "beginner-plan-v1"
+  },
+  "beginnerPlanSeconds": 21.62,
+  "originalIntake": {
+   "role_summary": "You’re an assistant store manager at a grocery store with about 40 staff, covering shifts, scheduling, inventory and customer issues on your feet all day.",
+   "tasks": [
+    {
+     "name": "Covering call outs",
+     "pile": "keep_visible",
+     "estimated_hours": 3,
+     "why": "Keeping shifts covered is core store management work that shows your judgment and reliability.",
+     "extra": false
+    },
+    {
+     "name": "Building the weekly schedule",
+     "pile": "hand_to_ai",
+     "estimated_hours": 2,
+     "why": "Schedule drafts follow set rules, so AI can produce a first pass you then check.",
+     "extra": false
+    },
+    {
+     "name": "Inventory counts",
+     "pile": "hand_to_ai",
+     "estimated_hours": 2,
+     "why": "Counts and their summaries are routine admin that AI can help organize and tally.",
+     "extra": false
+    },
+    {
+     "name": "Receiving deliveries",
+     "pile": "keep_visible",
+     "estimated_hours": 1.5,
+     "why": "Checking deliveries and catching errors is hands on work that protects the store.",
+     "extra": false
+    },
+    {
+     "name": "Handling customer complaints",
+     "pile": "keep_visible",
+     "estimated_hours": 1.5,
+     "why": "Resolving complaints well is a visible skill that builds your reputation with customers and managers.",
+     "extra": false
+    },
+    {
+     "name": "Planning staff birthday stuff",
+     "pile": "hand_back",
+     "estimated_hours": 0.5,
+     "why": "Social events aren’t part of your role, so hand planning to a coworker or a rotating volunteer.",
+     "extra": true
+    },
+    {
+     "name": "Being the go to for shift swaps",
+     "pile": "hand_back",
+     "estimated_hours": 1,
+     "why": "Staff swap requests can be routed through a shared system or handed to whoever owns the schedule.",
+     "extra": true
+    }
+   ],
+   "needs_follow_up": false,
+   "follow_up_question": null
+  }
+ },
+ "cashier": {
+  "persona": {
+   "job": "Cashier at a big box store.",
+   "week": "Register and stocking shelves.",
+   "extraWork": "Sometimes I cover self checkout.",
+   "worksFor": "employer",
+   "experience": "never",
+   "aiTools": [
+    "not_sure"
+   ],
+   "aiPolicy": "no_idea",
+   "followUpAnswer": "Mostly ringing people up and dealing with returns and coupons that don't scan. When it's slow I face shelves and do go backs."
+  },
+  "beginnerFollowUp": "What else takes your time in a normal shift, like emails, schedules or customer questions?",
+  "beginnerIntakeSeconds": 5.652,
+  "beginnerIntake": {
+   "role_summary": "You’re a cashier at a big box store, ringing up customers, handling returns and coupons, and stocking shelves when it’s slow.",
+   "tasks": [
+    {
+     "name": "Register work",
+     "ai": false,
+     "private": false
+    },
+    {
+     "name": "Returns and coupon problems",
+     "ai": true,
+     "private": false
+    },
+    {
+     "name": "Shelf facing and go backs",
+     "ai": false,
+     "private": false
+    }
+   ],
+   "first_win": {
+    "task": "Returns and coupon problems",
+    "intro": "You said returns and coupons that won’t scan take up a lot of your shift. Here is a quick guide you can keep at the register.",
+    "draft": "Coupon won’t scan? First, check the expiry date and that the item matches the offer. Re scan the barcode once, then try typing the code in by hand. If it still fails, note the coupon number and the time, call over a supervisor, and offer the customer a clear explanation. For returns, check the receipt date and the item condition against store policy, ask the customer what they’d like, and record the reason for the return. Keep the line moving with a calm, friendly tone."
+   },
+   "ideas": [
+    "A script for calm customer conversations",
+    "Quick guide for common register errors",
+    "Checklist for end of shift tidying",
+    "Shelf facing order to follow each shift",
+    "Short notes to learn store policies faster",
+    "Plain English summaries of new store signs"
+   ],
+   "needs_follow_up": false,
+   "follow_up_question": null
+  },
+  "beginnerPlan": {
+   "content": {
+    "version": 2,
+    "role": "You’re a cashier at a big box store, ringing up customers, handling returns and coupons, and stocking shelves when it’s slow.",
+    "tool": "claude",
+    "toolWhy": "Claude is a good place to start because the free version is enough to begin, and it works in a browser or a phone app. You just type to it like a text message, so there is nothing to set up.",
+    "worksFor": "employer",
+    "policy": "no_idea",
+    "firstWin": {
+     "task": "Returns and coupon problems",
+     "prompt": "I’m a cashier at a big box store. Write me a short, friendly script I can say out loud when a customer’s coupon won’t scan or they want to return something. Cover two situations: a coupon that won’t scan, and a return where the customer has no receipt. Use plain words, 2 or 3 sentences for each, and a calm tone that keeps the line moving. Remind me to follow store policy and call a supervisor when I need to. Today’s situation: [what happened at my register].",
+     "example": "Coupon that won’t scan: “Let me try that one more time. If it still won’t go through, I’ll grab a supervisor so we can sort it out quickly.” Return with no receipt: “I can help with that. Let me check what our policy allows, and if I need a supervisor to approve it, I’ll get one right away. Thanks for your patience.”",
+     "fixes": [
+      "Shorter.",
+      "Warmer, like I’m talking to a regular.",
+      "Make it sound more natural out loud."
+     ]
+    },
+    "ideas": [
+     {
+      "title": "A script for calm customer conversations",
+      "why": "Gives you steady words ready for tense moments at the register.",
+      "prompt": "I’m a cashier at a big box store. Write me three short things I can say to a customer who is upset, such as when a price is different from the sign, a coupon is expired, or a return is not allowed. Keep each one to 2 or 3 sentences, calm and kind but firm. Do not make up store policy. Leave a spot in brackets for [store policy detail].",
+      "life": false,
+      "mark": "safe_today"
+     },
+     {
+      "title": "Quick guide for common register errors",
+      "why": "Puts the usual problems and the steps to try in one easy list.",
+      "prompt": "I’m a cashier at a big box store. Make me a simple list of common problems at a register, like an item that won’t scan, a wrong price, a card that is declined, or a coupon that won’t work. For each one, give me 2 or 3 steps to try and when to call a supervisor. Keep it plain and short. I’ll check it against what my store teaches. The errors I see most are [my common errors].",
+      "life": false,
+      "mark": "safe_today"
+     },
+     {
+      "title": "Checklist for end of shift tidying",
+      "why": "Helps you finish your area without forgetting a step.",
+      "prompt": "I’m a cashier at a big box store and I also stock shelves when it’s slow. Make me a short checklist for the end of my shift covering my register area, going back items, and facing shelves. Put it in the order I’d do it, with simple boxes to tick. Keep each line short. My area today is [register number or department].",
+      "life": false,
+      "mark": "safe_today"
+     },
+     {
+      "title": "Explain a return policy in plain words",
+      "why": "Turns long policy wording into something quick to say to customers.",
+      "prompt": "I’m a cashier at a big box store. Here is a paragraph from our return policy: [paste the policy text, no customer details]. Rewrite it as 4 short points I can easily remember, and then one friendly sentence I can say to a customer. Don’t add anything that isn’t in the text I gave you.",
+      "life": false,
+      "mark": "safe_today"
+     },
+     {
+      "title": "Learn the produce or department codes faster",
+      "why": "Makes memorizing codes feel easier with simple practice.",
+      "prompt": "I’m a cashier at a big box store and I’m learning codes for [department or item type]. Here are the ones I need to learn: [list of items and codes]. Make me a short quiz of 10 questions, one at a time, and tell me if I’m right before moving on. Keep it friendly and simple.",
+      "life": false,
+      "mark": "safe_today"
+     },
+     {
+      "title": "Ask for a schedule change politely",
+      "why": "Helps you word a request to your manager clearly and kindly.",
+      "prompt": "I’m a cashier at a big box store. Write a short, polite message to my manager asking to change my shift on [day]. The reason is [reason]. Offer to [swap or cover option]. Keep it to 4 sentences, respectful and clear, in a text message style.",
+      "life": false,
+      "mark": "safe_today"
+     },
+     {
+      "title": "Practice for a busy day rush",
+      "why": "Gives you a calm plan for long lines and fast days.",
+      "prompt": "I’m a cashier at a big box store and I’m nervous about a busy rush on [day or event]. Give me a short list of 6 habits to keep me calm and keep the line moving, like what to say to people waiting and how to stay organized. Keep it practical and friendly, not preachy.",
+      "life": false,
+      "mark": "safe_today"
+     },
+     {
+      "title": "Write a note for the next shift",
+      "why": "Makes handoff notes clear so nothing gets missed.",
+      "prompt": "I’m a cashier at a big box store. Turn my rough notes into a short, clear handoff note for the next shift. Use bullet points and a polite tone. Leave out customer names. My notes: [what’s left to stock, any register issues, anything pending].",
+      "life": false,
+      "mark": "safe_today"
+     },
+     {
+      "title": "Easy meals for after a long shift",
+      "why": "Gives you simple dinner ideas when you’re tired and on your feet.",
+      "prompt": "I work long shifts on my feet as a cashier and I get home tired. Give me 5 simple dinner ideas that take little effort and use ordinary groceries. Keep them to a few steps each. I like [foods I like] and I don’t eat [foods to avoid]. Put it in a short list.",
+      "life": true,
+      "mark": "safe_today"
+     },
+     {
+      "title": "Plan a free day off",
+      "why": "Helps you make the most of a day off without the stress.",
+      "prompt": "I have a free [day] off from my cashier job. I’d like it to feel restful but still useful. Make me a simple plan for the day with a few options: one for resting, one for errands, and one for something fun. My budget is [amount] and I live near [town or area]. Keep it short and flexible.",
+      "life": true,
+      "mark": "safe_today"
+     }
+    ],
+    "safeUse": [
+     "Read and check everything AI writes before you use or send it.",
+     "AI can be confidently wrong about facts, dates and numbers, so check them yourself.",
+     "Never type in customer names, card numbers, addresses or phone numbers.",
+     "Never type in coworker details or anything from the store’s private systems.",
+     "Store policy comes from your manager, so check AI drafts against what your store has told you.",
+     "Ask your manager which AI tools are allowed before using AI on anything about your store."
+    ],
+    "workProfile": "I’m a cashier at a big box store. I ring up customers, handle returns and coupons that won’t scan, and stock shelves when it’s slow. I talk to customers face to face and write short notes to coworkers and my manager. I’m new to AI, so please use plain words and short answers. I like a calm, friendly, polite tone that sounds like a real person and not a robot. Keep drafts brief, with short sentences and simple steps. If you’re not sure about a fact or a store rule, tell me so I can check it with my manager.",
+    "atWork": {
+     "askMessage": "Hi, I wanted to ask whether the company has any approved AI tools and what we’re allowed to use them for. I’m thinking of things like practicing what to say to customers and making simple checklists for my shifts. I would not enter customer information or anything private. Could you let me know if there is a policy I should follow? Thank you.",
+     "aiTalk": "I wanted to let you know that I’ve started using an AI assistant to help me with things like practicing customer conversations and organizing checklists for my shifts. I don’t put in customer details or private store information. I read and check everything it gives me before I use it. It’s helping me feel more prepared, and I’m happy to share what I learn."
+    }
+   },
+   "model": "claude-sonnet-5-5",
+   "promptVersion": "beginner-plan-v1"
+  },
+  "beginnerPlanSeconds": 20.827,
+  "originalFollowUp": "What else fills your week, and which task takes the most time?",
+  "originalIntake": {
+   "role_summary": "You’re a cashier at a big box store, running the register and keeping shelves stocked.",
+   "tasks": [
+    {
+     "name": "Ringing people up",
+     "pile": "keep_visible",
+     "estimated_hours": 8,
+     "why": "This is your core work, and it shows your speed and care with customers.",
+     "extra": false
+    },
+    {
+     "name": "Returns and coupons that don’t scan",
+     "pile": "keep_visible",
+     "estimated_hours": 3,
+     "why": "Solving these problems at the register shows your judgment and keeps customers happy.",
+     "extra": false
+    },
+    {
+     "name": "Facing shelves and go backs",
+     "pile": "hand_to_ai",
+     "estimated_hours": 2,
+     "why": "This is routine restocking busywork that could be planned or tracked with a tool.",
+     "extra": false
+    },
+    {
+     "name": "Covering self checkout",
+     "pile": "hand_back",
+     "estimated_hours": 1,
+     "why": "This is extra coverage you were pulled into, so it can be shared with whoever should own it.",
+     "extra": true
+    }
+   ],
+   "needs_follow_up": false,
+   "follow_up_question": null
+  }
+ },
+ "boutique": {
+  "persona": {
+   "job": "I own a small women's clothing boutique, just me and two part timers.",
+   "week": "Working the floor, buying at markets twice a year, posting new arrivals on Instagram, steaming and tagging stock, window displays every month, payroll and paying vendors, answering DMs about sizes and holds. I do most of it on my phone between customers.",
+   "extraWork": "Everything is my job.",
+   "worksFor": "self",
+   "experience": "sometimes",
+   "aiTools": [
+    "chatgpt",
+    "other"
+   ],
+   "aiPolicy": null,
+   "followUpAnswer": "Instagram and the DMs take the most time, then tagging stock."
+  },
+  "beginnerIntakeSeconds": 4.321,
+  "beginnerIntake": {
+   "role_summary": "You own a small women’s clothing boutique with two part time staff, running the floor, buying, social media, displays, payroll and customer messages from your phone.",
+   "tasks": [
+    {
+     "name": "Instagram posts for new arrivals",
+     "ai": true,
+     "private": false
+    },
+    {
+     "name": "Replies to size and hold messages",
+     "ai": true,
+     "private": false
+    },
+    {
+     "name": "Monthly window display plans",
+     "ai": true,
+     "private": false
+    },
+    {
+     "name": "Payroll and vendor payments",
+     "ai": false,
+     "private": true
+    },
+    {
+     "name": "Steaming and tagging stock",
+     "ai": false,
+     "private": false
+    },
+    {
+     "name": "Working the floor",
+     "ai": false,
+     "private": false
+    }
+   ],
+   "first_win": {
+    "task": "Replies to size and hold messages",
+    "intro": "You said you answer DMs about sizes and holds. Here is a reply you can adapt for your boutique.",
+    "draft": "Hi [first name], thanks so much for reaching out! The [item name] comes in sizes [size range], and it runs [true to size / a little small / a little large]. I can hold it for you until [day and time] while you decide. Just send me a message with your size and I will confirm it right away. We would love to see you in store too, we are open [hours]. Have a lovely day!"
+   },
+   "ideas": [
+    "Instagram captions for new arrivals",
+    "A size guide for your website",
+    "Window display theme ideas by month",
+    "A checklist for market buying trips",
+    "A short welcome message for new customers",
+    "Text templates for restock announcements"
+   ],
+   "needs_follow_up": false,
+   "follow_up_question": null
+  },
+  "beginnerPlan": {
+   "content": {
+    "version": 2,
+    "role": "You own a small women’s clothing boutique with two part time staff, running the floor, buying, social media, displays, payroll and customer messages from your phone.",
+    "tool": "chatgpt",
+    "toolWhy": "ChatGPT is a good place to start because the free version is enough to begin, and it works in a browser or a phone app. You type to it like a text message, which suits how you already run your day between customers.",
+    "worksFor": "self",
+    "policy": null,
+    "firstWin": {
+     "task": "Replies to size and hold messages",
+     "prompt": "I own a small women’s clothing boutique and I answer customer messages on Instagram and by text from my phone. Write a reply to a customer who asked if [item name] comes in [her size] and if I can hold it. Tell her the sizes we have: [sizes in stock], and how it fits: [true to size / runs small / runs large]. Say I can hold it until [day and time]. Mention we are open [hours]. Keep it under 60 words, warm and friendly, like I’m texting a regular. No exclamation overload, one at most.",
+     "example": "Hi [first name], thanks for asking! The [item name] is in stock in your size, and it fits true to size. I’d be happy to hold it for you until [day and time]. Just let me know if you’d like me to, and I’ll set it aside with your name on it. We’re open [hours] if you want to try it on. See you soon!",
+     "fixes": [
+      "Shorter.",
+      "Warmer, like I’m texting a regular.",
+      "Make it sound less like a store policy."
+     ]
+    },
+    "ideas": [
+     {
+      "title": "Instagram captions for new arrivals",
+      "why": "Gets you a first caption fast when you are tired after steaming and tagging.",
+      "prompt": "I own a small women’s clothing boutique. Write three caption options for an Instagram post about a new arrival: [item description, color, fabric]. Our customers are [age range or style, like women 30 to 55 who like easy everyday pieces]. Sizes: [sizes]. Price: [price]. Keep each caption under 50 words, friendly and a little playful, with a line about stopping in or sending a DM to hold it. Add five hashtags to each.",
+      "life": false,
+      "mark": "safe_today"
+     },
+     {
+      "title": "A size guide for your website",
+      "why": "Gives you a clear page you can point customers to instead of answering the same question again.",
+      "prompt": "I own a small women’s clothing boutique. Help me write a simple size guide for my website. Our brands run like this: [brand and how it fits, like runs small or true to size]. Our sizes range from [smallest] to [largest]. Make a short friendly intro, a table layout I can fill in with measurements, tips on how to measure at home, and a line inviting customers to message me for fit help. Keep it plain and easy to read on a phone.",
+      "life": false,
+      "mark": "safe_today"
+     },
+     {
+      "title": "Window display theme ideas by month",
+      "why": "Hands you fresh themes to pick from so you are not starting from a blank page each month.",
+      "prompt": "I own a small women’s clothing boutique in a [small town / city neighborhood] with one front window. Give me a theme idea for each month of the year, with a short line on colors and the kind of clothes to feature. Our customers are [describe them]. Keep ideas low cost, using things like fabric, paper, plants, and props I can find easily. Format as a list by month, two lines each.",
+      "life": false,
+      "mark": "safe_today"
+     },
+     {
+      "title": "Instagram posts for new arrivals",
+      "why": "Helps you plan a week of posts from a few notes about what just came in.",
+      "prompt": "I own a small women’s clothing boutique. This week I got in: [list of new items with colors and prices]. Plan five Instagram posts for the week, one line each on the idea, such as a close up, a styled outfit, a reel idea, or a story. Then write a short caption for each in a warm, casual voice. Include a simple call to action like sending me a DM to hold a size.",
+      "life": false,
+      "mark": "safe_today"
+     },
+     {
+      "title": "Monthly window display plans",
+      "why": "Turns a theme into a short to do list you can finish between customers.",
+      "prompt": "I own a small women’s clothing boutique and I change my window every month. This month’s theme is [theme]. My window is about [size] and I have [props I already own]. Write a simple plan: what to feature, how to arrange it, a color palette, a shopping list under [budget], and a short checklist of steps in the order I should do them. Keep it practical and easy to read on my phone.",
+      "life": false,
+      "mark": "safe_today"
+     },
+     {
+      "title": "Polite replies to price and discount questions",
+      "why": "Gives you calm wording ready for the times a customer asks for a deal.",
+      "prompt": "I own a small women’s clothing boutique. Write three short replies I can send when a customer asks for a discount. One for when I can offer [kind of offer, like 10 percent off for two items], one for when I can’t discount but can offer something else like [alternative], and one for a loyal regular. Keep each under 50 words, friendly and confident, never defensive.",
+      "life": false,
+      "mark": "safe_today"
+     },
+     {
+      "title": "A shift note for my part time staff",
+      "why": "Makes your instructions clear when you are not on the floor.",
+      "prompt": "I own a small women’s clothing boutique with two part time staff. Write a clear shift note for [day]. Include these things: [tasks, like steam new arrivals, tag stock, change one rack, answer DMs]. Add reminders about [holds, returns, or store policy in my words]. Use a short bulleted list, friendly tone, under 120 words, and end with a thank you.",
+      "life": false,
+      "mark": "safe_today"
+     },
+     {
+      "title": "A vendor email about a late order",
+      "why": "Helps you stay firm and polite when a delivery is behind.",
+      "prompt": "I own a small women’s clothing boutique. Write a short, polite but firm email to a vendor about an order that is late. Details: order placed [date], promised by [date], items [description]. I need it by [date] because [reason, like a planned launch]. Ask for a clear delivery date and tracking. Keep it under 120 words and professional. Leave out account numbers.",
+      "life": false,
+      "mark": "safe_today"
+     },
+     {
+      "title": "Market buying checklist and questions",
+      "why": "Keeps you organized before you go buy for the season.",
+      "prompt": "I own a small women’s clothing boutique. I’m going to a buying market for [season]. Help me make a checklist for before, during, and after the trip. Include questions to ask vendors about minimums, delivery dates, and returns, and a simple way to note what I ordered and my budget of [amount]. My customers like [style]. Keep it as a short list I can use on my phone.",
+      "life": false,
+      "mark": "safe_today"
+     },
+     {
+      "title": "A packing list for a short trip",
+      "why": "Saves you from making the list from scratch before a market trip or getaway.",
+      "prompt": "I’m going on a trip to [place] for [number] days. The weather will be about [weather]. I’ll be [buying at a market / visiting family / relaxing], and I’ll be on my feet a lot. Make a packing list in short groups like clothes, shoes, toiletries, and chargers. Keep it practical, and suggest a few things I might forget.",
+      "life": true,
+      "mark": "safe_today"
+     }
+    ],
+    "safeUse": [
+     "Read and check everything before it goes out, especially replies to customers and posts.",
+     "AI can be confidently wrong about facts, dates and numbers, so check prices, sizes, hours and holds yourself.",
+     "Never type in customer names, phone numbers, addresses or payment details.",
+     "Never paste payroll details or your staff’s personal information, like pay rates or bank details.",
+     "Leave out vendor account numbers and login details when you ask for help with emails.",
+     "For anything about taxes, wages or contracts, use AI for a draft only and check it with your own approved sources."
+    ],
+    "workProfile": "I own a small women’s clothing boutique with two part time staff. I do most of my work from my phone between customers. I write to customers about sizes, holds and new arrivals, to vendors about orders, and to my staff about shifts. I also post on Instagram. I like drafts that are warm, friendly and short, written the way I would text a regular customer. Keep things plain and easy to read on a phone. Give me a few options when I ask for captions. Don’t use fancy words, and don’t make up details about my products. I will fill those in.",
+    "atWork": null
+   },
+   "model": "claude-sonnet-5-5",
+   "promptVersion": "beginner-plan-v1"
+  },
+  "beginnerPlanSeconds": 24.138,
+  "originalIntake": {
+   "role_summary": "You own a small women’s clothing boutique with two part timers, handling the floor, buying, marketing and the money side yourself.",
+   "tasks": [
+    {
+     "name": "Posting new arrivals on Instagram",
+     "pile": "hand_to_ai",
+     "estimated_hours": 2,
+     "why": "Captions and post drafts are busywork AI can draft for you quickly.",
+     "extra": false
+    },
+    {
+     "name": "Answering DMs about sizes and holds",
+     "pile": "hand_to_ai",
+     "estimated_hours": 2,
+     "why": "Repeat size and hold questions can be drafted as quick replies for you to approve.",
+     "extra": false
+    },
+    {
+     "name": "Payroll and paying vendors",
+     "pile": "hand_to_ai",
+     "estimated_hours": 1.5,
+     "why": "Admin tracking and reminders can be set up with AI, while you keep final approval.",
+     "extra": false
+    },
+    {
+     "name": "Steaming and tagging stock",
+     "pile": "keep_visible",
+     "estimated_hours": 3,
+     "why": "Presentation of stock is part of the shopping experience customers judge your shop by.",
+     "extra": false
+    },
+    {
+     "name": "Buying at markets twice a year",
+     "pile": "keep_visible",
+     "estimated_hours": 2,
+     "why": "Choosing what to stock is your core skill and what sets the boutique apart.",
+     "extra": false
+    }
+   ],
+   "needs_follow_up": false,
+   "follow_up_question": null
+  }
+ },
+ "beauty": {
+  "persona": {
+   "job": "Beauty advisor at a department store makeup counter, paid partly on commission.",
+   "week": "Doing makeovers and color matching, restocking testers, cleaning the counter, keeping my client book, texting my clients when new launches come in or there's a gift with purchase, hitting my sales goals, events on weekends.",
+   "extraWork": "Training the new girls on the brand and doing the counter's displays.",
+   "worksFor": "employer",
+   "experience": "once",
+   "aiTools": [
+    "not_sure"
+   ],
+   "aiPolicy": "restricted",
+   "followUpAnswer": "Texting clients and keeping the client book take the most time outside makeovers."
+  },
+  "beginnerIntakeSeconds": 2.958,
+  "beginnerIntake": {
+   "role_summary": "You’re a beauty advisor at a department store makeup counter, doing makeovers, keeping your client book, hitting sales goals and working weekend events.",
+   "tasks": [
+    {
+     "name": "Client texts about launches and gifts",
+     "ai": true,
+     "private": false
+    },
+    {
+     "name": "Weekend event planning",
+     "ai": true,
+     "private": false
+    },
+    {
+     "name": "Sales goal planning",
+     "ai": true,
+     "private": false
+    },
+    {
+     "name": "Restocking and counter routine",
+     "ai": false,
+     "private": false
+    },
+    {
+     "name": "Makeovers and color matching",
+     "ai": false,
+     "private": false
+    }
+   ],
+   "first_win": {
+    "task": "Client texts about launches and gifts",
+    "intro": "You said you text clients when new launches come in or there’s a gift with purchase. Here is a text you can adjust.",
+    "draft": "Hi [first name], it’s [your name] from the [store name] makeup counter. Our new [product name] just arrived, and I saved a [shade or color] for you to try. We also have a gift with purchase this weekend while supplies last. Would you like me to hold anything for you, or set up a time to come in for a quick look? Just reply here and I’ll take care of it."
+   },
+   "ideas": [
+    "Follow up messages after a makeover",
+    "A birthday text for loyal clients",
+    "Weekend event checklist",
+    "A monthly plan for reaching sales goals",
+    "Short talking points for a new launch",
+    "Thank you notes after a purchase"
+   ],
+   "needs_follow_up": false,
+   "follow_up_question": null
+  },
+  "beginnerPlan": {
+   "content": {
+    "version": 2,
+    "role": "You’re a beauty advisor at a department store makeup counter, doing makeovers, keeping your client book, hitting sales goals and working weekend events.",
+    "tool": "claude",
+    "toolWhy": "Claude is a good place to start because the free version is enough to begin, and it works in a browser or a phone app. You type to it like a text message, so there is nothing to set up or learn first.",
+    "worksFor": "employer",
+    "policy": "restricted",
+    "firstWin": {
+     "task": "Client texts about launches and gifts",
+     "prompt": "I’m a beauty advisor at a department store makeup counter. I text my regular clients when a new launch arrives or there’s a gift with purchase. Write me one friendly text I can send about [new product or gift with purchase] that is here [day or dates]. Keep it under 50 words, warm and personal like I’m texting a regular, with no pushy sales language. Leave a spot for [client first name] and [my name]. End by asking if they’d like me to hold something or set up a time to stop by.",
+     "example": "Hi [client first name], it’s [my name] from the makeup counter! Our new [product] just arrived and I think you’ll love it. We also have a free gift with purchase this weekend while supplies last. Want me to set something aside for you, or find a time for a quick look? Just text me back and I’ll take care of it.",
+     "fixes": [
+      "Shorter.",
+      "Warmer, like I’m texting a regular.",
+      "Less salesy, more like a friendly note."
+     ]
+    },
+    "ideas": [
+     {
+      "title": "Follow up messages after a makeover",
+      "why": "Helps you keep in touch with a client after she leaves your chair.",
+      "prompt": "I’m a beauty advisor at a makeup counter. Write three short follow up texts I can send a client a day or two after a makeover. Each one should sound warm and personal, under 45 words, and mention [products we used] and a tip for using them at home. Don’t pressure her to buy. Leave spots for [client first name] and [my name]. Don’t include any private details about her.",
+      "life": false,
+      "mark": "check_first"
+     },
+     {
+      "title": "A birthday text for loyal clients",
+      "why": "Gives you a kind, personal note ready to send when a birthday comes up.",
+      "prompt": "I’m a beauty advisor at a department store counter. Write three short birthday texts for my loyal clients, each under 40 words, warm and friendly, not salesy. Each one can mention that I’d love to see her in for a treat if she’s free [this month]. Leave a spot for [client first name] and [my name]. Leave out any private details about her.",
+      "life": false,
+      "mark": "check_first"
+     },
+     {
+      "title": "Weekend event checklist",
+      "why": "Gives you one list to check so nothing is forgotten before the doors open.",
+      "prompt": "I work at a department store makeup counter and we have a weekend event on [day] about [event theme]. Make me a checklist I can go through before the event, split into setup, testers and tools, clients and invitations, and end of day. Keep each item short. I’ll cross out anything that doesn’t apply to my store.",
+      "life": false,
+      "mark": "check_first"
+     },
+     {
+      "title": "Weekend event planning",
+      "why": "Helps you organize your time and your counter so the event runs smoothly.",
+      "prompt": "I’m a beauty advisor planning a weekend event at my makeup counter on [day]. We expect [rough number] guests and I’ll have [number] of us working. Help me plan the day in simple steps: what to do before, how to greet guests, how to keep makeovers moving, and how to follow up after. Keep it practical and brief, in a list.",
+      "life": false,
+      "mark": "check_first"
+     },
+     {
+      "title": "Sales goal planning",
+      "why": "Turns a big goal into smaller steps you can act on each week.",
+      "prompt": "I’m a beauty advisor at a department store counter and part of my pay is commission. My sales goal for [month] is [goal]. I’ve reached [amount so far] and have [number] shifts left. Help me break this into a simple weekly plan with friendly ways to reach out to clients and ideas for suggesting add ons without being pushy. Keep it short and encouraging.",
+      "life": false,
+      "mark": "check_first"
+     },
+     {
+      "title": "Talking points for a color match",
+      "why": "Helps you explain a shade choice clearly and confidently.",
+      "prompt": "I’m a beauty advisor doing color matching at a makeup counter. Write a short, friendly script of about five sentences that I can use to explain to a client why a foundation shade suits her, and how to check it in daylight. Use [undertone or shade description] as an example and keep it simple, with no jargon.",
+      "life": false,
+      "mark": "check_first"
+     },
+     {
+      "title": "Reply to a client who is unsure",
+      "why": "Gives you kind words for a client who is hesitating on a purchase.",
+      "prompt": "I’m a beauty advisor at a makeup counter. A client texted that she loved a product but isn’t sure if she should buy it. Write three short, warm replies I can choose from, under 40 words each, that offer help without pressure, like offering a sample or a time to try it again. Leave a spot for [client first name] and [my name].",
+      "life": false,
+      "mark": "check_first"
+     },
+     {
+      "title": "A simple client book system",
+      "why": "Helps you decide what to note down so follow ups come easily.",
+      "prompt": "I’m a beauty advisor and I keep a client book for my regulars. Suggest a simple layout of what to note after each visit, like products tried, preferences and when to follow up. Keep it to about eight short items, and tell me how I might keep it tidy. Don’t include anything too personal about a client.",
+      "life": false,
+      "mark": "check_first"
+     },
+     {
+      "title": "Easy weeknight meals after a long shift",
+      "why": "Gives you dinner ideas for days when you’re tired from being on your feet.",
+      "prompt": "I’m on my feet all day at work and get home tired, often around [time]. Give me five simple dinner ideas that take little effort and use ingredients like [ingredients I usually have]. I eat [any food preferences]. List the steps in a few short lines each and a shopping list at the end.",
+      "life": true,
+      "mark": "safe_today"
+     },
+     {
+      "title": "Plan a free weekend",
+      "why": "Helps you make the most of a weekend when you do get time off.",
+      "prompt": "I usually work weekends, but I have [day or days] free. Help me plan a relaxed and fun plan for that time. My budget is about [amount], I’m in [city or area], and I enjoy [things I like]. Give me a simple schedule with a mix of rest and one or two things to look forward to.",
+      "life": true,
+      "mark": "safe_today"
+     }
+    ],
+    "safeUse": [
+     "Read and check everything before it goes out. It’s your name on it.",
+     "AI can be confidently wrong about facts, dates and numbers, so double check them yourself.",
+     "Never type in client names, phone numbers, addresses or purchase history.",
+     "Never type in skin conditions, allergies or other health details about a client.",
+     "Never type in sales figures, store plans or anything your company treats as private.",
+     "Check product claims and ingredient details against your brand’s own materials, not what AI says."
+    ],
+    "workProfile": "I’m a beauty advisor at a department store makeup counter, and part of my pay is commission. I write short texts to my regular clients about new launches, gifts with purchase, birthdays and follow ups after makeovers. I like drafts that are warm and friendly, like I’m texting a regular, and never pushy. Keep them short, usually under 50 words, in plain everyday words. When I ask for a list or a plan, keep it simple and practical so I can use it between clients. Leave spots in brackets for names and details that I will add myself.",
+    "atWork": {
+     "askMessage": "Hi [manager name], I’d like to check which AI tools, if any, are approved for us to use at the counter. I’m thinking of using one to help me word client texts about launches and gifts, plan weekend events, and think through my sales goals. I would not type in client names or any private store information. Could you let me know what is allowed, or point me to who I should ask? Thank you.",
+     "aiTalk": "Hi [manager name], I wanted to let you know that I’ve started using AI to help me with the writing side of my job, like drafting texts to clients and planning events. I use it for first drafts only, and I read and check everything myself before anything goes out. I don’t put client details or store information into it. It helps me stay in touch with my clients more consistently, and I’m happy to show you how I use it."
+    }
+   },
+   "model": "claude-sonnet-5-5",
+   "promptVersion": "beginner-plan-v1"
+  },
+  "beginnerPlanSeconds": 21.296,
+  "originalIntake": {
+   "role_summary": "You’re a beauty advisor at a department store makeup counter, paid partly on commission, doing makeovers, color matching and client outreach.",
+   "tasks": [
+    {
+     "name": "Makeovers and color matching",
+     "pile": "keep_visible",
+     "estimated_hours": 8,
+     "why": "This is your core skill with clients and what builds your reputation and sales.",
+     "extra": false
+    },
+    {
+     "name": "Keeping the client book",
+     "pile": "hand_to_ai",
+     "estimated_hours": 2,
+     "why": "Record keeping is admin work AI could help organize, freeing time for clients.",
+     "extra": false
+    },
+    {
+     "name": "Texting clients about launches and gifts",
+     "pile": "hand_to_ai",
+     "estimated_hours": 2.5,
+     "why": "Drafting routine texts is busywork AI can speed up, while you keep the personal touch.",
+     "extra": false
+    },
+    {
+     "name": "Restocking testers",
+     "pile": "hand_to_ai",
+     "estimated_hours": 1.5,
+     "why": "Restocking is routine upkeep that doesn’t need your selling skills.",
+     "extra": false
+    },
+    {
+     "name": "Training the new girls on the brand",
+     "pile": "hand_back",
+     "estimated_hours": 2,
+     "why": "Training new staff could be shared with a manager or whoever owns onboarding.",
+     "extra": true
+    },
+    {
+     "name": "Doing the counter’s displays",
+     "pile": "hand_back",
+     "estimated_hours": 1.5,
+     "why": "Displays could go to a visual merchandiser or be shared among the team.",
+     "extra": true
+    }
+   ],
+   "needs_follow_up": false,
+   "follow_up_question": null
+  }
+ }
+}

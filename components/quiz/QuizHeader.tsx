@@ -4,12 +4,12 @@ import { Lockup } from "@/components/brand/Logo";
 import { offer } from "@/lib/offer";
 
 /** The quiz's header: a back control on the left, the logo in the middle, and the progress line under it. */
-export function QuizHeader({ progress, back }: { progress: number; back?: ReactNode }) {
+export function QuizHeader({ progress, back, home = "/" }: { progress: number; back?: ReactNode; home?: string }) {
   return (
     <header className="quiz-head">
       <div className="quiz-head-row">
         {back ?? <span />}
-        <Link href="/" className="quiz-brand" aria-label={`${offer.name}, home`}>
+        <Link href={home} className="quiz-brand" aria-label={`${offer.name}, home`}>
           <Lockup />
         </Link>
         <span />

@@ -21,6 +21,10 @@ type ToolsStepProps = {
   onOther: (other: string) => void;
   policy: AiPolicy | null;
   onPolicy: (policy: AiPolicy) => void;
+  /** The tools question, when it isn't the first version's. */
+  title?: string;
+  /** False leaves out her company's view on AI: the beginner version only asks someone with an employer. */
+  askPolicy?: boolean;
   onSubmit: () => void;
   error?: string;
   headingRef: RefObject<HTMLHeadingElement | null>;
@@ -33,7 +37,19 @@ const solo = (id: AiTool) => (SOLO_TOOLS as readonly AiTool[]).includes(id);
  * her company's view on AI (one). Other opens a field under the chips for the tools she means, and Continue
  * waits for it to have words. Nothing moves on by itself here, since there are two questions; Continue does.
  */
-export function ToolsStep({ tools, onTools, other, onOther, policy, onPolicy, onSubmit, error, headingRef }: ToolsStepProps) {
+export function ToolsStep({
+  tools,
+  onTools,
+  other,
+  onOther,
+  policy,
+  onPolicy,
+  title = toolsQuestion.title,
+  askPolicy = true,
+  onSubmit,
+  error,
+  headingRef,
+}: ToolsStepProps) {
   const toggle = (id: AiTool) => {
     if (tools.includes(id)) return onTools(tools.filter((t) => t !== id));
     // None yet and Not sure go on their own: picking one clears the rest, picking anything else clears them.
@@ -43,7 +59,7 @@ export function ToolsStep({ tools, onTools, other, onOther, policy, onPolicy, on
   return (
     <>
       <h1 ref={headingRef} tabIndex={-1} className="quiz-title" id="q-tools">
-        {toolsQuestion.title}
+        {title}
       </h1>
       <p className="quiz-hint">{toolsQuestion.hint}</p>
       <fieldset className="quiz-topics" aria-labelledby="q-tools">
@@ -73,25 +89,29 @@ export function ToolsStep({ tools, onTools, other, onOther, policy, onPolicy, on
         </div>
       ) : null}
 
-      <h2 className="quiz-check" id="q-policy">
-        {policyQuestion.title}
-      </h2>
-      <div className="quiz-choices quiz-choices-near" role="group" aria-labelledby="q-policy">
-        {AI_POLICIES.map((id) => (
-          <button
-            key={id}
-            type="button"
-            className="quiz-choice"
-            aria-pressed={policy === id}
-            onClick={() => onPolicy(id)}
-          >
-            <span>{policyLabels[id]}</span>
-            <span className="quiz-tick" aria-hidden="true">
-              <Check />
-            </span>
-          </button>
-        ))}
-      </div>
+      {askPolicy ? (
+        <>
+          <h2 className="quiz-check" id="q-policy">
+            {policyQuestion.title}
+          </h2>
+          <div className="quiz-choices quiz-choices-near" role="group" aria-labelledby="q-policy">
+            {AI_POLICIES.map((id) => (
+              <button
+                key={id}
+                type="button"
+                className="quiz-choice"
+                aria-pressed={policy === id}
+                onClick={() => onPolicy(id)}
+              >
+                <span>{policyLabels[id]}</span>
+                <span className="quiz-tick" aria-hidden="true">
+                  <Check />
+                </span>
+              </button>
+            ))}
+          </div>
+        </>
+      ) : null}
 
       {error ? (
         <p className="quiz-error" role="alert">
@@ -102,7 +122,7 @@ export function ToolsStep({ tools, onTools, other, onOther, policy, onPolicy, on
         <button
           type="button"
           className="btn btn-lg quiz-next"
-          disabled={!tools.length || !policy || (withOther && !other.trim())}
+          disabled={!tools.length || (askPolicy && !policy) || (withOther && !other.trim())}
           onClick={onSubmit}
         >
           Continue

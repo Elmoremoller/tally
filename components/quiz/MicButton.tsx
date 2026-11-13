@@ -2,13 +2,14 @@ import { Mic } from "@/components/icons";
 import { micCopy } from "@/lib/questions";
 
 /**
- * Talk instead of typing, inside the answer box. While listening it turns slate, with three bars moving in
- * place of the mic, and reads Done: tapping it again stops.
+ * Talk instead of typing, inside the answer box. Tapping it turns it slate at once and it reads Getting ready
+ * until the browser really is listening. Then three bars move in place of the mic and it reads Done: tapping
+ * it again stops.
  */
-export function MicButton({ listening, onToggle }: { listening: boolean; onToggle: () => void }) {
+export function MicButton({ listening, ready, onToggle }: { listening: boolean; ready: boolean; onToggle: () => void }) {
   return (
     <button type="button" className="quiz-mic" data-listening={listening || undefined} onClick={onToggle}>
-      {listening ? (
+      {listening && ready ? (
         <span className="quiz-mic-bars" aria-hidden="true">
           <i />
           <i />
@@ -17,7 +18,7 @@ export function MicButton({ listening, onToggle }: { listening: boolean; onToggl
       ) : (
         <Mic />
       )}
-      {listening ? micCopy.stop : micCopy.start}
+      {!listening ? micCopy.start : ready ? micCopy.stop : micCopy.starting}
     </button>
   );
 }

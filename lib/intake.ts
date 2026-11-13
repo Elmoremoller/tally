@@ -113,7 +113,7 @@ const schema = {
 } as const;
 
 /** Her words go between tags, so take out anything that looks like one of our tags. */
-const fenced = (text: string) =>
+export const fenced = (text: string) =>
   text.replace(/<\/?\s*(job|week|extra_work|follow_up_question|follow_up_answer)\s*>/gi, "").slice(0, ANSWER_MAX);
 
 function describe({ job, week, extraWork, aiTools, aiToolsOther, aiPolicy, followUp }: IntakeInput) {
@@ -141,7 +141,7 @@ function describe({ job, week, extraWork, aiTools, aiToolsOther, aiPolicy, follo
 }
 
 /** The site's style: no dash or hyphen characters, curly apostrophes, single spaces. */
-const tidy = (text: string) =>
+export const tidy = (text: string) =>
   text
     .replace(/\s*[—–]\s*|\s+-\s+/g, ", ")
     .replace(/(\p{L})-(?=\p{L})/gu, "$1 ")
@@ -149,13 +149,13 @@ const tidy = (text: string) =>
     .replace(/\s+/g, " ")
     .trim();
 
-const line = (value: unknown, max: number) => {
+export const line = (value: unknown, max: number) => {
   const text = typeof value === "string" ? tidy(value) : "";
   return text && text.length <= max ? text : null;
 };
 
 /** Lower case letters, digits and single spaces, so a quote matches whatever its punctuation. */
-const plain = (text: string) =>
+export const plain = (text: string) =>
   text
     .toLowerCase()
     .replace(/[‘’]/g, "'")
@@ -163,7 +163,7 @@ const plain = (text: string) =>
     .trim();
 
 /** The quote is really hers: word for word, or every word of it somewhere in what she wrote. */
-function isHers(quote: unknown, source: string) {
+export function isHers(quote: unknown, source: string) {
   const words = typeof quote === "string" ? plain(quote) : "";
   if (!words) return false;
   if (source.includes(words)) return true;

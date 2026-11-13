@@ -24,7 +24,8 @@ type TextStepProps = {
  * One open question: a box with room for a few lines, Talk instead of typing inside it where the browser can,
  * and the note that she needn't name her company or colleagues. With `examples`, the empty box types out
  * one example answer after another. While she talks the examples stop, her words show in the box as she says
- * them, and the box waits for Done before it can be typed in. If talking stops on its own, she's told why.
+ * them, and the box waits for Done before it can be typed in. Until the browser is really listening the box
+ * asks her to wait a moment. A pause to think doesn't end it; if talking does stop for a reason, she's told why.
  */
 export function TextStep({ title, hint, placeholder, examples, value, setValue, onSubmit, error, headingRef }: TextStepProps) {
   const voice = useDictation({ value, setValue, max: ANSWER_MAX });
@@ -61,7 +62,7 @@ export function TextStep({ title, hint, placeholder, examples, value, setValue, 
             rows={4}
             maxLength={ANSWER_MAX}
             readOnly={voice.listening}
-            placeholder={voice.listening ? micCopy.speak : examples ? undefined : placeholder}
+            placeholder={voice.listening ? (voice.ready ? micCopy.speak : micCopy.waiting) : examples ? undefined : placeholder}
             value={value}
             onChange={(e) => setValue(e.target.value)}
           />
@@ -71,9 +72,9 @@ export function TextStep({ title, hint, placeholder, examples, value, setValue, 
               For example: {examples[0]}
             </span>
           ) : null}
-          {voice.supported ? <MicButton listening={voice.listening} onToggle={voice.toggle} /> : null}
+          {voice.supported ? <MicButton listening={voice.listening} ready={voice.ready} onToggle={voice.toggle} /> : null}
           <span className="sr-only" role="status">
-            {voice.listening ? micCopy.listening : ""}
+            {voice.ready ? micCopy.listening : ""}
           </span>
         </div>
         {voice.problem ? (

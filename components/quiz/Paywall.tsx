@@ -1,37 +1,35 @@
 "use client";
 
 import Link from "next/link";
-import { useActionState } from "react";
+import { useActionState, type ReactNode } from "react";
 import { startCheckout } from "@/app/start/checkout";
 import { ArrowRight } from "@/components/icons";
 import { paywallConsent as consent } from "@/lib/legal";
 import { paywallCopy } from "@/lib/plan-copy";
-import type { AiPolicy, AiTool, WeekTask } from "@/lib/week";
 import { Dock } from "./Dock";
-import { PlanPreview } from "./PlanPreview";
 
 /**
- * Get my plan, under her free result: the headline, a look at her plan built from her answers, the price and
- * the refund line, and the button to Stripe's page.
+ * Get my plan, under her free result: the headline, a look at her plan built from her answers (`children`),
+ * the price and the refund line, and the button to Stripe's page. The beginner version passes its own headline.
  */
 export function Paywall({
-  tasks,
-  aiTools,
-  aiPolicy,
+  title = paywallCopy.title,
+  lead = paywallCopy.lead,
+  children,
 }: {
-  tasks: Pick<WeekTask, "name" | "pile" | "hours">[];
-  aiTools: AiTool[];
-  aiPolicy: AiPolicy | null;
+  title?: string;
+  lead?: string;
+  children: ReactNode;
 }) {
   const [state, action, pending] = useActionState(startCheckout, null);
 
   return (
     <section className="paywall" aria-labelledby="paywall-title">
       <h2 id="paywall-title" className="paywall-title">
-        {paywallCopy.title}
+        {title}
       </h2>
-      <p className="paywall-lead">{paywallCopy.lead}</p>
-      <PlanPreview tasks={tasks} aiTools={aiTools} aiPolicy={aiPolicy} />
+      <p className="paywall-lead">{lead}</p>
+      {children}
 
       {/* On a phone the price and the button stay pinned while she reads the cards, and the error shows with them. */}
       <form action={action} className="paywall-form">

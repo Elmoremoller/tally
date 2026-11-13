@@ -2,8 +2,10 @@ import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 import { Suspense } from "react";
 import { Backdrop } from "@/components/Backdrop";
+import { BeginnerPaywall, FirstWinResult } from "@/components/beginner/FirstWinResult";
 import { FreeResult } from "@/components/quiz/FreeResult";
 import { Paywall } from "@/components/quiz/Paywall";
+import { PlanPreview } from "@/components/quiz/PlanPreview";
 import { QuizHeader } from "@/components/quiz/QuizHeader";
 import { loadWeek } from "@/lib/funnel-db";
 import { offer } from "@/lib/offer";
@@ -35,10 +37,21 @@ async function SavedResult() {
   const week = sessionId ? await loadWeek(sessionId).catch(() => null) : null;
   const done = week?.session && week.session.status !== "started" && week.tasks.length;
   if (!week || !done) redirect("/start");
+  // The beginner quiz's result is her first win.
+  const beginner = week.intake?.beginner;
+  if (beginner) {
+    return (
+      <FirstWinResult firstWin={beginner.firstWin} ideas={beginner.ideas} restricted={week.intake?.ai_policy === "restricted"}>
+        <BeginnerPaywall />
+      </FirstWinResult>
+    );
+  }
   const tasks = week.tasks.map((t) => ({ name: t.name, pile: t.pile, hours: t.confirmed_hours ?? t.estimated_hours }));
   return (
     <FreeResult tasks={tasks}>
-      <Paywall tasks={tasks} aiTools={week.intake?.ai_tools ?? []} aiPolicy={week.intake?.ai_policy ?? null} />
+      <Paywall>
+        <PlanPreview tasks={tasks} aiTools={week.intake?.ai_tools ?? []} aiPolicy={week.intake?.ai_policy ?? null} />
+      </Paywall>
     </FreeResult>
   );
 }

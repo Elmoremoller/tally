@@ -1,0 +1,3401 @@
+{
+ "ranAt": "2026-11-13T17:09:44.866Z",
+ "levels": {
+  "not_yet": "I haven’t tried it yet",
+  "tried": "I’ve tried it, but it didn’t stick",
+  "uses": "I use it, but I could get more out of it"
+ },
+ "runs": {
+  "jess": {
+   "persona": {
+    "bio": "Jess, 24, event coordinator at a restaurant group in Chicago. Her inbox is full of clients, caterers, florists and AV people. She keeps the run of show, floor plans and vendor timelines in Google Sheets, collects headcounts and dietary lists the week before each event, sends banquet orders to the kitchen, and is on site with a headset on event nights. Vendor follow ups eat her afternoons. She has used ChatGPT for a few emails and a toast once, but mostly writes everything herself.",
+    "job": "Event coordinator for a restaurant group in Chicago. I plan private events and run them on the night.",
+    "level": "uses",
+    "worksFor": "employer",
+    "aiPolicy": "unclear",
+    "noDesk": false
+   },
+   "versions": {
+    "job": "beginner-job-v2",
+    "questions": "beginner-questions-v2",
+    "intake": "beginner-intake-v3",
+    "plan": "beginner-plan-v4"
+   },
+   "seconds": {
+    "jobRead": 2.4,
+    "questions": 2.6,
+    "intake": 3.2,
+    "plan": 25.3
+   },
+   "jobRead": {
+    "repeats": [
+     {
+      "label": "Writing event proposals",
+      "ai": true
+     },
+     {
+      "label": "Texting clients",
+      "ai": true
+     },
+     {
+      "label": "Planning event timelines",
+      "ai": true
+     },
+     {
+      "label": "Writing vendor emails",
+      "ai": true
+     },
+     {
+      "label": "Setting up rooms",
+      "ai": false
+     }
+    ],
+    "aiFallback": [
+     "Event follow up texts",
+     "Menu description drafts",
+     "Thank you notes",
+     "Social media captions"
+    ],
+    "apps": [
+     "Texts",
+     "Gmail",
+     "Instagram",
+     "Google Sheets",
+     "WhatsApp",
+     "Calendar"
+    ],
+    "worksFor": "employer"
+   },
+   "jobReadFallback": false,
+   "asked": [
+    {
+     "id": "asked_1",
+     "title": "How do you collect headcounts and dietary lists today?",
+     "kind": "one",
+     "choices": [
+      "Email replies",
+      "Text messages",
+      "Spreadsheet",
+      "Phone calls"
+     ],
+     "hint": null
+    },
+    {
+     "id": "asked_2",
+     "title": "What makes the dietary lists slow to sort?",
+     "kind": "many",
+     "choices": [
+      "Mixed up replies",
+      "Missing names",
+      "Too many versions",
+      "Late changes",
+      "Allergy details unclear"
+     ],
+     "hint": "Pick every one that fits."
+    },
+    {
+     "id": "asked_3",
+     "title": "Which vendor emails take the most follow ups?",
+     "kind": "one",
+     "choices": [
+      "Catering orders",
+      "Florists and decor",
+      "Bar and drinks",
+      "Rentals and staff"
+     ],
+     "hint": null
+    }
+   ],
+   "worksForFromJob": "employer",
+   "answers": {
+    "job": "Event coordinator for a restaurant group in Chicago. I plan private events and run them on the night.",
+    "experience": "uses",
+    "qas": [
+     {
+      "id": "repeats",
+      "title": "What do you do over and over, every day or every week?",
+      "picked": [
+       "Texting clients",
+       "Planning event timelines",
+       "Writing vendor emails",
+       "Setting up rooms"
+      ],
+      "text": "Headcounts and dietary lists the week before, every time.",
+      "shown": [
+       "Writing event proposals",
+       "Texting clients",
+       "Planning event timelines",
+       "Writing vendor emails",
+       "Setting up rooms"
+      ]
+     },
+     {
+      "id": "most",
+      "title": "Which would save you the most time if it got easier?",
+      "picked": [
+       "Writing vendor emails",
+       "Headcounts and dietary lists the week before, every time."
+      ],
+      "text": null,
+      "shown": [
+       "Texting clients",
+       "Planning event timelines",
+       "Writing vendor emails",
+       "Headcounts and dietary lists the week before, every time."
+      ]
+     },
+     {
+      "id": "picture",
+      "title": "How do you picture AI helping with it?",
+      "picked": [],
+      "text": "Mostly the vendor email follow-ups. Sorting headcounts and dietary lists before events would save me too."
+     },
+     {
+      "id": "apps",
+      "title": "Which apps do you use every week?",
+      "picked": [
+       "Gmail",
+       "Google Sheets",
+       "Calendar",
+       "Texts"
+      ],
+      "text": null,
+      "shown": [
+       "Texts",
+       "Gmail",
+       "Instagram",
+       "Google Sheets",
+       "WhatsApp",
+       "Calendar"
+      ]
+     },
+     {
+      "id": "tools",
+      "title": "Which AI have you used?",
+      "picked": [
+       "ChatGPT"
+      ],
+      "text": null,
+      "shown": [
+       "ChatGPT",
+       "Copilot",
+       "Gemini",
+       "Claude",
+       "Other",
+       "None yet",
+       "Not sure"
+      ]
+     },
+     {
+      "id": "asked_1",
+      "title": "How do you collect headcounts and dietary lists today?",
+      "picked": [
+       "Spreadsheet"
+      ],
+      "text": null,
+      "shown": [
+       "Email replies",
+       "Text messages",
+       "Spreadsheet",
+       "Phone calls"
+      ]
+     },
+     {
+      "id": "asked_2",
+      "title": "What makes the dietary lists slow to sort?",
+      "picked": [
+       "Mixed up replies",
+       "Missing names",
+       "Too many versions",
+       "Late changes",
+       "Allergy details unclear"
+      ],
+      "text": null,
+      "shown": [
+       "Mixed up replies",
+       "Missing names",
+       "Too many versions",
+       "Late changes",
+       "Allergy details unclear"
+      ]
+     },
+     {
+      "id": "asked_3",
+      "title": "Which vendor emails take the most follow ups?",
+      "picked": [
+       "Florists and decor"
+      ],
+      "text": null,
+      "shown": [
+       "Catering orders",
+       "Florists and decor",
+       "Bar and drinks",
+       "Rentals and staff"
+      ]
+     }
+    ],
+    "mostWanted": [
+     "Writing vendor emails",
+     "Headcounts and dietary lists the week before, every time."
+    ],
+    "worksFor": "employer",
+    "aiTools": [
+     "chatgpt"
+    ],
+    "aiToolsOther": null,
+    "aiPolicy": "unclear"
+   },
+   "digest": "What do you do over and over, every day or every week? Texting clients, Planning event timelines, Writing vendor emails, Setting up rooms, Headcounts and dietary lists the week before, every time.\nWhich would save you the most time if it got easier? Writing vendor emails, Headcounts and dietary lists the week before, every time.\nHow do you picture AI helping with it? Mostly the vendor email follow-ups. Sorting headcounts and dietary lists before events would save me too.\nWhich apps do you use every week? Gmail, Google Sheets, Calendar, Texts\nWhich AI have you used? ChatGPT\nHow do you collect headcounts and dietary lists today? Spreadsheet\nWhat makes the dietary lists slow to sort? Mixed up replies, Missing names, Too many versions, Late changes, Allergy details unclear\nWhich vendor emails take the most follow ups? Florists and decor",
+   "intake": {
+    "role_summary": "You’re an event coordinator for a restaurant group in Chicago, planning private events and running them on the night.",
+    "tasks": [
+     {
+      "name": "Vendor emails",
+      "ai": true,
+      "private": false
+     },
+     {
+      "name": "Headcounts and dietary lists",
+      "ai": true,
+      "private": true
+     },
+     {
+      "name": "Client texts",
+      "ai": true,
+      "private": true
+     },
+     {
+      "name": "Event timelines",
+      "ai": true,
+      "private": false
+     },
+     {
+      "name": "Setting up rooms",
+      "ai": false,
+      "private": false
+     }
+    ],
+    "first_win": {
+     "task": "Vendor emails",
+     "intro": "You said vendor emails take the most follow ups. Here is a reusable follow up for florists and decor.",
+     "draft": "Hi [vendor first name], I’m following up on the [event name] on [date] at [venue]. Could you confirm the [florals or decor items] and the delivery time of [time]? Please reply by [deadline] so we can finalize the setup. If anything has changed on your end, let me know as soon as possible. Thank you, [your name], [restaurant group name]"
+    },
+    "ideas": [
+     "Week before checklist for each event",
+     "A reminder text for clients about final numbers",
+     "Vendor timeline summary for the night",
+     "Setup notes for room layouts",
+     "A template for asking about late changes",
+     "Plain language summary of an event plan for staff"
+    ],
+    "needs_follow_up": false,
+    "follow_up_question": null
+   },
+   "plan": {
+    "version": 2,
+    "role": "You’re an event coordinator for a restaurant group in Chicago, planning private events and running them on the night.",
+    "tool": "chatgpt",
+    "toolWhy": "You said you’d most like help with writing vendor emails and sorting headcounts and dietary lists the week before. ChatGPT is a good place to start because the free version is enough to begin, it works in a browser or a phone app, and you type to it like a text message.",
+    "yourTools": [
+     {
+      "name": "Google Sheets",
+      "what": "Sheets holds your headcounts and dietary lists, and it may have AI features you can look for in the editor, which can depend on your plan. It’s also where a cleaned up list can live for the whole team.",
+      "tryThis": "This week, ask for a simple column layout for one event: name, headcount, dietary need, allergy details, and last changed. Then look for any AI or help option in Sheets to see what it offers.",
+      "withChat": "Paste the messy replies into ChatGPT and ask for a clean list in rows. Then paste it into Sheets and sort by dietary need."
+     },
+     {
+      "name": "Gmail",
+      "what": "Gmail is where your vendor emails and follow ups happen, and it may offer AI writing help depending on your plan. Labels and drafts keep florist and decor threads in one place.",
+      "tryThis": "This week, write one florist follow up in ChatGPT, then save it as a draft in Gmail. Reuse it for the next vendor by changing only the details.",
+      "withChat": "Paste the vendor’s last reply into ChatGPT and ask for a short follow up that asks for a confirmed delivery time. Check it, then paste it into Gmail and send."
+     },
+     {
+      "name": "Calendar",
+      "what": "Calendar can hold your event deadlines, like when vendor confirmations and final numbers are due. Reminders help follow ups go out on time.",
+      "tryThis": "This week, ask ChatGPT for a list of reminder dates counting back from one event, then add them to Calendar as reminders.",
+      "withChat": "Give ChatGPT your event date and ask for a countdown of what to do and when. Add each date to Calendar as an event with a reminder."
+     }
+    ],
+    "worksFor": "employer",
+    "policy": "unclear",
+    "firstWin": {
+     "task": "Vendor emails",
+     "prompt": "I’m an event coordinator for a restaurant group in Chicago. Write a short, friendly follow up email to a florist about [event name] on [date] at [venue]. Ask them to confirm [florals or decor items] and the delivery time of [time], and to reply by [deadline]. Ask them to tell me right away if anything has changed. Keep it under 100 words, warm but professional, and sign it [your name], [restaurant group name].",
+     "example": "Subject: Confirming florals for [event name] on [date]\n\nHi [florist first name],\n\nI’m following up on [event name] on [date] at [venue]. Could you confirm the [florals or decor items] and the delivery time of [time]? Please reply by [deadline] so we can finalize the room.\n\nIf anything has changed on your end, please let me know right away.\n\nThank you,\n[your name]\n[restaurant group name]",
+     "fixes": [
+      "Shorter.",
+      "Warmer, like I’m writing to a regular.",
+      "Make the deadline stand out more."
+     ]
+    },
+    "ideas": [
+     {
+      "title": "Headcounts and dietary lists",
+      "why": "Turns mixed up replies into one clean list you can trust.",
+      "prompt": "I’m an event coordinator. Below are messy guest replies for an event. Make one clean list with columns for name, headcount, dietary need, and allergy details. Mark anything unclear or missing a name with a question mark so I can follow up. Leave anything you’re unsure about as it is, and don’t guess. Here are the replies: [paste replies with names removed or first names only]",
+      "life": false,
+      "mark": "check_first"
+     },
+     {
+      "title": "Client texts",
+      "why": "Gives you quick, polished texts you can send between tasks.",
+      "prompt": "I’m an event coordinator for a restaurant group. Write three short, friendly texts I can send a client about [topic, like menu choices or arrival time] for their event on [date]. Each should be under 40 words, warm and clear, and end with one question they can answer quickly. Don’t include any prices or policies.",
+      "life": false,
+      "mark": "safe_today"
+     },
+     {
+      "title": "Event timelines",
+      "why": "Gives you a first draft of the night to adjust.",
+      "prompt": "I plan private events for a restaurant group. Draft a run of show timeline for an event on [date] with [number] guests, starting at [start time] and ending at [end time]. Include vendor arrival, room setup, guest arrival, food service, and breakdown. Put it in a simple list with times as placeholders I can change.",
+      "life": false,
+      "mark": "safe_today"
+     },
+     {
+      "title": "Week before checklist for each event",
+      "why": "Keeps the final week from living in your head.",
+      "prompt": "I’m an event coordinator for a restaurant group. Make a checklist for the week before a private event with [number] guests on [date]. Include vendor confirmations, final headcount, dietary and allergy list, room setup plan, and staff briefing. Group by day, and keep each line short enough to check off quickly.",
+      "life": false,
+      "mark": "safe_today"
+     },
+     {
+      "title": "A reminder text for clients about final numbers",
+      "why": "Gets final numbers from clients without a long back and forth.",
+      "prompt": "I’m an event coordinator. Write a friendly reminder text to a client asking for their final headcount and any dietary or allergy changes for their event on [date] by [deadline]. Keep it under 50 words, warm and clear, and sign it [your name].",
+      "life": false,
+      "mark": "safe_today"
+     },
+     {
+      "title": "Vendor timeline summary for the night",
+      "why": "Puts every vendor’s arrival in one place for the team.",
+      "prompt": "I’m running a private event on [date] at [venue]. Turn these vendor details into one simple timeline for the night, ordered by arrival time, with the contact role and what each vendor is delivering: [paste vendor details, like role, item and time]. Keep it short enough to read on my phone.",
+      "life": false,
+      "mark": "safe_today"
+     },
+     {
+      "title": "Decor change request to a vendor",
+      "why": "Helps you ask for late changes clearly and politely.",
+      "prompt": "I’m an event coordinator. Write a short, polite email to a decor vendor asking to change [what is changing] for the event on [date]. Ask if it’s possible, what they need from me, and when they need to know by. Keep it under 90 words and calm in tone.",
+      "life": false,
+      "mark": "safe_today"
+     },
+     {
+      "title": "Room setup notes for the team",
+      "why": "Gives your setup crew clear, simple directions.",
+      "prompt": "I run private events for a restaurant group. Turn these room setup details into a short checklist for the setup team: [layout, table count, decor items, special areas]. Use simple bullet points in the order the team should do them, and keep each line under 12 words.",
+      "life": false,
+      "mark": "safe_today"
+     },
+     {
+      "title": "Meal plan around late event nights",
+      "why": "Helps you eat well when your hours are long and unpredictable.",
+      "prompt": "I work late on event nights and often get home after [time]. Plan five simple dinners and lunches I can make ahead or throw together fast. I like [food preferences] and don’t eat [foods to avoid]. Give me a short shopping list grouped by store section.",
+      "life": true,
+      "mark": "safe_today"
+     },
+     {
+      "title": "Plan for a free weekend",
+      "why": "Makes the most of a weekend off after busy event weeks.",
+      "prompt": "I have a free weekend on [dates] in Chicago and I’m usually working weekends. Plan a relaxed two day outline with a mix of rest and one or two things to do. I like [interests] and have a budget of [amount]. Keep it in a simple list by morning, afternoon and evening, and I’ll check hours and details myself.",
+      "life": true,
+      "mark": "safe_today"
+     }
+    ],
+    "safeUse": [
+     "Read and check everything before it goes out, especially emails to vendors and clients.",
+     "AI can be confidently wrong about facts, dates and numbers, so check them against your own records.",
+     "Never type in guest full names, phone numbers, or allergy details tied to a named person.",
+     "Leave out client contact details, payment information and contract terms.",
+     "Don’t paste in confidential company information, like internal pricing or private event details for guests of note.",
+     "Check with your company about which AI tools are approved before using one on company work."
+    ],
+    "workProfile": "I’m an event coordinator for a restaurant group in Chicago. I plan private events and run them on the night. I write to vendors like florists and decor companies, to clients planning events, and to my own team. I like drafts that are friendly, clear and professional, with short sentences and no fluff. Emails should be under 100 words unless I say otherwise, and texts should be shorter and sound like a real person. When I ask for lists or timelines, I like simple bullet points I can scan on my phone. If you’re unsure about something, ask me rather than guessing.",
+    "atWork": {
+     "askMessage": "Hi [manager name], I’ve started looking at AI chat tools to help with my day to day work. Could you tell me which AI tools, if any, are approved for us to use and what I’m allowed to use them for? I have in mind things like drafting vendor follow up emails, writing client texts, and building event timelines. I’d leave out guest names and private details unless you tell me otherwise.",
+     "aiTalk": "I wanted to let you know I’ve started using an AI chat tool to help with first drafts of vendor emails, client texts and event checklists. It helps me get started faster, and I read and check everything myself before anything goes out. I don’t put guest names or private details into it. If you have guidelines you’d like me to follow, I’m happy to adjust."
+    }
+   },
+   "checks": {
+    "firstWinIsMostWanted": false,
+    "firstWinTask": "Vendor emails",
+    "mostWanted": [
+     "Writing vendor emails",
+     "Headcounts and dietary lists the week before, every time."
+    ],
+    "toolWhyNamesMostWanted": true,
+    "questionsOver10Words": [],
+    "choicesOver4Words": [],
+    "dashes": [],
+    "deskWordsInChoicesOrQuestions": [],
+    "deskWordsInPlan": [],
+    "moneyOrPercentInPlan": [],
+    "nearDuplicateIdeas": [],
+    "ideaCount": 10,
+    "yourTools": {
+     "named": [
+      "Gmail",
+      "Google Sheets",
+      "Calendar",
+      "Texts"
+     ],
+     "written": [
+      "Google Sheets",
+      "Gmail",
+      "Calendar"
+     ],
+     "notHers": [],
+     "withChatBelowUses": [],
+     "missingTryThis": [],
+     "menuWords": []
+    }
+   }
+  },
+  "maya": {
+   "persona": {
+    "bio": "Maya, 26, social media manager at a skincare brand in Austin. She runs TikTok, Instagram and Pinterest. Her content calendar lives in Notion, she films on her iPhone, edits in CapCut and schedules in Later. Every morning she answers comments and DMs, she pulls numbers for the Monday sync, chases creators for their posts, and tries to keep up with trends. She uses ChatGPT for caption ideas and sometimes Claude, but the captions come out sounding generic and she rewrites them.",
+    "job": "Social media manager at a skincare brand. TikTok, Instagram and Pinterest.",
+    "level": "uses",
+    "worksFor": "employer",
+    "aiPolicy": "encouraged",
+    "noDesk": false
+   },
+   "versions": {
+    "job": "beginner-job-v2",
+    "questions": "beginner-questions-v2",
+    "intake": "beginner-intake-v3",
+    "plan": "beginner-plan-v4"
+   },
+   "seconds": {
+    "jobRead": 2.1,
+    "questions": 2.6,
+    "intake": 3.9,
+    "plan": 35.8
+   },
+   "jobRead": {
+    "repeats": [
+     {
+      "label": "Writing captions",
+      "ai": true
+     },
+     {
+      "label": "Planning content calendar",
+      "ai": true
+     },
+     {
+      "label": "Drafting TikTok scripts",
+      "ai": true
+     },
+     {
+      "label": "Replying to comments",
+      "ai": true
+     },
+     {
+      "label": "Filming product demos",
+      "ai": false
+     },
+     {
+      "label": "Checking analytics",
+      "ai": false
+     }
+    ],
+    "aiFallback": [
+     "Hashtag ideas",
+     "Pinterest pin descriptions",
+     "Story poll questions",
+     "Video hook lines"
+    ],
+    "apps": [
+     "TikTok",
+     "Instagram",
+     "Pinterest",
+     "Texts",
+     "Canva",
+     "Google Sheets"
+    ],
+    "worksFor": "unclear"
+   },
+   "jobReadFallback": false,
+   "asked": [
+    {
+     "id": "asked_1",
+     "title": "How do you reply to comments today?",
+     "kind": "one",
+     "choices": [
+      "Type each one",
+      "Copy and paste",
+      "Reply from the app",
+      "Ask a teammate"
+     ],
+     "hint": "Pick whatever is closest to your usual routine."
+    },
+    {
+     "id": "asked_2",
+     "title": "What makes chasing creators slow for you?",
+     "kind": "many",
+     "choices": [
+      "Following up again",
+      "Writing the brief",
+      "Finding the right creator",
+      "Agreeing on terms",
+      "Tracking who replied"
+     ],
+     "hint": "Pick every one that applies."
+    },
+    {
+     "id": "asked_3",
+     "title": "Which comments take the longest to answer?",
+     "kind": "one",
+     "choices": [
+      "Questions about products",
+      "Complaints",
+      "Shipping questions",
+      "Compliments",
+      "Skin concerns"
+     ],
+     "hint": "Any guess is fine."
+    },
+    {
+     "id": "asked_4",
+     "title": "What do you use AI for today?",
+     "kind": "many",
+     "choices": [
+      "Captions",
+      "Hooks",
+      "Comment replies",
+      "Creator briefs",
+      "Calendar ideas"
+     ],
+     "hint": "Pick every one that applies."
+    }
+   ],
+   "worksForFromJob": "unclear",
+   "answers": {
+    "job": "Social media manager at a skincare brand. TikTok, Instagram and Pinterest.",
+    "experience": "uses",
+    "qas": [
+     {
+      "id": "repeats",
+      "title": "What do you do over and over, every day or every week?",
+      "picked": [
+       "Writing captions",
+       "Planning content calendar",
+       "Replying to comments",
+       "Checking analytics"
+      ],
+      "text": "chasing creators for posts, every week",
+      "shown": [
+       "Writing captions",
+       "Planning content calendar",
+       "Drafting TikTok scripts",
+       "Replying to comments",
+       "Filming product demos",
+       "Checking analytics"
+      ]
+     },
+     {
+      "id": "most",
+      "title": "Which would save you the most time if it got easier?",
+      "picked": [
+       "Replying to comments",
+       "chasing creators for posts, every week"
+      ],
+      "text": null,
+      "shown": [
+       "Writing captions",
+       "Planning content calendar",
+       "Replying to comments",
+       "chasing creators for posts, every week"
+      ]
+     },
+     {
+      "id": "picture",
+      "title": "How do you picture AI helping with it?",
+      "picked": [],
+      "text": "honestly mostly drafting comment replies so I'm not typing the same thing 50 times a day"
+     },
+     {
+      "id": "apps",
+      "title": "Which apps do you use every week?",
+      "picked": [
+       "TikTok",
+       "Instagram",
+       "Pinterest",
+       "Google Sheets"
+      ],
+      "text": null,
+      "shown": [
+       "TikTok",
+       "Instagram",
+       "Pinterest",
+       "Texts",
+       "Canva",
+       "Google Sheets"
+      ]
+     },
+     {
+      "id": "tools",
+      "title": "Which AI have you used?",
+      "picked": [
+       "ChatGPT",
+       "Claude"
+      ],
+      "text": null,
+      "shown": [
+       "ChatGPT",
+       "Copilot",
+       "Gemini",
+       "Claude",
+       "Other",
+       "None yet",
+       "Not sure"
+      ]
+     },
+     {
+      "id": "asked_1",
+      "title": "How do you reply to comments today?",
+      "picked": [
+       "Reply from the app"
+      ],
+      "text": null,
+      "shown": [
+       "Type each one",
+       "Copy and paste",
+       "Reply from the app",
+       "Ask a teammate"
+      ]
+     },
+     {
+      "id": "asked_2",
+      "title": "What makes chasing creators slow for you?",
+      "picked": [
+       "Following up again",
+       "Finding the right creator",
+       "Tracking who replied"
+      ],
+      "text": null,
+      "shown": [
+       "Following up again",
+       "Writing the brief",
+       "Finding the right creator",
+       "Agreeing on terms",
+       "Tracking who replied"
+      ]
+     },
+     {
+      "id": "asked_3",
+      "title": "Which comments take the longest to answer?",
+      "picked": [
+       "Skin concerns"
+      ],
+      "text": null,
+      "shown": [
+       "Questions about products",
+       "Complaints",
+       "Shipping questions",
+       "Compliments",
+       "Skin concerns"
+      ]
+     },
+     {
+      "id": "asked_4",
+      "title": "What do you use AI for today?",
+      "picked": [
+       "Captions",
+       "Hooks",
+       "Comment replies",
+       "Creator briefs",
+       "Calendar ideas"
+      ],
+      "text": null,
+      "shown": [
+       "Captions",
+       "Hooks",
+       "Comment replies",
+       "Creator briefs",
+       "Calendar ideas"
+      ]
+     }
+    ],
+    "mostWanted": [
+     "Replying to comments",
+     "chasing creators for posts, every week"
+    ],
+    "worksFor": "employer",
+    "aiTools": [
+     "chatgpt",
+     "claude"
+    ],
+    "aiToolsOther": null,
+    "aiPolicy": "encouraged"
+   },
+   "digest": "What do you do over and over, every day or every week? Writing captions, Planning content calendar, Replying to comments, Checking analytics, chasing creators for posts, every week\nWhich would save you the most time if it got easier? Replying to comments, chasing creators for posts, every week\nHow do you picture AI helping with it? honestly mostly drafting comment replies so I'm not typing the same thing 50 times a day\nWhich apps do you use every week? TikTok, Instagram, Pinterest, Google Sheets\nWhich AI have you used? ChatGPT, Claude\nHow do you reply to comments today? Reply from the app\nWhat makes chasing creators slow for you? Following up again, Finding the right creator, Tracking who replied\nWhich comments take the longest to answer? Skin concerns\nWhat do you use AI for today? Captions, Hooks, Comment replies, Creator briefs, Calendar ideas",
+   "intake": {
+    "role_summary": "You’re a social media manager at a skincare brand, running TikTok, Instagram and Pinterest and keeping the content calendar moving.",
+    "tasks": [
+     {
+      "name": "Writing captions",
+      "ai": true,
+      "private": false
+     },
+     {
+      "name": "Planning content calendar",
+      "ai": true,
+      "private": false
+     },
+     {
+      "name": "Replying to comments",
+      "ai": true,
+      "private": true
+     },
+     {
+      "name": "Checking analytics",
+      "ai": true,
+      "private": true
+     },
+     {
+      "name": "Chasing creators for posts",
+      "ai": true,
+      "private": true
+     }
+    ],
+    "first_win": {
+     "task": "Replying to comments",
+     "intro": "You said comment replies eat up your day with the same answers over and over. Here is a reusable reply for skin concern questions.",
+     "draft": "Hi [first name], thanks so much for reaching out about your [skin concern]. Everyone’s skin is different, so the best next step is [recommended step from your team]. You can find more details on [product or page name]. If anything else comes up, just send us a message and we’re happy to help. Take care of your skin!"
+    },
+    "ideas": [
+     "Creator outreach DMs that get replies",
+     "Follow up messages for creators who went quiet",
+     "Reply templates for common product questions",
+     "Pinterest pin descriptions",
+     "Weekly content calendar summary for your team",
+     "Caption variations for A/B testing"
+    ],
+    "needs_follow_up": false,
+    "follow_up_question": null
+   },
+   "plan": {
+    "version": 2,
+    "role": "You’re a social media manager at a skincare brand, running TikTok, Instagram and Pinterest and keeping the content calendar moving.",
+    "tool": "chatgpt",
+    "toolWhy": "You said you’d most like help with replying to comments and chasing creators for posts, and ChatGPT is a good place to start on both. The free version is enough to begin, it works in a browser or a phone app, and you type to it like a text message.",
+    "yourTools": [
+     {
+      "name": "Google Sheets",
+      "what": "Google Sheets can be your creator tracker, with one row per creator and columns for status, last message and next follow up. If you look for the AI or Gemini option in Sheets, it may help with formulas, though that may need a paid plan.",
+      "tryThis": "This week, add a Status column with options like asked, replied and posted, so you can see who needs a nudge. Then sort by the last contact date.",
+      "withChat": "Paste your creator rows into ChatGPT with names removed and ask which ones are due a follow up. Then write the nudges in the chat and paste the status updates back into your sheet."
+     },
+     {
+      "name": "Instagram",
+      "what": "Instagram is where many of your comments land, so it helps to keep a set of reply drafts ready. Saved replies may be available in some account types, so look in your inbox settings.",
+      "tryThis": "This week, draft your most common reply types in ChatGPT, then save the best ones where Instagram lets you keep quick replies. Edit each one so it still sounds like you.",
+      "withChat": "Paste a batch of recent comments into ChatGPT with usernames removed and ask for a reply to each. Then read each one, tweak it and post it from the app."
+     },
+     {
+      "name": "Claude",
+      "what": "Claude is another chat assistant, and it can be handy for a second opinion on tone or wording. Using two assistants can show you different ways to say the same thing.",
+      "tryThis": "This week, take a reply you drafted in ChatGPT and ask Claude to make it warmer or shorter. Notice which version sounds more like your brand.",
+      "withChat": "Draft your reply in ChatGPT first. Then paste it into Claude and ask for a tighter version, and keep the one that sounds most like you."
+     }
+    ],
+    "worksFor": "employer",
+    "policy": "encouraged",
+    "firstWin": {
+     "task": "Replying to comments",
+     "prompt": "I’m a social media manager at a skincare brand, replying to comments on TikTok and Instagram. Write a reply to this comment: [paste the comment, no usernames]. It’s about a skin concern. Keep it warm and friendly, two sentences, under 40 words, like a real person from the brand. Don’t give medical advice or promise results. Point them to [recommended step from my team] and [product or page name]. Give me three versions with slightly different wording.",
+     "example": "1. Hi [first name], thanks for asking about [skin concern]! Everyone’s skin is different, so our team suggests [recommended step from my team]. You’ll find more at [product or page name].\n2. Thanks for sharing this, [first name]. Our team recommends [recommended step from my team], and [product or page name] has the details.\n3. Hi [first name]! For [skin concern], the best next step is [recommended step from my team]. Details are on [product or page name].",
+     "fixes": [
+      "Shorter.",
+      "Warmer, like I’m replying to a regular.",
+      "Less salesy, no product push."
+     ]
+    },
+    "ideas": [
+     {
+      "title": "Creator outreach DMs that get replies",
+      "why": "Gives you a friendly first message to send without starting from scratch each time.",
+      "prompt": "I’m a social media manager at a skincare brand. Write a short first DM to a creator I’d like to post about our brand. Keep it friendly and casual, under 70 words, with one clear ask. Include [what I’m asking them to post], [timeline] and [what we offer]. Give me two versions, one more playful and one more professional. Leave out any real names.",
+      "life": false,
+      "mark": "safe_today"
+     },
+     {
+      "title": "Follow up messages for creators who went quiet",
+      "why": "Makes nudging feel easy and polite instead of awkward.",
+      "prompt": "I’m a social media manager at a skincare brand and a creator hasn’t replied about [post or collaboration]. Write three short follow up DMs, each under 50 words. One should be a gentle check in, one should be a deadline reminder for [date], and one should be a last friendly nudge. Keep the tone warm, never pushy.",
+      "life": false,
+      "mark": "safe_today"
+     },
+     {
+      "title": "Reply templates for common product questions",
+      "why": "Saves you from typing the same answer over and over each day.",
+      "prompt": "I manage social media for a skincare brand. Write short reply templates for these common comment questions: [list 4 or 5 questions, like where to buy or how to use a product]. Keep each under 35 words, friendly, with brackets for any product detail or link I need to add. Don’t invent product facts or claims.",
+      "life": false,
+      "mark": "safe_today"
+     },
+     {
+      "title": "Writing captions",
+      "why": "Gets you a few caption options to choose from and polish.",
+      "prompt": "I’m a social media manager at a skincare brand. Write three caption options for a [TikTok or Instagram] post about [topic or product]. Keep each under 40 words, warm and conversational, with one simple call to action and a short hook as the first line. Don’t make medical claims or promise results. Add [hashtags] at the end.",
+      "life": false,
+      "mark": "safe_today"
+     },
+     {
+      "title": "Planning content calendar",
+      "why": "Turns a blank month into a list of ideas you can slot into your sheet.",
+      "prompt": "I run TikTok, Instagram and Pinterest for a skincare brand. Help me plan a content calendar for [month]. Give me a table with the day, platform, post idea and format, with a mix of educational, behind the scenes and community posts. Include these dates or launches: [dates and launches]. Keep it easy to paste into Google Sheets.",
+      "life": false,
+      "mark": "safe_today"
+     },
+     {
+      "title": "Checking analytics",
+      "why": "Helps you spot what the numbers are saying without staring at them for ages.",
+      "prompt": "I manage social media for a skincare brand. Here are my numbers for [time period]: [paste the numbers, no private data]. Explain in plain words what seems to be working and what isn’t. Suggest three things to try next week. Tell me if you need more information, and don’t guess at numbers I haven’t given you.",
+      "life": false,
+      "mark": "check_first"
+     },
+     {
+      "title": "Tracking creator replies in a sheet",
+      "why": "Keeps your creator list tidy so nobody slips through.",
+      "prompt": "I’m a social media manager chasing creators for posts. Help me set up a Google Sheets tracker. Suggest columns, status options and a simple way to see who needs a follow up. Give me the column headings in a row I can paste in, plus a short note on how to use each one. Leave out any real creator names or contact details.",
+      "life": false,
+      "mark": "safe_today"
+     },
+     {
+      "title": "Replies to worried skin concern comments",
+      "why": "Helps you answer sensitive comments kindly while staying careful.",
+      "prompt": "I reply to comments for a skincare brand. Someone commented about a worried skin concern: [paste comment, no usernames]. Write a kind reply under 45 words that shows we care, doesn’t give medical advice and points them to [approved step from my team, like a link or contact]. I’ll check it against our approved guidance before posting.",
+      "life": false,
+      "mark": "check_first"
+     },
+     {
+      "title": "Meal ideas for busy workdays",
+      "why": "Gives you easy dinners when you’ve spent the day on your phone and screens.",
+      "prompt": "I work long days managing social media and want simple dinners that take little effort. Suggest five meals I can make in about [time I have] using [ingredients I have or like]. I don’t eat [foods to avoid]. Give me a short shopping list and one note on what could be prepped ahead.",
+      "life": true,
+      "mark": "safe_today"
+     },
+     {
+      "title": "Plan for a free weekend",
+      "why": "Helps you step away from the screen and actually enjoy your time off.",
+      "prompt": "I have a free weekend on [dates] and I’d like to rest and do something fun. My budget is [amount] and I’m in [city or area]. I like [interests]. Suggest a relaxed plan with one activity each morning and afternoon and one idea for staying offline for a while.",
+      "life": true,
+      "mark": "safe_today"
+     }
+    ],
+    "safeUse": [
+     "Read and check everything before it goes out, because it’s your name and your brand’s name on it.",
+     "AI can be confidently wrong about facts, dates and numbers, so check them against your own sources.",
+     "Never type in customer names, usernames, addresses or private messages from your comments or DMs.",
+     "Never type in creator contact details, contracts or payment information.",
+     "For skin concern replies, ask for a draft and check it against your team’s approved guidance, since AI can’t give medical advice.",
+     "Keep unreleased products, launch dates and internal numbers out of the chat unless your company has told you it’s okay."
+    ],
+    "workProfile": "I’m a social media manager at a skincare brand, running TikTok, Instagram and Pinterest. I write captions, reply to customer comments, plan the content calendar, check analytics and work with creators. I write to customers and followers in a warm, friendly voice, and to creators in a casual but professional one. I like short drafts, plain words and no hype. I never want medical claims or promised results. When I ask for replies, give me a few options so I can choose and edit. If you need more details, ask me first rather than guessing.",
+    "atWork": {
+     "askMessage": "Hi, I’m using AI more in my social media work and wanted to check which tools are approved. I’d like to use a chat assistant to draft comment replies, captions, creator outreach messages and content calendar ideas. Is there anything I should avoid typing in, like customer details or unreleased product information? Please let me know if there’s a policy or approved tool list I should follow.",
+     "aiTalk": "I wanted to let you know I’ve started using AI to help with my social media work. I use it to draft comment replies, captions and creator messages, and to brainstorm calendar ideas. I read and edit everything myself before anything goes out, and I never put customer or creator details into it. It gives me more time for the parts of the job that need a human touch, and I’m happy to share what’s working."
+    }
+   },
+   "checks": {
+    "firstWinIsMostWanted": true,
+    "firstWinTask": "Replying to comments",
+    "mostWanted": [
+     "Replying to comments",
+     "chasing creators for posts, every week"
+    ],
+    "toolWhyNamesMostWanted": true,
+    "questionsOver10Words": [],
+    "choicesOver4Words": [],
+    "dashes": [],
+    "deskWordsInChoicesOrQuestions": [],
+    "deskWordsInPlan": [],
+    "moneyOrPercentInPlan": [],
+    "nearDuplicateIdeas": [],
+    "ideaCount": 10,
+    "yourTools": {
+     "named": [
+      "TikTok",
+      "Instagram",
+      "Pinterest",
+      "Google Sheets",
+      "Claude"
+     ],
+     "written": [
+      "Google Sheets",
+      "Instagram",
+      "Claude"
+     ],
+     "notHers": [],
+     "withChatBelowUses": [],
+     "missingTryThis": [],
+     "menuWords": [
+      "Instagram is where many of your comments land, so it helps to keep a set of reply drafts ready. Saved replies may be available in some account types, so look in your inbox settings."
+     ]
+    }
+   }
+  },
+  "kayla": {
+   "persona": {
+    "bio": "Kayla, 27, electrician who owns a one truck business in Phoenix. She is in attics by 7am and on job sites all day; she has no office and works from her phone in the truck. The paperwork around the job is what drags: writing quotes, sending invoices, texting homeowners about times, chasing payment, asking for reviews. She does quotes on her phone at night. She tried ChatGPT once to write a review request and forgot about it.",
+    "job": "Electrician. I own my own business, one truck, mostly homes in Phoenix.",
+    "level": "tried",
+    "worksFor": "self",
+    "aiPolicy": null,
+    "noDesk": true
+   },
+   "versions": {
+    "job": "beginner-job-v2",
+    "questions": "beginner-questions-v2",
+    "intake": "beginner-intake-v3",
+    "plan": "beginner-plan-v4"
+   },
+   "seconds": {
+    "jobRead": 1.8,
+    "questions": 2.1,
+    "intake": 3,
+    "plan": 18.9
+   },
+   "jobRead": {
+    "repeats": [
+     {
+      "label": "Writing quotes",
+      "ai": true
+     },
+     {
+      "label": "Texting homeowners",
+      "ai": true
+     },
+     {
+      "label": "Scheduling jobs",
+      "ai": true
+     },
+     {
+      "label": "Running wire",
+      "ai": false
+     },
+     {
+      "label": "Installing panels",
+      "ai": false
+     },
+     {
+      "label": "Troubleshooting outages",
+      "ai": false
+     }
+    ],
+    "aiFallback": [
+     "Invoice reminder texts",
+     "Follow up messages",
+     "Service call replies",
+     "Maintenance tip posts"
+    ],
+    "apps": [
+     "Texts",
+     "Phone calls",
+     "WhatsApp",
+     "Instagram",
+     "Facebook",
+     "Google Maps",
+     "Square"
+    ],
+    "worksFor": "self"
+   },
+   "jobReadFallback": false,
+   "asked": [
+    {
+     "id": "asked_1",
+     "title": "How do you send a quote today?",
+     "kind": "one",
+     "choices": [
+      "Text",
+      "Email",
+      "Paper",
+      "An app"
+     ],
+     "hint": null
+    },
+    {
+     "id": "asked_2",
+     "title": "What makes quotes slow for you right now?",
+     "kind": "many",
+     "choices": [
+      "Figuring materials",
+      "Checking the job site",
+      "Pricing labor",
+      "Typing it up"
+     ],
+     "hint": "Pick every one that fits."
+    },
+    {
+     "id": "asked_3",
+     "title": "What did ChatGPT do when you tried it?",
+     "kind": "one",
+     "choices": [
+      "Answers felt generic",
+      "Faster doing it myself",
+      "Forgot about it",
+      "Didn’t trust it"
+     ],
+     "hint": null
+    }
+   ],
+   "worksForFromJob": "self",
+   "answers": {
+    "job": "Electrician. I own my own business, one truck, mostly homes in Phoenix.",
+    "experience": "tried",
+    "qas": [
+     {
+      "id": "repeats",
+      "title": "What do you do over and over, every day or every week?",
+      "picked": [
+       "Writing quotes",
+       "Texting homeowners",
+       "Scheduling jobs"
+      ],
+      "text": null,
+      "shown": [
+       "Writing quotes",
+       "Texting homeowners",
+       "Scheduling jobs",
+       "Running wire",
+       "Installing panels",
+       "Troubleshooting outages"
+      ]
+     },
+     {
+      "id": "most",
+      "title": "Which would save you the most time if it got easier?",
+      "picked": [
+       "Writing quotes",
+       "Texting homeowners"
+      ],
+      "text": null,
+      "shown": [
+       "Writing quotes",
+       "Texting homeowners",
+       "Scheduling jobs"
+      ]
+     },
+     {
+      "id": "picture",
+      "title": "How do you picture AI helping with it?",
+      "picked": [],
+      "text": "Honestly mostly the quotes at night, and the texts about times. Not sure how good it'd be at pricing though."
+     },
+     {
+      "id": "apps",
+      "title": "Which apps do you use every week?",
+      "picked": [
+       "Texts",
+       "Phone calls",
+       "Google Maps"
+      ],
+      "text": null,
+      "shown": [
+       "Texts",
+       "Phone calls",
+       "WhatsApp",
+       "Instagram",
+       "Facebook",
+       "Google Maps",
+       "Square"
+      ]
+     },
+     {
+      "id": "tools",
+      "title": "Which AI have you used?",
+      "picked": [
+       "ChatGPT"
+      ],
+      "text": null,
+      "shown": [
+       "ChatGPT",
+       "Copilot",
+       "Gemini",
+       "Claude",
+       "Other",
+       "None yet",
+       "Not sure"
+      ]
+     },
+     {
+      "id": "asked_1",
+      "title": "How do you send a quote today?",
+      "picked": [
+       "An app"
+      ],
+      "text": null,
+      "shown": [
+       "Text",
+       "Email",
+       "Paper",
+       "An app"
+      ]
+     },
+     {
+      "id": "asked_2",
+      "title": "What makes quotes slow for you right now?",
+      "picked": [
+       "Figuring materials",
+       "Pricing labor",
+       "Typing it up"
+      ],
+      "text": null,
+      "shown": [
+       "Figuring materials",
+       "Checking the job site",
+       "Pricing labor",
+       "Typing it up"
+      ]
+     },
+     {
+      "id": "asked_3",
+      "title": "What did ChatGPT do when you tried it?",
+      "picked": [
+       "Forgot about it"
+      ],
+      "text": null,
+      "shown": [
+       "Answers felt generic",
+       "Faster doing it myself",
+       "Forgot about it",
+       "Didn’t trust it"
+      ]
+     }
+    ],
+    "mostWanted": [
+     "Writing quotes",
+     "Texting homeowners"
+    ],
+    "worksFor": "self",
+    "aiTools": [
+     "chatgpt"
+    ],
+    "aiToolsOther": null,
+    "aiPolicy": null
+   },
+   "digest": "What do you do over and over, every day or every week? Writing quotes, Texting homeowners, Scheduling jobs\nWhich would save you the most time if it got easier? Writing quotes, Texting homeowners\nHow do you picture AI helping with it? Honestly mostly the quotes at night, and the texts about times. Not sure how good it'd be at pricing though.\nWhich apps do you use every week? Texts, Phone calls, Google Maps\nWhich AI have you used? ChatGPT\nHow do you send a quote today? An app\nWhat makes quotes slow for you right now? Figuring materials, Pricing labor, Typing it up\nWhat did ChatGPT do when you tried it? Forgot about it",
+   "intake": {
+    "role_summary": "You’re an electrician running your own business with one truck, mostly doing homes in Phoenix.",
+    "tasks": [
+     {
+      "name": "Writing quotes",
+      "ai": true,
+      "private": true
+     },
+     {
+      "name": "Texting homeowners",
+      "ai": true,
+      "private": true
+     },
+     {
+      "name": "Scheduling jobs",
+      "ai": true,
+      "private": true
+     }
+    ],
+    "first_win": {
+     "task": "Texting homeowners",
+     "intro": "You said texting homeowners takes up a lot of your time. Here is a reusable text for confirming a visit time.",
+     "draft": "Hi [first name], this is [your name] with [business name]. I’m confirming our electrical visit for [day] between [time window]. I’ll be arriving in [vehicle] and will text you when I’m about 15 minutes out. If that time no longer works, reply here and we’ll find another slot. Thanks, and see you soon!"
+    },
+    "ideas": [
+     "Follow up texts for unanswered quotes",
+     "A checklist for materials to order before a job",
+     "Templates for explaining a job delay",
+     "Reminder texts the day before a visit",
+     "A simple intake form for new customers",
+     "A plan for organizing your weekly schedule"
+    ],
+    "needs_follow_up": false,
+    "follow_up_question": null
+   },
+   "plan": {
+    "version": 2,
+    "role": "You’re an electrician running your own business with one truck, mostly doing homes in Phoenix.",
+    "tool": "chatgpt",
+    "toolWhy": "You said you’d most like help with writing quotes and texting homeowners, and ChatGPT is a good place to start on both. The free version is enough to begin, it works in a browser or a phone app, and you type to it like a text message.",
+    "yourTools": [
+     {
+      "name": "Texts",
+      "what": "Texts are where you reach homeowners about times, arrivals and quotes, so a good draft there saves you retyping the same message.",
+      "tryThis": "This week, save one drafted visit confirmation as a note on your phone, then copy it into a text and change only the name and time.",
+      "withChat": null
+     },
+     {
+      "name": "Google Maps",
+      "what": "Google Maps can show how long a drive will take, which helps you pick realistic arrival windows for homeowners.",
+      "tryThis": "This week, check the drive time between two jobs before you text a time window, then tell ChatGPT the window so it can write the text around it.",
+      "withChat": null
+     }
+    ],
+    "worksFor": "self",
+    "policy": null,
+    "firstWin": {
+     "task": "Texting homeowners",
+     "prompt": "I’m an electrician who owns my own business with one truck, doing mostly homes in Phoenix. Write a short text to a homeowner confirming our visit. Details: first name [first name], day [day], time window [time window], my name [your name], business [business name]. Say I’ll text when I’m close. Tell them to reply if the time doesn’t work. Keep it friendly and plain, like I’m texting a customer, under 60 words, no emoji.",
+     "example": "Hi [first name], it’s [your name] with [business name]. I’m confirming our visit on [day], [time window]. I’ll text you when I’m close. If that time doesn’t work anymore, just reply here and we’ll set up another. Thanks, see you then!",
+     "fixes": [
+      "Shorter.",
+      "Warmer, like I’m texting a regular.",
+      "Make it sound less formal."
+     ]
+    },
+    "ideas": [
+     {
+      "title": "Writing quotes",
+      "why": "Gets your typing done at night so you only check the numbers.",
+      "prompt": "I’m an electrician with my own business in Phoenix, doing mostly homes. Turn these notes into a clear quote I can send a homeowner. Job: [describe the job]. Materials: [list]. Labor: [my hours and rate]. Total: [my total]. Use only my numbers, add no prices of your own. Plain, polite tone, short sections for materials, labor and total.",
+      "life": false,
+      "mark": "safe_today"
+     },
+     {
+      "title": "Scheduling jobs",
+      "why": "Helps you turn a pile of jobs into a plan for the week.",
+      "prompt": "I’m a solo electrician with one truck in Phoenix. Here are my jobs this week: [list jobs with how long each might take and any time the homeowner needs]. Suggest a simple day by day order that keeps drive time sensible. Show it as a short list. Leave names and addresses out, just use job labels like Job A.",
+      "life": false,
+      "mark": "safe_today"
+     },
+     {
+      "title": "Follow up texts for unanswered quotes",
+      "why": "Gives you a friendly nudge to send without sounding pushy.",
+      "prompt": "I’m an electrician who owns my business in Phoenix. I sent a homeowner a quote on [day] and haven’t heard back. Write three short follow up texts, each under 50 words, in a friendly and relaxed tone, not pushy. Leave a spot for [first name] and [job type]. Don’t mention discounts or deadlines.",
+      "life": false,
+      "mark": "safe_today"
+     },
+     {
+      "title": "A checklist for materials to order before a job",
+      "why": "Helps you catch what to bring or order before you get to the house.",
+      "prompt": "I’m an electrician doing homes in Phoenix. Make a checklist of materials and tools to think about before a job like [type of job, for example a panel swap or ceiling fan install]. Group it by category and add a spot at the end for notes. I will check it against my own experience and local code before I order anything.",
+      "life": false,
+      "mark": "safe_today"
+     },
+     {
+      "title": "Templates for explaining a job delay",
+      "why": "Lets you share bad news clearly and kindly without stress.",
+      "prompt": "I’m an electrician with my own business in Phoenix. Write three short text templates telling a homeowner a job is delayed. Reasons: [part backordered, earlier job ran long, weather or other]. Include a spot for [new day and time]. Tone is honest, calm and respectful, each under 60 words. No excuses that sound made up.",
+      "life": false,
+      "mark": "safe_today"
+     },
+     {
+      "title": "Reply to a homeowner who says the quote is high",
+      "why": "Helps you answer price pushback calmly and keep the relationship.",
+      "prompt": "I’m an electrician with my own business in Phoenix. A homeowner texted that my quote feels high. Write a calm, friendly reply under 70 words that thanks them, explains that the quote covers [what’s included: materials, labor, permits if any], and offers to talk it through. Don’t offer discounts. Leave out names.",
+      "life": false,
+      "mark": "safe_today"
+     },
+     {
+      "title": "Review request text after a finished job",
+      "why": "Makes it easy to ask happy customers for a review.",
+      "prompt": "I’m an electrician with my own business in Phoenix. Write a short, warm text asking a homeowner to leave a review after I finish a job. Add a spot for [review link] and [first name]. Under 50 words, no pressure, no emoji. Also give me one shorter version.",
+      "life": false,
+      "mark": "safe_today"
+     },
+     {
+      "title": "Meal plan for long work days",
+      "why": "Gives you dinner ideas for days you get home tired.",
+      "prompt": "I work long days as an electrician, often in Phoenix heat, and get home tired. Make a simple dinner plan for [number] days with meals that take little effort to cook. Foods I like: [list]. Foods I avoid: [list]. Add a short grocery list at the end.",
+      "life": true,
+      "mark": "safe_today"
+     },
+     {
+      "title": "Plan for a free weekend",
+      "why": "Helps you actually rest and enjoy your time off.",
+      "prompt": "I own my own business and rarely get a full weekend. I have [Saturday and Sunday] free. Suggest a simple plan that mixes rest and one fun thing, near Phoenix. My budget is [amount] and I like [interests]. Give me two options and a short list for each.",
+      "life": true,
+      "mark": "safe_today"
+     }
+    ],
+    "safeUse": [
+     "Read and check everything before it goes out to a homeowner.",
+     "AI can be confidently wrong about facts, dates and numbers, so check every price, hour and total yourself.",
+     "Never type in homeowner names, home addresses, phone numbers or gate codes.",
+     "Don’t rely on AI for electrical code or safety rules. Check them against your own approved sources.",
+     "Use your own prices and rates in quotes, because AI doesn’t know your costs or local rates.",
+     "Keep photos of panels, alarm details and anything that shows a home’s security out of the chat."
+    ],
+    "workProfile": "I’m an electrician who owns my own business with one truck, working mostly on homes in Phoenix. I write quotes, text homeowners about times and arrivals, and schedule my own jobs. Most of my messages go to homeowners who aren’t in the trade, so I like plain words with no jargon. I want drafts that sound friendly and professional, like a real person texting. Keep texts short, under about 60 words. Keep quotes clear and simple, with materials, labor and total in separate parts. Use only the numbers I give you and never add prices of your own.",
+    "atWork": null
+   },
+   "checks": {
+    "firstWinIsMostWanted": true,
+    "firstWinTask": "Texting homeowners",
+    "mostWanted": [
+     "Writing quotes",
+     "Texting homeowners"
+    ],
+    "toolWhyNamesMostWanted": true,
+    "questionsOver10Words": [],
+    "choicesOver4Words": [],
+    "dashes": [],
+    "deskWordsInChoicesOrQuestions": [
+     "Email"
+    ],
+    "deskWordsInPlan": [],
+    "moneyOrPercentInPlan": [],
+    "nearDuplicateIdeas": [],
+    "ideaCount": 9,
+    "yourTools": {
+     "named": [
+      "Texts",
+      "Phone calls",
+      "Google Maps"
+     ],
+     "written": [
+      "Texts",
+      "Google Maps"
+     ],
+     "notHers": [],
+     "withChatBelowUses": [],
+     "missingTryThis": [],
+     "menuWords": []
+    }
+   }
+  },
+  "associate": {
+   "persona": {
+    "bio": "Sales associate at a clothing store in the mall, part time, about 28 hours. On the floor helping customers, folding and refolding tables, fitting rooms, the register, unloading the truck on Tuesdays, putting out new stock. The store wants her to offer the store card at every sale. She has no computer at work, just her phone. She ends up training new hires and sorting out shift swaps in the group chat. Customers ask the same questions about returns and sizes all day. She has never used AI.",
+    "job": "Sales associate at a clothing store in the mall. Part time, about 28 hours.",
+    "level": "not_yet",
+    "worksFor": "employer",
+    "aiPolicy": "no_idea",
+    "noDesk": true
+   },
+   "versions": {
+    "job": "beginner-job-v2",
+    "questions": "beginner-questions-v2",
+    "intake": "beginner-intake-v3",
+    "plan": "beginner-plan-v4"
+   },
+   "seconds": {
+    "jobRead": 2.7,
+    "questions": 1.5,
+    "intake": 2.9,
+    "plan": 19.7
+   },
+   "jobRead": {
+    "repeats": [
+     {
+      "label": "Folding and restocking",
+      "ai": false
+     },
+     {
+      "label": "Greeting shoppers",
+      "ai": false
+     },
+     {
+      "label": "Fitting room help",
+      "ai": false
+     },
+     {
+      "label": "Writing social posts",
+      "ai": true
+     },
+     {
+      "label": "Replying to customer messages",
+      "ai": true
+     },
+     {
+      "label": "Planning weekly schedule",
+      "ai": true
+     }
+    ],
+    "aiFallback": [
+     "Outfit styling ideas",
+     "Product description rewrites",
+     "Customer thank you notes",
+     "Sale announcement captions"
+    ],
+    "apps": [
+     "Texts",
+     "Instagram",
+     "WhatsApp",
+     "Google Calendar",
+     "Venmo",
+     "Facebook"
+    ],
+    "worksFor": "employer"
+   },
+   "jobReadFallback": false,
+   "asked": [
+    {
+     "id": "asked_1",
+     "title": "How do you usually answer return and size questions?",
+     "kind": "one",
+     "choices": [
+      "Same words every time",
+      "Ask a manager",
+      "Check the tag"
+     ],
+     "hint": "Pick the closest one."
+    },
+    {
+     "id": "asked_2",
+     "title": "How do you handle shift swaps today?",
+     "kind": "one",
+     "choices": [
+      "Group text",
+      "One on one texts",
+      "Paper sign up",
+      "Ask the manager"
+     ],
+     "hint": null
+    },
+    {
+     "id": "asked_3",
+     "title": "What has held you back from trying AI so far?",
+     "kind": "one",
+     "choices": [
+      "Unsure where to start",
+      "Worried about mistakes",
+      "Privacy",
+      "No time",
+      "Doesn’t fit my job"
+     ],
+     "hint": "Not having tried yet is completely normal."
+    }
+   ],
+   "worksForFromJob": "employer",
+   "answers": {
+    "job": "Sales associate at a clothing store in the mall. Part time, about 28 hours.",
+    "experience": "not_yet",
+    "qas": [
+     {
+      "id": "repeats",
+      "title": "What do you do over and over, every day or every week?",
+      "picked": [
+       "Folding and restocking",
+       "Greeting shoppers",
+       "Fitting room help",
+       "Replying to customer messages",
+       "Planning weekly schedule"
+      ],
+      "text": "Same return and size questions all day, and shift swaps in t",
+      "shown": [
+       "Folding and restocking",
+       "Greeting shoppers",
+       "Fitting room help",
+       "Writing social posts",
+       "Replying to customer messages",
+       "Planning weekly schedule"
+      ]
+     },
+     {
+      "id": "most",
+      "title": "Which would save you the most time if it got easier?",
+      "picked": [
+       "Same return and size questions all day, and shift swaps in t",
+       "Planning weekly schedule"
+      ],
+      "text": null,
+      "shown": [
+       "Replying to customer messages",
+       "Planning weekly schedule",
+       "Same return and size questions all day, and shift swaps in t"
+      ]
+     },
+     {
+      "id": "picture",
+      "title": "How do you picture AI helping with it?",
+      "picked": [],
+      "text": "Maybe answering the return and size questions so I don't repeat myself all shift. I've never used it though."
+     },
+     {
+      "id": "apps",
+      "title": "Which apps do you use every week?",
+      "picked": [
+       "Texts",
+       "Instagram",
+       "WhatsApp",
+       "Venmo",
+       "Facebook"
+      ],
+      "text": null,
+      "shown": [
+       "Texts",
+       "Instagram",
+       "WhatsApp",
+       "Google Calendar",
+       "Venmo",
+       "Facebook"
+      ]
+     },
+     {
+      "id": "asked_1",
+      "title": "How do you usually answer return and size questions?",
+      "picked": [
+       "Check the tag"
+      ],
+      "text": null,
+      "shown": [
+       "Same words every time",
+       "Ask a manager",
+       "Check the tag"
+      ]
+     },
+     {
+      "id": "asked_2",
+      "title": "How do you handle shift swaps today?",
+      "picked": [
+       "Group text"
+      ],
+      "text": null,
+      "shown": [
+       "Group text",
+       "One on one texts",
+       "Paper sign up",
+       "Ask the manager"
+      ]
+     },
+     {
+      "id": "asked_3",
+      "title": "What has held you back from trying AI so far?",
+      "picked": [
+       "No time"
+      ],
+      "text": "Between the floor, the truck, and the group chat, I'm just n",
+      "shown": [
+       "Unsure where to start",
+       "Worried about mistakes",
+       "Privacy",
+       "No time",
+       "Doesn’t fit my job"
+      ]
+     }
+    ],
+    "mostWanted": [
+     "Same return and size questions all day, and shift swaps in t",
+     "Planning weekly schedule"
+    ],
+    "worksFor": "employer",
+    "aiTools": [
+     "none_yet"
+    ],
+    "aiToolsOther": null,
+    "aiPolicy": "no_idea"
+   },
+   "digest": "What do you do over and over, every day or every week? Folding and restocking, Greeting shoppers, Fitting room help, Replying to customer messages, Planning weekly schedule, Same return and size questions all day, and shift swaps in t\nWhich would save you the most time if it got easier? Same return and size questions all day, and shift swaps in t, Planning weekly schedule\nHow do you picture AI helping with it? Maybe answering the return and size questions so I don't repeat myself all shift. I've never used it though.\nWhich apps do you use every week? Texts, Instagram, WhatsApp, Venmo, Facebook\nHow do you usually answer return and size questions? Check the tag\nHow do you handle shift swaps today? Group text\nWhat has held you back from trying AI so far? No time, Between the floor, the truck, and the group chat, I'm just n",
+   "intake": {
+    "role_summary": "You’re a part time sales associate at a clothing store in the mall, working about 28 hours a week on the floor.",
+    "tasks": [
+     {
+      "name": "Folding and restocking",
+      "ai": false,
+      "private": false
+     },
+     {
+      "name": "Greeting shoppers",
+      "ai": false,
+      "private": false
+     },
+     {
+      "name": "Fitting room help",
+      "ai": false,
+      "private": false
+     },
+     {
+      "name": "Replying to customer messages",
+      "ai": true,
+      "private": true
+     },
+     {
+      "name": "Return and size questions",
+      "ai": true,
+      "private": false
+     },
+     {
+      "name": "Planning the weekly schedule",
+      "ai": true,
+      "private": true
+     }
+    ],
+    "first_win": {
+     "task": "Return and size questions",
+     "intro": "You said return and size questions eat up your shift. Here is a reply you can reuse, with blanks for the details.",
+     "draft": "Hi [first name], thanks for reaching out! Here is what you need to know about sizing: [size chart note]. For returns, our policy is [return window and conditions]. If you have a specific item in mind, reply with the style name and your usual size, and I will check what we have in stock in that size: [stock note]. Hope that helps, and let me know if there is anything else I can do for you!"
+    },
+    "ideas": [
+     "Texts for shift swap requests",
+     "A checklist for setting up the weekly schedule",
+     "Instagram captions for new arrivals",
+     "Facebook posts for weekend sales",
+     "A short script for greeting shoppers",
+     "Answers for common fitting room questions"
+    ],
+    "needs_follow_up": false,
+    "follow_up_question": null
+   },
+   "plan": {
+    "version": 2,
+    "role": "You’re a part time sales associate at a clothing store in the mall, working about 28 hours a week on the floor.",
+    "tool": "claude",
+    "toolWhy": "You said you’d most like help with the same return and size questions all day, and with shift swaps and planning the weekly schedule. Claude is a good place to start because the free version is enough to begin, it works in a browser or a phone app, and you just type to it like a text message.",
+    "yourTools": [
+     {
+      "name": "Texts",
+      "what": "Texts are where you can send short, clear messages to coworkers about shift swaps and to customers who message you.",
+      "tryThis": "Next time a swap comes up, write the message in Claude first, then copy it into your text.",
+      "withChat": null
+     },
+     {
+      "name": "WhatsApp",
+      "what": "WhatsApp can keep a group chat for your team, so a shift swap request can go out in one message instead of many.",
+      "tryThis": "Write one clear swap request in Claude, with the day and time, and paste it into your group chat.",
+      "withChat": null
+     }
+    ],
+    "worksFor": "employer",
+    "policy": "no_idea",
+    "firstWin": {
+     "task": "Return and size questions",
+     "prompt": "I’m a part time sales associate at a clothing store in the mall. Customers ask me the same return and size questions all day. Write a short, friendly reply I can send when a customer messages asking about sizing or returns. Keep it under 80 words, warm and casual like I’m talking to a regular. Leave spots in square brackets for the size chart note [size chart], the return policy [return window and conditions], and a stock check [stock note]. Don’t make up any policy.",
+     "example": "Hi [first name], thanks for asking! For sizing, here’s a quick note: [size chart]. For returns, our policy is [return window and conditions]. If you tell me the style and your usual size, I’ll check if we have it: [stock note]. Happy to help with anything else!",
+     "fixes": [
+      "Shorter.",
+      "Warmer, like I’m texting a regular.",
+      "Make it sound less formal."
+     ]
+    },
+    "ideas": [
+     {
+      "title": "Texts for shift swap requests",
+      "why": "Gets a clear swap request out fast, so you stop retyping it.",
+      "prompt": "I work part time at a clothing store and ask coworkers to swap shifts by group text. Write three short, friendly texts asking someone to cover my shift on [day and time]. Offer to take their shift [day and time] in return. Keep each under 40 words, polite, and easy to answer with a yes or no.",
+      "life": false,
+      "mark": "safe_today"
+     },
+     {
+      "title": "A checklist for setting up the weekly schedule",
+      "why": "Gives you a simple list to follow each week so nothing gets missed.",
+      "prompt": "I help plan the weekly schedule at a clothing store in the mall. Make me a short checklist I can follow each week to set up shifts. Include things like checking time off requests, covering busy times, and sharing the final schedule with the team. Keep it to 8 items, plain words, easy to scan.",
+      "life": false,
+      "mark": "safe_today"
+     },
+     {
+      "title": "Instagram captions for new arrivals",
+      "why": "Gives you post ideas when you have no time to think of words.",
+      "prompt": "I work at a clothing store in the mall. Write three short Instagram captions for new arrivals: [item type and colors]. Make them friendly and fun, under 30 words each, with a simple line inviting people to stop by. Don’t mention prices or sales unless I add them: [details].",
+      "life": false,
+      "mark": "safe_today"
+     },
+     {
+      "title": "Replying to customer messages",
+      "why": "Helps you answer customers kindly without starting from scratch.",
+      "prompt": "I’m a sales associate at a clothing store in the mall. A customer sent this message: [paste message, leave out their name and number]. Write a short, warm reply under 60 words. Leave square brackets for anything I need to check, like stock or store policy: [details].",
+      "life": false,
+      "mark": "check_first"
+     },
+     {
+      "title": "Planning the weekly schedule",
+      "why": "Helps you think through who covers what before you write it up.",
+      "prompt": "I help plan the weekly schedule at a clothing store in the mall. Help me make a simple plan for the week. Here is what I know: busy times are [days and times], shifts needed are [number per shift], and time off requests are [requests]. Give me a clear table I can check and adjust.",
+      "life": false,
+      "mark": "safe_today"
+     },
+     {
+      "title": "A quick guide for common size questions",
+      "why": "Helps you answer fit questions the same way every time.",
+      "prompt": "I’m a sales associate at a clothing store. Help me write a short list of questions I can ask a customer to help them find the right size, like how they like things to fit and what they usually wear. Keep it to 5 questions, friendly and simple, easy to use on the floor.",
+      "life": false,
+      "mark": "safe_today"
+     },
+     {
+      "title": "Notes to hand off at the end of a shift",
+      "why": "Helps the next person know what you already did.",
+      "prompt": "I work part time at a clothing store in the mall. Help me write a short handoff note for the next shift. Here is what happened: [restocking done, customer requests, anything left to do]. Keep it under 80 words, as a short list, in plain words.",
+      "life": false,
+      "mark": "safe_today"
+     },
+     {
+      "title": "Meal ideas for busy shift days",
+      "why": "Gives you easy food plans around changing hours.",
+      "prompt": "I work part time on my feet, about 28 hours a week, with shifts that change. Give me five simple meal ideas I can make fast or prep ahead. I like [foods I like] and want to avoid [foods to skip]. Keep each idea to two lines with a short ingredient list.",
+      "life": true,
+      "mark": "safe_today"
+     },
+     {
+      "title": "Splitting costs with friends on Venmo",
+      "why": "Helps you ask friends for money in a kind, clear way.",
+      "prompt": "I paid for [what I paid for] and want to ask friends to send me their share on Venmo. Write a friendly, relaxed message I can send in a group chat. Keep it under 50 words, with no pressure, and leave a spot in square brackets for the amount: [amount].",
+      "life": true,
+      "mark": "safe_today"
+     }
+    ],
+    "safeUse": [
+     "Read and check everything before it goes out to a customer or coworker.",
+     "AI can be confidently wrong about facts, dates and numbers, so check them yourself.",
+     "Never type in customer names, phone numbers, addresses or payment details.",
+     "Never type in coworkers’ private details, like personal phone numbers or reasons for time off.",
+     "Use square brackets for return rules and prices, and fill in the real ones from your store.",
+     "Ask your manager what is allowed before using AI on anything about the store."
+    ],
+    "workProfile": "I’m a part time sales associate at a clothing store in the mall, about 28 hours a week, mostly on the floor. I write short messages to customers about sizing, returns and stock, and to coworkers about shift swaps and the weekly schedule. I like drafts that are warm, casual and easy to read, under 80 words unless I say otherwise. Please use plain words, leave square brackets for store policies, prices and details I need to fill in, and never make up rules. I’ll check everything before I use it.",
+    "atWork": {
+     "askMessage": "Hi [manager’s name], I’m interested in using AI tools to help with simple writing, like replies to common size and return questions and shift swap texts. Are there any AI tools the company has approved? And what am I allowed to use them for? I won’t type in customer details or anything private. Thanks so much!",
+     "aiTalk": "I’ve started using an AI assistant to help me write first drafts, like replies to common size and return questions and shift swap messages. It helps me get through the repeat questions faster so I can spend more time with customers on the floor. I always read and check everything myself before it goes out, and I keep customer details out of it. I’m happy to show you how I use it if that’s helpful."
+    }
+   },
+   "checks": {
+    "firstWinIsMostWanted": false,
+    "firstWinTask": "Return and size questions",
+    "mostWanted": [
+     "Same return and size questions all day, and shift swaps in t",
+     "Planning weekly schedule"
+    ],
+    "toolWhyNamesMostWanted": false,
+    "questionsOver10Words": [],
+    "choicesOver4Words": [],
+    "dashes": [],
+    "deskWordsInChoicesOrQuestions": [],
+    "deskWordsInPlan": [],
+    "moneyOrPercentInPlan": [],
+    "nearDuplicateIdeas": [],
+    "ideaCount": 9,
+    "yourTools": {
+     "named": [
+      "Texts",
+      "Instagram",
+      "WhatsApp",
+      "Venmo",
+      "Facebook"
+     ],
+     "written": [
+      "Texts",
+      "WhatsApp"
+     ],
+     "notHers": [],
+     "withChatBelowUses": [],
+     "missingTryThis": [],
+     "menuWords": []
+    }
+   }
+  },
+  "grocery": {
+   "persona": {
+    "bio": "Assistant store manager at a grocery store with about 40 people on staff. On her feet 10 hours a day. Covering call outs, building the schedule every week on the store tablet, inventory counts, receiving deliveries, handling customer complaints, training cashiers, walking the store before the district manager visits. Everything except the schedule is in her head or on paper. Everyone texts her when they need a shift covered, and she plans the staff birthdays. She tried ChatGPT once and it didn't stick.",
+    "job": "Assistant store manager at a grocery store, about 40 people on staff.",
+    "level": "tried",
+    "worksFor": "employer",
+    "aiPolicy": "unclear",
+    "noDesk": true
+   },
+   "versions": {
+    "job": "beginner-job-v2",
+    "questions": "beginner-questions-v2",
+    "intake": "beginner-intake-v3",
+    "plan": "beginner-plan-v4"
+   },
+   "seconds": {
+    "jobRead": 1.9,
+    "questions": 2.3,
+    "intake": 3.4,
+    "plan": 20.7
+   },
+   "jobRead": {
+    "repeats": [
+     {
+      "label": "Scheduling shifts",
+      "ai": true
+     },
+     {
+      "label": "Restocking shelves",
+      "ai": false
+     },
+     {
+      "label": "Writing staff notes",
+      "ai": true
+     },
+     {
+      "label": "Checking produce freshness",
+      "ai": false
+     },
+     {
+      "label": "Handling customer complaints",
+      "ai": true
+     },
+     {
+      "label": "Counting the cash drawers",
+      "ai": false
+     }
+    ],
+    "aiFallback": [
+     "Shift schedule drafts",
+     "Staff update messages",
+     "Complaint reply drafts",
+     "Weekly team meeting agenda"
+    ],
+    "apps": [
+     "Texts",
+     "WhatsApp",
+     "Phone calls",
+     "Google Calendar",
+     "Instagram",
+     "Facebook"
+    ],
+    "worksFor": "employer"
+   },
+   "jobReadFallback": false,
+   "asked": [
+    {
+     "id": "asked_1",
+     "title": "How do you find someone to cover a shift today?",
+     "kind": "one",
+     "choices": [
+      "Text one by one",
+      "Group text",
+      "Phone calls",
+      "Ask a manager"
+     ],
+     "hint": "Pick whatever you do most often."
+    },
+    {
+     "id": "asked_2",
+     "title": "What made you stop using it?",
+     "kind": "one",
+     "choices": [
+      "Answers felt generic",
+      "Faster doing it myself",
+      "Forgot about it",
+      "Didn’t trust it"
+     ],
+     "hint": "Any guess is fine."
+    }
+   ],
+   "worksForFromJob": "employer",
+   "answers": {
+    "job": "Assistant store manager at a grocery store, about 40 people on staff.",
+    "experience": "tried",
+    "qas": [
+     {
+      "id": "repeats",
+      "title": "What do you do over and over, every day or every week?",
+      "picked": [
+       "Scheduling shifts",
+       "Handling customer complaints"
+      ],
+      "text": "Covering call outs and texts from staff, all day.",
+      "shown": [
+       "Scheduling shifts",
+       "Restocking shelves",
+       "Writing staff notes",
+       "Checking produce freshness",
+       "Handling customer complaints",
+       "Counting the cash drawers"
+      ]
+     },
+     {
+      "id": "most",
+      "title": "Which would save you the most time if it got easier?",
+      "picked": [
+       "Covering call outs and texts from staff, all day.",
+       "Scheduling shifts"
+      ],
+      "text": null,
+      "shown": [
+       "Scheduling shifts",
+       "Handling customer complaints",
+       "Covering call outs and texts from staff, all day."
+      ]
+     },
+     {
+      "id": "picture",
+      "title": "How do you picture AI helping with it?",
+      "picked": [],
+      "text": "Honestly, I'd want it to sort out who can cover a shift without me texting 15 people."
+     },
+     {
+      "id": "apps",
+      "title": "Which apps do you use every week?",
+      "picked": [
+       "Texts",
+       "Phone calls"
+      ],
+      "text": "Mostly just texts and calls. The store tablet for the schedu",
+      "shown": [
+       "Texts",
+       "WhatsApp",
+       "Phone calls",
+       "Google Calendar",
+       "Instagram",
+       "Facebook"
+      ]
+     },
+     {
+      "id": "tools",
+      "title": "Which AI have you used?",
+      "picked": [
+       "ChatGPT"
+      ],
+      "text": null,
+      "shown": [
+       "ChatGPT",
+       "Copilot",
+       "Gemini",
+       "Claude",
+       "Other",
+       "None yet",
+       "Not sure"
+      ]
+     },
+     {
+      "id": "asked_1",
+      "title": "How do you find someone to cover a shift today?",
+      "picked": [
+       "Text one by one"
+      ],
+      "text": null,
+      "shown": [
+       "Text one by one",
+       "Group text",
+       "Phone calls",
+       "Ask a manager"
+      ]
+     },
+     {
+      "id": "asked_2",
+      "title": "What made you stop using it?",
+      "picked": [
+       "Forgot about it"
+      ],
+      "text": "Honestly just never came back to it, I'm on my feet all day.",
+      "shown": [
+       "Answers felt generic",
+       "Faster doing it myself",
+       "Forgot about it",
+       "Didn’t trust it"
+      ]
+     }
+    ],
+    "mostWanted": [
+     "Covering call outs and texts from staff, all day.",
+     "Scheduling shifts"
+    ],
+    "worksFor": "employer",
+    "aiTools": [
+     "chatgpt"
+    ],
+    "aiToolsOther": null,
+    "aiPolicy": "unclear"
+   },
+   "digest": "What do you do over and over, every day or every week? Scheduling shifts, Handling customer complaints, Covering call outs and texts from staff, all day.\nWhich would save you the most time if it got easier? Covering call outs and texts from staff, all day., Scheduling shifts\nHow do you picture AI helping with it? Honestly, I'd want it to sort out who can cover a shift without me texting 15 people.\nWhich apps do you use every week? Texts, Phone calls, Mostly just texts and calls. The store tablet for the schedu\nWhich AI have you used? ChatGPT\nHow do you find someone to cover a shift today? Text one by one\nWhat made you stop using it? Forgot about it, Honestly just never came back to it, I'm on my feet all day.",
+   "intake": {
+    "role_summary": "You’re the assistant store manager at a grocery store with about 40 people on staff, keeping shifts covered and handling customer complaints.",
+    "tasks": [
+     {
+      "name": "Scheduling shifts",
+      "ai": true,
+      "private": true
+     },
+     {
+      "name": "Handling customer complaints",
+      "ai": true,
+      "private": true
+     },
+     {
+      "name": "Covering call outs",
+      "ai": true,
+      "private": true
+     }
+    ],
+    "first_win": {
+     "task": "Covering call outs",
+     "intro": "You said covering call outs and staff texts takes up your whole day. Here is a reusable shift cover text you can fill in for each open shift.",
+     "draft": "Hi [first name], we have an open [shift day and time] shift in [department] and need coverage. Are you available to pick it up? Reply yes or no by [reply time] and I will confirm. Thanks for helping keep the store running well."
+    },
+    "ideas": [
+     "Customer complaint reply templates",
+     "A shift swap request message",
+     "Weekly schedule planning checklist",
+     "A script for call out follow ups",
+     "Team announcement for schedule changes",
+     "Tips for handling upset customers calmly"
+    ],
+    "needs_follow_up": false,
+    "follow_up_question": null
+   },
+   "plan": {
+    "version": 2,
+    "role": "You’re the assistant store manager at a grocery store with about 40 people on staff, keeping shifts covered and handling customer complaints.",
+    "tool": "chatgpt",
+    "toolWhy": "You said you’d most like help covering call outs and the constant texts from staff, and ChatGPT is a good place to start because the free version is enough to begin. It works in a browser or a phone app, and you type to it like a text message, which suits a day on your feet.",
+    "yourTools": [
+     {
+      "name": "Texts",
+      "what": "Texts are where your call out coverage already happens, so one clear message can reach your team fast.",
+      "tryThis": "Next time someone calls out, write the request in ChatGPT first, then copy it into one group text instead of texting people one by one.",
+      "withChat": null
+     }
+    ],
+    "worksFor": "employer",
+    "policy": "unclear",
+    "firstWin": {
+     "task": "Covering call outs",
+     "prompt": "I’m an assistant store manager at a grocery store with about 40 staff. Someone called out and I need to cover the shift by text. Write one short text I can send to my team. The open shift is [day and time] in [department]. Ask them to reply yes or no by [reply time]. Keep it friendly and direct, under 50 words, no emoji, and sound like a manager texting her team, not a formal email.",
+     "example": "Hi team, we have an open shift on [day and time] in [department] and need someone to cover it. Can you pick it up? Reply yes or no by [reply time] and I’ll confirm with the first yes. Thanks for helping keep the store running well.",
+     "fixes": [
+      "Shorter.",
+      "Warmer, like I’m texting a regular.",
+      "Make it sound more urgent."
+     ]
+    },
+    "ideas": [
+     {
+      "title": "Customer complaint reply templates",
+      "why": "Gives you a calm starting reply so you aren’t writing each one from scratch.",
+      "prompt": "I’m an assistant store manager at a grocery store. Write three short reply templates for common customer complaints: a long checkout line, an item that was out of stock, and a rude interaction with an employee. Each should be under 80 words, polite, and take the complaint seriously. Use [customer name] and [what happened] as blanks. Do not promise refunds or compensation.",
+      "life": false,
+      "mark": "safe_today"
+     },
+     {
+      "title": "A shift swap request message",
+      "why": "Lets staff swap shifts without you playing go between all day.",
+      "prompt": "I’m an assistant store manager at a grocery store. Write a short text I can send my team explaining how to ask for a shift swap. Staff should tell me [what info I need] and send it by [deadline]. Keep it friendly, clear, and under 70 words, with a note that I must approve every swap.",
+      "life": false,
+      "mark": "safe_today"
+     },
+     {
+      "title": "Weekly schedule planning checklist",
+      "why": "Gives you a repeatable list to check before you post the schedule.",
+      "prompt": "I’m an assistant store manager at a grocery store with about 40 staff. Make a short checklist I can run through each week before I post the schedule. Cover things like coverage by department, requested days off, and fair weekends. Put it in a simple list of 8 to 10 items, with plain wording. Leave room for [store specific rules] that I will add myself.",
+      "life": false,
+      "mark": "safe_today"
+     },
+     {
+      "title": "Scheduling shifts",
+      "why": "Helps you think through coverage before you build the week.",
+      "prompt": "I’m an assistant store manager at a grocery store with about 40 staff. Help me plan a weekly schedule. I’ll give you the needs for each department: [departments and number of people needed each day] and availability notes: [availability, no names]. Suggest a simple way to organize the shifts and point out any gaps I should watch. Keep the answer short and easy to read.",
+      "life": false,
+      "mark": "safe_today"
+     },
+     {
+      "title": "Handling customer complaints",
+      "why": "Helps you stay calm and clear when a customer is upset.",
+      "prompt": "I’m an assistant store manager at a grocery store. A customer is upset about [what happened]. Write a short, calm thing I can say in person, and a follow up text version. Both should be kind, take it seriously, and not promise anything I haven’t decided. Leave out names. Keep each under 60 words.",
+      "life": false,
+      "mark": "safe_today"
+     },
+     {
+      "title": "Thank you note for a staff member who covered",
+      "why": "Makes it easy to thank people who pick up extra shifts.",
+      "prompt": "I’m an assistant store manager at a grocery store. Write a short, warm thank you text to a team member who picked up a shift at the last minute. Mention [what they covered]. Keep it sincere, under 40 words, and not over the top.",
+      "life": false,
+      "mark": "check_first"
+     },
+     {
+      "title": "Talking points for a pre shift huddle",
+      "why": "Gives you quick points to say to the team at the start of a shift.",
+      "prompt": "I’m an assistant store manager at a grocery store. Write a quick talking points list for a short team huddle at the start of a shift. Today’s topics are [topics]. Keep it to 5 bullet points, simple words, and easy to say out loud in under a minute.",
+      "life": false,
+      "mark": "safe_today"
+     },
+     {
+      "title": "A reminder text about attendance expectations",
+      "why": "Helps you set expectations kindly without singling anyone out.",
+      "prompt": "I’m an assistant store manager at a grocery store. Write a friendly group text reminding my team how to report a call out. The rule at our store is [call out rule]. Keep it clear, kind, under 70 words, and not scolding. Do not mention any one person.",
+      "life": false,
+      "mark": "safe_today"
+     },
+     {
+      "title": "Meal plan for long shift days",
+      "why": "Gives you easy food ideas for days when you’re on your feet and short on time.",
+      "prompt": "I work long shifts on my feet as a grocery store manager. Make a 5 day dinner plan with simple meals that take about [cooking time] and use few dishes. Include a short shopping list. I eat [food preferences or limits]. Keep it practical and easy to read.",
+      "life": true,
+      "mark": "safe_today"
+     },
+     {
+      "title": "Plan for a free weekend",
+      "why": "Helps you use a rare day off well without much planning effort.",
+      "prompt": "I’m a grocery store manager and my schedule is busy, so free weekends are rare. Help me plan a relaxing weekend on [dates]. I like [things I enjoy] and my budget is [budget]. Give me a simple plan with some time to rest, kept to one short page.",
+      "life": true,
+      "mark": "safe_today"
+     }
+    ],
+    "safeUse": [
+     "Read and check everything before it goes out to staff or customers.",
+     "AI can be confidently wrong about facts, dates and numbers, so double check them.",
+     "Never type in employee names, phone numbers, or personal details like health or family reasons for a call out.",
+     "Never type in customer names, addresses, or payment details when working on a complaint.",
+     "Leave out store financials, sales numbers and anything private to the company.",
+     "Use placeholders like [first name] and fill them in yourself in your text."
+    ],
+    "workProfile": "I’m an assistant store manager at a grocery store with about 40 staff. I spend my day on my feet, so I mostly write by text. I write to my team about shifts, call outs and schedule changes, and to customers who have complaints. I like drafts that are short, friendly and direct, like a manager who respects people’s time. I don’t like stiff or corporate wording. Keep texts under 60 words unless I ask for more. Use plain words, and leave blanks in square brackets for details I will fill in myself.",
+    "atWork": {
+     "askMessage": "Hi [manager or IT contact], I’ve started looking at AI chat tools to help with my daily work. Could you tell me which AI tools, if any, are approved for us to use, and what I’m allowed to use them for? I’m thinking of things like drafting shift coverage texts, planning the schedule, and writing replies to customer complaints. I wouldn’t put in names or private details about staff or customers. Thanks.",
+     "aiTalk": "I’ve started using an AI chat tool to help me draft things like shift coverage texts and replies to customer complaints. It gives me a first draft, and then I read it, fix it and make sure everything is right before anything goes out. I don’t put in private details about staff or customers. It helps me get through the repetitive writing so I can spend more time on the floor with the team. I’m happy to show you how I use it."
+    }
+   },
+   "checks": {
+    "firstWinIsMostWanted": false,
+    "firstWinTask": "Covering call outs",
+    "mostWanted": [
+     "Covering call outs and texts from staff, all day.",
+     "Scheduling shifts"
+    ],
+    "toolWhyNamesMostWanted": false,
+    "questionsOver10Words": [],
+    "choicesOver4Words": [],
+    "dashes": [],
+    "deskWordsInChoicesOrQuestions": [],
+    "deskWordsInPlan": [
+     "email"
+    ],
+    "moneyOrPercentInPlan": [],
+    "nearDuplicateIdeas": [],
+    "ideaCount": 10,
+    "yourTools": {
+     "named": [
+      "Texts",
+      "Phone calls",
+      "Mostly just texts and calls. The store tablet for the schedu"
+     ],
+     "written": [
+      "Texts"
+     ],
+     "notHers": [],
+     "withChatBelowUses": [],
+     "missingTryThis": [],
+     "menuWords": []
+    }
+   }
+  },
+  "cashier": {
+   "persona": {
+    "bio": "Cashier at a big box store. Register and stocking shelves, sometimes self checkout. Mostly ringing people up and dealing with returns and coupons that don't scan. When it's slow she faces shelves and does go backs. Few words, not much of a writer. She has never used AI and isn't sure what it is for.",
+    "job": "Cashier at a big box store.",
+    "level": "not_yet",
+    "worksFor": "employer",
+    "aiPolicy": "no_idea",
+    "noDesk": true
+   },
+   "versions": {
+    "job": "beginner-job-v2",
+    "questions": "beginner-questions-v2",
+    "intake": "beginner-intake-v3",
+    "plan": "beginner-plan-v4"
+   },
+   "seconds": {
+    "jobRead": 2.4,
+    "questions": 1.6,
+    "intake": 2.7,
+    "plan": 38.2
+   },
+   "jobRead": {
+    "repeats": [
+     {
+      "label": "Scanning items",
+      "ai": false
+     },
+     {
+      "label": "Bagging groceries",
+      "ai": false
+     },
+     {
+      "label": "Handling returns",
+      "ai": false
+     },
+     {
+      "label": "Helping customers",
+      "ai": false
+     },
+     {
+      "label": "Writing shift notes",
+      "ai": true
+     },
+     {
+      "label": "Drafting schedule swaps",
+      "ai": true
+     }
+    ],
+    "aiFallback": [
+     "Shift reminder texts",
+     "Return policy replies",
+     "Customer thank you notes",
+     "Break schedule plans"
+    ],
+    "apps": [
+     "Texts",
+     "WhatsApp",
+     "Instagram",
+     "TikTok",
+     "Google Maps",
+     "Photos"
+    ],
+    "worksFor": "employer"
+   },
+   "jobReadFallback": false,
+   "asked": [
+    {
+     "id": "asked_1",
+     "title": "How do you answer return policy questions today?",
+     "kind": "one",
+     "choices": [
+      "Ask a manager",
+      "Check a paper sheet",
+      "Remember it myself"
+     ],
+     "hint": null
+    },
+    {
+     "id": "asked_2",
+     "title": "How do you send shift reminder texts today?",
+     "kind": "one",
+     "choices": [
+      "Text each person",
+      "Group text",
+      "I don’t send them"
+     ],
+     "hint": null
+    },
+    {
+     "id": "asked_3",
+     "title": "What has held you back from trying AI so far?",
+     "kind": "one",
+     "choices": [
+      "Unsure where to start",
+      "Worried about mistakes",
+      "Privacy",
+      "No time",
+      "Doesn’t fit my job"
+     ],
+     "hint": "Not having tried yet is completely normal."
+    }
+   ],
+   "worksForFromJob": "employer",
+   "answers": {
+    "job": "Cashier at a big box store.",
+    "experience": "not_yet",
+    "qas": [
+     {
+      "id": "repeats",
+      "title": "What do you do over and over, every day or every week?",
+      "picked": [
+       "Scanning items",
+       "Bagging groceries",
+       "Handling returns",
+       "Helping customers"
+      ],
+      "text": null,
+      "shown": [
+       "Scanning items",
+       "Bagging groceries",
+       "Handling returns",
+       "Helping customers",
+       "Writing shift notes",
+       "Drafting schedule swaps"
+      ]
+     },
+     {
+      "id": "most",
+      "title": "Which of these would help you most?",
+      "picked": [
+       "Return policy replies",
+       "Shift reminder texts"
+      ],
+      "text": null,
+      "shown": [
+       "Shift reminder texts",
+       "Return policy replies",
+       "Customer thank you notes",
+       "Break schedule plans"
+      ]
+     },
+     {
+      "id": "picture",
+      "title": "How do you picture AI helping with it?",
+      "picked": [],
+      "text": "Not sure. Maybe answer return questions faster?"
+     },
+     {
+      "id": "apps",
+      "title": "Which apps do you use every week?",
+      "picked": [
+       "Texts",
+       "Google Maps",
+       "Photos"
+      ],
+      "text": null,
+      "shown": [
+       "Texts",
+       "WhatsApp",
+       "Instagram",
+       "TikTok",
+       "Google Maps",
+       "Photos"
+      ]
+     },
+     {
+      "id": "asked_1",
+      "title": "How do you answer return policy questions today?",
+      "picked": [
+       "Ask a manager"
+      ],
+      "text": null,
+      "shown": [
+       "Ask a manager",
+       "Check a paper sheet",
+       "Remember it myself"
+      ]
+     },
+     {
+      "id": "asked_2",
+      "title": "How do you send shift reminder texts today?",
+      "picked": [
+       "I don’t send them"
+      ],
+      "text": null,
+      "shown": [
+       "Text each person",
+       "Group text",
+       "I don’t send them"
+      ]
+     },
+     {
+      "id": "asked_3",
+      "title": "What has held you back from trying AI so far?",
+      "picked": [
+       "Doesn’t fit my job"
+      ],
+      "text": null,
+      "shown": [
+       "Unsure where to start",
+       "Worried about mistakes",
+       "Privacy",
+       "No time",
+       "Doesn’t fit my job"
+      ]
+     }
+    ],
+    "mostWanted": [
+     "Return policy replies",
+     "Shift reminder texts"
+    ],
+    "worksFor": "employer",
+    "aiTools": [
+     "none_yet"
+    ],
+    "aiToolsOther": null,
+    "aiPolicy": "no_idea"
+   },
+   "digest": "What do you do over and over, every day or every week? Scanning items, Bagging groceries, Handling returns, Helping customers\nWhich of these would help you most? Return policy replies, Shift reminder texts\nHow do you picture AI helping with it? Not sure. Maybe answer return questions faster?\nWhich apps do you use every week? Texts, Google Maps, Photos\nHow do you answer return policy questions today? Ask a manager\nHow do you send shift reminder texts today? I don’t send them\nWhat has held you back from trying AI so far? Doesn’t fit my job",
+   "intake": {
+    "role_summary": "You’re a cashier at a big box store, ringing up items, bagging groceries, handling returns and helping customers.",
+    "tasks": [
+     {
+      "name": "Scanning items",
+      "ai": false,
+      "private": false
+     },
+     {
+      "name": "Bagging groceries",
+      "ai": false,
+      "private": false
+     },
+     {
+      "name": "Handling returns",
+      "ai": true,
+      "private": false
+     },
+     {
+      "name": "Helping customers",
+      "ai": false,
+      "private": false
+     },
+     {
+      "name": "Return policy replies",
+      "ai": true,
+      "private": false
+     },
+     {
+      "name": "Shift reminder texts",
+      "ai": true,
+      "private": false
+     }
+    ],
+    "first_win": {
+     "task": "Shift reminder texts",
+     "intro": "You said shift reminder texts would help most. Here is one you can reuse, with blanks for your details.",
+     "draft": "Hi [first name], this is a reminder that you’re scheduled to work [day] from [start time] to [end time] at [store name]. If you can’t make it, please let [manager name] know as soon as possible by [deadline]. Thanks, and see you on the floor!"
+    },
+    "ideas": [
+     "A checklist for handling returns",
+     "Customer greeting phrases to try",
+     "A simple guide to common return questions",
+     "Notes for your next shift swap request",
+     "Quick tips for busy checkout lines",
+     "A short script for asking a manager a question"
+    ],
+    "needs_follow_up": false,
+    "follow_up_question": null
+   },
+   "plan": {
+    "version": 2,
+    "role": "You’re a cashier at a big box store, ringing up items, bagging groceries, handling returns and helping customers.",
+    "tool": "claude",
+    "toolWhy": "You said you’d most like help with return policy replies and shift reminder texts. Claude is a good place to start because the free version is enough to begin, it works in a browser or a phone app, and you just type to it like a text message.",
+    "yourTools": [
+     {
+      "name": "Texts",
+      "what": "Texts is where short messages to coworkers or reminders to yourself can go once you have them written.",
+      "tryThis": "Ask Claude for a short reminder, then paste it into a text to yourself and read how it sounds.",
+      "withChat": null
+     }
+    ],
+    "worksFor": "employer",
+    "policy": "no_idea",
+    "firstWin": {
+     "task": "Shift reminder texts",
+     "prompt": "I’m a cashier at a big box store. Write a short shift reminder text I can send to a coworker. It should say they’re working [day] from [start time] to [end time], and to tell [manager name] by [deadline] if they can’t make it. Keep it under 50 words, friendly and clear, like a message from a teammate. Use plain words. Give me just the text, ready to send.",
+     "example": "Hi [first name], quick reminder that you’re working [day] from [start time] to [end time]. If you can’t make it, please tell [manager name] by [deadline]. Thanks, see you then!",
+     "fixes": [
+      "Shorter.",
+      "Warmer, like I’m texting a friend.",
+      "Make it sound more serious."
+     ]
+    },
+    "ideas": [
+     {
+      "title": "A checklist for handling returns",
+      "why": "Gives you a clear order of steps so a return feels less stressful.",
+      "prompt": "I’m a cashier at a big box store. Make a simple checklist for handling a return at the register, from greeting the customer to finishing up. Use short steps in plain words, no more than 10 lines. Where our own store rules belong, write [our store’s return step] so I can fill it in myself.",
+      "life": false,
+      "mark": "safe_today"
+     },
+     {
+      "title": "Customer greeting phrases to try",
+      "why": "Gives you fresh, friendly openers for a long day of customers.",
+      "prompt": "I’m a cashier at a big box store. Give me eight short, friendly things I can say when a customer steps up to my register. Make them warm and natural, not stiff, and easy to say many times a day. Keep each one to one sentence.",
+      "life": false,
+      "mark": "safe_today"
+     },
+     {
+      "title": "A simple guide to common return questions",
+      "why": "Puts the questions customers might ask in one place so you can check answers faster.",
+      "prompt": "Write a simple question and answer guide for common return questions a customer might ask at a big box store register, like what to do with an opened item. Don’t invent any rules. Where the answer depends on store policy, write [check our policy] so I can fill it in with my manager. Keep it short and friendly.",
+      "life": false,
+      "mark": "safe_today"
+     },
+     {
+      "title": "Return policy replies",
+      "why": "Helps you answer a customer clearly and kindly when they ask about a return.",
+      "prompt": "Here is our return policy as my manager gave it to me: [paste the policy]. Write three short, polite replies I can say at the register when a customer asks if they can return an item: one for yes, one for no, and one for not sure, so I go ask a manager. One or two sentences each. Don’t add any rules that aren’t in the policy.",
+      "life": false,
+      "mark": "safe_today"
+     },
+     {
+      "title": "Calm words for an upset customer",
+      "why": "Gives you steady phrases for tense moments at the register.",
+      "prompt": "I’m a cashier at a big box store. Write six short things I can say when a customer is upset about a return or a long line. They should sound calm and kind, and not promise anything I can’t give. One sentence each, plain words.",
+      "life": false,
+      "mark": "safe_today"
+     },
+     {
+      "title": "A text asking to swap a shift",
+      "why": "Helps you ask your manager politely without overthinking it.",
+      "prompt": "Write a short text from me to my manager asking to swap my shift on [day] because of [reason]. Be polite and clear in three sentences or fewer, and offer to cover [other day] if that helps. Sound like a friendly coworker, not formal.",
+      "life": false,
+      "mark": "safe_today"
+     },
+     {
+      "title": "Easy dinners after a long shift",
+      "why": "Gives you tired day meal ideas that don’t take much effort.",
+      "prompt": "I’m on my feet all day as a cashier and I get home tired around [time]. Give me five dinner ideas I can make with [ingredients I have on hand] with little effort and little cleanup. Write a short list with a one line how to for each. Keep it simple and don’t give diet advice.",
+      "life": true,
+      "mark": "safe_today"
+     },
+     {
+      "title": "A plan for a free weekend",
+      "why": "Turns a rare day off into a plan so it doesn’t slip away.",
+      "prompt": "I have a free [Saturday or Sunday] after a lot of shifts. Plan a relaxed day for me in [my town] with a budget of [amount]. Give me a morning, afternoon and evening idea, mostly low cost, plus one backup idea in case of rain. Keep it short and easy to read.",
+      "life": true,
+      "mark": "safe_today"
+     }
+    ],
+    "safeUse": [
+     "Read and check everything before it goes out or you say it to a customer.",
+     "AI can be confidently wrong about facts, dates and numbers, so check them yourself.",
+     "Never type in customer names, card numbers, receipts or addresses.",
+     "Never type in coworker names, phone numbers or schedules you were not given to share. Use brackets like [first name] instead.",
+     "For return rules, ask for a draft only, then check it against your store’s real policy or ask a manager.",
+     "Ask your manager which AI tools are approved before using AI on anything from work."
+    ],
+    "workProfile": "I’m a cashier at a big box store. I scan items, bag groceries, handle returns and help customers all day, so I’m on my feet and my time is short. I write mostly to coworkers and sometimes need to explain things to customers in a few words. I like drafts that are short, friendly and in plain words, like a text from a helpful teammate. Please don’t make up store rules. If something depends on our policy, leave a bracket so I can check it with my manager.",
+    "atWork": {
+     "askMessage": "Hi [manager name], I’d like to ask which AI tools, if any, are approved for us to use at work. I’m thinking of using one to practice writing short shift reminder texts and to help me write clear, polite replies to common return questions. I would not type in customer details or anything private. Could you tell me what I may use it for, or who I should ask? Thanks!",
+     "aiTalk": "Hi [manager name], I wanted to let you know I’ve started using AI to help me write things like shift reminder texts and friendly replies to return questions. It gives me a first draft, and I always read and check it myself before using it. I don’t put in customer details or private information. If you have any guidance on how you’d like me to use it, I’m happy to follow it."
+    }
+   },
+   "checks": {
+    "firstWinIsMostWanted": true,
+    "firstWinTask": "Shift reminder texts",
+    "mostWanted": [
+     "Return policy replies",
+     "Shift reminder texts"
+    ],
+    "toolWhyNamesMostWanted": true,
+    "questionsOver10Words": [],
+    "choicesOver4Words": [],
+    "dashes": [],
+    "deskWordsInChoicesOrQuestions": [],
+    "deskWordsInPlan": [],
+    "moneyOrPercentInPlan": [],
+    "nearDuplicateIdeas": [],
+    "ideaCount": 8,
+    "yourTools": {
+     "named": [
+      "Texts",
+      "Google Maps",
+      "Photos"
+     ],
+     "written": [
+      "Texts"
+     ],
+     "notHers": [],
+     "withChatBelowUses": [],
+     "missingTryThis": [],
+     "menuWords": []
+    }
+   }
+  },
+  "boutique": {
+   "persona": {
+    "bio": "Owns a small women's clothing boutique, just her and two part timers. Working the floor, buying at markets twice a year, posting new arrivals on Instagram, steaming and tagging stock, window displays every month, payroll and paying vendors, answering DMs about sizes and holds. She does most of it on her phone between customers. Instagram and the DMs take the most time, then tagging stock. She uses ChatGPT sometimes for captions and Canva's AI for posts.",
+    "job": "I own a small women's clothing boutique, just me and two part timers.",
+    "level": "uses",
+    "worksFor": "self",
+    "aiPolicy": null,
+    "noDesk": true
+   },
+   "versions": {
+    "job": "beginner-job-v2",
+    "questions": "beginner-questions-v2",
+    "intake": "beginner-intake-v3",
+    "plan": "beginner-plan-v4"
+   },
+   "seconds": {
+    "jobRead": 1.8,
+    "questions": 1.9,
+    "intake": 3.1,
+    "plan": 23.7
+   },
+   "jobRead": {
+    "repeats": [
+     {
+      "label": "Folding and restocking racks",
+      "ai": false
+     },
+     {
+      "label": "Writing product captions",
+      "ai": true
+     },
+     {
+      "label": "Ordering new stock",
+      "ai": false
+     },
+     {
+      "label": "Scheduling part timer shifts",
+      "ai": true
+     },
+     {
+      "label": "Replying to customer messages",
+      "ai": true
+     },
+     {
+      "label": "Setting up window displays",
+      "ai": false
+     }
+    ],
+    "aiFallback": [
+     "Sale announcement posts",
+     "Shift schedule templates",
+     "Return policy replies",
+     "New arrival blurbs"
+    ],
+    "apps": [
+     "Texts",
+     "Instagram",
+     "Facebook",
+     "WhatsApp",
+     "Square",
+     "Venmo"
+    ],
+    "worksFor": "self"
+   },
+   "jobReadFallback": false,
+   "asked": [
+    {
+     "id": "asked_1",
+     "title": "How do you answer size and hold messages today?",
+     "kind": "one",
+     "choices": [
+      "Type each reply",
+      "Copy old replies",
+      "Ask a part timer",
+      "Call back"
+     ],
+     "hint": "Pick whatever is closest to what you actually do."
+    },
+    {
+     "id": "asked_2",
+     "title": "What do you use AI for today?",
+     "kind": "many",
+     "choices": [
+      "Product captions",
+      "Size questions",
+      "Shift schedules",
+      "Nothing yet"
+     ],
+     "hint": "Pick every one that is true, even if it is only a little."
+    },
+    {
+     "id": "asked_3",
+     "title": "What slows down your message replies most?",
+     "kind": "one",
+     "choices": [
+      "Checking stock",
+      "Finding the size chart",
+      "Writing from scratch",
+      "Too many at once"
+     ],
+     "hint": null
+    }
+   ],
+   "worksForFromJob": "self",
+   "answers": {
+    "job": "I own a small women's clothing boutique, just me and two part timers.",
+    "experience": "uses",
+    "qas": [
+     {
+      "id": "repeats",
+      "title": "What do you do over and over, every day or every week?",
+      "picked": [
+       "Folding and restocking racks",
+       "Writing product captions",
+       "Scheduling part timer shifts",
+       "Replying to customer messages"
+      ],
+      "text": null,
+      "shown": [
+       "Folding and restocking racks",
+       "Writing product captions",
+       "Ordering new stock",
+       "Scheduling part timer shifts",
+       "Replying to customer messages",
+       "Setting up window displays"
+      ]
+     },
+     {
+      "id": "most",
+      "title": "Which would save you the most time if it got easier?",
+      "picked": [
+       "Replying to customer messages"
+      ],
+      "text": null,
+      "shown": [
+       "Writing product captions",
+       "Scheduling part timer shifts",
+       "Replying to customer messages"
+      ]
+     },
+     {
+      "id": "picture",
+      "title": "How do you picture AI helping with it?",
+      "picked": [],
+      "text": "Mostly the size and hold DMs. They eat my whole afternoon."
+     },
+     {
+      "id": "apps",
+      "title": "Which apps do you use every week?",
+      "picked": [
+       "Texts",
+       "Instagram",
+       "Square",
+       "Venmo"
+      ],
+      "text": null,
+      "shown": [
+       "Texts",
+       "Instagram",
+       "Facebook",
+       "WhatsApp",
+       "Square",
+       "Venmo"
+      ]
+     },
+     {
+      "id": "tools",
+      "title": "Which AI have you used?",
+      "picked": [
+       "ChatGPT"
+      ],
+      "text": null,
+      "shown": [
+       "ChatGPT",
+       "Copilot",
+       "Gemini",
+       "Claude",
+       "Other",
+       "None yet",
+       "Not sure"
+      ]
+     },
+     {
+      "id": "asked_1",
+      "title": "How do you answer size and hold messages today?",
+      "picked": [
+       "Type each reply"
+      ],
+      "text": null,
+      "shown": [
+       "Type each reply",
+       "Copy old replies",
+       "Ask a part timer",
+       "Call back"
+      ]
+     },
+     {
+      "id": "asked_2",
+      "title": "What do you use AI for today?",
+      "picked": [
+       "Product captions"
+      ],
+      "text": null,
+      "shown": [
+       "Product captions",
+       "Size questions",
+       "Shift schedules",
+       "Nothing yet"
+      ]
+     },
+     {
+      "id": "asked_3",
+      "title": "What slows down your message replies most?",
+      "picked": [
+       "Too many at once"
+      ],
+      "text": null,
+      "shown": [
+       "Checking stock",
+       "Finding the size chart",
+       "Writing from scratch",
+       "Too many at once"
+      ]
+     }
+    ],
+    "mostWanted": [
+     "Replying to customer messages"
+    ],
+    "worksFor": "self",
+    "aiTools": [
+     "chatgpt"
+    ],
+    "aiToolsOther": null,
+    "aiPolicy": null
+   },
+   "digest": "What do you do over and over, every day or every week? Folding and restocking racks, Writing product captions, Scheduling part timer shifts, Replying to customer messages\nWhich would save you the most time if it got easier? Replying to customer messages\nHow do you picture AI helping with it? Mostly the size and hold DMs. They eat my whole afternoon.\nWhich apps do you use every week? Texts, Instagram, Square, Venmo\nWhich AI have you used? ChatGPT\nHow do you answer size and hold messages today? Type each reply\nWhat do you use AI for today? Product captions\nWhat slows down your message replies most? Too many at once",
+   "intake": {
+    "role_summary": "You own a small women’s clothing boutique with two part time staff, handling the racks, captions, shift scheduling and customer messages yourself.",
+    "tasks": [
+     {
+      "name": "Customer message replies",
+      "ai": true,
+      "private": true
+     },
+     {
+      "name": "Folding and restocking racks",
+      "ai": false,
+      "private": false
+     },
+     {
+      "name": "Product captions",
+      "ai": true,
+      "private": false
+     },
+     {
+      "name": "Scheduling part timer shifts",
+      "ai": true,
+      "private": true
+     }
+    ],
+    "first_win": {
+     "task": "Customer message replies",
+     "intro": "You said size and hold messages eat your afternoon. Here is a reusable reply you can fill in.",
+     "draft": "Hi [first name], thanks for reaching out! The [item] is available in [size] right now. I can hold it for you for [hold length] while you decide. Holds follow our store rules: [hold rules]. Just reply here and let me know, or stop by before [closing time]. Looking forward to seeing you! [your name], [boutique name]"
+    },
+    "ideas": [
+     "Product caption variations for new arrivals",
+     "A reply for when an item is sold out",
+     "Shift swap message for part timers",
+     "Weekly restock checklist for the racks",
+     "Instagram post ideas for the week",
+     "FAQ answers for returns and exchanges"
+    ],
+    "needs_follow_up": false,
+    "follow_up_question": null
+   },
+   "plan": {
+    "version": 2,
+    "role": "You own a small women’s clothing boutique with two part time staff, handling the racks, captions, shift scheduling and customer messages yourself.",
+    "tool": "chatgpt",
+    "toolWhy": "You said you’d most like help with replying to customer messages, especially the size and hold DMs that eat your afternoon. ChatGPT is a good place to start because the free version is enough to begin, it works in a browser or a phone app, and you type to it like a text message.",
+    "yourTools": [
+     {
+      "name": "Instagram",
+      "what": "Instagram is where many of your size and hold questions land, and it’s also where your captions go. You can write replies and captions in ChatGPT, then paste them in.",
+      "tryThis": "This week, paste a few DMs you get most often into ChatGPT, with names left out, and ask for a short reply for each. Save the ones you like in a note to copy from.",
+      "withChat": "Draft the reply in ChatGPT and ask for two tones, friendly and quick. Then paste your pick into Instagram and add the real size or hold details yourself."
+     },
+     {
+      "name": "Texts",
+      "what": "Texts are a quick way to answer customers who already have your number, and to reach your part timers. Short, clear replies work best there.",
+      "tryThis": "Ask ChatGPT to turn a long hold reply into a text of two sentences, then keep it as your go to version.",
+      "withChat": "Paste the customer’s question into ChatGPT with no name or number. Ask for a text reply under 40 words, then check it and send it from your phone."
+     },
+     {
+      "name": "Square",
+      "what": "Square holds your sales and item information, so it’s a good place to check what’s really in stock before you reply. Some Square tools may have AI features, and some may need a paid plan.",
+      "tryThis": "Look in Square for an item or inventory view and see if it helps you confirm a size before you answer. Then use ChatGPT only for the wording.",
+      "withChat": "Check the size in Square first. Then ask ChatGPT to write the reply using the facts you give it, and read it before sending."
+     }
+    ],
+    "worksFor": "self",
+    "policy": null,
+    "firstWin": {
+     "task": "Customer message replies",
+     "prompt": "I own a small women’s clothing boutique with two part time staff. I’m answering a customer message about a size and a hold. Write a reply I can send as a DM or text. The customer is [first name]. She asked about [item] in [size]. Tell her [available or not], and offer to hold it for [hold length] under these rules: [hold rules]. Mention I close at [closing time]. Keep it under 60 words, warm and friendly, like I’m texting a regular. Sign off as [your name], [boutique name].",
+     "example": "Hi [first name], thanks for messaging! The [item] is [available or not] in [size]. I’d be happy to hold it for [hold length]. Holds work like this: [hold rules]. Just reply here to confirm, or stop in before [closing time]. Can’t wait to see you! [your name], [boutique name]",
+     "fixes": [
+      "Shorter.",
+      "Warmer, like I’m texting a regular.",
+      "Make it sound less like a form letter."
+     ]
+    },
+    "ideas": [
+     {
+      "title": "Customer message replies in batches",
+      "why": "Lets you handle many DMs at once instead of typing each one.",
+      "prompt": "I own a small women’s clothing boutique. I have several customer DMs to answer at once about sizes and holds. I’ll paste them one at a time with no last names or phone numbers. For each one, write a short, warm reply under 50 words. Leave square brackets for facts I need to fill in, like [size available] and [hold length]. Here are the messages: [paste messages]",
+      "life": false,
+      "mark": null
+     },
+     {
+      "title": "Product caption variations for new arrivals",
+      "why": "Gives you several options from one item so you can pick your favorite.",
+      "prompt": "I own a women’s clothing boutique and post on Instagram. Write three caption options for a new arrival: [item description]. Make them friendly, about 30 words each, with a short line inviting people to message me for sizes. Suggest five hashtags to go with them. Don’t invent prices or sales.",
+      "life": false,
+      "mark": "safe_today"
+     },
+     {
+      "title": "Product captions",
+      "why": "Gets a first draft of your regular captions out of the way.",
+      "prompt": "I own a small women’s clothing boutique. Write an Instagram caption for [item], which comes in [sizes] and [colors]. Keep it under 40 words, warm and fun, like I’m talking to my regulars. End with a line asking them to message me to ask about sizes. Don’t mention prices or sales.",
+      "life": false,
+      "mark": "safe_today"
+     },
+     {
+      "title": "A reply for when an item is sold out",
+      "why": "Helps you say no kindly and keep the customer interested.",
+      "prompt": "I own a women’s clothing boutique. A customer asked about [item] in [size], and it’s sold out. Write a short, kind reply under 50 words that apologizes, offers to let her know if it comes back, and suggests I can show her [similar item]. Friendly tone, like texting a regular.",
+      "life": false,
+      "mark": "safe_today"
+     },
+     {
+      "title": "Scheduling part timer shifts",
+      "why": "Turns your shift needs into a clear schedule message.",
+      "prompt": "I own a small boutique with two part time staff. Help me write a shift schedule message for next week. The shop needs coverage on [days and hours]. Part timer one is available [availability]. Part timer two is available [availability]. Lay it out as a simple list I can text to both of them, and point out any gaps I need to cover.",
+      "life": false,
+      "mark": "safe_today"
+     },
+     {
+      "title": "Shift swap message for part timers",
+      "why": "Gives you a clear, kind way to handle swap requests.",
+      "prompt": "I own a small boutique with two part time staff. One of them asked to swap [shift] with [other shift]. Write a short, friendly text I can send, confirming the swap or asking her to check with the other part timer first. Keep it under 50 words, clear about the day and time, and appreciative.",
+      "life": false,
+      "mark": "safe_today"
+     },
+     {
+      "title": "A polite reply for return questions",
+      "why": "Helps you answer return questions the same way every time.",
+      "prompt": "I own a women’s clothing boutique. A customer messaged asking about returning [item]. My return rules are: [return rules]. Write a short, kind reply under 60 words that explains the rules clearly without sounding cold. Leave the rules as I gave them and don’t add any I didn’t mention.",
+      "life": false,
+      "mark": "safe_today"
+     },
+     {
+      "title": "Restock and display checklist",
+      "why": "Gives you a simple list to follow when you fold and restock the racks.",
+      "prompt": "I own a small women’s clothing boutique. Make a simple checklist for restocking racks and tidying displays at [opening or closing time]. Keep it to 10 short items my part timers can follow. Put the most important steps first, and leave room for notes about [special display this week].",
+      "life": false,
+      "mark": "safe_today"
+     },
+     {
+      "title": "Quick dinners for busy shop days",
+      "why": "Gives you easy meal ideas for days when you’re on your feet until closing.",
+      "prompt": "I run a shop and I’m on my feet all day, often getting home late. Give me five easy dinner ideas that take little effort and use basic ingredients. I like [foods I like] and don’t eat [foods to avoid]. List the ingredients for each in one line, and keep the steps short.",
+      "life": true,
+      "mark": "safe_today"
+     },
+     {
+      "title": "Plan for a free weekend",
+      "why": "Helps you use a rare day off so you actually rest.",
+      "prompt": "I own a small shop and rarely get a full weekend off. Help me plan a free weekend in [my town]. I’d like a mix of rest and one fun outing. My budget is [budget], and I enjoy [things I enjoy]. Give me a simple plan for Saturday and Sunday with a few options for each part of the day.",
+      "life": true,
+      "mark": "safe_today"
+     }
+    ],
+    "safeUse": [
+     "Read and check everything before it goes out, especially replies to customers.",
+     "AI can be confidently wrong about facts, dates and numbers, so check sizes, hold times and hours yourself.",
+     "Never type in customer last names, phone numbers, addresses or payment details.",
+     "Keep your part timers’ personal details, like pay or private schedules, out of the chat.",
+     "Don’t paste anything from Square, like sales records or card information.",
+     "Fill in your real hold and return rules yourself, and don’t let AI make them up."
+    ],
+    "workProfile": "I own a small women’s clothing boutique with two part time staff. I write to customers by Instagram DMs and texts, mostly about sizes, holds, new arrivals and returns. I also write Instagram captions and short messages to my part timers about shifts. I like drafts that are warm, friendly and short, like I’m texting a regular customer. Keep replies under 60 words unless I say otherwise. Use plain words, no hype, and never invent prices, sales, hours or store rules. Leave square brackets for details I need to fill in myself.",
+    "atWork": null
+   },
+   "checks": {
+    "firstWinIsMostWanted": false,
+    "firstWinTask": "Customer message replies",
+    "mostWanted": [
+     "Replying to customer messages"
+    ],
+    "toolWhyNamesMostWanted": true,
+    "questionsOver10Words": [],
+    "choicesOver4Words": [],
+    "dashes": [],
+    "deskWordsInChoicesOrQuestions": [],
+    "deskWordsInPlan": [],
+    "moneyOrPercentInPlan": [],
+    "nearDuplicateIdeas": [],
+    "ideaCount": 10,
+    "yourTools": {
+     "named": [
+      "Texts",
+      "Instagram",
+      "Square",
+      "Venmo"
+     ],
+     "written": [
+      "Instagram",
+      "Texts",
+      "Square"
+     ],
+     "notHers": [],
+     "withChatBelowUses": [],
+     "missingTryThis": [],
+     "menuWords": [
+      "Ask ChatGPT to turn a long hold reply into a text of two sentences, then keep it as your go to version."
+     ]
+    }
+   }
+  },
+  "beauty": {
+   "persona": {
+    "bio": "Beauty advisor at a department store makeup counter, paid partly on commission. Makeovers and color matching, restocking testers, cleaning the counter, keeping her client book, texting her clients when new launches come in or there's a gift with purchase, hitting her sales goals, events on weekends. She trains the new girls on the brand and does the counter's displays. Texting clients and keeping the client book take the most time outside makeovers. She tried an AI app once and didn't trust it. Her store restricts AI.",
+    "job": "Beauty advisor at a department store makeup counter, paid partly on commission.",
+    "level": "tried",
+    "worksFor": "employer",
+    "aiPolicy": "restricted",
+    "noDesk": true
+   },
+   "versions": {
+    "job": "beginner-job-v2",
+    "questions": "beginner-questions-v2",
+    "intake": "beginner-intake-v3",
+    "plan": "beginner-plan-v4"
+   },
+   "seconds": {
+    "jobRead": 1.8,
+    "questions": 2.5,
+    "intake": 2.8,
+    "plan": 33
+   },
+   "jobRead": {
+    "repeats": [
+     {
+      "label": "Doing customer makeovers",
+      "ai": false
+     },
+     {
+      "label": "Recommending products",
+      "ai": false
+     },
+     {
+      "label": "Restocking the counter",
+      "ai": false
+     },
+     {
+      "label": "Writing follow up texts",
+      "ai": true
+     },
+     {
+      "label": "Planning promo events",
+      "ai": true
+     },
+     {
+      "label": "Tracking sales goals",
+      "ai": true
+     }
+    ],
+    "aiFallback": [
+     "Product description rewrites",
+     "Social media captions",
+     "Loyalty program ideas",
+     "Thank you note drafts"
+    ],
+    "apps": [
+     "Texts",
+     "Instagram",
+     "TikTok",
+     "WhatsApp",
+     "Calendar",
+     "Notes",
+     "Venmo"
+    ],
+    "worksFor": "employer"
+   },
+   "jobReadFallback": false,
+   "asked": [
+    {
+     "id": "asked_1",
+     "title": "How do you write follow up texts today?",
+     "kind": "one",
+     "choices": [
+      "Type each one fresh",
+      "Copy an old text",
+      "Use saved templates",
+      "Ask a coworker"
+     ],
+     "hint": null
+    },
+    {
+     "id": "asked_2",
+     "title": "What did you try AI for, and what happened?",
+     "kind": "one",
+     "choices": [
+      "Answers felt generic",
+      "Faster doing it myself",
+      "Forgot about it",
+      "Didn’t trust it"
+     ],
+     "hint": "Any answer is fine."
+    }
+   ],
+   "worksForFromJob": "employer",
+   "answers": {
+    "job": "Beauty advisor at a department store makeup counter, paid partly on commission.",
+    "experience": "tried",
+    "qas": [
+     {
+      "id": "repeats",
+      "title": "What do you do over and over, every day or every week?",
+      "picked": [
+       "Doing customer makeovers",
+       "Recommending products",
+       "Restocking the counter",
+       "Writing follow up texts",
+       "Tracking sales goals"
+      ],
+      "text": "Texting clients and the client book eat my time.",
+      "shown": [
+       "Doing customer makeovers",
+       "Recommending products",
+       "Restocking the counter",
+       "Writing follow up texts",
+       "Planning promo events",
+       "Tracking sales goals"
+      ]
+     },
+     {
+      "id": "most",
+      "title": "Which would save you the most time if it got easier?",
+      "picked": [
+       "Writing follow up texts",
+       "Texting clients and the client book eat my time."
+      ],
+      "text": null,
+      "shown": [
+       "Writing follow up texts",
+       "Tracking sales goals",
+       "Texting clients and the client book eat my time."
+      ]
+     },
+     {
+      "id": "picture",
+      "title": "How do you picture AI helping with it?",
+      "picked": [],
+      "text": "Maybe drafting client texts faster, but I don't trust it with my clients' info."
+     },
+     {
+      "id": "apps",
+      "title": "Which apps do you use every week?",
+      "picked": [
+       "Texts",
+       "Instagram",
+       "Calendar",
+       "Notes"
+      ],
+      "text": null,
+      "shown": [
+       "Texts",
+       "Instagram",
+       "TikTok",
+       "WhatsApp",
+       "Calendar",
+       "Notes",
+       "Venmo"
+      ]
+     },
+     {
+      "id": "tools",
+      "title": "Which AI have you used?",
+      "picked": [
+       "None yet"
+      ],
+      "text": null,
+      "shown": [
+       "ChatGPT",
+       "Copilot",
+       "Gemini",
+       "Claude",
+       "Other",
+       "None yet",
+       "Not sure"
+      ]
+     },
+     {
+      "id": "asked_1",
+      "title": "How do you write follow up texts today?",
+      "picked": [
+       "Type each one fresh"
+      ],
+      "text": null,
+      "shown": [
+       "Type each one fresh",
+       "Copy an old text",
+       "Use saved templates",
+       "Ask a coworker"
+      ]
+     },
+     {
+      "id": "asked_2",
+      "title": "What did you try AI for, and what happened?",
+      "picked": [
+       "Didn’t trust it"
+      ],
+      "text": "Tried it once for client texts. Didn’t trust it.",
+      "shown": [
+       "Answers felt generic",
+       "Faster doing it myself",
+       "Forgot about it",
+       "Didn’t trust it"
+      ]
+     }
+    ],
+    "mostWanted": [
+     "Writing follow up texts",
+     "Texting clients and the client book eat my time."
+    ],
+    "worksFor": "employer",
+    "aiTools": [
+     "none_yet"
+    ],
+    "aiToolsOther": null,
+    "aiPolicy": "restricted"
+   },
+   "digest": "What do you do over and over, every day or every week? Doing customer makeovers, Recommending products, Restocking the counter, Writing follow up texts, Tracking sales goals, Texting clients and the client book eat my time.\nWhich would save you the most time if it got easier? Writing follow up texts, Texting clients and the client book eat my time.\nHow do you picture AI helping with it? Maybe drafting client texts faster, but I don't trust it with my clients' info.\nWhich apps do you use every week? Texts, Instagram, Calendar, Notes\nWhich AI have you used? None yet\nHow do you write follow up texts today? Type each one fresh\nWhat did you try AI for, and what happened? Didn’t trust it, Tried it once for client texts. Didn’t trust it.",
+   "intake": {
+    "role_summary": "You’re a beauty advisor at a department store makeup counter, doing makeovers, recommending products and texting clients, with part of your pay tied to commission.",
+    "tasks": [
+     {
+      "name": "Follow up texts",
+      "ai": true,
+      "private": true
+     },
+     {
+      "name": "Customer makeovers",
+      "ai": false,
+      "private": false
+     },
+     {
+      "name": "Product recommendations",
+      "ai": false,
+      "private": false
+     },
+     {
+      "name": "Restocking the counter",
+      "ai": false,
+      "private": false
+     },
+     {
+      "name": "Sales goal tracking",
+      "ai": true,
+      "private": true
+     }
+    ],
+    "first_win": {
+     "task": "Follow up texts",
+     "intro": "You said writing follow up texts takes a lot of your time. Here is a reusable one with blanks for the details only you know.",
+     "draft": "Hi [first name], it was great meeting you at the counter today! I hope you love your new [product name]. If you have any questions about how to use it, or want to book a touch up, just text me back here. I am happy to help. Take care, [your first name] at [store name] [counter name]"
+    },
+    "ideas": [
+     "Thank you notes after a makeover",
+     "Reminders for a client’s next visit",
+     "Instagram captions for new arrivals",
+     "A plan for your weekly sales goals",
+     "Talking points for a product launch",
+     "Questions to ask at the start of a makeover"
+    ],
+    "needs_follow_up": false,
+    "follow_up_question": null
+   },
+   "plan": {
+    "version": 2,
+    "role": "You’re a beauty advisor at a department store makeup counter, doing makeovers, recommending products and texting clients, with part of your pay tied to commission.",
+    "tool": "claude",
+    "toolWhy": "You said you’d most like help with writing follow up texts and texting clients. Claude is a good place to start because the free version is enough to begin, it works in a browser or a phone app, and you type to it like a text message.",
+    "yourTools": [
+     {
+      "name": "Texts",
+      "what": "Texts is where your follow ups actually reach clients, so it is where a draft ends up once you have read it and made it yours.",
+      "tryThis": "Draft one follow up in Claude with blanks like [first name], then copy it into Texts and fill in the details yourself. Nothing about a real client ever goes into the chat.",
+      "withChat": null
+     },
+     {
+      "name": "Notes",
+      "what": "Notes can hold your own favorite texts so you are not starting from nothing each time.",
+      "tryThis": "Save the draft you like best in Notes with the blanks still in it. Next time, copy it, fill in the blanks, and change a line so it sounds like you.",
+      "withChat": null
+     },
+     {
+      "name": "Calendar",
+      "what": "Calendar can remind you when a client is due for a follow up or a next visit.",
+      "tryThis": "After a makeover, add a reminder in Calendar to check in with that client. Use only their initials so nothing private sits in the title.",
+      "withChat": null
+     }
+    ],
+    "worksFor": "employer",
+    "policy": "restricted",
+    "firstWin": {
+     "task": "Follow up texts",
+     "prompt": "I’m a beauty advisor at a department store makeup counter. Write me a short follow up text to send a client after a makeover today. Leave blanks in square brackets for the client’s first name, the product and my name, so I fill them in myself. Warm, friendly and personal, like I’m texting a regular. Under 60 words, no emoji, and end by inviting her to text me back with questions or to book a touch up on [day and time].",
+     "example": "Hi [first name], it was so nice doing your makeover today! I hope you love your [product name] as much as I loved putting your look together. If you have any questions about how to apply it, just text me back here. Want to book a touch up on [day and time]? Talk soon, [your first name]",
+     "fixes": [
+      "Shorter.",
+      "Warmer, like I’m texting a regular.",
+      "Less salesy, more like a friendly check in."
+     ]
+    },
+    "ideas": [
+     {
+      "title": "Thank you notes after a makeover",
+      "why": "Gives you a kind, quick thank you to personalize in your own words.",
+      "prompt": "I’m a beauty advisor at a makeup counter. Write a short thank you text I can send a client after a makeover. Leave blanks in square brackets for her first name and the look we created, and keep it under 50 words, warm and genuine. Do not include any client details beyond the blanks. Give me three versions with different tones.",
+      "life": false,
+      "mark": "check_first"
+     },
+     {
+      "title": "Reminders for a client’s next visit",
+      "why": "Helps you gently bring clients back without sounding pushy.",
+      "prompt": "I’m a beauty advisor at a department store makeup counter. Write a friendly text reminding a client it may be time to come see me again. Use square brackets for her first name, the date and [what we talked about last time]. Keep it casual, under 50 words, no pressure. Leave out any real names or purchase history. Give me two versions.",
+      "life": false,
+      "mark": "check_first"
+     },
+     {
+      "title": "Instagram captions for new arrivals",
+      "why": "Gets you a caption draft fast when something new hits the counter.",
+      "prompt": "I’m a beauty advisor and I post on Instagram about what’s new at my counter. Write three short caption options for a post about [product name and what it is]. Friendly and fun, no emoji, each under 40 words, ending with a line inviting people to stop by [store name and counter]. I’ll check every detail before posting.",
+      "life": false,
+      "mark": "check_first"
+     },
+     {
+      "title": "Sales goal tracking",
+      "why": "Gives you a simple weekly layout you can fill in yourself.",
+      "prompt": "I’m a beauty advisor paid partly on commission. Help me design a simple weekly page for Notes to track my sales goal. I want blanks I fill in myself, like [weekly goal], [sales so far] and [what I’ll focus on tomorrow]. Keep it short, easy to read on my phone, and don’t ask me for any real numbers.",
+      "life": false,
+      "mark": "check_first"
+     },
+     {
+      "title": "Replies when a client asks about a product",
+      "why": "Helps you word a clear answer you then check against your own product info.",
+      "prompt": "I’m a beauty advisor. A client texted asking [her question about a product]. Write a friendly reply under 50 words that answers in general terms and invites her to come see me at the counter. Use blanks for details I’ll add myself from the product information I have. Leave out names and make it sound like me.",
+      "life": false,
+      "mark": "check_first"
+     },
+     {
+      "title": "Invitation text for a counter event",
+      "why": "Gives you a ready invitation to adjust whenever an event comes up.",
+      "prompt": "I’m a beauty advisor at a department store makeup counter. Write a short, warm text inviting clients to [type of event] on [day and time] at [store name and counter]. Use a blank for her first name, keep it under 50 words, and make it sound like a personal note, not an ad. Give me two versions.",
+      "life": false,
+      "mark": "check_first"
+     },
+     {
+      "title": "Counter restocking checklist",
+      "why": "Turns a messy restock into a list you can tick off.",
+      "prompt": "I work a makeup counter and restock it regularly. Make me a simple checklist I can keep in Notes, grouped by area like testers, tools, displays and cleaning supplies. Leave blanks in square brackets for [items specific to my counter]. Short lines, easy to scan on my phone.",
+      "life": false,
+      "mark": "check_first"
+     },
+     {
+      "title": "Easy dinners after a long shift",
+      "why": "Takes the guesswork out of what to eat when your feet are tired.",
+      "prompt": "I work long shifts on my feet at a makeup counter and get home tired. Give me five easy dinner ideas that take little effort and use simple ingredients. I’m cooking for [number of people] and I don’t eat [foods to avoid]. Add a short shopping list at the end.",
+      "life": true,
+      "mark": "safe_today"
+     },
+     {
+      "title": "Plan for a free weekend",
+      "why": "Helps you use a rare weekend off without it slipping away.",
+      "prompt": "I work retail and my weekends off are rare. Help me plan a relaxed free weekend in [my city or area] with a mix of rest and one or two fun things. My budget is [amount] and I like [what I enjoy]. Give me a simple plan for Saturday and Sunday.",
+      "life": true,
+      "mark": "safe_today"
+     }
+    ],
+    "safeUse": [
+     "Never type client names, phone numbers, emails or purchase history into a chat. Use blanks like [first name] instead.",
+     "Never paste your client book or anything from it.",
+     "Read and check everything before it goes out. Make it sound like you.",
+     "AI can be confidently wrong about facts, dates and numbers, so check product details against your own approved information.",
+     "Check with your manager before using AI for anything connected to your store, and keep any practice to your own device."
+    ],
+    "workProfile": "I’m a beauty advisor at a department store makeup counter, and part of my pay is commission. I do makeovers, recommend products and text my clients to follow up. When I write to clients, I want a warm, friendly voice, like I’m texting a regular I like, never pushy or salesy. I prefer short messages, usually under 60 words, in plain everyday words and no emoji. I leave blanks in square brackets for names and details, and I fill them in myself. Please keep drafts simple so I can easily make them sound like me.",
+    "atWork": {
+     "askMessage": "Hi, I’d like to know whether we have any approved AI tools and what I’m allowed to use them for. I’m thinking of things like drafting follow up texts to clients, writing thank you notes and getting ideas for social posts. I would not put client names or details into any tool. Could you let me know what is okay and what isn’t? Thank you.",
+     "aiTalk": "I wanted to let you know I’ve started learning about AI tools on my own time, using my own device and none of our client information. I’m practicing with things like how to word a friendly follow up text. I read and check everything myself before anything goes out. Once I know what’s approved, I’m happy to follow whatever guidelines we have."
+    }
+   },
+   "checks": {
+    "firstWinIsMostWanted": false,
+    "firstWinTask": "Follow up texts",
+    "mostWanted": [
+     "Writing follow up texts",
+     "Texting clients and the client book eat my time."
+    ],
+    "toolWhyNamesMostWanted": true,
+    "questionsOver10Words": [],
+    "choicesOver4Words": [],
+    "dashes": [],
+    "deskWordsInChoicesOrQuestions": [],
+    "deskWordsInPlan": [],
+    "moneyOrPercentInPlan": [],
+    "nearDuplicateIdeas": [],
+    "ideaCount": 9,
+    "yourTools": {
+     "named": [
+      "Texts",
+      "Instagram",
+      "Calendar",
+      "Notes"
+     ],
+     "written": [
+      "Texts",
+      "Notes",
+      "Calendar"
+     ],
+     "notHers": [],
+     "withChatBelowUses": [],
+     "missingTryThis": [],
+     "menuWords": []
+    }
+   }
+  }
+ }
+}

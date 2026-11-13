@@ -10,6 +10,7 @@ import type { AiPolicy, AiTool, WeekTask } from "@/lib/week";
 import { FreeResult } from "./FreeResult";
 import { HeardStep } from "./HeardStep";
 import { Paywall } from "./Paywall";
+import { PlanPreview } from "./PlanPreview";
 import { QuizHeader } from "./QuizHeader";
 import { TextStep } from "./TextStep";
 import { ToolsStep } from "./ToolsStep";
@@ -169,7 +170,9 @@ export function Quiz() {
           </div>
         ) : phase === "result" ? (
           <FreeResult tasks={tasks} headingRef={headingRef}>
-            <Paywall tasks={tasks} aiTools={tools} aiPolicy={policy} />
+            <Paywall>
+              <PlanPreview tasks={tasks} aiTools={tools} aiPolicy={policy} />
+            </Paywall>
           </FreeResult>
         ) : (
           <div key={phase === "questions" ? step : phase} className="quiz-step" data-dir={direction}>
