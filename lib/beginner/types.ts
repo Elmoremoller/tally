@@ -14,13 +14,18 @@ export const worksForLabels: Record<WorksFor, string> = {
   both: "Both",
 };
 
-export const EXPERIENCE = ["not_yet", "tried", "uses"] as const;
+export const EXPERIENCE = ["not_yet", "tried", "uses", "heavy"] as const;
 export type Experience = (typeof EXPERIENCE)[number];
+/** Elmore's words, 2026-11-13. */
 export const experienceLabels: Record<Experience, string> = {
-  not_yet: "I haven’t tried it yet", // DRAFT
-  tried: "I’ve tried it, but it didn’t stick", // DRAFT
-  uses: "I use it, but I could get more out of it", // DRAFT
+  not_yet: "I haven’t started yet. I don’t know where to begin.",
+  tried: "I’ve tried it, but I never figured out what to use it for.",
+  uses: "I use it, but I’m not getting the most out of it.",
+  heavy: "I use it a lot, but it hasn’t given me any time back.",
 };
+
+/** She uses AI today, a little or a lot: she is asked what for, and her plan goes past the basics. */
+export const usesAi = (level: Experience | null) => level === "uses" || level === "heavy";
 
 /** Only someone with an employer is asked about her company's view on AI, and gets the At work part. */
 export const hasEmployer = (worksFor: WorksFor) => worksFor !== "self";

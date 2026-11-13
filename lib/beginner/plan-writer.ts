@@ -8,6 +8,7 @@ import {
   experienceLabels,
   IDEAS_MIN,
   hasEmployer,
+  usesAi,
   markFor,
   worksForLabels,
   type Experience,
@@ -96,6 +97,7 @@ your_tools: one to three short notes on tools she already uses, from the list un
   - "${experienceLabels.not_yet}": what is one plain sentence on what the tool can do for her job, no jargon. try_this is one very small first step in it, with nothing new to set up. with_chat is null.
   - "${experienceLabels.tried}": what says what the tool can do for her job. try_this is one thing to try this week, aimed at what stopped her last time, as her answers tell it. with_chat is null.
   - "${experienceLabels.uses}": what says what it can do for her job, including its AI features when it has them. try_this is one thing to try this week, past the basics she likely knows. with_chat is a small routine with her main chat tool in two or three steps, like drafting in the chat and finishing in the tool.
+  - "${experienceLabels.heavy}": as for the line above, but aimed at time back: try_this and with_chat cut a step she repeats today, like saving instructions she keeps typing, starting from a template, or moving work between the chat and the tool in one go, never more things to try.
 - what, try_this and with_chat are at most two short sentences each, spoken to her as "you", with no quote marks.
 - Accuracy: name only features the tool is widely known for. Never give menu paths, button names or steps that depend on a version. When you're not sure where something is, say where to look, like "look for the AI or magic option in the editor". When an AI feature may need a paid plan, say it may. Never invent what the tool does.
 
@@ -348,7 +350,7 @@ function checkYourTools(raw: unknown, input: BeginnerPlanInput): BeginnerToolNot
     if (!name || notes.some((n) => n.name === name)) continue;
     const what = toolLine(t.what);
     const tryThis = toolLine(t.try_this);
-    const withChat = input.experience === "uses" ? toolLine(t.with_chat) : null;
+    const withChat = usesAi(input.experience) ? toolLine(t.with_chat) : null;
     if (!what || tryThis === undefined || withChat === undefined) continue;
     notes.push({ name, what, tryThis, withChat });
   }

@@ -3,7 +3,7 @@ import { ANSWER_MAX } from "../week";
 import { FALLBACK_JOB_READ } from "./copy";
 import { EVERYDAY_SOFTWARE } from "./quiz-copy";
 import type { AiTool } from "../week";
-import type { Experience, WorksFor } from "./types";
+import { usesAi, type Experience, type WorksFor } from "./types";
 
 // The context quiz's shapes and the pure helpers behind its screens. Imports nothing from the server, so the
 // browser, the server actions and the tests can all use it.
@@ -114,12 +114,12 @@ export function stepsFor(s: {
   skipMost?: boolean;
 }): QuizStep[] {
   const steps: QuizStep[] = ["job", "level"];
-  if (s.level !== "uses") steps.push("held_back");
+  if (!usesAi(s.level)) steps.push("held_back");
   steps.push("repeats");
   if (!s.skipMost) steps.push("most");
   steps.push("picture", "apps");
   if (s.level !== "not_yet") steps.push("tools");
-  if (s.level === "uses") steps.push("ai_uses");
+  if (usesAi(s.level)) steps.push("ai_uses");
   steps.push("device");
   const asked = s.askedCount ?? ASKED_ASSUMED;
   for (let i = 1; i <= asked; i++) steps.push(`asked_${i}`);

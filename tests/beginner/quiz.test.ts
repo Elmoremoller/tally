@@ -101,6 +101,12 @@ test("stepsFor assumes asked screens while the AI is still writing them", () => 
   ]);
 });
 
+test("stepsFor treats someone who uses AI a lot like someone who uses it", () => {
+  assert.deepEqual(stepsFor({ level: "heavy", askedCount: 1, worksForFromJob: "self", worksFor: null }), [
+    "job", "level", "repeats", "most", "picture", "apps", "tools", "ai_uses", "device", "asked_1",
+  ]);
+});
+
 test("stepsFor asks what held her back when she tried it, and leaves out most when told to", () => {
   assert.deepEqual(stepsFor({ level: "tried", askedCount: 0, worksForFromJob: "self", worksFor: null, skipMost: true }), [
     "job", "level", "held_back", "repeats", "picture", "apps", "tools", "device",
@@ -163,7 +169,8 @@ test("cleanQAs rejects a bad id or a non array", () => {
 });
 
 test("the level labels and the fallback read follow the brief", () => {
-  assert.equal(experienceLabels.not_yet, "I haven’t tried it yet");
+  assert.equal(experienceLabels.not_yet, "I haven’t started yet. I don’t know where to begin.");
+  assert.equal(experienceLabels.heavy, "I use it a lot, but it hasn’t given me any time back.");
   assert.equal(FALLBACK_JOB_READ.repeats.length, 5);
   assert.equal(FALLBACK_JOB_READ.aiFallback.length, 4);
   assert.equal(FALLBACK_JOB_READ.apps.length, 6);

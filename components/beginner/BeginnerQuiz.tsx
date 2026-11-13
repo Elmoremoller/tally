@@ -38,6 +38,7 @@ import {
   EXPERIENCE,
   experienceLabels,
   hasEmployer,
+  usesAi,
   WORKS_FOR,
   worksForLabels,
   type Experience,
@@ -220,7 +221,7 @@ export function BeginnerQuiz({ home }: { home: string }) {
                 shown: EXPERIENCE.map((e) => experienceLabels[e]),
               }
             : choiceQA("level", questions.level.title, EXPERIENCE, experienceLabels, s.level),
-          ...(s.level === "uses" ? [] : [pickedQA("held_back", heldBack.title, heldBack.choices, held)]),
+          ...(usesAi(s.level) ? [] : [pickedQA("held_back", heldBack.title, heldBack.choices, held)]),
           pickedQA("repeats", questions.repeats.title, jobRead.read.repeats.map((r) => r.label), repeats),
           {
             id: "most",
@@ -247,7 +248,7 @@ export function BeginnerQuiz({ home }: { home: string }) {
                   { picked: tools.map((t) => toolLabels[t]), other: tools.includes("other") ? otherTools : null },
                 ),
               ]),
-          ...(s.level === "uses" ? [pickedQA("ai_uses", aiUsesCopy.title, jobRead.read.aiUses, uses)] : []),
+          ...(usesAi(s.level) ? [pickedQA("ai_uses", aiUsesCopy.title, jobRead.read.aiUses, uses)] : []),
           ...(s.device ? [choiceQA("device", deviceQuestion.title, DEVICES, deviceQuestion.labels, s.device)] : []),
         ]
       : [];

@@ -358,6 +358,11 @@ test("the prompt keeps her tools accurate and at her level", () => {
       "Leave a tool out when the only thing to say is that results get pasted into it, or when you would have to guess what it does.",
     ),
   );
-  for (const level of ["I haven’t tried it yet", "I’ve tried it, but it didn’t stick", "I use it, but I could get more out of it"])
+  for (const level of [
+    "I haven’t started yet. I don’t know where to begin.",
+    "I’ve tried it, but I never figured out what to use it for.",
+    "I use it, but I’m not getting the most out of it.",
+    "I use it a lot, but it hasn’t given me any time back.",
+  ])
     assert.ok(BEGINNER_PLAN_SYSTEM.includes(level), level);
 });

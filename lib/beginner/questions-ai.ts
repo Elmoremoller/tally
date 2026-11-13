@@ -76,6 +76,7 @@ const LEVEL_GUIDE: Record<Experience, string> = {
   not_yet: `Her level: she hasn't tried AI yet. What has held her back is already in her answers, so never ask it again. When one of her reasons is something a question could settle for her plan, ask one kind tap question that follows from it, like "What would you try first?" with choices like "A text to a friend", "A shopping list" or "A work message". Keep it kind: not having tried yet is normal.`,
   tried: `Her level: she has tried AI, but it didn't stick. What has held her back is already in her answers, so never ask it again. Ask what she tried it for, with choices like "Writing emails", "Quick questions", "Planning" or "Just to see".`,
   uses: `Her level: she uses AI, but could get more out of it. What she uses it for today is already in her answers, so never ask it again. Ask what still feels slow, or what she wishes it did, with choices that fit her job. Never ask which AI tools she uses: another screen asks that.`,
+  heavy: `Her level: she uses AI a lot, but it hasn't given her any time back. What she uses it for today is already in her answers, so never ask it again. Ask where the time still goes, with choices like "Fixing its answers", "Explaining it every time", "Copying between apps" or "Checking its facts". Never ask which AI tools she uses: another screen asks that.`,
 };
 
 const jobSchema = {
