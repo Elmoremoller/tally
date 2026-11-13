@@ -1,10 +1,14 @@
 # Backlog
 
-Small improvements for the daily maintenance run. It takes the top unchecked item under "To do", ships it as one pull request, then ticks it.
+Work for the daily maintenance run. It takes the top unchecked item under "To do", ships it as one pull request, then ticks it.
 
-Write each item as one line with one clear purpose, small enough for under about 50 changed lines.
+Write each item as one line with one clear purpose. An item can be up to about 200 changed lines, for example a small new feature or a page that needs to work better on phones.
 
 ## To do
+
+## Proposed
+
+Ideas the daily run spotted but has not built. Nothing here gets built until you move it up to "To do".
 
 ## Needs Karl
 
