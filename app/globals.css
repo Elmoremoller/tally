@@ -2567,6 +2567,12 @@
     box-shadow: none;
     color: var(--off-white);
   }
+  /* The I have no idea yet chip on the picture screen: a chip that answers for her, between hint and box. */
+  .quiz-no-idea {
+    margin-top: 1rem;
+    border: 0;
+    font-family: inherit;
+  }
   .quiz-topic svg {
     width: 1.05rem;
     height: 1.05rem;

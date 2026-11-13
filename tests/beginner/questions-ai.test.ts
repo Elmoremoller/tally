@@ -1,5 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
+import { FALLBACK_AI_USES } from "../../lib/beginner/quiz-copy";
 import { checkJobRead, checkQuestions, readJob, writeQuestions } from "../../lib/beginner/questions-ai";
 
 const repeat = (label: string, ai = true) => ({ label, ai });
@@ -13,7 +14,15 @@ const goodRead = () => ({
   ],
   aiFallback: ["Quote templates", "Payment reminder texts", "Review requests"],
   apps: ["Texts", "QuickBooks", "Google Business", "Gmail"],
+  aiUses: ["Quotes", "Customer texts", "Job notes"],
   worksFor: "self",
+});
+
+test("checkJobRead gives the fixed AI uses when the read has too few, and keeps the rest", () => {
+  const read = checkJobRead({ ...goodRead(), aiUses: ["Quotes"] });
+  assert.deepEqual(read?.aiUses, FALLBACK_AI_USES);
+  assert.deepEqual(read?.apps, goodRead().apps);
+  assert.deepEqual(checkJobRead({ ...goodRead(), aiUses: undefined })?.aiUses, FALLBACK_AI_USES);
 });
 
 test("checkJobRead accepts a read inside the limits", () => {
@@ -115,7 +124,7 @@ test("checkQuestions numbers the questions it keeps in order", () => {
   ]);
 });
 
-test("checkQuestions keeps at most 4", () => {
+test("checkQuestions keeps at most 3", () => {
   const questions = checkQuestions({ questions: ["A?", "B?", "C?", "D?", "E?"].map((t) => tap(t)) });
   assert.deepEqual(
     questions.map((q) => [q.id, q.title]),
@@ -123,7 +132,6 @@ test("checkQuestions keeps at most 4", () => {
       ["asked_1", "A?"],
       ["asked_2", "B?"],
       ["asked_3", "C?"],
-      ["asked_4", "D?"],
     ],
   );
 });

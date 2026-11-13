@@ -125,9 +125,22 @@ export function PickStep({
   );
 }
 
-/** The box under Something else: type or talk, as on the open questions, with the privacy note under it. */
-function OtherBox({ value, setValue }: { value: string; setValue: (value: string) => void }) {
-  const voice = useDictation({ value, setValue, max: PICK_MAX });
+/**
+ * The box under Something else: type or talk, as on the open questions, with the privacy note under it. Short
+ * by default, as a chip's words are; `max` and `placeholder` suit a longer answer.
+ */
+export function OtherBox({
+  value,
+  setValue,
+  max = PICK_MAX,
+  placeholder = somethingElse.placeholder,
+}: {
+  value: string;
+  setValue: (value: string) => void;
+  max?: number;
+  placeholder?: string;
+}) {
+  const voice = useDictation({ value, setValue, max });
   const box = useRef<HTMLTextAreaElement>(null);
 
   // Opening the box puts her in it, and her newest words stay in sight while she talks.
@@ -147,9 +160,9 @@ function OtherBox({ value, setValue }: { value: string; setValue: (value: string
           aria-label={somethingElse.label}
           aria-describedby={voice.problem ? "q-other-mic q-other-private" : "q-other-private"}
           rows={2}
-          maxLength={PICK_MAX}
+          maxLength={max}
           readOnly={voice.listening}
-          placeholder={voice.listening ? (voice.ready ? micCopy.speak : micCopy.waiting) : somethingElse.placeholder}
+          placeholder={voice.listening ? (voice.ready ? micCopy.speak : micCopy.waiting) : placeholder}
           value={value}
           onChange={(e) => setValue(e.target.value)}
         />

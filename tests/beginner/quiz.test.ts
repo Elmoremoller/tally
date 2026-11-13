@@ -7,7 +7,11 @@ import {
   ASKED_ASSUMED,
   cleanQAs,
   digest,
+  experienceFor,
+  levelWords,
   mostOptions,
+  skipsMost,
+  softwareOptions,
   PICK_MAX,
   PICKS_MAX,
   QAS_MAX,
@@ -21,15 +25,42 @@ const read: JobRead = {
     { label: "Attic work", ai: false },
   ],
   aiFallback: ["Answering messages", "Writing emails", "Planning my week"],
-  apps: ["Email"],
+  apps: ["Outlook", "QuickBooks", "excel"],
+  aiUses: ["Quotes", "Customer texts", "Job notes"],
   worksFor: "unclear",
 };
 
-test("mostOptions offers only her picks that AI can help with", () => {
+test("mostOptions offers every pick she made, hands on work included", () => {
   assert.deepEqual(mostOptions(read, ["Writing quotes", "Attic work"], null), {
-    options: ["Writing quotes"],
+    options: ["Writing quotes", "Attic work"],
     fallback: false,
   });
+});
+
+test("skipsMost skips a list of one, never the fallback list", () => {
+  assert.equal(skipsMost(mostOptions(read, ["Writing quotes"], null)), true);
+  assert.equal(skipsMost(mostOptions(read, ["Attic work"], "Chasing payments")), false);
+  assert.equal(skipsMost(mostOptions(read, ["Attic work"], null)), false);
+  assert.equal(skipsMost({ options: ["One"], fallback: true }), false);
+});
+
+test("softwareOptions puts the job's software first, then the everyday set, each once whatever its case", () => {
+  const names = softwareOptions(read);
+  assert.deepEqual(names.slice(0, 3), ["Outlook", "QuickBooks", "excel"]);
+  assert.equal(names.filter((n) => n.toLowerCase() === "excel").length, 1);
+  assert.equal(names.filter((n) => n === "Outlook").length, 1);
+  assert.ok(names.includes("Google Drive") && names.includes("Teams"));
+});
+
+test("experienceFor counts her own words as tried, or not yet when she then picked None yet", () => {
+  assert.equal(experienceFor("tried", true, ["chatgpt"]), "tried");
+  assert.equal(experienceFor("tried", true, ["none_yet"]), "not_yet");
+  assert.equal(experienceFor("uses", false, ["none_yet"]), "uses");
+});
+
+test("levelWords reads her own words on the level screen", () => {
+  assert.equal(levelWords([{ id: "level", title: "T", picked: [], text: "I use it to plan meals" }]), "I use it to plan meals");
+  assert.equal(levelWords([{ id: "level", title: "T", picked: ["I use it"], text: null }]), null);
 });
 
 test("mostOptions falls back when she picked only hands on work", () => {
@@ -38,7 +69,7 @@ test("mostOptions falls back when she picked only hands on work", () => {
 
 test("mostOptions offers what she typed under Something else", () => {
   assert.deepEqual(mostOptions(read, ["Attic work"], "Chasing payments"), {
-    options: ["Chasing payments"],
+    options: ["Attic work", "Chasing payments"],
     fallback: false,
   });
   assert.deepEqual(mostOptions(read, ["Writing quotes"], "Chasing payments").options, [
@@ -58,15 +89,21 @@ test("mostOptions offers at most six", () => {
 
 test("stepsFor for someone who works for herself and hasn't tried AI", () => {
   assert.deepEqual(stepsFor({ level: "not_yet", askedCount: 2, worksForFromJob: "self", worksFor: "self" }), [
-    "job", "level", "repeats", "most", "picture", "apps", "asked_1", "asked_2",
+    "job", "level", "held_back", "repeats", "most", "picture", "apps", "device", "asked_1", "asked_2",
   ]);
 });
 
 test("stepsFor assumes asked screens while the AI is still writing them", () => {
   assert.equal(ASKED_ASSUMED, 3);
   assert.deepEqual(stepsFor({ level: "uses", askedCount: null, worksForFromJob: "unclear", worksFor: "employer" }), [
-    "job", "level", "repeats", "most", "picture", "apps", "tools",
+    "job", "level", "repeats", "most", "picture", "apps", "tools", "ai_uses", "device",
     "asked_1", "asked_2", "asked_3", "works_for", "policy",
+  ]);
+});
+
+test("stepsFor asks what held her back when she tried it, and leaves out most when told to", () => {
+  assert.deepEqual(stepsFor({ level: "tried", askedCount: 0, worksForFromJob: "self", worksFor: null, skipMost: true }), [
+    "job", "level", "held_back", "repeats", "picture", "apps", "tools", "device",
   ]);
 });
 
@@ -95,7 +132,7 @@ test("digest is at most ANSWER_MAX characters", () => {
 });
 
 test("cleanQAs keeps good screens and enforces the limits", () => {
-  const picked = Array.from({ length: 12 }, (_, i) => `pick ${i}`).concat(["y".repeat(PICK_MAX + 1)]);
+  const picked = Array.from({ length: PICKS_MAX + 4 }, (_, i) => `pick ${i}`).concat(["y".repeat(PICK_MAX + 1)]);
   const out = cleanQAs([{ id: "repeats", title: "Title", picked, text: "z".repeat(ANSWER_MAX + 50) }]);
   assert.ok(out);
   assert.equal(out[0].picked.length, PICKS_MAX);
@@ -106,7 +143,7 @@ test("cleanQAs keeps good screens and enforces the limits", () => {
 });
 
 test("cleanQAs keeps the choices she was shown, with the same limits as picks", () => {
-  const shown = Array.from({ length: 10 }, (_, i) => `choice ${i}`).concat(["y".repeat(PICK_MAX + 1)]);
+  const shown = Array.from({ length: PICKS_MAX + 2 }, (_, i) => `choice ${i}`).concat(["y".repeat(PICK_MAX + 1)]);
   const out = cleanQAs([{ id: "repeats", title: "Title", picked: ["choice 1"], text: null, shown }]);
   assert.deepEqual(out?.[0].shown, shown.slice(0, PICKS_MAX));
   const long = cleanQAs([{ id: "most", title: "T", picked: [], text: null, shown: ["y".repeat(PICK_MAX + 1), "Ok"] }]);
@@ -129,5 +166,6 @@ test("the level labels and the fallback read follow the brief", () => {
   assert.equal(experienceLabels.not_yet, "I haven’t tried it yet");
   assert.equal(FALLBACK_JOB_READ.repeats.length, 5);
   assert.equal(FALLBACK_JOB_READ.aiFallback.length, 4);
-  assert.equal(FALLBACK_JOB_READ.apps.length, 8);
+  assert.equal(FALLBACK_JOB_READ.apps.length, 6);
+  assert.equal(softwareOptions(FALLBACK_JOB_READ).length, 14);
 });

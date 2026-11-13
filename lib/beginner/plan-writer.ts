@@ -2,7 +2,7 @@ import Anthropic from "@anthropic-ai/sdk";
 import { fence, planModel, text } from "../plan-writer";
 import { policyLabels, toolLabels, type AiPolicy, type AiTool, type ChatTool } from "../week";
 import { withoutScarcity } from "./intake";
-import type { QA } from "./quiz";
+import { levelWords, type QA } from "./quiz";
 import {
   beginnerTool,
   experienceLabels,
@@ -205,6 +205,7 @@ export function describeBeginnerPlan(input: BeginnerPlanInput) {
     `She has an employer: ${hasEmployer(input.worksFor) ? "yes, write at_work" : "no, at_work is null"}`,
     `Her company's view on AI: ${input.aiPolicy ? policyLabels[input.aiPolicy] : "she works for herself"}`,
     `How much she has used AI so far: ${experienceLabels[input.experience]}`,
+    ...(levelWords(input.qas) ? [`In her own words: ${fence(levelWords(input.qas) ?? "")}`] : []),
     `The tool her plan names: ${toolLabels[beginnerTool(input.aiTools)]}`,
     "",
     "Her tools, use these exact names:",

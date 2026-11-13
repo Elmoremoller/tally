@@ -3,7 +3,7 @@ import { fenced, IntakeLimitError, intakeModel, isHers, line, plain } from "../i
 import { beginnerFollowUp } from "./quiz-copy";
 import { tidy as tidyLines } from "../plan-writer";
 import { policyLabels, TASKS_MAX, toolLabels, type AiPolicy, type AiTool } from "../week";
-import type { QA } from "./quiz";
+import { levelWords, type QA } from "./quiz";
 import { experienceLabels, worksForLabels, type Experience, type FirstWin, type WorksFor } from "./types";
 
 // The beginner intake: a fast model reads her job and every answer from the context quiz, finds the tasks she
@@ -168,6 +168,7 @@ export function describeBeginnerIntake({
     "",
     `She works: ${worksForLabels[worksFor]}`,
     `How much she has used AI so far: ${experienceLabels[experience]}`,
+    ...(levelWords(qas) ? [`In her own words: ${fence(levelWords(qas) ?? "")}`] : []),
     `AI tools she has tried: ${aiTools
       .map((t) => (t === "other" && aiToolsOther ? `Other (${fence(aiToolsOther)})` : toolLabels[t]))
       .join(", ")}`,
