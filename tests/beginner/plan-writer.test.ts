@@ -353,6 +353,11 @@ test("the prompt keeps her tools accurate and at her level", () => {
   assert.ok(BEGINNER_PLAN_SYSTEM.includes("Never give menu paths, button names or steps that depend on a version."));
   assert.ok(BEGINNER_PLAN_SYSTEM.includes("only features the tool is widely known for"));
   assert.ok(BEGINNER_PLAN_SYSTEM.includes("look for the AI or magic option in the editor"));
+  assert.ok(
+    BEGINNER_PLAN_SYSTEM.includes(
+      "Leave a tool out when the only thing to say is that results get pasted into it, or when you would have to guess what it does.",
+    ),
+  );
   for (const level of ["I haven’t tried it yet", "I’ve tried it, but it didn’t stick", "I use it, but I could get more out of it"])
     assert.ok(BEGINNER_PLAN_SYSTEM.includes(level), level);
 });

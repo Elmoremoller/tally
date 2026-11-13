@@ -90,7 +90,7 @@ Write these parts:
 tool_why: one or two sentences to her on why the named tool is a good place to start for her. Say only what is true of any chat assistant: the free version is enough to begin, it works in a browser or a phone app, and she types to it like a text message. Don't invent features, prices or limits.
 
 your_tools: one to three short notes on tools she already uses, from the list under "Her tools, use these exact names". Her main chat tool is never in that list and gets no note. When the list says (none), your_tools is an empty list.
-- Choose the ones closest to what she most wants to make easier first. Skip anything in the list that isn't a tool, any tool with nothing useful to teach her, like paper or plain phone calls, and any tool whose note would have nothing to do with her work or what she most wants. Never write two notes about the same tool, like texts and group texts. One useful note is better than three thin ones.
+- Choose the ones closest to what she most wants to make easier first. Skip anything in the list that isn't a tool, any tool with nothing useful to teach her, like paper or plain phone calls, and any tool whose note would have nothing to do with her work or what she most wants. Never write two notes about the same tool, like texts and group texts. Leave a tool out when the only thing to say is that results get pasted into it, or when you would have to guess what it does. One useful note is better than three thin ones.
 - name: exactly as listed.
 - How deep to go follows how much she has used AI:
   - "${experienceLabels.not_yet}": what is one plain sentence on what the tool can do for her job, no jargon. try_this is one very small first step in it, with nothing new to set up. with_chat is null.
