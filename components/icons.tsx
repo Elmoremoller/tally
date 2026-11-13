@@ -24,43 +24,6 @@ export const ArrowLeft = (props: IconProps) => (
   </Icon>
 );
 
-export const ArrowUp = (props: IconProps) => (
-  <Icon {...props}>
-    <path d="M12 19V5M6 11l6-6 6 6" />
-  </Icon>
-);
-
-/** A shield with a tick: rules that keep you safe. */
-export const Shield = (props: IconProps) => (
-  <Icon {...props}>
-    <path d="M12 3.5 19 6.2v5.1c0 4.3-2.9 7.9-7 9.2-4.1-1.3-7-4.9-7-9.2V6.2z" />
-    <path d="m9 12 2.1 2.1 4.1-4.1" />
-  </Icon>
-);
-
-/** Two bars in a circle. */
-export const PauseCircle = (props: IconProps) => (
-  <Icon {...props}>
-    <circle cx="12" cy="12" r="8.5" />
-    <path d="M10 9v6M14 9v6" />
-  </Icon>
-);
-
-/** A heart. */
-export const Heart = (props: IconProps) => (
-  <Icon {...props}>
-    <path d="M12 19.5s-7.5-4.6-7.5-10.1A4.4 4.4 0 0 1 12 6.6a4.4 4.4 0 0 1 7.5 2.8c0 5.5-7.5 10.1-7.5 10.1z" />
-  </Icon>
-);
-
-/** Two circles that overlap. */
-export const Pair = (props: IconProps) => (
-  <Icon {...props}>
-    <circle cx="9" cy="12" r="5.5" />
-    <circle cx="15" cy="12" r="5.5" />
-  </Icon>
-);
-
 export const Plus = (props: IconProps) => (
   <Icon {...props}>
     <path d="M12 6v12M6 12h12" />
@@ -140,14 +103,6 @@ export const Mic = (props: IconProps) => (
   <Icon {...props}>
     <rect x="9" y="3.5" width="6" height="11" rx="3" />
     <path d="M5.5 11.5a6.5 6.5 0 0 0 13 0M12 18v2.5" />
-  </Icon>
-);
-
-/** Getting seen: an eye. */
-export const Eye = (props: IconProps) => (
-  <Icon {...props}>
-    <path d="M2.8 12S6.2 5.8 12 5.8 21.2 12 21.2 12 17.8 18.2 12 18.2 2.8 12 2.8 12z" />
-    <circle cx="12" cy="12" r="2.8" />
   </Icon>
 );
 
