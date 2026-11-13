@@ -1,5 +1,15 @@
 import { after } from "next/server";
-import { claimPlanGeneration, failPlan, loadPlanInput, orderEmail, planById, savePlan } from "./funnel-db";
+import { writeBeginnerPlan } from "./beginner/plan-writer";
+import {
+  claimPlanGeneration,
+  failPlan,
+  loadBeginnerPlanInput,
+  loadPlanInput,
+  loadWeek,
+  orderEmail,
+  planById,
+  savePlan,
+} from "./funnel-db";
 import { writePlan } from "./plan-writer";
 import { requestOrigin } from "./site";
 import { sendPlanEmail } from "./supabase";
@@ -17,7 +27,11 @@ export async function writeAndSavePlan(planId: string, origin: string) {
     try {
       const plan = await planById(planId);
       if (!plan) throw new Error("The plan is gone");
-      const { content, model, promptVersion } = await writePlan(await loadPlanInput(plan));
+      // Answers from the beginner quiz get the beginner plan.
+      const { intake } = await loadWeek(plan.session_id);
+      const { content, model, promptVersion } = intake?.beginner
+        ? await writeBeginnerPlan(await loadBeginnerPlanInput(plan))
+        : await writePlan(await loadPlanInput(plan));
       await savePlan(planId, content, promptVersion, model);
       await emailPlan(plan.order_id, `${origin}/plan/${plan.access_token}`, origin);
       return;

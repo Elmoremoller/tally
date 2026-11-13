@@ -51,6 +51,8 @@ export const policyQuestion = { title: "What’s your company’s view on AI?" }
 export const micCopy = {
   start: "Talk instead of typing",
   stop: "Done",
+  starting: "Getting ready",
+  waiting: "One moment while the microphone gets ready.",
   listening: "Listening",
   speak: "Start talking. Your words show up here as you go.",
   problems: {

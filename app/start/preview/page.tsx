@@ -4,6 +4,7 @@ import { Suspense } from "react";
 import { Backdrop } from "@/components/Backdrop";
 import { FreeResult } from "@/components/quiz/FreeResult";
 import { Paywall } from "@/components/quiz/Paywall";
+import { PlanPreview } from "@/components/quiz/PlanPreview";
 import { QuizHeader } from "@/components/quiz/QuizHeader";
 import { offer } from "@/lib/offer";
 import { planSamples } from "@/lib/plan-samples";
@@ -37,7 +38,9 @@ async function Preview({ searchParams }: { searchParams: PageProps<"/start/previ
   const tasks = plan.tasks.filter((t) => !dropped.includes(t.pile));
   return (
     <FreeResult tasks={tasks}>
-      <Paywall tasks={tasks} aiTools={plan.tools ?? (plan.tool ? [plan.tool] : ["not_sure"])} aiPolicy={plan.policy} />
+      <Paywall>
+        <PlanPreview tasks={tasks} aiTools={plan.tools ?? (plan.tool ? [plan.tool] : ["not_sure"])} aiPolicy={plan.policy} />
+      </Paywall>
     </FreeResult>
   );
 }

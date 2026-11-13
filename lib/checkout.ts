@@ -1,17 +1,20 @@
+import { beginnerCheckout } from "./beginner/copy";
 import { checkoutCopy } from "./plan-copy";
 import { CURRENCY, PLAN_PRICE } from "./prices";
 import { requestOrigin } from "./site";
 import { stripe } from "./stripe";
 
-/** Marks Checkouts this site started, since the Stripe account also sells The Couple Standard's plan. */
+/** Marks Checkouts this site started, since the Stripe account may also sell other things. */
 export const APP_TAG = "tally";
 
 /**
  * Starts a Stripe Checkout for her plan and returns its address. It carries her quiz session, so the payment
  * opens the plan built from her answers. Stripe asks for her email.
  */
-export async function createCheckout(sessionId: string) {
+export async function createCheckout(sessionId: string, { beginner = false }: { beginner?: boolean } = {}) {
   const origin = await requestOrigin();
+  // The beginner version's plan is the same price, named for what it is on Stripe's page and her receipt.
+  const { name, description } = beginner ? beginnerCheckout : checkoutCopy;
   const checkout = await stripe().checkout.sessions.create({
     mode: "payment",
     // Cards only (Apple Pay and Google Pay included), so a payment is either done or not when she comes back.
@@ -23,7 +26,7 @@ export async function createCheckout(sessionId: string) {
         price_data: {
           currency: CURRENCY,
           unit_amount: PLAN_PRICE,
-          product_data: { name: checkoutCopy.name, description: checkoutCopy.description },
+          product_data: { name, description },
         },
       },
     ],

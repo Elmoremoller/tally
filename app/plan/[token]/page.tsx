@@ -3,6 +3,7 @@ import Link from "next/link";
 import { connection } from "next/server";
 import { Suspense } from "react";
 import { Backdrop } from "@/components/Backdrop";
+import { BeginnerPlanPage } from "@/components/beginner/BeginnerPlanPage";
 import { PlanPage } from "@/components/plan/PlanPage";
 import { PlanWaiting } from "@/components/plan/PlanWaiting";
 import { SiteNav } from "@/components/SiteNav";
@@ -10,6 +11,7 @@ import { orderEmail, planByToken } from "@/lib/funnel-db";
 import { offer } from "@/lib/offer";
 import { planCopy } from "@/lib/plan-copy";
 import { writePlanAfterResponse } from "@/lib/plan-generation";
+import type { BeginnerPlan } from "@/lib/beginner/plan-writer";
 import type { PlanContent } from "@/lib/plan-writer";
 
 // Her plan's private page. The long random token in the address is the only way in. While the plan is
@@ -65,8 +67,10 @@ async function TokenPlan({
 
   const email = welcome === "1" ? await orderEmail(plan.order_id).catch(() => null) : null;
   const note = email ? { email, token } : null;
-  const content = plan.content as PlanContent | null;
+  // Version 2 is the beginner version's plan.
+  const content = plan.content as PlanContent | BeginnerPlan | null;
   if (plan.status === "ready" && content?.version === 1) return <PlanPage content={content} welcome={note} />;
+  if (plan.status === "ready" && content?.version === 2) return <BeginnerPlanPage content={content} welcome={note} />;
 
   // The database starts an attempt only when none is running (or one stopped over 3 minutes ago).
   if (plan.status === "pending") await writePlanAfterResponse(plan.id);
