@@ -16,12 +16,13 @@ import {
   type WorksFor,
 } from "./types";
 
-// Writes the beginner plan from every quiz answer: her tool, her first win as something she makes herself,
-// ideas for her job, safe use rules in her job's terms, her work profile and, with an employer, what to send
-// and say at work. The tool, the marks and the seven days are decided in code; the model writes the words.
+// Writes the beginner plan from every quiz answer: her tool, the other tools she named taught at her level,
+// her first win as something she makes herself, ideas for her job, safe use rules in her job's terms, her work
+// profile and, with an employer, what to send and say at work. The tool, the marks and the seven days are
+// decided in code; the model writes the words.
 // Versioned like the first plan: change BEGINNER_PLAN_VERSION whenever the words of the prompt change.
 
-export const BEGINNER_PLAN_VERSION = "beginner-plan-v3";
+export const BEGINNER_PLAN_VERSION = "beginner-plan-v4";
 
 /** The shortest first win example worth showing her, the same as the intake's first win draft. */
 const EXAMPLE_MIN = 60;
@@ -54,12 +55,17 @@ export type BeginnerIdea = {
   life: boolean;
 };
 
+/** One of the other tools she named, taught at her level. `withChat` is only for a woman who uses AI. */
+export type BeginnerToolNote = { name: string; what: string; tryThis: string | null; withChat: string | null };
+
 /** Everything the beginner plan page shows. `version: 2` tells it apart from the first plan. */
 export type BeginnerPlan = {
   version: 2;
   role: string;
   tool: ChatTool;
   toolWhy: string;
+  /** Up to three of her other tools. Absent on plans written before beginner-plan-v4. */
+  yourTools?: BeginnerToolNote[];
   worksFor: WorksFor;
   policy: AiPolicy | null;
   firstWin: { task: string; prompt: string; example: string; fixes: string[] };
@@ -77,11 +83,21 @@ Assume she has never written a prompt. Every prompt you write must work when pas
 
 Open her plan with what she most wants to make easier, given under "What she most wants to make easier". Start tool_why by naming it in her own words, like "You said you'd most like help with Instagram posts for new arrivals.", then say why the named tool is a good place to start on it. When her first win task is that same thing, the first win is how she starts on it.
 
-Her plan names one chat tool, and everything in it happens there. The apps she said she uses are where its results go, like "write it here, paste it into Notion" or "post it on Instagram". Mention her apps only that way. Never make one of them, or the AI built into it, something to learn on its own.
+Her plan names one chat tool, and everything in it happens there. The apps she said she uses are where its results go, like "write it here, paste it into Notion" or "post it on Instagram". Outside your_tools, mention her apps only that way. Only your_tools teaches her about one of them, or the AI built into it.
 
 Write these parts:
 
 tool_why: one or two sentences to her on why the named tool is a good place to start for her. Say only what is true of any chat assistant: the free version is enough to begin, it works in a browser or a phone app, and she types to it like a text message. Don't invent features, prices or limits.
+
+your_tools: one to three short notes on tools she already uses, from the list under "Her tools, use these exact names". Her main chat tool is never in that list and gets no note. When the list says (none), your_tools is an empty list.
+- Choose the ones closest to what she most wants to make easier first. Skip anything in the list that isn't a tool, any tool with nothing useful to teach her, like paper or plain phone calls, and any tool whose note would have nothing to do with her work or what she most wants. Never write two notes about the same tool, like texts and group texts. One useful note is better than three thin ones.
+- name: exactly as listed.
+- How deep to go follows how much she has used AI:
+  - "${experienceLabels.not_yet}": what is one plain sentence on what the tool can do for her job, no jargon. try_this is one very small first step in it, with nothing new to set up. with_chat is null.
+  - "${experienceLabels.tried}": what says what the tool can do for her job. try_this is one thing to try this week, aimed at what stopped her last time, as her answers tell it. with_chat is null.
+  - "${experienceLabels.uses}": what says what it can do for her job, including its AI features when it has them. try_this is one thing to try this week, past the basics she likely knows. with_chat is a small routine with her main chat tool in two or three steps, like drafting in the chat and finishing in the tool.
+- what, try_this and with_chat are at most two short sentences each, spoken to her as "you", with no quote marks.
+- Accuracy: name only features the tool is widely known for. Never give menu paths, button names or steps that depend on a version. When you're not sure where something is, say where to look, like "look for the AI or magic option in the editor". When an AI feature may need a paid plan, say it may. Never invent what the tool does.
 
 first_win: she saw a draft of her first win task on her free result. Now she makes it herself.
 - prompt: what she pastes to get it. Written in her voice, with her job and situation already filled in from her answers, so she changes as little as possible. Square brackets only for today's details, like [day and time]. Say the format, length and tone she needs. 40 to 110 words.
@@ -126,9 +142,34 @@ Copy rules:
 /** What she picked and typed on one screen, as one line. */
 const answerOf = (qa: QA) => [...qa.picked, ...(qa.text ? [qa.text] : [])].join(", ");
 
+/** Labels on the AI tools screen that name no tool. */
+const NOT_TOOLS = (["none_yet", "not_sure", "other"] as const).map((t) => toolLabels[t].toLowerCase());
+
+/**
+ * The other tools she named, for her Your tools part: her apps (picked, then typed) and the AI she has used
+ * (picked, then typed under Other), in screen order. What she typed is split at commas, so "Square, Canva" is
+ * two tools. Her main chat tool, None yet, Not sure and Other are left out, and a name she gave twice counts once.
+ */
+export function herTools(qas: QA[], mainTool: ChatTool): string[] {
+  const skip = new Set([toolLabels[mainTool].toLowerCase(), ...NOT_TOOLS]);
+  const names: string[] = [];
+  for (const qa of qas.filter((q) => q.id === "apps" || q.id === "tools")) {
+    const typed = (qa.text ?? "").split(/[,;/\n]/);
+    for (const raw of [...qa.picked, ...typed]) {
+      const name = raw.trim().replace(/[.!]+$/, "");
+      const key = name.toLowerCase();
+      if (!name || skip.has(key)) continue;
+      skip.add(key);
+      names.push(name);
+    }
+  }
+  return names;
+}
+
 /** The model's input: her job, every screen she answered, what she most wants to make easier, and the rest. */
 export function describeBeginnerPlan(input: BeginnerPlanInput) {
   const others = input.tasks.filter((t) => t.ai && t.name !== input.firstWin.task);
+  const tools = herTools(input.qas, beginnerTool(input.aiTools));
   const screens = input.qas.map((qa) => {
     const answer = answerOf(qa);
     return [
@@ -166,6 +207,9 @@ export function describeBeginnerPlan(input: BeginnerPlanInput) {
     `How much she has used AI so far: ${experienceLabels[input.experience]}`,
     `The tool her plan names: ${toolLabels[beginnerTool(input.aiTools)]}`,
     "",
+    "Her tools, use these exact names:",
+    ...(tools.length ? tools.map((name) => `- ${fence(name)}`) : ["(none)"]),
+    "",
     `Her first win task: ${input.firstWin.task}`,
     "The draft she saw on her free result:",
     `<draft>\n${fence(input.firstWin.draft)}\n</draft>`,
@@ -183,6 +227,20 @@ const schema = {
   type: "object",
   properties: {
     tool_why: { type: "string" },
+    your_tools: {
+      type: "array",
+      items: {
+        type: "object",
+        properties: {
+          name: { type: "string" },
+          what: { type: "string" },
+          try_this: { anyOf: [{ type: "string" }, { type: "null" }] },
+          with_chat: { anyOf: [{ type: "string" }, { type: "null" }] },
+        },
+        required: ["name", "what", "try_this", "with_chat"],
+        additionalProperties: false,
+      },
+    },
     first_win: {
       type: "object",
       properties: {
@@ -225,7 +283,7 @@ const schema = {
       ],
     },
   },
-  required: ["tool_why", "first_win", "ideas", "safe_use", "work_profile", "at_work"],
+  required: ["tool_why", "your_tools", "first_win", "ideas", "safe_use", "work_profile", "at_work"],
   additionalProperties: false,
 } as const;
 
@@ -257,6 +315,44 @@ export function nearSame(a: string, b: string): boolean {
 
 const strings = (value: unknown, max: number) =>
   Array.isArray(value) ? value.map((v) => text(v, max)).filter((v): v is string => Boolean(v)) : [];
+
+/** Her Your tools part holds at most this many tools, and each line at most TOOL_LINE_MAX characters. */
+const YOUR_TOOLS_MAX = 3;
+const TOOL_LINE_MAX = 300;
+
+/**
+ * One line of a tool note: null when the model gave none or left only a scarcity line, undefined when what it
+ * gave breaks the rules (too long), so the tool is dropped.
+ */
+function toolLine(value: unknown): string | null | undefined {
+  if (value === null || value === undefined || value === "") return null;
+  const line = text(value, TOOL_LINE_MAX);
+  if (!line) return undefined;
+  return withoutScarcity(line) || null;
+}
+
+/**
+ * Her Your tools part: only tools she named, in her spelling and in the order the model chose, at most
+ * YOUR_TOOLS_MAX. A note without what, or with a line that breaks the rules, is dropped. Only a woman who uses
+ * AI gets a routine with her chat tool. Never fails the plan: anything broken gives an empty list.
+ */
+function checkYourTools(raw: unknown, input: BeginnerPlanInput): BeginnerToolNote[] {
+  const named = new Map(herTools(input.qas, beginnerTool(input.aiTools)).map((name) => [name.toLowerCase(), name]));
+  const notes: BeginnerToolNote[] = [];
+  for (const item of Array.isArray(raw) ? raw : []) {
+    if (notes.length >= YOUR_TOOLS_MAX) break;
+    if (!item || typeof item !== "object") continue;
+    const t = item as Record<string, unknown>;
+    const name = typeof t.name === "string" ? named.get(t.name.trim().toLowerCase()) : undefined;
+    if (!name || notes.some((n) => n.name === name)) continue;
+    const what = toolLine(t.what);
+    const tryThis = toolLine(t.try_this);
+    const withChat = input.experience === "uses" ? toolLine(t.with_chat) : null;
+    if (!what || tryThis === undefined || withChat === undefined) continue;
+    notes.push({ name, what, tryThis, withChat });
+  }
+  return notes;
+}
 
 /** Holds the model's answer to the rules, or returns null when it breaks them. */
 export function checkBeginnerPlan(raw: unknown, input: BeginnerPlanInput): BeginnerPlan | null {
@@ -332,6 +428,7 @@ export function checkBeginnerPlan(raw: unknown, input: BeginnerPlanInput): Begin
     role: input.role,
     tool: beginnerTool(input.aiTools),
     toolWhy,
+    yourTools: checkYourTools(r.your_tools, input),
     worksFor: input.worksFor,
     policy: input.aiPolicy,
     firstWin: { task: input.firstWin.task, prompt, example, fixes },

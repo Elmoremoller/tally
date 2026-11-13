@@ -12,3 +12,10 @@ export const thinAnswers = "We need a little more to go on. Add another thing yo
  * no desk, inbox or computer. lib/beginner/intake.ts uses it in place of the /start quiz's DEFAULT_FOLLOW_UP.
  */
 export const beginnerFollowUp = "What else do you do over and over in your job?"; // DRAFT
+
+/** The Your tools part of the beginner plan, right after Your tool: the other tools she named, at her level. */
+export const planToolsCopy = {
+  title: "Your tools", // DRAFT
+  tryThis: "Try this week", // DRAFT
+  withChat: "With your chat tool", // DRAFT
+};

@@ -5,9 +5,11 @@ import {
   BEGINNER_PLAN_VERSION,
   checkBeginnerPlan,
   describeBeginnerPlan,
+  herTools,
   nearSame,
   type BeginnerPlanInput,
 } from "../../lib/beginner/plan-writer";
+import type { QA } from "../../lib/beginner/quiz";
 import { IDEAS_MIN } from "../../lib/beginner/types";
 
 const SHOWN = ["Instagram captions for new arrivals", "Window display theme ideas", "Restock notes for the owner"];
@@ -89,8 +91,8 @@ const raw = (extra: ReturnType<typeof idea>[] = []) => ({
   },
 });
 
-test("the prompt version is v3", () => {
-  assert.equal(BEGINNER_PLAN_VERSION, "beginner-plan-v3");
+test("the prompt version is v4", () => {
+  assert.equal(BEGINNER_PLAN_VERSION, "beginner-plan-v4");
 });
 
 test("nearSame matches titles that differ by one word, ignoring small words and plurals", () => {
@@ -226,4 +228,131 @@ test("checkBeginnerPlan leaves a clean example as it is", () => {
 test("the prompt quotes what she most wants without putting words in her mouth", () => {
   assert.ok(BEGINNER_PLAN_SYSTEM.includes(`"You said you'd most like help with Instagram posts for new arrivals."`));
   assert.ok(!BEGINNER_PLAN_SYSTEM.includes("take up your week"));
+});
+
+// Your tools: the other apps and AI she named, taught at her level.
+
+const appsQA = (picked: string[], text: string | null = null): QA => ({
+  id: "apps",
+  title: "Which apps do you use every week?",
+  picked,
+  text,
+  shown: ["Instagram", "Canva", "Notion"],
+});
+const toolsQA = (picked: string[], text: string | null = null): QA => ({
+  id: "tools",
+  title: "Which AI have you used?",
+  picked,
+  text,
+  shown: ["ChatGPT", "Copilot", "Gemini", "Claude", "Other", "None yet", "Not sure"],
+});
+
+test("herTools takes her apps and AI tools in screen order, without her main tool, and dedupes", () => {
+  const qas = [
+    { id: "most", title: "Which would save you the most time?", picked: ["Instagram posts"], text: null },
+    appsQA(["Instagram", "Canva"], "Square"),
+    toolsQA(["ChatGPT", "Claude", "Other"], "canva, Meta AI"),
+  ];
+  assert.deepEqual(herTools(qas, "chatgpt"), ["Instagram", "Canva", "Square", "Claude", "Meta AI"]);
+  assert.deepEqual(herTools(qas, "claude"), ["Instagram", "Canva", "Square", "ChatGPT", "Meta AI"]);
+});
+
+test("herTools leaves out None yet, Not sure and Other, and gives nothing when she named nothing else", () => {
+  assert.deepEqual(herTools([appsQA(["Instagram"]), toolsQA(["None yet"])], "claude"), ["Instagram"]);
+  assert.deepEqual(herTools([appsQA([]), toolsQA(["Not sure"])], "claude"), []);
+  assert.deepEqual(herTools([appsQA([]), toolsQA(["Other"], null)], "claude"), []);
+  assert.deepEqual(herTools([appsQA([]), toolsQA(["Claude"])], "claude"), []);
+  assert.deepEqual(herTools([], "claude"), []);
+});
+
+const note = (name: string, over: Record<string, unknown> = {}) => ({
+  name,
+  what: `${name} helps you get your posts and notes out faster.`,
+  try_this: `Open ${name} and try one small thing with this week’s new arrivals.`,
+  with_chat: `Draft it in ChatGPT first, then finish it in ${name}.`,
+  ...over,
+});
+const withTools = (yourTools: unknown) => ({ ...raw(), your_tools: yourTools });
+
+test("checkBeginnerPlan keeps only tools she named, in her spelling", () => {
+  const plan = checkBeginnerPlan(withTools([note("Pinterest"), note(" notion "), note("INSTAGRAM")]), input());
+  assert.deepEqual(plan?.yourTools?.map((t) => t.name), ["Notion", "Instagram"]);
+});
+
+test("checkBeginnerPlan keeps at most three tools", () => {
+  const qas = [...input().qas.filter((qa) => qa.id !== "apps"), appsQA(["Instagram", "Canva", "Notion", "Square"])];
+  const plan = checkBeginnerPlan(
+    withTools([note("Instagram"), note("Canva"), note("Notion"), note("Square")]),
+    input({ qas, experience: "uses" }),
+  );
+  assert.deepEqual(plan?.yourTools?.map((t) => t.name), ["Instagram", "Canva", "Notion"]);
+});
+
+test("checkBeginnerPlan gives a woman who hasn't tried AI or tried it no routine with her chat tool", () => {
+  for (const experience of ["not_yet", "tried"] as const) {
+    const plan = checkBeginnerPlan(withTools([note("Notion")]), input({ experience }));
+    assert.equal(plan?.yourTools?.[0]?.withChat, null, experience);
+    assert.ok(plan?.yourTools?.[0]?.tryThis, experience);
+  }
+  const uses = checkBeginnerPlan(withTools([note("Notion")]), input({ experience: "uses" }));
+  assert.equal(uses?.yourTools?.[0]?.withChat, "Draft it in ChatGPT first, then finish it in Notion.");
+});
+
+test("checkBeginnerPlan keeps a tool without a step only when the model gave none", () => {
+  const plan = checkBeginnerPlan(withTools([note("Notion", { try_this: null })]), input());
+  assert.deepEqual(plan?.yourTools, [
+    { name: "Notion", what: "Notion helps you get your posts and notes out faster.", tryThis: null, withChat: null },
+  ]);
+  const long = checkBeginnerPlan(withTools([note("Notion", { try_this: "Try it. ".repeat(60) })]), input());
+  assert.deepEqual(long?.yourTools, []);
+});
+
+test("checkBeginnerPlan drops a tool without what, or with what over 300 characters", () => {
+  const plan = checkBeginnerPlan(
+    withTools([note("Instagram", { what: "" }), note("Notion", { what: "Notion. ".repeat(50) })]),
+    input(),
+  );
+  assert.deepEqual(plan?.yourTools, []);
+});
+
+test("checkBeginnerPlan passes the plan with no tools when your_tools is missing or broken", () => {
+  for (const broken of [undefined, null, "Notion", [null, 3, "Notion", { name: 5 }]]) {
+    const made: Record<string, unknown> = withTools(broken);
+    if (broken === undefined) delete made.your_tools;
+    const plan = checkBeginnerPlan(made, input());
+    assert.ok(plan, String(broken));
+    assert.deepEqual(plan.yourTools, [], String(broken));
+  }
+});
+
+test("checkBeginnerPlan gives no tools when she named none besides her main one", () => {
+  const qas = input().qas.filter((qa) => qa.id !== "apps");
+  const plan = checkBeginnerPlan(withTools([note("Notion"), note("ChatGPT")]), input({ qas }));
+  assert.deepEqual(plan?.yourTools, []);
+});
+
+test("checkBeginnerPlan takes a scarcity line out of a tool's words", () => {
+  const plan = checkBeginnerPlan(
+    withTools([note("Instagram", { try_this: "Post this week’s new arrivals. They sell out fast!" })]),
+    input(),
+  );
+  assert.equal(plan?.yourTools?.[0]?.tryThis, "Post this week’s new arrivals.");
+});
+
+test("describeBeginnerPlan lists her tools by their exact names, without her main tool", () => {
+  const qas = [...input().qas, toolsQA(["ChatGPT", "Other"], "Canva AI")];
+  const lines = describeBeginnerPlan(input({ qas })).split("\n");
+  const at = lines.indexOf("Her tools, use these exact names:");
+  assert.ok(at > 0);
+  assert.deepEqual(lines.slice(at + 1, at + 4), ["- Instagram", "- Notion", "- Canva AI"]);
+  const none = describeBeginnerPlan(input({ qas: input().qas.filter((qa) => qa.id !== "apps") })).split("\n");
+  assert.equal(none[none.indexOf("Her tools, use these exact names:") + 1], "(none)");
+});
+
+test("the prompt keeps her tools accurate and at her level", () => {
+  assert.ok(BEGINNER_PLAN_SYSTEM.includes("Never give menu paths, button names or steps that depend on a version."));
+  assert.ok(BEGINNER_PLAN_SYSTEM.includes("only features the tool is widely known for"));
+  assert.ok(BEGINNER_PLAN_SYSTEM.includes("look for the AI or magic option in the editor"));
+  for (const level of ["I haven’t tried it yet", "I’ve tried it, but it didn’t stick", "I use it, but I could get more out of it"])
+    assert.ok(BEGINNER_PLAN_SYSTEM.includes(level), level);
 });

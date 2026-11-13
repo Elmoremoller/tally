@@ -21,11 +21,11 @@ const { readJob, writeQuestions, JOB_PROMPT_VERSION, QUESTIONS_PROMPT_VERSION } 
   `${ROOT}/lib/beginner/questions-ai.ts`
 );
 const { readBeginnerIntake, BEGINNER_INTAKE_VERSION } = await import(`${ROOT}/lib/beginner/intake.ts`);
-const { writeBeginnerPlan, nearSame, BEGINNER_PLAN_VERSION } = await import(`${ROOT}/lib/beginner/plan-writer.ts`);
+const { writeBeginnerPlan, nearSame, herTools, BEGINNER_PLAN_VERSION } = await import(`${ROOT}/lib/beginner/plan-writer.ts`);
 const { mostOptions, digest, jobReadOrFallback, PICK_MAX } = await import(`${ROOT}/lib/beginner/quiz.ts`);
 const { cleanAnswers } = await import(`${ROOT}/lib/beginner/answers.ts`);
 const { beginnerQuestions: screens } = await import(`${ROOT}/lib/beginner/copy.ts`);
-const { IDEAS_SHOWN, experienceLabels } = await import(`${ROOT}/lib/beginner/types.ts`);
+const { IDEAS_SHOWN, experienceLabels, beginnerTool } = await import(`${ROOT}/lib/beginner/types.ts`);
 const { intakeModel } = await import(`${ROOT}/lib/intake.ts`);
 const { AI_TOOLS, toolLabels } = await import(`${ROOT}/lib/week.ts`);
 
@@ -243,6 +243,13 @@ async function run(name: string, p: Persona) {
     { id: "most", title: mostTitle, picked: mostWanted, text: null, shown: most.options },
     { id: "picture", title: screens.picture.title, picked: [], text: picture.text },
     { id: "apps", title: screens.apps.title, picked: apps.picked, text: apps.text, shown: read.apps },
+    // The AI she has used, as the quiz sends it: the labels she tapped and what she typed under Other.
+    ...(p.level === "not_yet"
+      ? []
+      : [{
+          id: "tools", title: screens.tools.title, picked: aiTools.map((t: string) => toolLabels[t]), text: aiToolsOther,
+          shown: AI_TOOLS.map((t: string) => toolLabels[t]),
+        }]),
   ];
 
   // Screen 8, the questions written for her (Call B), then her answers to each.
@@ -313,6 +320,9 @@ async function run(name: string, p: Persona) {
 const DASH = /[–—]| - |\w-\w/;
 const DESK = /\b(e ?mails?|inbox|computer|laptop|desk|spreadsheets?|google sheets|excel|word doc|docs?)\b/i;
 const MADE_UP = /\d+ ?(%|percent)|\$ ?\d|\bper ?cent\b/i;
+/** Words that point at a menu path or a button in her tools part, to read by hand. */
+const MENU = /\b(click|go to|settings|menu|button|toggle|tab)\b|\btap (the|on)\b|>|→/i;
+type ToolNote = { name: string; what: string; tryThis: string | null; withChat: string | null };
 const words = (s: string) => s.split(/\s+/).filter(Boolean).length;
 
 function checks(
@@ -321,14 +331,21 @@ function checks(
   asked: { title: string; choices: string[] }[],
   mostWanted: string[],
   r: { first_win: { task: string; draft: string }; ideas: string[]; tasks: { name: string }[] },
-  plan: { toolWhy: string; firstWin: { prompt: string; example: string }; ideas: { title: string; prompt: string; why: string }[]; workProfile: string },
+  plan: {
+    toolWhy: string; yourTools?: ToolNote[]; firstWin: { prompt: string; example: string };
+    ideas: { title: string; prompt: string; why: string }[]; workProfile: string;
+  },
 ) {
+  const answers = out.answers as { qas: QA[]; aiTools: string[] };
+  const named: string[] = herTools(answers.qas, beginnerTool(answers.aiTools));
+  const notes = plan.yourTools ?? [];
+  const noteLines = notes.flatMap((n) => [n.what, n.tryThis, n.withChat].filter((l): l is string => Boolean(l)));
   const read = out.jobRead as { repeats: { label: string }[]; apps: string[]; aiFallback: string[] };
   const shownCopy = [
     ...read.repeats.map((x) => x.label), ...read.aiFallback, ...asked.flatMap((q) => [q.title, ...q.choices]),
   ];
   const planText = [
-    plan.toolWhy, plan.firstWin.prompt, plan.firstWin.example, plan.workProfile,
+    plan.toolWhy, ...noteLines, plan.firstWin.prompt, plan.firstWin.example, plan.workProfile,
     ...plan.ideas.flatMap((i) => [i.title, i.why, i.prompt]),
   ].join("\n");
   const titles = plan.ideas.map((i) => i.title);
@@ -349,6 +366,14 @@ function checks(
     moneyOrPercentInPlan: [...new Set([r.first_win.draft, planText].join("\n").match(new RegExp(MADE_UP, "g")) ?? [])],
     nearDuplicateIdeas: nearPairs,
     ideaCount: titles.length,
+    yourTools: {
+      named,
+      written: notes.map((n) => n.name),
+      notHers: notes.filter((n) => !named.includes(n.name)).map((n) => n.name),
+      withChatBelowUses: p.level === "uses" ? [] : notes.filter((n) => n.withChat).map((n) => n.name),
+      missingTryThis: notes.filter((n) => !n.tryThis).map((n) => n.name),
+      menuWords: noteLines.filter((l) => MENU.test(l)),
+    },
   };
 }
 
