@@ -6,7 +6,7 @@ Write each item as one line with one clear purpose. An item can be up to about 2
 
 ## To do
 
-- [ ] Make the daily run flag every setup card in `lib/beginner/cards.ts` whose `checked` date is more than 30 days old, by name and with its source links, so Karl rechecks it against the vendor's help page (a flag only, never a change to the steps).
+- [ ] Make the daily run flag every setup card in `lib/beginner/cards.ts` and every workflow recipe in `lib/beginner/recipes.ts` whose `checked` date is more than 30 days old, by id and with its source links, so Karl rechecks it against the vendor's help pages (a flag only, never a change to the steps).
 
 ## Proposed
 
