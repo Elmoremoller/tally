@@ -1,26 +1,26 @@
 import type { ReactNode, RefObject } from "react";
 import { Paywall } from "@/components/quiz/Paywall";
 import { beginnerParts, beginnerPaywall, firstWinCopy } from "@/lib/beginner/copy";
+import { fewHelp, orderMap } from "@/lib/beginner/free-result";
 import { IDEAS_MIN, IDEAS_SHOWN, type FirstWin, type MapLine } from "@/lib/beginner/types";
-import { toolLabels, type ChatTool } from "@/lib/week";
 import { CopyButton } from "./CopyButton";
+import { SeeIt } from "./SeeIt";
 
 /**
- * What the free result shows. Answers saved before Phase 2 of docs/DIRECTION.md have no first step or map,
- * only idea titles; they still load, and show those titles in place of both.
+ * What the free result shows. Answers saved before Phase 2 of docs/DIRECTION.md have no map, only idea
+ * titles; they still load, and show as they first did.
  */
 export type ShownResult = {
   firstWin: FirstWin;
-  firstStep?: string | null;
   map?: MapLine[];
-  tool?: ChatTool;
   ideas?: string[];
 };
 
 /**
- * The beginner version's free result, in the four parts of docs/DIRECTION.md, section 3: her finished result
- * with a Copy button, her first step (the message that makes the next one), the map of her week, then the
- * offer, which is `children`: the paywall. `restricted` adds a line for a company that restricts AI.
+ * The beginner version's free result (docs/DIRECTION.md, section 3): it opens with the map of her week under a
+ * line on how many of her tasks AI can help with, each task with where she is today and what changes with her
+ * path. Her finished result sits behind See it in the top row. Then the offer, which is `children`: the
+ * paywall. `restricted` adds a line for a company that restricts AI.
  */
 export function FirstWinResult({
   result,
@@ -33,11 +33,59 @@ export function FirstWinResult({
   headingRef?: RefObject<HTMLHeadingElement | null>;
   children?: ReactNode;
 }) {
-  const { firstWin, firstStep, map = [], tool = "claude", ideas = [] } = result;
-  const shownIdeas = firstStep ? [] : ideas.slice(0, IDEAS_SHOWN);
+  const { firstWin, map = [] } = result;
+  if (!map.length) return <LegacyResult {...{ result, restricted, headingRef, children }} />;
+
+  const rows = orderMap(map, firstWin.task);
+  const helps = rows.filter((m) => m.ai).length;
+  const heading = rows.length < 2 || fewHelp(rows) ? firstWinCopy.fewHeading : firstWinCopy.heading(helps, rows.length);
   return (
     <div className="quiz-step quiz-reveal" data-dir="forward">
       <p className="quiz-eyebrow">{firstWinCopy.eyebrow}</p>
+      <h1 ref={headingRef} tabIndex={-1} className="quiz-moment win-intro">
+        {heading}
+      </h1>
+      <ul className="win-map">
+        {rows.map((m) => (
+          <li key={m.task} data-ai={m.ai || undefined}>
+            <h2 className="win-map-task">{m.task}</h2>
+            <dl className="win-map-lines">
+              <div>
+                <dt>{firstWinCopy.today}</dt>
+                <dd>{m.today}</dd>
+              </div>
+              <div>
+                <dt>{firstWinCopy.withPath}</dt>
+                <dd>{m.withPath}</dd>
+              </div>
+            </dl>
+            {m.task === firstWin.task ? <SeeIt firstWin={firstWin} /> : null}
+          </li>
+        ))}
+      </ul>
+      {restricted ? <p className="plan-ack win-note">{firstWinCopy.restricted}</p> : null}
+      {children}
+    </div>
+  );
+}
+
+/** Her free result as answers saved before Phase 2 show it: her first win on top, then idea titles. */
+function LegacyResult({
+  result,
+  restricted,
+  headingRef,
+  children,
+}: {
+  result: ShownResult;
+  restricted: boolean;
+  headingRef?: RefObject<HTMLHeadingElement | null>;
+  children?: ReactNode;
+}) {
+  const { firstWin, ideas = [] } = result;
+  const shown = ideas.slice(0, IDEAS_SHOWN);
+  return (
+    <div className="quiz-step quiz-reveal" data-dir="forward">
+      <p className="quiz-eyebrow">{firstWinCopy.legacyEyebrow}</p>
       <h1 ref={headingRef} tabIndex={-1} className="quiz-moment win-intro">
         {firstWin.intro}
       </h1>
@@ -45,42 +93,14 @@ export function FirstWinResult({
       <CopyButton words={firstWin.draft} />
       <p className="quiz-type-text win-made">{firstWinCopy.made}</p>
       {restricted ? <p className="plan-ack win-note">{firstWinCopy.restricted}</p> : null}
-
-      {firstStep ? (
-        <section className="win-part" aria-labelledby="win-step-title">
-          <h2 id="win-step-title" className="win-part-title">
-            {firstWinCopy.stepTitle}
-          </h2>
-          <p className="win-part-lead">{firstWinCopy.stepLead(toolLabels[tool])}</p>
-          <blockquote className="win-draft win-step">{firstStep}</blockquote>
-          <CopyButton words={firstStep} quiet />
-        </section>
-      ) : null}
-
-      {map.length ? (
-        <section className="win-part" aria-labelledby="win-map-title">
-          <h2 id="win-map-title" className="win-part-title">
-            {firstWinCopy.mapTitle}
-          </h2>
-          <ul className="win-map">
-            {map.map((m) => (
-              <li key={m.task}>
-                <strong>{m.task}</strong>
-                <span>{m.line}</span>
-              </li>
-            ))}
-          </ul>
-        </section>
-      ) : null}
-
-      {shownIdeas.length ? (
+      {shown.length ? (
         <div className="quiz-built">
           <p>{firstWinCopy.also}</p>
           <ul>
-            {shownIdeas.map((idea) => (
+            {shown.map((idea) => (
               <li key={idea}>{idea}</li>
             ))}
-            <li>{firstWinCopy.more(IDEAS_MIN - shownIdeas.length)}</li>
+            <li>{firstWinCopy.more(IDEAS_MIN - shown.length)}</li>
           </ul>
         </div>
       ) : null}
@@ -90,11 +110,12 @@ export function FirstWinResult({
 }
 
 /**
- * The beginner paywall: her own setups by name, her tool and whether its free plan is enough. Without setups,
- * for answers saved before Phase 2, it shows the plan's five parts as it did.
+ * The beginner paywall: her own setups by name. The line on her tool's free plan waits for Phase 4, which
+ * reads it from the setup cards. Without setups, for answers saved before Phase 2, it shows the plan's five
+ * parts as it did.
  */
-export function BeginnerPaywall({ setups, tool }: { setups?: string[]; tool?: ChatTool }) {
-  if (!setups?.length || !tool) {
+export function BeginnerPaywall({ setups }: { setups?: string[] }) {
+  if (!setups?.length) {
     return (
       <Paywall title={beginnerPaywall.title} lead={beginnerPaywall.legacyLead}>
         <ol className="peek">
@@ -117,7 +138,6 @@ export function BeginnerPaywall({ setups, tool }: { setups?: string[]; tool?: Ch
           </li>
         ))}
       </ol>
-      <p className="win-tool">{beginnerPaywall.toolLine(toolLabels[tool])}</p>
     </Paywall>
   );
 }

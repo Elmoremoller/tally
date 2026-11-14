@@ -44,10 +44,10 @@ async function SavedResult() {
     const shown = beginner.shown;
     return (
       <FirstWinResult
-        result={{ firstWin: beginner.firstWin, ideas: beginner.ideas, ...shown }}
+        result={{ firstWin: beginner.firstWin, ideas: beginner.ideas, map: shown?.map }}
         restricted={week.intake?.ai_policy === "restricted"}
       >
-        <BeginnerPaywall setups={shown?.setups} tool={shown?.tool} />
+        <BeginnerPaywall setups={shown?.setups} />
       </FirstWinResult>
     );
   }

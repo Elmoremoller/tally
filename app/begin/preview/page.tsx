@@ -4,7 +4,7 @@ import { Suspense } from "react";
 import { Backdrop } from "@/components/Backdrop";
 import { BeginnerPaywall, FirstWinResult } from "@/components/beginner/FirstWinResult";
 import { QuizHeader } from "@/components/quiz/QuizHeader";
-import { secondTask, setupsFor } from "@/lib/beginner/free-result";
+import { orderMap, setupsFor, setupTasks } from "@/lib/beginner/free-result";
 import { beginnerSampleFor, beginnerSamples } from "@/lib/beginner/samples";
 import { offer } from "@/lib/offer";
 import { previewAllowed } from "@/lib/preview";
@@ -36,16 +36,16 @@ async function Preview({ searchParams }: { searchParams: PageProps<"/begin/previ
   if (!previewAllowed) notFound();
   const { firstWin, free, plan } = beginnerSampleFor(sample) ?? beginnerSamples.dental;
   // Her setups are built as on the live result, from her path, her tool and her own tasks.
+  const map = orderMap(free.map, firstWin.task);
   const setups = setupsFor({
     track: free.track,
     tool: plan.tool,
-    top: firstWin.task,
-    second: secondTask(free.map, firstWin.task),
+    ...setupTasks(map, firstWin.task),
     device: free.device,
   });
   return (
-    <FirstWinResult result={{ firstWin, firstStep: free.firstStep, map: free.map, tool: plan.tool }} restricted={plan.policy === "restricted"}>
-      <BeginnerPaywall setups={setups} tool={plan.tool} />
+    <FirstWinResult result={{ firstWin, map }} restricted={plan.policy === "restricted"}>
+      <BeginnerPaywall setups={setups} />
     </FirstWinResult>
   );
 }

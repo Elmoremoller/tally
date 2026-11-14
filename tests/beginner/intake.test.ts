@@ -7,6 +7,8 @@ import {
   BEGINNER_INTAKE_VERSION,
   checkBeginnerIntake,
   describeBeginnerIntake,
+  OPENINGS_PATTERN,
+  withoutSignOff,
   type BeginnerIntakeInput,
 } from "../../lib/beginner/intake";
 import { beginnerFollowUp } from "../../lib/beginner/quiz-copy";
@@ -39,6 +41,8 @@ const draft =
 const firstStep =
   "I’m an electrician and I run my own business. Write a short quote I can text a homeowner after a visit, with the job, the price and how long it holds. Friendly and plain, under 60 words. Here is this job: [what the job is]";
 
+const row = (task: string, phrase: string, today: string, with_path: string) => ({ task, phrase, today, with_path });
+
 const raw = () => ({
   role_summary: "You run your own electrical business.",
   tasks: [
@@ -50,17 +54,17 @@ const raw = () => ({
   first_win: { task: "Writing quotes", intro: "You said quotes eat your time. Here is one ready to send.", draft },
   first_step: firstStep,
   map: [
-    { task: "Writing quotes", line: "Becomes a message you paste into ChatGPT and adjust." },
-    { task: "Texting homeowners", line: "Becomes a reply you write once and reuse." },
-    { task: "Attic work", line: "Stays yours." },
-    { task: "Chasing payments", line: "Becomes a polite reminder you send in one go." },
+    row("Writing quotes", "writing quotes", "You write each quote from scratch after a visit.", "Each quote starts from words that already sound like you."),
+    row("Texting homeowners", "texting homeowners", "You type the same updates again and again.", "Your updates are ready to send, in your voice."),
+    row("Attic work", "attic work", "Hands on, in the heat.", "Stays yours."),
+    row("Chasing payments", "chasing payments", "You put off the awkward reminders.", "A polite reminder is ready whenever you need it."),
   ],
   needs_follow_up: false,
   follow_up_question: null,
 });
 
-test("the prompt version is v5", () => {
-  assert.equal(BEGINNER_INTAKE_VERSION, "beginner-intake-v5");
+test("the prompt version is v6", () => {
+  assert.equal(BEGINNER_INTAKE_VERSION, "beginner-intake-v6");
 });
 
 test("beginnerHers holds her job, every pick and typed answer, and the follow up answer, but not the titles", () => {
@@ -273,42 +277,70 @@ test("the first step and the map come back with her tasks' flags, in the order o
       ["Chasing payments", true],
     ],
   );
+  assert.equal(result?.map[0].today, "You write each quote from scratch after a visit.");
+  assert.equal(result?.map[0].withPath, "Each quote starts from words that already sound like you.");
 });
 
 test("the map lists only tasks she named, each once", () => {
   const made = raw();
-  made.map = [
-    ...made.map,
-    { task: "Social media posts", line: "Becomes a post a week." },
-    { task: "writing quotes", line: "A second line for the same task." },
-  ];
+  made.map = [...made.map, row("Social media posts", "social media posts", "You post now and then.", "You post every week."), row("writing quotes", "writing quotes", "Again.", "A second row for the same task.")];
   const result = checkBeginnerIntake(made, { followUpAsked: false, hers: beginnerHers(input()) });
   assert.deepEqual(result?.map.map((m) => m.task), ["Writing quotes", "Texting homeowners", "Attic work", "Chasing payments"]);
-  assert.equal(result?.map[0].line, "Becomes a message you paste into ChatGPT and adjust.");
+  assert.equal(result?.map[0].today, "You write each quote from scratch after a visit.");
 });
 
 test("a map task whose quote was not hers is not on the map", () => {
   const made = raw();
   made.tasks = [...made.tasks, { quote: "Running payroll", name: "Payroll", ai: true, private: true }];
-  made.map = [...made.map, { task: "Payroll", line: "Becomes a checklist." }];
+  made.map = [...made.map, row("Payroll", "payroll", "You do it by hand.", "A checklist.")];
   const result = checkBeginnerIntake(made, { followUpAsked: false, hers: beginnerHers(input()) });
   assert.ok(!result?.map.some((m) => m.task === "Payroll"));
 });
 
-test("a map line that promises time is asked again, and left out on the last attempt", () => {
+test("a map row that promises time is asked again, and left out on the last attempt", () => {
   const made = raw();
-  made.map[1] = { task: "Texting homeowners", line: "Becomes a reply that takes two minutes." };
+  made.map[1] = row("Texting homeowners", "texting homeowners", "You type the same updates.", "Each update takes two minutes.");
   const hers = beginnerHers(input());
   assert.equal(checkBeginnerIntake(made, { followUpAsked: false, hers, lastAttempt: false }), null);
   const last = checkBeginnerIntake(made, { followUpAsked: false, hers, lastAttempt: true });
   assert.deepEqual(last?.map.map((m) => m.task), ["Writing quotes", "Attic work", "Chasing payments"]);
 });
 
-test("her own count is fine on the map", () => {
+test("a count she never gave is asked again, and her own count passes", () => {
+  const hers = beginnerHers(input({ qas: [...input().qas, { id: "often", title: "How often?", picked: ["A few times a week"], text: "about 12 quotes" }] }));
+  const invented = raw();
+  invented.map[0] = row("Writing quotes", "writing quotes", "You write about 20 quotes a week.", "Each quote starts from your notes.");
+  assert.equal(checkBeginnerIntake(invented, { followUpAsked: false, hers, lastAttempt: false }), null);
+  const own = raw();
+  own.map[0] = row("Writing quotes", "writing quotes", "You write about 12 quotes, a few times a week.", "Each one starts from your notes.");
+  assert.equal(
+    checkBeginnerIntake(own, { followUpAsked: false, hers, lastAttempt: false })?.map[0].today,
+    "You write about 12 quotes, a few times a week.",
+  );
+});
+
+test("a phrase in her own words is kept, and one with words she never used is dropped", () => {
   const made = raw();
-  made.map[0] = { task: "Writing quotes", line: "You do this a few times a week, so it becomes a saved project." };
-  const result = checkBeginnerIntake(made, { followUpAsked: false, hers: beginnerHers(input()), lastAttempt: false });
-  assert.equal(result?.map[0].line, "You do this a few times a week, so it becomes a saved project.");
+  made.map[0] = row("Writing quotes", "invoices", "You write each quote from scratch.", "Each one starts from your notes.");
+  made.map[1] = row("Texting homeowners", "texts to homeowners", "You type the same updates.", "Your updates are ready to send.");
+  const result = checkBeginnerIntake(made, { followUpAsked: false, hers: beginnerHers(input()) });
+  assert.equal(result?.map[0].phrase, null);
+  assert.equal(result?.map[1].phrase, "texts to homeowners");
+});
+
+test("map lines end with a full stop", () => {
+  const made = raw();
+  made.map[0] = row("Writing quotes", "quotes", "You write each quote from scratch", "Each one starts from your notes!");
+  const result = checkBeginnerIntake(made, { followUpAsked: false, hers: beginnerHers(input()) });
+  assert.equal(result?.map[0].today, "You write each quote from scratch.");
+  assert.equal(result?.map[0].withPath, "Each one starts from your notes!");
+});
+
+test("withoutSignOff drops a sign off left hanging, and keeps a real last line", () => {
+  assert.equal(withoutSignOff("Hi there,\n\nYour order is on its way.\n\nThank you,"), "Hi there,\n\nYour order is on its way.");
+  assert.equal(withoutSignOff("Hi,\nSee you then.\nLooking forward to hearing from you,"), "Hi,\nSee you then.");
+  assert.equal(withoutSignOff("Hi,\nSee you Friday."), "Hi,\nSee you Friday.");
+  assert.equal(withoutSignOff("Thanks,"), "Thanks,");
 });
 
 test("an empty map is asked again, and shown without one on the last attempt", () => {
@@ -369,6 +401,7 @@ test("describeBeginnerIntake says whether she gave an example, her path and her 
 test("the prompt asks for at most two blanks with her example, and no promise of time on the map", () => {
   assert.ok(BEGINNER_INTAKE_SYSTEM.includes("Use at most 2 blanks in all"));
   assert.ok(BEGINNER_INTAKE_SYSTEM.includes("Never promise time saved"));
+  assert.ok(BEGINNER_INTAKE_SYSTEM.includes("Never guess a count she didn't give"));
   assert.ok(!BEGINNER_INTAKE_SYSTEM.includes("ideas:"));
 });
 
@@ -400,4 +433,18 @@ test("every new screen reaches the intake: example, how often, what she has done
 
 test("the prompt counts her example and how often as context, not tasks", () => {
   assert.ok(BEGINNER_INTAKE_SYSTEM.includes("how often she does it, her real example of one"));
+});
+
+test("a draft that says she has open times is asked again", () => {
+  for (const line of ["I do have some openings next Friday.", "We have availability on Saturday.", "I still have a few spots left."]) {
+    assert.ok(OPENINGS_PATTERN.test(line), line);
+  }
+  for (const line of ["I’ll check my Friday openings and get back to you.", "Which times work for you?"]) {
+    assert.ok(!OPENINGS_PATTERN.test(line), line);
+  }
+  const made = raw();
+  made.first_win.draft = "Hi there, a full balayage on long hair starts at [price]. I do have some openings next Friday afternoon, so tell me what time suits you.";
+  const hers = beginnerHers(input());
+  assert.equal(checkBeginnerIntake(made, { followUpAsked: false, hers, lastAttempt: false }), null);
+  assert.ok(checkBeginnerIntake(made, { followUpAsked: false, hers, lastAttempt: true }));
 });

@@ -753,7 +753,7 @@ export function BeginnerQuiz({ home }: { home: string }) {
           </div>
         ) : phase === "result" && win ? (
           <FirstWinResult result={win} restricted={win.restricted} headingRef={headingRef}>
-            <BeginnerPaywall setups={win.setups} tool={win.tool} />
+            <BeginnerPaywall setups={win.setups} />
           </FirstWinResult>
         ) : (
           <div key={phase === "questions" ? step : phase} className="quiz-step" data-dir={direction}>

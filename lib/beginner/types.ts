@@ -103,15 +103,24 @@ export function workLine(input: { worksFor: WorksFor; aiPolicy: AiPolicy | null;
 export type FirstWin = { task: string; intro: string; draft: string };
 
 /**
- * One task she named on the map of her week, with one line on what it becomes. `ai` and `private` are the
- * task's own flags, so the setups can pick her second task.
+ * One task she named on the map of her week: where she is with it today, and what changes for her with her
+ * path. `phrase` is the task as it reads mid sentence, for the setup names. `ai` and `private` are the task's
+ * own flags, so the map can be ordered and the setups can pick her second task.
  */
-export type MapLine = { task: string; line: string; ai: boolean; private: boolean };
+export type MapLine = {
+  task: string;
+  /** What she calls it, to fit "Your ___", or null to use the task's own name. See phraseFor. */
+  phrase: string | null;
+  today: string;
+  withPath: string;
+  ai: boolean;
+  private: boolean;
+};
 
 /**
- * Everything the free result shows, in its order (docs/DIRECTION.md, section 3): her finished result, the
- * message that makes the next one, the map of her week, and the offer with her setups, her tool and the
- * track that decided them.
+ * Everything the free result holds (docs/DIRECTION.md, section 3): the map of her week with her finished
+ * result in its top row, and the offer with her setups, her tool and the track that decided them. The first
+ * step message is not shown; it is saved for her paid path.
  */
 export type FreeResult = {
   firstWin: FirstWin;

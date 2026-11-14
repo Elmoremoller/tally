@@ -3,7 +3,7 @@
 import { cookies } from "next/headers";
 import { allowAiCall } from "@/lib/ai-allowance";
 import { cleanAnswers, type BeginnerAnswers } from "@/lib/beginner/answers";
-import { deviceOf, secondTask, setupsFor } from "@/lib/beginner/free-result";
+import { deviceOf, orderMap, setupsFor, setupTasks } from "@/lib/beginner/free-result";
 import { readBeginnerIntake } from "@/lib/beginner/intake";
 import { digest, type QuizStep } from "@/lib/beginner/quiz";
 import { beginnerTool, trackFor, type FreeResult } from "@/lib/beginner/types";
@@ -110,15 +110,16 @@ export async function readBeginner(input: {
     // Her setups are named in code, from her path, her tool and her own tasks, never by the model.
     const track = trackFor(answers.experience);
     const tool = beginnerTool(answers.aiTools);
+    const top = result.first_win.task;
+    const map = orderMap(result.map, top);
     const free: FreeResult = {
       firstWin: result.first_win,
       firstStep: result.first_step,
-      map: result.map,
+      map,
       setups: setupsFor({
         track,
         tool,
-        top: result.first_win.task,
-        second: secondTask(result.map, result.first_win.task),
+        ...setupTasks(map, top),
         device: deviceOf(answers.qas),
       }),
       tool,
