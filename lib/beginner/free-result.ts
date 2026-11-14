@@ -114,7 +114,7 @@ export function secondTask(map: readonly MapLine[], top: string): MapLine | null
  * sentence. A Builder's names say the kind of setup, so her path looks different from a Starter's at a glance.
  * Starter: her tool ready where she uses it, her top task set up, her tool taught who she is, a second task.
  * Builder: her top task as a saved project, tested on real ones, a second task with the right tool, a routine.
- * DRAFT, every line: the Starter pattern is Karl's from 2026-11-14, the rest follows it.
+ * The Starter pattern is Karl's; every line approved by Karl 2026-11-14.
  */
 export function setupsFor({
   track,

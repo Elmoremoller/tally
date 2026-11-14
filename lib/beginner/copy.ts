@@ -473,12 +473,12 @@ export const FALLBACK_JOB_READ: JobRead = {
 // The free result and the paywall
 
 // Phase 2 of docs/DIRECTION.md: the free result opens with the map of her week, with her finished result behind
-// See it in its top row, then the offer. Karl set the layout on 2026-11-14; every line here is a DRAFT until he
-// approves it, apart from the softer heading, which is his own words.
+// See it in its top row, then the offer. Karl set the layout and approved every line below on 2026-11-14, apart
+// from the restricted line and the free plan line, which are still DRAFT.
 
 export const firstWinCopy = {
-  eyebrow: "Your week with AI", // DRAFT
-  /** The heading over the map: how many of her tasks AI can help with. DRAFT */
+  eyebrow: "Your week with AI", // Approved by Karl 2026-11-14
+  /** The heading over the map: how many of her tasks AI can help with. Approved by Karl 2026-11-14 */
   heading: (helps: number, total: number) =>
     total === 2 && helps === 2
       ? "AI can help with both of your tasks"
@@ -487,14 +487,14 @@ export const firstWinCopy = {
         : `AI can help with ${helps} of your ${total} tasks`,
   /** In place of the count when AI fits fewer than half of her tasks, or she named only one. Karl, 2026-11-14 */
   fewHeading: "Here is where AI fits in your week",
-  today: "Today", // DRAFT
-  withPath: "With your path", // DRAFT
-  seeIt: "See it", // DRAFT
-  hideIt: "Hide it", // DRAFT
-  /** Under her finished result, inside See it. The line before it promised a time, which section 5 rules out. DRAFT */
+  today: "Today", // Approved by Karl 2026-11-14
+  withPath: "With your path", // Approved by Karl 2026-11-14
+  seeIt: "See it", // Approved by Karl 2026-11-14
+  hideIt: "Hide it", // Approved by Karl 2026-11-14
+  /** Under her finished result, inside See it. The line before it promised a time, which section 5 rules out. Approved by Karl 2026-11-14 */
   made: "AI wrote that from what you told us. Copy it and use it today.",
-  copy: "Copy", // DRAFT
-  copied: "Copied", // DRAFT
+  copy: "Copy", // Approved by Karl 2026-11-14
+  copied: "Copied", // Approved by Karl 2026-11-14
   /** When her company restricts AI. DRAFT */
   restricted:
     "Your company restricts AI, so your plan starts with practice on your own phone or computer, and gives you the message to ask what’s allowed.",
@@ -504,10 +504,10 @@ export const firstWinCopy = {
   more: (count: number) => `${count} more`,
 };
 
-/** The paywall's headline and her offer. The price, button and fine print are the first version's. DRAFT */
+/** The paywall's headline and her offer. The price, button and fine print are the first version's. */
 export const beginnerPaywall = {
-  title: "Get the rest of your path.", // DRAFT
-  lead: "Your first setups, one step at a time.", // DRAFT
+  title: "Get the rest of your path.", // Approved by Karl 2026-11-14
+  lead: "Your first setups, one step at a time.", // Approved by Karl 2026-11-14
   /** Only for answers saved before Phase 2, shown with the plan's five parts. */
   legacyLead: "Here’s what’s inside, built from your answers.",
   /**
