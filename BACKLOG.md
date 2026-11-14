@@ -6,6 +6,8 @@ Write each item as one line with one clear purpose. An item can be up to about 2
 
 ## To do
 
+- [ ] Make the daily run flag every setup card in `lib/beginner/cards.ts` whose `checked` date is more than 30 days old, by name and with its source links, so Karl rechecks it against the vendor's help page (a flag only, never a change to the steps).
+
 ## Proposed
 
 Ideas the daily run spotted but has not built. Nothing here gets built until you move it up to "To do".
