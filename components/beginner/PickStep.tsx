@@ -31,6 +31,8 @@ type PickStepProps = {
   onSubmit: () => void;
   error?: string;
   headingRef: RefObject<HTMLHeadingElement | null>;
+  /** One line under the chips, read out when it changes, like how many of her picks AI can help with. */
+  note?: string | null;
 };
 
 /**
@@ -51,6 +53,7 @@ export function PickStep({
   onSubmit,
   error,
   headingRef,
+  note = null,
 }: PickStepProps) {
   const withOther = other !== null;
   const beat = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
@@ -104,6 +107,9 @@ export function PickStep({
         ) : null}
       </fieldset>
       {withOther && onOther ? <OtherBox value={other ?? ""} setValue={onOther} /> : null}
+      <p className="quiz-note" role="status">
+        {note ?? ""}
+      </p>
 
       {error ? (
         <p className="quiz-error" role="alert">

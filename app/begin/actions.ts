@@ -122,6 +122,7 @@ export async function readBeginner(input: {
       experience: answers.experience,
       qas: answers.qas,
       mostWanted: answers.mostWanted,
+      often: answers.often ?? null,
       firstWin: result.first_win,
       ideas: result.ideas,
       privateTasks: result.tasks.filter((t) => t.private).map((t) => t.name),

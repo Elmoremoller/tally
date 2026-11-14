@@ -1,7 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { FALLBACK_AI_USES } from "../../lib/beginner/quiz-copy";
-import { checkJobRead, checkQuestions, readJob, writeQuestions } from "../../lib/beginner/questions-ai";
+import { checkJobRead, checkQuestions, QUESTIONS_PROMPT_VERSION, readJob, writeQuestions } from "../../lib/beginner/questions-ai";
 
 const repeat = (label: string, ai = true) => ({ label, ai });
 
@@ -114,119 +114,87 @@ const tap = (title: string, choices = ["Text", "Email", "Paper", "An app"]) => (
 });
 const talk = (title: string) => ({ title, kind: "text", choices: [], hint: null });
 
-test("checkQuestions numbers the questions it keeps in order", () => {
+const titles = (raw: unknown) => checkQuestions(raw).map((q) => q.title);
+
+test("checkQuestions keeps one question, the first that passes, as asked_1", () => {
   const questions = checkQuestions({
-    questions: [tap("How do you send a quote today?"), { ...tap("What held you back?"), kind: "many" }],
+    questions: [tap("How do you send a quote today?"), { ...tap("What slows you down?"), kind: "many" }],
   });
   assert.deepEqual(questions, [
     { id: "asked_1", title: "How do you send a quote today?", kind: "one", choices: ["Text", "Email", "Paper", "An app"], hint: null },
-    { id: "asked_2", title: "What held you back?", kind: "many", choices: ["Text", "Email", "Paper", "An app"], hint: null },
   ]);
 });
 
-test("checkQuestions keeps at most 3", () => {
-  const questions = checkQuestions({ questions: ["A?", "B?", "C?", "D?", "E?"].map((t) => tap(t)) });
-  assert.deepEqual(
-    questions.map((q) => [q.id, q.title]),
-    [
-      ["asked_1", "A?"],
-      ["asked_2", "B?"],
-      ["asked_3", "C?"],
-    ],
-  );
+test("checkQuestions never keeps more than one", () => {
+  assert.deepEqual(titles({ questions: ["A?", "B?", "C?"].map((t) => tap(t)) }), ["A?"]);
 });
 
 test("checkQuestions drops a title over 10 words or not ending in a question mark", () => {
-  const questions = checkQuestions({
-    questions: [
-      tap("How do you usually send a quote to a new homeowner today?"),
-      tap("Tell us how you send quotes"),
-      tap("How do you send a quote?"),
-      tap("What slows you down most?"),
-    ],
-  });
   assert.deepEqual(
-    questions.map((q) => [q.id, q.title]),
-    [
-      ["asked_1", "How do you send a quote?"],
-      ["asked_2", "What slows you down most?"],
-    ],
+    titles({
+      questions: [
+        tap("How do you usually send a quote to a new homeowner today?"),
+        tap("Tell us how you send quotes"),
+        tap("How do you send a quote?"),
+      ],
+    }),
+    ["How do you send a quote?"],
   );
 });
 
 test("checkQuestions drops a title with a colon", () => {
-  const questions = checkQuestions({
-    questions: [tap("Quotes: how do you send them?"), tap("A?"), tap("B?")],
-  });
-  assert.deepEqual(questions.map((q) => q.title), ["A?", "B?"]);
+  assert.deepEqual(titles({ questions: [tap("Quotes: how do you send them?"), tap("A?")] }), ["A?"]);
 });
 
 test("checkQuestions drops tap questions with fewer than 3 or more than 6 choices", () => {
-  const questions = checkQuestions({
-    questions: [
-      tap("Two?", ["Text", "Email"]),
-      { ...tap("Seven?", ["1", "2", "3", "4", "5", "6", "7"]), kind: "many" },
-      tap("Three?", ["Text", "Email", "Paper"]),
-      { ...tap("Six?", ["1", "2", "3", "4", "5", "6"]), kind: "many" },
-    ],
-  });
-  assert.deepEqual(questions.map((q) => q.title), ["Three?", "Six?"]);
+  assert.deepEqual(titles({ questions: [tap("Two?", ["Text", "Email"]), tap("Three?", ["Text", "Email", "Paper"])] }), ["Three?"]);
+  assert.deepEqual(
+    titles({ questions: [{ ...tap("Seven?", ["1", "2", "3", "4", "5", "6", "7"]), kind: "many" }, tap("A?")] }),
+    ["A?"],
+  );
+  assert.deepEqual(titles({ questions: [{ ...tap("Six?", ["1", "2", "3", "4", "5", "6"]), kind: "many" }] }), ["Six?"]);
 });
 
 test("checkQuestions cleans choices before counting them", () => {
-  const questions = checkQuestions({
-    questions: [
-      tap("Dupes?", ["Text", "text", "Email", "Something else"]),
-      tap("Long?", ["Text", "Email", "Paper", "A paper form I fill in"]),
-      tap("Dashes?", ["Follow-ups", "Texts — mostly", "Calls"]),
-      tap("A?"),
-    ],
-  });
-  assert.deepEqual(
-    questions.map((q) => [q.title, q.choices]),
-    [
-      ["Long?", ["Text", "Email", "Paper"]],
-      ["Dashes?", ["Follow ups", "Texts, mostly", "Calls"]],
-      ["A?", ["Text", "Email", "Paper", "An app"]],
-    ],
-  );
-});
-
-test("checkQuestions keeps only the first type or talk question and gives it no choices", () => {
-  const questions = checkQuestions({
-    questions: [
-      { ...talk("What would you hand off first?"), choices: ["Quotes", "Invoices", "Texts"] },
-      tap("How do you send a quote?"),
-      talk("What feels slow?"),
-    ],
-  });
-  assert.deepEqual(questions, [
-    { id: "asked_1", title: "What would you hand off first?", kind: "text", choices: [], hint: null },
-    { id: "asked_2", title: "How do you send a quote?", kind: "one", choices: ["Text", "Email", "Paper", "An app"], hint: null },
+  assert.deepEqual(checkQuestions({ questions: [tap("Dupes?", ["Text", "text", "Email", "Something else"]), tap("A?")] }).map((q) => q.title), ["A?"]);
+  assert.deepEqual(checkQuestions({ questions: [tap("Long?", ["Text", "Email", "Paper", "A paper form I fill in"])] })[0].choices, [
+    "Text",
+    "Email",
+    "Paper",
+  ]);
+  assert.deepEqual(checkQuestions({ questions: [tap("Dashes?", ["Follow-ups", "Texts — mostly", "Calls"])] })[0].choices, [
+    "Follow ups",
+    "Texts, mostly",
+    "Calls",
   ]);
 });
 
-test("checkQuestions drops an unknown kind", () => {
-  const questions = checkQuestions({ questions: [{ ...tap("Scale?"), kind: "slider" }, tap("A?"), tap("B?")] });
-  assert.deepEqual(questions.map((q) => q.title), ["A?", "B?"]);
+test("checkQuestions throws away a question she would have to type, since her example is the one typed answer", () => {
+  assert.deepEqual(titles({ questions: [talk("What would you hand off first?"), tap("How do you send a quote?")] }), [
+    "How do you send a quote?",
+  ]);
+  assert.deepEqual(checkQuestions({ questions: [talk("What feels slow?")] }), []);
 });
 
-test("checkQuestions returns nothing when fewer than 2 survive", () => {
-  assert.deepEqual(checkQuestions({ questions: [tap("How do you send a quote?"), tap("No question mark")] }), []);
+test("checkQuestions drops an unknown kind", () => {
+  assert.deepEqual(titles({ questions: [{ ...tap("Scale?"), kind: "slider" }, tap("A?")] }), ["A?"]);
+});
+
+test("checkQuestions returns nothing when no question survives", () => {
+  assert.deepEqual(checkQuestions({ questions: [tap("No question mark")] }), []);
   assert.deepEqual(checkQuestions({ questions: [] }), []);
   assert.deepEqual(checkQuestions(null), []);
   assert.deepEqual(checkQuestions({ questions: "A?" }), []);
 });
 
 test("checkQuestions keeps a short hint and turns one over 120 characters into null", () => {
-  const questions = checkQuestions({
-    questions: [
-      { ...tap("A?"), hint: "Any guess is fine." },
-      { ...tap("B?"), hint: "x".repeat(121) },
-      { ...tap("C?"), hint: 42 },
-    ],
-  });
-  assert.deepEqual(questions.map((q) => q.hint), ["Any guess is fine.", null, null]);
+  assert.equal(checkQuestions({ questions: [{ ...tap("A?"), hint: "Any guess is fine." }] })[0].hint, "Any guess is fine.");
+  assert.equal(checkQuestions({ questions: [{ ...tap("B?"), hint: "x".repeat(121) }] })[0].hint, null);
+  assert.equal(checkQuestions({ questions: [{ ...tap("C?"), hint: 42 }] })[0].hint, null);
+});
+
+test("the question prompt is v5", () => {
+  assert.equal(QUESTIONS_PROMPT_VERSION, "beginner-questions-v5");
 });
 
 test("readJob and writeQuestions give up quietly when the call isn't allowed", async () => {

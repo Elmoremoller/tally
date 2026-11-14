@@ -20,6 +20,8 @@ type TextStepProps = {
   headingRef: RefObject<HTMLHeadingElement | null>;
   /** Shown between the hint and the box, like a chip that answers for her. */
   afterHint?: ReactNode;
+  /** Shown under the box and its notes, like a one tap question on the same screen. */
+  afterBox?: ReactNode;
 };
 
 /**
@@ -40,6 +42,7 @@ export function TextStep({
   error,
   headingRef,
   afterHint,
+  afterBox,
 }: TextStepProps) {
   const voice = useDictation({ value, setValue, max: ANSWER_MAX });
   const box = useRef<HTMLTextAreaElement>(null);
@@ -99,6 +102,7 @@ export function TextStep({
         <p className="quiz-private" id="q-private">
           {privacyNote}
         </p>
+        {afterBox}
         {error ? (
           <p className="quiz-error" role="alert">
             {error}

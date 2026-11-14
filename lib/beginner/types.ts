@@ -1,5 +1,6 @@
 import type { QA } from "./quiz";
-import { chatTools, type AiPolicy, type AiTool, type ChatTool } from "../week";
+import type { Often } from "./quiz-copy";
+import { chatTools, policyLabels, type AiPolicy, type AiTool, type ChatTool } from "../week";
 
 // The beginner version: for women who want to start using AI and don't know where to begin, in any job. It
 // runs beside the first version, behind the ad angles in BEGINNER_ANGLES (lib/offer.ts), as a test. These are
@@ -16,16 +17,48 @@ export const worksForLabels: Record<WorksFor, string> = {
 
 export const EXPERIENCE = ["not_yet", "tried", "uses", "heavy"] as const;
 export type Experience = (typeof EXPERIENCE)[number];
-/** Elmore's words, 2026-11-13. */
+/**
+ * The four choices on Where are you with AI, from docs/DIRECTION.md (Phase 1). The ids stay as they were, so
+ * answers saved before keep loading. DRAFT
+ */
 export const experienceLabels: Record<Experience, string> = {
-  not_yet: "I haven’t started yet. I don’t know where to begin.",
-  tried: "I’ve tried it, but I never figured out what to use it for.",
-  uses: "I use it, but I’m not getting the most out of it.",
-  heavy: "I use it a lot, but it hasn’t given me any time back.",
+  not_yet: "Never used it",
+  tried: "Tried it a few times",
+  uses: "Use it some weeks",
+  heavy: "Use it most days",
 };
 
-/** She uses AI today, a little or a lot: she is asked what for, and her plan goes past the basics. */
+/** She uses AI today, some weeks or most days: she is a Builder, and her plan goes past the basics. */
 export const usesAi = (level: Experience | null) => level === "uses" || level === "heavy";
+
+/** The two paths in docs/DIRECTION.md. Never used it and Tried it a few times are Starter, the rest Builder. */
+export type Track = "starter" | "builder";
+export const trackFor = (level: Experience): Track => (usesAi(level) ? "builder" : "starter");
+
+/** Can you use AI for your work? One question in place of who she works for and her company's view. */
+export const CAN_USE = ["yes", "not_sure", "restricted", "self"] as const;
+export type CanUse = (typeof CAN_USE)[number];
+/** DRAFT */
+export const canUseLabels: Record<CanUse, string> = {
+  yes: "Yes",
+  not_sure: "Not sure",
+  restricted: "No, it’s restricted",
+  self: "I work for myself",
+};
+
+/**
+ * Her answer as the rules and the database read it. The database keeps the first version's four policies, so
+ * Yes is kept as encouraged; the prompts are given her own answer instead (workLine), so no plan says her
+ * company encourages AI.
+ */
+export function canUseToWork(answer: CanUse): { worksFor: WorksFor; aiPolicy: AiPolicy | null } {
+  if (answer === "self") return { worksFor: "self", aiPolicy: null };
+  const aiPolicy: AiPolicy = answer === "yes" ? "encouraged" : answer === "restricted" ? "restricted" : "no_idea";
+  return { worksFor: "employer", aiPolicy };
+}
+
+/** The screen id of Can you use AI for your work, as kept in her answered screens. */
+export const CAN_USE_ID = "can_use";
 
 /** Only someone with an employer is asked about her company's view on AI, and gets the At work part. */
 export const hasEmployer = (worksFor: WorksFor) => worksFor !== "self";
@@ -53,6 +86,19 @@ export function markFor(
   return item.private ? null : "safe_today";
 }
 
+/**
+ * Who she works for and what she may do with AI, as one line for the prompts. When she answered Can you use AI
+ * for your work, the line is her own answer; answers saved before it keep the old two lines.
+ */
+export function workLine(input: { worksFor: WorksFor; aiPolicy: AiPolicy | null; qas: QA[] }): string {
+  const canUse = input.qas.find((qa) => qa.id === CAN_USE_ID)?.picked[0];
+  if (canUse) return `Can she use AI for her work? Her answer: ${canUse}`;
+  return [
+    `She works: ${worksForLabels[input.worksFor]}`,
+    `Her company's view on AI: ${input.aiPolicy ? policyLabels[input.aiPolicy] : "she works for herself"}`,
+  ].join("\n");
+}
+
 /** Her first win on the free result: one task from her week, already drafted. */
 export type FirstWin = { task: string; intro: string; draft: string };
 
@@ -66,6 +112,8 @@ export type BeginnerIntake = {
   /** What she said would save her the most time. */
   mostWanted: string[];
   firstWin: FirstWin;
+  /** How often she does her top task, when she tapped it. Absent on answers saved before 2026-11-14. */
+  often?: Often | null;
   /** Titles of other things AI can do in her job, shown under her first win. */
   ideas: string[];
   /** Her tasks that need private details about other people or the company. */

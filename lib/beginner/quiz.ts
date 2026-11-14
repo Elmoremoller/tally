@@ -2,7 +2,6 @@ import { cleanText } from "../clean";
 import { ANSWER_MAX } from "../week";
 import { FALLBACK_JOB_READ } from "./copy";
 import { EVERYDAY_SOFTWARE, EVERYDAY_TASKS } from "./quiz-copy";
-import type { AiTool } from "../week";
 import { usesAi, type Experience, type WorksFor } from "./types";
 
 // The context quiz's shapes and the pure helpers behind its screens. Imports nothing from the server, so the
@@ -34,26 +33,28 @@ export type AskedQuestion = { id: string; title: string; kind: AskedKind; choice
  */
 export type QA = { id: string; title: string; picked: string[]; text: string | null; shown?: string[] };
 
+/**
+ * Every screen the quiz can show. Answers saved before 2026-11-14 may also hold held_back, picture, ai_uses,
+ * works_for and policy, screens that are gone; they still load, since a saved answer is only read by its id.
+ */
 export type QuizStep =
   | "job"
   | "level"
-  | "held_back"
+  | "done"
+  | "tools"
   | "repeats"
   | "most"
-  | "picture"
+  | "example"
   | "apps"
-  | "tools"
-  | "ai_uses"
   | "device"
   | `asked_${number}`
-  | "works_for"
-  | "policy";
+  | "can_use";
 
 export const QAS_MAX = 16;
 export const PICKS_MAX = 16;
 export const PICK_MAX = 60;
-/** How many asked screens the progress bar assumes while the AI is still writing them. */
-export const ASKED_ASSUMED = 3;
+/** The AI writes at most one question, and the progress bar assumes it while the AI is still writing it. */
+export const ASKED_ASSUMED = 1;
 const MOST_MAX = 6;
 /** The repeats screen shows this many choices: her job's first, then everyday work. */
 export const REPEATS_SHOWN = 10;
@@ -127,43 +128,45 @@ export function softwareOptions(read: JobRead): string[] {
   });
 }
 
-/**
- * Her level for the plan. Someone who answered in her own words counts as having tried AI, unless she then
- * picked None yet on the AI tools screen.
- */
-export const experienceFor = (level: Experience, ownWords: boolean, tools: readonly AiTool[]): Experience =>
-  ownWords && tools.includes("none_yet") ? "not_yet" : level;
-
-/** Her own words on Where are you with AI, when she wrote some there. */
+/** Her own words on Where are you with AI, on answers saved before that row was taken out on 2026-11-14. */
 export const levelWords = (qas: QA[]): string | null => qas.find((qa) => qa.id === "level")?.text ?? null;
 
 /**
- * Every screen she will see, in order, so the progress bar knows the length. Where an answer isn't known yet,
- * the step is assumed: asked screens while the AI writes them, the held back and tools screens before she
- * picks a level, and the work questions until we know who she works for. `skipMost` leaves out the most
- * wanted screen when it would show one choice.
+ * How many of her picks on the repeats screen AI can help with, out of how many she picked from the list.
+ * What she typed under Something else has no flag, so it isn't counted.
+ */
+export function aiHelpCount(read: JobRead, picked: string[]): { helps: number; picked: number } {
+  const hers = repeatChoices(read).filter((r) => picked.includes(r.label));
+  return { helps: hers.filter((r) => r.ai).length, picked: hers.length };
+}
+
+/**
+ * Every screen she will see, in order, so the progress bar knows the length. A Starter (Never used it, Tried it
+ * a few times) sees at most 8 screens and a Builder at most 10:
+ *
+ * Starter: job, level, repeats, most, example, device, one asked question, can_use.
+ * Builder: job, level, done, tools, repeats, most, example, apps, one asked question, can_use.
+ *
+ * Where an answer isn't known yet, the step is assumed: the asked screen while the AI writes it, and the
+ * Builder screens before she picks a level. Can you use AI for your work is left out when her job already
+ * said she works for herself. `skipMost` leaves out the most wanted screen when it would show one choice.
  */
 export function stepsFor(s: {
   level: Experience | null;
   askedCount: number | null;
   worksForFromJob: WorksFor | "unclear" | null;
-  worksFor: WorksFor | null;
   skipMost?: boolean;
 }): QuizStep[] {
+  const builder = usesAi(s.level);
   const steps: QuizStep[] = ["job", "level"];
-  if (!usesAi(s.level)) steps.push("held_back");
+  if (builder) steps.push("done", "tools");
   steps.push("repeats");
   if (!s.skipMost) steps.push("most");
-  steps.push("picture", "apps");
-  if (s.level !== "not_yet") steps.push("tools");
-  if (usesAi(s.level)) steps.push("ai_uses");
-  steps.push("device");
-  const asked = s.askedCount ?? ASKED_ASSUMED;
+  steps.push("example");
+  steps.push(builder ? "apps" : "device");
+  const asked = Math.min(s.askedCount ?? ASKED_ASSUMED, ASKED_ASSUMED);
   for (let i = 1; i <= asked; i++) steps.push(`asked_${i}`);
-  const fromJob = s.worksForFromJob && s.worksForFromJob !== "unclear" ? s.worksForFromJob : null;
-  if (!fromJob) steps.push("works_for");
-  const worksFor = fromJob ?? s.worksFor;
-  if (worksFor !== "self") steps.push("policy");
+  if (s.worksForFromJob !== "self") steps.push("can_use");
   return steps;
 }
 

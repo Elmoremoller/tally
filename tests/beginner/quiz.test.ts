@@ -3,11 +3,12 @@ import assert from "node:assert/strict";
 import { ANSWER_MAX } from "../../lib/week";
 import { experienceLabels } from "../../lib/beginner/types";
 import { FALLBACK_JOB_READ } from "../../lib/beginner/copy";
+import { repeatsLine } from "../../lib/beginner/quiz-copy";
 import {
+  aiHelpCount,
   ASKED_ASSUMED,
   cleanQAs,
   digest,
-  experienceFor,
   hasKind,
   levelWords,
   repeatChoices,
@@ -74,13 +75,7 @@ test("softwareOptions puts the job's software first, then the everyday set, each
   assert.ok(names.includes("Google Drive") && names.includes("Teams"));
 });
 
-test("experienceFor counts her own words as tried, or not yet when she then picked None yet", () => {
-  assert.equal(experienceFor("tried", true, ["chatgpt"]), "tried");
-  assert.equal(experienceFor("tried", true, ["none_yet"]), "not_yet");
-  assert.equal(experienceFor("uses", false, ["none_yet"]), "uses");
-});
-
-test("levelWords reads her own words on the level screen", () => {
+test("levelWords still reads her own words on answers saved before that row went", () => {
   assert.equal(levelWords([{ id: "level", title: "T", picked: [], text: "I use it to plan meals" }]), "I use it to plan meals");
   assert.equal(levelWords([{ id: "level", title: "T", picked: ["I use it"], text: null }]), null);
 });
@@ -109,38 +104,64 @@ test("mostOptions offers at most six", () => {
   assert.equal(mostOptions(many, many.repeats.map((r) => r.label), "Extra").options.length, 6);
 });
 
-test("stepsFor for someone who works for herself and hasn't tried AI", () => {
-  assert.deepEqual(stepsFor({ level: "not_yet", askedCount: 2, worksForFromJob: "self", worksFor: "self" }), [
-    "job", "level", "held_back", "repeats", "most", "picture", "apps", "device", "asked_1", "asked_2",
-  ]);
+const starter = (level: "not_yet" | "tried") => stepsFor({ level, askedCount: null, worksForFromJob: "unclear" });
+const builder = (level: "uses" | "heavy") => stepsFor({ level, askedCount: null, worksForFromJob: "unclear" });
+
+test("a Starter sees at most 8 screens, in order", () => {
+  for (const level of ["not_yet", "tried"] as const) {
+    assert.deepEqual(starter(level), ["job", "level", "repeats", "most", "example", "device", "asked_1", "can_use"]);
+    assert.ok(starter(level).length <= 8);
+  }
 });
 
-test("stepsFor assumes asked screens while the AI is still writing them", () => {
-  assert.equal(ASKED_ASSUMED, 3);
-  assert.deepEqual(stepsFor({ level: "uses", askedCount: null, worksForFromJob: "unclear", worksFor: "employer" }), [
-    "job", "level", "repeats", "most", "picture", "apps", "tools", "ai_uses", "device",
-    "asked_1", "asked_2", "asked_3", "works_for", "policy",
-  ]);
+test("a Builder sees at most 10 screens, in order", () => {
+  for (const level of ["uses", "heavy"] as const) {
+    assert.deepEqual(builder(level), [
+      "job", "level", "done", "tools", "repeats", "most", "example", "apps", "asked_1", "can_use",
+    ]);
+    assert.ok(builder(level).length <= 10);
+  }
 });
 
-test("stepsFor treats someone who uses AI a lot like someone who uses it", () => {
-  assert.deepEqual(stepsFor({ level: "heavy", askedCount: 1, worksForFromJob: "self", worksFor: null }), [
-    "job", "level", "repeats", "most", "picture", "apps", "tools", "ai_uses", "device", "asked_1",
-  ]);
+test("only the example screen is typed after her job", () => {
+  const typed = new Set(["job", "example"]);
+  for (const steps of [starter("tried"), builder("uses")]) {
+    assert.deepEqual(steps.filter((s) => typed.has(s)), ["job", "example"]);
+  }
 });
 
-test("stepsFor asks what held her back when she tried it, and leaves out most when told to", () => {
-  assert.deepEqual(stepsFor({ level: "tried", askedCount: 0, worksForFromJob: "self", worksFor: null, skipMost: true }), [
-    "job", "level", "held_back", "repeats", "picture", "apps", "tools", "device",
-  ]);
+test("Starters never see the Builder screens, and Builders never see phone or computer", () => {
+  for (const s of ["done", "tools", "apps"] as const) assert.ok(!starter("not_yet").includes(s));
+  assert.ok(!builder("heavy").includes("device"));
 });
 
-test("stepsFor handles no asked screens and a job that names the employer", () => {
-  const none = stepsFor({ level: "tried", askedCount: 0, worksForFromJob: "self", worksFor: null });
-  assert.ok(!none.some((s) => s.startsWith("asked_")));
-  const employer = stepsFor({ level: "tried", askedCount: 1, worksForFromJob: "employer", worksFor: null });
-  assert.ok(!employer.includes("works_for"));
-  assert.ok(employer.includes("policy"));
+test("the screens that are gone stay gone", () => {
+  for (const steps of [starter("not_yet"), starter("tried"), builder("uses"), builder("heavy")]) {
+    for (const gone of ["held_back", "picture", "ai_uses", "works_for", "policy"]) {
+      assert.ok(!(steps as string[]).includes(gone), gone);
+    }
+  }
+});
+
+test("stepsFor assumes one asked screen while the AI writes it, and never more than one", () => {
+  assert.equal(ASKED_ASSUMED, 1);
+  assert.equal(stepsFor({ level: "uses", askedCount: 3, worksForFromJob: null }).filter((s) => s.startsWith("asked_")).length, 1);
+  assert.ok(!stepsFor({ level: "tried", askedCount: 0, worksForFromJob: null }).some((s) => s.startsWith("asked_")));
+});
+
+test("Can you use AI for your work is left out when her job said she works for herself", () => {
+  assert.ok(!stepsFor({ level: "tried", askedCount: 1, worksForFromJob: "self" }).includes("can_use"));
+  assert.ok(stepsFor({ level: "tried", askedCount: 1, worksForFromJob: "employer" }).includes("can_use"));
+});
+
+test("stepsFor leaves out most when told to", () => {
+  assert.ok(!stepsFor({ level: "tried", askedCount: 1, worksForFromJob: null, skipMost: true }).includes("most"));
+});
+
+test("aiHelpCount counts her picks AI can help with, and leaves out what she typed", () => {
+  assert.deepEqual(aiHelpCount(read, ["Writing quotes", "Attic work"]), { helps: 1, picked: 2 });
+  assert.deepEqual(aiHelpCount(read, ["Writing quotes", "Writing emails", "Something she typed"]), { helps: 2, picked: 2 });
+  assert.deepEqual(aiHelpCount(read, []), { helps: 0, picked: 0 });
 });
 
 test("digest joins each screen's title and answer", () => {
@@ -190,11 +211,25 @@ test("cleanQAs rejects a bad id or a non array", () => {
   assert.equal(cleanQAs(null), null);
 });
 
-test("the level labels and the fallback read follow the brief", () => {
-  assert.equal(experienceLabels.not_yet, "I haven’t started yet. I don’t know where to begin.");
-  assert.equal(experienceLabels.heavy, "I use it a lot, but it hasn’t given me any time back.");
+test("the level labels follow DIRECTION.md and the fallback read follows the brief", () => {
+  assert.deepEqual(Object.values(experienceLabels), [
+    "Never used it",
+    "Tried it a few times",
+    "Use it some weeks",
+    "Use it most days",
+  ]);
   assert.equal(FALLBACK_JOB_READ.repeats.length, 5);
   assert.equal(FALLBACK_JOB_READ.aiFallback.length, 4);
   assert.equal(FALLBACK_JOB_READ.apps.length, 6);
   assert.equal(softwareOptions(FALLBACK_JOB_READ).length, 14);
+});
+
+test("repeatsLine reads well for any count, and says nothing when AI can help with none", () => {
+  assert.equal(repeatsLine(3, 5), "AI can help with 3 of these 5");
+  assert.equal(repeatsLine(2, 2), "AI can help with both of these");
+  assert.equal(repeatsLine(4, 4), "AI can help with all 4 of these");
+  assert.equal(repeatsLine(1, 1), "AI can help with this one");
+  assert.equal(repeatsLine(1, 3), "AI can help with 1 of these 3");
+  assert.equal(repeatsLine(0, 2), null);
+  assert.equal(repeatsLine(0, 0), null);
 });

@@ -2575,11 +2575,28 @@
     border: 0;
     font-family: inherit;
   }
-  /* The I have no idea yet chip on the picture screen: a chip that answers for her, between hint and box. */
-  .quiz-no-idea {
-    margin-top: 1rem;
+  /* How often, under the box on the example screen: a small heading, then one row of chips she taps once. */
+  .quiz-often {
+    margin-top: 1.5rem;
+  }
+  .quiz-often-title {
+    font-weight: 600;
+    color: var(--slate);
+  }
+  .quiz-often .quiz-topics {
+    margin-top: 0.75rem;
+  }
+  .quiz-often button.quiz-topic {
     border: 0;
     font-family: inherit;
+  }
+  /* One line under a chips screen's choices, like how many of her picks AI can help with. It stays in the page
+     while empty, so a screen reader hears it when it fills in. */
+  .quiz-note {
+    min-height: 1.5em;
+    margin-top: 1rem;
+    font-weight: 600;
+    color: var(--slate);
   }
   .quiz-topic svg {
     width: 1.05rem;

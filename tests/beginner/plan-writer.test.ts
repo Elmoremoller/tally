@@ -91,8 +91,8 @@ const raw = (extra: ReturnType<typeof idea>[] = []) => ({
   },
 });
 
-test("the prompt version is v4", () => {
-  assert.equal(BEGINNER_PLAN_VERSION, "beginner-plan-v4");
+test("the prompt version is v5", () => {
+  assert.equal(BEGINNER_PLAN_VERSION, "beginner-plan-v5");
 });
 
 test("nearSame matches titles that differ by one word, ignoring small words and plurals", () => {
@@ -359,10 +359,10 @@ test("the prompt keeps her tools accurate and at her level", () => {
     ),
   );
   for (const level of [
-    "I haven’t started yet. I don’t know where to begin.",
-    "I’ve tried it, but I never figured out what to use it for.",
-    "I use it, but I’m not getting the most out of it.",
-    "I use it a lot, but it hasn’t given me any time back.",
+    "Never used it",
+    "Tried it a few times",
+    "Use it some weeks",
+    "Use it most days",
   ])
     assert.ok(BEGINNER_PLAN_SYSTEM.includes(level), level);
 });

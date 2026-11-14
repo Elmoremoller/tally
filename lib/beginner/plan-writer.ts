@@ -1,6 +1,6 @@
 import Anthropic from "@anthropic-ai/sdk";
 import { fence, planModel, text } from "../plan-writer";
-import { policyLabels, toolLabels, type AiPolicy, type AiTool, type ChatTool } from "../week";
+import { toolLabels, type AiPolicy, type AiTool, type ChatTool } from "../week";
 import { withoutScarcity } from "./intake";
 import { levelWords, type QA } from "./quiz";
 import {
@@ -10,7 +10,7 @@ import {
   hasEmployer,
   usesAi,
   markFor,
-  worksForLabels,
+  workLine,
   type Experience,
   type FirstWin,
   type Mark,
@@ -23,7 +23,7 @@ import {
 // decided in code; the model writes the words.
 // Versioned like the first plan: change BEGINNER_PLAN_VERSION whenever the words of the prompt change.
 
-export const BEGINNER_PLAN_VERSION = "beginner-plan-v4";
+export const BEGINNER_PLAN_VERSION = "beginner-plan-v5";
 
 /** The shortest first win example worth showing her, the same as the intake's first win draft. */
 const EXAMPLE_MIN = 60;
@@ -203,9 +203,8 @@ export function describeBeginnerPlan(input: BeginnerPlanInput) {
   lines.push(
     "",
     `Her role: ${input.role}`,
-    `She works: ${worksForLabels[input.worksFor]}`,
+    workLine(input),
     `She has an employer: ${hasEmployer(input.worksFor) ? "yes, write at_work" : "no, at_work is null"}`,
-    `Her company's view on AI: ${input.aiPolicy ? policyLabels[input.aiPolicy] : "she works for herself"}`,
     `How much she has used AI so far: ${experienceLabels[input.experience]}`,
     ...(levelWords(input.qas) ? [`In her own words: ${fence(levelWords(input.qas) ?? "")}`] : []),
     `The tool her plan names: ${toolLabels[beginnerTool(input.aiTools)]}`,

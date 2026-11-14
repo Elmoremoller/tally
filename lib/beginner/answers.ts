@@ -1,7 +1,8 @@
 import { cleanText, oneOf } from "../clean";
 import { AI_POLICIES, AI_TOOLS, ANSWER_MAX, OTHER_TOOLS_MAX, SOLO_TOOLS, type AiPolicy, type AiTool } from "../week";
 import { cleanQAs, PICK_MAX, type QA } from "./quiz";
-import { EXPERIENCE, hasEmployer, WORKS_FOR, type Experience, type WorksFor } from "./types";
+import { OFTEN, type Often } from "./quiz-copy";
+import { EXPERIENCE, hasEmployer, usesAi, WORKS_FOR, type Experience, type WorksFor } from "./types";
 
 // What the context quiz sends at its final read, and the check it passes before anything is saved. Anyone can
 // call a server action, so nothing is trusted as sent. Kept apart from app/begin/actions.ts so the tests can
@@ -19,6 +20,8 @@ export type BeginnerAnswers = {
   aiToolsOther: string | null;
   /** Null when she works for herself. */
   aiPolicy: AiPolicy | null;
+  /** How often she does her top task: one tap on the example screen, which she may leave. */
+  often?: Often | null;
 };
 
 const MOST_WANTED_MAX = 2;
@@ -36,7 +39,8 @@ function cleanTools(tools: unknown, other: unknown): { aiTools: AiTool[]; aiTool
 /**
  * Her answers held to the quiz's rules, or null when something is missing or out of bounds: her job, her
  * level, a repeats screen with at least one pick or typed answer, one or two things she most wants to make
- * easier, and her company's view when she has an employer. The server can't see the fallback list her
+ * easier, and her company's view when she has an employer. How often she does her top task is kept when it is
+ * one of the choices, and dropped otherwise, since she may leave it. The server can't see the fallback list her
  * screen 4 may have offered, so it checks only how many she picked and how long each is.
  */
 export function cleanAnswers(answers: BeginnerAnswers): BeginnerAnswers | null {
@@ -52,11 +56,14 @@ export function cleanAnswers(answers: BeginnerAnswers): BeginnerAnswers | null {
   const mostWanted = wanted.map((w) => cleanText(w, PICK_MAX));
   if (mostWanted.some((w) => w === null)) return null;
 
-  // Someone who hasn't tried AI never sees the tools screen, so she counts as None yet whatever was sent.
+  // Only a Builder sees the AI tools screen. A Starter counts as None yet when she has never used AI, and as
+  // Not sure when she has tried it, whatever was sent, so her plan names the default tool.
   const tools =
     answers.experience === "not_yet"
       ? { aiTools: ["none_yet" as const], aiToolsOther: null }
-      : cleanTools(answers.aiTools, answers.aiToolsOther);
+      : !usesAi(answers.experience)
+        ? { aiTools: ["not_sure" as const], aiToolsOther: null }
+        : cleanTools(answers.aiTools, answers.aiToolsOther);
   if (!tools) return null;
 
   // Her company's view only counts, and is only needed, when she has an employer.
@@ -71,5 +78,6 @@ export function cleanAnswers(answers: BeginnerAnswers): BeginnerAnswers | null {
     worksFor: answers.worksFor,
     ...tools,
     aiPolicy: employed ? answers.aiPolicy : null,
+    often: oneOf(OFTEN, answers.often) ? answers.often : null,
   };
 }
