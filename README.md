@@ -1,6 +1,12 @@
-# The Couple Standard
+# Tally
 
-The Couple Standard: the landing page, the quiz, the paywall, each couple's plan, their Couple Standard, and the check ins for the pilot. It is built with Next.js 16 (App Router) and Tailwind CSS 4, with Supabase for answers and logins, Stripe for payment, and Claude for the message check. Every Get started button links to the quiz at `/start`. `/privacy` and `/terms` are plain language drafts: before launch, fill in the three blanks at the top of `lib/legal.ts` and have a lawyer check them. To connect the accounts, follow [SETUP.md](SETUP.md).
+Tally helps a person start using AI in her own job, or get much more out of it, with a guided path built from a short quiz. This repo is the whole site: the landing page, the free quiz, the free result, the paywall and each buyer's AI written plan. It is built with Next.js 16 (App Router) and Tailwind CSS 4, with Supabase for answers and logins, Stripe for payment, and Claude for reading the quiz and writing the plan.
+
+- What the product is and who it's for: [OVERVIEW.md](OVERVIEW.md).
+- Where it is going, the rules that stay, and the build phases: [docs/DIRECTION.md](docs/DIRECTION.md). Read it before changing the quiz, the free result, the paywall or the plan.
+- Connecting the accounts: [SETUP.md](SETUP.md).
+
+The first version's Get started buttons open the quiz at `/start`; the beginner ad angles open their own quiz at `/begin`. `/privacy` and `/terms` are plain language drafts: before launch, fill in the blanks at the top of `lib/legal.ts` and have a lawyer check them.
 
 ## Run it locally
 
@@ -20,9 +26,11 @@ npm run build
 npm start
 ```
 
+The tests run with `npm test`.
+
 ## Deploy to Vercel
 
-**From the dashboard.** Push this folder to a Git repository, then on vercel.com choose Add New, then Project, and import it. Vercel detects Next.js, so the defaults are right. If the repository also contains other folders, set Root Directory to `couple-standard`. Every push to the main branch deploys to production, and every other branch gets a preview URL.
+**From the dashboard.** Push this folder to a Git repository, then on vercel.com choose Add New, then Project, and import it. Vercel detects Next.js, so the defaults are right. If the repository also contains other folders, set Root Directory to `worth-her-time`. Every push to the main branch deploys to production, and every other branch gets a preview URL.
 
 **From the terminal.** Run these from this folder:
 
@@ -31,48 +39,41 @@ npx vercel        # first run links the project and makes a preview deployment
 npx vercel --prod # deploys to production
 ```
 
-**Optional:** once the site has its own domain, set the environment variable `NEXT_PUBLIC_SITE_URL` (for example `https://thecouplestandard.com`) in the Vercel project settings, so link previews use that domain. Without it, Vercel's production URL is used.
+Once the site has its own domain, set `NEXT_PUBLIC_SITE_URL` (for example `https://tallyher.com`) in the Vercel project settings, so link previews and emails use that domain.
 
 ## Where things live
 
 | Path | What it is |
 |---|---|
-| `app/page.tsx` | The landing page, section by section, in the order set in `LAYOUT.md` |
-| `lib/content.tsx` | The page copy (topics, steps, method, everything you get, questions) |
-| `app/globals.css` | Colour, type and motion tokens as CSS variables, the Tailwind theme, component styles, and the reduced motion and reduced transparency rules |
-| `components/` | Nav, footer, Get started button, phone mockup, card previews and questions |
-| `components/brand/` | The logo as SVG, traced from the supplied artwork so it can be deep red or warm white |
-| `app/icon.svg`, `app/favicon.ico`, `app/apple-icon.png`, `app/opengraph-image.png` | Browser icons and the link preview image |
-| `SETUP.md` | How to connect Supabase, Stripe and the message check, test it all, and go live |
-| `app/start/` | The quiz at `/start`, saving the answers (`actions.ts`), and Get my plan (`checkout.ts`). `result/` shows the couple type and paywall again after a trip to Stripe |
-| `components/quiz/` | The quiz screens, the safety question, the open question and its reflection, the couple type reveal and the paywall |
-| `lib/reflection.ts` | The quiz reflection: a small, fast model reads what someone wrote about their last fight and gives it back in their own words, plus labels for their plan. Checks after the answer drop anything they didn't write |
-| `lib/safety.ts` | The safety question, the calm page's words and the hotline's details |
-| `components/SafetyHelp.tsx` | The calm page: the hotline, nothing to buy, and a quick way out. Shown after Yes or Not sure, and instead of a verdict when a message mentions fear or harm |
-| `lib/quiz.ts` | The quiz copy, the answer ids that get saved, and the three couple types |
-| `app/api/stripe/webhook/` | Where Stripe reports payments. Marks the person as paid and sends their login email |
-| `app/welcome/` | Where people land after paying, with "Did you just have a fight?" |
-| `app/login/`, `app/auth/confirm/`, `proxy.ts` | Logging in with an email link, and staying logged in |
-| `app/plan/` | Their plan, for paid people and invited partners. `now/` is the help after a fight, `standard/` is their Couple Standard, and `check-in/` is the check in that's due. `preview/` shows sample plans on a local setup |
-| `components/fight-help/` | Help right after a fight: calming down with the 20 minutes, starting to make up, the guided 10 minute repair, and looking back on your own. Only the timers and where a repair stopped are kept, on that phone |
-| `lib/fight-help.ts` | The words for the help after a fight, exactly as approved |
-| `components/plan/` | Today's step and Did you try it?, today's small moment, all the steps under Prevent, Pause and Repair, the scripts for each fight topic, the message check, Add my partner, and the safety question an invited partner sees first |
-| `components/standard/` | Their Couple Standard: where they started, how each of them brings up something hard, and the lines they share. A line one of them writes waits for the other to agree. Until the other person has opened the plan, whoever wrote it can mark it agreed once they've talked |
-| `lib/standard.ts`, `lib/standard-state.ts` | The Couple Standard's words, exactly as approved, and how it's read from the database |
-| `components/check-in/` | The check ins at the start, two weeks in and a month in: the card under Today's step, with Not now kept on that phone until the next day, and the questions, one at a time like the quiz. The answers are only ever for us, never the partner |
-| `lib/check-ins.ts`, `lib/check-in-state.ts` | The check ins' words, exactly as approved, when each one is due, counted from each person's first visit to their plan, and which ones they've answered |
-| `app/privacy/`, `app/terms/` | The privacy and terms pages, linked from the footer and from the line under Get my plan |
-| `lib/legal.ts` | Their words, exactly as approved, with the three blanks to fill in before launch at the top: your company's legal name, the email for privacy and refund requests, and the state whose laws apply |
-| `components/LegalDocument.tsx` | Lays out either page, and makes the hotline's numbers, 988, the Privacy page and the contact email into links |
-| `lib/after-sign-in.ts` | Brings someone who opened the check in while signed out back to it after they sign in from the email link |
-| `lib/steps.ts` | The plan's steps (Notice, Try and On your own), the review's words, and the daily small moments |
-| `lib/progress.ts` | Which step comes when: the four paths, and where each answer to Did you try it? leads |
-| `lib/plan.ts` | The plan's other words: the tips for each couple type, and the scripts. Tone and Not feeling heard come first for everyone, then their own topics, each with a way to bring it up, a line for when it heats up, and one to make up after |
-| `lib/message-check.ts` | The message check, which asks Claude how a text might read before it's sent: words that could sound like blame, what they're asking for underneath, and a version that keeps their point. It never says how the partner will react. Its words are in `lib/message-check-copy.ts` |
-| `lib/prices.ts` | What things cost |
-| `supabase/migrations/` | The database: the `people`, `payments` and private `reflections` tables, each person's answers after each step, a couple's agreements and who agreed to them, how each person brings up something hard, the check ins and an overview of the pilot, the AI allowances, who may read what, a daily cleanup of quizzes from people who never bought, and a call that deletes everything about one person. Run the files in order |
+| `lib/offer.ts` | The offer in one place: the name, the price, the refund line, the support email, the lead, the buttons and the headline for each ad angle |
+| `app/page.tsx`, `app/angle/[angle]/`, `proxy.ts` | The landing page. An ad's `?angle=` is served from the page built for that angle, and `proxy.ts` keeps the angle and UTM values |
+| `lib/landing.ts`, `components/landing/` | The landing page's words and sections, in the order set in `LAYOUT.md` |
+| `lib/testimonials.ts` | Reviews from real buyers. The section stays hidden until there are real ones |
+| `app/globals.css` | Colour, type and motion tokens, the Tailwind theme, component styles, and the reduced motion rules |
+| `components/brand/`, `brand/` | The Tally logo, traced from the supplied artwork |
+| `app/start/`, `components/quiz/` | The quiz at `/start`: her job, her week, the extra work she got pulled into, her AI tools and her company's view on AI. Then Here's what we heard, the free result and the paywall. `result/` shows them again after a trip to Stripe |
+| `lib/questions.ts`, `lib/week.ts` | The quiz's words, and the rules for her week shared by the screens, the server and the AI |
+| `lib/intake.ts` | The fast model that reads her answers and sorts her tasks into piles |
+| `lib/dictation.ts`, `components/quiz/useDictation.ts`, `MicButton.tsx` | Talking instead of typing in the answer boxes |
+| `lib/ai-allowance.ts` | How many AI calls each visitor and the whole site may make |
+| `app/start/checkout.ts`, `lib/checkout.ts` | Get my plan: Stripe Checkout for the plan built from this browser's quiz |
+| `app/api/stripe/webhook/`, `lib/fulfill.ts` | Where Stripe reports payments. Records the order and starts writing the plan |
+| `app/welcome/` | Where Stripe sends her after paying |
+| `lib/plan-prompt.ts`, `lib/plan-writer.ts`, `lib/plan-generation.ts` | The versioned master prompt, the model that writes her plan, and the retries |
+| `app/plan/[token]/`, `components/plan/` | Her plan's private page, opened with a long random token, and the waiting page while it's written |
+| `app/login/`, `app/auth/confirm/`, `app/plan/page.tsx` | Getting back to her plan with an email link |
+| `lib/plan-copy.ts` | The words around the plan: the paywall, checkout, the page after paying and the plan page |
+| `lib/beginner/`, `components/beginner/`, `app/begin/` | The beginner version, for women new to AI, behind the ad angles in `BEGINNER_ANGLES` in `lib/offer.ts`. Its own quiz at `/begin`, a first win as the free result, and its own plan |
+| `lib/funnel-db.ts` | Tally's tables and database calls |
+| `supabase/migrations/` | The database: sessions, answers, tasks, orders, plans and funnel events, all locked to the server, the AI allowances, and a call that deletes everything about one email. Run the files in order |
+| `supabase/email-templates/` | The login email, which opens her plan directly |
+| `app/privacy/`, `app/terms/`, `lib/legal.ts` | The privacy and terms pages and their words |
+| `docs/DIRECTION.md` | What Tally is, the rules that stay, and the build phases |
+| `docs/audit/`, `docs/superpowers/` | Audits, persona runs, and the specs and plans behind earlier changes |
+| `BACKLOG.md`, `CHANGELOG.md` | Work for the daily maintenance run, and one line per change |
+| `tests/` | A smoke test, the repo checks and the beginner version's tests. Run them with `npm test` |
 | `.env.example` | The settings the site needs. Copy it to `.env.local` |
 
 ## Copy rules
 
-Copy is used exactly as approved. Keep it free of dashes used as punctuation, and add no testimonials, press logos, ratings, user counts or statistics until real ones exist.
+The rules are in section 5 of [docs/DIRECTION.md](docs/DIRECTION.md). In short: no dashes used as punctuation, no colons in headlines, no hype words, no emoji, and no price before the paywall. No invented facts, no promised hours or minutes saved, and no testimonials, press logos, ratings, user counts or statistics until real ones exist. Every new line of copy is marked DRAFT until Karl approves it, and every changed prompt gets a new version name.

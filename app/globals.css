@@ -2672,10 +2672,6 @@
     color: var(--muted);
     text-wrap: pretty;
   }
-  .link-button.quiz-skip {
-    display: block;
-    margin: 0.75rem auto 0;
-  }
   .quiz-story::placeholder {
     color: var(--muted);
     opacity: 0.75;
@@ -2978,38 +2974,6 @@
   .quiz-result-piles .quiz-built {
     margin-top: 0;
   }
-
-  /* The reflection: their words back in a quiet card, then the question and its two answers. */
-  .quiz-heard {
-    display: grid;
-    gap: 0.875rem;
-    margin: clamp(1.5rem, 1.2rem + 1.2vw, 2rem) 0 0;
-    padding: 1.25rem 1.375rem;
-    border-radius: var(--r-card);
-    background: var(--off-white);
-    box-shadow:
-      0 0 0 1px var(--line),
-      var(--shadow-1);
-    list-style: none;
-  }
-  .quiz-heard li {
-    display: grid;
-    grid-template-columns: 0.5rem minmax(0, 1fr);
-    column-gap: 0.875rem;
-    font-size: var(--fs-lead);
-    line-height: var(--lh-lead);
-    letter-spacing: var(--tr-lead);
-    color: var(--ink);
-    text-wrap: pretty;
-  }
-  .quiz-heard li::before {
-    content: "";
-    width: 0.5rem;
-    height: 0.5rem;
-    margin-top: calc((var(--lh-lead) * 1em - 0.5rem) / 2);
-    border-radius: 50%;
-    background: var(--slate);
-  }
   .quiz-check {
     margin-top: clamp(1.75rem, 1.4rem + 1.5vw, 2.5rem);
     font-family: var(--stack-display);
@@ -3055,7 +3019,7 @@
     }
   }
 
-  /* The reveal: the couple type at hero size, with the smile drawn under it. */
+  /* The reveal: her result at hero size, with the smile drawn under it. */
   .quiz-reveal {
     display: grid;
     justify-items: center;
@@ -3084,7 +3048,7 @@
   .quiz-type:focus {
     outline: none;
   }
-  /* Their own fight, in one line: "When chores come up, you go quiet and Alex wants to talk now." */
+  /* Her result in one line, under the reveal. */
   .quiz-moment {
     max-width: 26em;
     margin-top: 1.75rem;
@@ -3475,84 +3439,18 @@
   }
 }
 
-/* ---------- The calm page: after Yes or Not sure to the safety question ---------- */
-/* The hotline, nothing to buy, and a quick way out. The same quiet column as the quiz, so it reads as the
-   same place, with the call as the one filled button. Inside the message check it is a card, one size down. */
+/* ---------- The plan's footer ---------- */
 @layer components {
-  .safety {
-    display: grid;
-    gap: 1rem;
-  }
-  /* First and top right, where the hotline's own quick exit sits. */
-  .safety-exit {
-    justify-self: end;
-    display: inline-flex;
-    align-items: center;
-    min-height: 2.75rem;
-    padding: 0 1.125rem;
-    border-radius: 999px;
-    background: var(--ink);
-    color: var(--off-white);
-    font-size: var(--fs-small);
-    font-weight: 600;
-    text-decoration: none;
-    touch-action: manipulation;
-    transition: background-color 0.2s ease;
-  }
-  .safety-exit:hover {
-    background: color-mix(in oklab, var(--ink), var(--off-white) 16%);
-  }
-  .safety-title {
-    font-family: var(--stack-display);
-    font-size: clamp(1.925rem, 1.595rem + 1.54vw, 2.75rem);
-    font-weight: 400;
-    line-height: 1.12;
-    letter-spacing: -0.005em;
-    color: var(--slate);
-    text-wrap: balance;
-  }
-  .safety-title:focus {
-    outline: none;
-  }
-  .safety[data-level="3"] .safety-title {
-    font-size: var(--fs-title);
-    line-height: var(--lh-title);
-    letter-spacing: var(--tr-title);
-  }
-  .safety-text {
-    font-size: var(--fs-lead);
-    line-height: var(--lh-lead);
-    letter-spacing: var(--tr-lead);
-    color: var(--ink);
-    text-wrap: pretty;
-  }
-  .safety-actions {
-    display: grid;
-    gap: 0.75rem;
-    margin-block: 0.5rem;
-  }
-  .safety-actions .btn {
-    width: 100%;
-  }
-  .safety-note {
-    color: var(--muted);
-    text-wrap: pretty;
-  }
-  .safety-note a,
   .plan-foot a {
     color: var(--slate);
     font-weight: 600;
     text-decoration: underline;
     text-underline-offset: 0.2em;
   }
-  .safety-back {
-    justify-self: start;
-  }
 }
 
 /* ---------- Their plan (/plan) ---------- */
-/* One column. Today's step leads, as the one thing to do; the words for their fights and the message
-   check follow, open from the first day. Same brand as everywhere else, quieter than the landing page. */
+/* One column. Same brand as everywhere else, quieter than the landing page. */
 @layer components {
   .plan {
     display: grid;
@@ -3703,8 +3601,7 @@
     outline: none;
     box-shadow: 0 0 0 2px var(--slate);
   }
-  .plan-say-copy,
-  .plan-review-now {
+  .plan-say-copy {
     justify-self: start;
   }
   /* The line for the answer they just gave, above the step it led to. */
@@ -3719,93 +3616,6 @@
     color: var(--ink);
     font-weight: 600;
     text-wrap: pretty;
-  }
-  /* Did you try it?, in place of today's step. */
-  .step-review-step {
-    margin-top: 0.25rem;
-    font-weight: 600;
-    color: var(--muted);
-    text-wrap: pretty;
-  }
-  .plan-today .quiz-choices,
-  .plan-today .quiz-heard {
-    margin-top: 0;
-  }
-  .step-review-line {
-    min-height: 6rem;
-  }
-  /* What they agreed: one line, like the other fields, that grows to fit their words. */
-  .step-review-agree {
-    min-height: 3.5rem;
-    overflow: hidden;
-    resize: none;
-  }
-  .step-review-reading {
-    justify-items: center;
-    padding-block: clamp(2rem, 1.5rem + 3vw, 3rem);
-    text-align: center;
-  }
-  .plan-today .link-button.quiz-skip {
-    margin-top: 0;
-  }
-  .plan-tip {
-    padding: 0.875rem 1rem;
-    border-radius: 1rem;
-    background: var(--tint);
-    font-size: var(--fs-small);
-    line-height: var(--lh-small);
-    color: var(--ink);
-    text-wrap: pretty;
-  }
-
-  .plan-earlier {
-    margin-top: calc(clamp(2.5rem, 2rem + 2vw, 3.5rem) * -0.6);
-    border-radius: 1rem;
-    box-shadow: 0 0 0 1px var(--line);
-  }
-  .plan-earlier summary {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    min-height: 3rem;
-    padding: 0 1.125rem;
-    font-weight: 600;
-    cursor: pointer;
-    list-style: none;
-  }
-  .plan-earlier summary::-webkit-details-marker {
-    display: none;
-  }
-  .plan-earlier summary::after {
-    content: "+";
-    font-size: 1.375rem;
-    font-weight: 400;
-    color: var(--muted);
-  }
-  .plan-earlier[open] summary::after {
-    content: "\2212";
-  }
-  .plan-earlier ul {
-    display: grid;
-    gap: 1.25rem;
-    margin: 0;
-    padding: 0.25rem 1.125rem 1.25rem;
-    list-style: none;
-  }
-  .plan-earlier li p {
-    margin: 0;
-    font-size: var(--fs-small);
-    line-height: var(--lh-small);
-    color: var(--muted);
-  }
-  .plan-earlier .plan-earlier-part {
-    font-size: var(--fs-micro);
-    font-weight: 700;
-    color: var(--slate);
-  }
-  .plan-earlier .plan-earlier-title {
-    font-weight: 600;
-    color: var(--ink);
   }
 
   .plan-section {
@@ -3829,22 +3639,6 @@
   }
   .plan-section-text {
     color: var(--muted);
-    text-wrap: pretty;
-  }
-  .plan-earlier .plan-earlier-outcome {
-    font-weight: 600;
-    color: var(--slate);
-  }
-
-  /* Today's small moment */
-  .plan-moment {
-    padding: 1.125rem 1.25rem;
-    border-radius: 1.25rem;
-    background: var(--tint);
-    font-size: var(--fs-lead);
-    line-height: var(--lh-lead);
-    letter-spacing: var(--tr-lead);
-    color: var(--ink);
     text-wrap: pretty;
   }
 
@@ -3880,7 +3674,7 @@
     margin-top: 0.375rem;
   }
 
-  /* Scripts, by fight topic */
+  /* Scripts, one tab at a time */
   .plan-tabs {
     display: flex;
     gap: 0.5rem;
@@ -3936,124 +3730,6 @@
   .plan-script-lead {
     font-size: var(--fs-small);
     font-weight: 600;
-    color: var(--ink);
-  }
-  .plan-review blockquote {
-    margin: 0;
-    font-size: var(--fs-lead);
-    line-height: var(--lh-lead);
-    letter-spacing: var(--tr-lead);
-    color: var(--ink);
-    text-wrap: pretty;
-  }
-  .plan-review blockquote::before {
-    content: "“";
-  }
-  .plan-review blockquote::after {
-    content: "”";
-  }
-
-  /* The message check */
-  .plan-check {
-    display: grid;
-    gap: 1rem;
-  }
-  .plan-check-form {
-    display: grid;
-    gap: 0.75rem;
-  }
-  .plan-check-form textarea {
-    width: 100%;
-    min-height: 7.5rem;
-    padding: 0.875rem 1.125rem;
-    border: 0;
-    border-radius: 1rem;
-    background: var(--off-white);
-    box-shadow:
-      0 0 0 1px var(--line-strong),
-      var(--shadow-1);
-    color: var(--ink);
-    font: inherit;
-    font-size: 1.0625rem;
-    line-height: 1.5;
-    resize: vertical;
-  }
-  .plan-check-form textarea:focus {
-    outline: none;
-    box-shadow: 0 0 0 2px var(--slate);
-  }
-  .plan-check .btn {
-    width: 100%;
-  }
-  .plan-review {
-    display: grid;
-    gap: 0.875rem;
-    padding: 1.25rem;
-    border-radius: 1.25rem;
-    background: var(--off-white);
-    box-shadow: 0 0 0 1px var(--line);
-  }
-  /* Each part of an answer: a small slate label, then the words. */
-  .plan-review-part {
-    display: grid;
-    gap: 0.25rem;
-  }
-  .plan-review-label {
-    font-size: var(--fs-micro);
-    font-weight: 700;
-    letter-spacing: var(--tr-micro);
-    color: var(--slate);
-  }
-  .plan-review-flags {
-    display: grid;
-    gap: 0.625rem;
-    margin: 0;
-    padding: 0;
-    list-style: none;
-  }
-  .plan-review-flags li {
-    display: grid;
-    gap: 0.125rem;
-  }
-  .plan-review-quote {
-    font-weight: 700;
-    color: var(--ink);
-    text-wrap: pretty;
-  }
-  .plan-review-why {
-    color: var(--muted);
-    text-wrap: pretty;
-  }
-  .plan-review-note {
-    font-size: var(--fs-small);
-    line-height: var(--lh-small);
-    color: var(--muted);
-    text-wrap: pretty;
-  }
-  .plan-review-verdict {
-    font-family: var(--stack-text);
-    font-size: 1.25rem;
-    font-weight: 700;
-    color: var(--slate);
-  }
-  /* A version to send, in a box they can change. */
-  .plan-review-suggestion {
-    display: grid;
-    gap: 0.5rem;
-    padding: 1rem 1.125rem 0.375rem;
-    border-radius: 1rem;
-    background: var(--tint);
-  }
-
-  /* Add my partner */
-  .plan-partner-form {
-    display: grid;
-    gap: 0.75rem;
-  }
-  .plan-partner-form .btn {
-    width: 100%;
-  }
-  .plan-partner-status {
     color: var(--ink);
   }
 
@@ -4130,652 +3806,6 @@
     font-size: var(--fs-small);
     line-height: var(--lh-small);
     color: var(--muted);
-  }
-}
-
-/* ---------- Help right after a fight (/plan/now, and the page after paying) ---------- */
-/* One screen at a time, in the plan's card. Like apps that time a break, the time left is the biggest thing
-   on its screen, with little around it. Behind the 20 minutes, rings breathe at the pace of the tip under
-   them: in for four, out for six. Parts and questions show where they are with a row of dots. */
-@layer components {
-  /* The back link and the card sit in the middle of the screen, not at the top of an empty one. */
-  .help-page {
-    gap: 1rem;
-    min-height: calc(100dvh - var(--nav-h));
-    align-content: center;
-    align-content: safe center;
-    padding-block: 2rem;
-  }
-  .help {
-    display: grid;
-    gap: 0.75rem;
-  }
-  .help-back {
-    justify-self: start;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.375rem;
-    min-height: 2.75rem;
-    padding: 0;
-    border: 0;
-    background: none;
-    color: var(--slate);
-    font: inherit;
-    font-weight: 600;
-    text-decoration: none;
-    cursor: pointer;
-    touch-action: manipulation;
-  }
-  .help-back:hover {
-    text-decoration: underline;
-    text-underline-offset: 0.2em;
-  }
-  .help-back svg {
-    width: 1.125rem;
-    height: 1.125rem;
-    fill: none;
-    stroke: currentColor;
-    stroke-width: 2;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-  }
-  .help-card {
-    gap: 1.125rem;
-  }
-  .help-title {
-    font-family: var(--stack-display);
-    font-size: clamp(1.925rem, 1.595rem + 1.54vw, 2.75rem);
-    font-weight: 400;
-    line-height: 1.12;
-    letter-spacing: -0.005em;
-    color: var(--slate);
-    text-wrap: balance;
-  }
-  .help-title:focus {
-    outline: none;
-  }
-  .help-subtitle {
-    margin-top: 0.5rem;
-    font-family: var(--stack-display);
-    font-size: var(--fs-title);
-    font-weight: 400;
-    line-height: var(--lh-title);
-    letter-spacing: var(--tr-title);
-    color: var(--ink);
-    text-wrap: balance;
-  }
-  .help-small {
-    font-size: var(--fs-small);
-    line-height: var(--lh-small);
-    color: var(--muted);
-    text-wrap: pretty;
-  }
-  .help-unsafe a {
-    color: var(--slate);
-    font-weight: 600;
-    text-decoration: underline;
-    text-underline-offset: 0.2em;
-    white-space: nowrap;
-  }
-  .help-half {
-    color: var(--ink);
-    text-wrap: pretty;
-  }
-  .help-list {
-    display: grid;
-    gap: 0.5rem;
-    padding-left: 1.25rem;
-    list-style: disc;
-    color: var(--ink);
-    text-wrap: pretty;
-  }
-  .help-list li::marker {
-    color: var(--slate);
-  }
-  /* Answers and buttons here can run long, so they take the whole width and wrap on a phone. */
-  .help-wide,
-  .help-actions .btn,
-  .help-nav .btn,
-  .help-box .btn,
-  .plan-help-link {
-    white-space: normal;
-    text-align: center;
-  }
-  .help-wide,
-  .help-actions .btn {
-    width: 100%;
-  }
-  .help-actions {
-    display: grid;
-    gap: 0.75rem;
-  }
-  .help-nav {
-    display: grid;
-    grid-template-columns: 1fr 2fr;
-    gap: 0.75rem;
-  }
-  .help-aside {
-    justify-self: start;
-  }
-  .help-links {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    gap: 0 1.5rem;
-    padding-top: 0.25rem;
-    border-top: 1px solid var(--line);
-  }
-
-  /* The 20 minutes */
-  .help-timer {
-    position: relative;
-    isolation: isolate;
-    display: grid;
-    place-items: center;
-    justify-self: center;
-    width: min(100%, 17rem);
-    aspect-ratio: 1;
-    margin-block: 0.25rem;
-  }
-  /* The face stays still, so the time never moves under the eye. */
-  .help-timer::before {
-    content: "";
-    position: absolute;
-    inset: 13%;
-    z-index: 1;
-    border-radius: 50%;
-    background: var(--off-white);
-    box-shadow: 0 0 0 1px var(--line);
-  }
-  .help-breath,
-  .help-breath::before {
-    position: absolute;
-    border-radius: 50%;
-    background: var(--slate-wash);
-  }
-  .help-breath {
-    inset: 0;
-    animation: help-breathe 10s ease-in-out infinite;
-  }
-  .help-breath::before {
-    content: "";
-    inset: 6%;
-  }
-  @keyframes help-breathe {
-    0%,
-    100% {
-      transform: scale(0.86);
-    }
-    40% {
-      transform: scale(1);
-    }
-  }
-  .help-time {
-    position: relative;
-    z-index: 2;
-    display: grid;
-    justify-items: center;
-    font-size: var(--fs-body);
-    font-weight: 600;
-    color: var(--muted);
-  }
-  .help-time-num,
-  .help-time-part {
-    font-family: var(--stack-display);
-    font-weight: 400;
-    line-height: 1;
-    letter-spacing: -0.01em;
-    font-variant-numeric: tabular-nums;
-    color: var(--slate);
-  }
-  .help-time-num {
-    font-size: clamp(3rem, 2.6rem + 2vw, 3.75rem);
-  }
-
-  /* A part of the 10 minute repair */
-  .help-step {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-between;
-    gap: 0.5rem 1rem;
-  }
-  .help-step-label {
-    font-size: var(--fs-small);
-    font-weight: 700;
-    letter-spacing: var(--tr-micro);
-    color: var(--ink);
-  }
-  .help-dots {
-    display: flex;
-    gap: 0.375rem;
-    margin: 0;
-    padding: 0;
-    list-style: none;
-  }
-  .help-dots li {
-    width: 0.5rem;
-    height: 0.5rem;
-    border-radius: 50%;
-    background: var(--line-strong);
-  }
-  .help-dots li[data-on] {
-    background: var(--slate);
-  }
-  .help-who {
-    justify-self: start;
-    padding: 0.3rem 0.75rem;
-    border-radius: 999px;
-    background: var(--slate-wash);
-    color: var(--slate);
-    font-size: var(--fs-small);
-    font-weight: 700;
-  }
-  .help-part-timer {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-between;
-    gap: 0.75rem 1rem;
-    padding: 0.75rem 0.75rem 0.75rem 1.25rem;
-    border-radius: 1.25rem;
-    background: var(--tint);
-  }
-  .help-time-part {
-    font-size: 2.25rem;
-  }
-  .help-part-timer .btn svg {
-    fill: currentColor;
-    stroke: none;
-  }
-  .help-agree {
-    display: grid;
-    gap: 0.75rem;
-  }
-
-  /* Looking back on your own */
-  .help-feelings {
-    margin: 0;
-  }
-  .help-answer {
-    min-height: 6rem;
-    overflow: hidden;
-    resize: none;
-  }
-  .help-notes {
-    display: grid;
-    gap: 1rem;
-    margin: 0;
-    padding: 1rem 1.125rem;
-    border-radius: 1rem;
-    background: var(--tint);
-  }
-  .help-notes dt {
-    font-size: var(--fs-micro);
-    font-weight: 700;
-    letter-spacing: var(--tr-micro);
-    color: var(--slate);
-  }
-  .help-notes dd {
-    margin: 0.25rem 0 0;
-    color: var(--ink);
-    white-space: pre-line;
-    text-wrap: pretty;
-  }
-  .help-copy {
-    justify-self: start;
-  }
-
-  /* At the top of the plan */
-  .help-box {
-    display: grid;
-    gap: 1rem;
-    padding: 1.25rem 1.25rem 1.25rem 1.5rem;
-    border-radius: var(--r-card);
-    background: var(--tint);
-    box-shadow: 0 0 0 1px var(--line);
-  }
-  .help-box .btn {
-    width: 100%;
-  }
-  .help-box-title {
-    font-family: var(--stack-display);
-    font-size: var(--fs-title);
-    font-weight: 400;
-    line-height: var(--lh-title);
-    letter-spacing: var(--tr-title);
-    color: var(--slate);
-    text-wrap: balance;
-  }
-  .help-box-text {
-    margin-top: 0.25rem;
-    color: var(--ink);
-    text-wrap: pretty;
-  }
-  .help-box-actions {
-    display: grid;
-    justify-items: center;
-    gap: 0.25rem;
-  }
-  @media (min-width: 36rem) {
-    .help-box {
-      grid-template-columns: 1fr auto;
-      align-items: center;
-      gap: 1rem 1.5rem;
-    }
-    .help-box .btn {
-      width: auto;
-    }
-  }
-  .plan-help-link {
-    justify-self: start;
-    margin-top: 0.25rem;
-  }
-
-  /* Right after paying */
-  .page-eyebrow {
-    font-size: var(--fs-lead);
-    font-weight: 600;
-    color: var(--ink);
-  }
-}
-
-/* ---------- Their Couple Standard (/plan/standard) ---------- */
-/* The outcome they paid for, so it reads like a document of their own: the brand's mark, their names, then
-   one card per part with a line for each thing they agree on. Pending items work like requests in other
-   apps: a quiet pill for whoever is waiting, and one filled button for whoever has to answer. */
-@layer components {
-  .plan-standard {
-    display: grid;
-    justify-items: start;
-    gap: 0.625rem;
-    padding: clamp(1.25rem, 1rem + 1vw, 1.75rem);
-    border-radius: var(--r-card);
-    background: var(--off-white);
-    box-shadow:
-      0 0 0 1px var(--line),
-      var(--shadow-1);
-  }
-  .plan-standard-mark,
-  .standard-mark {
-    width: 2.5rem;
-    height: auto;
-    color: var(--slate);
-  }
-  .plan-standard-title {
-    font-family: var(--stack-display);
-    font-size: var(--fs-title);
-    font-weight: 400;
-    line-height: var(--lh-title);
-    letter-spacing: var(--tr-title);
-    color: var(--slate);
-  }
-  .plan-standard-text {
-    color: var(--ink);
-    text-wrap: pretty;
-  }
-  .plan-standard-open {
-    margin-top: 0.25rem;
-    max-width: 100%;
-    white-space: normal;
-    text-align: center;
-  }
-  .plan-today .plan-standard-open {
-    justify-self: start;
-  }
-
-  .standard-page {
-    gap: 1rem;
-  }
-  .standard {
-    display: grid;
-    gap: 1.25rem;
-  }
-  .standard-head {
-    display: grid;
-    justify-items: start;
-    gap: 0.5rem;
-    margin-bottom: 0.25rem;
-  }
-  .standard-title {
-    font-family: var(--stack-display);
-    font-size: clamp(2.2rem, 1.76rem + 2.2vw, 3.163rem);
-    font-weight: 400;
-    line-height: 1.06;
-    letter-spacing: var(--tr-display);
-    color: var(--slate);
-    text-wrap: balance;
-  }
-  .standard-intro {
-    font-size: var(--fs-lead);
-    line-height: var(--lh-lead);
-    letter-spacing: var(--tr-lead);
-    color: var(--ink);
-    text-wrap: pretty;
-  }
-  .standard-invite,
-  .standard-private,
-  .standard-part-text {
-    font-size: var(--fs-small);
-    line-height: var(--lh-small);
-    color: var(--muted);
-    text-wrap: pretty;
-  }
-  .standard-part {
-    display: grid;
-    gap: 0.75rem;
-    padding: clamp(1.25rem, 1rem + 1vw, 1.75rem);
-    border-radius: var(--r-card);
-    background: var(--off-white);
-    box-shadow:
-      0 0 0 1px var(--line),
-      var(--shadow-1);
-  }
-  .standard-part-title {
-    font-family: var(--stack-display);
-    font-size: var(--fs-title);
-    font-weight: 400;
-    line-height: var(--lh-title);
-    letter-spacing: var(--tr-title);
-    color: var(--slate);
-    text-wrap: balance;
-  }
-  .standard-heard {
-    margin: 0;
-  }
-  .standard-lines {
-    display: grid;
-  }
-  .standard-line {
-    display: grid;
-    gap: 0.5rem;
-    padding-block: 1rem;
-    border-top: 1px solid var(--line);
-  }
-  .standard-line:first-child {
-    padding-top: 0.25rem;
-    border-top: 0;
-  }
-  .standard-line:last-child {
-    padding-bottom: 0;
-  }
-  .standard-label {
-    font-size: var(--fs-micro);
-    font-weight: 700;
-    letter-spacing: var(--tr-micro);
-    color: var(--slate);
-  }
-  .standard-text {
-    font-size: var(--fs-lead);
-    line-height: var(--lh-lead);
-    letter-spacing: var(--tr-lead);
-    color: var(--ink);
-    text-wrap: pretty;
-  }
-  .standard-hint {
-    color: var(--muted);
-    text-wrap: pretty;
-  }
-  .standard-status {
-    justify-self: start;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.375rem;
-    padding: 0.3rem 0.75rem;
-    border-radius: 999px;
-    background: var(--tint);
-    color: var(--muted);
-    font-size: var(--fs-small);
-    font-weight: 700;
-  }
-  .standard-status[data-status="suggested"] {
-    color: var(--ink);
-  }
-  .standard-status[data-status="agreed"] {
-    background: var(--slate-wash);
-    color: var(--slate);
-  }
-  .standard-status svg {
-    width: 1rem;
-    height: 1rem;
-    fill: none;
-    stroke: currentColor;
-    stroke-width: 2.5;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-  }
-  .standard-actions {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 0.5rem 1.25rem;
-  }
-  .standard-actions .btn,
-  .standard-write {
-    white-space: normal;
-    text-align: center;
-  }
-  .standard-write {
-    justify-self: start;
-  }
-  .standard-edit {
-    display: grid;
-    gap: 0.5rem;
-  }
-}
-
-/* ---------- The check ins (/plan/check-in) ---------- */
-/* A short ask from us, so the card on the plan is quiet like the help box: a tinted note with one filled
-   button and a plain Not now. The questions look and move exactly like the quiz's. */
-@layer components {
-  .plan-checkin {
-    display: grid;
-    justify-items: start;
-    gap: 0.5rem;
-    padding: 1.25rem 1.25rem 1.25rem 1.5rem;
-    border-radius: var(--r-card);
-    background: var(--tint);
-    box-shadow: 0 0 0 1px var(--line);
-  }
-  .plan-checkin-title {
-    font-family: var(--stack-display);
-    font-size: var(--fs-title);
-    font-weight: 400;
-    line-height: var(--lh-title);
-    letter-spacing: var(--tr-title);
-    color: var(--slate);
-    text-wrap: balance;
-  }
-  .plan-checkin-text {
-    color: var(--ink);
-    text-wrap: pretty;
-  }
-  .plan-checkin-actions {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 0.5rem 1.5rem;
-    margin-top: 0.5rem;
-  }
-  .plan-checkin-actions .btn {
-    white-space: normal;
-    text-align: center;
-  }
-
-  .checkin-page {
-    gap: 1rem;
-  }
-  .checkin {
-    display: grid;
-    gap: 0.75rem;
-  }
-  /* Back and the progress line on one row; the arrow's glyph lines up with the text below. */
-  .checkin-head {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    min-height: 3rem;
-  }
-  .checkin-head .quiz-back {
-    flex: none;
-    margin-left: -0.6875rem;
-  }
-  .checkin-progress {
-    flex: 1;
-    height: 5px;
-    border-radius: 4px;
-    background: var(--line);
-    overflow: hidden;
-  }
-  .checkin-progress span {
-    display: block;
-    height: 100%;
-    border-radius: inherit;
-    background: var(--slate);
-    transform-origin: left;
-    transition: transform var(--dur-spring) var(--ease-spring);
-  }
-  .checkin-break {
-    flex-basis: 100%;
-    height: 0.25rem;
-  }
-  /* The tick under what they'd tell another couple. Left unticked; the whole line is the target. */
-  .checkin-consent {
-    display: flex;
-    align-items: flex-start;
-    gap: 0.75rem;
-    min-height: 2.75rem;
-    padding-block: 0.5rem;
-    color: var(--ink);
-    font-size: var(--fs-body);
-    line-height: var(--lh-body);
-    cursor: pointer;
-    text-wrap: pretty;
-  }
-  .checkin-consent input {
-    flex: none;
-    width: 1.375rem;
-    height: 1.375rem;
-    margin: calc((var(--lh-body) * 1em - 1.375rem) / 2) 0 0;
-    accent-color: var(--slate);
-    cursor: pointer;
-  }
-  .checkin-done {
-    display: grid;
-    gap: 1rem;
-    padding-top: 0.5rem;
-  }
-  .checkin-done .quiz-hint {
-    margin-top: 0;
-  }
-  .checkin-back {
-    justify-self: start;
-    margin-top: 0.5rem;
-    white-space: normal;
-    text-align: center;
-  }
-  .checkin-done .help-box {
-    margin-top: 1.5rem;
   }
 }
 
@@ -4982,30 +4012,20 @@
   .quiz-topic:not([data-on]),
   .quiz-field input,
   .quiz-story,
-  .quiz-heard,
   .paywall,
   .plan-today,
-  .plan-earlier,
-  .plan-check-form textarea,
-  .plan-review,
   .plan-tool,
   .plan-say textarea,
-  .plan-tab:not([aria-pressed="true"]),
-  .plan-standard,
-  .standard-part {
+  .plan-tab:not([aria-pressed="true"]) {
     background: var(--frost);
     -webkit-backdrop-filter: blur(22px) saturate(150%);
     backdrop-filter: blur(22px) saturate(150%);
   }
   .quiz-choice,
   .quiz-topic:not([data-on]),
-  .quiz-heard,
   .paywall,
   .plan-today,
-  .plan-tool,
-  .plan-review,
-  .plan-standard,
-  .standard-part {
+  .plan-tool {
     box-shadow:
       0 0 0 1px var(--frost-edge),
       var(--frost-shadow);
@@ -5014,16 +4034,9 @@
     background: var(--slate-wash-hover);
   }
   .plan-script,
-  .plan-tip,
   .plan-try,
-  .plan-moment,
   .quiz-built,
-  .page-note,
-  .plan-review-suggestion,
-  .help-box,
-  .help-part-timer,
-  .help-notes,
-  .plan-checkin {
+  .page-note {
     background: var(--frost-tint);
     -webkit-backdrop-filter: blur(16px);
     backdrop-filter: blur(16px);
@@ -5264,10 +4277,6 @@
   .quiz-step {
     --quiz-from: 0;
   }
-  /* The rings behind the 20 minutes hold still; the tip under them still gives the pace. */
-  .help-breath {
-    animation: none;
-  }
   .quiz-spinner {
     animation: quiz-pulse 1.6s ease-in-out infinite alternate;
   }
@@ -5276,7 +4285,6 @@
     transform: none;
   }
   .quiz-progress span,
-  .checkin-progress span,
   .quiz-tick svg,
   .bloom {
     transition-duration: 0.01ms;
@@ -5306,32 +4314,19 @@
   .quiz-topic:not([data-on]),
   .quiz-field input,
   .quiz-story,
-  .quiz-heard,
   .paywall,
   .plan-today,
-  .plan-earlier,
-  .plan-check-form textarea,
-  .plan-review,
   .plan-tool,
   .plan-say textarea,
-  .plan-tab:not([aria-pressed="true"]),
-  .plan-standard,
-  .standard-part {
+  .plan-tab:not([aria-pressed="true"]) {
     background: var(--off-white);
     -webkit-backdrop-filter: none;
     backdrop-filter: none;
   }
   .plan-script,
-  .plan-tip,
   .plan-try,
-  .plan-moment,
   .quiz-built,
-  .page-note,
-  .plan-review-suggestion,
-  .help-box,
-  .help-part-timer,
-  .help-notes,
-  .plan-checkin {
+  .page-note {
     background: var(--tint);
     -webkit-backdrop-filter: none;
     backdrop-filter: none;
@@ -5342,16 +4337,10 @@
   .quiz-topic:not([data-on]),
   .quiz-field input,
   .quiz-story,
-  .quiz-heard,
   .paywall,
   .plan-today,
-  .plan-earlier,
-  .plan-check-form textarea,
   .plan-tool,
-  .plan-say textarea,
-  .plan-review,
-  .plan-standard,
-  .standard-part {
+  .plan-say textarea {
     background: var(--off-white);
   }
 }
@@ -5387,7 +4376,6 @@
     background: CanvasText;
   }
   .btn,
-  .safety-exit,
   .review,
   .ask,
   .quiz-choice,

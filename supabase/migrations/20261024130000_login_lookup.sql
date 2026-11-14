@@ -1,4 +1,4 @@
--- Worth Her Time, step 2: finds the login for an email, so the email with her plan's link can be sent to a
+-- Tally, step 2: finds the login for an email, so the email with her plan's link can be sent to a
 -- customer who already has a login (a second purchase, "send it again", or the Open your plan page). It only
 -- reads. Only the server, with the secret key, may call it. Safe to run again.
 create or replace function public.login_id_for_email(p_email text)

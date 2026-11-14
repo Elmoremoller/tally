@@ -1,8 +1,8 @@
 <!--
   Supabase: Authentication, then Emails, then Magic Link. Subject: Your plan is ready
   Tally keeps each buyer's private plan link on her login (user_metadata.plan_url), so her email
-  opens her plan directly and keeps working. Anyone without one, like The Couple Standard's customers, gets
-  the one time sign in link as before. A mistake in this template makes Supabase fall back to its default.
+  opens her plan directly and keeps working. Anyone without one gets the one time sign in link.
+  A mistake in this template makes Supabase fall back to its default.
 -->
 {{ if .Data.plan_url }}
 <h2>Your plan is ready</h2>
