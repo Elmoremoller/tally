@@ -58,5 +58,5 @@ Restart `npm run dev` after changing `.env.local`, then:
 3. In Stripe, open Developers, then Webhooks, and add an endpoint: `https://your-address/api/stripe/webhook`, listening for `checkout.session.completed` and `checkout.session.async_payment_succeeded`. Copy its Signing secret (`whsec_`) into `STRIPE_WEBHOOK_SECRET` in Vercel.
 4. In Supabase, change the Site URL and Redirect URLs to your real address.
 5. Make sure the email service is connected, and listed on the privacy page in `lib/legal.ts`.
-6. Fill in the blanks at the top of `lib/legal.ts`, confirm the refund line in `lib/offer.ts` (still marked DRAFT), and make sure the support inbox in `lib/offer.ts` receives email. Have a lawyer check the privacy and terms pages.
+6. Fill in the blanks at the top of `lib/legal.ts`, and make sure the support inbox in `lib/offer.ts` receives email. Have a lawyer check the privacy and terms pages.
 7. If you add analytics, an ad pixel or another company that handles people's data, change the privacy page first.

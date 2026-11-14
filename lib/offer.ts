@@ -11,7 +11,7 @@ export const offer = {
   supportEmail: "support@tallyher.com",
   /** In cents, charged through Stripe Checkout. Paid once, no subscription. */
   price: { cents: 1999, currency: "usd" },
-  /** On the paywall, in the landing page's questions and on the terms page. DRAFT until Karl confirms it. */
+  /** On the paywall, in the landing page's questions and on the terms page. Approved 2026-11-14. */
   refund: "If your first setup does not work, you get your money back.",
   /** Under the hero headline. */
   lead: "Most of what keeps you late is busywork nobody notices. Tally builds you a plan to hand it to AI.",
