@@ -37,12 +37,17 @@ async function SavedResult() {
   const week = sessionId ? await loadWeek(sessionId).catch(() => null) : null;
   const done = week?.session && week.session.status !== "started" && week.tasks.length;
   if (!week || !done) redirect("/start");
-  // The beginner quiz's result is her first win.
+  // The beginner quiz's result is her first win, with what else it showed her. Answers saved before Phase 2
+  // have no `shown`, and come back as they first did.
   const beginner = week.intake?.beginner;
   if (beginner) {
+    const shown = beginner.shown;
     return (
-      <FirstWinResult firstWin={beginner.firstWin} ideas={beginner.ideas} restricted={week.intake?.ai_policy === "restricted"}>
-        <BeginnerPaywall />
+      <FirstWinResult
+        result={{ firstWin: beginner.firstWin, ideas: beginner.ideas, ...shown }}
+        restricted={week.intake?.ai_policy === "restricted"}
+      >
+        <BeginnerPaywall setups={shown?.setups} tool={shown?.tool} />
       </FirstWinResult>
     );
   }

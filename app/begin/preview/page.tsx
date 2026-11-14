@@ -4,6 +4,7 @@ import { Suspense } from "react";
 import { Backdrop } from "@/components/Backdrop";
 import { BeginnerPaywall, FirstWinResult } from "@/components/beginner/FirstWinResult";
 import { QuizHeader } from "@/components/quiz/QuizHeader";
+import { secondTask, setupsFor } from "@/lib/beginner/free-result";
 import { beginnerSampleFor, beginnerSamples } from "@/lib/beginner/samples";
 import { offer } from "@/lib/offer";
 import { previewAllowed } from "@/lib/preview";
@@ -33,10 +34,18 @@ export default function Page({ searchParams }: PageProps<"/begin/preview">) {
 async function Preview({ searchParams }: { searchParams: PageProps<"/begin/preview">["searchParams"] }) {
   const { sample } = await searchParams;
   if (!previewAllowed) notFound();
-  const { firstWin, ideas, plan } = beginnerSampleFor(sample) ?? beginnerSamples.dental;
+  const { firstWin, free, plan } = beginnerSampleFor(sample) ?? beginnerSamples.dental;
+  // Her setups are built as on the live result, from her path, her tool and her own tasks.
+  const setups = setupsFor({
+    track: free.track,
+    tool: plan.tool,
+    top: firstWin.task,
+    second: secondTask(free.map, firstWin.task),
+    device: free.device,
+  });
   return (
-    <FirstWinResult firstWin={firstWin} ideas={ideas} restricted={plan.policy === "restricted"}>
-      <BeginnerPaywall />
+    <FirstWinResult result={{ firstWin, firstStep: free.firstStep, map: free.map, tool: plan.tool }} restricted={plan.policy === "restricted"}>
+      <BeginnerPaywall setups={setups} tool={plan.tool} />
     </FirstWinResult>
   );
 }

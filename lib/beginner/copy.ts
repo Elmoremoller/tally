@@ -472,9 +472,21 @@ export const FALLBACK_JOB_READ: JobRead = {
 
 // The free result and the paywall
 
+// Phase 2 of docs/DIRECTION.md: the free result in four parts, her finished result, her first step, the map of
+// her week and the offer. Every line written for it on 2026-11-14 is a DRAFT until Karl approves it.
+
 export const firstWinCopy = {
   eyebrow: "Your first AI win",
-  made: "AI wrote that from what you told us. Your plan shows you how to make it yourself, in your own words, in about 15 minutes.",
+  /** Under her finished result. The line before it promised a time, which section 5 rules out. DRAFT */
+  made: "AI wrote that from what you told us. Copy it and use it today.",
+  copy: "Copy", // DRAFT
+  copied: "Copied", // DRAFT
+  /** Her first step: the message that makes the next one. DRAFT */
+  stepTitle: "Make the next one yourself",
+  stepLead: (tool: string) => `Paste this into ${tool}. It is step 1 of your path.`, // DRAFT
+  /** The map of her week. DRAFT */
+  mapTitle: "Your week with AI",
+  /** Only for answers saved before Phase 2, which have idea titles in place of a first step and a map. */
   also: "Also in your plan",
   more: (count: number) => `${count} more`,
   /** When her company restricts AI. DRAFT */
@@ -482,10 +494,14 @@ export const firstWinCopy = {
     "Your company restricts AI, so your plan starts with practice on your own phone or computer, and gives you the message to ask what’s allowed.",
 };
 
-/** DRAFT: the paywall's headline for this version. The price, button and fine print are the first version's. */
+/** The paywall's headline and her offer. The price, button and fine print are the first version's. DRAFT */
 export const beginnerPaywall = {
-  title: "Get your plan and make the next one yourself.",
-  lead: "Here’s what’s inside, built from your answers.",
+  title: "Get the rest of your path.", // DRAFT
+  lead: "Your first setups, one step at a time.", // DRAFT
+  /** Only for answers saved before Phase 2, shown with the plan's five parts. */
+  legacyLead: "Here’s what’s inside, built from your answers.",
+  /** Her tool, and whether its free plan is enough. Phase 3 checks this against the tool's own help pages. DRAFT */
+  toolLine: (tool: string) => `In ${tool}. The free plan is enough to start.`,
 };
 
 /** What people see on Stripe's page and their receipt. DRAFT */

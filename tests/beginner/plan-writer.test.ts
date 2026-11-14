@@ -91,10 +91,6 @@ const raw = (extra: ReturnType<typeof idea>[] = []) => ({
   },
 });
 
-test("the prompt version is v5", () => {
-  assert.equal(BEGINNER_PLAN_VERSION, "beginner-plan-v5");
-});
-
 test("nearSame matches titles that differ by one word, ignoring small words and plurals", () => {
   assert.equal(nearSame("Instagram captions for new arrivals", "Instagram posts for new arrivals"), true);
   assert.equal(nearSame("Window display theme ideas", "Vendor email about a late order"), false);
@@ -365,4 +361,21 @@ test("the prompt keeps her tools accurate and at her level", () => {
     "Use it most days",
   ])
     assert.ok(BEGINNER_PLAN_SYSTEM.includes(level), level);
+});
+
+test("the prompt version is v6", () => {
+  assert.equal(BEGINNER_PLAN_VERSION, "beginner-plan-v6");
+});
+
+test("the first step her free result gave her is her plan's first win prompt, word for word", () => {
+  const shownFirstStep = "I run a small shop. Write a short reply to a customer asking about [what she asked]. Warm and plain.";
+  const plan = checkBeginnerPlan(raw(), input({ shownFirstStep }));
+  assert.equal(plan?.firstWin.prompt, shownFirstStep);
+  assert.ok(describeBeginnerPlan(input({ shownFirstStep })).includes(`<first_step>\n${shownFirstStep}\n</first_step>`));
+});
+
+test("answers saved before the first step keep the prompt the model wrote", () => {
+  const plan = checkBeginnerPlan(raw(), input());
+  assert.equal(plan?.firstWin.prompt, raw().first_win.prompt);
+  assert.ok(describeBeginnerPlan(input()).includes("She was given no first step message."));
 });

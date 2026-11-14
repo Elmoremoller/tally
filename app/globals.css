@@ -5473,6 +5473,79 @@
     margin-top: 1.25rem;
     text-align: left;
   }
+  /* The free result in four parts (docs/DIRECTION.md, section 3): each Copy button sits under its words, full
+     width on a phone so it is an easy thumb target, and the first step and the map read as their own parts. */
+  .win-copy {
+    width: 100%;
+    max-width: 34rem;
+    margin-top: 1rem;
+  }
+  .win-made {
+    margin-top: 1.5rem;
+  }
+  .win-part {
+    display: grid;
+    justify-items: center;
+    width: 100%;
+    max-width: 34rem;
+    margin-top: clamp(2.75rem, 2rem + 3vw, 4rem);
+  }
+  .win-part-title {
+    font-family: var(--stack-display);
+    font-size: var(--fs-title);
+    font-weight: 400;
+    line-height: var(--lh-title);
+    letter-spacing: var(--tr-title);
+    color: var(--ink);
+    text-wrap: balance;
+  }
+  .win-part-lead {
+    margin-top: 0.625rem;
+    color: var(--muted);
+    text-wrap: pretty;
+  }
+  .win-step {
+    margin-top: 1.25rem;
+    font-size: var(--fs-body);
+    line-height: 1.55;
+    letter-spacing: normal;
+  }
+  .win-map {
+    display: grid;
+    gap: 0.625rem;
+    width: 100%;
+    margin: 1.25rem 0 0;
+    padding: 0;
+    list-style: none;
+    text-align: left;
+  }
+  .win-map li {
+    display: grid;
+    gap: 0.25rem;
+    padding: 1rem 1.125rem;
+    border-radius: 1.25rem;
+    background: var(--off-white);
+    box-shadow: 0 0 0 1px var(--line);
+    text-wrap: pretty;
+  }
+  .win-map strong {
+    font-weight: 700;
+    color: var(--ink);
+  }
+  .win-map span {
+    font-size: var(--fs-small);
+    line-height: var(--lh-small);
+    color: var(--muted);
+  }
+  .win-setups .peek-card {
+    text-align: left;
+  }
+  .win-tool {
+    margin-top: 1rem;
+    font-size: var(--fs-small);
+    line-height: var(--lh-small);
+    color: var(--muted);
+  }
   .win-example {
     padding: 0.875rem 1rem;
     border-radius: 1rem;

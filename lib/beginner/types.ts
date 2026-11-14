@@ -102,6 +102,26 @@ export function workLine(input: { worksFor: WorksFor; aiPolicy: AiPolicy | null;
 /** Her first win on the free result: one task from her week, already drafted. */
 export type FirstWin = { task: string; intro: string; draft: string };
 
+/**
+ * One task she named on the map of her week, with one line on what it becomes. `ai` and `private` are the
+ * task's own flags, so the setups can pick her second task.
+ */
+export type MapLine = { task: string; line: string; ai: boolean; private: boolean };
+
+/**
+ * Everything the free result shows, in its order (docs/DIRECTION.md, section 3): her finished result, the
+ * message that makes the next one, the map of her week, and the offer with her setups, her tool and the
+ * track that decided them.
+ */
+export type FreeResult = {
+  firstWin: FirstWin;
+  firstStep: string;
+  map: MapLine[];
+  setups: string[];
+  tool: ChatTool;
+  track: Track;
+};
+
 /** What the beginner quiz keeps beside her answers, in intake.beginner. */
 export type BeginnerIntake = {
   v: 2;
@@ -114,10 +134,15 @@ export type BeginnerIntake = {
   firstWin: FirstWin;
   /** How often she does her top task, when she tapped it. Absent on answers saved before 2026-11-14. */
   often?: Often | null;
-  /** Titles of other things AI can do in her job, shown under her first win. */
+  /** Titles of other things AI can do in her job, shown under her first win. Empty from beginner-intake-v5 on. */
   ideas: string[];
   /** Her tasks that need private details about other people or the company. */
   privateTasks: string[];
+  /**
+   * What her free result showed beyond her first win, saved so her paid path can be held to it. Absent on
+   * answers saved before beginner-intake-v5 (Phase 2 of docs/DIRECTION.md).
+   */
+  shown?: { firstStep: string; map: MapLine[]; setups: string[]; tool: ChatTool; track: Track };
 };
 
 /** Her plan holds at least this many ideas, and her free result shows the first few titles of them. */
