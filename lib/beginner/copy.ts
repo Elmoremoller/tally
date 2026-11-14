@@ -472,20 +472,49 @@ export const FALLBACK_JOB_READ: JobRead = {
 
 // The free result and the paywall
 
+// Phase 2 of docs/DIRECTION.md: the free result opens with the map of her week, with her finished result behind
+// See it in its top row, then the offer. Karl set the layout on 2026-11-14; every line here is a DRAFT until he
+// approves it, apart from the softer heading, which is his own words.
+
 export const firstWinCopy = {
-  eyebrow: "Your first AI win",
-  made: "AI wrote that from what you told us. Your plan shows you how to make it yourself, in your own words, in about 15 minutes.",
-  also: "Also in your plan",
-  more: (count: number) => `${count} more`,
+  eyebrow: "Your week with AI", // DRAFT
+  /** The heading over the map: how many of her tasks AI can help with. DRAFT */
+  heading: (helps: number, total: number) =>
+    total === 2 && helps === 2
+      ? "AI can help with both of your tasks"
+      : helps === total
+        ? `AI can help with all ${total} of your tasks`
+        : `AI can help with ${helps} of your ${total} tasks`,
+  /** In place of the count when AI fits fewer than half of her tasks, or she named only one. Karl, 2026-11-14 */
+  fewHeading: "Here is where AI fits in your week",
+  today: "Today", // DRAFT
+  withPath: "With your path", // DRAFT
+  seeIt: "See it", // DRAFT
+  hideIt: "Hide it", // DRAFT
+  /** Under her finished result, inside See it. The line before it promised a time, which section 5 rules out. DRAFT */
+  made: "AI wrote that from what you told us. Copy it and use it today.",
+  copy: "Copy", // DRAFT
+  copied: "Copied", // DRAFT
   /** When her company restricts AI. DRAFT */
   restricted:
     "Your company restricts AI, so your plan starts with practice on your own phone or computer, and gives you the message to ask what’s allowed.",
+  /** Only for answers saved before Phase 2, which show her first win on top and idea titles under it. */
+  legacyEyebrow: "Your first AI win",
+  also: "Also in your plan",
+  more: (count: number) => `${count} more`,
 };
 
-/** DRAFT: the paywall's headline for this version. The price, button and fine print are the first version's. */
+/** The paywall's headline and her offer. The price, button and fine print are the first version's. DRAFT */
 export const beginnerPaywall = {
-  title: "Get your plan and make the next one yourself.",
-  lead: "Here’s what’s inside, built from your answers.",
+  title: "Get the rest of your path.", // DRAFT
+  lead: "Your first setups, one step at a time.", // DRAFT
+  /** Only for answers saved before Phase 2, shown with the plan's five parts. */
+  legacyLead: "Here’s what’s inside, built from your answers.",
+  /**
+   * Her tool, and whether its free plan is enough. Hidden until Phase 4 reads it from the setup cards
+   * (lib/beginner/cards.ts), so nothing shows it today. DRAFT
+   */
+  toolLine: (tool: string) => `In ${tool}. The free plan is enough to start.`,
 };
 
 /** What people see on Stripe's page and their receipt. DRAFT */

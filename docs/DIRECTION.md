@@ -21,12 +21,13 @@ The two paths are different products. They are not the same plan in different wo
 
 ## 3. What the free result must do
 
-The free result must give real value in the first seconds, so the price feels small. It has four parts, in this order.
+The free result must give real value in the first seconds, so the price feels small. It opens with the map of her week and has three parts, in this order.
 
-1. **A finished result.** Her real example from the quiz, answered or rewritten, ready to copy and use. No more than two blanks.
-2. **A first step she can do right now.** The exact message to paste into her AI tool to make the next one herself. This is step 1 of her path, given free.
-3. **A map of her week.** Each task she named, with one line on what it becomes. For example "Vendor emails become a saved project, so every follow up takes two minutes".
-4. **An offer that names her own path.** Her first setups by name, her tool, and whether the free plan of that tool is enough.
+1. **A map of her week.** One line above it counts how many of her tasks AI can help with, like "AI can help with 3 of your 4 tasks". When AI can help with fewer than half of them, the line is "Here is where AI fits in your week" and the tasks AI can help with come first. Each task she named has two lines. "Today" says where she is with it now, using her own count from the quiz where she gave one. "With your path" says what changes for her, not the method. For a Builder it names the kind of setup, like a saved project. No promised time.
+2. **A finished result, inside the top row of the map.** Her real example from the quiz, answered or rewritten, ready to copy and use, behind a "See it" tap. No more than two blanks.
+3. **An offer that names her own path.** Her first setups by name, like "Teach Claude who you are" and "Your rescheduling texts, set up" for a Starter, or "Your Instagram posts, as a saved project" for a Builder. Whether the free plan of her tool is enough is shown only once the paid path reads it from the setup cards.
+
+The exact message she pastes to make the next one herself is written and saved with her result, but not shown. The paid path uses it as a step.
 
 Everything the free result shows must also be in the paid path.
 

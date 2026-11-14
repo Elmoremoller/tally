@@ -1,21 +1,69 @@
 import type { BeginnerPlan } from "./plan-writer";
-import type { FirstWin } from "./types";
+import type { Device } from "./quiz-copy";
+import type { FirstWin, MapLine, Track } from "./types";
 
 // Sample first wins and plans for the local previews (/begin/preview and /plan/preview?sample=dental), written
 // by the beginner intake and plan writer on 2026-11-10 for three made up women: a dental office receptionist
 // (an employer, no idea of its view on AI), a salon owner (works for herself) and a hospital nurse (AI is
-// restricted). Nothing here is shown on the live site.
+// restricted). Nothing here is shown on the live site. The free result parts (`free`, and the dental and salon
+// first wins, done from a real example) were written by hand on 2026-11-14 for Phase 2 of docs/DIRECTION.md, in
+// the shape beginner-intake-v5 returns: the dental receptionist and the nurse are Starters, the salon owner a
+// Builder. Her setups are built from them in code, as on the live result.
 
-type Sample = { firstWin: FirstWin; ideas: string[]; plan: BeginnerPlan };
+type Sample = {
+  firstWin: FirstWin;
+  ideas: string[];
+  free: { firstStep: string; map: MapLine[]; track: Track; device: Device | null };
+  plan: BeginnerPlan;
+};
 
 export const beginnerSamples: Record<"dental" | "salon" | "nurse", Sample> = {
   dental: {
     firstWin: {
-      task: "Appointment reminders",
-      intro:
-        "You said you spend time on reminder calls and texts. Here is a text you can adapt for any patient.",
+      task: "Rescheduling texts",
+      intro: "You pasted a patient’s text asking to move her cleaning. Here is your reply, ready to send.",
       draft:
-        "Hi [first name], this is a friendly reminder from [office name] about your appointment on [day] at [time]. If you need to reschedule, please call us at [phone number] at least 24 hours ahead so we can offer the time to someone else. We look forward to seeing you. Reply to this text with any questions.",
+        "Hi [first name], thanks for letting us know. Happy to move your cleaning from Tuesday. Which days and times later this week work best for you? Send me two or three and I’ll check the schedule and confirm one with you.",
+    },
+    free: {
+      firstStep:
+        "I’m a receptionist at a dental office. Patients text us to move their appointments. Write a short, warm reply I can send by text. Thank them, say we can move it, and ask which days and times work for them. Keep it under 50 words, friendly and plain, with no medical details. Here is the patient’s message: [paste the patient’s text here]",
+      map: [
+        {
+          task: "Rescheduling texts",
+          phrase: "rescheduling texts",
+          today: "You answer each one by hand, many times a day, between calls.",
+          withPath: "Every reply starts from words that already sound like your office.",
+          ai: true,
+          private: false,
+        },
+        {
+          task: "Appointment reminders",
+          phrase: "appointment reminders",
+          today: "You type a fresh reminder for each patient.",
+          withPath: "One reminder you trust, ready for every patient.",
+          ai: true,
+          private: false,
+        },
+        {
+          task: "Insurance questions",
+          phrase: "insurance questions",
+          today: "You explain the same coverage questions again and again.",
+          withPath: "Clear answers to the common questions, with no patient details in them.",
+          ai: true,
+          private: true,
+        },
+        {
+          task: "Answering phones",
+          phrase: "answering phones",
+          today: "The phone pulls you away from everything else.",
+          withPath: "Stays yours. A short script makes the common calls easier.",
+          ai: false,
+          private: false,
+        },
+      ],
+      track: "starter",
+      device: "phone",
     },
     ideas: [
       "A script for confirming appointments by phone",
@@ -148,10 +196,49 @@ export const beginnerSamples: Record<"dental" | "salon" | "nurse", Sample> = {
   salon: {
     firstWin: {
       task: "Instagram posts",
-      intro:
-        "You said you spend time on posting on Instagram. Here is one caption for your salon.",
+      intro: "You pasted your last post about balayage. Here it is rewritten, ready to post.",
       draft:
-        "Fresh color, fresh start. This week we are booking balayage and trims for [month]. Tell us your dream look in the comments or send us a DM, and we will help you find the right cut for your face and routine. Spots fill fast, so reserve yours today at [salon name] or link in bio. Book your next chair with us!",
+        "Thinking about balayage? Send us a photo of the look you love in a DM, and we’ll tell you how we’d make it work for your hair. Book your consultation through the link in bio. [booking note]",
+    },
+    free: {
+      firstStep:
+        "I own a small hair salon and post on Instagram a few times a week. Write one caption for a post about [what this post is about]. Keep it under 60 words, warm and confident, like a stylist talking to a regular. End by asking people to book through the link in bio or send a DM. At most three hashtags, and no prices or offers I haven’t given you.",
+      map: [
+        {
+          task: "Instagram posts",
+          phrase: "Instagram posts",
+          today: "You write each caption from a blank box after a long day in the chair.",
+          withPath: "A saved project holds your salon’s voice, so each caption starts from your notes.",
+          ai: true,
+          private: false,
+        },
+        {
+          task: "Booking DMs",
+          phrase: "booking DMs",
+          today: "You answer the same booking questions one by one.",
+          withPath: "Saved instructions answer the common questions in your voice, ready to send.",
+          ai: true,
+          private: false,
+        },
+        {
+          task: "Ordering stock",
+          phrase: "ordering stock",
+          today: "You work out each order from memory.",
+          withPath: "A weekly routine turns what you used into an order list to check.",
+          ai: true,
+          private: false,
+        },
+        {
+          task: "Cutting hair",
+          phrase: "cutting hair",
+          today: "This is the work you love, chair side.",
+          withPath: "Stays yours, as it should.",
+          ai: false,
+          private: false,
+        },
+      ],
+      track: "builder",
+      device: null,
     },
     ideas: [
       "Auto replies for common DM questions",
@@ -301,6 +388,46 @@ export const beginnerSamples: Record<"dental" | "salon" | "nurse", Sample> = {
         "You said you precept the new nurses. Here is a first week checklist you can adapt for them.",
       draft:
         "New nurse first week checklist\n\nDay 1: Tour the unit, meet the charge nurse, review unit policies and where supplies are kept, and set up your login and charting access.\n\nDay 2: Shadow a full shift with [preceptor name], practice a shift handoff report, and review how the floor’s medication process works.\n\nDay 3: Take on one or two patients with close guidance, and go over your documentation checklist.\n\nDay 4 and 5: Take a larger patient load step by step, ask questions after each task, and set one learning goal for next week.",
+    },
+    free: {
+      firstStep:
+        "I’m a registered nurse on a med surg floor, and I precept new nurses. Write a one week checklist for a new nurse on my unit, day by day, with three or four short items each day. Plain words, no patient details, nothing about medications or treatment. Here is what this nurse needs most: [what this nurse needs]",
+      map: [
+        {
+          task: "Precepting new nurses",
+          phrase: "plans for new nurses",
+          today: "You build each new nurse’s first week from scratch.",
+          withPath: "Every new nurse gets a clear first week plan you only adjust.",
+          ai: true,
+          private: false,
+        },
+        {
+          task: "Family calls",
+          phrase: "family calls",
+          today: "Hard calls with families take a lot out of you.",
+          withPath: "You go into hard calls with calm words ready, and no patient details in them.",
+          ai: true,
+          private: true,
+        },
+        {
+          task: "Shift handoffs",
+          phrase: "shift handoffs",
+          today: "Handoffs happen fast, with private details in every one.",
+          withPath: "Waits until you know what your hospital allows.",
+          ai: true,
+          private: true,
+        },
+        {
+          task: "Patient education",
+          phrase: "patient education",
+          today: "You teach patients at the bedside every shift.",
+          withPath: "Stays yours, since it is medical advice.",
+          ai: false,
+          private: false,
+        },
+      ],
+      track: "starter",
+      device: "computer",
     },
     ideas: [
       "Shift handoff summary template",

@@ -102,6 +102,35 @@ export function workLine(input: { worksFor: WorksFor; aiPolicy: AiPolicy | null;
 /** Her first win on the free result: one task from her week, already drafted. */
 export type FirstWin = { task: string; intro: string; draft: string };
 
+/**
+ * One task she named on the map of her week: where she is with it today, and what changes for her with her
+ * path. `phrase` is the task as it reads mid sentence, for the setup names. `ai` and `private` are the task's
+ * own flags, so the map can be ordered and the setups can pick her second task.
+ */
+export type MapLine = {
+  task: string;
+  /** What she calls it, to fit "Your ___", or null to use the task's own name. See phraseFor. */
+  phrase: string | null;
+  today: string;
+  withPath: string;
+  ai: boolean;
+  private: boolean;
+};
+
+/**
+ * Everything the free result holds (docs/DIRECTION.md, section 3): the map of her week with her finished
+ * result in its top row, and the offer with her setups, her tool and the track that decided them. The first
+ * step message is not shown; it is saved for her paid path.
+ */
+export type FreeResult = {
+  firstWin: FirstWin;
+  firstStep: string;
+  map: MapLine[];
+  setups: string[];
+  tool: ChatTool;
+  track: Track;
+};
+
 /** What the beginner quiz keeps beside her answers, in intake.beginner. */
 export type BeginnerIntake = {
   v: 2;
@@ -114,10 +143,15 @@ export type BeginnerIntake = {
   firstWin: FirstWin;
   /** How often she does her top task, when she tapped it. Absent on answers saved before 2026-11-14. */
   often?: Often | null;
-  /** Titles of other things AI can do in her job, shown under her first win. */
+  /** Titles of other things AI can do in her job, shown under her first win. Empty from beginner-intake-v5 on. */
   ideas: string[];
   /** Her tasks that need private details about other people or the company. */
   privateTasks: string[];
+  /**
+   * What her free result showed beyond her first win, saved so her paid path can be held to it. Absent on
+   * answers saved before beginner-intake-v5 (Phase 2 of docs/DIRECTION.md).
+   */
+  shown?: { firstStep: string; map: MapLine[]; setups: string[]; tool: ChatTool; track: Track };
 };
 
 /** Her plan holds at least this many ideas, and her free result shows the first few titles of them. */

@@ -23,7 +23,7 @@ import {
 // decided in code; the model writes the words.
 // Versioned like the first plan: change BEGINNER_PLAN_VERSION whenever the words of the prompt change.
 
-export const BEGINNER_PLAN_VERSION = "beginner-plan-v5";
+export const BEGINNER_PLAN_VERSION = "beginner-plan-v6";
 
 /** The shortest first win example worth showing her, the same as the intake's first win draft. */
 const EXAMPLE_MIN = 60;
@@ -46,6 +46,11 @@ export type BeginnerPlanInput = {
   firstWin: FirstWin;
   /** The idea titles her free result showed, so her plan holds them. */
   shownIdeas: string[];
+  /**
+   * The message her free result gave her as her first step (beginner-intake-v5 on), so her plan holds it word
+   * for word as her first win prompt. Null for answers saved before.
+   */
+  shownFirstStep?: string | null;
 };
 
 export type BeginnerIdea = {
@@ -102,7 +107,7 @@ your_tools: one to three short notes on tools she already uses, from the list un
 - Accuracy: name only features the tool is widely known for. Never give menu paths, button names or steps that depend on a version. When you're not sure where something is, say where to look, like "look for the AI or magic option in the editor". When an AI feature may need a paid plan, say it may. Never invent what the tool does.
 
 first_win: she saw a draft of her first win task on her free result. Now she makes it herself.
-- prompt: what she pastes to get it. Written in her voice, with her job and situation already filled in from her answers, so she changes as little as possible. Square brackets only for today's details, like [day and time]. Say the format, length and tone she needs. 40 to 110 words.
+- prompt: what she pastes to get it. When she was given a first step message on her free result, the prompt is that message, word for word, and the example and fixes fit it. Otherwise: written in her voice, with her job and situation already filled in from her answers, so she changes as little as possible. Square brackets only for today's details, like [day and time]. Say the format, length and tone she needs. 40 to 110 words.
 - example: what a good answer looks like, written out, so she can tell when she got one. 30 to 90 words. Keep the prompt's square brackets as they are, never fill one with a made up name, product, price, discount, sale, opening hours or date, and add no rule of her workplace beside them.
 - fixes: exactly three short lines she can send next when the answer is off, each at most 12 words, like "Shorter." or "Warmer, like I’m texting a regular."
 
@@ -215,6 +220,9 @@ export function describeBeginnerPlan(input: BeginnerPlanInput) {
     `Her first win task: ${input.firstWin.task}`,
     "The draft she saw on her free result:",
     `<draft>\n${fence(input.firstWin.draft)}\n</draft>`,
+    ...(input.shownFirstStep
+      ? ["The first step message she was given on her free result:", `<first_step>\n${fence(input.shownFirstStep)}\n</first_step>`]
+      : ["She was given no first step message."]),
     "",
     "Her other tasks, one idea each, using these exact names as titles:",
     ...(others.length ? others.map((t) => `- ${t.name}`) : ["(none)"]),
@@ -361,7 +369,8 @@ export function checkBeginnerPlan(raw: unknown, input: BeginnerPlanInput): Begin
   const r = (raw ?? {}) as Record<string, unknown>;
   const toolWhy = text(r.tool_why, 500);
   const w = (r.first_win ?? {}) as Record<string, unknown>;
-  const prompt = text(w.prompt, 1200);
+  // The first step her free result gave her is her prompt, word for word, whatever the model wrote.
+  const prompt = input.shownFirstStep || text(w.prompt, 1200);
   // The prompt forbids stock and urgency lines, but one can slip through, as in the intake's first win draft:
   // those sentences are taken out, and the example stays only if what is left is still long enough to use.
   const cleaned = withoutScarcity(text(w.example, 1200) ?? "");

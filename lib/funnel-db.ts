@@ -175,7 +175,7 @@ export const saveIntakeResult = (
     p_tasks: result.tasks,
   });
 
-/** The beginner version's extras beside her answers: who she works for, her first win and her idea titles. */
+/** The beginner version's extras beside her answers: who she works for, and what her free result showed. */
 export async function saveBeginner(sessionId: string, beginner: BeginnerIntake) {
   const { error } = await supabaseAdmin().from("intake").update({ beginner }).eq("session_id", sessionId);
   if (error) throw new Error(`Saving the first win failed: ${error.message}`);
@@ -317,6 +317,7 @@ export async function loadBeginnerPlanInput(plan: PlanRow): Promise<BeginnerPlan
     tasks: tasks.map((t) => ({ name: t.name, ai: t.pile === "hand_to_ai", private: beginner.privateTasks.includes(t.name) })),
     firstWin: beginner.firstWin,
     shownIdeas: beginner.ideas.slice(0, IDEAS_SHOWN),
+    shownFirstStep: beginner.shown?.firstStep ?? null,
   };
 }
 
