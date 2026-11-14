@@ -1,4 +1,4 @@
-import { useEffect, useRef, type Dispatch, type FormEvent, type RefObject, type SetStateAction } from "react";
+import { useEffect, useRef, type Dispatch, type FormEvent, type ReactNode, type RefObject, type SetStateAction } from "react";
 import { ArrowRight } from "@/components/icons";
 import { micCopy, privacyNote } from "@/lib/questions";
 import { ANSWER_MAX } from "@/lib/week";
@@ -18,6 +18,10 @@ type TextStepProps = {
   onSubmit: () => void;
   error?: string;
   headingRef: RefObject<HTMLHeadingElement | null>;
+  /** Shown between the hint and the box, like a chip that answers for her. */
+  afterHint?: ReactNode;
+  /** Shown under the box and its notes, like a one tap question on the same screen. */
+  afterBox?: ReactNode;
 };
 
 /**
@@ -27,7 +31,19 @@ type TextStepProps = {
  * them, and the box waits for Done before it can be typed in. Until the browser is really listening the box
  * asks her to wait a moment. A pause to think doesn't end it; if talking does stop for a reason, she's told why.
  */
-export function TextStep({ title, hint, placeholder, examples, value, setValue, onSubmit, error, headingRef }: TextStepProps) {
+export function TextStep({
+  title,
+  hint,
+  placeholder,
+  examples,
+  value,
+  setValue,
+  onSubmit,
+  error,
+  headingRef,
+  afterHint,
+  afterBox,
+}: TextStepProps) {
   const voice = useDictation({ value, setValue, max: ANSWER_MAX });
   const box = useRef<HTMLTextAreaElement>(null);
   const describedBy = [hint && "q-hint", examples && "q-example", voice.problem && "q-mic", "q-private"].filter(Boolean).join(" ");
@@ -51,6 +67,7 @@ export function TextStep({ title, hint, placeholder, examples, value, setValue, 
           {hint}
         </p>
       ) : null}
+      {afterHint}
       <div className="quiz-fields">
         <div className="quiz-box" data-listening={voice.listening || undefined}>
           <textarea
@@ -85,6 +102,7 @@ export function TextStep({ title, hint, placeholder, examples, value, setValue, 
         <p className="quiz-private" id="q-private">
           {privacyNote}
         </p>
+        {afterBox}
         {error ? (
           <p className="quiz-error" role="alert">
             {error}

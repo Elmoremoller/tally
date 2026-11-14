@@ -1,6 +1,7 @@
 import type { ChatTool } from "../week";
 import type { JobRead } from "./quiz";
 import type { Mark } from "./types";
+import { FALLBACK_AI_USES } from "./quiz-copy";
 
 // The beginner version's words. The landing page, the quiz questions, the free result and the seven days were
 // approved on 2026-11-10 (docs/audit/2026-11-10-beginner-draft.md). Lines marked DRAFT fill a gap and wait for
@@ -449,7 +450,7 @@ export const beginnerQuestions = {
     fallbackHint: "Things AI could help with in your job.", // DRAFT
   },
   picture: { title: "How do you picture AI helping with it?", hint: "Any guess is fine.", skip: "Skip" }, // DRAFT
-  apps: { title: "Which apps do you use every week?", hint: "Pick all that fit." }, // DRAFT
+  apps: { title: "What software do you use every week?", hint: "Pick all that fit." }, // Elmore's words, 2026-11-13
   somethingElse: { label: "Something else", placeholder: "Type it here" }, // DRAFT
   waitLine: "One moment", // DRAFT
 } as const;
@@ -464,7 +465,8 @@ export const FALLBACK_JOB_READ: JobRead = {
     { label: "Keeping records", ai: true },
   ],
   aiFallback: ["Answering messages", "Writing emails", "Planning my week", "Keeping records"],
-  apps: ["Texts", "Email", "WhatsApp", "Instagram", "Facebook", "Google Docs or Word", "Google Sheets or Excel", "Canva"],
+  apps: ["Texts", "WhatsApp", "Instagram", "Facebook", "Canva", "Google Calendar"],
+  aiUses: FALLBACK_AI_USES,
   worksFor: "unclear",
 };
 

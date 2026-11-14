@@ -50,8 +50,8 @@ const raw = () => ({
   follow_up_question: null,
 });
 
-test("the prompt version is v3", () => {
-  assert.equal(BEGINNER_INTAKE_VERSION, "beginner-intake-v3");
+test("the prompt version is v4", () => {
+  assert.equal(BEGINNER_INTAKE_VERSION, "beginner-intake-v4");
 });
 
 test("beginnerHers holds her job, every pick and typed answer, and the follow up answer, but not the titles", () => {
@@ -255,4 +255,34 @@ test("idea titles with a square bracket are dropped", () => {
   made.ideas = ["Review request texts", "A thank you note for [customer name]", "Payment reminder texts", "Job notes for your records"];
   const result = checkBeginnerIntake(made, { followUpAsked: false, hers: beginnerHers(input()) });
   assert.deepEqual(result?.ideas, ["Review request texts", "Payment reminder texts", "Job notes for your records"]);
+});
+
+test("every new screen reaches the intake: example, how often, what she has done, her question and Can you use AI", () => {
+  const qas = [
+    { id: "level", title: "Where are you with AI?", picked: ["Use it some weeks"], text: null },
+    { id: "done", title: "What have you already done with AI?", picked: ["Made a project", "Pay for a plan"], text: null },
+    ...input().qas.filter((qa) => qa.id !== "picture"),
+    { id: "example", title: "Paste the last one you wrote", picked: [], text: "Hi Dana, here is the quote for the panel swap." },
+    { id: "often", title: "How often do you do this?", picked: ["A few times a week"], text: null },
+    { id: "apps", title: "What software do you use every week?", picked: ["QuickBooks"], text: null },
+    { id: "asked_1", title: "How do you send a quote today?", picked: ["Text", "Email"], text: null },
+    { id: "can_use", title: "Can you use AI for your work?", picked: ["Not sure"], text: null },
+  ];
+  const told = describeBeginnerIntake(input({ qas, experience: "uses", worksFor: "employer", aiPolicy: "no_idea" }));
+  for (const words of [
+    "Made a project, Pay for a plan",
+    "Hi Dana, here is the quote for the panel swap.",
+    "A few times a week",
+    "QuickBooks",
+    "How do you send a quote today?",
+    "Can she use AI for her work? Her answer: Not sure",
+    "Use it some weeks",
+  ]) {
+    assert.ok(told.includes(words), words);
+  }
+  assert.ok(!told.includes("No idea"), "her own answer, not the stored policy");
+});
+
+test("the prompt counts her example and how often as context, not tasks", () => {
+  assert.ok(BEGINNER_INTAKE_SYSTEM.includes("how often she does it, her real example of one"));
 });

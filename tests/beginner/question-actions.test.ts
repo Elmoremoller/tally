@@ -12,6 +12,7 @@ const goodRead: JobRead = {
   ],
   aiFallback: ["Quote templates", "Payment reminder texts", "Review requests"],
   apps: ["Texts", "QuickBooks"],
+  aiUses: ["Quotes", "Customer texts", "Job notes"],
   worksFor: "self",
 };
 
