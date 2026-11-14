@@ -1,5 +1,4 @@
--- Worth Her Time, step 1: the funnel's own tables, in the same database as The Couple Standard. Nothing here
--- reads or changes The Couple Standard's tables, and nothing is copied from them.
+-- Tally, step 1: the funnel's own tables.
 --
 -- sessions: one row per quiz visitor, with the ad angle and UTM values she came in with.
 -- intake:   her answers and what the AI made of them. tasks: the tasks it found, with her own hours.
@@ -9,7 +8,7 @@
 --
 -- Every table is locked: the publishable key the website uses can't read or change any of it. The server
 -- writes through the functions below, with the secret key. The AI allowance per visitor (use_ai_call) is
--- The Couple Standard's, from 20261022130000_quiz_reflection.sql. Safe to run again.
+-- in 20261024110000_ai_allowance.sql. Safe to run again.
 
 -- One row per quiz visitor.
 create table if not exists public.sessions (

@@ -7,11 +7,12 @@ const whole = (sentence: string) => sentence.replaceAll(" ", "\u00a0");
 
 export const offer = {
   name: "Tally",
-  /** Shown in brackets until it's a real address. */
-  supportEmail: "[support email]",
+  /** On the privacy and terms pages, as a link. */
+  supportEmail: "support@tallyher.com",
   /** In cents, charged through Stripe Checkout. Paid once, no subscription. */
   price: { cents: 1999, currency: "usd" },
-  refund: "[REFUND POLICY, Karl to confirm]",
+  /** On the paywall, in the landing page's questions and on the terms page. DRAFT until Karl confirms it. */
+  refund: "If your first setup does not work, you get your money back.",
   /** Under the hero headline. */
   lead: "Most of what keeps you late is busywork nobody notices. Tally builds you a plan to hand it to AI.",
   adLine: "Win back your hours. Get the credit you’ve earned.",

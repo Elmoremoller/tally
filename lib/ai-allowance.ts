@@ -4,7 +4,7 @@ import { previewAllowed } from "./preview";
 import { supabaseAdmin, supabaseConfigured } from "./supabase";
 
 /**
- * Counts one AI call (the quiz reflection, or reading back a review line) against this caller's allowance
+ * Counts one AI call (reading her quiz answers, or writing her questions) against this caller's allowance
  * and the site's. Server only.
  */
 export async function allowAiCall() {
