@@ -41,7 +41,7 @@ export const deviceQuestion = {
 export const EVERYDAY_SOFTWARE = ["Outlook", "Gmail", "Excel", "Google Sheets", "Word", "Google Drive", "Teams", "Zoom"];
 
 /** The wait while the AI writes her questions. */
-export const questionsWait = "Writing a question for your job"; // DRAFT
+export const questionsWait = "Writing a question for your job"; // Approved by Karl 2026-11-14
 
 /** Shown in turn while her answers are read and her first win is written, ending where her result begins. */
 export const readingLines = ["Reading your answers", "Finding the easiest place to start", "Writing your first win"];
@@ -70,21 +70,21 @@ export const jobKinds = {
   list: ["Office and admin", "Shop or salon", "Health care", "Teaching", "My own business", "Social media and marketing"],
 };
 
-// Added 2026-11-14 for Phase 1 of docs/DIRECTION.md: the real example screen, how often she does her top task,
+// Added 2026-11-14 for Phase 1 of docs/DIRECTION.md, all approved by Karl the same day: the real example screen, how often she does her top task,
 // what a Builder has already done with AI, Can you use AI for your work, and the line on the repeats screen.
 
 /** After her top task: one she really did. She can type or talk, and skip it. */
 export const exampleScreen = {
   title: "Paste the last one you wrote, or what the last person asked you.", // from DIRECTION.md
   /** Her top task, as she picked or typed it, then the note on names. */
-  hint: (task: string) => `${task}. Leave out names.`, // DRAFT
+  hint: (task: string) => `${task}. Leave out names.`, // Approved by Karl 2026-11-14
   hintPlain: "Leave out names.", // from DIRECTION.md
-  skip: "Skip", // DRAFT
+  skip: "Skip", // Approved by Karl 2026-11-14
 };
 
 export const OFTEN = ["many_a_day", "daily", "few_a_week", "weekly_or_less"] as const;
 export type Often = (typeof OFTEN)[number];
-/** One tap on the example screen, under the box. DRAFT */
+/** One tap on the example screen, under the box. Approved by Karl 2026-11-14. */
 export const oftenQuestion = {
   title: "How often do you do this?",
   labels: {
@@ -95,7 +95,7 @@ export const oftenQuestion = {
   } satisfies Record<Often, string>,
 };
 
-/** Builders only: what she has already done with AI, so her path can skip it. DRAFT */
+/** Builders only: what she has already done with AI, so her path can skip it. Approved by Karl 2026-11-14. */
 export const doneWithAi = {
   title: "What have you already done with AI?",
   hint: "Pick all that fit.",
@@ -110,12 +110,12 @@ export const doneWithAi = {
   none: "None of these",
 };
 
-/** One tap in place of who she works for and her company's view on AI. DRAFT */
+/** One tap in place of who she works for and her company's view on AI. Approved by Karl 2026-11-14. */
 export const canUseQuestion = { title: "Can you use AI for your work?" };
 
 /**
  * Under the repeats screen's choices once she has picked one: how many of her picks AI can help with. Null, and
- * no line, when it can help with none of them. DRAFT
+ * no line, when it can help with none of them. Approved by Karl 2026-11-14.
  */
 export function repeatsLine(helps: number, picked: number): string | null {
   if (!helps || !picked) return null;

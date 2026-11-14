@@ -19,7 +19,7 @@ export const EXPERIENCE = ["not_yet", "tried", "uses", "heavy"] as const;
 export type Experience = (typeof EXPERIENCE)[number];
 /**
  * The four choices on Where are you with AI, from docs/DIRECTION.md (Phase 1). The ids stay as they were, so
- * answers saved before keep loading. DRAFT
+ * answers saved before keep loading. Approved by Karl 2026-11-14.
  */
 export const experienceLabels: Record<Experience, string> = {
   not_yet: "Never used it",
@@ -38,7 +38,7 @@ export const trackFor = (level: Experience): Track => (usesAi(level) ? "builder"
 /** Can you use AI for your work? One question in place of who she works for and her company's view. */
 export const CAN_USE = ["yes", "not_sure", "restricted", "self"] as const;
 export type CanUse = (typeof CAN_USE)[number];
-/** DRAFT */
+/** Approved by Karl 2026-11-14. */
 export const canUseLabels: Record<CanUse, string> = {
   yes: "Yes",
   not_sure: "Not sure",
