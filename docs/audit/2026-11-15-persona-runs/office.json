@@ -1,0 +1,1444 @@
+{
+ "name": "office",
+ "group": "experiment",
+ "persona": {
+  "group": "experiment",
+  "bio": "Office coordinator for an office of about 70 people. In her own words: I am an office coordinator for an office of about 70 people. I prepare and organize lunch for everyone. I order drinks, restock the fridges and keep the office clean and organized. I take care of the plants and general maintenance. I handle special orders and preparations for company events. I coordinate suppliers and make sure we have what we need. I am the person everyone comes to when something is missing or needs fixing. If the printer runs out of ink I find a replacement, and if we have none I order more. She works in Outlook, Teams and Excel, on a computer and on her phone. She is new to AI and has never really used it. She is an employee and is not sure what her company allows.",
+  "job": "I am an office coordinator for an office of about 70 people. I prepare and organize lunch for everyone. I order drinks, restock the fridges and keep the office clean and organized. I take care of the plants and general maintenance. I handle special orders and preparations for company events. I coordinate suppliers and make sure we have what we need. I am the person everyone comes to when something is missing or needs fixing. If the printer runs out of ink I find a replacement, and if we have none I order more.",
+  "level": "not_yet",
+  "device": "both",
+  "phone": "iphone",
+  "canUse": "not_sure",
+  "connect": "not_sure"
+ },
+ "versions": {
+  "job": "beginner-job-v5",
+  "questions": "beginner-questions-v6",
+  "intake": "beginner-intake-v8",
+  "path": "beginner-path-v1"
+ },
+ "jobRead": {
+  "repeats": [
+   {
+    "label": "Ordering lunch and drinks",
+    "ai": false
+   },
+   {
+    "label": "Restocking the fridges",
+    "ai": false
+   },
+   {
+    "label": "Writing supplier emails",
+    "ai": true
+   },
+   {
+    "label": "Planning company events",
+    "ai": true
+   },
+   {
+    "label": "Tracking office supplies",
+    "ai": false
+   },
+   {
+    "label": "Writing staff reminders",
+    "ai": true
+   }
+  ],
+  "aiFallback": [
+   "Event checklists",
+   "Supplier reorder notes",
+   "Office notice posts",
+   "Vendor follow up replies"
+  ],
+  "apps": [
+   "Microsoft Outlook",
+   "Microsoft Excel",
+   "Google Sheets",
+   "Slack",
+   "Amazon Business",
+   "Canva"
+  ],
+  "aiUses": [
+   "Email drafts",
+   "Event planning",
+   "Supplier messages",
+   "Office notices",
+   "Meeting agendas"
+  ],
+  "worksFor": "employer"
+ },
+ "jobReadFallback": false,
+ "asked": [
+  {
+   "id": "asked_1",
+   "title": "How do you collect lunch orders today?",
+   "kind": "many",
+   "choices": [
+    "Text messages",
+    "Email",
+    "Paper sheet",
+    "Ask in person",
+    "Excel list"
+   ],
+   "hint": "Pick all that fit."
+  }
+ ],
+ "screens": 9,
+ "worksForFromJob": "employer",
+ "answers": {
+  "job": "I am an office coordinator for an office of about 70 people. I prepare and organize lunch for everyone. I order drinks, restock the fridges and keep the office clean and organized. I take care of the plants and general maintenance. I handle special orders and preparations for company events. I coordinate suppliers and make sure we have what we need. I am the person everyone comes to when something is missing or needs fixing. If the printer runs out of ink I find a replacement, and if we have none I order more.",
+  "experience": "not_yet",
+  "qas": [
+   {
+    "id": "level",
+    "title": "Where are you with AI?",
+    "picked": [
+     "Never used it"
+    ],
+    "text": null,
+    "shown": [
+     "Never used it",
+     "Tried it a few times",
+     "Use it some weeks",
+     "Use it most days"
+    ]
+   },
+   {
+    "id": "repeats",
+    "title": "What do you do over and over, every day or every week?",
+    "picked": [
+     "Ordering lunch and drinks",
+     "Restocking the fridges",
+     "Writing supplier emails",
+     "Planning company events",
+     "Tracking office supplies",
+     "Answering messages",
+     "Writing emails",
+     "Making lists"
+    ],
+    "text": null,
+    "shown": [
+     "Ordering lunch and drinks",
+     "Restocking the fridges",
+     "Writing supplier emails",
+     "Planning company events",
+     "Tracking office supplies",
+     "Writing staff reminders",
+     "Answering messages",
+     "Writing emails",
+     "Planning my week",
+     "Making lists"
+    ]
+   },
+   {
+    "id": "most",
+    "title": "Which would save you the most time if it got easier?",
+    "picked": [
+     "Ordering lunch and drinks",
+     "Writing supplier emails"
+    ],
+    "text": null,
+    "shown": [
+     "Ordering lunch and drinks",
+     "Restocking the fridges",
+     "Writing supplier emails",
+     "Planning company events",
+     "Tracking office supplies",
+     "Answering messages"
+    ]
+   },
+   {
+    "id": "example",
+    "title": "Paste the last one you wrote, or what the last person asked you.",
+    "picked": [],
+    "text": "Ordering lunch for 70 people. Need 2 vegetarian and 1 gluten-free for Thursday, plus restock the fridge with oat milk and sparkling water."
+   },
+   {
+    "id": "often",
+    "title": "How often do you do this?",
+    "picked": [
+     "Many times a day"
+    ],
+    "text": null,
+    "shown": [
+     "Many times a day",
+     "About once a day",
+     "A few times a week",
+     "Once a week or less"
+    ]
+   },
+   {
+    "id": "where",
+    "title": "Where does your work happen?",
+    "picked": [
+     "Microsoft Outlook",
+     "Microsoft Excel",
+     "Text messages",
+     "Outlook",
+     "Paper",
+     "In person"
+    ],
+    "text": null,
+    "shown": [
+     "Microsoft Outlook",
+     "Microsoft Excel",
+     "Google Sheets",
+     "Slack",
+     "Amazon Business",
+     "Canva",
+     "Text messages",
+     "Gmail",
+     "Outlook",
+     "Instagram",
+     "A work system",
+     "Paper",
+     "In person"
+    ]
+   },
+   {
+    "id": "device",
+    "title": "Do you work on a phone, a computer or both?",
+    "picked": [
+     "Both"
+    ],
+    "text": null,
+    "shown": [
+     "Phone only",
+     "Computer only",
+     "Both"
+    ]
+   },
+   {
+    "id": "asked_1",
+    "title": "How do you collect lunch orders today?",
+    "picked": [
+     "Email",
+     "Paper sheet",
+     "Ask in person",
+     "Excel list"
+    ],
+    "text": "Mostly email, and I write names down on paper if people just",
+    "shown": [
+     "Text messages",
+     "Email",
+     "Paper sheet",
+     "Ask in person",
+     "Excel list"
+    ]
+   },
+   {
+    "id": "can_use",
+    "title": "Can you use AI for your work?",
+    "picked": [
+     "Not sure"
+    ],
+    "text": null,
+    "shown": [
+     "Yes",
+     "Not sure",
+     "No, it’s restricted",
+     "I work for myself"
+    ]
+   },
+   {
+    "id": "connect",
+    "title": "Would your company let you link your work email to an AI tool?",
+    "picked": [
+     "Not sure"
+    ],
+    "text": null,
+    "shown": [
+     "Yes",
+     "No",
+     "Not sure"
+    ]
+   }
+  ],
+  "mostWanted": [
+   "Ordering lunch and drinks",
+   "Writing supplier emails"
+  ],
+  "worksFor": "employer",
+  "aiTools": [
+   "none_yet"
+  ],
+  "aiToolsOther": null,
+  "aiPolicy": "no_idea",
+  "often": "many_a_day"
+ },
+ "intake": {
+  "role_summary": "You’re the office coordinator for a 70 person office, handling lunch, drinks, supplies, events, suppliers and anything that needs fixing.",
+  "tasks": [
+   {
+    "name": "Ordering lunch and drinks",
+    "ai": true,
+    "private": false,
+    "kind": "repeat_emails"
+   },
+   {
+    "name": "Supplier emails",
+    "ai": true,
+    "private": false,
+    "kind": "repeat_emails"
+   },
+   {
+    "name": "Planning company events",
+    "ai": true,
+    "private": false,
+    "kind": "repeat_writing"
+   },
+   {
+    "name": "Restocking the fridges",
+    "ai": false,
+    "private": false,
+    "kind": null
+   }
+  ],
+  "first_win": {
+   "task": "Supplier emails",
+   "intro": "Here is your email to the supplier, rewritten and ready to send.",
+   "draft": "Hi there,\n\nCould we place an order for lunch on Thursday for 70 people? We need 2 vegetarian options and 1 gluten free option. We also need to restock the fridge with oat milk and sparkling water.\n\nCould you let me know what you can deliver and the timing? Thank you for your help."
+  },
+  "first_step": "I’m an office coordinator for an office of about 70 people. I regularly email suppliers to order lunch and restock drinks. Write a short, polite email to a supplier. Keep it under 90 words, friendly and clear. Include the date, the number of people, any dietary needs and the items to restock. End the email by asking for their availability and delivery time. Here are this time’s details: [paste the order details here].",
+  "map": [
+   {
+    "task": "Ordering lunch and drinks",
+    "phrase": "lunch and drink orders",
+    "today": "You order these many times a day, and each one starts from scratch.",
+    "withPath": "Each order starts from a draft you only need to check and send.",
+    "ai": true,
+    "private": false,
+    "kind": "repeat_emails"
+   },
+   {
+    "task": "Supplier emails",
+    "phrase": "supplier emails",
+    "today": "You write these often, and each one takes a fresh start.",
+    "withPath": "Each email starts from a draft you adjust rather than writing from zero.",
+    "ai": true,
+    "private": false,
+    "kind": "repeat_emails"
+   },
+   {
+    "task": "Planning company events",
+    "phrase": "event plans",
+    "today": "You plan events and write the details out by hand.",
+    "withPath": "AI can help you outline plans and lists while you keep the final decisions yourself.",
+    "ai": true,
+    "private": false,
+    "kind": "repeat_writing"
+   },
+   {
+    "task": "Restocking the fridges",
+    "phrase": "fridge restocks",
+    "today": "You restock the fridges by hand as needed.",
+    "withPath": "This stays yours, though AI can help you write the list you check against.",
+    "ai": false,
+    "private": false,
+    "kind": null
+   }
+  ],
+  "needs_follow_up": false,
+  "follow_up_question": null
+ },
+ "free": {
+  "firstWin": {
+   "task": "Supplier emails",
+   "intro": "Here is your email to the supplier, rewritten and ready to send.",
+   "draft": "Hi there,\n\nCould we place an order for lunch on Thursday for 70 people? We need 2 vegetarian options and 1 gluten free option. We also need to restock the fridge with oat milk and sparkling water.\n\nCould you let me know what you can deliver and the timing? Thank you for your help."
+  },
+  "firstStep": "I’m an office coordinator for an office of about 70 people. I regularly email suppliers to order lunch and restock drinks. Write a short, polite email to a supplier. Keep it under 90 words, friendly and clear. Include the date, the number of people, any dietary needs and the items to restock. End the email by asking for their availability and delivery time. Here are this time’s details: [paste the order details here].",
+  "map": [
+   {
+    "task": "Supplier emails",
+    "phrase": "supplier emails",
+    "today": "You write these often, and each one takes a fresh start.",
+    "withPath": "Each email starts from a draft you adjust rather than writing from zero.",
+    "ai": true,
+    "private": false,
+    "kind": "repeat_emails",
+    "level": 2,
+    "waits": false,
+    "recipe": null,
+    "held": null,
+    "askFirst": true
+   },
+   {
+    "task": "Ordering lunch and drinks",
+    "phrase": "lunch and drink orders",
+    "today": "You order these many times a day, and each one starts from scratch.",
+    "withPath": "Each order starts from a draft you only need to check and send.",
+    "ai": true,
+    "private": false,
+    "kind": "repeat_emails",
+    "level": 2,
+    "waits": false,
+    "recipe": null,
+    "held": null,
+    "askFirst": true
+   },
+   {
+    "task": "Planning company events",
+    "phrase": "event plans",
+    "today": "You plan events and write the details out by hand.",
+    "withPath": "For your event plans, you hand it the job, and it writes in your voice with your details already in.",
+    "ai": true,
+    "private": false,
+    "kind": "repeat_writing",
+    "level": 3,
+    "waits": false,
+    "recipe": "saved_assistant",
+    "held": null,
+    "askFirst": true
+   },
+   {
+    "task": "Restocking the fridges",
+    "phrase": "fridge restocks",
+    "today": "You restock the fridges by hand as needed.",
+    "withPath": "This stays yours, though AI can help you write the list you check against.",
+    "ai": false,
+    "private": false,
+    "kind": null,
+    "level": 1,
+    "waits": false,
+    "recipe": null,
+    "held": null,
+    "askFirst": false
+   }
+  ],
+  "setups": [
+   "Your supplier emails, written with AI",
+   "Your event plans, with a saved assistant"
+  ],
+  "prep": [
+   "Get Claude ready on your phone and computer",
+   "Teach Claude who you are"
+  ],
+  "freePlan": false,
+  "tool": "claude",
+  "track": "starter"
+ },
+ "who": {
+  "track": "starter",
+  "canUse": "not_sure",
+  "connect": "not_sure",
+  "places": [
+   "Microsoft Outlook",
+   "Microsoft Excel",
+   "Text messages",
+   "Outlook",
+   "Paper",
+   "In person"
+  ],
+  "device": "both",
+  "aiTools": [
+   "none_yet"
+  ]
+ },
+ "outline": [
+  "ready:ready",
+  "about:about",
+  "task_1:workflow",
+  "task_2:workflow(saved_assistant)",
+  "end:end"
+ ],
+ "path": {
+  "version": 3,
+  "role": "You’re the office coordinator for a 70 person office, handling lunch, drinks, supplies, events, suppliers and anything that needs fixing.",
+  "track": "starter",
+  "tool": "claude",
+  "worksFor": "employer",
+  "policy": "no_idea",
+  "device": "both",
+  "apps": [
+   "any_chat",
+   "claude",
+   "iphone",
+   "gboard",
+   "samsung_keyboard"
+  ],
+  "skipped": [],
+  "steps": [
+   {
+    "id": "ready",
+    "kind": "ready",
+    "card": "claude_get_started",
+    "firstStep": "I’m an office coordinator for an office of about 70 people. I regularly email suppliers to order lunch and restock drinks. Write a short, polite email to a supplier. Keep it under 90 words, friendly and clear. Include the date, the number of people, any dietary needs and the items to restock. End the email by asking for their availability and delivery time. Here are this time’s details: [paste the order details here]."
+   },
+   {
+    "id": "about",
+    "kind": "about",
+    "card": "claude_about_you",
+    "note": "I am an office coordinator for an office of about 70 people. I handle lunch, drinks, fridge restocking, supplies, company events and suppliers, and I am the person people come to when something is missing or broken. I write to coworkers, suppliers and my manager. Keep the tone friendly, clear and direct, and keep messages short unless I ask for more. Use plain words. Never add details I did not give you, like prices, quantities, dates or policies. If something is missing, put it in square brackets so I can fill it in. Always give me a draft I can read and change before it goes out."
+   },
+   {
+    "id": "task_1",
+    "kind": "workflow",
+    "task": "Supplier emails",
+    "title": "Your supplier emails, written with AI",
+    "recipe": null,
+    "read": "Supplier emails get written in Claude each time they come up. You paste one message with today’s details, and Claude drafts the email for you to read and send. That way every email starts from your situation and your tone instead of a blank page.",
+    "material": [
+     {
+      "label": "Message for supplier emails",
+      "items": [
+       "I am an office coordinator for an office of about 70 people. Please write an email to a supplier in my voice, friendly, clear and short. The email is about [what I need, like a lunch order, drinks, restocking or printer ink]. Details for today: [items and quantities], needed by [day and time], delivery to [address or location], dietary needs [for example 2 vegetarian and 1 gluten free]. Do not add prices, policies or details I did not give you. If something is missing, put it in square brackets. Give me a subject line and the email, ready for me to read and change before I send it."
+      ]
+     }
+    ]
+   },
+   {
+    "id": "task_2",
+    "kind": "workflow",
+    "task": "Planning company events",
+    "title": "Your event plans, with a saved assistant",
+    "recipe": "saved_assistant",
+    "read": "Your event plans live in a saved Claude assistant that already knows your office, your tone and your usual suppliers. You hand it the event and it drafts the details in your voice, and you read and change them before anything goes out. That way you stop rewriting the same plan from scratch for every event.",
+    "material": [
+     {
+      "label": "Instructions for your assistant",
+      "items": [
+       "You help me plan company events. I am an office coordinator for an office of about 70 people. I handle lunch, drinks, supplies, suppliers and anything that needs fixing, so I plan events from start to finish. When I describe an event, write the plan or the message I ask for in my voice: friendly, clear and plain, with short sentences. Cover the date, the headcount, food and drinks, dietary needs, setup, suppliers to contact and what needs to be ready beforehand. Never invent prices, quantities, dates, vendors or company rules. When a detail is missing, put it in square brackets so I can fill it in. Do not give legal, safety or financial advice. Give me a draft I can read and change, with a short checklist of what I still need to confirm."
+      ]
+     },
+     {
+      "label": "Examples to start with",
+      "items": [
+       "Event: team lunch on [day] for [number] people. Plan: Order lunch from [caterer] by [day]. Include [number] vegetarian and [number] gluten free options. Ask for delivery at [time]. Set up drinks, plates and napkins in [room]. Send the team a note on [day] asking for dietary needs.",
+       "Event: end of quarter celebration on [date]. Plan: Confirm the headcount with my manager. Ask [supplier] for a quote for food and drinks. Book [room] and set up chairs and tables the day before. Remind everyone [number] days ahead with the time and place.",
+       "Event: visitor day at the office on [date]. Plan: Email [supplier] to order coffee, water and snacks for [number] guests. Tidy the common areas and restock the fridges the day before. Tell the team where guests will park and where to meet them."
+      ]
+     }
+    ]
+   },
+   {
+    "id": "end",
+    "kind": "end",
+    "safeUse": [
+     "Never type coworker names, health or allergy details tied to a person, home addresses or phone numbers into Claude. Use square brackets or roles instead.",
+     "Never paste account numbers, payment card details, login details or supplier contract terms.",
+     "Keep dietary needs as counts, like 2 vegetarian, and not names.",
+     "Read every email and plan before it goes out, and check quantities, dates and prices yourself.",
+     "Check with your manager or IT before you use Claude for work, and ask about linking your work email."
+    ],
+    "askMessage": "Hi [manager or IT name], I would like to know which AI tools the company has approved and what I may use them for. I am thinking of using one to draft supplier emails and to plan company events, like lunches and drinks orders. I would not put coworker names, personal details or payment information into it, and I would read everything before it is sent. Could you let me know what is allowed, and whether linking my work email to an AI tool needs approval first?"
+   }
+  ]
+ },
+ "design": [
+  {
+   "task": "Supplier emails",
+   "today": "You write supplier emails often, and each one takes a fresh start. Your work happens in Outlook, text messages and on paper.",
+   "newWay": "You keep one saved assistant that knows your usual suppliers, your tone and the details a supplier needs, like item, amount and delivery day. You type or paste the few facts for each order, such as oat milk and sparkling water for the fridges, and it hands back a finished draft. You copy it into Outlook yourself, so the AI never touches your work email. Each email stops being a fresh start, and nothing about your company's rules is put at risk while you wait to hear whether AI is allowed.",
+   "steps": [
+    {
+     "app": null,
+     "ref": null,
+     "goal": "Ask your company whether you may use an AI tool for work, and keep every step below on hold until you have an answer."
+    },
+    {
+     "app": "Claude",
+     "ref": "claude_get_started",
+     "goal": "Get Claude ready on your phone and computer."
+    },
+    {
+     "app": "Claude",
+     "ref": "claude_project",
+     "goal": "Make a project for supplier emails where your saved instructions and examples live."
+    },
+    {
+     "app": null,
+     "ref": null,
+     "goal": "Choose two or three past supplier emails you were happy with, with private details removed, to show your style."
+    },
+    {
+     "app": "Claude",
+     "ref": "saved_assistant",
+     "goal": "Save the assistant so a few facts typed in give you a supplier email draft in your tone."
+    }
+   ],
+   "material": [
+    {
+     "label": "Assistant instructions",
+     "what": "Tells the assistant you are an office coordinator for about 70 people and that it writes short, polite supplier emails from the facts you give."
+    },
+    {
+     "label": "Tone notes",
+     "what": "Describes how you like to sound with suppliers, such as friendly, direct and clear about dates."
+    },
+    {
+     "label": "Supplier fact sheet",
+     "what": "Lists your usual suppliers, what you order from each and the details every order email must include, with no private personal data."
+    },
+    {
+     "label": "Example emails",
+     "what": "Holds your best past supplier emails with private details removed, so the drafts match your style."
+    }
+   ],
+   "checkPoint": "You read each draft and check every item, amount, date and name before you copy it into Outlook and send it yourself."
+  },
+  {
+   "task": "Planning company events",
+   "today": "You plan events and write the details out by hand. Your work happens in Excel, Outlook, on paper and in person.",
+   "newWay": "You say out loud what the event needs, in your own words, and the AI turns it into a clean plan with a checklist, a supplier to do list and a short announcement for the team. You keep the plan in Excel as you do now, and you paste in text rather than connecting any work app. Planning gets more organized, and you stop rewriting the same details in different places.",
+   "steps": [
+    {
+     "app": null,
+     "ref": null,
+     "goal": "Ask your company whether AI may be used for work, and wait for the answer before using it on any event details."
+    },
+    {
+     "app": "ChatGPT",
+     "ref": "chatgpt_get_started",
+     "goal": "Get ChatGPT ready on your phone and computer."
+    },
+    {
+     "app": "ChatGPT",
+     "ref": "chatgpt_about_you",
+     "goal": "Save a short note about your role so every answer fits an office coordinator for about 70 people."
+    },
+    {
+     "app": "ChatGPT",
+     "ref": "chatgpt_project",
+     "goal": "Make a project for company events that holds your event instructions and past plans."
+    },
+    {
+     "app": "ChatGPT",
+     "ref": "say_it_out_loud",
+     "goal": "Speak your event details in your own words and get back a finished plan and announcement text."
+    },
+    {
+     "app": "Excel",
+     "ref": "notes_to_sheet",
+     "goal": "Turn your messy event notes into a clean table you can paste into your Excel list."
+    }
+   ],
+   "material": [
+    {
+     "label": "Event planning instructions",
+     "what": "Tells the assistant to turn your spoken notes into a checklist, a supplier to do list and a short team announcement."
+    },
+    {
+     "label": "Event checklist template",
+     "what": "Holds the usual parts of your events, such as food, drinks, setup and cleanup, so nothing is forgotten."
+    },
+    {
+     "label": "Announcement style notes",
+     "what": "Describes how you like event messages to your colleagues to sound."
+    },
+    {
+     "label": "Table layout",
+     "what": "Names the columns for your Excel event table so notes arrive ready to paste."
+    }
+   ],
+   "checkPoint": "You compare the plan and the table with your own notes, and check every name, number and date before you share or import anything."
+  }
+ ],
+ "design3": {
+  "responsibilities": [
+   {
+    "name": "Ordering lunch and drinks",
+    "handsOn": "Collecting names and choices, then placing the order and setting out the food.",
+    "around": "Gathering orders from email, paper, Excel and people in person, counting the dietary needs, and sending the order to the supplier each time.",
+    "patterns": [
+     4,
+     6,
+     1
+    ],
+    "stays": false,
+    "level": 3,
+    "held": "you are not sure yet what your company allows",
+    "today": "Orders arrive by email, on a paper sheet, in person and in an Excel list. You put them together by hand for about 70 people.",
+    "withPath": "One Excel lunch sheet with a drop down list of choices, and a standard order that fills from the count.",
+    "offerName": "Your lunch order, from one Excel sheet",
+    "newWay": "You use one Excel sheet with a column for name, choice and dietary need, and a count at the bottom that adds up each choice. Paper and in person orders get typed into the same sheet, so there is one place to look. The supplier order is written from the count with a saved template, so you stop rebuilding it each time.",
+    "builtOnce": "an Excel lunch sheet with a drop down list, dietary columns and a count, plus a standard lunch order template with blanks",
+    "steps": [
+     {
+      "app": null,
+      "ref": null,
+      "feature": null,
+      "goal": "Ask whether you may use AI for your work and whether the lunch sheet may be built with its help, before you put any work into Claude.",
+      "clickPath": null
+     },
+     {
+      "app": "Claude",
+      "ref": null,
+      "feature": null,
+      "goal": "Describe the columns you need, such as name, choice, vegetarian, gluten free and notes, and ask Claude to design the sheet layout and the count formulas, without any real names.",
+      "clickPath": null
+     },
+     {
+      "app": "Microsoft Excel",
+      "ref": null,
+      "feature": "Excel data validation drop down list",
+      "goal": "Make the choice column a drop down list so every order is entered the same way.",
+      "clickPath": "Data, Data Validation, List"
+     },
+     {
+      "app": "Microsoft Excel",
+      "ref": null,
+      "feature": "Excel COUNTIF function",
+      "goal": "Add a count for each choice and each dietary need so the totals appear by themselves.",
+      "clickPath": null
+     },
+     {
+      "app": "Microsoft Excel",
+      "ref": null,
+      "feature": "Excel conditional formatting",
+      "goal": "Highlight any row with a dietary need so it is not missed.",
+      "clickPath": "Home, Conditional Formatting"
+     },
+     {
+      "app": "Microsoft Outlook",
+      "ref": null,
+      "feature": "Outlook Quick Parts",
+      "goal": "Save the standard lunch order email with blanks for the date, counts and special needs.",
+      "clickPath": "Insert, Quick Parts"
+     }
+    ],
+    "material": [
+     {
+      "label": "Sheet layout",
+      "what": "The columns, drop down choices and count formulas for the lunch sheet."
+     },
+     {
+      "label": "Standard lunch order",
+      "what": "An order email with blanks for [supplier], [date], the count of each choice and the dietary needs."
+     },
+     {
+      "label": "Order call for the team",
+      "what": "A short message asking people to send their choice by a set time."
+     }
+    ],
+    "checkPoint": "You compare the count with the sheet and your paper notes, then read the order yourself before you send it."
+   },
+   {
+    "name": "Restocking the fridges",
+    "handsOn": "Checking what is left in the fridges and putting new drinks and milk in.",
+    "around": "Keeping track of what is low, deciding how much of each to get, ordering it and doing it again next time.",
+    "patterns": [
+     3,
+     4
+    ],
+    "stays": false,
+    "level": 3,
+    "held": null,
+    "today": "You check the fridges and decide what is needed, such as oat milk and sparkling water. You then order it.",
+    "withPath": "A restock sheet in Excel with the usual amounts, so you count once and the order list writes itself.",
+    "offerName": "Your fridge restock, from one standard order",
+    "newWay": "You use an Excel sheet listing each drink and item with the amount you want to keep and the amount left. A column shows what to order. You count the fridges, type the numbers and send the list, with no AI needed once it is built.",
+    "builtOnce": "a restock tracker with the usual amounts and a column that shows what to order",
+    "steps": [
+     {
+      "app": null,
+      "ref": null,
+      "feature": null,
+      "goal": "Count what is in the fridges once and write down the amount you want to always have of each item.",
+      "clickPath": null
+     },
+     {
+      "app": "Microsoft Excel",
+      "ref": null,
+      "feature": "Excel formulas",
+      "goal": "Build a sheet with item, amount wanted, amount left and a column that subtracts to show what to order.",
+      "clickPath": null
+     },
+     {
+      "app": "Microsoft Excel",
+      "ref": null,
+      "feature": "Excel conditional formatting",
+      "goal": "Colour any item that is below the amount wanted.",
+      "clickPath": "Home, Conditional Formatting"
+     },
+     {
+      "app": "Microsoft Outlook",
+      "ref": null,
+      "feature": "Outlook Quick Parts",
+      "goal": "Save a standard restock email to the supplier with blanks for the items and amounts.",
+      "clickPath": "Insert, Quick Parts"
+     }
+    ],
+    "material": [
+     {
+      "label": "Restock sheet layout",
+      "what": "The columns and the formula that shows what to order."
+     },
+     {
+      "label": "Standard restock order",
+      "what": "A supplier email with blanks for [supplier], [items] and [amounts]."
+     }
+    ],
+    "checkPoint": "You check the counts against the fridges and read the order before you send it."
+   },
+   {
+    "name": "Writing supplier emails",
+    "handsOn": null,
+    "around": "Writing similar emails to suppliers for lunch, drinks, supplies and events, and starting from nothing each time.",
+    "patterns": [
+     1,
+     8
+    ],
+    "stays": false,
+    "level": 3,
+    "held": "you are not sure yet what your company allows",
+    "today": "You write each supplier email yourself, many times a day, in Outlook.",
+    "withPath": "A set of saved supplier emails in Outlook that you fill in and send.",
+    "offerName": "Your supplier emails, saved and ready",
+    "newWay": "You keep a few saved emails in Outlook for the usual cases: a lunch order, a restock, a supplies order, a question about a late delivery. Each has blanks for the details. You pick one, fill the gaps and send it, with no AI in the moment.",
+    "builtOnce": "a set of saved supplier emails with blanks, kept in Outlook",
+    "steps": [
+     {
+      "app": null,
+      "ref": null,
+      "feature": null,
+      "goal": "Ask whether you may use AI for your work, before you put any supplier emails into Claude.",
+      "clickPath": null
+     },
+     {
+      "app": "Claude",
+      "ref": null,
+      "feature": null,
+      "goal": "Paste two or three of your past supplier emails, with prices and private details removed, and ask Claude to turn them into reusable emails with blanks.",
+      "clickPath": null
+     },
+     {
+      "app": "Microsoft Outlook",
+      "ref": null,
+      "feature": "Outlook Quick Parts",
+      "goal": "Save each email as a Quick Part so you can insert it into a new message.",
+      "clickPath": "Insert, Quick Parts"
+     }
+    ],
+    "material": [
+     {
+      "label": "Lunch order email",
+      "what": "A standard email with blanks for [supplier], [date] and the counts."
+     },
+     {
+      "label": "Supplies order email",
+      "what": "A standard email for ordering supplies with blanks for the items."
+     },
+     {
+      "label": "Late or wrong delivery email",
+      "what": "A polite email asking about a missing or wrong item."
+     }
+    ],
+    "checkPoint": "You fill every blank and read each email before you send it yourself."
+   },
+   {
+    "name": "Planning company events",
+    "handsOn": "Setting up the space and preparing food and items for company events.",
+    "around": "Making the same lists and checks for every event, such as food, orders, suppliers and who is told what.",
+    "patterns": [
+     5,
+     1
+    ],
+    "stays": false,
+    "level": 3,
+    "held": "you are not sure yet what your company allows",
+    "today": "You plan each event and make lists for it. You handle special orders and preparations.",
+    "withPath": "One event checklist you copy for each event, with the usual messages ready.",
+    "offerName": "Your event checklist, ready to copy",
+    "newWay": "You keep one checklist in Excel with the steps that every event needs, in order, with a column for who and a column for when. For each event you copy it and fill in the details, so nothing is forgotten.",
+    "builtOnce": "an event checklist with the usual steps and the messages that go with them",
+    "steps": [
+     {
+      "app": null,
+      "ref": null,
+      "feature": null,
+      "goal": "Ask whether you may use AI for your work, before you put event details into Claude.",
+      "clickPath": null
+     },
+     {
+      "app": "Claude",
+      "ref": null,
+      "feature": null,
+      "goal": "Tell Claude how your last event went, without private details, and ask for a checklist with the steps in order and the messages to send.",
+      "clickPath": null
+     },
+     {
+      "app": "Microsoft Excel",
+      "ref": null,
+      "feature": "Excel table",
+      "goal": "Put the checklist in a table with columns for step, who, due date and done, and save it as a template to copy for each event.",
+      "clickPath": "Insert, Table"
+     }
+    ],
+    "material": [
+     {
+      "label": "Event checklist",
+      "what": "The steps from first plan to cleanup, in order."
+     },
+     {
+      "label": "Event messages",
+      "what": "A save the date note, a reminder and a thank you with blanks for [event] and [date]."
+     }
+    ],
+    "checkPoint": "You go through the checklist for each event and read every message before it goes out."
+   },
+   {
+    "name": "Tracking office supplies",
+    "handsOn": "Looking in the cupboards and replacing things like printer ink.",
+    "around": "Knowing what is in stock, noticing what is running out, and ordering before it runs out.",
+    "patterns": [
+     3,
+     6
+    ],
+    "stays": false,
+    "level": 3,
+    "held": null,
+    "today": "You track supplies yourself. When something is missing, people come to you and you find a replacement or order more.",
+    "withPath": "A supplies sheet in Excel with the usual amounts and a request list in one place.",
+    "offerName": "Your supplies tracker, with a request list",
+    "newWay": "You use one Excel sheet that lists each supply, how many you keep, how many are left and what to order. A second tab holds requests from colleagues, so missing items stop living in your head and in messages.",
+    "builtOnce": "a supplies tracker with the usual amounts and a request tab",
+    "steps": [
+     {
+      "app": null,
+      "ref": null,
+      "feature": null,
+      "goal": "Walk through the cupboards once and list each supply with the amount you want to keep.",
+      "clickPath": null
+     },
+     {
+      "app": "Microsoft Excel",
+      "ref": null,
+      "feature": "Excel formulas",
+      "goal": "Add a column that shows what to order when the amount left is below the amount to keep.",
+      "clickPath": null
+     },
+     {
+      "app": "Microsoft Excel",
+      "ref": null,
+      "feature": "Excel conditional formatting",
+      "goal": "Colour items that are low.",
+      "clickPath": "Home, Conditional Formatting"
+     },
+     {
+      "app": "Microsoft Excel",
+      "ref": null,
+      "feature": "Excel worksheet tab",
+      "goal": "Add a tab where colleagues' requests are written down with date, what and done.",
+      "clickPath": null
+     }
+    ],
+    "material": [
+     {
+      "label": "Supplies sheet layout",
+      "what": "Columns for item, amount to keep, amount left and to order."
+     },
+     {
+      "label": "Request tab layout",
+      "what": "A simple list for what people ask for and whether it is done."
+     }
+    ],
+    "checkPoint": "You check the counts and the order list before you buy anything."
+   },
+   {
+    "name": "Answering messages and fixing what is missing",
+    "handsOn": "Fixing things in the office, like the printer or small repairs.",
+    "around": "Answering the same questions in texts, emails and in person, and finding out who needs what.",
+    "patterns": [
+     6,
+     1
+    ],
+    "stays": false,
+    "level": 3,
+    "held": null,
+    "today": "People come to you in person, by text and by email when something is missing or broken.",
+    "withPath": "Your common replies saved on your phone, and one place where requests are written down.",
+    "offerName": "Your common replies, saved on your phone",
+    "newWay": "You save the answers you give most, such as when lunch is ordered or how to report something broken, as text shortcuts on your phone. You reply with a few taps and add the request to the supplies sheet.",
+    "builtOnce": "a set of saved replies for the messages you get most",
+    "steps": [
+     {
+      "app": null,
+      "ref": null,
+      "feature": null,
+      "goal": "Write down the five questions you are asked most often and your usual answer to each.",
+      "clickPath": null
+     },
+     {
+      "app": "iPhone",
+      "ref": null,
+      "feature": "iPhone Text Replacement",
+      "goal": "Save each answer as a short shortcut that expands into the full reply.",
+      "clickPath": "Settings, General, Keyboard, Text Replacement"
+     }
+    ],
+    "material": [
+     {
+      "label": "Saved replies",
+      "what": "Short answers for the questions you get most, with blanks for names and times."
+     }
+    ],
+    "checkPoint": "You read each reply before you send it, and nothing is sent by itself."
+   },
+   {
+    "name": "Plants, cleaning and general maintenance",
+    "handsOn": "Watering the plants, keeping the office clean and tidy, and handling repairs.",
+    "around": "Remembering what needs doing and when.",
+    "patterns": [
+     7
+    ],
+    "stays": false,
+    "level": 3,
+    "held": null,
+    "today": "You take care of the plants, the cleaning and the maintenance as it comes up.",
+    "withPath": "A repeating checklist with reminders for plants, cleaning and maintenance.",
+    "offerName": "Your office routine, with reminders",
+    "newWay": "You list the regular jobs and how often each is done, then set repeating reminders in Outlook. The jobs come to you instead of you having to remember them.",
+    "builtOnce": "a routine list with how often each job is done",
+    "steps": [
+     {
+      "app": null,
+      "ref": null,
+      "feature": null,
+      "goal": "List the regular jobs, such as watering plants and checking the printers, and how often each one is needed.",
+      "clickPath": null
+     },
+     {
+      "app": "Microsoft Outlook",
+      "ref": null,
+      "feature": "Outlook recurring calendar events",
+      "goal": "Make a repeating reminder for each job.",
+      "clickPath": "New Event, Repeat"
+     }
+    ],
+    "material": [
+     {
+      "label": "Routine list",
+      "what": "Each regular job with how often it is done."
+     }
+    ],
+    "checkPoint": "You decide which jobs matter and mark each one done yourself."
+   }
+  ],
+  "top": [
+   {
+    "name": "Ordering lunch and drinks",
+    "why": "It comes up many times a day, and one sheet with a count replaces the gathering of orders from email, paper and in person."
+   },
+   {
+    "name": "Writing supplier emails",
+    "why": "Saved emails with blanks replace writing each one from scratch."
+   }
+  ]
+ },
+ "design3Links": {
+  "microsoft excel|excel data validation drop down list": {
+   "app": "Microsoft Excel",
+   "feature": "Excel data validation drop down list",
+   "url": "https://support.microsoft.com/en-us/excel/get-started/create-a-drop-down-list",
+   "title": "Create a drop-down list"
+  },
+  "microsoft excel|excel countif function": {
+   "app": "Microsoft Excel",
+   "feature": "Excel COUNTIF function",
+   "url": "https://support.microsoft.com/en-us/excel/get-started/use-the-countif-function-in-microsoft-excel",
+   "title": "Use the COUNTIF function in Microsoft Excel"
+  },
+  "microsoft excel|excel conditional formatting": {
+   "app": "Microsoft Excel",
+   "feature": "Excel conditional formatting",
+   "url": "https://support.microsoft.com/en-us/excel/use-conditional-formatting-to-highlight-information-in-excel",
+   "title": "Use conditional formatting to highlight information in Excel"
+  },
+  "microsoft outlook|outlook quick parts": {
+   "app": "Microsoft Outlook",
+   "feature": "Outlook Quick Parts",
+   "url": "https://support.microsoft.com/en-us/office/quick-parts-4ffef7c5-7596-4e95-9faf-41c771847a7b",
+   "title": "Quick Parts"
+  },
+  "microsoft excel|excel formulas": {
+   "app": "Microsoft Excel",
+   "feature": "Excel formulas",
+   "url": "https://support.microsoft.com/en-us/excel/get-started/overview-of-formulas-in-excel",
+   "title": "Overview of formulas in Excel"
+  },
+  "microsoft excel|excel table": {
+   "app": "Microsoft Excel",
+   "feature": "Excel table",
+   "url": "https://support.microsoft.com/en-us/excel/overview-of-excel-tables",
+   "title": "Overview of Excel tables"
+  },
+  "microsoft excel|excel worksheet tab": {
+   "app": "Microsoft Excel",
+   "feature": "Excel worksheet tab",
+   "url": "https://support.microsoft.com/en-us/office/add-a-background-color-to-a-sheet-tab-440b28f2-3146-4dca-95df-3b9d43acbe59",
+   "title": "Add a background color to a sheet tab"
+  },
+  "iphone|iphone text replacement": {
+   "app": "iPhone",
+   "feature": "iPhone Text Replacement",
+   "url": "https://support.apple.com/guide/iphone/use-text-replacements-iph6d01d862/ios",
+   "title": "Set up shorthand for frequently used text on iPhone - Apple Support"
+  },
+  "microsoft outlook|outlook recurring calendar events": {
+   "app": "Microsoft Outlook",
+   "feature": "Outlook recurring calendar events",
+   "url": "https://support.microsoft.com/en-us/outlook/get-started-with-the-outlook-calendar",
+   "title": "Get started with the Outlook Calendar"
+  }
+ },
+ "screens3": {
+  "seeIt": {
+   "task": "Ordering lunch and drinks",
+   "intro": "This is your Thursday order written as a standard lunch order, ready to copy and use, with the oat milk and sparkling water restock added.",
+   "result": "Subject: Lunch and drinks order for Thursday\n\nHello [supplier],\n\nI would like to place an order for lunch for 70 people for Thursday.\n\nDietary needs:\n2 vegetarian\n1 gluten free\n\nPlease also include a restock of:\nOat milk: [amount]\nSparkling water: [amount]\n\nPlease confirm the order and the delivery time.\n\nThank you,\n[your name]"
+  },
+  "askMessage": "Hi, I would like to use an AI tool to help me build my lunch order sheet and to write saved supplier emails, using only general wording and no real names or private details. Am I allowed to use one for these two things? Please also tell me what must stay out of it.",
+  "workflows": [
+   {
+    "name": "Ordering lunch and drinks",
+    "read": "From now on every lunch order goes into one Excel sheet, whether it came by email, on paper or in person. The count at the bottom adds up each choice and each dietary need for you. The supplier order is written from that count with a saved template, so you stop rebuilding it each time and nobody with a dietary need gets missed.",
+    "material": [
+     {
+      "label": "Sheet layout",
+      "items": [
+       "Column A: Name",
+       "Column B: Choice (drop down list)",
+       "Column C: Vegetarian (yes or no)",
+       "Column D: Gluten free (yes or no)",
+       "Column E: Notes",
+       "Drop down choices: [choice 1], [choice 2], [choice 3]",
+       "Count for each choice: =COUNTIF(B:B,\"[choice 1]\")",
+       "Count of vegetarian: =COUNTIF(C:C,\"yes\")",
+       "Count of gluten free: =COUNTIF(D:D,\"yes\")",
+       "Highlight rule: colour any row where column C or D says yes"
+      ]
+     },
+     {
+      "label": "Standard lunch order",
+      "items": [
+       "Subject: Lunch order for [date]",
+       "Hello [supplier],",
+       "I would like to place a lunch order for [date].",
+       "[count] of [choice 1]",
+       "[count] of [choice 2]",
+       "[count] of [choice 3]",
+       "Dietary needs: [vegetarian count] vegetarian, [gluten free count] gluten free, [other needs]",
+       "Please confirm the order and the delivery time.",
+       "Thank you,",
+       "[your name]"
+      ]
+     },
+     {
+      "label": "Order call for the team",
+      "items": [
+       "Hi everyone, please send me your lunch choice for [date] by [time].",
+       "Tell me about any dietary need when you reply.",
+       "Orders after [time] cannot be added.",
+       "Thank you!"
+      ]
+     }
+    ],
+    "test": {
+     "tryOn": "Try it on three real orders: this Thursday's lunch for 70 people, a day with several paper orders, and a day with a gluten free request.",
+     "good": "Every order is in one sheet, the totals match your paper notes, dietary rows stand out, and the email has every count filled in.",
+     "fixes": [
+      "The count is off: check that every choice is spelled exactly as in the drop down list.",
+      "A dietary need is missing from the email: copy the highlighted rows into the dietary line.",
+      "The email sounds too long: ask Claude to shorten it and keep all the counts."
+     ]
+    },
+    "approval": "You compare the count with the sheet and your paper notes, then read the order yourself before you send it.",
+    "ifStops": "If the counts stop adding up, check the drop down list for a typo or a blank row, then ask Claude to fix the formula."
+   },
+   {
+    "name": "Writing supplier emails",
+    "read": "From now on you keep a few saved emails in Outlook for the usual cases: a lunch order, a restock, a supplies order and a late delivery question. You pick one, fill the gaps and send it, with no AI in the moment. It is faster to start and every supplier gets the same clear details.",
+    "material": [
+     {
+      "label": "Lunch order email",
+      "items": [
+       "Subject: Lunch order for [date]",
+       "Hello [supplier],",
+       "Please find our order for [date]:",
+       "[count] of [choice]",
+       "Dietary needs: [needs]",
+       "Please confirm the order and delivery time.",
+       "Thank you,",
+       "[your name]"
+      ]
+     },
+     {
+      "label": "Supplies order email",
+      "items": [
+       "Subject: Supplies order",
+       "Hello [supplier],",
+       "I would like to order the following:",
+       "[item] x [amount]",
+       "[item] x [amount]",
+       "Please confirm availability and the delivery date.",
+       "Thank you,",
+       "[your name]"
+      ]
+     },
+     {
+      "label": "Late or wrong delivery email",
+      "items": [
+       "Subject: Question about our delivery of [date]",
+       "Hello [supplier],",
+       "Our delivery of [date] has not arrived or has an item that does not match the order: [item].",
+       "Could you let me know when we can expect the correct item?",
+       "Thank you for your help,",
+       "[your name]"
+      ]
+     }
+    ],
+    "test": {
+     "tryOn": "Try it on three real cases: your next lunch order, a restock of oat milk and sparkling water, and a printer ink order.",
+     "good": "You insert the saved email, fill every blank, and it reads like something you wrote yourself.",
+     "fixes": [
+      "A blank is left in the text: search for the square brackets before sending.",
+      "The tone is too stiff: ask Claude to make it friendlier and keep the blanks.",
+      "An email is missing a detail: add one more blank to the saved version."
+     ]
+    },
+    "approval": "You fill every blank and read each email before you send it yourself.",
+    "ifStops": "If a saved email no longer appears in Outlook, paste it again from this list and save it as a new Quick Part."
+   }
+  ],
+  "safeUse": [
+   "You are not sure your company allows AI, so ask before you put any work into it.",
+   "Until you have an answer, keep names, prices and supplier details out of Claude.",
+   "Do not link your work email to an AI tool until your company says it is allowed.",
+   "Use general wording and blanks, and check every email and order yourself."
+  ]
+ },
+ "checks": [
+  {
+   "id": "screens",
+   "pass": true,
+   "detail": "9 screens, at most 9 for a starter"
+  },
+  {
+   "id": "levels_in_code",
+   "pass": true,
+   "detail": "Every row has a level or waits"
+  },
+  {
+   "id": "level3_not_writing_help",
+   "pass": true,
+   "detail": "No line at level 3 or higher reads like writing help"
+  },
+  {
+   "id": "path_line_from_recipe",
+   "pass": true,
+   "detail": "Every line at level 3 or higher is its recipe's"
+  },
+  {
+   "id": "no_connect_without_ok",
+   "pass": true,
+   "detail": "No row connects a work app"
+  },
+  {
+   "id": "not_sure_ask_first",
+   "pass": true,
+   "detail": "Every task AI touches says to ask first"
+  },
+  {
+   "id": "path_written",
+   "pass": true,
+   "detail": "5 steps"
+  },
+  {
+   "id": "workflow_parts",
+   "pass": true,
+   "detail": "2 workflows, each with a test, an approval point and a cost line"
+  },
+  {
+   "id": "setup_from_recipe_or_card",
+   "pass": true,
+   "detail": "card claude_get_started, card claude_about_you, Tally's own steps for writing with AI, recipe saved_assistant"
+  },
+  {
+   "id": "no_click_paths_from_model",
+   "pass": true,
+   "detail": "The model wrote no menu paths or button names"
+  },
+  {
+   "id": "copy_rules",
+   "pass": true,
+   "detail": "No dashes, promised times, prices or percents"
+  },
+  {
+   "id": "offer_matches_path",
+   "pass": true,
+   "detail": "Offer names 2, path has 2 workflows, 2 match by name"
+  }
+ ],
+ "recipes": {
+  "total": 4,
+  "aiTasks": 3,
+  "withRecipe": [
+   {
+    "task": "Planning company events",
+    "recipe": "saved_assistant",
+    "level": 3
+   }
+  ],
+  "without": [
+   {
+    "task": "Supplier emails",
+    "level": 2,
+    "waits": false
+   },
+   {
+    "task": "Ordering lunch and drinks",
+    "level": 2,
+    "waits": false
+   },
+   {
+    "task": "Restocking the fridges",
+    "level": 1,
+    "waits": false
+   }
+  ],
+  "noRecipe": false,
+  "mostlyAssistant": false
+ },
+ "designCount": {
+  "steps": 11,
+  "checked": 8,
+  "unchecked": 0,
+  "noApp": 3,
+  "badRefs": [],
+  "clickPaths": [],
+  "apps": [],
+  "refs": [
+   "claude_get_started",
+   "claude_project",
+   "saved_assistant",
+   "chatgpt_get_started",
+   "chatgpt_about_you",
+   "chatgpt_project",
+   "say_it_out_loud",
+   "notes_to_sheet"
+  ]
+ },
+ "checks3": [
+  {
+   "id": "three_patterns",
+   "pass": true,
+   "detail": "7 responsibilities, each with patterns from the ten"
+  },
+  {
+   "id": "three_refs_real",
+   "pass": true,
+   "detail": "Every card and recipe id exists"
+  },
+  {
+   "id": "three_links_vendor",
+   "pass": true,
+   "detail": "Every link is on the vendor's own site"
+  },
+  {
+   "id": "three_feature_named",
+   "pass": false,
+   "detail": "Describe the columns you need, such as name, choice, vegetarian, gluten free and notes, and ask Clau | Paste two or three of your past supplier emails, with prices and private details removed, and ask Cl | Tell Claude how your last event went, without private details, and ask for a checklist with the step"
+  },
+  {
+   "id": "three_no_click_without_link",
+   "pass": true,
+   "detail": "No menu path or button name outside a linked click path"
+  },
+  {
+   "id": "three_approval",
+   "pass": true,
+   "detail": "Every workflow has a point where she checks"
+  },
+  {
+   "id": "three_copy_rules",
+   "pass": true,
+   "detail": "No dashes, promised times, prices or percents"
+  },
+  {
+   "id": "three_levels",
+   "pass": true,
+   "detail": "Every level is 1 to 5, and level 1 means it stays hers"
+  },
+  {
+   "id": "three_starter_level",
+   "pass": true,
+   "detail": "Every level is 3 or lower for a Starter"
+  },
+  {
+   "id": "three_not_writing_help",
+   "pass": true,
+   "detail": "No map line at level 3 or higher reads like writing help"
+  },
+  {
+   "id": "three_no_connect",
+   "pass": true,
+   "detail": "No step connects a work app"
+  },
+  {
+   "id": "three_ask_first",
+   "pass": true,
+   "detail": "Her path opens with the message to ask what is allowed"
+  },
+  {
+   "id": "three_top_two",
+   "pass": true,
+   "detail": "Top: Ordering lunch and drinks, Writing supplier emails; 2 workflows on her path"
+  }
+ ],
+ "design3Count": {
+  "responsibilities": 7,
+  "stays": 0,
+  "builtOnce": 7,
+  "patterns": {
+   "1": 4,
+   "3": 2,
+   "4": 2,
+   "5": 1,
+   "6": 3,
+   "7": 1,
+   "8": 1
+  },
+  "levels": {
+   "3": 7
+  },
+  "steps": 24,
+  "checked": 0,
+  "unchecked": 17,
+  "linked": 14,
+  "noApp": 7,
+  "clickPathsShown": 10,
+  "clickPathsHidden": 0,
+  "apps": [
+   [
+    "Microsoft Excel",
+    {
+     "steps": 9,
+     "linked": 9
+    }
+   ],
+   [
+    "Microsoft Outlook",
+    {
+     "steps": 4,
+     "linked": 4
+    }
+   ],
+   [
+    "Claude",
+    {
+     "steps": 3,
+     "linked": 0
+    }
+   ],
+   [
+    "IPhone",
+    {
+     "steps": 1,
+     "linked": 1
+    }
+   ]
+  ],
+  "refs": []
+ }
+}
