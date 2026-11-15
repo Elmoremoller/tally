@@ -138,7 +138,10 @@ export type MapLine = {
   recipe?: string | null;
   /** The rule that held its level down, when one did. */
   held?: Held | null;
-  /** She works where AI is restricted, and this recipe needs no AI at work: she asks first if the rule covers any AI. */
+  /**
+   * She asks first: she works where AI is restricted and this recipe needs no AI at work, or she is Not sure
+   * whether she can use AI and AI touches this task.
+   */
   askFirst?: boolean;
 };
 

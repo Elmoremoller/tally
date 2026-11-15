@@ -46,10 +46,10 @@ test("exampleOf gives her real example, and null when she skipped it or left it 
 });
 
 test("TIME_PROMISE catches minutes and hours, and lets her own count through", () => {
-  for (const line of ["Takes two minutes now", "Saves you an hour", "Done in 30 mins", "Back in hours"]) {
+  for (const line of ["Takes two minutes now", "Saves you an hour", "Done in 30 mins", "Back in hours", "Add 2 hrs", "Two Hours back", "1 hr"]) {
     assert.ok(TIME_PROMISE.test(line), line);
   }
-  for (const line of ["You do this many times a day", "Becomes a saved project", "About once a day"]) {
+  for (const line of ["You do this many times a day", "Becomes a saved project", "About once a day", "You answer HR questions by email", "Sent to HR"]) {
     assert.ok(!TIME_PROMISE.test(line), line);
   }
 });
@@ -219,4 +219,15 @@ test("freeResultFor chooses levels and the offer in code, as the live server doe
   assert.equal(restricted.askOnly, true);
   assert.deepEqual(restricted.setups, []);
   assert.ok(restricted.askMessage);
+});
+
+test("secondTask takes the recipe task at the highest level, the first on her map when two tie", () => {
+  const rows: MapLine[] = [
+    { ...line("Inquiries", "inquiries", true, false), recipe: "phone_quick_replies", level: 3 },
+    { ...line("Client emails", "client emails", true, false), recipe: "gmail_templates", level: 3 },
+    { ...line("Chasing replies", "chasing replies", true, false), recipe: "gmail_claude_follow_ups", level: 4 },
+    { ...line("Proposals", "proposals", true, false), recipe: "saved_assistant", level: 3 },
+  ];
+  assert.equal(secondTask(rows, "Inquiries")?.task, "Chasing replies");
+  assert.equal(secondTask(rows.slice(0, 2).concat(rows[3]), "Inquiries")?.task, "Client emails");
 });

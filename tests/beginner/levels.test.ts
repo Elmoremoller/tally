@@ -135,10 +135,18 @@ test("a restricted employee still gets the two recipes that need no AI at work, 
   assert.ok(offered.every((r) => !r.conditions.needsAiAllowed));
 });
 
-test("nobody else sees the line to ask first", () => {
-  for (const canUse of ["self", "yes", "not_sure"] as const) {
+test("someone who works for herself or may use AI never sees the line to ask first", () => {
+  for (const canUse of ["self", "yes"] as const) {
     assert.equal(levelFor(task("repeat_texts"), who({ canUse })).askFirst, false, canUse);
   }
+});
+
+test("someone who is Not sure sees the line to ask first on every task AI touches, and keeps her levels", () => {
+  const texts = levelFor(task("repeat_texts"), who({ canUse: "not_sure" }));
+  assert.deepEqual([texts.level, texts.askFirst], [3, true]);
+  const none = levelFor(task(null), who({ canUse: "not_sure" }));
+  assert.deepEqual([none.level, none.askFirst], [2, true]);
+  assert.equal(levelFor(task(null, { ai: false }), who({ canUse: "not_sure" })).askFirst, false);
 });
 
 test("her chat tool decides which chat routes count, and Claude when she uses none of them", () => {
