@@ -3,7 +3,7 @@ import assert from "node:assert/strict";
 import type { Who } from "../lib/beginner/levels";
 import type { EndStep, PathPlan, WorkflowStep } from "../lib/beginner/path";
 import type { FreeResult, MapLine } from "../lib/beginner/types";
-import { contentWords, countDesign, jaccard, MENU, PROMISED_TIME, recipeCount, refKind, runChecks, WRITING_HELP } from "../scripts/persona-checks";
+import { moneyNotHers, checkLookup, contentWords, countDesign, countDesign2, featureKey, jaccard, MENU, PROMISED_TIME, recipeCount, refKind, runChecks, vendorOk, WRITING_HELP } from "../scripts/persona-checks";
 
 const row = (task: string, opts: Partial<MapLine> = {}): MapLine => ({
   task,
@@ -119,7 +119,10 @@ test("time as content and food menus are not flagged, promises and click paths a
   assert.ok(PROMISED_TIME.test("This saves you hours every week."));
   assert.ok(PROMISED_TIME.test("It takes 5 minutes."));
   assert.ok(!MENU.test("Never add menu items. You type a shortcut and tap the reply."));
-  assert.ok(MENU.test("Tap the share icon, then open the menu."));
+  assert.ok(!MENU.test("Tell the client the menu choices are due. Tell us your go to workout outfit."));
+  assert.ok(MENU.test("Tap the share icon."));
+  assert.ok(MENU.test("Open the side menu, then Projects."));
+  assert.ok(MENU.test("Go to Settings."));
 });
 
 test("a task named in Expect must reach its level", () => {
@@ -128,4 +131,44 @@ test("a task named in Expect must reach its level", () => {
   const c = checks.find((x) => x.id === "quote_level_3");
   assert.equal(c?.pass, false);
   assert.match(c?.detail ?? "", /needs_computer/);
+});
+
+test("someone who is Not sure needs the ask first line on every task AI touches", () => {
+  const map = [row("Texts", { askFirst: true }), row("Notes", { level: 2, recipe: null, withPath: "Notes, written with AI.", askFirst: false })];
+  const checks = runChecks({ track: "starter", who: who({ canUse: "not_sure" }), screens: 9, free: free(map), path: null });
+  assert.equal(checks.find((c) => c.id === "not_sure_ask_first")?.pass, false);
+});
+
+test("a vendor link counts only from the search results and on the vendor's own site", () => {
+  const searched = ["https://www.canva.com/help/magic-write/", "https://someblog.com/canva-tips"];
+  assert.equal(checkLookup("Canva", "Magic Write", { url: "https://www.canva.com/help/magic-write/", title: "Magic Write" }, searched).url, "https://www.canva.com/help/magic-write/");
+  assert.equal(checkLookup("Canva", "Magic Write", { url: "https://someblog.com/canva-tips", title: "" }, searched).url, null);
+  assert.equal(checkLookup("Canva", "Magic Write", { url: "https://www.canva.com/help/other/", title: "" }, searched).url, null);
+  assert.ok(vendorOk("Outlook", "https://support.microsoft.com/en-us/office/quick-parts"));
+  assert.ok(!vendorOk("Outlook", "https://microsoft.com.evil.net/x"));
+  assert.ok(!vendorOk("Some HR system", "https://example.com/help"));
+});
+
+test("countDesign2 counts unchecked steps, linked ones and what became of tasks left at level 1 or 2", () => {
+  const map = [row("Policy questions", { level: 2, recipe: null, withPath: "x" }), row("Texts")];
+  const tasks = [
+    {
+      task: "Policy questions", stays: false, today: "", newWay: "", material: [], checkPoint: "",
+      steps: [
+        { app: "Outlook", ref: null, feature: "Quick Parts", goal: "Save each answer once.", clickPath: "Insert, then Quick Parts" },
+        { app: "Excel", ref: null, feature: "Copilot", goal: "Keep the list.", clickPath: "Home, then Copilot" },
+        { app: null, ref: null, feature: null, goal: "Pick ten questions.", clickPath: null },
+      ],
+    },
+  ];
+  const links = { [featureKey("Outlook", "Quick Parts")]: { app: "Outlook", feature: "Quick Parts", url: "https://support.microsoft.com/x", title: "Quick Parts" } };
+  const c = countDesign2(tasks, links, map);
+  assert.deepEqual([c.unchecked, c.linked, c.noApp, c.clickPathsHidden], [2, 1, 1, 1]);
+  assert.deepEqual(c.missingTasks, ["Texts"]);
+  assert.equal(c.lowTasks[0].unchecked, 2);
+});
+
+test("a price she gave herself is not flagged, an invented one is", () => {
+  assert.deepEqual(moneyNotHers("Good for 30 days, 50% deposit to book.", "Quote... Good for 30 days, 50% deposit to book."), []);
+  assert.deepEqual(moneyNotHers("A 20% discount and $40 off.", "Quote... 50% deposit"), ["20%", "$40"]);
 });
