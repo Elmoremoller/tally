@@ -1,9 +1,10 @@
 import { toolLabels, type ChatTool } from "../week";
 import { askFirstCopy, offerCopy } from "./copy";
-import { recipeOf } from "./levels";
+import type { AiPolicy, AiTool } from "../week";
+import { recipeOf, whoFrom, withLevels } from "./levels";
 import type { QA } from "./quiz";
 import type { Device } from "./quiz-copy";
-import type { MapLine, Track } from "./types";
+import { beginnerTool, trackFor, type Experience, type FirstWin, type FreeResult, type MapLine, type Track, type WorksFor } from "./types";
 
 export { deviceOf } from "./levels";
 
@@ -181,4 +182,33 @@ export function askMessageFor(map: readonly MapLine[]): string {
 export function freePlanFor(map: readonly MapLine[], top: string): boolean {
   const tasks = offerTasks(map, top);
   return tasks.length > 0 && tasks.every((m) => recipeOf(m)?.cost.freePlanEnough === true);
+}
+
+/**
+ * Her whole free result from her checked answers and the intake's read of them: each task's level and recipe,
+ * the map in the order she sees it, and her offer, all chosen in code, never by the model. The server
+ * (app/begin/actions.ts) and scripts/persona-runs.ts both use it, so the test runs check what the live site shows.
+ */
+export function freeResultFor(
+  answers: { experience: Experience; aiTools: AiTool[]; worksFor: WorksFor; aiPolicy: AiPolicy | null; qas: QA[] },
+  result: { first_win: FirstWin; first_step: string; map: MapLine[] },
+): FreeResult {
+  const track = trackFor(answers.experience);
+  const tool = beginnerTool(answers.aiTools);
+  const top = result.first_win.task;
+  const who = whoFrom({ track, ...answers });
+  const map = orderMap(withLevels(result.map, who), top);
+  const restricted = who.canUse === "restricted";
+  // With every task waiting for her company's OK there is nothing to sell: no offer, only the free message.
+  const askOnly = askOnlyFor(map, top, restricted);
+  return {
+    firstWin: result.first_win,
+    firstStep: result.first_step,
+    map,
+    ...(askOnly
+      ? { setups: [], prep: [], freePlan: false, askOnly, askMessage: askMessageFor(map) }
+      : { ...offerFor({ track, tool, map, top, device: who.device, restricted }), freePlan: freePlanFor(map, top) }),
+    tool,
+    track,
+  };
 }

@@ -3,11 +3,10 @@
 import { cookies } from "next/headers";
 import { allowAiCall } from "@/lib/ai-allowance";
 import { cleanAnswers, type BeginnerAnswers } from "@/lib/beginner/answers";
-import { askMessageFor, askOnlyFor, freePlanFor, offerFor, orderMap } from "@/lib/beginner/free-result";
+import { freeResultFor } from "@/lib/beginner/free-result";
 import { readBeginnerIntake } from "@/lib/beginner/intake";
-import { whoFrom, withLevels } from "@/lib/beginner/levels";
 import { digest, type QuizStep } from "@/lib/beginner/quiz";
-import { beginnerTool, trackFor, type FreeResult } from "@/lib/beginner/types";
+import type { FreeResult } from "@/lib/beginner/types";
 import { cleanText } from "@/lib/clean";
 import {
   confirmTasks,
@@ -109,24 +108,9 @@ export async function readBeginner(input: {
     }
 
     // Each task's level and recipe, and her offer, are chosen in code from her answers, never by the model.
-    const track = trackFor(answers.experience);
-    const tool = beginnerTool(answers.aiTools);
-    const top = result.first_win.task;
-    const who = whoFrom({ track, ...answers });
-    const map = orderMap(withLevels(result.map, who), top);
-    const restricted = who.canUse === "restricted";
-    // With every task waiting for her company's OK there is nothing to sell: no offer, only the free message.
-    const askOnly = askOnlyFor(map, top, restricted);
-    const free: FreeResult = {
-      firstWin: result.first_win,
-      firstStep: result.first_step,
-      map,
-      ...(askOnly
-        ? { setups: [], prep: [], freePlan: false, askOnly, askMessage: askMessageFor(map) }
-        : { ...offerFor({ track, tool, map, top, device: who.device, restricted }), freePlan: freePlanFor(map, top) }),
-      tool,
-      track,
-    };
+    const free = freeResultFor(answers, { first_win: result.first_win, first_step: result.first_step, map: result.map });
+    const { tool, track } = free;
+    const askOnly = free.askOnly === true;
 
     // Her tasks go in the first version's table: what AI can help with as hand to AI, the rest as hers to keep.
     await saveIntakeResult(sessionId, {

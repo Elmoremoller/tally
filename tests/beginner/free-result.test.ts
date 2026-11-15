@@ -7,6 +7,7 @@ import {
   exampleOf,
   fewHelp,
   freePlanFor,
+  freeResultFor,
   offerFor,
   orderMap,
   phraseFor,
@@ -185,4 +186,37 @@ test("the free plan line shows only when every task in the offer has a recipe th
   assert.ok(freePlanFor(leveled.slice(0, 1), "Rescheduling texts"));
   const unknown = [{ ...leveled[0], recipe: "weekly_no_reply_list", level: 5 as const }];
   assert.ok(!freePlanFor(unknown, "Rescheduling texts"), "the recipe does not say");
+});
+
+test("freeResultFor chooses levels and the offer in code, as the live server does", () => {
+  const qa = (id: string, picked: string[]) => ({ id, title: id, picked, text: null });
+  const first_win = { task: "Rescheduling texts", intro: "Intro.", draft: "Draft." };
+  const rows: MapLine[] = [
+    { ...line("Rescheduling texts", "rescheduling texts", true, true), kind: "repeat_texts" },
+    { ...line("Answering phones", "answering phones", false, false), kind: null },
+  ];
+  const answers = {
+    experience: "tried" as const,
+    aiTools: ["not_sure" as const],
+    worksFor: "employer" as const,
+    aiPolicy: "no_idea" as const,
+    qas: [qa("where", ["Text messages"]), qa("device", ["Phone only"]), qa("can_use", ["Not sure"])],
+  };
+  const free = freeResultFor(answers, { first_win, first_step: "Step.", map: rows });
+  assert.equal(free.track, "starter");
+  assert.equal(free.map[0].level, 3);
+  assert.equal(free.map[0].recipe, "phone_quick_replies");
+  assert.equal(free.map[1].level, 1);
+  assert.equal(free.prep.length, 2);
+  assert.ok(free.setups[0].startsWith("Your rescheduling texts"));
+  assert.equal(free.askOnly, undefined);
+
+  // Restricted, with no recipe that needs no AI at work: nothing to sell, only the message to ask.
+  const restricted = freeResultFor(
+    { ...answers, aiPolicy: "restricted", qas: [qa("where", ["A work system"]), qa("device", ["Phone only"])] },
+    { first_win: { ...first_win, task: "Writing notes" }, first_step: "Step.", map: [{ ...line("Writing notes", "notes", true, false), kind: null }] },
+  );
+  assert.equal(restricted.askOnly, true);
+  assert.deepEqual(restricted.setups, []);
+  assert.ok(restricted.askMessage);
 });
