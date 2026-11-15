@@ -1,7 +1,11 @@
 import { toolLabels, type ChatTool } from "../week";
+import { offerCopy } from "./copy";
+import { recipeOf } from "./levels";
 import type { QA } from "./quiz";
-import { deviceQuestion, DEVICES, type Device } from "./quiz-copy";
+import type { Device } from "./quiz-copy";
 import type { MapLine, Track } from "./types";
+
+export { deviceOf } from "./levels";
 
 // The free result's rules from docs/DIRECTION.md, section 3 and Phase 2: the map of her week, with her
 // finished result inside its top row, and the offer that names her own setups. Her first step message is
@@ -73,13 +77,6 @@ export function phraseFor(name: string, phrase: unknown, hers: string): string |
 /** A task as a setup name starts: "Your rescheduling texts", or the task's own name when no phrase is trusted. */
 export const taskForSetup = (m: Pick<MapLine, "task" | "phrase">) => (m.phrase ? `Your ${m.phrase}` : m.task);
 
-/** Her first win task and her second task, as her setup names start them. */
-export function setupTasks(map: readonly MapLine[], top: string): { top: string; second: string | null } {
-  const first = map.find((m) => m.task.toLowerCase() === top.toLowerCase());
-  const second = secondTask(map, top);
-  return { top: first ? taskForSetup(first) : top, second: second ? taskForSetup(second) : null };
-}
-
 /** AI fits fewer than half of her tasks: the map opens with a softer heading and those tasks first. */
 export const fewHelp = (map: readonly MapLine[]) => map.filter((m) => m.ai).length * 2 < map.length;
 
@@ -94,57 +91,71 @@ export function orderMap(map: readonly MapLine[], top: string): MapLine[] {
   return fewHelp(map) ? [...first, ...rest.filter((m) => m.ai), ...rest.filter((m) => !m.ai)] : [...first, ...rest];
 }
 
-/** Where she said she would use AI most, a Starter's answer on the device screen. */
-export function deviceOf(qas: readonly QA[]): Device | null {
-  const picked = qas.find((qa) => qa.id === "device")?.picked[0];
-  return DEVICES.find((d) => deviceQuestion.labels[d] === picked) ?? null;
-}
-
 /**
- * The second task her setups name: the next task on her map that AI can help with without private details,
- * then any other task AI can help with. Null when she named only one.
+ * The task her offer names after her top task: the next one on her map with a recipe, then the next one AI can
+ * help with that needs no private details, then any other AI can help with. A task that waits for her company's
+ * OK is never one. Null when there is none.
  */
 export function secondTask(map: readonly MapLine[], top: string): MapLine | null {
-  const others = map.filter((m) => m.ai && m.task.toLowerCase() !== top.toLowerCase());
-  return others.find((m) => !m.private) ?? others[0] ?? null;
+  const others = map.filter((m) => m.ai && !m.waits && m.task.toLowerCase() !== top.toLowerCase());
+  return others.find((m) => recipeOf(m)) ?? others.find((m) => !m.private) ?? others[0] ?? null;
 }
 
 /**
- * Her first setups by name, in the order of her path (DIRECTION.md, section 4), each task as it reads mid
- * sentence. A Builder's names say the kind of setup, so her path looks different from a Starter's at a glance.
- * Starter: her tool ready where she uses it, her top task set up, her tool taught who she is, a second task.
- * Builder: her top task as a saved project, tested on real ones, a second task with the right tool, a routine.
- * DRAFT, every line: the Starter pattern is Karl's from 2026-11-14, the rest follows it.
+ * A task as her offer names it (DIRECTION.md, section 3): what its recipe makes of it, like "Your rescheduling
+ * texts, saved once on your phone", or, with no recipe, what it is at level 2, like "Your booking replies,
+ * written with AI". Never a saved setup the task doesn't get.
  */
-export function setupsFor({
+export function workflowName(m: Pick<MapLine, "task" | "phrase" | "recipe">): string {
+  const recipe = recipeOf(m);
+  return `${taskForSetup(m)}, ${recipe ? recipe.offer : offerCopy.withAi}`;
+}
+
+/**
+ * The tasks her offer names, in order: her first win task, then her second. Only tasks AI can help with, and
+ * never one that waits for her company's OK.
+ */
+export function offerTasks(map: readonly MapLine[], top: string): MapLine[] {
+  const first = map.find((m) => m.ai && !m.waits && m.task.toLowerCase() === top.toLowerCase());
+  const second = secondTask(map, top);
+  return [...(first ? [first] : []), ...(second ? [second] : [])];
+}
+
+/**
+ * Her offer by name (DIRECTION.md, section 3). `setups` is her workflows, each named by workflowName, and, when
+ * her company restricts AI, the message to ask what's allowed, which ends her path (section 4). `prep` is a
+ * Starter's two short steps, her tool ready where she works and taught who she is: her path opens with them,
+ * but the offer lists them under her workflows, under offerCopy.prepLead. A Builder has none.
+ */
+export function offerFor({
   track,
   tool,
+  map,
   top,
-  second,
   device,
+  restricted = false,
 }: {
   track: Track;
   tool: ChatTool;
-  /** Her first win task and her second, as taskForSetup gives them: "Your rescheduling texts". */
+  /** Her map with levels, as withLevels gives it. */
+  map: readonly MapLine[];
   top: string;
-  second: string | null;
   device: Device | null;
-}): string[] {
+  restricted?: boolean;
+}): { setups: string[]; prep: string[] } {
+  const setups = [...offerTasks(map, top).map(workflowName), ...(restricted ? [offerCopy.askAllowed] : [])];
+  if (track === "builder") return { setups, prep: [] };
   const name = toolLabels[tool];
-  if (track === "starter") {
-    const where =
-      device === "phone" ? "on your phone" : device === "computer" ? "on your computer" : "on your phone and computer";
-    return [
-      `Get ${name} ready ${where}`,
-      `${top}, set up`,
-      `Teach ${name} who you are`,
-      ...(second ? [`${second}, set up`] : []),
-    ];
-  }
-  return [
-    `${top}, as a saved project`,
-    "Test it on three real ones",
-    ...(second ? [`${second}, with the right tool`] : []),
-    "Turn it into a routine you reuse",
-  ];
+  const where =
+    device === "phone" ? "on your phone" : device === "computer" ? "on your computer" : "on your phone and computer";
+  return { setups, prep: [`Get ${name} ready ${where}`, `Teach ${name} who you are`] };
+}
+
+/**
+ * Whether her offer says the free plan is enough (DIRECTION.md, section 3): only when every task it names has a
+ * recipe, and every one of those recipes says so.
+ */
+export function freePlanFor(map: readonly MapLine[], top: string): boolean {
+  const tasks = offerTasks(map, top);
+  return tasks.length > 0 && tasks.every((m) => recipeOf(m)?.cost.freePlanEnough === true);
 }

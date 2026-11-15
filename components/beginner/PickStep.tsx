@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, type RefObject } from "react";
+import { useEffect, useRef, type ReactNode, type RefObject } from "react";
 import { ArrowRight, Check } from "@/components/icons";
 import { Dock } from "@/components/quiz/Dock";
 import { MicButton } from "@/components/quiz/MicButton";
@@ -33,6 +33,8 @@ type PickStepProps = {
   headingRef: RefObject<HTMLHeadingElement | null>;
   /** One line under the chips, read out when it changes, like how many of her picks AI can help with. */
   note?: string | null;
+  /** More on the same screen, under the chips, like the one tap row for what she uses for work. */
+  after?: ReactNode;
 };
 
 /**
@@ -54,6 +56,7 @@ export function PickStep({
   error,
   headingRef,
   note = null,
+  after = null,
 }: PickStepProps) {
   const withOther = other !== null;
   const beat = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
@@ -110,6 +113,7 @@ export function PickStep({
       <p className="quiz-note" role="status">
         {note ?? ""}
       </p>
+      {after}
 
       {error ? (
         <p className="quiz-error" role="alert">

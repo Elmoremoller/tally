@@ -5513,6 +5513,27 @@
       0 0 0 1px var(--line-strong),
       var(--shadow-2);
   }
+  /* The level tag over each task (Phase 5), in the plain words of DIRECTION.md, section 3. */
+  .win-map-level {
+    justify-self: start;
+    padding: 0.25rem 0.625rem;
+    border-radius: 999px;
+    background: var(--tint);
+    font-size: var(--fs-micro);
+    font-weight: 700;
+    line-height: var(--lh-micro);
+    letter-spacing: var(--tr-micro);
+    color: var(--slate);
+  }
+  .win-map-level + .win-map-task {
+    margin-top: -0.25rem;
+  }
+  /* Why a rule held the level down, or to ask her company first: a few quiet words under the lines. */
+  .win-map-why {
+    font-size: var(--fs-small);
+    line-height: var(--lh-small);
+    color: var(--muted);
+  }
   .win-map-task {
     font-family: var(--stack-text);
     font-size: 1.125rem;
@@ -5564,6 +5585,24 @@
   }
   .win-setups .peek-card {
     text-align: left;
+  }
+  /* A Starter's two prep steps, under her workflows on the paywall: quieter than the workflows they lead to. */
+  .win-prep {
+    width: 100%;
+    margin-top: 1.25rem;
+    text-align: left;
+  }
+  .win-prep-lead {
+    font-weight: 600;
+    color: var(--slate);
+  }
+  .win-prep-steps {
+    display: grid;
+    gap: 0.375rem;
+    margin: 0.5rem 0 0;
+    padding: 0;
+    list-style: none;
+    color: var(--ink);
   }
   .win-example {
     padding: 0.875rem 1rem;

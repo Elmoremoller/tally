@@ -47,6 +47,7 @@ The code chooses the level, never the model. A task gets the highest level where
 2. She controls the app, or she is allowed to connect it.
 3. The task does not put other people's private details into a tool that may not hold them.
 4. It fits her track. A Starter path normally stops at level 3. A Builder path aims for level 4, and level 5 when a recipe exists.
+5. The recipe has steps for the device she uses.
 
 Two principles guide every recommendation.
 
@@ -145,8 +146,10 @@ Read docs/DIRECTION.md and do Phase 4. Follow the working rules in section 7.
 2. Phase 1. A shorter quiz with a real example, a count, four levels of experience and one work question.
 3. Phase 2. The free result opens with the map, with the finished result inside the top row.
 4. Phase 3. Six setup cards for ChatGPT and Claude, checked against the vendors' help pages.
+5. Phase 4. Eight workflow recipes, checked against the vendors' help pages.
+6. Phase 5. The quiz asks where her work happens, what she uses for work and whether she can connect her work email, and the code gives every task a level and a recipe.
 
-All of it stays. Phases 4 to 7 build on it.
+All of it stays. Phases 6 and 7 build on it.
 
 ### Phase 4. Workflow recipes
 
@@ -174,7 +177,7 @@ Code to read first. `lib/beginner/cards.ts` and its test file.
 **Goal.** The quiz collects what a workflow needs, and the map shows the right level for each task.
 
 1. Add "Where does this task happen?" for everyone, with choices from the read of her job plus fixed ones such as text messages, Gmail, Outlook, Instagram, a work system, paper or in person.
-2. For an employee who answered Yes or Not sure to the work question, add "Could you connect your work email or calendar to an AI tool yourself?" Yes. No. Not sure.
+2. For an employee who answered Yes or Not sure to the work question, add "Would your company let you link your work email to an AI tool?" Yes. No. Not sure.
 3. Have the intake give each task a kind from a fixed list that matches the recipes. The code checks it.
 4. Write the level function in code, following "How the level is chosen" in section 2. It returns the level and the recipe for each task, and the reason when a rule held the level down.
 5. Change the map to match section 3. A level tag on each row, a "With your path" line taken from the recipe, and offer names that come from the recipes.

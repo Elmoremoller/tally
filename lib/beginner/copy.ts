@@ -1,6 +1,6 @@
 import type { ChatTool } from "../week";
 import type { JobRead } from "./quiz";
-import type { Mark } from "./types";
+import type { Held, Mark } from "./types";
 import { FALLBACK_AI_USES } from "./quiz-copy";
 
 // The beginner version's words. The landing page, the quiz questions, the free result and the seven days were
@@ -473,12 +473,12 @@ export const FALLBACK_JOB_READ: JobRead = {
 // The free result and the paywall
 
 // Phase 2 of docs/DIRECTION.md: the free result opens with the map of her week, with her finished result behind
-// See it in its top row, then the offer. Karl set the layout on 2026-11-14; every line here is a DRAFT until he
-// approves it, apart from the softer heading, which is his own words.
+// See it in its top row, then the offer. Karl set the layout and approved every line below on 2026-11-14, apart
+// from the restricted line and the free plan line, which are still DRAFT.
 
 export const firstWinCopy = {
-  eyebrow: "Your week with AI", // DRAFT
-  /** The heading over the map: how many of her tasks AI can help with. DRAFT */
+  eyebrow: "Your week with AI", // Approved by Karl 2026-11-14
+  /** The heading over the map: how many of her tasks AI can help with. Approved by Karl 2026-11-14 */
   heading: (helps: number, total: number) =>
     total === 2 && helps === 2
       ? "AI can help with both of your tasks"
@@ -487,14 +487,14 @@ export const firstWinCopy = {
         : `AI can help with ${helps} of your ${total} tasks`,
   /** In place of the count when AI fits fewer than half of her tasks, or she named only one. Karl, 2026-11-14 */
   fewHeading: "Here is where AI fits in your week",
-  today: "Today", // DRAFT
-  withPath: "With your path", // DRAFT
-  seeIt: "See it", // DRAFT
-  hideIt: "Hide it", // DRAFT
-  /** Under her finished result, inside See it. The line before it promised a time, which section 5 rules out. DRAFT */
+  today: "Today", // Approved by Karl 2026-11-14
+  withPath: "With your path", // Approved by Karl 2026-11-14
+  seeIt: "See it", // Approved by Karl 2026-11-14
+  hideIt: "Hide it", // Approved by Karl 2026-11-14
+  /** Under her finished result, inside See it. The line before it promised a time, which section 5 rules out. Approved by Karl 2026-11-14 */
   made: "AI wrote that from what you told us. Copy it and use it today.",
-  copy: "Copy", // DRAFT
-  copied: "Copied", // DRAFT
+  copy: "Copy", // Approved by Karl 2026-11-14
+  copied: "Copied", // Approved by Karl 2026-11-14
   /** When her company restricts AI. DRAFT */
   restricted:
     "Your company restricts AI, so your plan starts with practice on your own phone or computer, and gives you the message to ask what’s allowed.",
@@ -504,17 +504,51 @@ export const firstWinCopy = {
   more: (count: number) => `${count} more`,
 };
 
-/** The paywall's headline and her offer. The price, button and fine print are the first version's. DRAFT */
+/** The paywall's headline and her offer. The price, button and fine print are the first version's. */
 export const beginnerPaywall = {
-  title: "Get the rest of your path.", // DRAFT
-  lead: "Your first setups, one step at a time.", // DRAFT
+  title: "Get the rest of your path.", // Approved by Karl 2026-11-14
+  lead: "Your first setups, one step at a time.", // Approved by Karl 2026-11-14
   /** Only for answers saved before Phase 2, shown with the plan's five parts. */
   legacyLead: "Here’s what’s inside, built from your answers.",
+  /** Under her offer, only when every recipe in it says the free plan is enough (Phase 5). Approved by Karl 2026-11-15 */
+  freePlan: "The free plan is enough to start.",
+};
+
+/** Her offer's own lines (Phase 5). Karl's words or approved by Karl 2026-11-15. */
+export const offerCopy = {
+  /** How her offer names a task that has no recipe: what it is at level 2. */
+  withAi: "written with AI",
+  /** Over a Starter's two prep steps, which her offer lists under her workflows. */
+  prepLead: "Starts with two quick steps",
+  /** The last thing her offer names when her company restricts AI (DIRECTION.md, section 4). */
+  askAllowed: "The message to ask what’s allowed",
+};
+
+/**
+ * The map's lines for levels (Phase 5 of docs/DIRECTION.md). The level tags are LEVELS in recipes.ts, in the
+ * words of section 3. A row whose level a rule held down says why in a few words; a row with a recipe that needs
+ * no AI at work, for someone whose company restricts AI, says to ask first. Approved by Karl 2026-11-15.
+ */
+export const levelCopy = {
+  /** For screen readers, before the tag. */
+  levelLabel: "Level",
+  /** The tag, in place of a level, on a task that needs AI when her company restricts it. Karl's words. */
+  waits: "Waits for your company’s OK",
+  held: {
+    restricted: "Your company restricts AI, so this one waits.", // Karl's words, 2026-11-15
+    connect: "Connecting your work email needs your company’s OK first.",
+    private: "Other people’s private details stay out of your AI tool.",
+    track: "This can go further once your first workflow works.",
+    needs_computer: "The setup for this needs a computer.",
+    needs_phone: "The setup for this needs a phone.",
+  } satisfies Record<Held, string>,
   /**
-   * Her tool, and whether its free plan is enough. Hidden until Phase 4 reads it from the setup cards
-   * (lib/beginner/cards.ts), so nothing shows it today. DRAFT
+   * A recipe's With your path line with her own name for the task in front, when that name can be trusted, so
+   * two tasks with the same recipe never read the same: "For your rescheduling texts, your common replies are
+   * saved on your phone, each a few letters away."
    */
-  toolLine: (tool: string) => `In ${tool}. The free plan is enough to start.`,
+  forTask: (phrase: string, line: string) => `For your ${phrase}, ${line.charAt(0).toLowerCase()}${line.slice(1)}`,
+  askFirst: "Ask first if your company’s rule covers any use of AI.",
 };
 
 /** What people see on Stripe's page and their receipt. DRAFT */

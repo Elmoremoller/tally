@@ -194,7 +194,7 @@ test("checkQuestions keeps a short hint and turns one over 120 characters into n
 });
 
 test("the question prompt is v5", () => {
-  assert.equal(QUESTIONS_PROMPT_VERSION, "beginner-questions-v5");
+  assert.equal(QUESTIONS_PROMPT_VERSION, "beginner-questions-v6");
 });
 
 test("readJob and writeQuestions give up quietly when the call isn't allowed", async () => {

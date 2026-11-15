@@ -16,11 +16,11 @@ import {
   toggleKind,
   mostOptions,
   skipsMost,
-  softwareOptions,
   PICK_MAX,
   PICKS_MAX,
   QAS_MAX,
   stepsFor,
+  whereOptions,
   type JobRead,
 } from "../../lib/beginner/quiz";
 
@@ -67,12 +67,13 @@ test("skipsMost skips a list of one, never the fallback list", () => {
   assert.equal(skipsMost({ options: ["One"], fallback: true }), false);
 });
 
-test("softwareOptions puts the job's software first, then the everyday set, each once whatever its case", () => {
-  const names = softwareOptions(read);
+test("whereOptions puts the job's apps first, then the fixed places, each once whatever its case", () => {
+  const names = whereOptions(read);
   assert.deepEqual(names.slice(0, 3), ["Outlook", "QuickBooks", "excel"]);
-  assert.equal(names.filter((n) => n.toLowerCase() === "excel").length, 1);
   assert.equal(names.filter((n) => n === "Outlook").length, 1);
-  assert.ok(names.includes("Google Drive") && names.includes("Teams"));
+  for (const place of ["Text messages", "Gmail", "Google Sheets", "Instagram", "A work system", "Paper", "In person"]) {
+    assert.ok(names.includes(place), place);
+  }
 });
 
 test("levelWords still reads her own words on answers saved before that row went", () => {
@@ -107,20 +108,30 @@ test("mostOptions offers at most six", () => {
 const starter = (level: "not_yet" | "tried") => stepsFor({ level, askedCount: null, worksForFromJob: "unclear" });
 const builder = (level: "uses" | "heavy") => stepsFor({ level, askedCount: null, worksForFromJob: "unclear" });
 
-test("a Starter sees at most 8 screens, in order", () => {
+test("a Starter sees at most 9 screens, in order, with the connect question last", () => {
   for (const level of ["not_yet", "tried"] as const) {
-    assert.deepEqual(starter(level), ["job", "level", "repeats", "most", "example", "device", "asked_1", "can_use"]);
-    assert.ok(starter(level).length <= 8);
+    assert.deepEqual(starter(level), ["job", "level", "repeats", "most", "example", "where", "asked_1", "can_use", "connect"]);
+    assert.ok(starter(level).length <= 9);
   }
 });
 
-test("a Builder sees at most 10 screens, in order", () => {
+test("a Builder sees at most 11 screens, in order, with the connect question last", () => {
   for (const level of ["uses", "heavy"] as const) {
     assert.deepEqual(builder(level), [
-      "job", "level", "done", "tools", "repeats", "most", "example", "apps", "asked_1", "can_use",
+      "job", "level", "done", "tools", "repeats", "most", "example", "where", "asked_1", "can_use", "connect",
     ]);
-    assert.ok(builder(level).length <= 10);
+    assert.ok(builder(level).length <= 11);
   }
+});
+
+test("the connect question is only for Yes or Not sure on Can you use AI for your work", () => {
+  const withAnswer = (canUse: "yes" | "not_sure" | "restricted" | "self") =>
+    stepsFor({ level: "tried", askedCount: 1, worksForFromJob: "employer", canUse });
+  assert.ok(withAnswer("yes").includes("connect"));
+  assert.ok(withAnswer("not_sure").includes("connect"));
+  assert.ok(!withAnswer("restricted").includes("connect"));
+  assert.ok(!withAnswer("self").includes("connect"));
+  assert.ok(!stepsFor({ level: "uses", askedCount: 1, worksForFromJob: "self" }).includes("connect"));
 });
 
 test("only the example screen is typed after her job", () => {
@@ -130,14 +141,14 @@ test("only the example screen is typed after her job", () => {
   }
 });
 
-test("Starters never see the Builder screens, and Builders never see phone or computer", () => {
-  for (const s of ["done", "tools", "apps"] as const) assert.ok(!starter("not_yet").includes(s));
-  assert.ok(!builder("heavy").includes("device"));
+test("Starters never see the Builder screens, and everyone sees where her work happens", () => {
+  for (const s of ["done", "tools"] as const) assert.ok(!starter("not_yet").includes(s));
+  for (const steps of [starter("tried"), builder("heavy")]) assert.ok(steps.includes("where"));
 });
 
 test("the screens that are gone stay gone", () => {
   for (const steps of [starter("not_yet"), starter("tried"), builder("uses"), builder("heavy")]) {
-    for (const gone of ["held_back", "picture", "ai_uses", "works_for", "policy"]) {
+    for (const gone of ["held_back", "picture", "ai_uses", "works_for", "policy", "apps", "device"]) {
       assert.ok(!(steps as string[]).includes(gone), gone);
     }
   }
@@ -221,7 +232,8 @@ test("the level labels follow DIRECTION.md and the fallback read follows the bri
   assert.equal(FALLBACK_JOB_READ.repeats.length, 5);
   assert.equal(FALLBACK_JOB_READ.aiFallback.length, 4);
   assert.equal(FALLBACK_JOB_READ.apps.length, 6);
-  assert.equal(softwareOptions(FALLBACK_JOB_READ).length, 14);
+  assert.equal(whereOptions(FALLBACK_JOB_READ).length, 12, "Instagram shows once, and Texts is the same as Text messages");
+  assert.ok(!whereOptions(FALLBACK_JOB_READ).includes("Texts"));
 });
 
 test("repeatsLine reads well for any count, and says nothing when AI can help with none", () => {
