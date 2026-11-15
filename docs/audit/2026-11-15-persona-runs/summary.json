@@ -1,0 +1,2226 @@
+{
+ "ranAt": "2026-11-15T19:04:09.584Z",
+ "versions": {
+  "job": "beginner-job-v5",
+  "questions": "beginner-questions-v6",
+  "intake": "beginner-intake-v8",
+  "path": "beginner-path-v1"
+ },
+ "runs": {
+  "beauty": {
+   "group": "restricted employee",
+   "screens": 8,
+   "checks": [
+    {
+     "id": "screens",
+     "pass": true,
+     "detail": "8 screens, at most 9 for a starter"
+    },
+    {
+     "id": "levels_in_code",
+     "pass": true,
+     "detail": "Every row has a level or waits"
+    },
+    {
+     "id": "level3_not_writing_help",
+     "pass": true,
+     "detail": "No line at level 3 or higher reads like writing help"
+    },
+    {
+     "id": "path_line_from_recipe",
+     "pass": true,
+     "detail": "Every line at level 3 or higher is its recipe's"
+    },
+    {
+     "id": "no_connect_without_ok",
+     "pass": true,
+     "detail": "No row connects a work app"
+    },
+    {
+     "id": "restricted_waits",
+     "pass": true,
+     "detail": "Every AI task waits or needs no AI at work"
+    },
+    {
+     "id": "path_written",
+     "pass": true,
+     "detail": "5 steps"
+    },
+    {
+     "id": "workflow_parts",
+     "pass": true,
+     "detail": "2 workflows, each with a test, an approval point and a cost line"
+    },
+    {
+     "id": "setup_from_recipe_or_card",
+     "pass": true,
+     "detail": "card claude_get_started, card claude_about_you, recipe phone_quick_replies, recipe phone_quick_replies"
+    },
+    {
+     "id": "no_click_paths_from_model",
+     "pass": true,
+     "detail": "The model wrote no menu paths or button names"
+    },
+    {
+     "id": "copy_rules",
+     "pass": true,
+     "detail": "No dashes, promised times, prices or percents"
+    },
+    {
+     "id": "offer_matches_path",
+     "pass": true,
+     "detail": "Offer names 2, path has 2 workflows, 2 match by name"
+    }
+   ],
+   "recipes": {
+    "total": 5,
+    "aiTasks": 3,
+    "withRecipe": [
+     {
+      "task": "Follow up texts",
+      "recipe": "phone_quick_replies",
+      "level": 3
+     },
+     {
+      "task": "Answering client messages",
+      "recipe": "phone_quick_replies",
+      "level": 3
+     }
+    ],
+    "without": [
+     {
+      "task": "Customer makeovers",
+      "level": 1,
+      "waits": false
+     },
+     {
+      "task": "Restocking the counter",
+      "level": 1,
+      "waits": false
+     },
+     {
+      "task": "Tracking commission sales",
+      "level": null,
+      "waits": true
+     }
+    ],
+    "noRecipe": false,
+    "mostlyAssistant": false
+   },
+   "designCount": {
+    "steps": 8,
+    "checked": 0,
+    "unchecked": 3,
+    "noApp": 5,
+    "badRefs": [],
+    "clickPaths": [],
+    "apps": [
+     [
+      "Your iPhone's keyboard settings",
+      2
+     ],
+     [
+      "Your paper client book",
+      1
+     ]
+    ],
+    "refs": []
+   },
+   "design2Count": null,
+   "pathRecipes": [
+    "phone_quick_replies",
+    "phone_quick_replies"
+   ],
+   "askOnly": false
+  },
+  "cashier": {
+   "group": "restricted employee",
+   "screens": 8,
+   "checks": [
+    {
+     "id": "screens",
+     "pass": true,
+     "detail": "8 screens, at most 9 for a starter"
+    },
+    {
+     "id": "levels_in_code",
+     "pass": true,
+     "detail": "Every row has a level or waits"
+    },
+    {
+     "id": "level3_not_writing_help",
+     "pass": true,
+     "detail": "No line at level 3 or higher reads like writing help"
+    },
+    {
+     "id": "path_line_from_recipe",
+     "pass": true,
+     "detail": "Every line at level 3 or higher is its recipe's"
+    },
+    {
+     "id": "no_connect_without_ok",
+     "pass": true,
+     "detail": "No row connects a work app"
+    },
+    {
+     "id": "restricted_waits",
+     "pass": true,
+     "detail": "Every AI task waits or needs no AI at work"
+    },
+    {
+     "id": "path_written",
+     "pass": true,
+     "detail": "4 steps"
+    },
+    {
+     "id": "workflow_parts",
+     "pass": true,
+     "detail": "1 workflows, each with a test, an approval point and a cost line"
+    },
+    {
+     "id": "setup_from_recipe_or_card",
+     "pass": true,
+     "detail": "card claude_get_started, card claude_about_you, recipe phone_quick_replies"
+    },
+    {
+     "id": "no_click_paths_from_model",
+     "pass": true,
+     "detail": "The model wrote no menu paths or button names"
+    },
+    {
+     "id": "copy_rules",
+     "pass": true,
+     "detail": "No dashes, promised times, prices or percents"
+    },
+    {
+     "id": "offer_matches_path",
+     "pass": true,
+     "detail": "Offer names 1, path has 1 workflows, 1 match by name"
+    }
+   ],
+   "recipes": {
+    "total": 4,
+    "aiTasks": 1,
+    "withRecipe": [
+     {
+      "task": "Answering messages",
+      "recipe": "phone_quick_replies",
+      "level": 3
+     }
+    ],
+    "without": [
+     {
+      "task": "Handling returns",
+      "level": 1,
+      "waits": false
+     },
+     {
+      "task": "Answering price questions",
+      "level": 1,
+      "waits": false
+     },
+     {
+      "task": "Counting the till",
+      "level": 1,
+      "waits": false
+     }
+    ],
+    "noRecipe": false,
+    "mostlyAssistant": false
+   },
+   "designCount": {
+    "steps": 4,
+    "checked": 0,
+    "unchecked": 1,
+    "noApp": 3,
+    "badRefs": [],
+    "clickPaths": [],
+    "apps": [
+     [
+      "Her phone's keyboard",
+      1
+     ]
+    ],
+    "refs": []
+   },
+   "design2Count": null,
+   "pathRecipes": [
+    "phone_quick_replies"
+   ],
+   "askOnly": false
+  },
+  "dental": {
+   "group": "allowed employee",
+   "screens": 9,
+   "checks": [
+    {
+     "id": "screens",
+     "pass": true,
+     "detail": "9 screens, at most 9 for a starter"
+    },
+    {
+     "id": "levels_in_code",
+     "pass": true,
+     "detail": "Every row has a level or waits"
+    },
+    {
+     "id": "level3_not_writing_help",
+     "pass": true,
+     "detail": "No line at level 3 or higher reads like writing help"
+    },
+    {
+     "id": "path_line_from_recipe",
+     "pass": true,
+     "detail": "Every line at level 3 or higher is its recipe's"
+    },
+    {
+     "id": "no_connect_without_ok",
+     "pass": true,
+     "detail": "No row connects a work app"
+    },
+    {
+     "id": "dental_top_level_3",
+     "pass": true,
+     "detail": "Top task Appointment reminders at level 3 with phone_quick_replies"
+    },
+    {
+     "id": "path_written",
+     "pass": true,
+     "detail": "5 steps"
+    },
+    {
+     "id": "workflow_parts",
+     "pass": true,
+     "detail": "2 workflows, each with a test, an approval point and a cost line"
+    },
+    {
+     "id": "setup_from_recipe_or_card",
+     "pass": true,
+     "detail": "card claude_get_started, card claude_about_you, recipe phone_quick_replies, recipe phone_quick_replies"
+    },
+    {
+     "id": "no_click_paths_from_model",
+     "pass": true,
+     "detail": "The model wrote no menu paths or button names"
+    },
+    {
+     "id": "copy_rules",
+     "pass": true,
+     "detail": "No dashes, promised times, prices or percents"
+    },
+    {
+     "id": "offer_matches_path",
+     "pass": true,
+     "detail": "Offer names 2, path has 2 workflows, 2 match by name"
+    }
+   ],
+   "recipes": {
+    "total": 6,
+    "aiTasks": 3,
+    "withRecipe": [
+     {
+      "task": "Appointment reminders",
+      "recipe": "phone_quick_replies",
+      "level": 3
+     },
+     {
+      "task": "Recall messages",
+      "recipe": "phone_quick_replies",
+      "level": 3
+     },
+     {
+      "task": "Rescheduling when a dentist is out",
+      "recipe": "phone_quick_replies",
+      "level": 3
+     }
+    ],
+    "without": [
+     {
+      "task": "Booking appointments",
+      "level": 1,
+      "waits": false
+     },
+     {
+      "task": "Answering phone calls",
+      "level": 1,
+      "waits": false
+     },
+     {
+      "task": "Checking insurance coverage",
+      "level": 1,
+      "waits": false
+     }
+    ],
+    "noRecipe": false,
+    "mostlyAssistant": false
+   },
+   "designCount": {
+    "steps": 8,
+    "checked": 4,
+    "unchecked": 0,
+    "noApp": 4,
+    "badRefs": [],
+    "clickPaths": [],
+    "apps": [],
+    "refs": [
+     "chatgpt_get_started",
+     "phone_quick_replies",
+     "chatgpt_project",
+     "saved_assistant"
+    ]
+   },
+   "design2Count": null,
+   "pathRecipes": [
+    "phone_quick_replies",
+    "phone_quick_replies"
+   ],
+   "askOnly": false
+  },
+  "jess": {
+   "group": "allowed employee",
+   "screens": 11,
+   "checks": [
+    {
+     "id": "screens",
+     "pass": true,
+     "detail": "11 screens, at most 11 for a builder"
+    },
+    {
+     "id": "levels_in_code",
+     "pass": true,
+     "detail": "Every row has a level or waits"
+    },
+    {
+     "id": "level3_not_writing_help",
+     "pass": true,
+     "detail": "No line at level 3 or higher reads like writing help"
+    },
+    {
+     "id": "path_line_from_recipe",
+     "pass": true,
+     "detail": "Every line at level 3 or higher is its recipe's"
+    },
+    {
+     "id": "vendor_level_4",
+     "pass": true,
+     "detail": "Follow up emails to vendors and clients at level 4"
+    },
+    {
+     "id": "path_written",
+     "pass": true,
+     "detail": "4 steps"
+    },
+    {
+     "id": "builder_no_sign_up",
+     "pass": true,
+     "detail": "No sign up step or line"
+    },
+    {
+     "id": "workflow_parts",
+     "pass": true,
+     "detail": "2 workflows, each with a test, an approval point and a cost line"
+    },
+    {
+     "id": "setup_from_recipe_or_card",
+     "pass": true,
+     "detail": "card chatgpt_about_you, recipe gmail_claude_follow_ups, recipe gmail_help_me_write"
+    },
+    {
+     "id": "no_click_paths_from_model",
+     "pass": true,
+     "detail": "The model wrote no menu paths or button names"
+    },
+    {
+     "id": "copy_rules",
+     "pass": true,
+     "detail": "No dashes, promised times, prices or percents"
+    },
+    {
+     "id": "offer_matches_path",
+     "pass": true,
+     "detail": "Offer names 2, path has 2 workflows, 2 match by name"
+    }
+   ],
+   "recipes": {
+    "total": 5,
+    "aiTasks": 4,
+    "withRecipe": [
+     {
+      "task": "Follow up emails to vendors and clients",
+      "recipe": "gmail_claude_follow_ups",
+      "level": 4
+     },
+     {
+      "task": "Answering messages",
+      "recipe": "gmail_help_me_write",
+      "level": 4
+     },
+     {
+      "task": "Building run of show",
+      "recipe": "saved_assistant",
+      "level": 3
+     },
+     {
+      "task": "Making lists",
+      "recipe": "notes_to_sheet",
+      "level": 3
+     }
+    ],
+    "without": [
+     {
+      "task": "Calling vendors",
+      "level": 1,
+      "waits": false
+     }
+    ],
+    "noRecipe": false,
+    "mostlyAssistant": false
+   },
+   "designCount": {
+    "steps": 11,
+    "checked": 9,
+    "unchecked": 0,
+    "noApp": 2,
+    "badRefs": [],
+    "clickPaths": [],
+    "apps": [],
+    "refs": [
+     "chatgpt_get_started",
+     "chatgpt_about_you",
+     "chatgpt_project",
+     "weekly_no_reply_list",
+     "gmail_claude_follow_ups",
+     "phone_quick_replies",
+     "say_it_out_loud",
+     "gmail_templates"
+    ]
+   },
+   "design2Count": {
+    "tasks": 5,
+    "stays": 1,
+    "steps": 11,
+    "checked": 11,
+    "unchecked": 0,
+    "linked": 0,
+    "noApp": 0,
+    "noFeature": 0,
+    "clickInGoal": [],
+    "clickPathsHidden": 0,
+    "apps": [],
+    "lowTasks": [
+     {
+      "task": "Calling vendors",
+      "level": 1,
+      "designed": true,
+      "stays": true,
+      "steps": 0,
+      "unchecked": 0
+     }
+    ],
+    "missingTasks": []
+   },
+   "pathRecipes": [
+    "gmail_claude_follow_ups",
+    "gmail_help_me_write"
+   ],
+   "askOnly": false
+  },
+  "kayla": {
+   "group": "self employed Starter",
+   "screens": 6,
+   "checks": [
+    {
+     "id": "screens",
+     "pass": true,
+     "detail": "6 screens, at most 9 for a starter"
+    },
+    {
+     "id": "levels_in_code",
+     "pass": true,
+     "detail": "Every row has a level or waits"
+    },
+    {
+     "id": "level3_not_writing_help",
+     "pass": true,
+     "detail": "No line at level 3 or higher reads like writing help"
+    },
+    {
+     "id": "path_line_from_recipe",
+     "pass": true,
+     "detail": "Every line at level 3 or higher is its recipe's"
+    },
+    {
+     "id": "quote_level_3",
+     "pass": true,
+     "detail": "Following up quotes at level 3"
+    },
+    {
+     "id": "path_written",
+     "pass": true,
+     "detail": "5 steps"
+    },
+    {
+     "id": "workflow_parts",
+     "pass": true,
+     "detail": "2 workflows, each with a test, an approval point and a cost line"
+    },
+    {
+     "id": "setup_from_recipe_or_card",
+     "pass": true,
+     "detail": "card claude_get_started, card claude_about_you, recipe say_it_out_loud, recipe phone_quick_replies"
+    },
+    {
+     "id": "no_click_paths_from_model",
+     "pass": true,
+     "detail": "The model wrote no menu paths or button names"
+    },
+    {
+     "id": "copy_rules",
+     "pass": true,
+     "detail": "No dashes, promised times, prices or percents"
+    },
+    {
+     "id": "offer_matches_path",
+     "pass": true,
+     "detail": "Offer names 2, path has 2 workflows, 2 match by name"
+    }
+   ],
+   "recipes": {
+    "total": 6,
+    "aiTasks": 6,
+    "withRecipe": [
+     {
+      "task": "Quoting jobs",
+      "recipe": "say_it_out_loud",
+      "level": 3
+     },
+     {
+      "task": "Texting homeowners",
+      "recipe": "phone_quick_replies",
+      "level": 3
+     },
+     {
+      "task": "Writing invoices",
+      "recipe": "say_it_out_loud",
+      "level": 3
+     },
+     {
+      "task": "Following up quotes",
+      "recipe": "phone_quick_replies",
+      "level": 3
+     },
+     {
+      "task": "Answering messages",
+      "recipe": "phone_quick_replies",
+      "level": 3
+     },
+     {
+      "task": "Chasing payment and asking for reviews",
+      "recipe": "phone_quick_replies",
+      "level": 3
+     }
+    ],
+    "without": [],
+    "noRecipe": false,
+    "mostlyAssistant": false
+   },
+   "designCount": {
+    "steps": 9,
+    "checked": 7,
+    "unchecked": 0,
+    "noApp": 2,
+    "badRefs": [],
+    "clickPaths": [],
+    "apps": [],
+    "refs": [
+     "chatgpt_get_started",
+     "chatgpt_about_you",
+     "saved_assistant",
+     "chatgpt_project",
+     "phone_quick_replies"
+    ]
+   },
+   "design2Count": null,
+   "pathRecipes": [
+    "say_it_out_loud",
+    "phone_quick_replies"
+   ],
+   "askOnly": false
+  },
+  "groomer": {
+   "group": "self employed Starter",
+   "screens": 7,
+   "checks": [
+    {
+     "id": "screens",
+     "pass": true,
+     "detail": "7 screens, at most 9 for a starter"
+    },
+    {
+     "id": "levels_in_code",
+     "pass": true,
+     "detail": "Every row has a level or waits"
+    },
+    {
+     "id": "level3_not_writing_help",
+     "pass": true,
+     "detail": "No line at level 3 or higher reads like writing help"
+    },
+    {
+     "id": "path_line_from_recipe",
+     "pass": true,
+     "detail": "Every line at level 3 or higher is its recipe's"
+    },
+    {
+     "id": "path_written",
+     "pass": true,
+     "detail": "5 steps"
+    },
+    {
+     "id": "workflow_parts",
+     "pass": true,
+     "detail": "2 workflows, each with a test, an approval point and a cost line"
+    },
+    {
+     "id": "setup_from_recipe_or_card",
+     "pass": true,
+     "detail": "card claude_get_started, card claude_about_you, recipe phone_quick_replies, recipe say_it_out_loud"
+    },
+    {
+     "id": "no_click_paths_from_model",
+     "pass": true,
+     "detail": "The model wrote no menu paths or button names"
+    },
+    {
+     "id": "copy_rules",
+     "pass": true,
+     "detail": "No dashes, promised times, prices or percents"
+    },
+    {
+     "id": "offer_matches_path",
+     "pass": true,
+     "detail": "Offer names 2, path has 2 workflows, 2 match by name"
+    }
+   ],
+   "recipes": {
+    "total": 6,
+    "aiTasks": 3,
+    "withRecipe": [
+     {
+      "task": "Answering owner messages",
+      "recipe": "phone_quick_replies",
+      "level": 3
+     },
+     {
+      "task": "Owner reminder texts",
+      "recipe": "phone_quick_replies",
+      "level": 3
+     },
+     {
+      "task": "Social posts",
+      "recipe": "say_it_out_loud",
+      "level": 3
+     }
+    ],
+    "without": [
+     {
+      "task": "Booking appointments",
+      "level": 1,
+      "waits": false
+     },
+     {
+      "task": "Bathing and drying dogs",
+      "level": 1,
+      "waits": false
+     },
+     {
+      "task": "Cutting and styling coats",
+      "level": 1,
+      "waits": false
+     }
+    ],
+    "noRecipe": false,
+    "mostlyAssistant": false
+   },
+   "designCount": {
+    "steps": 8,
+    "checked": 5,
+    "unchecked": 2,
+    "noApp": 1,
+    "badRefs": [],
+    "clickPaths": [],
+    "apps": [
+     [
+      "Google Calendar",
+      1
+     ],
+     [
+      "Instagram",
+      1
+     ]
+    ],
+    "refs": [
+     "chatgpt_get_started",
+     "phone_quick_replies",
+     "claude_get_started",
+     "claude_project",
+     "saved_assistant"
+    ]
+   },
+   "design2Count": null,
+   "pathRecipes": [
+    "phone_quick_replies",
+    "say_it_out_loud"
+   ],
+   "askOnly": false
+  },
+  "boutique": {
+   "group": "self employed Builder",
+   "screens": 9,
+   "checks": [
+    {
+     "id": "screens",
+     "pass": true,
+     "detail": "9 screens, at most 11 for a builder"
+    },
+    {
+     "id": "levels_in_code",
+     "pass": true,
+     "detail": "Every row has a level or waits"
+    },
+    {
+     "id": "level3_not_writing_help",
+     "pass": true,
+     "detail": "No line at level 3 or higher reads like writing help"
+    },
+    {
+     "id": "path_line_from_recipe",
+     "pass": true,
+     "detail": "Every line at level 3 or higher is its recipe's"
+    },
+    {
+     "id": "path_written",
+     "pass": true,
+     "detail": "4 steps"
+    },
+    {
+     "id": "builder_no_sign_up",
+     "pass": true,
+     "detail": "No sign up step or line"
+    },
+    {
+     "id": "workflow_parts",
+     "pass": true,
+     "detail": "2 workflows, each with a test, an approval point and a cost line"
+    },
+    {
+     "id": "setup_from_recipe_or_card",
+     "pass": true,
+     "detail": "card chatgpt_about_you, recipe phone_quick_replies, recipe say_it_out_loud"
+    },
+    {
+     "id": "no_click_paths_from_model",
+     "pass": true,
+     "detail": "The model wrote no menu paths or button names"
+    },
+    {
+     "id": "copy_rules",
+     "pass": true,
+     "detail": "No dashes, promised times, prices or percents"
+    },
+    {
+     "id": "offer_matches_path",
+     "pass": true,
+     "detail": "Offer names 2, path has 2 workflows, 2 match by name"
+    }
+   ],
+   "recipes": {
+    "total": 5,
+    "aiTasks": 3,
+    "withRecipe": [
+     {
+      "task": "Replies to customer messages",
+      "recipe": "phone_quick_replies",
+      "level": 3
+     },
+     {
+      "task": "Instagram captions",
+      "recipe": "say_it_out_loud",
+      "level": 3
+     },
+     {
+      "task": "Social posts",
+      "recipe": "say_it_out_loud",
+      "level": 3
+     }
+    ],
+    "without": [
+     {
+      "task": "Tagging and steaming new stock",
+      "level": 1,
+      "waits": false
+     },
+     {
+      "task": "Folding and restocking racks",
+      "level": 1,
+      "waits": false
+     }
+    ],
+    "noRecipe": false,
+    "mostlyAssistant": false
+   },
+   "designCount": {
+    "steps": 8,
+    "checked": 5,
+    "unchecked": 1,
+    "noApp": 2,
+    "badRefs": [],
+    "clickPaths": [],
+    "apps": [
+     [
+      "ChatGPT",
+      1
+     ]
+    ],
+    "refs": [
+     "chatgpt_get_started",
+     "phone_quick_replies",
+     "chatgpt_project",
+     "saved_assistant"
+    ]
+   },
+   "design2Count": null,
+   "pathRecipes": [
+    "phone_quick_replies",
+    "say_it_out_loud"
+   ],
+   "askOnly": false
+  },
+  "planner": {
+   "group": "self employed Builder",
+   "screens": 9,
+   "checks": [
+    {
+     "id": "screens",
+     "pass": true,
+     "detail": "9 screens, at most 11 for a builder"
+    },
+    {
+     "id": "levels_in_code",
+     "pass": true,
+     "detail": "Every row has a level or waits"
+    },
+    {
+     "id": "level3_not_writing_help",
+     "pass": true,
+     "detail": "No line at level 3 or higher reads like writing help"
+    },
+    {
+     "id": "path_line_from_recipe",
+     "pass": true,
+     "detail": "Every line at level 3 or higher is its recipe's"
+    },
+    {
+     "id": "gmail_builder_top_level_4",
+     "pass": true,
+     "detail": "Top task Answering messages at level 4 with gmail_help_me_write"
+    },
+    {
+     "id": "path_written",
+     "pass": true,
+     "detail": "3 steps"
+    },
+    {
+     "id": "builder_no_sign_up",
+     "pass": true,
+     "detail": "No sign up step or line"
+    },
+    {
+     "id": "workflow_parts",
+     "pass": true,
+     "detail": "2 workflows, each with a test, an approval point and a cost line"
+    },
+    {
+     "id": "setup_from_recipe_or_card",
+     "pass": true,
+     "detail": "recipe gmail_help_me_write, recipe gmail_claude_follow_ups"
+    },
+    {
+     "id": "no_click_paths_from_model",
+     "pass": true,
+     "detail": "The model wrote no menu paths or button names"
+    },
+    {
+     "id": "copy_rules",
+     "pass": true,
+     "detail": "No dashes, promised times, prices or percents"
+    },
+    {
+     "id": "offer_matches_path",
+     "pass": true,
+     "detail": "Offer names 2, path has 2 workflows, 2 match by name"
+    }
+   ],
+   "recipes": {
+    "total": 6,
+    "aiTasks": 6,
+    "withRecipe": [
+     {
+      "task": "Answering messages",
+      "recipe": "gmail_help_me_write",
+      "level": 4
+     },
+     {
+      "task": "Vendor booking emails",
+      "recipe": "gmail_templates",
+      "level": 3
+     },
+     {
+      "task": "Writing emails",
+      "recipe": "gmail_templates",
+      "level": 3
+     },
+     {
+      "task": "Making lists",
+      "recipe": "notes_to_sheet",
+      "level": 3
+     },
+     {
+      "task": "Chasing vendors",
+      "recipe": "gmail_claude_follow_ups",
+      "level": 4
+     }
+    ],
+    "without": [
+     {
+      "task": "Timeline planning",
+      "level": 2,
+      "waits": false
+     }
+    ],
+    "noRecipe": false,
+    "mostlyAssistant": false
+   },
+   "designCount": {
+    "steps": 8,
+    "checked": 6,
+    "unchecked": 0,
+    "noApp": 2,
+    "badRefs": [],
+    "clickPaths": [],
+    "apps": [],
+    "refs": [
+     "chatgpt_about_you",
+     "gmail_templates",
+     "gmail_help_me_write",
+     "chatgpt_get_started",
+     "weekly_no_reply_list",
+     "gmail_claude_follow_ups"
+    ]
+   },
+   "design2Count": {
+    "tasks": 6,
+    "stays": 0,
+    "steps": 14,
+    "checked": 11,
+    "unchecked": 3,
+    "linked": 3,
+    "noApp": 0,
+    "noFeature": 0,
+    "clickInGoal": [],
+    "clickPathsHidden": 0,
+    "apps": [
+     [
+      "Gmail",
+      {
+       "steps": 1,
+       "linked": 1
+      }
+     ],
+     [
+      "Google Sheets",
+      {
+       "steps": 1,
+       "linked": 1
+      }
+     ],
+     [
+      "ChatGPT",
+      {
+       "steps": 1,
+       "linked": 1
+      }
+     ]
+    ],
+    "lowTasks": [
+     {
+      "task": "Timeline planning",
+      "level": 2,
+      "designed": true,
+      "stays": false,
+      "steps": 3,
+      "unchecked": 2
+     }
+    ],
+    "missingTasks": []
+   },
+   "pathRecipes": [
+    "gmail_help_me_write",
+    "gmail_claude_follow_ups"
+   ],
+   "askOnly": false
+  },
+  "social_new": {
+   "group": "experiment",
+   "screens": 9,
+   "checks": [
+    {
+     "id": "screens",
+     "pass": true,
+     "detail": "9 screens, at most 9 for a starter"
+    },
+    {
+     "id": "levels_in_code",
+     "pass": true,
+     "detail": "Every row has a level or waits"
+    },
+    {
+     "id": "level3_not_writing_help",
+     "pass": true,
+     "detail": "No line at level 3 or higher reads like writing help"
+    },
+    {
+     "id": "path_line_from_recipe",
+     "pass": true,
+     "detail": "Every line at level 3 or higher is its recipe's"
+    },
+    {
+     "id": "no_connect_without_ok",
+     "pass": true,
+     "detail": "No row connects a work app"
+    },
+    {
+     "id": "not_sure_ask_first",
+     "pass": true,
+     "detail": "Every task AI touches says to ask first"
+    },
+    {
+     "id": "path_written",
+     "pass": true,
+     "detail": "5 steps"
+    },
+    {
+     "id": "workflow_parts",
+     "pass": true,
+     "detail": "2 workflows, each with a test, an approval point and a cost line"
+    },
+    {
+     "id": "setup_from_recipe_or_card",
+     "pass": true,
+     "detail": "card claude_get_started, card claude_about_you, recipe saved_assistant, recipe phone_quick_replies"
+    },
+    {
+     "id": "no_click_paths_from_model",
+     "pass": true,
+     "detail": "The model wrote no menu paths or button names"
+    },
+    {
+     "id": "copy_rules",
+     "pass": true,
+     "detail": "No dashes, promised times, prices or percents"
+    },
+    {
+     "id": "offer_matches_path",
+     "pass": true,
+     "detail": "Offer names 2, path has 2 workflows, 2 match by name"
+    }
+   ],
+   "recipes": {
+    "total": 5,
+    "aiTasks": 5,
+    "withRecipe": [
+     {
+      "task": "Post captions",
+      "recipe": "saved_assistant",
+      "level": 3
+     },
+     {
+      "task": "Comment replies",
+      "recipe": "phone_quick_replies",
+      "level": 3
+     },
+     {
+      "task": "Direct messages",
+      "recipe": "phone_quick_replies",
+      "level": 3
+     },
+     {
+      "task": "Emails",
+      "recipe": "gmail_templates",
+      "level": 3
+     }
+    ],
+    "without": [
+     {
+      "task": "Weekly content planning",
+      "level": 2,
+      "waits": false
+     }
+    ],
+    "noRecipe": false,
+    "mostlyAssistant": false
+   },
+   "designCount": {
+    "steps": 9,
+    "checked": 4,
+    "unchecked": 0,
+    "noApp": 5,
+    "badRefs": [],
+    "clickPaths": [],
+    "apps": [],
+    "refs": [
+     "chatgpt_get_started",
+     "saved_assistant",
+     "phone_quick_replies"
+    ]
+   },
+   "design2Count": {
+    "tasks": 5,
+    "stays": 0,
+    "steps": 15,
+    "checked": 8,
+    "unchecked": 2,
+    "linked": 2,
+    "noApp": 5,
+    "noFeature": 0,
+    "clickInGoal": [],
+    "clickPathsHidden": 0,
+    "apps": [
+     [
+      "ChatGPT",
+      {
+       "steps": 1,
+       "linked": 1
+      }
+     ],
+     [
+      "Google Sheets",
+      {
+       "steps": 1,
+       "linked": 1
+      }
+     ]
+    ],
+    "lowTasks": [
+     {
+      "task": "Weekly content planning",
+      "level": 2,
+      "designed": true,
+      "stays": false,
+      "steps": 4,
+      "unchecked": 1
+     }
+    ],
+    "missingTasks": []
+   },
+   "pathRecipes": [
+    "saved_assistant",
+    "phone_quick_replies"
+   ],
+   "askOnly": false
+  },
+  "social_canva": {
+   "group": "experiment",
+   "screens": 11,
+   "checks": [
+    {
+     "id": "screens",
+     "pass": true,
+     "detail": "11 screens, at most 11 for a builder"
+    },
+    {
+     "id": "levels_in_code",
+     "pass": true,
+     "detail": "Every row has a level or waits"
+    },
+    {
+     "id": "level3_not_writing_help",
+     "pass": true,
+     "detail": "No line at level 3 or higher reads like writing help"
+    },
+    {
+     "id": "path_line_from_recipe",
+     "pass": true,
+     "detail": "Every line at level 3 or higher is its recipe's"
+    },
+    {
+     "id": "path_written",
+     "pass": true,
+     "detail": "4 steps"
+    },
+    {
+     "id": "builder_no_sign_up",
+     "pass": true,
+     "detail": "No sign up step or line"
+    },
+    {
+     "id": "workflow_parts",
+     "pass": true,
+     "detail": "2 workflows, each with a test, an approval point and a cost line"
+    },
+    {
+     "id": "setup_from_recipe_or_card",
+     "pass": true,
+     "detail": "card chatgpt_about_you, recipe saved_assistant, recipe phone_quick_replies"
+    },
+    {
+     "id": "no_click_paths_from_model",
+     "pass": true,
+     "detail": "The model wrote no menu paths or button names"
+    },
+    {
+     "id": "copy_rules",
+     "pass": true,
+     "detail": "No dashes, promised times, prices or percents"
+    },
+    {
+     "id": "offer_matches_path",
+     "pass": true,
+     "detail": "Offer names 2, path has 2 workflows, 2 match by name"
+    }
+   ],
+   "recipes": {
+    "total": 6,
+    "aiTasks": 5,
+    "withRecipe": [
+     {
+      "task": "Writing captions",
+      "recipe": "saved_assistant",
+      "level": 3
+     },
+     {
+      "task": "Replying to comments",
+      "recipe": "phone_quick_replies",
+      "level": 3
+     },
+     {
+      "task": "Answering messages",
+      "recipe": "phone_quick_replies",
+      "level": 3
+     },
+     {
+      "task": "Writing emails",
+      "recipe": "gmail_templates",
+      "level": 3
+     }
+    ],
+    "without": [
+     {
+      "task": "Designing posts in Canva",
+      "level": 1,
+      "waits": false
+     },
+     {
+      "task": "Planning the content calendar",
+      "level": 2,
+      "waits": false
+     }
+    ],
+    "noRecipe": false,
+    "mostlyAssistant": false
+   },
+   "designCount": {
+    "steps": 9,
+    "checked": 7,
+    "unchecked": 0,
+    "noApp": 2,
+    "badRefs": [],
+    "clickPaths": [],
+    "apps": [],
+    "refs": [
+     "chatgpt_get_started",
+     "chatgpt_about_you",
+     "chatgpt_project",
+     "saved_assistant",
+     "phone_quick_replies"
+    ]
+   },
+   "design2Count": {
+    "tasks": 6,
+    "stays": 1,
+    "steps": 13,
+    "checked": 6,
+    "unchecked": 7,
+    "linked": 3,
+    "noApp": 0,
+    "noFeature": 0,
+    "clickInGoal": [],
+    "clickPathsHidden": 0,
+    "apps": [
+     [
+      "ChatGPT",
+      {
+       "steps": 5,
+       "linked": 2
+      }
+     ],
+     [
+      "Google Sheets",
+      {
+       "steps": 2,
+       "linked": 1
+      }
+     ]
+    ],
+    "lowTasks": [
+     {
+      "task": "Designing posts in Canva",
+      "level": 1,
+      "designed": true,
+      "stays": true,
+      "steps": 0,
+      "unchecked": 0
+     },
+     {
+      "task": "Planning the content calendar",
+      "level": 2,
+      "designed": true,
+      "stays": false,
+      "steps": 3,
+      "unchecked": 2
+     }
+    ],
+    "missingTasks": []
+   },
+   "pathRecipes": [
+    "saved_assistant",
+    "phone_quick_replies"
+   ],
+   "askOnly": false
+  },
+  "hr": {
+   "group": "experiment",
+   "screens": 9,
+   "checks": [
+    {
+     "id": "screens",
+     "pass": true,
+     "detail": "9 screens, at most 9 for a starter"
+    },
+    {
+     "id": "levels_in_code",
+     "pass": true,
+     "detail": "Every row has a level or waits"
+    },
+    {
+     "id": "level3_not_writing_help",
+     "pass": true,
+     "detail": "No line at level 3 or higher reads like writing help"
+    },
+    {
+     "id": "path_line_from_recipe",
+     "pass": true,
+     "detail": "Every line at level 3 or higher is its recipe's"
+    },
+    {
+     "id": "no_connect_without_ok",
+     "pass": true,
+     "detail": "No row connects a work app"
+    },
+    {
+     "id": "not_sure_ask_first",
+     "pass": true,
+     "detail": "Every task AI touches says to ask first"
+    },
+    {
+     "id": "path_written",
+     "pass": true,
+     "detail": "5 steps"
+    },
+    {
+     "id": "workflow_parts",
+     "pass": true,
+     "detail": "2 workflows, each with a test, an approval point and a cost line"
+    },
+    {
+     "id": "setup_from_recipe_or_card",
+     "pass": true,
+     "detail": "card claude_get_started, card claude_about_you, Tally's own steps for writing with AI, Tally's own steps for writing with AI"
+    },
+    {
+     "id": "no_click_paths_from_model",
+     "pass": true,
+     "detail": "The model wrote no menu paths or button names"
+    },
+    {
+     "id": "copy_rules",
+     "pass": true,
+     "detail": "No dashes, promised times, prices or percents"
+    },
+    {
+     "id": "offer_matches_path",
+     "pass": true,
+     "detail": "Offer names 2, path has 2 workflows, 2 match by name"
+    }
+   ],
+   "recipes": {
+    "total": 3,
+    "aiTasks": 3,
+    "withRecipe": [],
+    "without": [
+     {
+      "task": "Answering benefits questions",
+      "level": 2,
+      "waits": false
+     },
+     {
+      "task": "Onboarding new hires",
+      "level": 2,
+      "waits": false
+     },
+     {
+      "task": "Writing emails",
+      "level": 2,
+      "waits": false
+     }
+    ],
+    "noRecipe": true,
+    "mostlyAssistant": false
+   },
+   "designCount": {
+    "steps": 12,
+    "checked": 7,
+    "unchecked": 0,
+    "noApp": 5,
+    "badRefs": [],
+    "clickPaths": [],
+    "apps": [],
+    "refs": [
+     "claude_get_started",
+     "claude_project",
+     "saved_assistant",
+     "chatgpt_get_started",
+     "chatgpt_about_you",
+     "say_it_out_loud"
+    ]
+   },
+   "design2Count": {
+    "tasks": 3,
+    "stays": 0,
+    "steps": 14,
+    "checked": 6,
+    "unchecked": 4,
+    "linked": 3,
+    "noApp": 4,
+    "noFeature": 1,
+    "clickInGoal": [],
+    "clickPathsHidden": 0,
+    "apps": [
+     [
+      "Outlook",
+      {
+       "steps": 2,
+       "linked": 2
+      }
+     ],
+     [
+      "Microsoft Word",
+      {
+       "steps": 1,
+       "linked": 0
+      }
+     ],
+     [
+      "Excel",
+      {
+       "steps": 1,
+       "linked": 1
+      }
+     ]
+    ],
+    "lowTasks": [
+     {
+      "task": "Answering benefits questions",
+      "level": 2,
+      "designed": true,
+      "stays": false,
+      "steps": 5,
+      "unchecked": 1
+     },
+     {
+      "task": "Onboarding new hires",
+      "level": 2,
+      "designed": true,
+      "stays": false,
+      "steps": 5,
+      "unchecked": 2
+     },
+     {
+      "task": "Writing emails",
+      "level": 2,
+      "designed": true,
+      "stays": false,
+      "steps": 4,
+      "unchecked": 1
+     }
+    ],
+    "missingTasks": []
+   },
+   "pathRecipes": [
+    "with_ai",
+    "with_ai"
+   ],
+   "askOnly": false
+  },
+  "ecom": {
+   "group": "experiment",
+   "screens": 11,
+   "checks": [
+    {
+     "id": "screens",
+     "pass": true,
+     "detail": "11 screens, at most 11 for a builder"
+    },
+    {
+     "id": "levels_in_code",
+     "pass": true,
+     "detail": "Every row has a level or waits"
+    },
+    {
+     "id": "level3_not_writing_help",
+     "pass": true,
+     "detail": "No line at level 3 or higher reads like writing help"
+    },
+    {
+     "id": "path_line_from_recipe",
+     "pass": true,
+     "detail": "Every line at level 3 or higher is its recipe's"
+    },
+    {
+     "id": "path_written",
+     "pass": true,
+     "detail": "4 steps"
+    },
+    {
+     "id": "builder_no_sign_up",
+     "pass": true,
+     "detail": "No sign up step or line"
+    },
+    {
+     "id": "workflow_parts",
+     "pass": true,
+     "detail": "2 workflows, each with a test, an approval point and a cost line"
+    },
+    {
+     "id": "setup_from_recipe_or_card",
+     "pass": true,
+     "detail": "card chatgpt_about_you, recipe saved_assistant, recipe gmail_help_me_write"
+    },
+    {
+     "id": "no_click_paths_from_model",
+     "pass": true,
+     "detail": "The model wrote no menu paths or button names"
+    },
+    {
+     "id": "copy_rules",
+     "pass": true,
+     "detail": "No dashes, promised times, prices or percents"
+    },
+    {
+     "id": "offer_matches_path",
+     "pass": true,
+     "detail": "Offer names 2, path has 2 workflows, 2 match by name"
+    }
+   ],
+   "recipes": {
+    "total": 5,
+    "aiTasks": 5,
+    "withRecipe": [
+     {
+      "task": "Product descriptions",
+      "recipe": "saved_assistant",
+      "level": 3
+     },
+     {
+      "task": "Product listing updates",
+      "recipe": "saved_assistant",
+      "level": 3
+     },
+     {
+      "task": "Promo emails",
+      "recipe": "gmail_templates",
+      "level": 3
+     },
+     {
+      "task": "Customer message replies",
+      "recipe": "gmail_help_me_write",
+      "level": 4
+     }
+    ],
+    "without": [
+     {
+      "task": "Weekly sales numbers",
+      "level": 2,
+      "waits": false
+     }
+    ],
+    "noRecipe": false,
+    "mostlyAssistant": false
+   },
+   "designCount": {
+    "steps": 10,
+    "checked": 6,
+    "unchecked": 2,
+    "noApp": 2,
+    "badRefs": [],
+    "clickPaths": [],
+    "apps": [
+     [
+      "Shopify",
+      1
+     ],
+     [
+      "Gorgias",
+      1
+     ]
+    ],
+    "refs": [
+     "claude_get_started",
+     "claude_project",
+     "saved_assistant",
+     "chatgpt_get_started",
+     "chatgpt_project"
+    ]
+   },
+   "design2Count": {
+    "tasks": 5,
+    "stays": 0,
+    "steps": 14,
+    "checked": 8,
+    "unchecked": 6,
+    "linked": 6,
+    "noApp": 0,
+    "noFeature": 0,
+    "clickInGoal": [],
+    "clickPathsHidden": 0,
+    "apps": [
+     [
+      "Shopify",
+      {
+       "steps": 2,
+       "linked": 2
+      }
+     ],
+     [
+      "ChatGPT",
+      {
+       "steps": 1,
+       "linked": 1
+      }
+     ],
+     [
+      "Klaviyo",
+      {
+       "steps": 1,
+       "linked": 1
+      }
+     ],
+     [
+      "Gmail",
+      {
+       "steps": 1,
+       "linked": 1
+      }
+     ],
+     [
+      "Google Sheets",
+      {
+       "steps": 1,
+       "linked": 1
+      }
+     ]
+    ],
+    "lowTasks": [
+     {
+      "task": "Weekly sales numbers",
+      "level": 2,
+      "designed": true,
+      "stays": false,
+      "steps": 3,
+      "unchecked": 2
+     }
+    ],
+    "missingTasks": []
+   },
+   "pathRecipes": [
+    "saved_assistant",
+    "gmail_help_me_write"
+   ],
+   "askOnly": false
+  }
+ },
+ "similarity": [
+  {
+   "a": "jess",
+   "b": "planner",
+   "recipes": 1,
+   "steps": 0.75,
+   "words": 0.4
+  },
+  {
+   "a": "groomer",
+   "b": "boutique",
+   "recipes": 1,
+   "steps": 0.8,
+   "words": 0.36
+  },
+  {
+   "a": "social_new",
+   "b": "social_canva",
+   "recipes": 1,
+   "steps": 0.8,
+   "words": 0.34
+  },
+  {
+   "a": "beauty",
+   "b": "dental",
+   "recipes": 1,
+   "steps": 1,
+   "words": 0.32
+  },
+  {
+   "a": "jess",
+   "b": "ecom",
+   "recipes": 0.33,
+   "steps": 0.6,
+   "words": 0.32
+  },
+  {
+   "a": "dental",
+   "b": "hr",
+   "recipes": 0,
+   "steps": 0.5,
+   "words": 0.31
+  },
+  {
+   "a": "jess",
+   "b": "hr",
+   "recipes": 0,
+   "steps": 0.33,
+   "words": 0.31
+  },
+  {
+   "a": "groomer",
+   "b": "dental",
+   "recipes": 0.5,
+   "steps": 0.67,
+   "words": 0.3
+  },
+  {
+   "a": "groomer",
+   "b": "kayla",
+   "recipes": 1,
+   "steps": 1,
+   "words": 0.3
+  },
+  {
+   "a": "beauty",
+   "b": "boutique",
+   "recipes": 0.5,
+   "steps": 0.5,
+   "words": 0.3
+  },
+  {
+   "a": "planner",
+   "b": "ecom",
+   "recipes": 0.33,
+   "steps": 0.4,
+   "words": 0.3
+  },
+  {
+   "a": "beauty",
+   "b": "social_canva",
+   "recipes": 0.5,
+   "steps": 0.5,
+   "words": 0.29
+  },
+  {
+   "a": "cashier",
+   "b": "dental",
+   "recipes": 1,
+   "steps": 0.8,
+   "words": 0.29
+  },
+  {
+   "a": "cashier",
+   "b": "boutique",
+   "recipes": 0.5,
+   "steps": 0.6,
+   "words": 0.29
+  },
+  {
+   "a": "dental",
+   "b": "boutique",
+   "recipes": 0.5,
+   "steps": 0.5,
+   "words": 0.29
+  },
+  {
+   "a": "jess",
+   "b": "social_canva",
+   "recipes": 0,
+   "steps": 0.33,
+   "words": 0.29
+  },
+  {
+   "a": "kayla",
+   "b": "boutique",
+   "recipes": 1,
+   "steps": 0.8,
+   "words": 0.29
+  },
+  {
+   "a": "boutique",
+   "b": "social_canva",
+   "recipes": 0.33,
+   "steps": 0.6,
+   "words": 0.29
+  },
+  {
+   "a": "social_canva",
+   "b": "ecom",
+   "recipes": 0.33,
+   "steps": 0.6,
+   "words": 0.29
+  },
+  {
+   "a": "groomer",
+   "b": "beauty",
+   "recipes": 0.5,
+   "steps": 0.67,
+   "words": 0.28
+  },
+  {
+   "a": "cashier",
+   "b": "hr",
+   "recipes": 0,
+   "steps": 0.6,
+   "words": 0.28
+  },
+  {
+   "a": "groomer",
+   "b": "cashier",
+   "recipes": 0.5,
+   "steps": 0.8,
+   "words": 0.27
+  },
+  {
+   "a": "groomer",
+   "b": "planner",
+   "recipes": 0,
+   "steps": 0.14,
+   "words": 0.27
+  },
+  {
+   "a": "groomer",
+   "b": "social_new",
+   "recipes": 0.33,
+   "steps": 0.67,
+   "words": 0.27
+  },
+  {
+   "a": "groomer",
+   "b": "social_canva",
+   "recipes": 0.33,
+   "steps": 0.5,
+   "words": 0.27
+  },
+  {
+   "a": "beauty",
+   "b": "cashier",
+   "recipes": 1,
+   "steps": 0.8,
+   "words": 0.27
+  },
+  {
+   "a": "beauty",
+   "b": "jess",
+   "recipes": 0,
+   "steps": 0.29,
+   "words": 0.27
+  },
+  {
+   "a": "beauty",
+   "b": "planner",
+   "recipes": 0,
+   "steps": 0.14,
+   "words": 0.27
+  },
+  {
+   "a": "cashier",
+   "b": "social_new",
+   "recipes": 0.5,
+   "steps": 0.8,
+   "words": 0.27
+  },
+  {
+   "a": "cashier",
+   "b": "social_canva",
+   "recipes": 0.5,
+   "steps": 0.6,
+   "words": 0.27
+  },
+  {
+   "a": "dental",
+   "b": "social_canva",
+   "recipes": 0.5,
+   "steps": 0.5,
+   "words": 0.27
+  },
+  {
+   "a": "boutique",
+   "b": "social_new",
+   "recipes": 0.33,
+   "steps": 0.5,
+   "words": 0.27
+  },
+  {
+   "a": "planner",
+   "b": "hr",
+   "recipes": 0,
+   "steps": 0.17,
+   "words": 0.27
+  },
+  {
+   "a": "social_new",
+   "b": "hr",
+   "recipes": 0,
+   "steps": 0.5,
+   "words": 0.27
+  },
+  {
+   "a": "hr",
+   "b": "ecom",
+   "recipes": 0,
+   "steps": 0.33,
+   "words": 0.27
+  },
+  {
+   "a": "cashier",
+   "b": "kayla",
+   "recipes": 0.5,
+   "steps": 0.8,
+   "words": 0.26
+  },
+  {
+   "a": "dental",
+   "b": "jess",
+   "recipes": 0,
+   "steps": 0.29,
+   "words": 0.26
+  },
+  {
+   "a": "jess",
+   "b": "social_new",
+   "recipes": 0,
+   "steps": 0.29,
+   "words": 0.26
+  },
+  {
+   "a": "kayla",
+   "b": "planner",
+   "recipes": 0,
+   "steps": 0.14,
+   "words": 0.26
+  },
+  {
+   "a": "boutique",
+   "b": "planner",
+   "recipes": 0,
+   "steps": 0.17,
+   "words": 0.26
+  },
+  {
+   "a": "planner",
+   "b": "social_canva",
+   "recipes": 0,
+   "steps": 0.17,
+   "words": 0.26
+  },
+  {
+   "a": "social_canva",
+   "b": "hr",
+   "recipes": 0,
+   "steps": 0.33,
+   "words": 0.26
+  },
+  {
+   "a": "groomer",
+   "b": "jess",
+   "recipes": 0,
+   "steps": 0.29,
+   "words": 0.25
+  },
+  {
+   "a": "beauty",
+   "b": "kayla",
+   "recipes": 0.5,
+   "steps": 0.67,
+   "words": 0.25
+  },
+  {
+   "a": "beauty",
+   "b": "social_new",
+   "recipes": 0.5,
+   "steps": 0.67,
+   "words": 0.25
+  },
+  {
+   "a": "beauty",
+   "b": "hr",
+   "recipes": 0,
+   "steps": 0.5,
+   "words": 0.25
+  },
+  {
+   "a": "beauty",
+   "b": "ecom",
+   "recipes": 0,
+   "steps": 0.29,
+   "words": 0.25
+  },
+  {
+   "a": "cashier",
+   "b": "jess",
+   "recipes": 0,
+   "steps": 0.33,
+   "words": 0.25
+  },
+  {
+   "a": "dental",
+   "b": "kayla",
+   "recipes": 0.5,
+   "steps": 0.67,
+   "words": 0.25
+  },
+  {
+   "a": "boutique",
+   "b": "ecom",
+   "recipes": 0,
+   "steps": 0.33,
+   "words": 0.25
+  },
+  {
+   "a": "social_new",
+   "b": "ecom",
+   "recipes": 0.33,
+   "steps": 0.5,
+   "words": 0.25
+  },
+  {
+   "a": "groomer",
+   "b": "hr",
+   "recipes": 0,
+   "steps": 0.5,
+   "words": 0.24
+  },
+  {
+   "a": "cashier",
+   "b": "planner",
+   "recipes": 0,
+   "steps": 0.17,
+   "words": 0.24
+  },
+  {
+   "a": "jess",
+   "b": "kayla",
+   "recipes": 0,
+   "steps": 0.29,
+   "words": 0.24
+  },
+  {
+   "a": "jess",
+   "b": "boutique",
+   "recipes": 0,
+   "steps": 0.33,
+   "words": 0.24
+  },
+  {
+   "a": "kayla",
+   "b": "social_new",
+   "recipes": 0.33,
+   "steps": 0.67,
+   "words": 0.24
+  },
+  {
+   "a": "groomer",
+   "b": "ecom",
+   "recipes": 0,
+   "steps": 0.29,
+   "words": 0.23
+  },
+  {
+   "a": "cashier",
+   "b": "ecom",
+   "recipes": 0,
+   "steps": 0.33,
+   "words": 0.23
+  },
+  {
+   "a": "dental",
+   "b": "planner",
+   "recipes": 0,
+   "steps": 0.14,
+   "words": 0.23
+  },
+  {
+   "a": "dental",
+   "b": "social_new",
+   "recipes": 0.5,
+   "steps": 0.67,
+   "words": 0.23
+  },
+  {
+   "a": "kayla",
+   "b": "social_canva",
+   "recipes": 0.33,
+   "steps": 0.5,
+   "words": 0.23
+  },
+  {
+   "a": "kayla",
+   "b": "hr",
+   "recipes": 0,
+   "steps": 0.5,
+   "words": 0.23
+  },
+  {
+   "a": "boutique",
+   "b": "hr",
+   "recipes": 0,
+   "steps": 0.33,
+   "words": 0.23
+  },
+  {
+   "a": "planner",
+   "b": "social_new",
+   "recipes": 0,
+   "steps": 0.14,
+   "words": 0.23
+  },
+  {
+   "a": "dental",
+   "b": "ecom",
+   "recipes": 0,
+   "steps": 0.29,
+   "words": 0.2
+  },
+  {
+   "a": "kayla",
+   "b": "ecom",
+   "recipes": 0,
+   "steps": 0.29,
+   "words": 0.2
+  }
+ ]
+}

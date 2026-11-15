@@ -26,7 +26,9 @@ import {
 // key as lib/intake.ts. Phase 2 of docs/DIRECTION.md. From Phase 5 it also names each task's kind, from a fixed
 // list the code checks, so the code can choose its level and recipe (lib/beginner/levels.ts).
 
-export const BEGINNER_INTAKE_VERSION = "beginner-intake-v7";
+// v8 (2026-11-15, after the Phase 7 runs): clearer rules for texts or email, spoken writing, awaiting replies,
+// and no kind for a task done in person.
+export const BEGINNER_INTAKE_VERSION = "beginner-intake-v8";
 
 export type BeginnerIntakeInput = {
   job: string;
@@ -79,7 +81,11 @@ Tasks:
 - private: true when doing it with AI would mean typing in private details about other people, like patients, students, clients, customers or staff, or confidential company information like financials. False when a version with no names and no private details works just as well, like a template with blanks.
 - kind: what kind of task it is, from this list, or "none":
 ${KIND_LINES}
-  Pick a kind only when the task plainly is that kind. The task itself says how it goes, by text, by email or on paper, and her answer on where her work happens says which apps she uses: replies she sends by text, WhatsApp or Instagram are repeat_texts, and replies to emails in her inbox are email_replies. When no kind fits well, or ai is false, use "none". Never stretch a task to fit a kind.
+  Pick a kind only when the task plainly is that kind. The task itself says how it goes, by text, by email or on paper, and her answer on where her work happens says which apps she uses. Decide it like this:
+  - Texts or email: messages she sends by text, WhatsApp, Instagram or another chat app are repeat_texts. Anything that comes in or goes out through her inbox, like inquiries, client emails or vendor emails, is an email kind and never repeat_texts: repeat_emails for the same few emails again and again, email_replies for replies that each need a little thought, email_follow_ups for writing the emails that chase people. When it is not clear whether a task goes by text or by email and she uses Gmail or Outlook for work, it is an email kind.
+  - spoken_writing: longer writing she could say out loud faster than she could type it, like quotes, job notes, visit reports or descriptions, when she says she talks it through or dictates it, or does it on her phone between jobs, in a truck or on her feet.
+  - awaiting_replies: keeping track of who has not answered her emails yet, like vendors, clients or applicants she is waiting on. Writing the chase itself is email_follow_ups.
+  - "none": a task done in person or with her hands, face to face, at a till, counter or chair with someone in front of her, even when words are said, like handling returns at the register or answering questions at the counter. Also "none" when no kind fits well, or ai is false. Never stretch a task to fit a kind.
 
 first_win: one of her tasks, done for her now.
 - task: the exact name of one of the tasks above, with ai true. Pick what she most wants to make easier whenever a chat assistant can help with it and it needs no private details. When doing it in full would need private details, still pick it and draft a version that needs none: a text, reply or message she can reuse, with blanks like [first name], [day] or [item]. Pick another task only when no such version would help her. Otherwise pick one that needs no private details, is about writing or planning, and that she does often. If every task is private, pick the one that works best as a template with blanks.

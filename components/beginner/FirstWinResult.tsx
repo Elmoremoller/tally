@@ -73,7 +73,7 @@ export function FirstWinResult({
               </div>
             </dl>
             {m.held ? <p className="win-map-why">{levelCopy.held[m.held]}</p> : null}
-            {m.askFirst ? <p className="win-map-why">{levelCopy.askFirst}</p> : null}
+            {m.askFirst ? <p className="win-map-why">{restricted ? levelCopy.askFirst : levelCopy.askFirstNotSure}</p> : null}
             {m.task === firstWin.task ? <SeeIt firstWin={firstWin} /> : null}
           </li>
         ))}

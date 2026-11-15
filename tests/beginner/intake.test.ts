@@ -64,7 +64,7 @@ const raw = () => ({
 });
 
 test("the prompt version is v7", () => {
-  assert.equal(BEGINNER_INTAKE_VERSION, "beginner-intake-v7");
+  assert.equal(BEGINNER_INTAKE_VERSION, "beginner-intake-v8");
 });
 
 test("beginnerHers holds her job, every pick and typed answer, and the follow up answer, but not the titles", () => {
@@ -480,4 +480,11 @@ test("the prompt lists every kind and lets a task have none rather than a forced
 test("the prompt keeps with_path to asking AI each time, since the code writes the line for a saved setup", () => {
   assert.match(BEGINNER_INTAKE_SYSTEM, /Never name a saved project, saved instructions, a template, a connected app or a routine/);
   assert.doesNotMatch(BEGINNER_INTAKE_SYSTEM, /name the kind of setup it becomes/);
+});
+
+test("the final read is told when a task is email, spoken writing, awaiting replies, or none because it is in person", () => {
+  assert.ok(BEGINNER_INTAKE_SYSTEM.includes("is an email kind and never repeat_texts"));
+  assert.ok(BEGINNER_INTAKE_SYSTEM.includes("- spoken_writing: longer writing she could say out loud"));
+  assert.ok(BEGINNER_INTAKE_SYSTEM.includes("- awaiting_replies: keeping track of who has not answered"));
+  assert.ok(BEGINNER_INTAKE_SYSTEM.includes("like handling returns at the register"));
 });

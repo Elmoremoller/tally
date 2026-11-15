@@ -549,6 +549,8 @@ export const levelCopy = {
    */
   forTask: (phrase: string, line: string) => `For your ${phrase}, ${line.charAt(0).toLowerCase()}${line.slice(1)}`,
   askFirst: "Ask first if your company’s rule covers any use of AI.",
+  /** The same line for someone who is Not sure whether she can use AI for her work. DRAFT */
+  askFirstNotSure: "Ask first what your company allows with AI.",
 };
 
 /** What people see on Stripe's page and their receipt. DRAFT */

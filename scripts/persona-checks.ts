@@ -1,0 +1,337 @@
+import { cardById } from "../lib/beginner/cards";
+import type { Who } from "../lib/beginner/levels";
+import type { PathPlan, PathStep } from "../lib/beginner/path";
+import { recipeById } from "../lib/beginner/recipes";
+import type { FreeResult, MapLine, Track } from "../lib/beginner/types";
+
+// The checks behind the Phase 7 readout (docs/DIRECTION.md, Phase 7): each test person's run in
+// scripts/persona-runs.ts is held to the "Done when" lines of Phases 5 and 6, and her free workflow design (the
+// experiment) is counted. Pure, so tests/persona-checks.test.ts can try every check on made up runs.
+
+export type Check = { id: string; pass: boolean; detail: string };
+
+/** What a run's checks need to know. `expect` names the DIRECTION.md examples a person stands for. */
+export type RunForChecks = {
+  track: Track;
+  who: Who;
+  /** How many screens she saw, from stepsFor with her real answers. */
+  screens: number;
+  free: FreeResult;
+  path: PathPlan | null;
+  expect?: Expect;
+  /** Everything she typed or picked, so a price she gave herself is not flagged. */
+  hers?: string;
+};
+
+/**
+ * The DIRECTION.md examples a person stands for: the dental receptionist and the Gmail Builder from Phase 5's Done
+ * when, and a task that must reach a level, like the electrician's quotes (section 2, example 2).
+ */
+export type Expect = { dentalTop?: boolean; gmailBuilderTop?: boolean; taskLevel?: { task: string; level: number } };
+
+/** Starter and Builder screen limits (DIRECTION.md, Phase 5). */
+export const SCREENS_MAX: Record<Track, number> = { starter: 9, builder: 11 };
+
+/** A With your path line that reads like writing help: asking AI each time, or pasting a prompt. */
+export const WRITING_HELP = /\b(ask (ai|claude|chatgpt|it)|paste|prompt|each time|every time|help(s)? you write|writes? it for you)\b/i;
+/**
+ * Words that point at a menu path or a button, which only checked recipes and cards may give. "Tap the reply" or
+ * "menu items" on a restaurant are not click paths, so a tap counts only on a button, icon, key or tab.
+ */
+export const MENU = /\b([Cc]lick|[Ss]ettings|[Bb]utton|[Tt]oggle)\b|\b[Gg]o to (the )?[A-Z][a-z]+\b|\b([Oo]pen|[Tt]ap|[Ss]elect) the [\w ]{0,15}menu\b|\b[Tt]ap (the|on) [\w ]{0,20}\b(button|icon|key|tab)\b|>|→/;
+/**
+ * A promise of time: saving it, or a task taking it. Time as content, like opening hours or labor hours, is fine.
+ * TIME_PROMISE in lib/beginner/free-result.ts is wider and also catches "HR" (see the Phase 7 readout).
+ */
+export const PROMISED_TIME = /\b(save[sd]?|saving|takes?|only|under|in|within|back)\s+(you\s+)?(about\s+)?(a|an|one|\d+|few|a few|hours of)?\s*(minutes?|mins?|hours?|hrs|seconds?|secs?)\b/i;
+export const DASH = /[–—]| - |\w-\w/;
+export const MONEY = /(\d+|\b(five|ten|fifteen|twenty|twenty five|thirty|forty|fifty)) ?(%|per ?cent\b)|\$ ?\d[\d,.]*/i;
+
+/** Prices and percents in a line that she did not give herself, like a 50% deposit from her own example. */
+export function moneyNotHers(line: string, hers: string): string[] {
+  const own = hers.toLowerCase().replace(/\s+/g, "");
+  return [...line.matchAll(new RegExp(MONEY.source, "gi"))].map((m) => m[0]).filter((m) => !own.includes(m.toLowerCase().replace(/\s+/g, "")));
+}
+const SIGN_UP = /\bsign(ing)? up\b|\bcreate an account\b|\bdownload the app\b/i;
+
+/** Every line the path writer wrote for her, so the copy rules can be checked on it. */
+export function pathText(path: PathPlan): string[] {
+  return path.steps.flatMap((step: PathStep) => {
+    switch (step.kind) {
+      case "ready":
+        return step.firstStep ? [step.firstStep] : [];
+      case "about":
+        return [step.note];
+      case "workflow":
+      case "extra":
+        return [step.read, ...step.material.flatMap((m) => [m.label, ...m.items])];
+      case "end":
+        return [...step.safeUse, ...(step.askMessage ? [step.askMessage] : [])];
+    }
+  });
+}
+
+/** Her tasks with a recipe, the ones without, and the flags the readout must raise. */
+export function recipeCount(map: readonly MapLine[]) {
+  const aiTasks = map.filter((m) => m.ai);
+  const withRecipe = map.filter((m) => m.recipe).map((m) => ({ task: m.task, recipe: m.recipe as string, level: m.level ?? null }));
+  const assistant = withRecipe.filter((r) => r.recipe === "saved_assistant").length;
+  return {
+    total: map.length,
+    aiTasks: aiTasks.length,
+    withRecipe,
+    without: map.filter((m) => !m.recipe).map((m) => ({ task: m.task, level: m.level ?? null, waits: Boolean(m.waits) })),
+    noRecipe: withRecipe.length === 0,
+    /** More than half of the tasks AI can help with land on the saved assistant. */
+    mostlyAssistant: aiTasks.length > 0 && assistant * 2 > aiTasks.length,
+  };
+}
+
+const check = (id: string, pass: boolean, detail: string): Check => ({ id, pass, detail });
+
+/** Every check for one run. A check that does not apply to her is left out. */
+export function runChecks(run: RunForChecks): Check[] {
+  const { free, path, who, track } = run;
+  const map = free.map;
+  const top = map[0];
+  const out: Check[] = [];
+
+  out.push(check("screens", run.screens <= SCREENS_MAX[track], `${run.screens} screens, at most ${SCREENS_MAX[track]} for a ${track}`));
+
+  const unlevelled = map.filter((m) => m.level === undefined && !m.waits).map((m) => m.task);
+  out.push(check("levels_in_code", unlevelled.length === 0, unlevelled.length ? `No level on ${unlevelled.join(", ")}` : "Every row has a level or waits"));
+
+  const helpLines = map.filter((m) => (m.level ?? 0) >= 3 && WRITING_HELP.test(m.withPath)).map((m) => m.withPath);
+  out.push(check("level3_not_writing_help", helpLines.length === 0, helpLines.length ? helpLines.join(" | ") : "No line at level 3 or higher reads like writing help"));
+
+  const recipeLines = map.filter((m) => m.recipe && !m.withPath.toLowerCase().includes(recipeById(m.recipe)?.withPath.slice(1, 30).toLowerCase() ?? "")).map((m) => m.task);
+  out.push(check("path_line_from_recipe", recipeLines.length === 0, recipeLines.length ? `Not the recipe's line on ${recipeLines.join(", ")}` : "Every line at level 3 or higher is its recipe's"));
+
+  if (who.canUse !== "self" && who.connect !== "yes") {
+    const connected = map.filter((m) => m.recipe && recipeById(m.recipe)?.conditions.connectsApp).map((m) => m.task);
+    out.push(check("no_connect_without_ok", connected.length === 0, connected.length ? `Connects an app for ${connected.join(", ")}` : "No row connects a work app"));
+  }
+
+  if (who.canUse === "restricted") {
+    const bad = map.filter((m) => m.ai && !m.waits && !(m.recipe && !recipeById(m.recipe)?.conditions.needsAiAllowed)).map((m) => m.task);
+    out.push(check("restricted_waits", bad.length === 0, bad.length ? `Needs AI but does not wait: ${bad.join(", ")}` : "Every AI task waits or needs no AI at work"));
+  }
+
+  if (who.canUse === "not_sure") {
+    const missing = map.filter((m) => (m.level ?? 0) >= 2 && !m.askFirst).map((m) => m.task);
+    out.push(check("not_sure_ask_first", missing.length === 0, missing.length ? `No ask first line on ${missing.join(", ")}` : "Every task AI touches says to ask first"));
+  }
+
+  if (run.expect?.dentalTop)
+    out.push(check("dental_top_level_3", top?.level === 3 && !recipeById(top.recipe ?? "")?.conditions.connectsApp, `Top task ${top?.task} at level ${top?.level ?? "none"} with ${top?.recipe ?? "no recipe"}`));
+  if (run.expect?.gmailBuilderTop)
+    out.push(check("gmail_builder_top_level_4", (top?.level ?? 0) >= 4, `Top task ${top?.task} at level ${top?.level ?? "none"} with ${top?.recipe ?? "no recipe"}`));
+
+  if (run.expect?.taskLevel) {
+    const { task, level } = run.expect.taskLevel;
+    const m = map.find((x) => x.task.toLowerCase().includes(task));
+    out.push(check(`${task.replace(/\W+/g, "_")}_level_${level}`, (m?.level ?? 0) >= level, m ? `${m.task} at level ${m.level ?? "none"}${m.held ? `, held: ${m.held}` : ""}` : `No task named ${task} on her map`));
+  }
+
+  if (free.askOnly) {
+    out.push(check("ask_only_no_path", path === null, "Every task waits: no offer, no path, only the message to ask"));
+    return out;
+  }
+  out.push(check("path_written", path !== null, path ? `${path.steps.length} steps` : "The path writer failed three times"));
+  if (!path) return out;
+
+  if (track === "builder") {
+    const ready = path.steps.some((s) => s.kind === "ready");
+    const signUp = pathText(path).filter((l) => SIGN_UP.test(l));
+    out.push(check("builder_no_sign_up", !ready && signUp.length === 0, ready ? "Has a get ready step" : signUp.length ? signUp.join(" | ") : "No sign up step or line"));
+  }
+
+  const workflows = path.steps.filter((s) => s.kind === "workflow" || s.kind === "extra");
+  const partsMissing = workflows.filter((s) => {
+    const recipe = s.recipe ? recipeById(s.recipe) : null;
+    if (s.recipe && !recipe) return true;
+    return recipe ? !recipe.test.tryOn || !recipe.approval || !recipe.cost.note : false; // no recipe: pathCopy.withAi gives all three
+  });
+  out.push(check("workflow_parts", partsMissing.length === 0, partsMissing.length ? `Missing a test, approval point or cost on ${partsMissing.map((s) => s.id).join(", ")}` : `${workflows.length} workflows, each with a test, an approval point and a cost line`));
+
+  const sources = path.steps.flatMap((s) => {
+    if (s.kind === "ready" || s.kind === "about") return [s.card ? `card ${s.card}` : "no card for her tool"];
+    if (s.kind === "workflow" || s.kind === "extra") return [s.recipe ? `recipe ${s.recipe}` : "Tally's own steps for writing with AI"];
+    return [];
+  });
+  const unknown = path.steps.filter((s) => (s.kind === "ready" || s.kind === "about") && s.card && !cardById(s.card));
+  out.push(check("setup_from_recipe_or_card", unknown.length === 0, sources.join(", ")));
+
+  const text = pathText(path);
+  const menu = text.filter((l) => MENU.test(l));
+  out.push(check("no_click_paths_from_model", menu.length === 0, menu.length ? menu.map((l) => l.slice(0, 120)).join(" | ") : "The model wrote no menu paths or button names"));
+  const rules = text.filter((l) => DASH.test(l) || PROMISED_TIME.test(l) || moneyNotHers(l, run.hers ?? "").length > 0);
+  out.push(check("copy_rules", rules.length === 0, rules.length ? rules.map((l) => l.slice(0, 120)).join(" | ") : "No dashes, promised times, prices or percents"));
+
+  const named = free.setups.filter((s) => workflows.some((w) => w.title === s));
+  const offered = free.setups.length - (who.canUse === "restricted" ? 1 : 0);
+  out.push(check("offer_matches_path", named.length === offered && workflows.length === offered, `Offer names ${offered}, path has ${workflows.length} workflows, ${named.length} match by name`));
+  return out;
+}
+
+// The experiment: a workflow designed freely for her top two tasks, with no fixed list of task kinds.
+
+export type DesignStep = { app: string | null; ref: string | null; goal: string };
+export type DesignTask = {
+  task: string;
+  today: string;
+  newWay: string;
+  steps: DesignStep[];
+  material: { label: string; what: string }[];
+  checkPoint: string;
+};
+
+/** A step is checked only when it points at a real card or recipe. One in an app without a real id is not checked by us. */
+export const refKind = (ref: string | null): "card" | "recipe" | null =>
+  !ref ? null : cardById(ref) ? "card" : recipeById(ref) ? "recipe" : null;
+
+export function countDesign(tasks: readonly DesignTask[]) {
+  const steps = tasks.flatMap((t) => t.steps);
+  const unchecked = steps.filter((s) => s.app && !refKind(s.ref));
+  const badRefs = steps.filter((s) => s.ref && !refKind(s.ref)).map((s) => s.ref as string);
+  const clickPaths = unchecked.filter((s) => MENU.test(s.goal)).map((s) => s.goal);
+  const apps = new Map<string, number>();
+  for (const s of unchecked) {
+    const app = appName(s.app as string);
+    apps.set(app, (apps.get(app) ?? 0) + 1);
+  }
+  return {
+    steps: steps.length,
+    checked: steps.filter((s) => refKind(s.ref)).length,
+    unchecked: unchecked.length,
+    noApp: steps.filter((s) => !s.app && !refKind(s.ref)).length,
+    badRefs,
+    clickPaths,
+    apps: [...apps.entries()].sort((a, b) => b[1] - a[1]),
+    refs: [...new Set(steps.map((s) => s.ref).filter((r): r is string => Boolean(refKind(r))))],
+  };
+}
+
+/** One spelling per app, so Google Calendar and google calendar count once. */
+export const appName = (app: string) => {
+  const t = app.trim().replace(/\s+/g, " ");
+  return t.charAt(0).toUpperCase() + t.slice(1);
+};
+
+/** How alike two sets are, from 0 (nothing shared) to 1 (the same). */
+export function jaccard<T>(a: Iterable<T>, b: Iterable<T>): number {
+  const x = new Set(a);
+  const y = new Set(b);
+  const union = new Set([...x, ...y]);
+  if (!union.size) return 1;
+  let both = 0;
+  for (const v of x) if (y.has(v)) both++;
+  return both / union.size;
+}
+
+/** The words of a text, lower case, without the most common ones, for comparing two paths. */
+export function contentWords(lines: readonly string[]): Set<string> {
+  const stop = new Set("the a an and or to of in on for with your you it is this that be as at by from it’s its so when what each one".split(" "));
+  return new Set(lines.join(" ").toLowerCase().match(/[a-z’']+/g)?.filter((w) => w.length > 2 && !stop.has(w)) ?? []);
+}
+
+// The experiment, second round: a workflow for every task on her map, with the vendor's help page for every
+// feature a step relies on that no card or recipe covers.
+
+export type Design2Step = { app: string | null; ref: string | null; feature: string | null; goal: string; clickPath: string | null };
+export type Design2Task = {
+  task: string;
+  stays: boolean;
+  today: string;
+  newWay: string;
+  steps: Design2Step[];
+  material: { label: string; what: string }[];
+  checkPoint: string;
+};
+/** The vendor's help page for one feature, or null with the reason. */
+export type Lookup = { app: string; feature: string; url: string | null; title: string | null; why?: string };
+
+export const featureKey = (app: string, feature: string) => `${appName(app).toLowerCase()}|${feature.trim().toLowerCase()}`;
+
+/**
+ * The vendors' own sites, by a word in the app's name. A help page counts only on one of these hosts or a
+ * subdomain of one. An app not listed here can never get a link, so its steps say none found.
+ */
+export const VENDOR_SITES: [RegExp, string[]][] = [
+  [/canva/i, ["canva.com"]],
+  [/outlook|excel|word|teams|microsoft|copilot|onedrive|sharepoint|bookings/i, ["microsoft.com"]],
+  [/shopify/i, ["shopify.com"]],
+  [/klaviyo/i, ["klaviyo.com"]],
+  [/gorgias/i, ["gorgias.com"]],
+  [/notion/i, ["notion.com", "notion.so"]],
+  [/later\b/i, ["later.com"]],
+  [/slack/i, ["slack.com"]],
+  [/gmail|google|sheets|calendar|gemini|drive|docs|gboard/i, ["google.com"]],
+  [/instagram|facebook|meta/i, ["facebook.com", "instagram.com", "meta.com"]],
+  [/tiktok/i, ["tiktok.com"]],
+  [/chatgpt|openai/i, ["openai.com", "chatgpt.com"]],
+  [/claude|anthropic/i, ["claude.com", "anthropic.com"]],
+  [/square/i, ["squareup.com", "square.site"]],
+  [/iphone|ios|apple/i, ["apple.com"]],
+  [/samsung/i, ["samsung.com"]],
+  [/workday/i, ["workday.com"]],
+  [/bamboo/i, ["bamboohr.com"]],
+];
+
+/** The URL sits on the app vendor's own site. */
+export function vendorOk(app: string, url: string): boolean {
+  let host: string;
+  try {
+    host = new URL(url).hostname.toLowerCase();
+  } catch {
+    return false;
+  }
+  const sites = VENDOR_SITES.filter(([word]) => word.test(app)).flatMap(([, s]) => s);
+  return sites.some((site) => host === site || host.endsWith(`.${site}`));
+}
+
+/** The model's answer held to the rules: a link from the search results, on the vendor's own site, or none. */
+export function checkLookup(app: string, feature: string, found: { url: string | null; title: string | null }, searched: readonly string[]): Lookup {
+  if (!found.url) return { app, feature, url: null, title: null, why: searched.length ? "no vendor page in the results" : "no results" };
+  const clean = (u: string) => u.replace(/[#?].*$/, "").replace(/\/$/, "");
+  if (!searched.some((u) => clean(u) === clean(found.url as string))) return { app, feature, url: null, title: null, why: "the link was not in the search results" };
+  if (!vendorOk(app, found.url)) return { app, feature, url: null, title: null, why: `the link was not on ${appName(app)}'s own site` };
+  return { app, feature, url: found.url, title: found.title };
+}
+
+export function countDesign2(tasks: readonly Design2Task[], links: Record<string, Lookup>, map: readonly MapLine[]) {
+  const steps = tasks.flatMap((t) => t.steps);
+  const unchecked = steps.filter((s) => s.app && !refKind(s.ref));
+  const linked = unchecked.filter((s) => s.feature && links[featureKey(s.app as string, s.feature)]?.url);
+  const apps = new Map<string, { steps: number; linked: number }>();
+  for (const s of unchecked) {
+    const a = apps.get(appName(s.app as string)) ?? { steps: 0, linked: 0 };
+    a.steps++;
+    if (s.feature && links[featureKey(s.app as string, s.feature)]?.url) a.linked++;
+    apps.set(appName(s.app as string), a);
+  }
+  const low = map.filter((m) => m.level === 1 || m.level === 2);
+  const designed = (task: string) => tasks.find((t) => t.task.toLowerCase() === task.toLowerCase());
+  return {
+    tasks: tasks.length,
+    stays: tasks.filter((t) => t.stays).length,
+    steps: steps.length,
+    checked: steps.filter((s) => refKind(s.ref)).length,
+    unchecked: unchecked.length,
+    linked: linked.length,
+    noApp: steps.filter((s) => !s.app && !refKind(s.ref)).length,
+    /** Unchecked steps with no feature named: the rules asked for one on every such step. */
+    noFeature: unchecked.filter((s) => !s.feature).length,
+    /** Click words in a goal, which must hold none. */
+    clickInGoal: steps.filter((s) => MENU.test(s.goal)).map((s) => s.goal),
+    /** Click paths the model gave with no vendor page found: shown nowhere. */
+    clickPathsHidden: unchecked.filter((s) => s.clickPath && !(s.feature && links[featureKey(s.app as string, s.feature)]?.url)).length,
+    apps: [...apps.entries()].sort((a, b) => b[1].steps - a[1].steps),
+    /** Tasks the product left at level 1 or 2, and what the design made of each. */
+    lowTasks: low.map((m) => {
+      const t = designed(m.task);
+      return { task: m.task, level: m.level, designed: Boolean(t), stays: t?.stays ?? null, steps: t?.steps.length ?? 0, unchecked: t ? t.steps.filter((s) => s.app && !refKind(s.ref)).length : 0 };
+    }),
+    missingTasks: map.filter((m) => !designed(m.task)).map((m) => m.task),
+  };
+}

@@ -7,6 +7,7 @@ import {
   exampleOf,
   fewHelp,
   freePlanFor,
+  freeResultFor,
   offerFor,
   orderMap,
   phraseFor,
@@ -45,10 +46,10 @@ test("exampleOf gives her real example, and null when she skipped it or left it 
 });
 
 test("TIME_PROMISE catches minutes and hours, and lets her own count through", () => {
-  for (const line of ["Takes two minutes now", "Saves you an hour", "Done in 30 mins", "Back in hours"]) {
+  for (const line of ["Takes two minutes now", "Saves you an hour", "Done in 30 mins", "Back in hours", "Add 2 hrs", "Two Hours back", "1 hr"]) {
     assert.ok(TIME_PROMISE.test(line), line);
   }
-  for (const line of ["You do this many times a day", "Becomes a saved project", "About once a day"]) {
+  for (const line of ["You do this many times a day", "Becomes a saved project", "About once a day", "You answer HR questions by email", "Sent to HR"]) {
     assert.ok(!TIME_PROMISE.test(line), line);
   }
 });
@@ -123,6 +124,25 @@ test("secondTask takes a task with a recipe before one without", () => {
   assert.equal(secondTask(leveled, "Vendor emails")?.task, "Schedule changes");
 });
 
+test("on a tie in level, secondTask takes another recipe than her top task's, and a higher level still wins", () => {
+  const groomer: MapLine[] = [
+    { ...line("Reminder texts", "reminder texts", true, false), level: 3, recipe: "phone_quick_replies" },
+    { ...line("Booking", "booking", true, false), level: 3, recipe: "phone_quick_replies" },
+    { ...line("Social posts", "social posts", true, false), level: 3, recipe: "say_it_out_loud" },
+    { ...line("Grooming notes", "grooming notes", true, false), level: 3, recipe: "say_it_out_loud" },
+  ];
+  assert.equal(secondTask(groomer, "Reminder texts")?.task, "Social posts", "the first with another recipe");
+  assert.equal(secondTask(groomer.slice(0, 2), "Reminder texts")?.task, "Booking", "the same recipe when nothing else has one");
+  const higher = [...groomer.slice(0, 3), { ...line("Replies", "replies", true, false), level: 4 as const, recipe: "gmail_help_me_write" }];
+  assert.equal(secondTask(higher, "Reminder texts")?.task, "Replies");
+  const sameHigher = [
+    { ...line("Answering", "answering", true, false), level: 4 as const, recipe: "gmail_help_me_write" },
+    { ...line("Notes", "notes", true, false), level: 3 as const, recipe: "notes_to_sheet" },
+    { ...line("Vendor emails", "vendor emails", true, false), level: 4 as const, recipe: "gmail_help_me_write" },
+  ];
+  assert.equal(secondTask(sameHigher, "Answering")?.task, "Vendor emails", "level beats a different recipe");
+});
+
 /** A map with levels, as withLevels gives it: rescheduling texts with a recipe, booking replies at level 2. */
 const leveled: MapLine[] = [
   { ...line("Rescheduling texts", "rescheduling texts", true, false), level: 3, recipe: "phone_quick_replies" },
@@ -185,4 +205,48 @@ test("the free plan line shows only when every task in the offer has a recipe th
   assert.ok(freePlanFor(leveled.slice(0, 1), "Rescheduling texts"));
   const unknown = [{ ...leveled[0], recipe: "weekly_no_reply_list", level: 5 as const }];
   assert.ok(!freePlanFor(unknown, "Rescheduling texts"), "the recipe does not say");
+});
+
+test("freeResultFor chooses levels and the offer in code, as the live server does", () => {
+  const qa = (id: string, picked: string[]) => ({ id, title: id, picked, text: null });
+  const first_win = { task: "Rescheduling texts", intro: "Intro.", draft: "Draft." };
+  const rows: MapLine[] = [
+    { ...line("Rescheduling texts", "rescheduling texts", true, true), kind: "repeat_texts" },
+    { ...line("Answering phones", "answering phones", false, false), kind: null },
+  ];
+  const answers = {
+    experience: "tried" as const,
+    aiTools: ["not_sure" as const],
+    worksFor: "employer" as const,
+    aiPolicy: "no_idea" as const,
+    qas: [qa("where", ["Text messages"]), qa("device", ["Phone only"]), qa("can_use", ["Not sure"])],
+  };
+  const free = freeResultFor(answers, { first_win, first_step: "Step.", map: rows });
+  assert.equal(free.track, "starter");
+  assert.equal(free.map[0].level, 3);
+  assert.equal(free.map[0].recipe, "phone_quick_replies");
+  assert.equal(free.map[1].level, 1);
+  assert.equal(free.prep.length, 2);
+  assert.ok(free.setups[0].startsWith("Your rescheduling texts"));
+  assert.equal(free.askOnly, undefined);
+
+  // Restricted, with no recipe that needs no AI at work: nothing to sell, only the message to ask.
+  const restricted = freeResultFor(
+    { ...answers, aiPolicy: "restricted", qas: [qa("where", ["A work system"]), qa("device", ["Phone only"])] },
+    { first_win: { ...first_win, task: "Writing notes" }, first_step: "Step.", map: [{ ...line("Writing notes", "notes", true, false), kind: null }] },
+  );
+  assert.equal(restricted.askOnly, true);
+  assert.deepEqual(restricted.setups, []);
+  assert.ok(restricted.askMessage);
+});
+
+test("secondTask takes the recipe task at the highest level, the first on her map when two tie", () => {
+  const rows: MapLine[] = [
+    { ...line("Inquiries", "inquiries", true, false), recipe: "phone_quick_replies", level: 3 },
+    { ...line("Client emails", "client emails", true, false), recipe: "gmail_templates", level: 3 },
+    { ...line("Chasing replies", "chasing replies", true, false), recipe: "gmail_claude_follow_ups", level: 4 },
+    { ...line("Proposals", "proposals", true, false), recipe: "saved_assistant", level: 3 },
+  ];
+  assert.equal(secondTask(rows, "Inquiries")?.task, "Chasing replies");
+  assert.equal(secondTask(rows.slice(0, 2).concat(rows[3]), "Inquiries")?.task, "Client emails");
 });

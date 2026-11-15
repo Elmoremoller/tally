@@ -1,9 +1,10 @@
 import { toolLabels, type ChatTool } from "../week";
 import { askFirstCopy, offerCopy } from "./copy";
-import { recipeOf } from "./levels";
+import type { AiPolicy, AiTool } from "../week";
+import { recipeOf, whoFrom, withLevels } from "./levels";
 import type { QA } from "./quiz";
 import type { Device } from "./quiz-copy";
-import type { MapLine, Track } from "./types";
+import { beginnerTool, trackFor, type Experience, type FirstWin, type FreeResult, type MapLine, type Track, type WorksFor } from "./types";
 
 export { deviceOf } from "./levels";
 
@@ -32,9 +33,10 @@ export function blanksIn(text: string): string[] {
 
 /**
  * A map line must never promise time saved (DIRECTION.md, section 5, rule 3). Her own count from the quiz,
- * like "many times a day", is fine; minutes, hours and seconds are not.
+ * like "many times a day", is fine; minutes, hours and seconds are not. Case matters only for "hrs": "HR" is a
+ * department, so "You answer HR questions" stays (the Phase 7 readout found it dropped rows before).
  */
-export const TIME_PROMISE = /\b(minutes?|mins?|hours?|hrs?|seconds?|secs?)\b/i;
+export const TIME_PROMISE = /\b(?:[Mm]inutes?|[Mm]ins?|[Hh]ours?|[Hh]rs?|[Ss]econds?|[Ss]ecs?|MINUTES?|HOURS?|SECONDS?)\b/;
 
 /**
  * Counts on the map must be hers (DIRECTION.md, section 5, rule 3): a digit or a number word in a map line has
@@ -92,13 +94,20 @@ export function orderMap(map: readonly MapLine[], top: string): MapLine[] {
 }
 
 /**
- * The task her offer names after her top task: the next one on her map with a recipe, then the next one AI can
- * help with that needs no private details, then any other AI can help with. A task that waits for her company's
- * OK is never one. Null when there is none.
+ * The task her offer names after her top task: the one with a recipe at the highest level (Karl, 2026-11-15,
+ * after the Phase 7 runs gave a Gmail Builder a level 3 second task over her level 4 one). When two tie on level,
+ * one with another recipe than her top task's wins, so she learns two ways of working, not one twice (Karl,
+ * 2026-11-15, after a dog groomer got quick replies twice over say it out loud); then the first on her map. With
+ * no recipe, the next one AI can help with that needs no private details, then any other AI can help with. A task
+ * that waits for her company's OK is never one. Null when there is none.
  */
 export function secondTask(map: readonly MapLine[], top: string): MapLine | null {
   const others = map.filter((m) => m.ai && !m.waits && m.task.toLowerCase() !== top.toLowerCase());
-  return others.find((m) => recipeOf(m)) ?? others.find((m) => !m.private) ?? others[0] ?? null;
+  const topRecipe = map.find((m) => m.task.toLowerCase() === top.toLowerCase())?.recipe ?? null;
+  const rank = (m: MapLine) => (m.level ?? 0) * 2 + (m.recipe !== topRecipe ? 1 : 0);
+  const withRecipe = others.filter((m) => recipeOf(m));
+  const best = withRecipe.reduce<MapLine | null>((a, m) => (!a || rank(m) > rank(a) ? m : a), null);
+  return best ?? others.find((m) => !m.private) ?? others[0] ?? null;
 }
 
 /**
@@ -181,4 +190,33 @@ export function askMessageFor(map: readonly MapLine[]): string {
 export function freePlanFor(map: readonly MapLine[], top: string): boolean {
   const tasks = offerTasks(map, top);
   return tasks.length > 0 && tasks.every((m) => recipeOf(m)?.cost.freePlanEnough === true);
+}
+
+/**
+ * Her whole free result from her checked answers and the intake's read of them: each task's level and recipe,
+ * the map in the order she sees it, and her offer, all chosen in code, never by the model. The server
+ * (app/begin/actions.ts) and scripts/persona-runs.ts both use it, so the test runs check what the live site shows.
+ */
+export function freeResultFor(
+  answers: { experience: Experience; aiTools: AiTool[]; worksFor: WorksFor; aiPolicy: AiPolicy | null; qas: QA[] },
+  result: { first_win: FirstWin; first_step: string; map: MapLine[] },
+): FreeResult {
+  const track = trackFor(answers.experience);
+  const tool = beginnerTool(answers.aiTools);
+  const top = result.first_win.task;
+  const who = whoFrom({ track, ...answers });
+  const map = orderMap(withLevels(result.map, who), top);
+  const restricted = who.canUse === "restricted";
+  // With every task waiting for her company's OK there is nothing to sell: no offer, only the free message.
+  const askOnly = askOnlyFor(map, top, restricted);
+  return {
+    firstWin: result.first_win,
+    firstStep: result.first_step,
+    map,
+    ...(askOnly
+      ? { setups: [], prep: [], freePlan: false, askOnly, askMessage: askMessageFor(map) }
+      : { ...offerFor({ track, tool, map, top, device: who.device, restricted }), freePlan: freePlanFor(map, top) }),
+    tool,
+    track,
+  };
 }

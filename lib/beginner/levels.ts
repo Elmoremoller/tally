@@ -1,7 +1,7 @@
 import { chatTools, type AiPolicy, type AiTool } from "../week";
 import type { QA } from "./quiz";
 import { CONNECT, CONNECT_ID, connectQuestion, deviceQuestion, DEVICES, type Connect, type Device } from "./quiz-copy";
-import { recipeById, recipes, TASK_KINDS, type Level, type Recipe, type RecipeApp, type RecipeRoute, type TaskKind } from "./recipes";
+import { PHONE_STAND_IN, recipeById, recipes, TASK_KINDS, type Level, type Recipe, type RecipeApp, type RecipeRoute, type TaskKind } from "./recipes";
 import { levelCopy } from "./copy";
 import { canUseOf, DEFAULT_TOOL, type CanUse, type Held, type MapLine, type Track, type WorksFor } from "./types";
 
@@ -15,10 +15,14 @@ import { canUseOf, DEFAULT_TOOL, type CanUse, type Held, type MapLine, type Trac
 // 4. It fits her track: a Starter path stops at level 3.
 // 5. The recipe has steps for the device she uses.
 //
+// On a phone, a task whose recipes all need a computer may take the recipe of a stand in kind (PHONE_STAND_IN in
+// recipes.ts): repeat writing is said out loud instead of handed to a saved assistant.
+//
 // A task with no recipe that fits gets level 2 when AI can help with it and level 1 when it can't, never a forced
 // recipe. When a recipe of its kind and her apps exists but a rule held it back, the reason goes with the level.
 // Someone whose company restricts AI still gets the recipes that need no AI at work, with a line to ask first;
-// any other task of hers that needs AI gets no level, and waits for her company's OK.
+// any other task of hers that needs AI gets no level, and waits for her company's OK. Someone who is Not sure
+// whether she can use AI gets her levels, with a line to ask first on every task AI touches (Karl, 2026-11-15).
 // Pure, so the server, the previews and the tests can all use it.
 
 /** What the level rules need to know about her. */
@@ -119,12 +123,18 @@ export function levelFor(task: LevelTask, who: Who): TaskLevel {
       waits: false,
       recipe,
       held: blocked && blocked.recipe.level > recipe.level ? blocked.held : null,
-      askFirst: who.canUse === "restricted" && !recipe.conditions.needsAiAllowed,
+      askFirst: (who.canUse === "restricted" && !recipe.conditions.needsAiAllowed) || who.canUse === "not_sure",
     };
+  }
+  // On a phone, when only a computer held her task's recipes back, a recipe of the stand in kind may fit instead.
+  const standIn = task.kind && who.device === "phone" && blocked?.held === "needs_computer" ? PHONE_STAND_IN[task.kind] : undefined;
+  if (standIn) {
+    const instead = levelFor({ ...task, kind: standIn }, who);
+    if (instead.recipe) return instead;
   }
   // With AI restricted at her work, writing it with AI isn't hers to choose: it waits for her company's OK.
   if (who.canUse === "restricted") return { level: null, waits: true, recipe: null, held: blocked?.held ?? null, askFirst: false };
-  return { level: 2, waits: false, recipe: null, held: blocked?.held ?? null, askFirst: false };
+  return { level: 2, waits: false, recipe: null, held: blocked?.held ?? null, askFirst: who.canUse === "not_sure" };
 }
 
 /**

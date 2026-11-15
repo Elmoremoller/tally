@@ -90,13 +90,32 @@ test("condition 4: a Starter path stops at level 3, and says why", () => {
 
 test("condition 5, phone only: a recipe set up only on a computer is not offered", () => {
   const phone = who({ device: "phone" });
-  for (const kind of ["repeat_writing", "repeat_emails", "notes_to_table", "email_follow_ups", "awaiting_replies"] as const) {
+  for (const kind of ["repeat_emails", "notes_to_table", "email_follow_ups", "awaiting_replies"] as const) {
     const result = levelFor(task(kind), phone);
     assert.deepEqual([result.level, result.recipe, result.held], [2, null, "needs_computer"], kind);
   }
   assert.equal(levelFor(task("repeat_texts"), phone).recipe?.id, "phone_quick_replies");
   assert.equal(levelFor(task("email_replies"), phone).recipe?.id, "gmail_help_me_write", "Help me write has phone steps");
   assert.equal(levelFor(task("spoken_writing"), phone).recipe?.id, "say_it_out_loud");
+});
+
+test("on a phone only, repeat writing is said out loud, since a saved assistant has no phone steps", () => {
+  for (const tool of ["claude", "chatgpt"] as const) {
+    const result = levelFor(task("repeat_writing"), who({ device: "phone", aiTools: [tool] }));
+    assert.deepEqual([result.level, result.recipe?.id, result.held], [3, "say_it_out_loud", null], tool);
+  }
+  assert.equal(levelFor(task("repeat_writing"), who({ device: "both" })).recipe?.id, "saved_assistant", "with a computer, the saved assistant");
+  const notSure = levelFor(task("repeat_writing"), who({ device: "phone", canUse: "not_sure", connect: null }));
+  assert.deepEqual([notSure.recipe?.id, notSure.askFirst], ["say_it_out_loud", true]);
+});
+
+test("the stand in never gets round another rule", () => {
+  const restricted = levelFor(task("repeat_writing"), who({ device: "phone", canUse: "restricted" }));
+  assert.deepEqual([restricted.level, restricted.waits, restricted.held], [null, true, "restricted"]);
+  const privateTask = levelFor(task("repeat_writing", { private: true }), who({ device: "phone", canUse: "yes" }));
+  assert.deepEqual([privateTask.level, privateTask.recipe, privateTask.held], [2, null, "private"]);
+  const noAi = levelFor(task("repeat_writing", { ai: false }), who({ device: "phone" }));
+  assert.deepEqual([noAi.level, noAi.recipe], [1, null]);
 });
 
 test("condition 5, computer only: a recipe set up only on a phone is not offered", () => {
@@ -135,10 +154,18 @@ test("a restricted employee still gets the two recipes that need no AI at work, 
   assert.ok(offered.every((r) => !r.conditions.needsAiAllowed));
 });
 
-test("nobody else sees the line to ask first", () => {
-  for (const canUse of ["self", "yes", "not_sure"] as const) {
+test("someone who works for herself or may use AI never sees the line to ask first", () => {
+  for (const canUse of ["self", "yes"] as const) {
     assert.equal(levelFor(task("repeat_texts"), who({ canUse })).askFirst, false, canUse);
   }
+});
+
+test("someone who is Not sure sees the line to ask first on every task AI touches, and keeps her levels", () => {
+  const texts = levelFor(task("repeat_texts"), who({ canUse: "not_sure" }));
+  assert.deepEqual([texts.level, texts.askFirst], [3, true]);
+  const none = levelFor(task(null), who({ canUse: "not_sure" }));
+  assert.deepEqual([none.level, none.askFirst], [2, true]);
+  assert.equal(levelFor(task(null, { ai: false }), who({ canUse: "not_sure" })).askFirst, false);
 });
 
 test("her chat tool decides which chat routes count, and Claude when she uses none of them", () => {

@@ -41,6 +41,13 @@ export const TASK_KINDS = [
 ] as const;
 export type TaskKind = (typeof TASK_KINDS)[number];
 
+/**
+ * On a phone, the kind whose recipe stands in when every recipe of a task's own kind needs a computer. The
+ * vendors' help pages give no phone steps for a saved assistant (checked 2026-11-15), so a phone only person's
+ * repeat writing is said out loud instead, which has checked phone steps (Karl, 2026-11-15).
+ */
+export const PHONE_STAND_IN: Partial<Record<TaskKind, TaskKind>> = { repeat_writing: "spoken_writing" };
+
 /** What each kind means, for the intake prompt in Phase 5 and for anyone reading the recipes. */
 export const taskKindMeaning: Record<TaskKind, string> = {
   repeat_texts: "Short messages she sends again and again by text or chat, with the same few answers.",
