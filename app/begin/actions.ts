@@ -3,7 +3,7 @@
 import { cookies } from "next/headers";
 import { allowAiCall } from "@/lib/ai-allowance";
 import { cleanAnswers, type BeginnerAnswers } from "@/lib/beginner/answers";
-import { freePlanFor, offerFor, orderMap } from "@/lib/beginner/free-result";
+import { askMessageFor, askOnlyFor, freePlanFor, offerFor, orderMap } from "@/lib/beginner/free-result";
 import { readBeginnerIntake } from "@/lib/beginner/intake";
 import { whoFrom, withLevels } from "@/lib/beginner/levels";
 import { digest, type QuizStep } from "@/lib/beginner/quiz";
@@ -114,12 +114,16 @@ export async function readBeginner(input: {
     const top = result.first_win.task;
     const who = whoFrom({ track, ...answers });
     const map = orderMap(withLevels(result.map, who), top);
+    const restricted = who.canUse === "restricted";
+    // With every task waiting for her company's OK there is nothing to sell: no offer, only the free message.
+    const askOnly = askOnlyFor(map, top, restricted);
     const free: FreeResult = {
       firstWin: result.first_win,
       firstStep: result.first_step,
       map,
-      ...offerFor({ track, tool, map, top, device: who.device, restricted: who.canUse === "restricted" }),
-      freePlan: freePlanFor(map, top),
+      ...(askOnly
+        ? { setups: [], prep: [], freePlan: false, askOnly, askMessage: askMessageFor(map) }
+        : { ...offerFor({ track, tool, map, top, device: who.device, restricted }), freePlan: freePlanFor(map, top) }),
       tool,
       track,
     };
@@ -154,6 +158,7 @@ export async function readBeginner(input: {
         setups: free.setups,
         prep: free.prep,
         freePlan: free.freePlan,
+        ...(askOnly ? { askOnly } : {}),
         tool,
         track,
       },

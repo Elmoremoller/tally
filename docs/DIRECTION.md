@@ -148,8 +148,9 @@ Read docs/DIRECTION.md and do Phase 4. Follow the working rules in section 7.
 4. Phase 3. Six setup cards for ChatGPT and Claude, checked against the vendors' help pages.
 5. Phase 4. Eight workflow recipes, checked against the vendors' help pages.
 6. Phase 5. The quiz asks where her work happens, what she uses for work and whether she can connect her work email, and the code gives every task a level and a recipe.
+7. Phase 6. The paid path replaces the plan page for new buyers. One step at a time, with the setup steps from recipes and cards, "Did it work?" saved in the events table, the phone asked on the path, a second task with the same recipe as a short extra step, and a free result with no price when every task waits for her company's OK.
 
-All of it stays. Phases 6 and 7 build on it.
+All of it stays. Phase 7 builds on it.
 
 ### Phase 4. Workflow recipes
 

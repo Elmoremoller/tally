@@ -1,14 +1,17 @@
 import { after } from "next/server";
 import { writeBeginnerPlan } from "./beginner/plan-writer";
+import { writePath } from "./beginner/path-writer";
 import {
   claimPlanGeneration,
   failPlan,
   loadBeginnerPlanInput,
+  loadPathInput,
   loadPlanInput,
   loadWeek,
   orderEmail,
   planById,
   savePlan,
+  wantsPath,
 } from "./funnel-db";
 import { writePlan } from "./plan-writer";
 import { requestOrigin } from "./site";
@@ -27,11 +30,14 @@ export async function writeAndSavePlan(planId: string, origin: string) {
     try {
       const plan = await planById(planId);
       if (!plan) throw new Error("The plan is gone");
-      // Answers from the beginner quiz get the beginner plan.
+      // Answers from the beginner quiz get the paid path when her free result showed levels (Phase 6), and the
+      // beginner plan when they were saved before; the first version's answers get the first plan.
       const { intake } = await loadWeek(plan.session_id);
-      const { content, model, promptVersion } = intake?.beginner
-        ? await writeBeginnerPlan(await loadBeginnerPlanInput(plan))
-        : await writePlan(await loadPlanInput(plan));
+      const { content, model, promptVersion } = wantsPath(intake?.beginner)
+        ? await writePath(await loadPathInput(plan))
+        : intake?.beginner
+          ? await writeBeginnerPlan(await loadBeginnerPlanInput(plan))
+          : await writePlan(await loadPlanInput(plan));
       await savePlan(planId, content, promptVersion, model);
       await emailPlan(plan.order_id, `${origin}/plan/${plan.access_token}`, origin);
       return;

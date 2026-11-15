@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
 import { Backdrop } from "@/components/Backdrop";
-import { BeginnerPaywall, FirstWinResult } from "@/components/beginner/FirstWinResult";
+import { AskFirst, BeginnerPaywall, FirstWinResult } from "@/components/beginner/FirstWinResult";
 import { QuizHeader } from "@/components/quiz/QuizHeader";
-import { freePlanFor, offerFor, orderMap } from "@/lib/beginner/free-result";
+import { askMessageFor, askOnlyFor, freePlanFor, offerFor, orderMap } from "@/lib/beginner/free-result";
 import { sampleWho, withLevels } from "@/lib/beginner/levels";
 import { beginnerSampleFor, beginnerSamples } from "@/lib/beginner/samples";
 import { offer } from "@/lib/offer";
@@ -47,9 +47,16 @@ async function Preview({ searchParams }: { searchParams: PageProps<"/begin/previ
     device: free.device,
     restricted: plan.policy === "restricted",
   });
+  const restricted = plan.policy === "restricted";
+  // As on the live result: with every task waiting for her company's OK, no paywall, only the free message.
+  const askOnly = askOnlyFor(map, firstWin.task, restricted);
   return (
-    <FirstWinResult result={{ firstWin, map }} restricted={plan.policy === "restricted"}>
-      <BeginnerPaywall {...offer} freePlan={freePlanFor(map, firstWin.task)} />
+    <FirstWinResult result={{ firstWin, map }} restricted={restricted && !askOnly}>
+      {askOnly ? (
+        <AskFirst message={askMessageFor(map)} />
+      ) : (
+        <BeginnerPaywall {...offer} freePlan={freePlanFor(map, firstWin.task)} />
+      )}
     </FirstWinResult>
   );
 }

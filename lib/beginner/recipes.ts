@@ -55,9 +55,20 @@ export const taskKindMeaning: Record<TaskKind, string> = {
 
 /**
  * The apps a route needs. `any_chat` is whichever chat tool she uses, for a step where any of them can write
- * the material once. `gboard` is Google's keyboard on Android.
+ * the material once. `gboard` is Google's keyboard on Android, and `samsung_keyboard` the keyboard Samsung phones
+ * come with. The three phone keyboards are told apart only on her path, where she says which phone she has
+ * (Phase 6); the quiz never asks.
  */
-export const RECIPE_APPS = ["iphone", "gboard", "gmail", "google_sheets", "chatgpt", "claude", "any_chat"] as const;
+export const RECIPE_APPS = [
+  "iphone",
+  "gboard",
+  "samsung_keyboard",
+  "gmail",
+  "google_sheets",
+  "chatgpt",
+  "claude",
+  "any_chat",
+] as const;
 export type RecipeApp = (typeof RECIPE_APPS)[number];
 
 /** A step is a line of text, or a setup card whose steps go here in full. */
@@ -69,6 +80,8 @@ export type RecipeRoute = {
   steps: { phone?: RecipeStep[]; computer?: RecipeStep[] };
   /** Something true of this route only, like a device it does not work on. */
   note?: string;
+  /** When this route was checked on another day than the rest of its recipe, as YYYY-MM-DD. Phase 6. */
+  checked?: string;
 };
 
 /**
@@ -119,6 +132,7 @@ export type Recipe = {
 
 const IOS_TEXT_REPLACEMENT = "https://support.apple.com/guide/iphone/use-text-replacements-iph6d01d862/ios";
 const GBOARD_CLIPBOARD = "https://support.google.com/gboard/answer/10742542?hl=en";
+const SAMSUNG_TEXT_SHORTCUTS = "https://www.samsung.com/us/support/answer/ANS10013525/";
 const SHEETS_IMPORT = "https://support.google.com/docs/answer/40608?hl=en";
 
 /** The last steps of a table recipe on a computer, the same for every chat tool. */
@@ -143,7 +157,7 @@ export const recipes: readonly Recipe[] = [
         apps: ["iphone", "any_chat"],
         steps: {
           phone: [
-            "Paste the instructions Tally wrote for you into your chat tool. You get your most common replies, each with a short shortcut.",
+            "Keep the replies and shortcuts Tally wrote for you open, above.",
             "In any app where you can type, touch and hold the Emoji button or the Switch Keyboard key.",
             "Tap Keyboard Settings, then tap Text Replacement.",
             "Tap the Add button.",
@@ -156,20 +170,36 @@ export const recipes: readonly Recipe[] = [
         apps: ["gboard", "any_chat"],
         steps: {
           phone: [
-            "Paste the instructions Tally wrote for you into your chat tool. You get your most common replies.",
-            "Copy one reply.",
+            "Copy one reply Tally wrote for you, above.",
             "Open an app you can type in and tap a text field.",
             "At the top of the keyboard, tap Clipboard.",
             "Touch and hold the reply you copied, then tap Pin. Pinned replies stay in the Pinned section.",
             "Do the same for each reply on your list.",
           ],
         },
-        note: "This works with Google's keyboard, Gboard, on Android.",
+        note: "These steps are for Gboard, Google's keyboard. If your phone uses another keyboard, this workflow has no steps for your phone yet.",
+      },
+      {
+        apps: ["samsung_keyboard"],
+        steps: {
+          phone: [
+            "Keep the replies and shortcuts Tally wrote for you open, above.",
+            "Go to Settings, then tap General management.",
+            "Tap Samsung Keyboard settings.",
+            "Tap Text shortcuts.",
+            "Tap the plus icon in the top right corner of the screen.",
+            "Type a shortcut in Shortcut phrase and its reply in Expanded phrase, then tap Add.",
+            "Do the same for each reply on your list.",
+            "When you type a shortcut, its reply appears in the bar above the keyboard. Tap it to put it in.",
+          ],
+        },
+        note: "These steps are for Samsung Keyboard. If your settings look different, Samsung says to try Settings, then Language and input, then On screen keyboard, then Samsung Keyboard, then Smart typing.",
+        checked: "2026-11-15",
       },
     ],
     material: [
       "Your most common replies, in your own words, with no names, times or private details in them.",
-      "A short shortcut for each reply, for an iPhone.",
+      "A short shortcut for each reply, for an iPhone or a Samsung phone.",
     ],
     test: {
       tryOn: "The next three messages that need one of these replies.",
@@ -183,10 +213,10 @@ export const recipes: readonly Recipe[] = [
     approval: "You read every reply before you send it. Nothing is sent by itself.",
     cost: {
       freePlanEnough: true,
-      note: "Text replacement on an iPhone and the Gboard clipboard are free, and the free plan of your chat tool is enough to write the replies once.",
+      note: "Text replacement on an iPhone, text shortcuts on a Samsung phone and the Gboard clipboard are free, and Tally writes the replies for you.",
     },
     checked: "2026-11-14",
-    sources: [IOS_TEXT_REPLACEMENT, GBOARD_CLIPBOARD],
+    sources: [IOS_TEXT_REPLACEMENT, GBOARD_CLIPBOARD, SAMSUNG_TEXT_SHORTCUTS],
   },
   // DRAFT
   {
@@ -384,7 +414,7 @@ export const recipes: readonly Recipe[] = [
         apps: ["gmail", "any_chat"],
         steps: {
           computer: [
-            "Paste the instructions Tally wrote for you into your chat tool. You get your most common emails, ready to save.",
+            "Keep the emails Tally wrote for you open, above.",
             "In Gmail, click Settings at the top right, then See all settings.",
             "Click Advanced at the top, click Enable next to Templates, then click Save Changes at the bottom.",
             "Click Compose and paste one email.",
@@ -411,7 +441,7 @@ export const recipes: readonly Recipe[] = [
     approval: "You fill in every gap and read the email before you send it yourself.",
     cost: {
       freePlanEnough: true,
-      note: "Gmail templates are free, and the free plan of your chat tool is enough to write them once.",
+      note: "Gmail templates are free, and Tally writes the emails for you.",
     },
     checked: "2026-11-14",
     sources: ["https://support.google.com/mail/answer/14864208?hl=en"],

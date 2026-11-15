@@ -164,6 +164,12 @@ export type FreeResult = {
   prep: string[];
   /** Every recipe in her offer says the free plan is enough. Phase 5. */
   freePlan: boolean;
+  /**
+   * Her company restricts AI and every task waits for its OK: no offer, only the free message to ask what's
+   * allowed, which `askMessage` holds. Phase 6.
+   */
+  askOnly?: boolean;
+  askMessage?: string | null;
   tool: ChatTool;
   track: Track;
 };
@@ -195,6 +201,7 @@ export type BeginnerIntake = {
     setups: string[];
     prep?: string[];
     freePlan?: boolean;
+    askOnly?: boolean;
     tool: ChatTool;
     track: Track;
   };

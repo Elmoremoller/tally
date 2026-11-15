@@ -1,5 +1,5 @@
 import { toolLabels, type ChatTool } from "../week";
-import { offerCopy } from "./copy";
+import { askFirstCopy, offerCopy } from "./copy";
 import { recipeOf } from "./levels";
 import type { QA } from "./quiz";
 import type { Device } from "./quiz-copy";
@@ -145,10 +145,33 @@ export function offerFor({
 }): { setups: string[]; prep: string[] } {
   const setups = [...offerTasks(map, top).map(workflowName), ...(restricted ? [offerCopy.askAllowed] : [])];
   if (track === "builder") return { setups, prep: [] };
+  const { ready, about } = prepTitles(tool, device);
+  return { setups, prep: [ready, about] };
+}
+
+/** A Starter's two prep steps by name, as her offer lists them and her path titles them. Approved by Karl 2026-11-15. */
+export function prepTitles(tool: ChatTool, device: Device | null) {
   const name = toolLabels[tool];
   const where =
     device === "phone" ? "on your phone" : device === "computer" ? "on your computer" : "on your phone and computer";
-  return { setups, prep: [`Get ${name} ready ${where}`, `Teach ${name} who you are`] };
+  return { ready: `Get ${name} ready ${where}`, about: `Teach ${name} who you are` };
+}
+
+/**
+ * Her company restricts AI and her offer would name no workflow, because every task waits for its OK and no recipe
+ * fits (Karl, 2026-11-15). Her free result then shows no price and no pay button, only the message to ask what's
+ * allowed, free.
+ */
+export const askOnlyFor = (map: readonly MapLine[], top: string, restricted: boolean) =>
+  restricted && offerTasks(map, top).length === 0;
+
+/** The free message to ask what's allowed, naming the tasks that wait the way her map names them. */
+export function askMessageFor(map: readonly MapLine[]): string {
+  const tasks = map
+    .filter((m) => m.waits)
+    .map((m) => m.phrase ?? m.task.charAt(0).toLowerCase() + m.task.slice(1))
+    .slice(0, 3);
+  return askFirstCopy.message(tasks);
 }
 
 /**
