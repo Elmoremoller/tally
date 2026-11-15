@@ -179,3 +179,107 @@ test("the word percent alone is not a price, a figure with it is", () => {
   assert.ok(MONEY.test("A 10% deposit."));
   assert.ok(MONEY.test("It costs $40."));
 });
+
+// Experiment three: her job as responsibilities, with the ten patterns.
+
+import { checks3, countDesign3, LINE_DASH, type Design3, type Responsibility, type Screens3 } from "../scripts/persona-checks";
+
+const resp = (name: string, opts: Partial<Responsibility> = {}): Responsibility => ({
+  name,
+  handsOn: "You restock the fridges.",
+  around: "You count what is left and decide what to order.",
+  patterns: [3, 4],
+  stays: false,
+  level: 3,
+  held: null,
+  today: "You count by eye and order when it looks low.",
+  withPath: "Your restock runs from one tracker with the usual amounts.",
+  offerName: "Your fridge restock, from one tracker",
+  newWay: "You fill in a short count and the tracker shows what to order.",
+  builtOnce: "a restock tracker",
+  steps: [
+    { app: null, ref: null, feature: null, goal: "Ask your manager what is allowed.", clickPath: null },
+    { app: "Microsoft Excel", ref: null, feature: "Excel conditional formatting", goal: "Make low counts stand out.", clickPath: "Home, then Conditional Formatting" },
+  ],
+  material: [{ label: "Tracker columns", what: "Item, usual amount, count today." }],
+  checkPoint: "You read the order before it goes to the supplier.",
+  ...opts,
+});
+
+const design3 = (rs: Responsibility[], top = rs.slice(0, 2).map((r) => ({ name: r.name, why: "It repeats every week." }))): Design3 => ({ responsibilities: rs, top });
+
+const screens3 = (opts: Partial<Screens3> = {}): Screens3 => ({
+  seeIt: { task: "Restocking", intro: "Here is your order.", result: "Sparkling water [amount]" },
+  askMessage: "Could I use an AI tool to build our restock tracker? Nothing about people goes in.",
+  workflows: [0, 1].map((i) => ({ name: `W${i}`, read: "You count, the tracker says what to order.", material: [{ label: "Columns", items: ["Item"] }], test: { tryOn: "Three weeks.", good: "It matches.", fixes: ["a", "b", "c"] }, approval: "You read the order first.", ifStops: "Count by hand that week." })),
+  safeUse: ["Keep names out of AI tools."],
+  ...opts,
+});
+
+const excelLink = { "microsoft excel|excel conditional formatting": { app: "Microsoft Excel", feature: "Excel conditional formatting", url: "https://support.microsoft.com/en-us/office/use-conditional-formatting", title: "Use conditional formatting" } };
+const failed3 = (c: ReturnType<typeof checks3>) => c.filter((x) => !x.pass).map((x) => x.id);
+const notSure = { canUse: "not_sure" as const, connect: "not_sure" as const };
+
+test("a clean experiment three design passes every check", () => {
+  const c = checks3({ d: design3([resp("Restocking"), resp("Lunch")]), s: screens3(), links: excelLink, track: "starter", who: notSure });
+  assert.deepEqual(failed3(c), []);
+});
+
+test("a pattern outside the ten, an unknown id, a missing feature and an off site link all fail", () => {
+  const bad = resp("Plants", { patterns: [11], steps: [{ app: "Microsoft Excel", ref: "made_up", feature: null, goal: "Track watering.", clickPath: null }] });
+  const c = checks3({ d: design3([resp("Restocking"), bad]), s: screens3(), links: { x: { app: "Microsoft Excel", feature: "f", url: "https://someblog.com/excel", title: "t" } }, track: "starter", who: notSure });
+  assert.deepEqual(failed3(c).sort(), ["three_feature_named", "three_links_vendor", "three_patterns", "three_refs_real"]);
+});
+
+test("a Starter above level 3, a level 1 that does not stay, and writing help on the map fail", () => {
+  const c = checks3({
+    d: design3([resp("Restocking", { level: 4 }), resp("Lunch", { withPath: "You ask AI each time for the menu." }), resp("Plants", { level: 1 })]),
+    s: screens3(), links: excelLink, track: "starter", who: notSure,
+  });
+  assert.deepEqual(failed3(c).sort(), ["three_levels", "three_not_writing_help", "three_starter_level"]);
+});
+
+test("menu words outside a click path, a dash, a missing approval and a connected app fail", () => {
+  const c = checks3({
+    d: design3([
+      resp("Restocking", { newWay: "Click Settings and pick a list.", checkPoint: "" }),
+      resp("Lunch", { today: "Lunch for 70 people - every day.", steps: [{ app: "Microsoft Outlook", ref: null, feature: "Copilot in Outlook", goal: "Connect your inbox to Copilot.", clickPath: null }] }),
+    ]),
+    s: screens3(), links: excelLink, track: "starter", who: notSure,
+  });
+  assert.deepEqual(failed3(c).sort(), ["three_approval", "three_copy_rules", "three_no_click_without_link", "three_no_connect"]);
+});
+
+test("someone not sure needs the message to ask, and the top two must be real workflows", () => {
+  const rs = [resp("Restocking"), resp("Lunch"), resp("Cleaning", { stays: true, level: 1, steps: [], material: [] })];
+  const c = checks3({ d: design3(rs, [{ name: "Restocking", why: "" }, { name: "Cleaning", why: "" }]), s: screens3({ askMessage: null }), links: excelLink, track: "starter", who: notSure });
+  assert.deepEqual(failed3(c).sort(), ["three_ask_first", "three_top_two"]);
+});
+
+test("countDesign3 counts patterns, levels, checked steps, links and hidden click paths", () => {
+  const rs = [resp("Restocking"), resp("Texts", { patterns: [1], steps: [{ app: "iPhone", ref: "phone_quick_replies", feature: null, goal: "Save replies.", clickPath: null }, { app: "Microsoft Teams", ref: null, feature: "Teams channel", goal: "Collect requests.", clickPath: "Teams, then channels" }] })];
+  const n = countDesign3(design3(rs), excelLink);
+  assert.deepEqual(n.patterns, { 1: 1, 3: 1, 4: 1 });
+  assert.deepEqual(n.levels, { 3: 2 });
+  assert.equal(n.checked, 1);
+  assert.equal(n.unchecked, 2);
+  assert.equal(n.linked, 1);
+  assert.equal(n.clickPathsShown, 1);
+  assert.equal(n.clickPathsHidden, 1);
+  assert.deepEqual(n.refs, ["phone_quick_replies"]);
+});
+
+test("a line that starts with a dash is caught in experiment three, a hyphen word in the middle by DASH", () => {
+  assert.ok(LINE_DASH.test("Diet needs:\n- 2 vegetarian meals"));
+  assert.ok(!LINE_DASH.test("Two vegetarian meals"));
+  const c = checks3({ d: design3([resp("Restocking"), resp("Lunch")]), s: screens3({ seeIt: { task: "Lunch", intro: "Your order.", result: "Please add:\n- Oat milk" } }), links: excelLink, track: "starter", who: notSure });
+  assert.deepEqual(failed3(c), ["three_copy_rules"]);
+});
+
+test("a [link] blank is not connecting an app, linking your inbox is", () => {
+  const step = (goal: string) => resp("Lunch", { steps: [{ app: null, ref: null, feature: null, goal, clickPath: null }] });
+  const blank = checks3({ d: design3([resp("Restocking"), step("Write a reminder with gaps for [policy], [date] and [link].")]), s: screens3(), links: excelLink, track: "starter", who: notSure });
+  assert.deepEqual(failed3(blank), []);
+  const linked = checks3({ d: design3([resp("Restocking"), step("Link your inbox to the chat tool.")]), s: screens3(), links: excelLink, track: "starter", who: notSure });
+  assert.deepEqual(failed3(linked), ["three_no_connect"]);
+});

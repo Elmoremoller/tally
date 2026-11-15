@@ -259,7 +259,7 @@ export const featureKey = (app: string, feature: string) => `${appName(app).toLo
  */
 export const VENDOR_SITES: [RegExp, string[]][] = [
   [/canva/i, ["canva.com"]],
-  [/outlook|excel|word|teams|microsoft|copilot|onedrive|sharepoint|bookings/i, ["microsoft.com"]],
+  [/outlook|excel|word|teams|microsoft|copilot|onedrive|sharepoint|bookings|power automate|planner/i, ["microsoft.com"]],
   [/shopify/i, ["shopify.com"]],
   [/klaviyo/i, ["klaviyo.com"]],
   [/gorgias/i, ["gorgias.com"]],
@@ -333,5 +333,169 @@ export function countDesign2(tasks: readonly Design2Task[], links: Record<string
       return { task: m.task, level: m.level, designed: Boolean(t), stays: t?.stays ?? null, steps: t?.steps.length ?? 0, unchecked: t ? t.steps.filter((s) => s.app && !refKind(s.ref)).length : 0 };
     }),
     missingTasks: map.filter((m) => !designed(m.task)).map((m) => m.task),
+  };
+}
+
+// The experiment, third round (Karl, 2026-11-15): her job read as responsibilities, each matched to the ten
+// patterns below and given the simplest workflow that removes the repeated work, then her free map and her paid
+// path for the top two, as she would see them.
+
+/** The ten patterns a responsibility can match, numbered as in Karl's brief. */
+export const PATTERNS = {
+  1: "Messages she repeats",
+  2: "Documents she repeats",
+  3: "Stock that runs low and gets reordered",
+  4: "Orders prepared from a short count",
+  5: "Events that repeat, run from a checklist",
+  6: "Requests from colleagues, collected in one place",
+  7: "Routines and reminders on a schedule",
+  8: "An inbox that needs sorting and follow up",
+  9: "Notes that become tables or reports",
+  10: "Answers looked up in documents she already has",
+} as const;
+export type PatternId = keyof typeof PATTERNS;
+
+export type Responsibility = {
+  name: string;
+  /** The work done with her hands, or null when there is none. */
+  handsOn: string | null;
+  /** The tracking, deciding, ordering or repeating around it. */
+  around: string;
+  patterns: number[];
+  stays: boolean;
+  level: number;
+  /** Why the level is not higher, in a few words, or null. */
+  held: string | null;
+  today: string;
+  /** The "With your path" line on her map. */
+  withPath: string;
+  /** The workflow as her offer would name it. */
+  offerName: string;
+  newWay: string;
+  /** What AI builds once for her, like a tracker or a checklist, or null. */
+  builtOnce: string | null;
+  steps: Design2Step[];
+  material: { label: string; what: string }[];
+  checkPoint: string;
+};
+export type Design3 = { responsibilities: Responsibility[]; top: { name: string; why: string }[] };
+
+/** Her two top workflows as the paid path shows them, written by the model; steps and costs come from the design. */
+export type Screens3 = {
+  seeIt: { task: string; intro: string; result: string };
+  askMessage: string | null;
+  workflows: {
+    name: string;
+    read: string;
+    material: { label: string; items: string[] }[];
+    test: { tryOn: string; good: string; fixes: string[] };
+    approval: string;
+    ifStops: string;
+  }[];
+  safeUse: string[];
+};
+
+/** Every line the model wrote in experiment three, for the copy rules. */
+export function design3Text(d: Design3, s: Screens3 | null): string[] {
+  const fromDesign = d.responsibilities.flatMap((r) => [r.today, r.withPath, r.offerName, r.newWay, r.held ?? "", r.builtOnce ?? "", r.checkPoint, ...r.steps.map((x) => x.goal), ...r.material.flatMap((m) => [m.label, m.what])]);
+  const fromScreens = s
+    ? [s.seeIt.intro, s.seeIt.result, s.askMessage ?? "", ...s.safeUse, ...s.workflows.flatMap((w) => [w.read, w.approval, w.ifStops, w.test.tryOn, w.test.good, ...w.test.fixes, ...w.material.flatMap((m) => [m.label, ...m.items])])]
+    : [];
+  return [...fromDesign, ...fromScreens].filter(Boolean);
+}
+
+/** A line that starts with a dash, like a bullet in an order email: DASH misses it. */
+export const LINE_DASH = /^\s*[-–—]\s/m;
+
+/** Connecting an app. "Link" counts only as a verb, so a [link] blank in a message is not flagged. */
+const CONNECT_WORDS = /\b(connect|link (your|her|it|the|to)|sign in with|give .{0,20}access to)\b/i;
+
+/** Every check for experiment three. */
+export function checks3(input: { d: Design3; s: Screens3 | null; links: Record<string, Lookup>; track: Track; who: Pick<Who, "canUse" | "connect">; hers?: string }): Check[] {
+  const { d, s, links, track, who } = input;
+  const rs = d.responsibilities;
+  const out: Check[] = [];
+
+  const badPatterns = rs.filter((r) => !r.patterns.length || r.patterns.some((p) => !(p in PATTERNS))).map((r) => r.name);
+  out.push(check("three_patterns", badPatterns.length === 0, badPatterns.length ? `No pattern or one outside 1 to 10 on ${badPatterns.join(", ")}` : `${rs.length} responsibilities, each with patterns from the ten`));
+
+  const steps = rs.flatMap((r) => r.steps);
+  const badRefs = steps.filter((x) => x.ref && !refKind(x.ref)).map((x) => x.ref as string);
+  out.push(check("three_refs_real", badRefs.length === 0, badRefs.length ? `Unknown ids ${badRefs.join(", ")}` : "Every card and recipe id exists"));
+
+  const offSite = Object.values(links).filter((l) => l.url && !vendorOk(l.app, l.url)).map((l) => l.url as string);
+  out.push(check("three_links_vendor", offSite.length === 0, offSite.length ? offSite.join(" | ") : "Every link is on the vendor's own site"));
+
+  const noFeature = steps.filter((x) => x.app && !refKind(x.ref) && !x.feature).map((x) => x.goal);
+  out.push(check("three_feature_named", noFeature.length === 0, noFeature.length ? noFeature.map((g) => g.slice(0, 100)).join(" | ") : "Every unchecked app step names its feature"));
+
+  const proseLines = [...rs.flatMap((r) => [r.withPath, r.newWay, r.checkPoint, ...r.steps.map((x) => x.goal)]), ...(s ? s.workflows.flatMap((w) => [w.read, w.approval, w.ifStops]) : [])];
+  const menu = proseLines.filter((l) => MENU.test(l));
+  out.push(check("three_no_click_without_link", menu.length === 0, menu.length ? menu.map((l) => l.slice(0, 120)).join(" | ") : "No menu path or button name outside a linked click path"));
+
+  const noApproval = rs.filter((r) => !r.stays && !r.checkPoint.trim()).map((r) => r.name);
+  const topNoApproval = s ? s.workflows.filter((w) => !w.approval.trim()).map((w) => w.name) : [];
+  out.push(check("three_approval", noApproval.length + topNoApproval.length === 0, noApproval.length + topNoApproval.length ? `No approval point on ${[...noApproval, ...topNoApproval].join(", ")}` : "Every workflow has a point where she checks"));
+
+  const text = design3Text(d, s);
+  const rules = text.filter((l) => DASH.test(l) || LINE_DASH.test(l) || PROMISED_TIME.test(l) || moneyNotHers(l, input.hers ?? "").length > 0);
+  out.push(check("three_copy_rules", rules.length === 0, rules.length ? rules.map((l) => l.slice(0, 120)).join(" | ") : "No dashes, promised times, prices or percents"));
+
+  const levelOff = rs.filter((r) => r.level < 1 || r.level > 5 || (r.stays !== (r.level === 1))).map((r) => `${r.name} (${r.level}${r.stays ? ", stays" : ""})`);
+  out.push(check("three_levels", levelOff.length === 0, levelOff.length ? `Level and stays disagree on ${levelOff.join(", ")}` : "Every level is 1 to 5, and level 1 means it stays hers"));
+
+  if (track === "starter") {
+    const high = rs.filter((r) => r.level > 3).map((r) => `${r.name} (${r.level})`);
+    out.push(check("three_starter_level", high.length === 0, high.length ? `Above level 3 for a Starter: ${high.join(", ")}` : "Every level is 3 or lower for a Starter"));
+  }
+
+  const helpLines = rs.filter((r) => r.level >= 3 && WRITING_HELP.test(r.withPath)).map((r) => r.withPath);
+  out.push(check("three_not_writing_help", helpLines.length === 0, helpLines.length ? helpLines.join(" | ") : "No map line at level 3 or higher reads like writing help"));
+
+  if (who.canUse !== "self" && who.connect !== "yes") {
+    const connects = steps.filter((x) => (x.ref && recipeById(x.ref)?.conditions.connectsApp) || CONNECT_WORDS.test(`${x.feature ?? ""} ${x.goal}`)).map((x) => x.goal);
+    out.push(check("three_no_connect", connects.length === 0, connects.length ? connects.map((g) => g.slice(0, 100)).join(" | ") : "No step connects a work app"));
+  }
+
+  if (who.canUse === "not_sure") out.push(check("three_ask_first", Boolean(s?.askMessage?.trim()), s?.askMessage ? "Her path opens with the message to ask what is allowed" : "No message to ask what is allowed"));
+
+  const names = new Set(rs.filter((r) => !r.stays).map((r) => r.name));
+  const topOk = d.top.length === 2 && d.top.every((t) => names.has(t.name)) && (!s || s.workflows.length === 2);
+  out.push(check("three_top_two", topOk, `Top: ${d.top.map((t) => t.name).join(", ") || "none"}${s ? `; ${s.workflows.length} workflows on her path` : ""}`));
+  return out;
+}
+
+/** Counts for experiment three. */
+export function countDesign3(d: Design3, links: Record<string, Lookup>) {
+  const rs = d.responsibilities;
+  const steps = rs.flatMap((r) => r.steps);
+  const unchecked = steps.filter((x) => x.app && !refKind(x.ref));
+  const linked = unchecked.filter((x) => x.feature && links[featureKey(x.app as string, x.feature)]?.url);
+  const patterns: Record<string, number> = {};
+  for (const r of rs) for (const p of r.patterns) patterns[p] = (patterns[p] ?? 0) + 1;
+  const levels: Record<string, number> = {};
+  for (const r of rs) levels[r.level] = (levels[r.level] ?? 0) + 1;
+  const apps = new Map<string, { steps: number; linked: number }>();
+  for (const x of unchecked) {
+    const a = apps.get(appName(x.app as string)) ?? { steps: 0, linked: 0 };
+    a.steps++;
+    if (x.feature && links[featureKey(x.app as string, x.feature)]?.url) a.linked++;
+    apps.set(appName(x.app as string), a);
+  }
+  return {
+    responsibilities: rs.length,
+    stays: rs.filter((r) => r.stays).length,
+    builtOnce: rs.filter((r) => r.builtOnce).length,
+    patterns,
+    levels,
+    steps: steps.length,
+    checked: steps.filter((x) => refKind(x.ref)).length,
+    unchecked: unchecked.length,
+    linked: linked.length,
+    noApp: steps.filter((x) => !x.app && !refKind(x.ref)).length,
+    clickPathsShown: unchecked.filter((x) => x.clickPath && x.feature && links[featureKey(x.app as string, x.feature)]?.url).length,
+    clickPathsHidden: unchecked.filter((x) => x.clickPath && !(x.feature && links[featureKey(x.app as string, x.feature)]?.url)).length,
+    apps: [...apps.entries()].sort((a, b) => b[1].steps - a[1].steps),
+    refs: [...new Set(steps.map((x) => x.ref).filter((r): r is string => Boolean(refKind(r))))],
   };
 }

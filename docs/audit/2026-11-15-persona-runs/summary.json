@@ -1,5 +1,5 @@
 {
- "ranAt": "2026-11-15T19:04:09.584Z",
+ "ranAt": "2026-11-15T20:26:44.741Z",
  "versions": {
   "job": "beginner-job-v5",
   "questions": "beginner-questions-v6",
@@ -645,7 +645,103 @@
     "say_it_out_loud",
     "phone_quick_replies"
    ],
-   "askOnly": false
+   "askOnly": false,
+   "checks3": [
+    {
+     "id": "three_patterns",
+     "pass": true,
+     "detail": "6 responsibilities, each with patterns from the ten"
+    },
+    {
+     "id": "three_refs_real",
+     "pass": true,
+     "detail": "Every card and recipe id exists"
+    },
+    {
+     "id": "three_links_vendor",
+     "pass": true,
+     "detail": "Every link is on the vendor's own site"
+    },
+    {
+     "id": "three_feature_named",
+     "pass": false,
+     "detail": "Paste in a few of your own past replies with no customer names and ask for a short list of the repli | Ask Claude to write three reminders with blanks for [name], [amount] and [due date], in your tone. | Ask Claude to write a short review request with blanks for [name] and [review link]."
+    },
+    {
+     "id": "three_no_click_without_link",
+     "pass": true,
+     "detail": "No menu path or button name outside a linked click path"
+    },
+    {
+     "id": "three_approval",
+     "pass": true,
+     "detail": "Every workflow has a point where she checks"
+    },
+    {
+     "id": "three_copy_rules",
+     "pass": true,
+     "detail": "No dashes, promised times, prices or percents"
+    },
+    {
+     "id": "three_levels",
+     "pass": true,
+     "detail": "Every level is 1 to 5, and level 1 means it stays hers"
+    },
+    {
+     "id": "three_starter_level",
+     "pass": false,
+     "detail": "Above level 3 for a Starter: Following up quotes (4)"
+    },
+    {
+     "id": "three_not_writing_help",
+     "pass": true,
+     "detail": "No map line at level 3 or higher reads like writing help"
+    },
+    {
+     "id": "three_top_two",
+     "pass": true,
+     "detail": "Top: Quoting jobs, Following up quotes; 2 workflows on her path"
+    }
+   ],
+   "design3Count": {
+    "responsibilities": 6,
+    "stays": 0,
+    "builtOnce": 6,
+    "patterns": {
+     "1": 5,
+     "2": 2,
+     "7": 2,
+     "8": 2,
+     "9": 1
+    },
+    "levels": {
+     "3": 5,
+     "4": 1
+    },
+    "steps": 12,
+    "checked": 9,
+    "unchecked": 3,
+    "linked": 0,
+    "noApp": 0,
+    "clickPathsShown": 0,
+    "clickPathsHidden": 0,
+    "apps": [
+     [
+      "Claude",
+      {
+       "steps": 3,
+       "linked": 0
+      }
+     ]
+    ],
+    "refs": [
+     "claude_project",
+     "saved_assistant",
+     "say_it_out_loud",
+     "phone_quick_replies",
+     "gmail_claude_follow_ups"
+    ]
+   }
   },
   "groomer": {
    "group": "self employed Starter",
@@ -1570,7 +1666,126 @@
     "with_ai",
     "with_ai"
    ],
-   "askOnly": false
+   "askOnly": false,
+   "checks3": [
+    {
+     "id": "three_patterns",
+     "pass": true,
+     "detail": "7 responsibilities, each with patterns from the ten"
+    },
+    {
+     "id": "three_refs_real",
+     "pass": true,
+     "detail": "Every card and recipe id exists"
+    },
+    {
+     "id": "three_links_vendor",
+     "pass": true,
+     "detail": "Every link is on the vendor's own site"
+    },
+    {
+     "id": "three_feature_named",
+     "pass": false,
+     "detail": "Paste your current checklist steps without names and ask for a standard checklist with owners and da | Ask for a reminder message for each policy with gaps for [policy], [date] and [link]."
+    },
+    {
+     "id": "three_no_click_without_link",
+     "pass": true,
+     "detail": "No menu path or button name outside a linked click path"
+    },
+    {
+     "id": "three_approval",
+     "pass": true,
+     "detail": "Every workflow has a point where she checks"
+    },
+    {
+     "id": "three_copy_rules",
+     "pass": true,
+     "detail": "No dashes, promised times, prices or percents"
+    },
+    {
+     "id": "three_levels",
+     "pass": true,
+     "detail": "Every level is 1 to 5, and level 1 means it stays hers"
+    },
+    {
+     "id": "three_starter_level",
+     "pass": true,
+     "detail": "Every level is 3 or lower for a Starter"
+    },
+    {
+     "id": "three_not_writing_help",
+     "pass": false,
+     "detail": "A saved newsletter layout and a prompt that turns your notes into a draft."
+    },
+    {
+     "id": "three_no_connect",
+     "pass": true,
+     "detail": "No step connects a work app"
+    },
+    {
+     "id": "three_ask_first",
+     "pass": true,
+     "detail": "Her path opens with the message to ask what is allowed"
+    },
+    {
+     "id": "three_top_two",
+     "pass": true,
+     "detail": "Top: Answering benefits questions, Onboarding new hires; 2 workflows on her path"
+    }
+   ],
+   "design3Count": {
+    "responsibilities": 7,
+    "stays": 1,
+    "builtOnce": 6,
+    "patterns": {
+     "1": 5,
+     "2": 2,
+     "5": 2,
+     "6": 4,
+     "7": 4,
+     "8": 1,
+     "9": 1,
+     "10": 1
+    },
+    "levels": {
+     "1": 1,
+     "3": 6
+    },
+    "steps": 18,
+    "checked": 2,
+    "unchecked": 12,
+    "linked": 8,
+    "noApp": 4,
+    "clickPathsShown": 0,
+    "clickPathsHidden": 0,
+    "apps": [
+     [
+      "Microsoft Outlook",
+      {
+       "steps": 6,
+       "linked": 4
+      }
+     ],
+     [
+      "Claude",
+      {
+       "steps": 3,
+       "linked": 1
+      }
+     ],
+     [
+      "Microsoft Excel",
+      {
+       "steps": 3,
+       "linked": 3
+      }
+     ]
+    ],
+    "refs": [
+     "claude_project"
+    ]
+   }
   },
   "ecom": {
    "group": "experiment",
@@ -1757,6 +1972,249 @@
     "gmail_help_me_write"
    ],
    "askOnly": false
+  },
+  "office": {
+   "group": "experiment",
+   "screens": 9,
+   "checks": [
+    {
+     "id": "screens",
+     "pass": true,
+     "detail": "9 screens, at most 9 for a starter"
+    },
+    {
+     "id": "levels_in_code",
+     "pass": true,
+     "detail": "Every row has a level or waits"
+    },
+    {
+     "id": "level3_not_writing_help",
+     "pass": true,
+     "detail": "No line at level 3 or higher reads like writing help"
+    },
+    {
+     "id": "path_line_from_recipe",
+     "pass": true,
+     "detail": "Every line at level 3 or higher is its recipe's"
+    },
+    {
+     "id": "no_connect_without_ok",
+     "pass": true,
+     "detail": "No row connects a work app"
+    },
+    {
+     "id": "not_sure_ask_first",
+     "pass": true,
+     "detail": "Every task AI touches says to ask first"
+    },
+    {
+     "id": "path_written",
+     "pass": true,
+     "detail": "5 steps"
+    },
+    {
+     "id": "workflow_parts",
+     "pass": true,
+     "detail": "2 workflows, each with a test, an approval point and a cost line"
+    },
+    {
+     "id": "setup_from_recipe_or_card",
+     "pass": true,
+     "detail": "card claude_get_started, card claude_about_you, Tally's own steps for writing with AI, recipe saved_assistant"
+    },
+    {
+     "id": "no_click_paths_from_model",
+     "pass": true,
+     "detail": "The model wrote no menu paths or button names"
+    },
+    {
+     "id": "copy_rules",
+     "pass": true,
+     "detail": "No dashes, promised times, prices or percents"
+    },
+    {
+     "id": "offer_matches_path",
+     "pass": true,
+     "detail": "Offer names 2, path has 2 workflows, 2 match by name"
+    }
+   ],
+   "recipes": {
+    "total": 4,
+    "aiTasks": 3,
+    "withRecipe": [
+     {
+      "task": "Planning company events",
+      "recipe": "saved_assistant",
+      "level": 3
+     }
+    ],
+    "without": [
+     {
+      "task": "Supplier emails",
+      "level": 2,
+      "waits": false
+     },
+     {
+      "task": "Ordering lunch and drinks",
+      "level": 2,
+      "waits": false
+     },
+     {
+      "task": "Restocking the fridges",
+      "level": 1,
+      "waits": false
+     }
+    ],
+    "noRecipe": false,
+    "mostlyAssistant": false
+   },
+   "designCount": {
+    "steps": 11,
+    "checked": 8,
+    "unchecked": 0,
+    "noApp": 3,
+    "badRefs": [],
+    "clickPaths": [],
+    "apps": [],
+    "refs": [
+     "claude_get_started",
+     "claude_project",
+     "saved_assistant",
+     "chatgpt_get_started",
+     "chatgpt_about_you",
+     "chatgpt_project",
+     "say_it_out_loud",
+     "notes_to_sheet"
+    ]
+   },
+   "design2Count": null,
+   "pathRecipes": [
+    "with_ai",
+    "saved_assistant"
+   ],
+   "askOnly": false,
+   "checks3": [
+    {
+     "id": "three_patterns",
+     "pass": true,
+     "detail": "7 responsibilities, each with patterns from the ten"
+    },
+    {
+     "id": "three_refs_real",
+     "pass": true,
+     "detail": "Every card and recipe id exists"
+    },
+    {
+     "id": "three_links_vendor",
+     "pass": true,
+     "detail": "Every link is on the vendor's own site"
+    },
+    {
+     "id": "three_feature_named",
+     "pass": false,
+     "detail": "Describe the columns you need, such as name, choice, vegetarian, gluten free and notes, and ask Clau | Paste two or three of your past supplier emails, with prices and private details removed, and ask Cl | Tell Claude how your last event went, without private details, and ask for a checklist with the step"
+    },
+    {
+     "id": "three_no_click_without_link",
+     "pass": true,
+     "detail": "No menu path or button name outside a linked click path"
+    },
+    {
+     "id": "three_approval",
+     "pass": true,
+     "detail": "Every workflow has a point where she checks"
+    },
+    {
+     "id": "three_copy_rules",
+     "pass": true,
+     "detail": "No dashes, promised times, prices or percents"
+    },
+    {
+     "id": "three_levels",
+     "pass": true,
+     "detail": "Every level is 1 to 5, and level 1 means it stays hers"
+    },
+    {
+     "id": "three_starter_level",
+     "pass": true,
+     "detail": "Every level is 3 or lower for a Starter"
+    },
+    {
+     "id": "three_not_writing_help",
+     "pass": true,
+     "detail": "No map line at level 3 or higher reads like writing help"
+    },
+    {
+     "id": "three_no_connect",
+     "pass": true,
+     "detail": "No step connects a work app"
+    },
+    {
+     "id": "three_ask_first",
+     "pass": true,
+     "detail": "Her path opens with the message to ask what is allowed"
+    },
+    {
+     "id": "three_top_two",
+     "pass": true,
+     "detail": "Top: Ordering lunch and drinks, Writing supplier emails; 2 workflows on her path"
+    }
+   ],
+   "design3Count": {
+    "responsibilities": 7,
+    "stays": 0,
+    "builtOnce": 7,
+    "patterns": {
+     "1": 4,
+     "3": 2,
+     "4": 2,
+     "5": 1,
+     "6": 3,
+     "7": 1,
+     "8": 1
+    },
+    "levels": {
+     "3": 7
+    },
+    "steps": 24,
+    "checked": 0,
+    "unchecked": 17,
+    "linked": 14,
+    "noApp": 7,
+    "clickPathsShown": 10,
+    "clickPathsHidden": 0,
+    "apps": [
+     [
+      "Microsoft Excel",
+      {
+       "steps": 9,
+       "linked": 9
+      }
+     ],
+     [
+      "Microsoft Outlook",
+      {
+       "steps": 4,
+       "linked": 4
+      }
+     ],
+     [
+      "Claude",
+      {
+       "steps": 3,
+       "linked": 0
+      }
+     ],
+     [
+      "IPhone",
+      {
+       "steps": 1,
+       "linked": 1
+      }
+     ]
+    ],
+    "refs": []
+   }
   }
  },
  "similarity": [
@@ -1810,20 +2268,6 @@
    "words": 0.31
   },
   {
-   "a": "groomer",
-   "b": "dental",
-   "recipes": 0.5,
-   "steps": 0.67,
-   "words": 0.3
-  },
-  {
-   "a": "groomer",
-   "b": "kayla",
-   "recipes": 1,
-   "steps": 1,
-   "words": 0.3
-  },
-  {
    "a": "beauty",
    "b": "boutique",
    "recipes": 0.5,
@@ -1831,10 +2275,38 @@
    "words": 0.3
   },
   {
+   "a": "dental",
+   "b": "groomer",
+   "recipes": 0.5,
+   "steps": 0.67,
+   "words": 0.3
+  },
+  {
+   "a": "jess",
+   "b": "office",
+   "recipes": 0,
+   "steps": 0.29,
+   "words": 0.3
+  },
+  {
+   "a": "kayla",
+   "b": "groomer",
+   "recipes": 1,
+   "steps": 1,
+   "words": 0.3
+  },
+  {
    "a": "planner",
    "b": "ecom",
    "recipes": 0.33,
    "steps": 0.4,
+   "words": 0.3
+  },
+  {
+   "a": "hr",
+   "b": "office",
+   "recipes": 0.5,
+   "steps": 0.8,
    "words": 0.3
   },
   {
@@ -1894,8 +2366,8 @@
    "words": 0.29
   },
   {
-   "a": "groomer",
-   "b": "beauty",
+   "a": "beauty",
+   "b": "groomer",
    "recipes": 0.5,
    "steps": 0.67,
    "words": 0.28
@@ -1908,32 +2380,11 @@
    "words": 0.28
   },
   {
-   "a": "groomer",
-   "b": "cashier",
-   "recipes": 0.5,
-   "steps": 0.8,
-   "words": 0.27
-  },
-  {
-   "a": "groomer",
-   "b": "planner",
+   "a": "cashier",
+   "b": "office",
    "recipes": 0,
-   "steps": 0.14,
-   "words": 0.27
-  },
-  {
-   "a": "groomer",
-   "b": "social_new",
-   "recipes": 0.33,
-   "steps": 0.67,
-   "words": 0.27
-  },
-  {
-   "a": "groomer",
-   "b": "social_canva",
-   "recipes": 0.33,
    "steps": 0.5,
-   "words": 0.27
+   "words": 0.28
   },
   {
    "a": "beauty",
@@ -1958,6 +2409,13 @@
   },
   {
    "a": "cashier",
+   "b": "groomer",
+   "recipes": 0.5,
+   "steps": 0.8,
+   "words": 0.27
+  },
+  {
+   "a": "cashier",
    "b": "social_new",
    "recipes": 0.5,
    "steps": 0.8,
@@ -1974,6 +2432,27 @@
    "a": "dental",
    "b": "social_canva",
    "recipes": 0.5,
+   "steps": 0.5,
+   "words": 0.27
+  },
+  {
+   "a": "groomer",
+   "b": "planner",
+   "recipes": 0,
+   "steps": 0.14,
+   "words": 0.27
+  },
+  {
+   "a": "groomer",
+   "b": "social_new",
+   "recipes": 0.33,
+   "steps": 0.67,
+   "words": 0.27
+  },
+  {
+   "a": "groomer",
+   "b": "social_canva",
+   "recipes": 0.33,
    "steps": 0.5,
    "words": 0.27
   },
@@ -1995,6 +2474,13 @@
    "a": "social_new",
    "b": "hr",
    "recipes": 0,
+   "steps": 0.5,
+   "words": 0.27
+  },
+  {
+   "a": "social_canva",
+   "b": "office",
+   "recipes": 0.33,
    "steps": 0.5,
    "words": 0.27
   },
@@ -2020,6 +2506,13 @@
    "words": 0.26
   },
   {
+   "a": "dental",
+   "b": "office",
+   "recipes": 0,
+   "steps": 0.43,
+   "words": 0.26
+  },
+  {
    "a": "jess",
    "b": "social_new",
    "recipes": 0,
@@ -2048,18 +2541,18 @@
    "words": 0.26
   },
   {
+   "a": "planner",
+   "b": "office",
+   "recipes": 0,
+   "steps": 0.14,
+   "words": 0.26
+  },
+  {
    "a": "social_canva",
    "b": "hr",
    "recipes": 0,
    "steps": 0.33,
    "words": 0.26
-  },
-  {
-   "a": "groomer",
-   "b": "jess",
-   "recipes": 0,
-   "steps": 0.29,
-   "words": 0.25
   },
   {
    "a": "beauty",
@@ -2104,6 +2597,13 @@
    "words": 0.25
   },
   {
+   "a": "jess",
+   "b": "groomer",
+   "recipes": 0,
+   "steps": 0.29,
+   "words": 0.25
+  },
+  {
    "a": "boutique",
    "b": "ecom",
    "recipes": 0,
@@ -2118,11 +2618,11 @@
    "words": 0.25
   },
   {
-   "a": "groomer",
-   "b": "hr",
-   "recipes": 0,
-   "steps": 0.5,
-   "words": 0.24
+   "a": "social_new",
+   "b": "office",
+   "recipes": 0.33,
+   "steps": 0.67,
+   "words": 0.25
   },
   {
    "a": "cashier",
@@ -2154,9 +2654,30 @@
   },
   {
    "a": "groomer",
-   "b": "ecom",
+   "b": "hr",
    "recipes": 0,
-   "steps": 0.29,
+   "steps": 0.5,
+   "words": 0.24
+  },
+  {
+   "a": "groomer",
+   "b": "office",
+   "recipes": 0,
+   "steps": 0.43,
+   "words": 0.24
+  },
+  {
+   "a": "ecom",
+   "b": "office",
+   "recipes": 0.33,
+   "steps": 0.5,
+   "words": 0.24
+  },
+  {
+   "a": "beauty",
+   "b": "office",
+   "recipes": 0,
+   "steps": 0.43,
    "words": 0.23
   },
   {
@@ -2195,6 +2716,13 @@
    "words": 0.23
   },
   {
+   "a": "groomer",
+   "b": "ecom",
+   "recipes": 0,
+   "steps": 0.29,
+   "words": 0.23
+  },
+  {
    "a": "boutique",
    "b": "hr",
    "recipes": 0,
@@ -2207,6 +2735,20 @@
    "recipes": 0,
    "steps": 0.14,
    "words": 0.23
+  },
+  {
+   "a": "kayla",
+   "b": "office",
+   "recipes": 0,
+   "steps": 0.43,
+   "words": 0.22
+  },
+  {
+   "a": "boutique",
+   "b": "office",
+   "recipes": 0,
+   "steps": 0.29,
+   "words": 0.22
   },
   {
    "a": "dental",
