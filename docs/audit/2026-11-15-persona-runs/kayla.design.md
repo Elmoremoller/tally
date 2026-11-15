@@ -4,73 +4,75 @@ Designed by the model for her top two tasks with no fixed list of task kinds. Cl
 
 9 steps: 7 checked, 0 not checked by us, 2 outside any app.
 
-## Writing quotes
+## Quoting jobs
 
-**Today.** You write quotes a few times a week, usually at night after talking the job through on a voice memo. Photos from the site go into your phone, and each quote lists parts, labor, permit fee and a total, good for 30 days with 50% deposit to book.
+**Today.** You write a quote about once a day, and each one starts from scratch. Your last one was a 200 amp panel upgrade with attic runs, permit included, $2,450, 50% deposit.
 
-**The new way.** You keep talking the job through out loud at night, and your assistant turns what you said into a quote in your usual layout: parts, labor, permit fee, total at bottom, 30 day validity and 50% deposit. You read it, fix any number, and send it yourself. It is better for you because the typing and layout are done and you only check the figures.
+**The new way.** You keep one saved assistant that knows how your quotes read: scope, permit, price, deposit and start date. On site or in the truck, you tell it the job in your own words and it hands back a finished quote in your wording. You fill in the numbers yourself, so the price is always yours, and each quote starts from your format instead of a blank page.
 
 **Setup**
 
-1. Get Claude ready on your phone so you can use it from the truck or at night. (Claude). Checked: card claude_get_started.
-   * Download the Claude app from the App Store on an iPhone or Google Play on Android.
-   * Open the app and create a free account. You need to be 18 or older.
+1. Get ChatGPT ready on your phone so you can use it from the truck. (ChatGPT). Checked: card chatgpt_get_started.
+   * Open the App Store on an iPhone or Google Play on Android and search for OpenAI ChatGPT.
+   * Check that the app comes from OpenAI before you download it.
+   * Open the app and sign up with an email address you own, so your chats are saved.
    * Type what you need in the message box and send it.
-2. Save a short note about you and your business so quotes come out in your voice and your terms. (Claude). Checked: card claude_about_you.
-   * Click your initials in the lower left corner.
-   * Select Settings, then Your Claude. If you see the older Settings page, select Account.
-   * Under Instructions, describe how you work and how you like your answers. On the older page this is called Instructions for Claude.
-   * Claude uses these instructions in all your chats.
-3. Make a project for quotes that holds your quote layout and terms in one place. (Claude). Checked: card claude_project.
-   * Open the left side panel and click Projects, or go to claude.ai/projects.
-   * Click New Project in the upper right corner.
-   * Give the project a name and a description. Claude does not read these.
-   * Click Set project instructions, write how Claude should handle this task, then click Save instructions.
-   * In the project knowledge on the right, click the plus button and add your examples as documents or text.
-   * Start a chat inside the project. Claude uses your instructions and examples in every chat there.
-4. Set up a saved quote assistant that turns your spoken job notes into a finished quote in your layout. (Claude). Checked: recipe saved_assistant.
-   * Open the left side panel and click Projects, or go to claude.ai/projects.
-   * Click New Project in the upper right corner.
-   * Give the project a name and a description. Claude does not read these.
-   * Click Set project instructions, write how Claude should handle this task, then click Save instructions.
-   * In the project knowledge on the right, click the plus button and add your examples as documents or text.
-   * Start a chat inside the project. Claude uses your instructions and examples in every chat there.
+2. Save a short note about your business, your area and how you like to sound, so every quote starts from it. (ChatGPT). Checked: card chatgpt_about_you.
+   * Open the sidebar and select your profile icon to open Settings.
+   * Select Customize ChatGPT.
+   * Make sure Enable customization is turned on.
+   * Type your instructions in the Custom Instructions field. They apply to every chat right away.
+3. Pick two or three of your past quotes that read the way you like and note what each always includes.
+4. Build a saved quote assistant from your past quotes that turns a few spoken details into a finished quote. (ChatGPT). Checked: recipe saved_assistant.
+   * Select New project in the sidebar.
+   * Give the project a name, then pick an icon and a color.
+   * Open the menu with three dots and select Project settings.
+   * Type your instructions for this task, then select Save.
+   * Add your examples to the project by uploading a file or pasting text.
+   * Start a new chat inside the project. It uses your instructions and examples, and no other chat does.
    * Use the instructions and examples Tally wrote for you when the card asks for them.
    * Each time the task comes up, start a new chat in the project and say what you need.
-5. Pick two or three past quotes, such as the panel upgrade, to use as examples of how you want quotes to look.
+5. Keep the quote assistant, your sample quotes and your standard terms together in one project you can reopen each time. (ChatGPT). Checked: card chatgpt_project.
+   * Select New project in the sidebar.
+   * Give the project a name, then pick an icon and a color.
+   * Open the menu with three dots and select Project settings.
+   * Type your instructions for this task, then select Save.
+   * Add your examples to the project by uploading a file or pasting text.
+   * Start a new chat inside the project. It uses your instructions and examples, and no other chat does.
 
 **What Tally would write for her**
 
-* Quote assistant instructions: Tells the assistant to build a quote with parts, labor, permit fee and total at bottom, using your wording.
-* Standard terms: Holds your 30 day validity and 50% deposit to book, ready to add to every quote.
-* Example quote: Your 200 amp panel upgrade quote kept as a model for layout and tone.
-* Missing info prompt: A short line that makes the assistant ask you about any price or quantity you did not say, instead of guessing.
+* Quote assistant instructions: Tells the assistant to write a quote in your wording with scope, permit, price, deposit and start date, and to leave a gap for anything you did not say.
+* Sample quotes: Your own past quotes, including the 200 amp panel upgrade, so the assistant copies your layout and tone.
+* Standard terms note: Your usual deposit, how you mention permits and how you offer a start date, written once.
+* About you note: Your business, your Phoenix home work and your plain, friendly way of writing.
 
-**Where she checks.** You read the finished quote and check every part, price, permit fee and total against your notes before you send it yourself.
+**Where she checks.** You read every quote and check the scope, price, deposit and start date yourself before you send it to the homeowner.
 
 ## Texting homeowners
 
-**Today.** You text homeowners often, and many of the messages are about the same few things.
+**Today.** You send texts to homeowners through the day, often the same few answers.
 
-**The new way.** Your most common replies are saved on your phone, so a few letters brings up the full message, like arrival times, quote follow ups or a payment reminder. You read each one, adjust the details, and send it. It is better for you because you answer fast from the job site without retyping the same thing.
+**The new way.** Your most common answers are saved on your phone and come up after a few letters. You read the reply, change anything for that job, and send it yourself. Nothing goes out on its own, and you stop retyping the same answers between jobs.
 
 **Setup**
 
-1. List the ten things you text homeowners most often, such as running late, confirming a visit and asking for a review.
-2. Get Claude ready on your phone so it can help you word the saved replies. (Claude). Checked: card claude_get_started.
-   * Download the Claude app from the App Store on an iPhone or Google Play on Android.
-   * Open the app and create a free account. You need to be 18 or older.
+1. List the ten questions homeowners ask you most and write down how you usually answer each.
+2. Get ChatGPT ready on your phone to help tidy your ten answers. (ChatGPT). Checked: card chatgpt_get_started.
+   * Open the App Store on an iPhone or Google Play on Android and search for OpenAI ChatGPT.
+   * Check that the app comes from OpenAI before you download it.
+   * Open the app and sign up with an email address you own, so your chats are saved.
    * Type what you need in the message box and send it.
-3. Have the assistant write a short, friendly version of each of your ten replies in your voice. (Claude). Checked: recipe saved_assistant.
-   * Open the left side panel and click Projects, or go to claude.ai/projects.
-   * Click New Project in the upper right corner.
-   * Give the project a name and a description. Claude does not read these.
-   * Click Set project instructions, write how Claude should handle this task, then click Save instructions.
-   * In the project knowledge on the right, click the plus button and add your examples as documents or text.
-   * Start a chat inside the project. Claude uses your instructions and examples in every chat there.
+3. Have the assistant turn your rough answers into short, clear texts in your voice with gaps for names and times. (ChatGPT). Checked: recipe saved_assistant.
+   * Select New project in the sidebar.
+   * Give the project a name, then pick an icon and a color.
+   * Open the menu with three dots and select Project settings.
+   * Type your instructions for this task, then select Save.
+   * Add your examples to the project by uploading a file or pasting text.
+   * Start a new chat inside the project. It uses your instructions and examples, and no other chat does.
    * Use the instructions and examples Tally wrote for you when the card asks for them.
    * Each time the task comes up, start a new chat in the project and say what you need.
-4. Save the ten replies so each one is a few letters away when you text. (her phone's keyboard). Checked: recipe phone_quick_replies.
+4. Save the ten replies on your phone so each one is a few letters away in any text thread. (her phone's keyboard). Checked: recipe phone_quick_replies.
    * Keep the replies and shortcuts Tally wrote for you open, above.
    * In any app where you can type, touch and hold the Emoji button or the Switch Keyboard key.
    * Tap Keyboard Settings, then tap Text Replacement.
@@ -80,8 +82,8 @@ Designed by the model for her top two tasks with no fixed list of task kinds. Cl
 
 **What Tally would write for her**
 
-* Ten saved replies: Short texts for your most common homeowner messages, with gaps for name, time or amount.
-* Shortcut list: The few letters that bring up each saved reply, so you can remember them.
-* Tone notes: A few lines on how you sound with homeowners: polite, direct and brief.
+* Ten saved replies: Short texts for your most common homeowner questions, like arrival time, pricing, permits and scheduling.
+* Shortcut list: A few letters for each reply so you know what to type to bring it up.
+* Tone notes: A few lines on how you sound to homeowners, friendly, direct and brief.
 
-**Where she checks.** You read every reply and fill in the name, time or amount before you send it yourself.
+**Where she checks.** You read each reply, fill in any gap and send it yourself.

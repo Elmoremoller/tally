@@ -5,20 +5,20 @@ restricted employee. Tried it a few times, starter. Phone only. Can use AI: No, 
 ## Her map
 
 * **Follow up texts** (level 3, Build once, reuse, recipe phone_quick_replies)
-  * Today: You write these many times a day, often starting from your client book each time.
+  * Today: You write these many times a day, often starting from scratch or an old text.
   * With your path: For your follow up texts, your common replies are saved on your phone, each a few letters away.
-* **Answering messages** (level 3, Build once, reuse, recipe phone_quick_replies)
-  * Today: You answer client texts many times a day, one at a time from scratch.
+* **Answering client messages** (level 3, Build once, reuse, recipe phone_quick_replies)
+  * Today: Messages come in all day, and each one needs a bit of thought.
   * With your path: For your client messages, your common replies are saved on your phone, each a few letters away.
-* **Client consultations** (level 1, Stays yours)
-  * Today: You run these face to face at the counter as part of your day.
-  * With your path: This stays yours in person, and AI can only help with the notes you write afterward.
-* **Product demos** (level 1, Stays yours)
-  * Today: You give these in person at the counter.
-  * With your path: This stays yours in person, with no change from AI.
-* **Restocking testers** (level 1, Stays yours)
-  * Today: You restock testers by hand throughout the week.
-  * With your path: This stays hands on, and AI doesn’t change it.
+* **Customer makeovers** (level 1, Stays yours)
+  * Today: Makeovers are hands on, face to face work at the counter.
+  * With your path: Makeovers stay yours, and AI doesn’t touch that part of your day.
+* **Restocking the counter** (level 1, Stays yours)
+  * Today: Restocking happens by hand on the counter throughout your shift.
+  * With your path: Restocking stays hands on, and AI doesn’t change that part of your day.
+* **Tracking commission sales** (level Waits for your company's OK)
+  * Today: You track your commission sales by hand in the book and store system.
+  * With your path: Your sales notes stay yours, and AI can help you tidy them into a clear summary.
 
 ## Her offer
 
@@ -43,17 +43,17 @@ On a phone:
 2. Open the app and create a free account. You need to be 18 or older.
 3. Type what you need in the message box and send it.
 
-First message: I’m a beauty advisor at a department store makeup counter, and I text clients about new launches, holds and gift with purchase offers from my phone. Write a short, friendly text of 2 to 3 sentences that follows up with a client about a product I’m holding for them, ending with a clear question so they can reply. Keep the tone warm and personal, with no pushy sales language. This time the details are: [describe the product, the client’s shade or item, and any hold date].
+First message: I’m a beauty advisor at a department store makeup counter, and I text clients to follow up after visits, restocks and promotions. Write a short, warm text in a friendly, upbeat tone, two to three sentences, that a store can send from a personal phone. Keep it casual, use one emoji at most, and end with a simple question that invites a reply. Here is what this one is about: [paste the client’s name, what they bought or liked, and the news to share].
 
 ### Step 2, about
 
 Card: claude_about_you
 
-Her note: I work as a beauty advisor at a department store makeup counter, and part of my pay is commission. I text my clients from my phone about new launches, held items, gifts with purchase and follow ups after a visit. My clients are regulars and new customers, and I want every message to sound warm, short and like me. Keep replies to a few sentences. Never add details I did not give you, like prices, shades, dates, offers or stock. Use square brackets for anything I need to fill in. Never claim a product does something I did not say. Give me the text only, ready for me to read and change before I send it.
+Her note: I am a beauty advisor at a department store makeup counter. I do makeovers, restock, and text my clients to follow up and answer their messages. I write to clients in a warm, short, friendly way, like a real person at the counter, and one or two sentences is usually enough. I never want you to add details I did not give you, like product facts, prices, offers, or what a client said. If something is missing, leave a square bracket for me to fill in. Give me plain text I can read, change, and send myself.
 
 ### Step 3, workflow: Your follow up texts, saved once on your phone
 
-Your follow up texts live on your phone’s keyboard, each a few letters away. You stop starting from your client book every time, and you only fill in the name, shade or day. Every text still sounds like you, because the words are yours.
+Your replies live on your phone’s keyboard, each a few letters away. You still read each one and change the name or the day before you send it. That beats starting from scratch or copying an old text, because every reply already sounds like you and fits your counter.
 
 Recipe phone_quick_replies, route iphone + any_chat
 
@@ -69,27 +69,25 @@ Test: The next three messages that need one of these replies. Good: The reply fi
 Approval point: You read every reply before you send it. Nothing is sent by itself.
 Cost: Text replacement on an iPhone, text shortcuts on a Samsung phone and the Gboard clipboard are free, and Tally writes the replies for you.
 
-**Your follow up replies**
-* Hi [first name]! The new [product] just came in and I saved you a shade. Want me to hold it until [day]? Text me back and I’ll set it aside.
-* Hi [first name]! It was so nice seeing you today. How are you liking the [product]? Let me know if you want to tweak anything.
-* Hi [first name]! We have a gift with purchase starting [day] with [product or set]. Want me to put one aside for you? Just text me back.
-* Hi [first name]! Your [product] is back in stock. Shall I hold one for you until [day]?
-* Hi [first name]! Just checking in on the [product] you picked up. Any questions on how to apply it? Happy to show you again when you stop by.
-* Hi [first name]! We have a launch coming on [day]: [product]. Would you like me to save you one? I can also set up a time to try it.
-* Hi [first name]! Thank you for stopping by [day]. I’d love to see you again soon. Text me when you’re free and I’ll save you a spot at the counter.
+**Your replies**
+* Hi [first name]! The [product] you liked is back in stock and I saved your shade. Want me to hold it until [day]?
+* Hi [first name], it was so good seeing you at the counter. How is the [product] working for you? I’m happy to help with anything you need.
+* Hi [first name], [current offer] starts [day]. I’d love to set aside [product] for you before then. Want me to?
+* Hi [first name], I thought of you when [new product] arrived. Want to stop by on [day] and try it?
+* Hi [first name], your [product] may be close to needing a refill. Want me to set one aside in [shade]?
+* Hi [first name], just checking in after your makeover on [day]. Let me know if you’d like the steps for the look written down.
 
 **Your shortcuts**
-* hldb
-* thnk
-* gwpl
 * bkst
 * chkn
-* lnch
-* visi
+* ofrz
+* nwpd
+* rfll
+* mkov
 
 ### Step 4, extra: Your client messages, saved once on your phone
 
-Answering messages is added to the setup you made in the follow up texts step. Your common answers to client texts sit on your phone’s keyboard next to your follow ups.
+Answering client messages is added to the setup you made in the follow up texts step. Your quick answers sit on the same keyboard, so each message gets a reply that sounds like you.
 
 Recipe phone_quick_replies, route iphone + any_chat
 
@@ -105,30 +103,29 @@ Test: The next three messages that need one of these replies. Good: The reply fi
 Approval point: You read every reply before you send it. Nothing is sent by itself.
 Cost: Text replacement on an iPhone, text shortcuts on a Samsung phone and the Gboard clipboard are free, and Tally writes the replies for you.
 
-**Your message replies**
-* Hi [first name]! Yes, we have [product] in stock. Want me to hold one for you until [day]?
-* Hi [first name]! Thanks for asking. I’m at the counter [days and hours], so come by whenever suits you.
-* Hi [first name]! I’m not sure about that one yet. Let me check and get back to you today.
-* Hi [first name]! Yes, I can show you how to use it. Stop by the counter and ask for me.
-* Hi [first name]! Thank you so much for your message. I’ll set it aside for you under your name.
-* Hi [first name]! The gift with purchase is available [dates or while supplies last]. Let me know if you’d like me to save one.
-* Hi [first name]! So glad you love it! Let me know if you’d like a refill or something to go with it.
+**Your replies**
+* Hi [first name], thanks for your message! Yes, we have [product] in [shade]. Want me to hold it for you until [day]?
+* Hi [first name], I’m with another client right now. I’ll write back properly as soon as I’m free.
+* Hi [first name], I’m not sure that’s in stock. Let me check and I’ll get back to you by [day].
+* Hi [first name], I’m at the counter [days and hours]. Come by any time and I’ll take care of you.
+* Hi [first name], I’d suggest [product] for that. Come in and I’ll show you how it looks on you before you decide.
+* Hi [first name], thanks for letting me know. I’ll add it to your notes so I remember for next time.
 
 **Your shortcuts**
-* stck
-* hrs
-* chkb
-* shwm
-* setd
-* gift
-* luvt
+* qhld
+* qbzy
+* qchk
+* qhrz
+* qsgg
+* qnts
 
 ### Step 5, end
 
-* Never type a client’s full name, phone number, address or purchase history into a chat tool.
-* Use square brackets in place of names and details, and fill them in yourself on your phone.
-* Don’t paste your client book or sales numbers into a chat tool.
-* Check every text for the right product, shade, offer and day before you send it.
-* Only use AI for work tasks once your company says it is okay.
+* Never type a client’s full name, phone number, address, or purchase history into a chat tool. Use square brackets and fill them in yourself.
+* Leave out anything private from your paper client book, like skin concerns, allergies, or personal notes about a client.
+* Do not paste store system details, sales numbers, or commission figures into a chat tool.
+* Only check product facts, offers, and stock against your store’s own sources, never from a chat tool’s answer.
+* Read every text on your screen and change the brackets before you send it.
+* Check with your manager on which tools are approved before you use any AI at work.
 
-> Hi [manager’s name], I’d like to know which AI tools the company has approved and what I may use them for. I’m thinking of using one to help write my follow up texts to clients and my replies to their messages, without ever typing client names or details into it. I would read every text before sending it. Could you let me know what is allowed, or point me to the right person in IT?
+> Hi [manager’s name], I’d like to know which AI tools, if any, are approved for use at the counter, and what I’m allowed to use them for. I’m thinking of using one to help me write follow up texts to clients and to answer client messages faster, with no client names or private details typed in. I’d also like to know whether using AI to track my commission sales is allowed, and I will not do that until I hear from you. Could you let me know, or point me to the right person in IT?

@@ -1,6 +1,6 @@
 # Phase 7 readout
 
-Written on 15 November 2026, and written again the same evening after the fixes Karl asked for. Twelve made up people went through the live quiz at /begin with the real AI calls. Their free result and paid path were built by the same code the site uses. Nothing was written to the database.
+Written on 15 November 2026, written again the same evening after the fixes Karl asked for, and updated once more after phone only people got say it out loud in place of a saved assistant (the five phone only people ran again; the other seven runs are unchanged, since the change cannot touch them). Twelve made up people went through the live quiz at /begin with the real AI calls. Their free result and paid path were built by the same code the site uses. Nothing was written to the database.
 
 Every file is in `docs/audit/2026-11-15-persona-runs`:
 
@@ -15,14 +15,12 @@ Prompt versions in this run: job read beginner-job-v5, question beginner-questio
 
 1. **Every check passes now.** That covers all twelve people, the Phase 5 and 6 Done when lines, and examples 2 and 3 from section 2.
    * The Gmail Builder gets two Inside your apps workflows.
-   * The phone only electrician's quotes get Build once, reuse, through say it out loud.
-2. **Two people get no recipe at all.**
-   * The restricted cashier: every task she has is in person or waits, so she gets only the free message to ask, and no path to buy.
-   * The HR coordinator: she works in Outlook and Excel, which have no recipes, so both her workflows are "written with AI".
-3. **Paths differ more than in the first run, but phone people still look alike.**
-   * Two paths now share 26 percent of their recipes on average, down from 43.
-   * Quick replies are still in 7 of the 11 paths, and three people (beauty advisor, dental receptionist, dog groomer) get nothing but quick replies.
-4. **Neither vendor gives phone steps for a saved assistant.** Details under "Phone steps for a saved assistant".
+   * The phone only electrician's quotes and invoices get Build once, reuse, through say it out loud.
+2. **One person gets no recipe at all: the HR coordinator.** She works in Outlook and Excel, which have no recipes, so both her workflows are "written with AI". The restricted cashier had none in the first runs; this time the final read named her customer texts, and quick replies need no AI at work, so she gets one recipe.
+3. **Phone only people now get say it out loud for writing they repeat.** Karl chose it, since neither vendor gives phone steps for a saved assistant. It gave six rows a recipe across three people: the electrician's invoices, the groomer's social posts, and the boutique owner's captions and social posts.
+4. **Paths differ more than in the first run, but three phone people still look alike.**
+   * Two paths share 30 percent of their recipes on average.
+   * Quick replies are in 8 of the 12 paths, and the beauty advisor, the dental receptionist and the dog groomer get nothing but quick replies. The groomer has say it out loud on two tasks now, but her offer takes her two text tasks, because all three are level 3 and the first on her map wins a tie.
 5. **The second experiment found where new recipes would pay off.** Outlook, Excel, Shopify and Klaviyo, each with the vendor's own help page. It also chose to leave Canva design and phone calls to her.
 
 ## What changed in this PR since the first readout
@@ -43,12 +41,9 @@ I read the vendors' own pages on 15 November:
 * **ChatGPT.** "Projects in ChatGPT" (help.openai.com/en/articles/10169521) gives one set of steps ("Select New project in the sidebar") and never says which device. It says projects let you "start on one device and continue on another", and that sharing works "across the web and mobile apps". The phone app FAQ (articles/8142208) points phone users to custom instructions, not projects. A help center search for projects on mobile finds nothing more.
 * **Claude.** "How can I create and manage projects?" (support.claude.com/en/articles/9519177) is written for a computer: "Hover over the left side", "Click + New Project". "What are projects?" has no phone steps, and the personalization page has none either. Claude Mobile is named only for memory.
 
-**What it means.** Under Karl's rule that a step goes in only when the vendor's page says it, the saved assistant stays computer only. A phone only person cannot get it.
+**What it means.** Under Karl's rule that a step goes in only when the vendor's page says it, the saved assistant stays computer only.
 
-Two ways forward, for Karl's call:
-
-1. Give phone only people say it out loud where it fits. That is how the electrician's quotes now reach level 3, and its steps are checked for both phones.
-2. Check by hand on a phone whether ChatGPT's "New project" works in the app, and whether a project made on a computer works on a phone. That would be our own check, not the vendor's page.
+**What Karl chose, and what changed.** Phone only people get say it out loud for writing they repeat, since its steps are checked for both phones in both chat tools. `PHONE_STAND_IN` in `lib/beginner/recipes.ts` says repeat writing takes the spoken writing recipe on a phone, and `levelFor` in `lib/beginner/levels.ts` uses it only when a computer was the one thing that held the saved assistant back. So it never gets round the other rules: a restricted person still waits, and an employee's task with other people's private details stays at Write it with AI. Someone with a computer, or both, still gets the saved assistant. Tested in `tests/beginner/levels.test.ts`.
 
 ## Who ran
 
@@ -58,7 +53,7 @@ Two ways forward, for Karl's call:
 | cashier, big box cashier | restricted employee | Starter | Phone only | No, restricted | not asked | 8 |
 | dental, dental receptionist | allowed employee | Starter | Both | Yes | No | 9 |
 | jess, event coordinator | allowed employee | Builder | Both | Yes | Yes | 11 |
-| kayla, electrician | self employed Starter | Starter | Phone only | works for herself | | 7 |
+| kayla, electrician | self employed Starter | Starter | Phone only | works for herself | | 6 |
 | groomer, mobile dog groomer | self employed Starter | Starter | Phone only | works for herself | | 7 |
 | boutique, boutique owner | self employed Builder | Builder | Phone only | works for herself | | 9 |
 | planner, wedding planner | self employed Builder | Builder | Both | works for herself | | 9 |
@@ -96,7 +91,7 @@ Every run is held in code (`scripts/persona-checks.ts`, tested in `tests/persona
 * **kayla, the electrician.** "Writing quotes" now gets say it out loud at level 3. She said on the quiz that she talks her quotes through on a voice memo at night.
 * **jess, the event coordinator.** Vendor follow ups stay at level 4, and her second workflow is now Help me write, also level 4.
 
-**Checks I tightened, because they flagged things that were fine.** "Menu choices" for a restaurant, "your go to workout outfit", "opening hours", "labor hours", and a 50 percent deposit that came from Kayla's own example. A price now counts only when she did not give it, and click words only count in the shape of a click path. Each change has a test.
+**Checks I tightened, because they flagged things that were fine.** "Menu choices" for a restaurant, "your go to workout outfit", "opening hours", "labor hours", a 50 percent deposit that came from Kayla's own example, and "the deposit amount or percent" with no figure in it. A price now counts only when she did not give it, and click words only count in the shape of a click path. Each change has a test.
 
 **Not run again.** "Did it work?" reaching the events table was proven live in Phase 6 (a tagged row written, read back and deleted). I did not write test rows again. Old saved answers loading is covered by the existing tests, which all pass.
 
@@ -104,35 +99,36 @@ Every run is held in code (`scripts/persona-checks.ts`, tested in `tests/persona
 
 | Person | Tasks with a recipe | Which |
 |---|---|---|
-| beauty | 2 of 5 | Follow up texts and answering messages, both quick replies. The other three are in person and stay hers. |
-| **cashier** | **0 of 5. No recipe at all.** | Handling returns waits for her company's OK; the rest stay hers. She gets no offer, only the free message to ask. |
+| beauty | 2 of 5 | Follow up texts and answering client messages, both quick replies. Tracking commission waits for her company's OK; makeovers and restocking stay hers. |
+| cashier | 1 of 4 | Answering messages (quick replies, which need no AI at work, with the line to ask first). Returns, price questions and the till stay hers. |
 | dental | 3 of 6 | Reminders, recall messages and rescheduling when a dentist is out, all quick replies. |
 | jess | 4 of 5 | Follow ups (Gmail follow ups, level 4), answering messages (Help me write, level 4), run of show (saved assistant), lists (notes to sheet). Calling vendors stays hers. |
-| kayla | 4 of 5 | Quotes (say it out loud), texting homeowners, reviews and chasing payment (quick replies). Invoicing is level 2. |
-| groomer | 4 of 5 | Client messages, reminders, booking and price questions, all quick replies. Social posts are level 2. |
-| boutique | 2 of 4 | Customer messages and texts to regulars, both quick replies. Social posts and scheduling part timers are level 2. |
+| kayla | 6 of 6 | Quotes and invoices (say it out loud), texting homeowners, following up quotes, answering messages, and chasing payment and reviews (quick replies). |
+| groomer | 4 of 4 | Reminder texts and booking (quick replies), social posts and grooming notes (say it out loud). Her offer still takes the two text tasks. |
+| boutique | 3 of 5 | Customer messages (quick replies), Instagram captions and social posts (say it out loud). Tagging and restocking stay hers. |
 | planner | 5 of 6 | Answering messages (Help me write, level 4), vendor booking emails and other emails (Gmail templates), lists (notes to sheet), chasing vendors (Gmail follow ups, level 4). Timeline planning is level 2. |
 | social_new | 4 of 5 | Captions (saved assistant), comments and messages (quick replies), emails (Gmail templates). Weekly planning is level 2. Every task AI touches says to ask first. |
 | social_canva | 4 of 6 | Captions (saved assistant), comments and messages (quick replies), emails (Gmail templates). Designing in Canva stays hers; the calendar is level 2. |
 | **hr** | **0 of 3. No recipe at all.** | Benefits questions, onboarding and emails are all level 2, because she works in Outlook and Excel. Every task says to ask first. |
 | ecom | 4 of 5 | Product descriptions and listing updates (saved assistant), promo emails (Gmail templates), customer replies (Help me write, level 4). Weekly sales numbers are level 2. |
 
-**No recipe at all: cashier and hr.** For the cashier that is the honest answer: her work is at the till and her store restricts AI. The free message she gets still names "handling returns" as something to ask about, which reads oddly for work done at the register. For the HR coordinator, it is the missing Microsoft recipes ("Later" in DIRECTION.md).
+**No recipe at all: hr.** It is the missing Microsoft recipes ("Later" in DIRECTION.md). The cashier had no recipe in the first runs; this run's final read found her customer texts, and register work now stays hers instead of waiting, so the odd "ask about handling returns" message did not come back. That is the model reading her differently, not a code change, so it may come back on another run.
 
 **Most tasks on the saved assistant: nobody.** The most is the ecommerce manager, with 2 of 5.
 
-**Quick replies take 18 of the 36 rows that got a recipe**, down from 20 of 35. For beauty, dental and groomer, every recipe on the map is still quick replies.
+**Quick replies take 17 of the 40 rows that got a recipe**, down from 18 of 36. Say it out loud takes 6 and the saved assistant 5. For beauty and dental every recipe on the map is still quick replies.
 
 **Inside your apps (level 4) now reaches three paths:** jess, planner and ecom. **Nobody reached level 5.** The weekly list of who has not replied was offered to nobody, because no task was given the kind "awaiting replies". Jess's and the planner's chasing went to Gmail follow ups instead. That is a level 4 that drafts the chase, and a reasonable reading of "chasing".
 
 ## How different the paths are
 
-Plainly: more different than in the first run, but people who work from a phone still get the same workflow.
+Plainly: more different than in the first run, but three people who work from a phone still get the same workflow.
 
-* 11 people got a path; the cashier is ask only. Of the 55 ways to pair two paths, 5 pairs set up exactly the same recipes, down from 11 of 66.
-* On average two paths share 26 percent of their recipes, down from 43, and 26 percent of the words Tally wrote for them.
-* The identical pairs:
-  * the beauty advisor, the dental receptionist and the dog groomer, who all get quick replies twice (three pairs)
+* All 12 people got a path this time. Of the 66 ways to pair two paths, 9 pairs set up the same recipes, against 11 of 66 in the first run.
+* On average two paths share 30 percent of their recipes and 27 percent of the words Tally wrote for them.
+* The pairs with the same recipes:
+  * the beauty advisor, the cashier, the dental receptionist and the dog groomer, who all get quick replies only (six pairs)
+  * the electrician and the boutique owner, who both get say it out loud and quick replies
   * the two social media managers, who both get a saved assistant and quick replies
   * Jess and the planner, who both get Help me write and Gmail follow ups
 
@@ -154,7 +150,7 @@ Same shape, but written for each of them. That fits two people whose work really
 
 Same rules as the first run: tool facts only from the checked cards and recipes, by id, and every other step in an app is its goal only and not checked by us. Prompt `DESIGN_SYSTEM` in `scripts/persona-runs.ts`.
 
-Across twelve people: 110 steps, 61 checked by id, 5 not checked by us, 44 outside any app. The unchecked apps were the Notes app on the beauty advisor's phone (2), Instagram (1), Shopify (1) and Gorgias (1). As in the first run, the free design stays close to the recipes. It is more careful than the product with restricted and Not sure, and it still ignores the device now and then.
+Across twelve people: 106 steps, 59 checked by id, 11 not checked by us, 36 outside any app. The unchecked apps were the phone's keyboard settings (3), Claude (2), and one step each in a paper client book, text messages, Google Calendar, ChatGPT, Shopify and Gorgias. The phone keyboard steps are covered by the quick replies recipe; the model named the app instead of the recipe. As in the first run, the free design stays close to the recipes. It is more careful than the product with restricted and Not sure, and it still ignores the device now and then.
 
 ## The second experiment, every task on her map, for the six who work at a desk
 
@@ -200,7 +196,7 @@ Each step not from a card or recipe names the app feature it relies on. A second
 
 ## What I suggest next (not done, for Karl's call)
 
-1. Phone steps for a saved assistant: decide between say it out loud for phone people, and a hand check of ChatGPT projects in the app.
+1. Let her second workflow prefer a different recipe from her first when two tasks tie on level. The dog groomer would then get say it out loud for her social posts next to quick replies, instead of quick replies twice.
 2. A first Microsoft recipe: saved replies with Outlook Quick Parts, checked against Microsoft's page. It would give the HR coordinator a level 3.
 3. Tell the final read that work done at a register is not something AI helps with (ai false, not only no kind), so a restricted cashier's message does not ask about returns.
 4. Watch the final read for runs with no result: one in thirteen here.

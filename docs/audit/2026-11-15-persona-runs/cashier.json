@@ -24,45 +24,46 @@
     "ai": false
    },
    {
-    "label": "Handling returns",
-    "ai": true
-   },
-   {
-    "label": "Restocking shelves",
+    "label": "Bagging groceries",
     "ai": false
    },
    {
-    "label": "Answering customer questions",
-    "ai": true
+    "label": "Handling returns",
+    "ai": false
    },
    {
-    "label": "Counting the drawer",
+    "label": "Counting the till",
     "ai": false
    },
    {
     "label": "Writing shift notes",
     "ai": true
+   },
+   {
+    "label": "Answering price questions",
+    "ai": true
    }
   ],
   "aiFallback": [
-   "Return policy explainers",
-   "Shift handover notes",
-   "Polite refusal scripts",
-   "Shopping list drafts"
+   "Shift handoff notes",
+   "Customer reply templates",
+   "Break schedule planning",
+   "Training checklists"
   ],
   "apps": [
    "Point of sale system",
    "Self checkout kiosk",
-   "Price lookup terminal",
-   "Workday",
-   "When I Work",
-   "Microsoft Teams"
+   "Timeclock app",
+   "Store intranet",
+   "Employee scheduling app",
+   "Price check scanner"
   ],
   "aiUses": [
-   "Customer replies",
    "Shift notes",
+   "Customer replies",
    "Schedule swaps",
-   "Product questions"
+   "Training tips",
+   "Writing reminders"
   ],
   "worksFor": "employer"
  },
@@ -70,16 +71,16 @@
  "asked": [
   {
    "id": "asked_1",
-   "title": "What do you need when a return has no receipt?",
+   "title": "How do you look up a return today?",
    "kind": "many",
    "choices": [
-    "Customer’s ID",
-    "Store credit",
-    "Manager approval",
-    "Price lookup",
-    "Order number"
+    "Ask a manager",
+    "Check the receipt",
+    "Scan the item",
+    "Call the store",
+    "Ask the customer"
    ],
-   "hint": "Pick every one that comes up."
+   "hint": "Pick every one that fits."
   }
  ],
  "screens": 8,
@@ -108,19 +109,18 @@
     "picked": [
      "Scanning customer items",
      "Handling returns",
-     "Restocking shelves",
-     "Answering customer questions",
-     "Counting the drawer",
+     "Counting the till",
+     "Answering price questions",
      "Answering messages"
     ],
-    "text": null,
+    "text": "Coupons that dont scan, lol",
     "shown": [
      "Scanning customer items",
+     "Bagging groceries",
      "Handling returns",
-     "Restocking shelves",
-     "Answering customer questions",
-     "Counting the drawer",
+     "Counting the till",
      "Writing shift notes",
+     "Answering price questions",
      "Answering messages",
      "Writing emails",
      "Planning my week",
@@ -132,23 +132,23 @@
     "title": "Which would save you the most time if it got easier?",
     "picked": [
      "Handling returns",
-     "Scanning customer items"
+     "Coupons that dont scan, lol"
     ],
     "text": null,
     "shown": [
      "Scanning customer items",
      "Handling returns",
-     "Restocking shelves",
-     "Answering customer questions",
-     "Counting the drawer",
-     "Answering messages"
+     "Counting the till",
+     "Answering price questions",
+     "Answering messages",
+     "Coupons that dont scan, lol"
     ]
    },
    {
     "id": "example",
     "title": "Paste the last one you wrote, or what the last person asked you.",
     "picked": [],
-    "text": "Customer wanted a refund on a blender with no receipt. Told her I can't do that but can exchange it for store credit. Took her a while but she was ok with it."
+    "text": "Customer wanted a refund on a blender with no receipt. Told her I can do store credit, she said fine. Sorry, can't help with the rest."
    },
    {
     "id": "often",
@@ -170,8 +170,9 @@
     "picked": [
      "Point of sale system",
      "Self checkout kiosk",
-     "Price lookup terminal",
-     "When I Work",
+     "Timeclock app",
+     "Employee scheduling app",
+     "Price check scanner",
      "Text messages",
      "In person"
     ],
@@ -179,10 +180,10 @@
     "shown": [
      "Point of sale system",
      "Self checkout kiosk",
-     "Price lookup terminal",
-     "Workday",
-     "When I Work",
-     "Microsoft Teams",
+     "Timeclock app",
+     "Store intranet",
+     "Employee scheduling app",
+     "Price check scanner",
      "Text messages",
      "Gmail",
      "Outlook",
@@ -208,19 +209,19 @@
    },
    {
     "id": "asked_1",
-    "title": "What do you need when a return has no receipt?",
+    "title": "How do you look up a return today?",
     "picked": [
-     "Customer’s ID",
-     "Manager approval",
-     "Price lookup"
+     "Ask a manager",
+     "Check the receipt",
+     "Scan the item"
     ],
     "text": null,
     "shown": [
-     "Customer’s ID",
-     "Store credit",
-     "Manager approval",
-     "Price lookup",
-     "Order number"
+     "Ask a manager",
+     "Check the receipt",
+     "Scan the item",
+     "Call the store",
+     "Ask the customer"
     ]
    },
    {
@@ -240,7 +241,7 @@
   ],
   "mostWanted": [
    "Handling returns",
-   "Scanning customer items"
+   "Coupons that dont scan, lol"
   ],
   "worksFor": "employer",
   "aiTools": [
@@ -251,87 +252,78 @@
   "often": "many_a_day"
  },
  "intake": {
-  "role_summary": "You’re a cashier at a big box store, handling scanning, returns, restocking, customer questions and the drawer.",
+  "role_summary": "You’re a cashier at a big box store, scanning items, handling returns, counting the till and answering price and coupon questions.",
   "tasks": [
    {
     "name": "Handling returns",
+    "ai": false,
+    "private": false,
+    "kind": null
+   },
+   {
+    "name": "Coupons that don’t scan",
+    "ai": false,
+    "private": false,
+    "kind": null
+   },
+   {
+    "name": "Answering messages",
     "ai": true,
-    "private": true,
-    "kind": null
+    "private": false,
+    "kind": "repeat_texts"
    },
    {
-    "name": "Scanning customer items",
+    "name": "Answering price questions",
     "ai": false,
     "private": false,
     "kind": null
    },
    {
-    "name": "Restocking shelves",
-    "ai": false,
-    "private": false,
-    "kind": null
-   },
-   {
-    "name": "Answering customer questions",
-    "ai": false,
-    "private": false,
-    "kind": null
-   },
-   {
-    "name": "Counting the drawer",
+    "name": "Counting the till",
     "ai": false,
     "private": false,
     "kind": null
    }
   ],
   "first_win": {
-   "task": "Handling returns",
-   "intro": "You said returns take a while. Here is a reply for a customer asking for a refund with no receipt, written for you to reuse.",
-   "draft": "Hi there,\n\nI’m sorry, but I can’t give a refund without a receipt. I can exchange the item for store credit instead. Please bring your ID and I’ll help you with that today."
+   "task": "Answering messages",
+   "intro": "You said you answer messages all day. Here is a reply for a customer asking about a refund with no receipt, written so you can reuse it.",
+   "draft": "Hi there, thanks for reaching out. Without a receipt, we can offer store credit for [item] at the current value. Store credit is available for [return window]. Please bring the item to the returns desk with your ID, and we’ll take it from there. Let me know if you have any other questions."
   },
-  "first_step": "I’m a cashier at a big box store. I handle returns, and when a customer has no receipt I offer store credit instead of a refund, after checking their ID and a price lookup. Write a short, friendly reply I can send to a customer who asks for a refund without a receipt, about 40 to 80 words, in a calm and polite tone. Here is this customer’s situation: [describe what the customer asked for and what item it is].",
+  "first_step": "I’m a cashier at a big box store and I answer customer messages all day by text. Write a short, polite reply in plain language that a cashier can send. Keep it under 60 words, friendly and clear, and do not invent store policies. Here is what the customer asked: [paste the customer’s message here]",
   "map": [
    {
     "task": "Handling returns",
-    "phrase": null,
-    "today": "You handle these many times a day, each one from scratch at the counter.",
-    "withPath": "Each time you start from a ready reply and only adjust the details.",
+    "phrase": "return questions",
+    "today": "You handle returns many times a day, often by asking a manager first.",
+    "withPath": "Your return steps stay at the register, and AI can only help with the wording of a message around them.",
+    "ai": false,
+    "private": false,
+    "kind": null
+   },
+   {
+    "task": "Answering messages",
+    "phrase": "customer texts",
+    "today": "You answer messages many times a day, each one from scratch.",
+    "withPath": "Each reply starts from a draft you only need to check and send.",
     "ai": true,
-    "private": true,
-    "kind": null
+    "private": false,
+    "kind": "repeat_texts"
    },
    {
-    "task": "Scanning customer items",
-    "phrase": "scanning work",
-    "today": "You do this many times a day, mostly at the register.",
-    "withPath": "This stays yours at the register, since it is hands on and in person.",
+    "task": "Answering price questions",
+    "phrase": "price questions",
+    "today": "You answer price questions many times a day while you work the register.",
+    "withPath": "Answering stays face to face at the counter, and AI does not help with that part.",
     "ai": false,
     "private": false,
     "kind": null
    },
    {
-    "task": "Restocking shelves",
-    "phrase": "restocking work",
-    "today": "You do this on the floor, every shift.",
-    "withPath": "This stays yours on the floor, since it is hands on and in person.",
-    "ai": false,
-    "private": false,
-    "kind": null
-   },
-   {
-    "task": "Answering customer questions",
-    "phrase": "customer answers",
-    "today": "You answer these face to face throughout your shift.",
-    "withPath": "This stays yours, since it happens face to face with customers.",
-    "ai": false,
-    "private": false,
-    "kind": null
-   },
-   {
-    "task": "Counting the drawer",
-    "phrase": "drawer counts",
-    "today": "You count the drawer by hand at the start and end of your shift.",
-    "withPath": "This stays yours, since it is hands on with the cash.",
+    "task": "Counting the till",
+    "phrase": "till counts",
+    "today": "You count the till at the end of your shift.",
+    "withPath": "Counting stays with you and the till, and AI does not help with it.",
     "ai": false,
     "private": false,
     "kind": null
@@ -342,31 +334,31 @@
  },
  "free": {
   "firstWin": {
-   "task": "Handling returns",
-   "intro": "You said returns take a while. Here is a reply for a customer asking for a refund with no receipt, written for you to reuse.",
-   "draft": "Hi there,\n\nI’m sorry, but I can’t give a refund without a receipt. I can exchange the item for store credit instead. Please bring your ID and I’ll help you with that today."
+   "task": "Answering messages",
+   "intro": "You said you answer messages all day. Here is a reply for a customer asking about a refund with no receipt, written so you can reuse it.",
+   "draft": "Hi there, thanks for reaching out. Without a receipt, we can offer store credit for [item] at the current value. Store credit is available for [return window]. Please bring the item to the returns desk with your ID, and we’ll take it from there. Let me know if you have any other questions."
   },
-  "firstStep": "I’m a cashier at a big box store. I handle returns, and when a customer has no receipt I offer store credit instead of a refund, after checking their ID and a price lookup. Write a short, friendly reply I can send to a customer who asks for a refund without a receipt, about 40 to 80 words, in a calm and polite tone. Here is this customer’s situation: [describe what the customer asked for and what item it is].",
+  "firstStep": "I’m a cashier at a big box store and I answer customer messages all day by text. Write a short, polite reply in plain language that a cashier can send. Keep it under 60 words, friendly and clear, and do not invent store policies. Here is what the customer asked: [paste the customer’s message here]",
   "map": [
    {
-    "task": "Handling returns",
-    "phrase": null,
-    "today": "You handle these many times a day, each one from scratch at the counter.",
-    "withPath": "Each time you start from a ready reply and only adjust the details.",
+    "task": "Answering messages",
+    "phrase": "customer texts",
+    "today": "You answer messages many times a day, each one from scratch.",
+    "withPath": "For your customer texts, your common replies are saved on your phone, each a few letters away.",
     "ai": true,
-    "private": true,
-    "kind": null,
-    "level": null,
-    "waits": true,
-    "recipe": null,
+    "private": false,
+    "kind": "repeat_texts",
+    "level": 3,
+    "waits": false,
+    "recipe": "phone_quick_replies",
     "held": null,
-    "askFirst": false
+    "askFirst": true
    },
    {
-    "task": "Scanning customer items",
-    "phrase": "scanning work",
-    "today": "You do this many times a day, mostly at the register.",
-    "withPath": "This stays yours at the register, since it is hands on and in person.",
+    "task": "Handling returns",
+    "phrase": "return questions",
+    "today": "You handle returns many times a day, often by asking a manager first.",
+    "withPath": "Your return steps stay at the register, and AI can only help with the wording of a message around them.",
     "ai": false,
     "private": false,
     "kind": null,
@@ -377,10 +369,10 @@
     "askFirst": false
    },
    {
-    "task": "Restocking shelves",
-    "phrase": "restocking work",
-    "today": "You do this on the floor, every shift.",
-    "withPath": "This stays yours on the floor, since it is hands on and in person.",
+    "task": "Answering price questions",
+    "phrase": "price questions",
+    "today": "You answer price questions many times a day while you work the register.",
+    "withPath": "Answering stays face to face at the counter, and AI does not help with that part.",
     "ai": false,
     "private": false,
     "kind": null,
@@ -391,24 +383,10 @@
     "askFirst": false
    },
    {
-    "task": "Answering customer questions",
-    "phrase": "customer answers",
-    "today": "You answer these face to face throughout your shift.",
-    "withPath": "This stays yours, since it happens face to face with customers.",
-    "ai": false,
-    "private": false,
-    "kind": null,
-    "level": 1,
-    "waits": false,
-    "recipe": null,
-    "held": null,
-    "askFirst": false
-   },
-   {
-    "task": "Counting the drawer",
-    "phrase": "drawer counts",
-    "today": "You count the drawer by hand at the start and end of your shift.",
-    "withPath": "This stays yours, since it is hands on with the cash.",
+    "task": "Counting the till",
+    "phrase": "till counts",
+    "today": "You count the till at the end of your shift.",
+    "withPath": "Counting stays with you and the till, and AI does not help with it.",
     "ai": false,
     "private": false,
     "kind": null,
@@ -419,11 +397,15 @@
     "askFirst": false
    }
   ],
-  "setups": [],
-  "prep": [],
-  "freePlan": false,
-  "askOnly": true,
-  "askMessage": "Hi, I’d like to start using AI for parts of my work, like handling returns. Which AI tools are we allowed to use, and what can I use them for? I would never put private details about people or the company into them. Thanks.",
+  "setups": [
+   "Your customer texts, saved once on your phone",
+   "The message to ask what’s allowed"
+  ],
+  "prep": [
+   "Get Claude ready on your phone",
+   "Teach Claude who you are"
+  ],
+  "freePlan": true,
   "tool": "claude",
   "track": "starter"
  },
@@ -434,8 +416,9 @@
   "places": [
    "Point of sale system",
    "Self checkout kiosk",
-   "Price lookup terminal",
-   "When I Work",
+   "Timeclock app",
+   "Employee scheduling app",
+   "Price check scanner",
    "Text messages",
    "In person"
   ],
@@ -444,87 +427,133 @@
    "none_yet"
   ]
  },
- "path": null,
+ "outline": [
+  "ready:ready",
+  "about:about",
+  "task_1:workflow(phone_quick_replies)",
+  "end:end"
+ ],
+ "path": {
+  "version": 3,
+  "role": "You’re a cashier at a big box store, scanning items, handling returns, counting the till and answering price and coupon questions.",
+  "track": "starter",
+  "tool": "claude",
+  "worksFor": "employer",
+  "policy": "restricted",
+  "device": "phone",
+  "apps": [
+   "any_chat",
+   "claude",
+   "iphone",
+   "gboard",
+   "samsung_keyboard"
+  ],
+  "skipped": [],
+  "steps": [
+   {
+    "id": "ready",
+    "kind": "ready",
+    "card": "claude_get_started",
+    "firstStep": "I’m a cashier at a big box store and I answer customer messages all day by text. Write a short, polite reply in plain language that a cashier can send. Keep it under 60 words, friendly and clear, and do not invent store policies. Here is what the customer asked: [paste the customer’s message here]"
+   },
+   {
+    "id": "about",
+    "kind": "about",
+    "card": "claude_about_you",
+    "note": "I work as a cashier at a big box store. I scan items, handle returns, count the till, and answer price and coupon questions. The people I write to are customers, and sometimes coworkers. I like short, friendly, plain replies that sound like a real person. Two or three sentences is plenty. Never add details I did not give you, like prices, dates, store rules or return policies. Use square brackets for anything I need to fill in. Never write anything about someone’s private information. Keep the draft simple so I can read it, change it and send it myself."
+   },
+   {
+    "id": "task_1",
+    "kind": "workflow",
+    "task": "Answering messages",
+    "title": "Your customer texts, saved once on your phone",
+    "recipe": "phone_quick_replies",
+    "read": "Your customer replies live on your phone’s keyboard, each one a few letters away. You stop typing the same answer from scratch many times a day. Each reply fits after you change a name or a time, so you read it, adjust it and send it.",
+    "material": [
+     {
+      "label": "Your replies",
+      "items": [
+       "Hi [first name], thanks for reaching out. I can check on that for you. Can you tell me the item and what you need?",
+       "Hi [first name], for a return without a receipt, store credit may be an option. Please check with a manager on [what applies] and we will go from there.",
+       "Hi [first name], I am not able to confirm that price by text. Please bring the item to a register or a price check scanner and we will look it up with you.",
+       "Hi [first name], if a coupon does not scan, bring it to the front and I will ask a manager to check it. It depends on [coupon details].",
+       "Thanks for waiting, [first name]. I checked and [answer]. Let me know if you need anything else.",
+       "Hi [first name], I am sorry about the trouble. A manager can help with this best. Please ask for them when you come in on [day and time].",
+       "Hi [first name], I am not able to help with that one. Please ask a manager or call the store at [store phone number].",
+       "Thanks, [first name]. Have a good day."
+      ]
+     },
+     {
+      "label": "Your shortcuts",
+      "items": [
+       "hlpq",
+       "nrct",
+       "prck",
+       "cpnx",
+       "wait",
+       "sorr",
+       "mgrx",
+       "thnx"
+      ]
+     }
+    ]
+   },
+   {
+    "id": "end",
+    "kind": "end",
+    "safeUse": [
+     "Never type a customer’s name, phone number, address, or card or payment details into a chat tool.",
+     "Never type receipt numbers, loyalty account numbers or anything from a customer’s order.",
+     "Never type your store’s till counts, safe details or employee numbers.",
+     "Check what your store allows before using any AI tool for work.",
+     "Read every reply before you send it, and check prices, coupon and return rules against what your manager gives you."
+    ],
+    "askMessage": "Hi [manager or IT contact], I would like to know which AI tools, if any, are approved for my work as a cashier, and what I may use them for. I have two uses in mind. One is drafting replies to customer messages. The other is working out how to handle returns and coupons that do not scan. I would not enter any customer details, and I would read everything before using it. Both of these wait for the company’s OK, so please let me know what is allowed."
+   }
+  ]
+ },
  "design": [
   {
-   "task": "Handling returns",
-   "today": "You handle returns many times a day, each one from scratch at the counter. When there is no receipt, you need the customer's ID, manager approval and a price lookup, and it can take a while.",
-   "newWay": "Because your company restricts AI, no AI tool touches your returns, your point of sale or anything from the store. The better way is a short return routine you write once in your own words and read before your shift. It puts the no receipt steps in the same order every time, so you are not working them out again at the counter. You still make every decision and get every approval the way your store requires.",
+   "task": "Answering messages",
+   "today": "You answer messages many times a day, each one from scratch.",
+   "newWay": "Your company restricts AI, so AI does not touch this task at all. Instead you keep a short set of your own saved replies for the questions you get most, each a few letters away on your phone. You read each one, change what needs changing, and send it yourself. You stop retyping the same answer, and every reply still sounds like you and follows store policy.",
    "steps": [
     {
      "app": null,
      "ref": null,
-     "goal": "Write down in your own words the order you follow for a return with no receipt: ask for ID, do the price lookup, get manager approval, then offer the options your store allows."
+     "goal": "Pick the ten messages you answer most often, without writing down any customer's name or private details."
     },
     {
      "app": null,
      "ref": null,
-     "goal": "Add one calm sentence you can say when you have to decline a cash refund and offer an exchange or store credit instead, like the one that worked with the blender customer."
+     "goal": "Write one short answer to each in your own words, and check each against your store's policy or ask a manager where you are unsure."
+    },
+    {
+     "app": "her phone's keyboard",
+     "ref": null,
+     "goal": "Save each answer so it is a few letters away when you type."
     },
     {
      "app": null,
      "ref": null,
-     "goal": "Check the routine against your store's own return policy or your manager, and fix anything that does not match."
-    },
-    {
-     "app": null,
-     "ref": null,
-     "goal": "Read the routine at the start of your shift so the order is fresh, keeping it out of any work system and free of customer details."
+     "goal": "Look over the saved answers every so often and update any that no longer match store policy."
     }
    ],
    "material": [
     {
-     "label": "No receipt return routine",
-     "what": "A short ordered list of what to ask for and check when a customer has no receipt, based on the ID, price lookup and manager approval you named."
+     "label": "Ten common questions",
+     "what": "The list of messages you get most often, with no customer details."
     },
     {
-     "label": "Decline and offer wording",
-     "what": "One or two plain sentences for saying a cash refund is not possible and offering an exchange or store credit, for you to adjust to your own voice."
+     "label": "Saved replies",
+     "what": "One short answer per question, in your own tone, ready to save on your phone."
     },
     {
-     "label": "Questions for your manager",
-     "what": "A few points to confirm with your manager so the routine matches store policy, such as when approval is needed."
+     "label": "Policy check list",
+     "what": "A short note of which answers to confirm with a manager before you use them."
     }
    ],
-   "checkPoint": "You check the routine against your store's return policy or your manager before you rely on it, and you follow the store's own approval steps on every return."
-  },
-  {
-   "task": "Scanning customer items",
-   "today": "You scan customer items many times a day, and you named it as one of the two tasks that would save you the most time if it got easier.",
-   "newWay": "Because your company restricts AI, no AI tool touches your scanning, the point of sale, the self checkout kiosk or the price lookup terminal. The better way is a short list of the scanning problems you meet most, each with the fix you already know works. You make the list once on your own time and keep it for yourself, so a stuck item or a missing price has a ready answer. Nothing connects to a work app, and your scanning stays exactly as your store runs it.",
-   "steps": [
-    {
-     "app": null,
-     "ref": null,
-     "goal": "Over a few shifts, jot down the scanning problems that slow you down most, such as an item that will not scan or a price that looks wrong."
-    },
-    {
-     "app": null,
-     "ref": null,
-     "goal": "Next to each problem, write the fix you use now, such as the price lookup terminal or asking a coworker or manager."
-    },
-    {
-     "app": null,
-     "ref": null,
-     "goal": "Ask your manager whether each fix is the approved way to handle it, and change any that are not."
-    },
-    {
-     "app": null,
-     "ref": null,
-     "goal": "Keep the finished list for your own use and read it before busy shifts, free of customer details and kept out of any work system."
-    }
-   ],
-   "material": [
-    {
-     "label": "Scanning problem list",
-     "what": "Your most common scanning problems in your own words, each paired with the fix you use."
-    },
-    {
-     "label": "Manager check list",
-     "what": "The fixes you want your manager to confirm as the approved way to handle each problem."
-    }
-   ],
-   "checkPoint": "You confirm each fix with your manager and keep using your store's own systems and rules for every item you scan."
+   "checkPoint": "You read each saved reply and fix anything that does not fit the message before you send it yourself."
   }
  ],
  "checks": [
@@ -559,53 +588,79 @@
    "detail": "Every AI task waits or needs no AI at work"
   },
   {
-   "id": "ask_only_no_path",
+   "id": "path_written",
    "pass": true,
-   "detail": "Every task waits: no offer, no path, only the message to ask"
+   "detail": "4 steps"
+  },
+  {
+   "id": "workflow_parts",
+   "pass": true,
+   "detail": "1 workflows, each with a test, an approval point and a cost line"
+  },
+  {
+   "id": "setup_from_recipe_or_card",
+   "pass": true,
+   "detail": "card claude_get_started, card claude_about_you, recipe phone_quick_replies"
+  },
+  {
+   "id": "no_click_paths_from_model",
+   "pass": true,
+   "detail": "The model wrote no menu paths or button names"
+  },
+  {
+   "id": "copy_rules",
+   "pass": true,
+   "detail": "No dashes, promised times, prices or percents"
+  },
+  {
+   "id": "offer_matches_path",
+   "pass": true,
+   "detail": "Offer names 1, path has 1 workflows, 1 match by name"
   }
  ],
  "recipes": {
-  "total": 5,
+  "total": 4,
   "aiTasks": 1,
-  "withRecipe": [],
+  "withRecipe": [
+   {
+    "task": "Answering messages",
+    "recipe": "phone_quick_replies",
+    "level": 3
+   }
+  ],
   "without": [
    {
     "task": "Handling returns",
-    "level": null,
-    "waits": true
-   },
-   {
-    "task": "Scanning customer items",
     "level": 1,
     "waits": false
    },
    {
-    "task": "Restocking shelves",
+    "task": "Answering price questions",
     "level": 1,
     "waits": false
    },
    {
-    "task": "Answering customer questions",
-    "level": 1,
-    "waits": false
-   },
-   {
-    "task": "Counting the drawer",
+    "task": "Counting the till",
     "level": 1,
     "waits": false
    }
   ],
-  "noRecipe": true,
+  "noRecipe": false,
   "mostlyAssistant": false
  },
  "designCount": {
-  "steps": 8,
+  "steps": 4,
   "checked": 0,
-  "unchecked": 0,
-  "noApp": 8,
+  "unchecked": 1,
+  "noApp": 3,
   "badRefs": [],
   "clickPaths": [],
-  "apps": [],
+  "apps": [
+   [
+    "Her phone's keyboard",
+    1
+   ]
+  ],
   "refs": []
  }
 }

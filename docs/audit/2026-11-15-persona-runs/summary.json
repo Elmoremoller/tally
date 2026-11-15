@@ -1,5 +1,5 @@
 {
- "ranAt": "2026-11-15T16:39:11.474Z",
+ "ranAt": "2026-11-15T18:44:13.549Z",
  "versions": {
   "job": "beginner-job-v5",
   "questions": "beginner-questions-v6",
@@ -74,7 +74,7 @@
    ],
    "recipes": {
     "total": 5,
-    "aiTasks": 2,
+    "aiTasks": 3,
     "withRecipe": [
      {
       "task": "Follow up texts",
@@ -82,26 +82,26 @@
       "level": 3
      },
      {
-      "task": "Answering messages",
+      "task": "Answering client messages",
       "recipe": "phone_quick_replies",
       "level": 3
      }
     ],
     "without": [
      {
-      "task": "Client consultations",
+      "task": "Customer makeovers",
       "level": 1,
       "waits": false
      },
      {
-      "task": "Product demos",
+      "task": "Restocking the counter",
       "level": 1,
       "waits": false
      },
      {
-      "task": "Restocking testers",
-      "level": 1,
-      "waits": false
+      "task": "Tracking commission sales",
+      "level": null,
+      "waits": true
      }
     ],
     "noRecipe": false,
@@ -110,14 +110,18 @@
    "designCount": {
     "steps": 8,
     "checked": 0,
-    "unchecked": 2,
-    "noApp": 6,
+    "unchecked": 3,
+    "noApp": 5,
     "badRefs": [],
     "clickPaths": [],
     "apps": [
      [
-      "Notes app on phone",
+      "Your iPhone's keyboard settings",
       2
+     ],
+     [
+      "Your paper client book",
+      1
      ]
     ],
     "refs": []
@@ -164,58 +168,86 @@
      "detail": "Every AI task waits or needs no AI at work"
     },
     {
-     "id": "ask_only_no_path",
+     "id": "path_written",
      "pass": true,
-     "detail": "Every task waits: no offer, no path, only the message to ask"
+     "detail": "4 steps"
+    },
+    {
+     "id": "workflow_parts",
+     "pass": true,
+     "detail": "1 workflows, each with a test, an approval point and a cost line"
+    },
+    {
+     "id": "setup_from_recipe_or_card",
+     "pass": true,
+     "detail": "card claude_get_started, card claude_about_you, recipe phone_quick_replies"
+    },
+    {
+     "id": "no_click_paths_from_model",
+     "pass": true,
+     "detail": "The model wrote no menu paths or button names"
+    },
+    {
+     "id": "copy_rules",
+     "pass": true,
+     "detail": "No dashes, promised times, prices or percents"
+    },
+    {
+     "id": "offer_matches_path",
+     "pass": true,
+     "detail": "Offer names 1, path has 1 workflows, 1 match by name"
     }
    ],
    "recipes": {
-    "total": 5,
+    "total": 4,
     "aiTasks": 1,
-    "withRecipe": [],
+    "withRecipe": [
+     {
+      "task": "Answering messages",
+      "recipe": "phone_quick_replies",
+      "level": 3
+     }
+    ],
     "without": [
      {
       "task": "Handling returns",
-      "level": null,
-      "waits": true
-     },
-     {
-      "task": "Scanning customer items",
       "level": 1,
       "waits": false
      },
      {
-      "task": "Restocking shelves",
+      "task": "Answering price questions",
       "level": 1,
       "waits": false
      },
      {
-      "task": "Answering customer questions",
-      "level": 1,
-      "waits": false
-     },
-     {
-      "task": "Counting the drawer",
+      "task": "Counting the till",
       "level": 1,
       "waits": false
      }
     ],
-    "noRecipe": true,
+    "noRecipe": false,
     "mostlyAssistant": false
    },
    "designCount": {
-    "steps": 8,
+    "steps": 4,
     "checked": 0,
-    "unchecked": 0,
-    "noApp": 8,
+    "unchecked": 1,
+    "noApp": 3,
     "badRefs": [],
     "clickPaths": [],
-    "apps": [],
+    "apps": [
+     [
+      "Her phone's keyboard",
+      1
+     ]
+    ],
     "refs": []
    },
    "design2Count": null,
-   "pathRecipes": [],
-   "askOnly": true
+   "pathRecipes": [
+    "phone_quick_replies"
+   ],
+   "askOnly": false
   },
   "dental": {
    "group": "allowed employee",
@@ -495,12 +527,12 @@
   },
   "kayla": {
    "group": "self employed Starter",
-   "screens": 7,
+   "screens": 6,
    "checks": [
     {
      "id": "screens",
      "pass": true,
-     "detail": "7 screens, at most 9 for a starter"
+     "detail": "6 screens, at most 9 for a starter"
     },
     {
      "id": "levels_in_code",
@@ -520,7 +552,7 @@
     {
      "id": "quote_level_3",
      "pass": true,
-     "detail": "Writing quotes at level 3"
+     "detail": "Following up quotes at level 3"
     },
     {
      "id": "path_written",
@@ -554,11 +586,11 @@
     }
    ],
    "recipes": {
-    "total": 5,
-    "aiTasks": 5,
+    "total": 6,
+    "aiTasks": 6,
     "withRecipe": [
      {
-      "task": "Writing quotes",
+      "task": "Quoting jobs",
       "recipe": "say_it_out_loud",
       "level": 3
      },
@@ -568,23 +600,27 @@
       "level": 3
      },
      {
-      "task": "Asking for reviews",
+      "task": "Writing invoices",
+      "recipe": "say_it_out_loud",
+      "level": 3
+     },
+     {
+      "task": "Following up quotes",
       "recipe": "phone_quick_replies",
       "level": 3
      },
      {
-      "task": "Chasing payments",
+      "task": "Answering messages",
+      "recipe": "phone_quick_replies",
+      "level": 3
+     },
+     {
+      "task": "Chasing payment and asking for reviews",
       "recipe": "phone_quick_replies",
       "level": 3
      }
     ],
-    "without": [
-     {
-      "task": "Invoicing jobs",
-      "level": 2,
-      "waits": false
-     }
-    ],
+    "without": [],
     "noRecipe": false,
     "mostlyAssistant": false
    },
@@ -597,10 +633,10 @@
     "clickPaths": [],
     "apps": [],
     "refs": [
-     "claude_get_started",
-     "claude_about_you",
-     "claude_project",
+     "chatgpt_get_started",
+     "chatgpt_about_you",
      "saved_assistant",
+     "chatgpt_project",
      "phone_quick_replies"
     ]
    },
@@ -667,51 +703,57 @@
     }
    ],
    "recipes": {
-    "total": 5,
-    "aiTasks": 5,
+    "total": 4,
+    "aiTasks": 4,
     "withRecipe": [
      {
-      "task": "Answering client messages",
+      "task": "Owner reminder texts",
       "recipe": "phone_quick_replies",
       "level": 3
      },
      {
-      "task": "Appointment reminders",
+      "task": "Booking appointments",
       "recipe": "phone_quick_replies",
       "level": 3
      },
      {
-      "task": "Booking new clients",
-      "recipe": "phone_quick_replies",
+      "task": "Social posts",
+      "recipe": "say_it_out_loud",
       "level": 3
      },
      {
-      "task": "Price and timing questions",
-      "recipe": "phone_quick_replies",
+      "task": "Grooming notes",
+      "recipe": "say_it_out_loud",
       "level": 3
      }
     ],
-    "without": [
-     {
-      "task": "Social media posts",
-      "level": 2,
-      "waits": false
-     }
-    ],
+    "without": [],
     "noRecipe": false,
     "mostlyAssistant": false
    },
    "designCount": {
-    "steps": 9,
-    "checked": 5,
-    "unchecked": 0,
-    "noApp": 4,
+    "steps": 10,
+    "checked": 4,
+    "unchecked": 4,
+    "noApp": 2,
     "badRefs": [],
     "clickPaths": [],
-    "apps": [],
+    "apps": [
+     [
+      "Claude",
+      2
+     ],
+     [
+      "Text messages",
+      1
+     ],
+     [
+      "Google Calendar",
+      1
+     ]
+    ],
     "refs": [
-     "chatgpt_get_started",
-     "saved_assistant",
+     "claude_get_started",
      "phone_quick_replies"
     ]
    },
@@ -764,7 +806,7 @@
     {
      "id": "setup_from_recipe_or_card",
      "pass": true,
-     "detail": "card chatgpt_about_you, Tally's own steps for writing with AI, recipe phone_quick_replies"
+     "detail": "card chatgpt_about_you, recipe phone_quick_replies, recipe say_it_out_loud"
     },
     {
      "id": "no_click_paths_from_model",
@@ -783,29 +825,34 @@
     }
    ],
    "recipes": {
-    "total": 4,
-    "aiTasks": 4,
+    "total": 5,
+    "aiTasks": 3,
     "withRecipe": [
      {
-      "task": "Customer messages",
+      "task": "Replies to customer messages",
       "recipe": "phone_quick_replies",
       "level": 3
      },
      {
-      "task": "Texts to regulars",
-      "recipe": "phone_quick_replies",
+      "task": "Instagram captions",
+      "recipe": "say_it_out_loud",
+      "level": 3
+     },
+     {
+      "task": "Social posts",
+      "recipe": "say_it_out_loud",
       "level": 3
      }
     ],
     "without": [
      {
-      "task": "Social posts",
-      "level": 2,
+      "task": "Tagging and steaming new stock",
+      "level": 1,
       "waits": false
      },
      {
-      "task": "Scheduling part timers",
-      "level": 2,
+      "task": "Folding and restocking racks",
+      "level": 1,
       "waits": false
      }
     ],
@@ -813,29 +860,29 @@
     "mostlyAssistant": false
    },
    "designCount": {
-    "steps": 9,
-    "checked": 6,
+    "steps": 8,
+    "checked": 5,
     "unchecked": 1,
     "noApp": 2,
     "badRefs": [],
     "clickPaths": [],
     "apps": [
      [
-      "Instagram",
+      "ChatGPT",
       1
      ]
     ],
     "refs": [
      "chatgpt_get_started",
-     "chatgpt_about_you",
-     "saved_assistant",
-     "phone_quick_replies"
+     "phone_quick_replies",
+     "chatgpt_project",
+     "saved_assistant"
     ]
    },
    "design2Count": null,
    "pathRecipes": [
-    "with_ai",
-    "phone_quick_replies"
+    "phone_quick_replies",
+    "say_it_out_loud"
    ],
    "askOnly": false
   },
@@ -1711,10 +1758,10 @@
    "words": 0.4
   },
   {
-   "a": "beauty",
-   "b": "dental",
+   "a": "social_new",
+   "b": "social_canva",
    "recipes": 1,
-   "steps": 1,
+   "steps": 0.8,
    "words": 0.34
   },
   {
@@ -1722,14 +1769,14 @@
    "b": "groomer",
    "recipes": 1,
    "steps": 1,
-   "words": 0.34
+   "words": 0.33
   },
   {
-   "a": "social_new",
-   "b": "social_canva",
+   "a": "beauty",
+   "b": "dental",
    "recipes": 1,
-   "steps": 0.8,
-   "words": 0.34
+   "steps": 1,
+   "words": 0.32
   },
   {
    "a": "jess",
@@ -1753,10 +1800,17 @@
    "words": 0.31
   },
   {
-   "a": "beauty",
+   "a": "kayla",
    "b": "groomer",
-   "recipes": 1,
-   "steps": 1,
+   "recipes": 0.5,
+   "steps": 0.67,
+   "words": 0.31
+  },
+  {
+   "a": "beauty",
+   "b": "boutique",
+   "recipes": 0.5,
+   "steps": 0.5,
    "words": 0.3
   },
   {
@@ -1768,14 +1822,35 @@
   },
   {
    "a": "beauty",
-   "b": "boutique",
-   "recipes": 0.5,
-   "steps": 0.5,
+   "b": "groomer",
+   "recipes": 1,
+   "steps": 1,
    "words": 0.29
   },
   {
    "a": "beauty",
    "b": "social_canva",
+   "recipes": 0.5,
+   "steps": 0.5,
+   "words": 0.29
+  },
+  {
+   "a": "cashier",
+   "b": "dental",
+   "recipes": 1,
+   "steps": 0.8,
+   "words": 0.29
+  },
+  {
+   "a": "cashier",
+   "b": "boutique",
+   "recipes": 0.5,
+   "steps": 0.6,
+   "words": 0.29
+  },
+  {
+   "a": "dental",
+   "b": "boutique",
    "recipes": 0.5,
    "steps": 0.5,
    "words": 0.29
@@ -1788,6 +1863,20 @@
    "words": 0.29
   },
   {
+   "a": "kayla",
+   "b": "boutique",
+   "recipes": 1,
+   "steps": 0.8,
+   "words": 0.29
+  },
+  {
+   "a": "boutique",
+   "b": "social_canva",
+   "recipes": 0.33,
+   "steps": 0.6,
+   "words": 0.29
+  },
+  {
    "a": "social_canva",
    "b": "ecom",
    "recipes": 0.33,
@@ -1795,17 +1884,45 @@
    "words": 0.29
   },
   {
-   "a": "beauty",
-   "b": "jess",
+   "a": "cashier",
+   "b": "hr",
    "recipes": 0,
-   "steps": 0.29,
+   "steps": 0.6,
    "words": 0.28
   },
   {
    "a": "beauty",
+   "b": "cashier",
+   "recipes": 1,
+   "steps": 0.8,
+   "words": 0.27
+  },
+  {
+   "a": "beauty",
+   "b": "jess",
+   "recipes": 0,
+   "steps": 0.29,
+   "words": 0.27
+  },
+  {
+   "a": "beauty",
+   "b": "planner",
+   "recipes": 0,
+   "steps": 0.14,
+   "words": 0.27
+  },
+  {
+   "a": "cashier",
    "b": "social_new",
    "recipes": 0.5,
-   "steps": 0.67,
+   "steps": 0.8,
+   "words": 0.27
+  },
+  {
+   "a": "cashier",
+   "b": "social_canva",
+   "recipes": 0.5,
+   "steps": 0.6,
    "words": 0.27
   },
   {
@@ -1813,13 +1930,6 @@
    "b": "social_canva",
    "recipes": 0.5,
    "steps": 0.5,
-   "words": 0.27
-  },
-  {
-   "a": "kayla",
-   "b": "groomer",
-   "recipes": 0.5,
-   "steps": 0.67,
    "words": 0.27
   },
   {
@@ -1858,17 +1968,17 @@
    "words": 0.27
   },
   {
-   "a": "dental",
-   "b": "jess",
-   "recipes": 0,
-   "steps": 0.29,
+   "a": "cashier",
+   "b": "kayla",
+   "recipes": 0.5,
+   "steps": 0.8,
    "words": 0.26
   },
   {
    "a": "dental",
-   "b": "boutique",
-   "recipes": 0.5,
-   "steps": 0.5,
+   "b": "jess",
+   "recipes": 0,
+   "steps": 0.29,
    "words": 0.26
   },
   {
@@ -1880,9 +1990,23 @@
   },
   {
    "a": "kayla",
+   "b": "planner",
+   "recipes": 0,
+   "steps": 0.14,
+   "words": 0.26
+  },
+  {
+   "a": "groomer",
    "b": "social_canva",
-   "recipes": 0.33,
+   "recipes": 0.5,
    "steps": 0.5,
+   "words": 0.26
+  },
+  {
+   "a": "boutique",
+   "b": "planner",
+   "recipes": 0,
+   "steps": 0.17,
    "words": 0.26
   },
   {
@@ -1900,6 +2024,48 @@
    "words": 0.26
   },
   {
+   "a": "beauty",
+   "b": "kayla",
+   "recipes": 0.5,
+   "steps": 0.67,
+   "words": 0.25
+  },
+  {
+   "a": "beauty",
+   "b": "social_new",
+   "recipes": 0.5,
+   "steps": 0.67,
+   "words": 0.25
+  },
+  {
+   "a": "beauty",
+   "b": "hr",
+   "recipes": 0,
+   "steps": 0.5,
+   "words": 0.25
+  },
+  {
+   "a": "beauty",
+   "b": "ecom",
+   "recipes": 0,
+   "steps": 0.29,
+   "words": 0.25
+  },
+  {
+   "a": "cashier",
+   "b": "jess",
+   "recipes": 0,
+   "steps": 0.33,
+   "words": 0.25
+  },
+  {
+   "a": "cashier",
+   "b": "groomer",
+   "recipes": 1,
+   "steps": 0.8,
+   "words": 0.25
+  },
+  {
    "a": "dental",
    "b": "kayla",
    "recipes": 0.5,
@@ -1907,52 +2073,10 @@
    "words": 0.25
   },
   {
-   "a": "jess",
-   "b": "boutique",
+   "a": "boutique",
+   "b": "ecom",
    "recipes": 0,
    "steps": 0.33,
-   "words": 0.25
-  },
-  {
-   "a": "kayla",
-   "b": "planner",
-   "recipes": 0,
-   "steps": 0.14,
-   "words": 0.25
-  },
-  {
-   "a": "kayla",
-   "b": "hr",
-   "recipes": 0,
-   "steps": 0.5,
-   "words": 0.25
-  },
-  {
-   "a": "groomer",
-   "b": "planner",
-   "recipes": 0,
-   "steps": 0.14,
-   "words": 0.25
-  },
-  {
-   "a": "groomer",
-   "b": "social_new",
-   "recipes": 0.5,
-   "steps": 0.67,
-   "words": 0.25
-  },
-  {
-   "a": "boutique",
-   "b": "planner",
-   "recipes": 0,
-   "steps": 0.17,
-   "words": 0.25
-  },
-  {
-   "a": "boutique",
-   "b": "social_canva",
-   "recipes": 0.33,
-   "steps": 0.6,
    "words": 0.25
   },
   {
@@ -1963,17 +2087,10 @@
    "words": 0.25
   },
   {
-   "a": "beauty",
+   "a": "cashier",
    "b": "planner",
    "recipes": 0,
-   "steps": 0.14,
-   "words": 0.24
-  },
-  {
-   "a": "beauty",
-   "b": "hr",
-   "recipes": 0,
-   "steps": 0.5,
+   "steps": 0.17,
    "words": 0.24
   },
   {
@@ -1984,10 +2101,10 @@
    "words": 0.24
   },
   {
-   "a": "kayla",
+   "a": "jess",
    "b": "boutique",
-   "recipes": 0.33,
-   "steps": 0.5,
+   "recipes": 0,
+   "steps": 0.33,
    "words": 0.24
   },
   {
@@ -1999,30 +2116,16 @@
   },
   {
    "a": "groomer",
-   "b": "social_canva",
+   "b": "social_new",
    "recipes": 0.5,
-   "steps": 0.5,
+   "steps": 0.67,
    "words": 0.24
   },
   {
-   "a": "groomer",
-   "b": "hr",
-   "recipes": 0,
-   "steps": 0.5,
-   "words": 0.24
-  },
-  {
-   "a": "boutique",
+   "a": "cashier",
    "b": "ecom",
    "recipes": 0,
    "steps": 0.33,
-   "words": 0.24
-  },
-  {
-   "a": "beauty",
-   "b": "kayla",
-   "recipes": 0.5,
-   "steps": 0.67,
    "words": 0.23
   },
   {
@@ -2047,10 +2150,38 @@
    "words": 0.23
   },
   {
+   "a": "kayla",
+   "b": "social_canva",
+   "recipes": 0.33,
+   "steps": 0.5,
+   "words": 0.23
+  },
+  {
+   "a": "kayla",
+   "b": "hr",
+   "recipes": 0,
+   "steps": 0.5,
+   "words": 0.23
+  },
+  {
+   "a": "groomer",
+   "b": "planner",
+   "recipes": 0,
+   "steps": 0.14,
+   "words": 0.23
+  },
+  {
+   "a": "groomer",
+   "b": "hr",
+   "recipes": 0,
+   "steps": 0.5,
+   "words": 0.23
+  },
+  {
    "a": "boutique",
    "b": "hr",
-   "recipes": 0.5,
-   "steps": 0.6,
+   "recipes": 0,
+   "steps": 0.33,
    "words": 0.23
   },
   {
@@ -2061,14 +2192,7 @@
    "words": 0.23
   },
   {
-   "a": "kayla",
-   "b": "ecom",
-   "recipes": 0,
-   "steps": 0.29,
-   "words": 0.22
-  },
-  {
-   "a": "beauty",
+   "a": "groomer",
    "b": "ecom",
    "recipes": 0,
    "steps": 0.29,
@@ -2082,7 +2206,7 @@
    "words": 0.2
   },
   {
-   "a": "groomer",
+   "a": "kayla",
    "b": "ecom",
    "recipes": 0,
    "steps": 0.29,

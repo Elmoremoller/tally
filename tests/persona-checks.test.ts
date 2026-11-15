@@ -3,7 +3,7 @@ import assert from "node:assert/strict";
 import type { Who } from "../lib/beginner/levels";
 import type { EndStep, PathPlan, WorkflowStep } from "../lib/beginner/path";
 import type { FreeResult, MapLine } from "../lib/beginner/types";
-import { moneyNotHers, checkLookup, contentWords, countDesign, countDesign2, featureKey, jaccard, MENU, PROMISED_TIME, recipeCount, refKind, runChecks, vendorOk, WRITING_HELP } from "../scripts/persona-checks";
+import { moneyNotHers, MONEY, checkLookup, contentWords, countDesign, countDesign2, featureKey, jaccard, MENU, PROMISED_TIME, recipeCount, refKind, runChecks, vendorOk, WRITING_HELP } from "../scripts/persona-checks";
 
 const row = (task: string, opts: Partial<MapLine> = {}): MapLine => ({
   task,
@@ -171,4 +171,11 @@ test("countDesign2 counts unchecked steps, linked ones and what became of tasks 
 test("a price she gave herself is not flagged, an invented one is", () => {
   assert.deepEqual(moneyNotHers("Good for 30 days, 50% deposit to book.", "Quote... Good for 30 days, 50% deposit to book."), []);
   assert.deepEqual(moneyNotHers("A 20% discount and $40 off.", "Quote... 50% deposit"), ["20%", "$40"]);
+});
+
+test("the word percent alone is not a price, a figure with it is", () => {
+  assert.ok(!MONEY.test("Say the deposit amount or percent each time."));
+  assert.ok(MONEY.test("Take twenty percent off."));
+  assert.ok(MONEY.test("A 10% deposit."));
+  assert.ok(MONEY.test("It costs $40."));
 });

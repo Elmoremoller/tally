@@ -4,26 +4,23 @@ self employed Starter. Never used it, starter. Phone only. Can use AI: I work fo
 
 ## Her map
 
-* **Answering client messages** (level 3, Build once, reuse, recipe phone_quick_replies)
-  * Today: You answer these all day, each one from scratch.
-  * With your path: For your client texts, your common replies are saved on your phone, each a few letters away.
-* **Appointment reminders** (level 3, Build once, reuse, recipe phone_quick_replies)
-  * Today: You text these by hand from your paper diary.
-  * With your path: For your appointment reminders, your common replies are saved on your phone, each a few letters away.
-* **Booking new clients** (level 3, Build once, reuse, recipe phone_quick_replies)
-  * Today: You handle new bookings by text and in person, many times a day.
-  * With your path: For your new client bookings, your common replies are saved on your phone, each a few letters away.
-* **Social media posts** (level 2, Write it with AI, held: needs_computer)
-  * Today: You write posts for your business on your own time.
-  * With your path: Each post starts from a rough draft you shape to match your voice.
-* **Price and timing questions** (level 3, Build once, reuse, recipe phone_quick_replies)
-  * Today: You answer questions about prices and timing for each breed, all day.
-  * With your path: For your breed price questions, your common replies are saved on your phone, each a few letters away.
+* **Owner reminder texts** (level 3, Build once, reuse, recipe phone_quick_replies)
+  * Today: You send these many times a day, each one typed from scratch.
+  * With your path: For your owner reminder texts, your common replies are saved on your phone, each a few letters away.
+* **Booking appointments** (level 3, Build once, reuse, recipe phone_quick_replies)
+  * Today: You send booking messages many times a day, one at a time.
+  * With your path: For your booking messages, your common replies are saved on your phone, each a few letters away.
+* **Social posts** (level 3, Build once, reuse, recipe say_it_out_loud)
+  * Today: You write social posts for Instagram as you find time for them.
+  * With your path: For your social posts, you say what you need out loud, and the finished text comes back.
+* **Grooming notes** (level 3, Build once, reuse, recipe say_it_out_loud)
+  * Today: You write notes after each groom, often in a rush between clients.
+  * With your path: For your grooming notes, you say what you need out loud, and the finished text comes back.
 
 ## Her offer
 
-* Your client texts, saved once on your phone
-* Your appointment reminders, saved once on your phone
+* Your owner reminder texts, saved once on your phone
+* Your booking messages, saved once on your phone
 
 Starts with two quick steps:
 * Get Claude ready on your phone
@@ -42,53 +39,17 @@ On a phone:
 2. Open the app and create a free account. You need to be 18 or older.
 3. Type what you need in the message box and send it.
 
-First message: I’m a mobile dog groomer who runs my own grooming van. My clients text me to change or ask about appointments. Write a short, friendly text reply I can send from my phone. Keep it under 40 words and sound warm and professional. Here is the client’s message: [paste the client’s message here]
+First message: I’m a mobile dog groomer running my own grooming van. I text owners appointment reminders many times a day. Write a short, friendly text reminder I can send by text message. It should be warm, under 50 words, and say the dog’s name, the day and time, that the van will be in their driveway, and to keep the dog inside until I arrive. Here are this reminder’s details: [paste the owner’s name, dog’s name, day and time here]
 
 ### Step 2, about
 
 Card: claude_about_you
 
-Her note: I run my own mobile dog grooming van. I mostly write to my clients, who are dog owners, by text on my phone. I answer booking questions, move appointments, send reminders and post on social media. I like a friendly, warm tone that is short and plain, usually two or three sentences. I sign off simply. Never add details I did not give you, like prices, times, breeds or names. If something is missing, put it in square brackets so I can fill it in. Always give me one version I can read and send myself, and tell me if you need more information first.
+Her note: I run my own mobile dog grooming van, and I work from my phone. I write to dog owners by text, mostly about bookings and reminders. My tone is warm, friendly and short, like a quick message from someone who knows their dog. Keep replies to a few sentences. Use plain words and no fancy phrases. Never add details I did not give you, like prices, times, addresses or what a dog needs. If something is missing, put it in square brackets so I can fill it in. I read everything before I send it.
 
-### Step 3, workflow: Your client texts, saved once on your phone
+### Step 3, workflow: Your owner reminder texts, saved once on your phone
 
-Your client replies now live on your phone’s keyboard, each one a few letters away. You stop typing the same answer from scratch many times a day. Every reply is still yours to read and change before it goes out, so it sounds like you and fits the dog and the day.
-
-Recipe phone_quick_replies, route iphone + any_chat
-
-On a phone:
-1. Keep the replies and shortcuts Tally wrote for you open, above.
-2. In any app where you can type, touch and hold the Emoji button or the Switch Keyboard key.
-3. Tap Keyboard Settings, then tap Text Replacement.
-4. Tap the Add button.
-5. Type one reply in the Phrase field and its shortcut in the Shortcut field.
-6. Do the same for each reply on your list.
-
-Test: The next three messages that need one of these replies. Good: The reply fits after you change at most a name or a time.
-Approval point: You read every reply before you send it. Nothing is sent by itself.
-Cost: Text replacement on an iPhone, text shortcuts on a Samsung phone and the Gboard clipboard are free, and Tally writes the replies for you.
-
-**Your client replies**
-* Hi [first name], thanks for getting in touch! I’d be happy to fit [dog’s name] in. I have [day and time] open. Does that work for you?
-* Hi [first name], no problem at all, I can move [dog’s name] to [new day and time]. I’ll update my diary now. See you then!
-* Hi [first name], thanks for asking! The price depends on [dog’s breed and size] and the coat. Can you tell me a bit about [dog’s name] and I’ll give you a quote and timing?
-* Hi [first name], I’m fully booked on [day], but I have [other day and time] free. Would that suit you?
-* Hi [first name], thanks for letting me know. I’m sorry [dog’s name] isn’t feeling well. Let’s pick a new time when [he/she/they] feel better. What day works for you?
-* Hi [first name], I’m on my way and will be at your place around [time]. See you soon!
-* Hi [first name], thank you so much for having me today! [Dog’s name] was a pleasure. Let me know when you’d like to book the next visit.
-
-**Your shortcuts**
-* bkng
-* mvap
-* qprc
-* fulld
-* sick
-* onwy
-* thnx
-
-### Step 4, extra: Your appointment reminders, saved once on your phone
-
-Appointment reminders are added to the setup you made in the first step. They join your saved replies on your phone’s keyboard, so you no longer retype them from your paper diary.
+Your reminder texts now live on your phone’s keyboard, each one a few letters away. You type a short shortcut and the full text appears, then you change the name or the time. That fits your day better because you send these many times a day, from the van, with one hand free.
 
 Recipe phone_quick_replies, route iphone + any_chat
 
@@ -104,24 +65,60 @@ Test: The next three messages that need one of these replies. Good: The reply fi
 Approval point: You read every reply before you send it. Nothing is sent by itself.
 Cost: Text replacement on an iPhone, text shortcuts on a Samsung phone and the Gboard clipboard are free, and Tally writes the replies for you.
 
-**Your reminder texts**
-* Hi [first name], a quick reminder that [dog’s name] is booked with me on [day and time] at [address]. Please reply to confirm!
-* Hi [first name], I’m looking forward to seeing [dog’s name] tomorrow at [time]. Please let me know if anything has changed.
-* Hi [first name], just a reminder that [dog’s name] is due for a groom soon. Would you like me to book [day and time]?
-* Hi [first name], I’ll be at your place around [time] for [dog’s name]. Please have [dog’s name] ready by the door if you can.
-* Hi [first name], I haven’t heard back about [dog’s name]’s appointment on [day and time]. Can you confirm it still works for you?
+**Your reminder replies**
+* Hi! Just a reminder [dog’s name] is booked for [day] at [time]. The van will be in your driveway. Please keep [him or her] in the house until I arrive. See you then!
+* Hi! I’m on my way and should be there around [time]. Please keep [dog’s name] inside until I get there. See you soon!
+* Hi! Quick reminder that [dog’s name] has a groom coming up on [day and time]. Could you reply to let me know that still works?
+* Hi! I’m running a little behind and now expect to be there around [new time]. Thank you for your patience!
+* Hi! I’ve arrived and the van is parked at your place. You can bring [dog’s name] out when you’re ready.
+* Hi! [dog’s name] is all done and looks great. [Short note about the groom]. Thank you, see you next time!
 
-**Your reminder shortcuts**
+**Shortcuts for replies**
 * rmnd
-* tmrw
-* duen
-* arvl
+* onwy
 * cfrm
+* bhnd
+* hrvn
+* dnxg
+
+### Step 4, extra: Your booking messages, saved once on your phone
+
+Booking messages are added to the same phone keyboard setup you made for your reminder texts. They get their own shortcuts, so a booking reply is a few letters away too.
+
+Recipe phone_quick_replies, route iphone + any_chat
+
+On a phone:
+1. Keep the replies and shortcuts Tally wrote for you open, above.
+2. In any app where you can type, touch and hold the Emoji button or the Switch Keyboard key.
+3. Tap Keyboard Settings, then tap Text Replacement.
+4. Tap the Add button.
+5. Type one reply in the Phrase field and its shortcut in the Shortcut field.
+6. Do the same for each reply on your list.
+
+Test: The next three messages that need one of these replies. Good: The reply fits after you change at most a name or a time.
+Approval point: You read every reply before you send it. Nothing is sent by itself.
+Cost: Text replacement on an iPhone, text shortcuts on a Samsung phone and the Gboard clipboard are free, and Tally writes the replies for you.
+
+**Your booking replies**
+* Hi! Thanks for reaching out. I’d love to groom [dog’s name]. I have [day and time] open. Does that work for you?
+* Hi! To book [dog’s name] in, could you send me the breed, the size and the address where the van will park?
+* Hi! You’re booked for [day] at [time] for [dog’s name]. I’ll send you a reminder before then. Thank you!
+* Hi! I don’t have anything open on [day]. I can do [first option] or [second option]. Which suits you better?
+* Hi! No problem, let’s move [dog’s name] to [new day and time]. Does that work for you?
+* Hi! Thanks for letting me know. I’ve cancelled [day and time] for [dog’s name]. Message me whenever you’d like to rebook.
+
+**Shortcuts for bookings**
+* opnd
+* bkin
+* bkdd
+* nopn
+* mvit
+* cxld
 
 ### Step 5, end
 
-* Never type a client’s full name, home address, phone number or door codes into a chat tool. Use [square brackets] and fill them in yourself.
-* Keep dog health details, like medication or a vet’s diagnosis, out of the chat. Ask for a draft and use your own judgment on the dog’s care.
-* Never type payment details or bank information into a chat tool.
-* Read every reply, reminder and post before it goes out, and check the day, time and dog’s name against your diary.
-* Check any price or timing against your own rates before you send it.
+* Never type an owner’s full name, phone number or home address into a chat tool. Use square brackets or a role like “an owner”.
+* Keep your replies to saved text on your phone’s keyboard, with brackets for the parts that change, so private details stay in your own messages.
+* Never put payment details or card numbers into a chat tool.
+* When a dog has a skin or health concern, describe it in general words and leave out the owner’s details. Check anything about a dog’s health against what you know and trust before it goes out.
+* Read every message before you send it, and fill in every square bracket.

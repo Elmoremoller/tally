@@ -45,7 +45,7 @@ export const MENU = /\b([Cc]lick|[Ss]ettings|[Bb]utton|[Tt]oggle)\b|\b[Gg]o to (
  */
 export const PROMISED_TIME = /\b(save[sd]?|saving|takes?|only|under|in|within|back)\s+(you\s+)?(about\s+)?(a|an|one|\d+|few|a few|hours of)?\s*(minutes?|mins?|hours?|hrs|seconds?|secs?)\b/i;
 export const DASH = /[–—]| - |\w-\w/;
-export const MONEY = /\d+ ?(%|percent)|\$ ?\d[\d,.]*|\bper ?cent\b/i;
+export const MONEY = /(\d+|\b(five|ten|fifteen|twenty|twenty five|thirty|forty|fifty)) ?(%|per ?cent\b)|\$ ?\d[\d,.]*/i;
 
 /** Prices and percents in a line that she did not give herself, like a 50% deposit from her own example. */
 export function moneyNotHers(line: string, hers: string): string[] {
