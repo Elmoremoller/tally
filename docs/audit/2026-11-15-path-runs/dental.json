@@ -1,0 +1,114 @@
+{
+  "promptVersion": "beginner-path-v1",
+  "model": "claude-sonnet-5-5",
+  "content": {
+    "version": 3,
+    "role": "You’re the front desk receptionist at a dental office, handling phones, scheduling, insurance verification, reminder calls and texts, and billing questions.",
+    "track": "starter",
+    "tool": "claude",
+    "worksFor": "employer",
+    "policy": "no_idea",
+    "device": "phone",
+    "apps": [
+      "any_chat",
+      "claude",
+      "iphone",
+      "gboard",
+      "samsung_keyboard"
+    ],
+    "skipped": [],
+    "steps": [
+      {
+        "id": "ready",
+        "kind": "ready",
+        "card": "claude_get_started",
+        "firstStep": "I’m a receptionist at a dental office. Patients text us to move their appointments. Write a short, warm reply I can send by text. Thank them, say we can move it, and ask which days and times work for them. Keep it under 50 words, friendly and plain, with no medical details. Here is the patient’s message: [paste the patient’s text here]"
+      },
+      {
+        "id": "about",
+        "kind": "about",
+        "card": "claude_about_you",
+        "note": "I am a front desk receptionist at a dental office. I handle phones, scheduling, insurance verification, reminder calls and texts, and billing questions. I write to patients, mostly by text, and sometimes to my coworkers. I like a warm, calm and polite tone, in short plain sentences, usually two or three sentences at most. Never add details I did not give you, like times, prices, coverage or office rules. If something is missing, put it in square brackets so I can fill it in. Never give medical or insurance advice. Always give me a draft I can read and change before I send it."
+      },
+      {
+        "id": "task_1",
+        "kind": "workflow",
+        "task": "Rescheduling texts",
+        "title": "Your rescheduling texts, saved once on your phone",
+        "recipe": "phone_quick_replies",
+        "read": "Your rescheduling texts now live on your phone’s keyboard. You type a few letters and the full reply is ready to put in. That keeps your answers steady and friendly even when the phone keeps ringing. You read each one and change the name or time before it goes out.",
+        "material": [
+          {
+            "label": "Your reschedule replies",
+            "items": [
+              "Hi [first name], thanks for letting us know. We can move your appointment. Would [day and time] or [day and time] work for you?",
+              "Hi [first name], no problem at all. What days and times usually work best for you? I will look for the closest opening.",
+              "Hi [first name], I have moved your appointment to [day and time]. Please reply to let me know that works for you.",
+              "Hi [first name], we have an opening on [day and time]. Would you like me to hold it for you?",
+              "Hi [first name], I am sorry, that time is no longer open. Could [day and time] work instead?",
+              "Hi [first name], we received your message about your appointment on [day and time]. I will check the schedule and text you back shortly.",
+              "Hi [first name], thank you for telling us ahead of time. Your appointment on [day and time] is cancelled. Reply here whenever you are ready to book a new one."
+            ]
+          },
+          {
+            "label": "Your shortcuts",
+            "items": [
+              "rsch",
+              "rnew",
+              "rcfm",
+              "ropen",
+              "rnot",
+              "rrec",
+              "rcan"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "task_2",
+        "kind": "extra",
+        "task": "Appointment reminders",
+        "title": "Your appointment reminders, saved once on your phone",
+        "recipe": "phone_quick_replies",
+        "sameAs": "task_1",
+        "read": "Your appointment reminders are added to the setup you made in the step Rescheduling texts. They sit on your phone’s keyboard next to your other saved replies.",
+        "material": [
+          {
+            "label": "Your reminder replies",
+            "items": [
+              "Hi [first name], this is a reminder of your appointment at [office name] on [day and time]. Please reply to confirm.",
+              "Hi [first name], your appointment is coming up on [day and time]. Let us know if you need to change it.",
+              "Hi [first name], we are looking forward to seeing you tomorrow at [time]. Please reply to confirm that you can make it.",
+              "Hi [first name], we have not heard back about your appointment on [day and time]. Could you please confirm when you can?",
+              "Hi [first name], thank you for confirming. We will see you on [day and time].",
+              "Hi [first name], it is time to book your next visit. Reply here and I will find a time that works for you."
+            ]
+          },
+          {
+            "label": "Your reminder shortcuts",
+            "items": [
+              "rmnd",
+              "rsoon",
+              "rtmrw",
+              "rnoreply",
+              "rthx",
+              "rbook"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "end",
+        "kind": "end",
+        "safeUse": [
+          "Never type patient names, birth dates, phone numbers or addresses into a chat tool. Use square brackets and add those details yourself.",
+          "Never type insurance member numbers, claim details or payment information into a chat tool.",
+          "Never share health details or treatment notes with a chat tool.",
+          "Read every text before you send it and check the name, day and time.",
+          "For insurance or billing questions, treat what AI gives you as a draft and check it against your office’s approved sources."
+        ],
+        "askMessage": "Hi [manager or IT name], I would like to know which AI tools the office has approved and what I may use them for. I am thinking of using one to help me write patient rescheduling texts and appointment reminders, and I would use only placeholders, never patient details. I would also like to use it to draft questions about insurance, which I would always check against our approved sources first. Could you tell me what is allowed for each of these, or who can confirm? I will wait for your answer before using it for the insurance questions."
+      }
+    ]
+  }
+}

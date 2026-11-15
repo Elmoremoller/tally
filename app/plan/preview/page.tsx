@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
 import { BeginnerPlanPage } from "@/components/beginner/BeginnerPlanPage";
+import { PathPlanPage } from "@/components/beginner/PathPlanPage";
+import { writtenPaths } from "@/lib/beginner/path-samples-written";
 import { PlanPage } from "@/components/plan/PlanPage";
 import { PlanWaiting } from "@/components/plan/PlanWaiting";
 import { SiteNav } from "@/components/SiteNav";
@@ -11,7 +13,9 @@ import { planSamples } from "@/lib/plan-samples";
 import { previewAllowed } from "@/lib/preview";
 
 // A sample plan, only on a local setup. /plan/preview shows the marketing coordinator's plan; add
-// ?sample=law_firm for the executive assistant's, ?sample=dental, salon or nurse for a beginner plan, &state=pending or &state=failed for the waiting page, and
+// ?sample=law_firm for the executive assistant's, ?sample=dental, salon or nurse for a beginner plan,
+// ?sample=path_dental, path_salon, path_planner or path_tutor for a paid path (Phase 6; Did it work is not saved,
+// and the phone is kept in this browser only), &state=pending or &state=failed for the waiting page, and
 // &welcome=1 for the note shown right after paying. Nothing is saved or sent.
 export const metadata: Metadata = { title: `Plan preview · ${offer.name}`, robots: { index: false } };
 
@@ -33,6 +37,8 @@ async function Preview({ searchParams }: { searchParams: PageProps<"/plan/previe
   const content = sample === "law_firm" ? planSamples.law_firm : planSamples.marketing;
   const note = welcome === "1" ? { email: "you@example.com", token: null } : null;
   if (state === "pending" || state === "failed") return <PlanWaiting failed={state === "failed"} welcome={note} />;
+  const path = typeof sample === "string" && sample.startsWith("path_") ? writtenPaths[sample.slice(5)] : undefined;
+  if (path) return <PathPlanPage content={path} token={null} saved={{ answers: {}, phone: null }} welcome={note} />;
   const beginner = beginnerSampleFor(sample);
   if (beginner) return <BeginnerPlanPage content={beginner.plan} welcome={note} />;
   return <PlanPage content={content} welcome={note} />;

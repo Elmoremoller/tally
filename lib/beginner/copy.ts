@@ -663,3 +663,96 @@ export const sevenDays = (idea: string | null, life: string | null) => [
     text: "Look back over the week and keep the three that helped most.",
   },
 ];
+
+/**
+ * The free result when her company restricts AI and every task on her map waits for its OK, with no recipe that
+ * fits (Karl, 2026-11-15): no price and no pay button, only the message to ask what's allowed, free, and a line
+ * inviting her back. DRAFT
+ */
+export const askFirstCopy = {
+  title: "Ask first, then come back",
+  lead: "Your company restricts AI, and every task on your map needs it. So there is nothing to buy yet. Here is the message to ask what’s allowed, free.",
+  /** Karl's words, from her offer (Phase 5). */
+  label: "The message to ask what’s allowed",
+  sendTo: "Send this to your manager or IT.",
+  back: "When you know what’s allowed, come back and take the quiz again. Your path starts from there.",
+  /** The message, in her voice, naming her tasks the way her map does. */
+  message: (tasks: string[]) =>
+    `Hi, I’d like to start using AI for parts of my work${tasks.length ? `, like ${listOf(tasks)}` : ""}. Which AI tools are we allowed to use, and what can I use them for? I would never put private details about people or the company into them. Thanks.`,
+};
+
+/** "a, b and c". */
+const listOf = (items: string[]) =>
+  items.length < 2 ? (items[0] ?? "") : `${items.slice(0, -1).join(", ")} and ${items[items.length - 1]}`;
+
+/** Her paid path, one step at a time (Phase 6). Every line is a DRAFT until Karl approves it. */
+export const pathCopy = {
+  eyebrow: "Your path",
+  progress: (at: number, total: number) => `Step ${at} of ${total}`,
+  skipped: {
+    ready: "You already use AI, so your path skips getting a tool ready.",
+    about: "You have already saved instructions about yourself, so your path skips that step.",
+  },
+  firstMessage: "Then send this first message",
+  firstMessageLead: "Fill in the part in brackets. What comes back is your first real result.",
+  aboutLabel: "Your note about you",
+  aboutLead: "Save this note as your instructions, so every answer fits you.",
+  noCard: (tool: string) => `Tally has no checked steps for ${tool} yet. Paste this note at the start of a new chat each time.`,
+  readyNoCard: (tool: string) => `Tally has no checked steps for ${tool} yet. Open it, sign in, and send the message below.`,
+  computerOnly: (tool: string) =>
+    `${tool}’s help pages give these steps on a computer only. Until you are at one, paste this note at the start of a chat.`,
+  readLabel: "How it works from now on",
+  setupLabel: "Set it up",
+  devices: { phone: "On your phone", computer: "On your computer" },
+  materialLabel: "What Tally wrote for you",
+  extraSetup: (title: string) => `Add these to the setup from ${title}, the same way you did there.`,
+  testLabel: "Try it on three real ones",
+  goodLabel: "What good looks like",
+  fixesLabel: "When it is off, send one of these",
+  approvalLabel: "You always check",
+  costLabel: "What it costs",
+  costFirst: "Before you start",
+  stopsLabel: "If it stops working",
+  stops: (email: string) =>
+    `Apps change their menus now and then. Write to ${email} and we will check the steps for you.`,
+  noSteps: "This workflow has no steps for your phone yet. Skip it for now, and we will add them.",
+  phone: {
+    title: "Which phone do you have?",
+    hint: "So you only see the steps for your phone.",
+    labels: { iphone: "iPhone", samsung: "Samsung", android: "Another Android phone" },
+    change: "Change phone",
+  },
+  /** A task with no recipe, which she writes with AI in her chat tool each time. Tally's own steps. */
+  withAi: {
+    steps: (tool: string) => [
+      `Open ${tool} and start a new chat.`,
+      "Paste the message Tally wrote for you, above, and fill in the parts in brackets.",
+      "Read the answer and change anything that is not right before you use it.",
+    ],
+    tryOn: "The next three times this task comes up.",
+    good: "You change no more than a sentence before you use it.",
+    fixes: ["Make it shorter.", "Make it sound more like me.", "Use only what I gave you and add nothing."] as [string, string, string],
+    approval: "You read it and check every detail before it goes out.",
+    cost: (tool: string, free: boolean) =>
+      free ? `The free plan of ${tool} is enough for this.` : `Check whether the free plan of ${tool} covers this before you start.`,
+  },
+  didItWork: "Did it work?",
+  yes: "Yes",
+  notQuite: "Not quite",
+  yesSaved: "Good. On to the next step.",
+  notQuiteSaved: "Try one of the lines above, then test it again.",
+  help: {
+    /** After a second Not quite on the same step. The refund sentence is the approved one in lib/offer.ts. */
+    line: (email: string, refund: string) => `Still not working? Write to ${email} and we will help you get it running. ${refund}`,
+    label: "What went wrong? A few words help.",
+    send: "Send",
+    sent: "Thanks, we got it.",
+  },
+  next: "Next step",
+  back: "Back",
+  endTitle: "What is safe at your job",
+  askLabel: "The message to ask what’s allowed",
+  askLead: "Send this to your manager or IT.",
+  end: "That is your path. You can come back to any step.",
+  saveError: "That didn’t save. Please try again.",
+};

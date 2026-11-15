@@ -66,8 +66,10 @@ export function appsOf(who: Pick<Who, "places" | "device" | "aiTools">): Set<Rec
   const chats = chatTools(who.aiTools);
   for (const tool of chats.length ? chats : [DEFAULT_TOOL]) if (tool === "chatgpt" || tool === "claude") apps.add(tool);
   if (who.device !== "computer") {
+    // Which phone she has is asked on her path, at the first step that needs it, so every phone route counts here.
     apps.add("iphone");
     apps.add("gboard");
+    apps.add("samsung_keyboard");
   }
   if (has(who.places, /\bgmail\b/i)) apps.add("gmail");
   if (has(who.places, /\bgoogle sheets\b|^\s*sheets\s*$/i)) apps.add("google_sheets");

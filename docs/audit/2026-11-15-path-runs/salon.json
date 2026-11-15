@@ -1,0 +1,101 @@
+{
+  "promptVersion": "beginner-path-v1",
+  "model": "claude-sonnet-5-5",
+  "content": {
+    "version": 3,
+    "role": "You own a small hair salon with three stylists, and you still cut hair five days a week while handling bookings, social media, ordering and payroll.",
+    "track": "builder",
+    "tool": "claude",
+    "worksFor": "self",
+    "policy": null,
+    "device": "both",
+    "apps": [
+      "any_chat",
+      "claude",
+      "iphone",
+      "gboard",
+      "samsung_keyboard"
+    ],
+    "skipped": [
+      "ready"
+    ],
+    "steps": [
+      {
+        "id": "about",
+        "kind": "about",
+        "card": "claude_about_you",
+        "note": "I own a small hair salon with three stylists, and I still cut hair five days a week. I write to clients and followers on Instagram, in text messages, and in booking DMs. My tone is warm, friendly and relaxed, like a stylist talking to a regular, never stiff or salesy. I like short captions and short replies, with a clear next step like booking through the link in my bio. Never add details I did not give you, like prices, openings, products or promises about results. Never make up names or rules. If something is missing, put it in square brackets so I can fill it in."
+      },
+      {
+        "id": "task_1",
+        "kind": "workflow",
+        "task": "Instagram posts",
+        "title": "Your Instagram posts, with a saved assistant",
+        "recipe": "saved_assistant",
+        "read": "Claude drafts each Instagram caption and waits for your OK. The assistant already knows your salon, your warm tone and your habit of ending with a link in your bio. You stop starting from a blank box after a long day in the chair, and you still decide what goes out.",
+        "material": [
+          {
+            "label": "Instructions for your assistant",
+            "items": [
+              "You are my assistant for writing Instagram captions for my small hair salon. I own the salon, we have three stylists, and I still cut hair five days a week, so I am usually tired when I post. Write in my voice: warm, friendly and relaxed, like a stylist talking to a regular. Keep captions short, usually two or three sentences. Often I invite people to DM a photo of the look they love, and I end by telling them to book through the link in my bio. Never invent prices, offers, openings, products, stylist names or promises about results. If you need a detail I did not give, put it in square brackets. Do not use hype or pushy sales talk. Each time, I will tell you the look, season or news I want to post about. Give me back one caption, plus a second shorter version, and nothing else."
+            ]
+          },
+          {
+            "label": "Examples to start with",
+            "items": [
+              "Balayage season is here! DM us a photo of the look you love and we will tell you how we would do it. Book through the link in bio.",
+              "Fresh cut, fresh start. If you are ready for a change, send us a photo of what you have in mind and we will talk it through. Book through the link in bio.",
+              "Our chairs are open for [service] this [season or month]. Not sure what you want? DM us a photo and we will help you figure it out. Book through the link in bio."
+            ]
+          }
+        ]
+      },
+      {
+        "id": "task_2",
+        "kind": "workflow",
+        "task": "Booking DMs",
+        "title": "Your booking DMs, saved once on your phone",
+        "recipe": "phone_quick_replies",
+        "read": "Your common booking replies live on your phone’s keyboard, each a few letters away. You stop retyping the same answers one by one, and each reply is still yours to check and adjust before you send it. That keeps your DMs and texts quick and in your own voice.",
+        "material": [
+          {
+            "label": "Your replies",
+            "items": [
+              "Hi [first name]! Thanks so much for reaching out. I would love to get you in. What service are you looking for, and what days work best for you?",
+              "Hi [first name]! We have [day and time] open with [stylist]. Would that work for you? You can also book through the link in our bio.",
+              "You are all booked for [service] on [day and time]. We look forward to seeing you!",
+              "Hi [first name], just a reminder about your appointment on [day and time]. Let us know if anything changes.",
+              "Thanks for letting us know. Let’s find a new time for you. Does [day and time] work?",
+              "Great question! For a look like that, it is best to see your hair first. Send a photo or book a consult through the link in our bio and we will go from there.",
+              "Thank you for visiting us, [first name]! If you loved your look, we would love for you to tell a friend."
+            ]
+          },
+          {
+            "label": "Your shortcuts",
+            "items": [
+              "bkq",
+              "bkopen",
+              "bkcf",
+              "bkrem",
+              "bkres",
+              "bkcon",
+              "bkthx"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "end",
+        "kind": "end",
+        "safeUse": [
+          "Never type client names, phone numbers or addresses into a chat tool. Use square brackets instead.",
+          "Keep payment details, card numbers and Square account information out of every chat.",
+          "Do not paste your stylists’ pay or payroll details when you ask for help with ordering or planning.",
+          "Read every caption and reply before it goes out, and check prices, openings and any claims against what is true for your salon.",
+          "Use only photos and stories of clients who have said yes to being shared."
+        ],
+        "askMessage": null
+      }
+    ]
+  }
+}

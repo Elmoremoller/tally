@@ -1,6 +1,6 @@
 import type { ReactNode, RefObject } from "react";
 import { Paywall } from "@/components/quiz/Paywall";
-import { beginnerParts, beginnerPaywall, firstWinCopy, levelCopy, offerCopy } from "@/lib/beginner/copy";
+import { askFirstCopy, beginnerParts, beginnerPaywall, firstWinCopy, levelCopy, offerCopy } from "@/lib/beginner/copy";
 import { fewHelp, orderMap } from "@/lib/beginner/free-result";
 import { LEVELS } from "@/lib/beginner/recipes";
 import { IDEAS_MIN, IDEAS_SHOWN, type FirstWin, type MapLine } from "@/lib/beginner/types";
@@ -173,5 +173,27 @@ export function BeginnerPaywall({
       ) : null}
       {freePlan ? <p className="quiz-type-text win-made">{beginnerPaywall.freePlan}</p> : null}
     </Paywall>
+  );
+}
+
+/**
+ * In place of the paywall when her company restricts AI and every task on her map waits for its OK (Karl,
+ * 2026-11-15): no price and no pay button. The message to ask what's allowed, free, and a line inviting her back.
+ */
+export function AskFirst({ message }: { message: string }) {
+  return (
+    <section className="ask-first" aria-labelledby="ask-first-title">
+      <h2 id="ask-first-title" className="quiz-title ask-first-title">
+        {askFirstCopy.title}
+      </h2>
+      <p className="quiz-type-text">{askFirstCopy.lead}</p>
+      <figure className="plan-script">
+        <p className="plan-script-label">{askFirstCopy.label}</p>
+        <p className="plan-script-lead">{askFirstCopy.sendTo}</p>
+        <blockquote className="win-draft">{message}</blockquote>
+      </figure>
+      <CopyButton words={message} />
+      <p className="quiz-type-text win-made">{askFirstCopy.back}</p>
+    </section>
   );
 }

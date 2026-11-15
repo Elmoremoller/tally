@@ -4,10 +4,12 @@ import { connection } from "next/server";
 import { Suspense } from "react";
 import { Backdrop } from "@/components/Backdrop";
 import { BeginnerPlanPage } from "@/components/beginner/BeginnerPlanPage";
+import { PathPlanPage } from "@/components/beginner/PathPlanPage";
 import { PlanPage } from "@/components/plan/PlanPage";
 import { PlanWaiting } from "@/components/plan/PlanWaiting";
 import { SiteNav } from "@/components/SiteNav";
-import { orderEmail, planByToken } from "@/lib/funnel-db";
+import { orderEmail, pathEvents, planByToken } from "@/lib/funnel-db";
+import { PATH_VERSION, savedFrom, validPath, type PathPlan } from "@/lib/beginner/path";
 import { offer } from "@/lib/offer";
 import { planCopy } from "@/lib/plan-copy";
 import { writePlanAfterResponse } from "@/lib/plan-generation";
@@ -67,10 +69,18 @@ async function TokenPlan({
 
   const email = welcome === "1" ? await orderEmail(plan.order_id).catch(() => null) : null;
   const note = email ? { email, token } : null;
-  // Version 2 is the beginner version's plan.
-  const content = plan.content as PlanContent | BeginnerPlan | null;
+  // Version 2 is the beginner version's plan, and version 3 her paid path (Phase 6). Older plans keep their pages.
+  const content = plan.content as PlanContent | BeginnerPlan | PathPlan | null;
   if (plan.status === "ready" && content?.version === 1) return <PlanPage content={content} welcome={note} />;
   if (plan.status === "ready" && content?.version === 2) return <BeginnerPlanPage content={content} welcome={note} />;
+  if (plan.status === "ready" && content?.version === PATH_VERSION && validPath(content)) {
+    // Her answers so far, so her progress shows on any device. Without them the path still shows, from the start.
+    const events = await pathEvents(plan.session_id).catch((error) => {
+      console.error("Loading her path answers failed", error);
+      return [];
+    });
+    return <PathPlanPage content={content} token={token} saved={savedFrom(events, plan.id)} welcome={note} />;
+  }
 
   // The database starts an attempt only when none is running (or one stopped over 3 minutes ago).
   if (plan.status === "pending") await writePlanAfterResponse(plan.id);

@@ -1,5 +1,8 @@
 import { supabaseAdmin } from "./supabase";
 import type { BeginnerPlanInput } from "./beginner/plan-writer";
+import { whoFrom } from "./beginner/levels";
+import { pathApps } from "./beginner/path";
+import type { PathInput } from "./beginner/path-writer";
 import { IDEAS_SHOWN, type BeginnerIntake } from "./beginner/types";
 import type { PlanInput } from "./plan-writer";
 import type { AiPolicy, AiTool, Pile } from "./week";
@@ -22,7 +25,9 @@ export type EventName =
   | "checkout_start"
   | "purchase"
   | "plan_view"
-  | "wins_log_click";
+  | "wins_log_click"
+  | "path_answer"
+  | "path_phone";
 
 export type SessionRow = {
   id: string;
@@ -319,6 +324,68 @@ export async function loadBeginnerPlanInput(plan: PlanRow): Promise<BeginnerPlan
     shownIdeas: beginner.ideas.slice(0, IDEAS_SHOWN),
     shownFirstStep: beginner.shown?.firstStep ?? null,
   };
+}
+
+/**
+ * Her answers saved since Phase 6 have a map with levels on her free result: they get the paid path. Older answers
+ * get the plan they were sold.
+ */
+export const wantsPath = (beginner: BeginnerIntake | null | undefined) =>
+  Boolean(beginner?.shown?.map?.some((row) => row.level !== undefined || row.waits !== undefined));
+
+/** What the path writer needs: her answers, and what her free result showed, levels and all. */
+export async function loadPathInput(plan: PlanRow): Promise<PathInput> {
+  const base = await loadBeginnerPlanInput(plan);
+  const { intake } = await loadWeek(plan.session_id);
+  const shown = intake?.beginner?.shown;
+  if (!shown || !wantsPath(intake?.beginner)) throw new Error("Her free result has no levels");
+  const who = whoFrom({
+    track: shown.track,
+    worksFor: base.worksFor,
+    aiPolicy: base.aiPolicy,
+    qas: base.qas,
+    aiTools: base.aiTools,
+  });
+  return {
+    job: base.job,
+    qas: base.qas,
+    mostWanted: base.mostWanted,
+    role: base.role,
+    worksFor: base.worksFor,
+    experience: base.experience,
+    aiTools: base.aiTools,
+    aiPolicy: base.aiPolicy,
+    map: shown.map,
+    top: base.firstWin.task,
+    track: shown.track,
+    tool: shown.tool,
+    device: who.device,
+    apps: pathApps(who),
+    firstStep: shown.firstStep || null,
+  };
+}
+
+/** One answer on her path: "Did it work?" on a step, or the phone she picked. */
+export type PathEvent = { name: "path_answer" | "path_phone"; props: Record<string, unknown>; created_at: string };
+
+/** Her answers on her path so far, oldest first, so the page shows her progress on any device. */
+export async function pathEvents(sessionId: string): Promise<PathEvent[]> {
+  const { data, error } = await supabaseAdmin()
+    .from("events")
+    .select("name, props, created_at")
+    .eq("session_id", sessionId)
+    .in("name", ["path_answer", "path_phone"])
+    .order("created_at", { ascending: true })
+    .limit(500);
+  if (error) throw new Error(`Loading her path answers failed: ${error.message}`);
+  return (data ?? []) as PathEvent[];
+}
+
+/** The angle a session came in on, for her events. */
+export async function sessionAngle(sessionId: string): Promise<string> {
+  const { data, error } = await supabaseAdmin().from("sessions").select("angle").eq("id", sessionId).maybeSingle();
+  if (error) throw new Error(`Loading a session failed: ${error.message}`);
+  return (data?.angle as string | undefined) ?? "default";
 }
 
 /** One session as the quiz and its result read it: the session, her answers, and her tasks in order. */

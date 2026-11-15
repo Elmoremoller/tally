@@ -61,7 +61,7 @@ import {
 import { followUpCopy, quizErrors } from "@/lib/questions";
 import { AI_TOOLS, toolLabels, type AiTool } from "@/lib/week";
 import { ChoiceStep } from "./ChoiceStep";
-import { BeginnerPaywall, FirstWinResult } from "./FirstWinResult";
+import { AskFirst, BeginnerPaywall, FirstWinResult } from "./FirstWinResult";
 import { PICK_BEAT, PickStep } from "./PickStep";
 
 // The beginner quiz, one screen at a time, in the order stepsFor gives (lib/beginner/quiz.ts). Everyone: her
@@ -792,8 +792,12 @@ export function BeginnerQuiz({ home }: { home: string }) {
             </h1>
           </div>
         ) : phase === "result" && win ? (
-          <FirstWinResult result={win} restricted={win.restricted} headingRef={headingRef}>
-            <BeginnerPaywall setups={win.setups} prep={win.prep} freePlan={win.freePlan} />
+          <FirstWinResult result={win} restricted={win.restricted && !win.askOnly} headingRef={headingRef}>
+            {win.askOnly && win.askMessage ? (
+              <AskFirst message={win.askMessage} />
+            ) : (
+              <BeginnerPaywall setups={win.setups} prep={win.prep} freePlan={win.freePlan} />
+            )}
           </FirstWinResult>
         ) : (
           <div key={phase === "questions" ? step : phase} className="quiz-step" data-dir={direction}>

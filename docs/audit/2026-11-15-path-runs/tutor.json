@@ -1,0 +1,79 @@
+{
+  "promptVersion": "beginner-path-v1",
+  "model": "claude-sonnet-5-5",
+  "content": {
+    "version": 3,
+    "role": "You tutor high school math students on your own, planning sessions, writing practice problems and keeping parents up to date.",
+    "track": "starter",
+    "tool": "claude",
+    "worksFor": "self",
+    "policy": null,
+    "device": "phone",
+    "apps": [
+      "any_chat",
+      "claude",
+      "iphone",
+      "gboard",
+      "samsung_keyboard"
+    ],
+    "skipped": [],
+    "steps": [
+      {
+        "id": "ready",
+        "kind": "ready",
+        "card": "claude_get_started",
+        "firstStep": "I tutor high school math. Write 5 practice problems on [topic] for a student who is [where they are], from easier to harder, with the answers listed at the end. Keep the wording plain and short."
+      },
+      {
+        "id": "about",
+        "kind": "about",
+        "card": "claude_about_you",
+        "note": "I tutor high school students in math on my own. I write practice problems, plan sessions and send short updates to parents. When I write to students, I keep it warm, clear and encouraging, with no talking down. When I write to parents, I stay friendly and plain, and I keep it short. Please use simple words and short sentences. Never add details I did not give you, like grades, test dates or names. If something is missing, ask me or leave a square bracket. Give me a draft I can read and change, and tell me when you are unsure about a math step so I can check it myself."
+      },
+      {
+        "id": "task_1",
+        "kind": "workflow",
+        "task": "Practice problems",
+        "title": "Your practice problems, written with AI",
+        "recipe": null,
+        "read": "From now on, Claude drafts your practice problems and you check every one before a student sees it. You tell it the topic and the level, and it gives you a set with an answer key. That way you start each session from a draft you can fix, instead of a blank page, and you still decide what goes to your students.",
+        "material": [
+          {
+            "label": "Your practice problem request",
+            "items": [
+              "I tutor a high school student in math. Today’s topic is [topic]. The student is in [course] and is [struggling with / comfortable with / ready to push on] this topic. Please write [number] practice problems that start easy and get harder. Include a mix of plain computation and a couple of word problems with everyday settings. Do not use any real names. Then give me a separate answer key with short worked steps for each problem so I can check every one myself. Tell me if any problem might have more than one valid answer."
+            ]
+          }
+        ]
+      },
+      {
+        "id": "task_2",
+        "kind": "workflow",
+        "task": "Session plans",
+        "title": "Your session plans, written with AI",
+        "recipe": null,
+        "read": "From now on, Claude drafts your session plan and you adjust it before the session. You give it the topic, the student’s level and the time you have, and it lays out the session in order. That way the night before gets easier, and the plan still reflects what you know about each student.",
+        "material": [
+          {
+            "label": "Your session plan request",
+            "items": [
+              "I tutor a high school student in math in a one on one session. The session is [length] long. The student is in [course], and our topic today is [topic]. Last time we covered [what we did last time], and the student found [what was hard] difficult. Please draft a session plan with a short warm up, a clear order for the main teaching, a few check in questions to see if it is landing, and a short wrap up. Add one idea for homework. Keep it simple enough that I can follow it on one page. Give me the plan as a short numbered outline."
+            ]
+          }
+        ]
+      },
+      {
+        "id": "end",
+        "kind": "end",
+        "safeUse": [
+          "Never type a student’s full name, school, grades or home address into a chat tool. Use [student] or a first initial instead.",
+          "Never paste a parent’s name, phone number or email into a chat tool.",
+          "Check every practice problem and answer key yourself by working it before a student sees it.",
+          "Read every message to a parent before you send it, and make sure it says only what you know.",
+          "Keep your own notes on how each student is doing in your own records, not in the chat."
+        ],
+        "askMessage": null
+      }
+    ]
+  }
+}
