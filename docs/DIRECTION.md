@@ -177,7 +177,7 @@ Code to read first. `lib/beginner/cards.ts` and its test file.
 **Goal.** The quiz collects what a workflow needs, and the map shows the right level for each task.
 
 1. Add "Where does this task happen?" for everyone, with choices from the read of her job plus fixed ones such as text messages, Gmail, Outlook, Instagram, a work system, paper or in person.
-2. For an employee who answered Yes or Not sure to the work question, add "Could you connect your work email or calendar to an AI tool yourself?" Yes. No. Not sure.
+2. For an employee who answered Yes or Not sure to the work question, add "Would your company let you link your work email to an AI tool?" Yes. No. Not sure.
 3. Have the intake give each task a kind from a fixed list that matches the recipes. The code checks it.
 4. Write the level function in code, following "How the level is chosen" in section 2. It returns the level and the recipe for each task, and the reason when a rule held the level down.
 5. Change the map to match section 3. A level tag on each row, a "With your path" line taken from the recipe, and offer names that come from the recipes.

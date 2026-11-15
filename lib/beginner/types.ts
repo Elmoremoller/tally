@@ -127,8 +127,13 @@ export type MapLine = {
   private: boolean;
   /** The kind of task the intake gave it, checked against TASK_KINDS. Absent before Phase 5. */
   kind?: TaskKind | null;
-  /** Its level from levelFor in lib/beginner/levels.ts. Absent on answers saved before Phase 5. */
-  level?: Level;
+  /**
+   * Its level from levelFor in lib/beginner/levels.ts. Null when it waits for her company's OK. Absent on answers
+   * saved before Phase 5.
+   */
+  level?: Level | null;
+  /** It needs AI and her company restricts AI: it shows Waits for your company's OK in place of a level. */
+  waits?: boolean;
   /** The id of the recipe that gave it a level of 3 or higher. */
   recipe?: string | null;
   /** The rule that held its level down, when one did. */
@@ -155,6 +160,8 @@ export type FreeResult = {
   firstStep: string;
   map: MapLine[];
   setups: string[];
+  /** A Starter's two prep steps, which her offer lists under her workflows. Empty for a Builder. Phase 5. */
+  prep: string[];
   /** Every recipe in her offer says the free plan is enough. Phase 5. */
   freePlan: boolean;
   tool: ChatTool;
@@ -181,7 +188,16 @@ export type BeginnerIntake = {
    * What her free result showed beyond her first win, saved so her paid path can be held to it. Absent on
    * answers saved before beginner-intake-v5 (Phase 2 of docs/DIRECTION.md).
    */
-  shown?: { firstStep: string; map: MapLine[]; setups: string[]; freePlan?: boolean; tool: ChatTool; track: Track };
+  shown?: {
+    firstStep: string;
+    map: MapLine[];
+    /** Her workflows by name, in order. Before Phase 5, every setup her offer named. */
+    setups: string[];
+    prep?: string[];
+    freePlan?: boolean;
+    tool: ChatTool;
+    track: Track;
+  };
 };
 
 /** Her plan holds at least this many ideas, and her free result shows the first few titles of them. */

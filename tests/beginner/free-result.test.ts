@@ -139,36 +139,45 @@ test("a task with no recipe is named for what it is, written with AI, never a sa
   assert.equal(workflowName({ task: "Writing the prep list", phrase: null, recipe: null }), "Writing the prep list, written with AI");
 });
 
-test("a Starter's offer opens with her tool ready and taught, then her workflows", () => {
-  assert.deepEqual(offerFor({ track: "starter", tool: "claude", map: leveled, top: "Rescheduling texts", device: "phone" }), [
-    "Get Claude ready on your phone",
-    "Teach Claude who you are",
-    "Your rescheduling texts, saved once on your phone",
-    "Your booking replies, written with AI",
-  ]);
+test("a Starter's offer lists her workflows first, and her two prep steps apart", () => {
+  assert.deepEqual(offerFor({ track: "starter", tool: "claude", map: leveled, top: "Rescheduling texts", device: "phone" }), {
+    setups: ["Your rescheduling texts, saved once on your phone", "Your booking replies, written with AI"],
+    prep: ["Get Claude ready on your phone", "Teach Claude who you are"],
+  });
   assert.equal(
-    offerFor({ track: "starter", tool: "chatgpt", map: leveled, top: "Rescheduling texts", device: "both" })[0],
+    offerFor({ track: "starter", tool: "chatgpt", map: leveled, top: "Rescheduling texts", device: "both" }).prep[0],
     "Get ChatGPT ready on your phone and computer",
   );
   assert.equal(
-    offerFor({ track: "starter", tool: "chatgpt", map: leveled, top: "Rescheduling texts", device: "computer" })[0],
+    offerFor({ track: "starter", tool: "chatgpt", map: leveled, top: "Rescheduling texts", device: "computer" }).prep[0],
     "Get ChatGPT ready on your computer",
   );
 });
 
-test("a Builder's offer starts at the workflow, with no sign up step", () => {
+test("a Builder's offer starts at the workflow, with no prep and no sign up step", () => {
   const offer = offerFor({ track: "builder", tool: "chatgpt", map: leveled, top: "Booking replies", device: null });
-  assert.deepEqual(offer, ["Your booking replies, written with AI", "Your rescheduling texts, saved once on your phone"]);
-  assert.ok(!offer.some((s) => /ready on|sign up|who you are/i.test(s)));
+  assert.deepEqual(offer, {
+    setups: ["Your booking replies, written with AI", "Your rescheduling texts, saved once on your phone"],
+    prep: [],
+  });
+  assert.ok(!offer.setups.some((s) => /ready on|sign up|who you are/i.test(s)));
 });
 
 test("no offer promises a saved project, a setup or a routine a task doesn't get", () => {
   const noRecipes = leveled.map((m) => ({ ...m, level: m.ai ? (2 as const) : (1 as const), recipe: null }));
   for (const track of ["starter", "builder"] as const) {
-    const offer = offerFor({ track, tool: "claude", map: noRecipes, top: "Rescheduling texts", device: "phone" });
-    assert.ok(!offer.some((s) => /saved project|set up|routine|right tool|saved once/i.test(s)), offer.join(" | "));
-    assert.ok(!offer.some((s) => s.includes("Answering phones")), "a task AI can't help with is never offered");
+    const { setups, prep } = offerFor({ track, tool: "claude", map: noRecipes, top: "Rescheduling texts", device: "phone" });
+    const all = [...setups, ...prep];
+    assert.ok(!all.some((s) => /saved project|set up|routine|right tool|saved once/i.test(s)), all.join(" | "));
+    assert.ok(!all.some((s) => s.includes("Answering phones")), "a task AI can't help with is never offered");
   }
+});
+
+test("a task that waits for her company's OK is never in the offer, and the offer ends with the message to ask", () => {
+  const waiting = leveled.map((m) => (m.task === "Booking replies" ? { ...m, level: null, waits: true } : m));
+  const offer = offerFor({ track: "builder", tool: "claude", map: waiting, top: "Rescheduling texts", device: "phone", restricted: true });
+  assert.deepEqual(offer.setups, ["Your rescheduling texts, saved once on your phone", "The message to ask what’s allowed"]);
+  assert.ok(!offer.setups.some((s) => s.includes("written with AI")));
 });
 
 test("the free plan line shows only when every task in the offer has a recipe that says so", () => {

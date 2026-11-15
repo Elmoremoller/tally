@@ -2,6 +2,7 @@ import { chatTools, type AiPolicy, type AiTool } from "../week";
 import type { QA } from "./quiz";
 import { CONNECT, CONNECT_ID, connectQuestion, deviceQuestion, DEVICES, type Connect, type Device } from "./quiz-copy";
 import { recipeById, recipes, TASK_KINDS, type Level, type Recipe, type RecipeApp, type RecipeRoute, type TaskKind } from "./recipes";
+import { levelCopy } from "./copy";
 import { canUseOf, DEFAULT_TOOL, type CanUse, type Held, type MapLine, type Track, type WorksFor } from "./types";
 
 // The level of each task on her map (docs/DIRECTION.md, section 2, How the level is chosen). The code chooses the
@@ -16,7 +17,8 @@ import { canUseOf, DEFAULT_TOOL, type CanUse, type Held, type MapLine, type Trac
 //
 // A task with no recipe that fits gets level 2 when AI can help with it and level 1 when it can't, never a forced
 // recipe. When a recipe of its kind and her apps exists but a rule held it back, the reason goes with the level.
-// Someone whose company restricts AI still gets the recipes that need no AI at work, with a line to ask first.
+// Someone whose company restricts AI still gets the recipes that need no AI at work, with a line to ask first;
+// any other task of hers that needs AI gets no level, and waits for her company's OK.
 // Pure, so the server, the previews and the tests can all use it.
 
 /** What the level rules need to know about her. */
@@ -37,7 +39,10 @@ export type Who = {
 export type LevelTask = { ai: boolean; private: boolean; kind: TaskKind | null };
 
 export type TaskLevel = {
-  level: Level;
+  /** Null when the task waits for her company's OK. */
+  level: Level | null;
+  /** It needs AI and her company restricts AI, and no recipe that needs no AI at work fits it. */
+  waits: boolean;
   /** The recipe behind a level of 3 or higher. */
   recipe: Recipe | null;
   /** The rule that held the level down, when a recipe of its kind and her apps exists. */
@@ -92,7 +97,7 @@ function heldBy(recipe: Recipe, task: LevelTask, who: Who, routes: RecipeRoute[]
 
 /** The level of one task, with its recipe and what held it down. See the top of this file. */
 export function levelFor(task: LevelTask, who: Who): TaskLevel {
-  if (!task.ai) return { level: 1, recipe: null, held: null, askFirst: false };
+  if (!task.ai) return { level: 1, waits: false, recipe: null, held: null, askFirst: false };
   const apps = appsOf(who);
   const candidates = recipes
     .filter((recipe) => task.kind !== null && recipe.kind === task.kind)
@@ -109,26 +114,41 @@ export function levelFor(task: LevelTask, who: Who): TaskLevel {
     }
     return {
       level: recipe.level,
+      waits: false,
       recipe,
       held: blocked && blocked.recipe.level > recipe.level ? blocked.held : null,
       askFirst: who.canUse === "restricted" && !recipe.conditions.needsAiAllowed,
     };
   }
-  return { level: 2, recipe: null, held: blocked?.held ?? null, askFirst: false };
+  // With AI restricted at her work, writing it with AI isn't hers to choose: it waits for her company's OK.
+  if (who.canUse === "restricted") return { level: null, waits: true, recipe: null, held: blocked?.held ?? null, askFirst: false };
+  return { level: 2, waits: false, recipe: null, held: blocked?.held ?? null, askFirst: false };
 }
 
 /**
- * Her map with a level on every row. A row with a recipe takes its With your path line from the recipe, so a
- * level of 3 or higher never reads like writing help; a row at level 1 or 2 keeps the model's line.
+ * A recipe's With your path line for one task: with her own name for the task in front when it can be trusted
+ * (phraseFor gives null when it can't), so two tasks with the same recipe never read the same.
+ */
+export const pathLineFor = (recipe: Recipe, phrase: string | null): string =>
+  phrase ? levelCopy.forTask(phrase, recipe.withPath) : recipe.withPath;
+
+/**
+ * Her map with a level on every row, or the waits tag. A row with a recipe takes its With your path line from the
+ * recipe, with her name for the task in it, so a level of 3 or higher never reads like writing help; any other
+ * row keeps the model's line.
  */
 export function withLevels(map: readonly MapLine[], who: Who): MapLine[] {
   return map.map((row) => {
-    const { level, recipe, held, askFirst } = levelFor({ ai: row.ai, private: row.private, kind: row.kind ?? null }, who);
+    const { level, waits, recipe, held, askFirst } = levelFor(
+      { ai: row.ai, private: row.private, kind: row.kind ?? null },
+      who,
+    );
     return {
       ...row,
       level,
+      waits,
       recipe: recipe?.id ?? null,
-      withPath: recipe ? recipe.withPath : row.withPath,
+      withPath: recipe ? pathLineFor(recipe, row.phrase) : row.withPath,
       held,
       askFirst,
     };

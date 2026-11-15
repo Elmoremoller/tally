@@ -39,10 +39,17 @@ async function Preview({ searchParams }: { searchParams: PageProps<"/begin/previ
   const { firstWin, free, plan } = sampled;
   // Levels and the offer are chosen as on the live result, from her path, her answers and her own tasks.
   const map = orderMap(withLevels(free.map, sampleWho(sampled)), firstWin.task);
-  const setups = offerFor({ track: free.track, tool: plan.tool, map, top: firstWin.task, device: free.device });
+  const offer = offerFor({
+    track: free.track,
+    tool: plan.tool,
+    map,
+    top: firstWin.task,
+    device: free.device,
+    restricted: plan.policy === "restricted",
+  });
   return (
     <FirstWinResult result={{ firstWin, map }} restricted={plan.policy === "restricted"}>
-      <BeginnerPaywall setups={setups} freePlan={freePlanFor(map, firstWin.task)} />
+      <BeginnerPaywall {...offer} freePlan={freePlanFor(map, firstWin.task)} />
     </FirstWinResult>
   );
 }

@@ -1,12 +1,14 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { freePlanFor, offerFor, orderMap } from "../../lib/beginner/free-result";
+import { levelCopy } from "../../lib/beginner/copy";
 import {
   appsOf,
   connectOf,
   hasStepsFor,
   kindOf,
   levelFor,
+  pathLineFor,
   placesOf,
   sampleWho,
   whoFrom,
@@ -40,7 +42,8 @@ test("kindOf keeps only kinds on the list", () => {
 });
 
 test("a task AI can't help with stays hers at level 1", () => {
-  assert.deepEqual(levelFor(task(null, { ai: false }), who()), { level: 1, recipe: null, held: null, askFirst: false });
+  assert.deepEqual(levelFor(task(null, { ai: false }), who()), { level: 1, waits: false, recipe: null, held: null, askFirst: false });
+  assert.equal(levelFor(task(null, { ai: false }), who({ canUse: "restricted" })).level, 1, "even when AI is restricted");
 });
 
 test("a task no kind fits gets level 2, never a forced recipe", () => {
@@ -121,8 +124,10 @@ test("a restricted employee still gets the two recipes that need no AI at work, 
   assert.deepEqual([emails.level, emails.recipe?.id, emails.askFirst], [3, "gmail_templates", true]);
   for (const kind of ["repeat_writing", "spoken_writing", "email_replies"] as const) {
     const result = levelFor(task(kind), restricted);
-    assert.deepEqual([result.level, result.held, result.askFirst], [2, "restricted", false], kind);
+    assert.deepEqual([result.level, result.waits, result.held, result.askFirst], [null, true, "restricted", false], kind);
   }
+  const none = levelFor(task(null), restricted);
+  assert.deepEqual([none.level, none.waits, none.held], [null, true, null], "no kind fits, and it still waits");
   const offered = recipes.filter((r) =>
     TASK_KINDS.some((kind) => levelFor(task(kind), { ...restricted, track: "builder" }).recipe?.id === r.id),
   );
@@ -178,13 +183,32 @@ test("no With your path line at level 3 or higher reads like writing help", () =
   }
 });
 
+test("no reason line says Held here, and the restricted one says the task waits", () => {
+  for (const line of Object.values(levelCopy.held)) assert.doesNotMatch(line, /held here/i, line);
+  assert.equal(levelCopy.held.restricted, "Your company restricts AI, so this one waits.");
+  assert.equal(levelCopy.waits, "Waits for your company’s OK");
+});
+
+test("her trusted name for a task goes into the recipe's line, and the plain line is used without one", () => {
+  const recipe = recipeById("phone_quick_replies");
+  assert.ok(recipe);
+  assert.equal(
+    pathLineFor(recipe, "rescheduling texts"),
+    "For your rescheduling texts, your common replies are saved on your phone, each a few letters away.",
+  );
+  assert.equal(pathLineFor(recipe, null), recipe.withPath);
+  const saved = recipeById("saved_assistant");
+  assert.equal(saved?.withPath, "You hand it the job, and it writes in your voice with your details already in.");
+  for (const r of recipes) assert.doesNotMatch(pathLineFor(r, "booking texts"), WRITING_HELP, r.id);
+});
+
 test("withLevels takes the line from the recipe and keeps the model's line below level 3", () => {
   const rows: MapLine[] = [
     { task: "Booking texts", phrase: "booking texts", today: "T.", withPath: "Model line.", ai: true, private: false, kind: "repeat_texts" },
     { task: "Odd jobs", phrase: "odd jobs", today: "T.", withPath: "Model line two.", ai: true, private: false, kind: null },
   ];
   const [texts, odd] = withLevels(rows, who());
-  assert.equal(texts.withPath, recipeById("phone_quick_replies")?.withPath);
+  assert.equal(texts.withPath, `For your booking texts, ${recipeById("phone_quick_replies")?.withPath.replace(/^Y/, "y")}`);
   assert.deepEqual([texts.level, texts.recipe], [3, "phone_quick_replies"]);
   assert.deepEqual([odd.level, odd.recipe, odd.withPath], [2, null, "Model line two."]);
 });
@@ -203,6 +227,9 @@ test("the dental sample gets Build once, reuse for rescheduling texts, and never
     assert.ok((row.level ?? 0) <= 3, `${row.task} stays at or below level 3`);
   }
   assert.equal(map.find((m) => m.task === "Insurance questions")?.held, "private");
+  const reminders = map.find((m) => m.task === "Appointment reminders");
+  assert.equal(reminders?.recipe, texts?.recipe, "the same recipe");
+  assert.notEqual(reminders?.withPath, texts?.withPath, "but not the same sentence");
   assert.equal(map.find((m) => m.task === "Answering phones")?.level, 1);
 });
 
@@ -217,7 +244,7 @@ test("a self employed Builder who works in Gmail gets Inside your apps for her t
   assert.equal(map[0].level, 4);
   assert.equal(map[0].recipe, "gmail_help_me_write");
   const offer = offerFor({ track: "builder", tool: "chatgpt", map, top: "Client emails", device: "computer" });
-  assert.deepEqual(offer, ["Your client emails, drafted in your inbox", "Your invoices, saved once as Gmail templates"]);
+  assert.deepEqual(offer.setups, ["Your client emails, drafted in your inbox", "Your invoices, saved once as Gmail templates"]);
 });
 
 test("a phone only Starter gets only what she can set up on her phone, named for what it is", () => {
@@ -238,12 +265,10 @@ test("a phone only Starter gets only what she can set up on her phone, named for
       ["Price lists", 2, "needs_computer"],
     ],
   );
-  assert.deepEqual(offerFor({ track: "starter", tool: "claude", map, top: "Booking texts", device: "phone" }), [
-    "Get Claude ready on your phone",
-    "Teach Claude who you are",
-    "Your booking texts, saved once on your phone",
-    "Your price lists, written with AI",
-  ]);
+  assert.deepEqual(offerFor({ track: "starter", tool: "claude", map, top: "Booking texts", device: "phone" }), {
+    setups: ["Your booking texts, saved once on your phone", "Your price lists, written with AI"],
+    prep: ["Get Claude ready on your phone", "Teach Claude who you are"],
+  });
   assert.equal(freePlanFor(map, "Booking texts"), false, "price lists has no recipe");
 });
 
@@ -262,28 +287,40 @@ test("a Starter with both gets the computer recipes too", () => {
       ["Price lists", 3, "notes_to_sheet"],
     ],
   );
-  assert.deepEqual(offerFor({ track: "starter", tool: "claude", map, top: "Booking texts", device: "both" }), [
-    "Get Claude ready on your phone and computer",
-    "Teach Claude who you are",
-    "Your booking texts, saved once on your phone",
-    "Your price lists, turned into rows for your sheet",
-  ]);
+  assert.deepEqual(offerFor({ track: "starter", tool: "claude", map, top: "Booking texts", device: "both" }), {
+    setups: ["Your booking texts, saved once on your phone", "Your price lists, turned into rows for your sheet"],
+    prep: ["Get Claude ready on your phone and computer", "Teach Claude who you are"],
+  });
   assert.equal(freePlanFor(map, "Booking texts"), true);
 });
 
-test("the restricted nurse sample is held at level 2 with the reason, and never offered a saved project", () => {
+test("the restricted nurse sample waits for her company's OK, with no level and no Write it with AI", () => {
   const sample = beginnerSamples.nurse;
   const map = orderMap(withLevels(sample.free.map, sampleWho(sample)), sample.firstWin.task);
-  assert.equal(map.find((m) => m.task === "Precepting new nurses")?.held, "restricted");
-  assert.ok(map.every((m) => (m.level ?? 0) <= 2));
-  const offer = offerFor({ track: "starter", tool: "claude", map, top: sample.firstWin.task, device: sample.free.device });
-  assert.ok(offer.every((name) => !/saved|project|routine/i.test(name)), offer.join(" | "));
+  const precepting = map.find((m) => m.task === "Precepting new nurses");
+  assert.deepEqual([precepting?.level, precepting?.waits, precepting?.held], [null, true, "restricted"]);
+  for (const row of map) {
+    if (row.ai) assert.deepEqual([row.level, row.waits], [null, true], row.task);
+    else assert.equal(row.level, 1, row.task);
+    assert.notEqual(row.level, 2, `${row.task} never carries Write it with AI`);
+  }
+  const offer = offerFor({
+    track: "starter",
+    tool: "claude",
+    map,
+    top: sample.firstWin.task,
+    device: sample.free.device,
+    restricted: true,
+  });
+  assert.deepEqual(offer.setups, ["The message to ask what’s allowed"]);
+  assert.ok([...offer.setups, ...offer.prep].every((name) => !/saved|project|routine|written with AI/i.test(name)));
 });
 
 test("old saved map rows with no level still load in every function", () => {
   const old: MapLine[] = [{ task: "Vendor emails", phrase: "vendor emails", today: "T.", withPath: "M.", ai: true, private: false }];
   assert.equal(withLevels(old, who())[0].level, 2);
-  assert.deepEqual(offerFor({ track: "builder", tool: "claude", map: old, top: "Vendor emails", device: null }), [
-    "Your vendor emails, written with AI",
-  ]);
+  assert.deepEqual(offerFor({ track: "builder", tool: "claude", map: old, top: "Vendor emails", device: null }), {
+    setups: ["Your vendor emails, written with AI"],
+    prep: [],
+  });
 });

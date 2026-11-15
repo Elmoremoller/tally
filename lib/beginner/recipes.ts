@@ -10,8 +10,8 @@ import { CARD_IDS, type CardId } from "./cards";
 // steps for a device means the pages give none for that device. Steps about Tally's own material ("paste the
 // instructions Tally wrote for you") are Tally's, not the vendor's.
 //
-// Every title, step, note and line of copy here is a DRAFT until Karl approves it, the withPath and offer lines
-// added in Phase 5 too. Imports nothing from the server.
+// Every title, step, note and line of copy here is a DRAFT until Karl approves it. The withPath and offer lines
+// added in Phase 5 were approved by Karl on 2026-11-15. Imports nothing from the server.
 
 /** The five levels a task can get, in the plain words of DIRECTION.md, section 3. */
 export const LEVELS = {
@@ -194,7 +194,7 @@ export const recipes: readonly Recipe[] = [
     kind: "repeat_writing",
     level: 3,
     title: "A saved assistant for the writing you repeat",
-    withPath: "A saved assistant holds your details and examples, ready each time this comes up.",
+    withPath: "You hand it the job, and it writes in your voice with your details already in.",
     offer: "with a saved assistant",
     conditions: { needsAiAllowed: true, connectsApp: false, taskContent: "chat_tool" },
     routes: [

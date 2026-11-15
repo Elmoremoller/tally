@@ -1,6 +1,6 @@
 import type { ReactNode, RefObject } from "react";
 import { Paywall } from "@/components/quiz/Paywall";
-import { beginnerParts, beginnerPaywall, firstWinCopy, levelCopy } from "@/lib/beginner/copy";
+import { beginnerParts, beginnerPaywall, firstWinCopy, levelCopy, offerCopy } from "@/lib/beginner/copy";
 import { fewHelp, orderMap } from "@/lib/beginner/free-result";
 import { LEVELS } from "@/lib/beginner/recipes";
 import { IDEAS_MIN, IDEAS_SHOWN, type FirstWin, type MapLine } from "@/lib/beginner/types";
@@ -21,8 +21,9 @@ export type ShownResult = {
  * The beginner version's free result (docs/DIRECTION.md, section 3): it opens with the map of her week under a
  * line on how many of her tasks AI can help with, each task with where she is today and what changes with her
  * path. Her finished result sits behind See it in the top row. Then the offer, which is `children`: the
- * paywall. `restricted` adds a line for a company that restricts AI. From Phase 5 each row has its level tag,
- * and a short line when a rule held its level down; rows saved before have neither.
+ * paywall. `restricted` adds a line for a company that restricts AI. From Phase 5 each row has its level tag, or
+ * Waits for your company's OK in its place, and a short line when a rule held its level down; rows saved before
+ * have neither.
  */
 export function FirstWinResult({
   result,
@@ -50,7 +51,11 @@ export function FirstWinResult({
       <ul className="win-map">
         {rows.map((m) => (
           <li key={m.task} data-ai={m.ai || undefined}>
-            {m.level ? (
+            {m.waits ? (
+              <p className="win-map-level" data-level="waits">
+                {levelCopy.waits}
+              </p>
+            ) : m.level ? (
               <p className="win-map-level" data-level={m.level}>
                 <span className="sr-only">{levelCopy.levelLabel} </span>
                 {LEVELS[m.level]}
@@ -120,11 +125,19 @@ function LegacyResult({
 }
 
 /**
- * The beginner paywall: her own workflows by name, with the line on the free plan when every recipe in her
- * offer says it is enough. Without setups, for answers saved before Phase 2, it shows the plan's five parts as
- * it did.
+ * The beginner paywall: her own workflows by name, then a Starter's two prep steps under a short line, then the
+ * line on the free plan when every recipe in her offer says it is enough. Without setups, for answers saved
+ * before Phase 2, it shows the plan's five parts as it did.
  */
-export function BeginnerPaywall({ setups, freePlan = false }: { setups?: string[]; freePlan?: boolean }) {
+export function BeginnerPaywall({
+  setups,
+  prep = [],
+  freePlan = false,
+}: {
+  setups?: string[];
+  prep?: string[];
+  freePlan?: boolean;
+}) {
   if (!setups?.length) {
     return (
       <Paywall title={beginnerPaywall.title} lead={beginnerPaywall.legacyLead}>
@@ -148,6 +161,16 @@ export function BeginnerPaywall({ setups, freePlan = false }: { setups?: string[
           </li>
         ))}
       </ol>
+      {prep.length ? (
+        <div className="win-prep">
+          <p className="win-prep-lead">{offerCopy.prepLead}</p>
+          <ol className="win-prep-steps">
+            {prep.map((step) => (
+              <li key={step}>{step}</li>
+            ))}
+          </ol>
+        </div>
+      ) : null}
       {freePlan ? <p className="quiz-type-text win-made">{beginnerPaywall.freePlan}</p> : null}
     </Paywall>
   );

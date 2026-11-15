@@ -93,10 +93,11 @@ export function orderMap(map: readonly MapLine[], top: string): MapLine[] {
 
 /**
  * The task her offer names after her top task: the next one on her map with a recipe, then the next one AI can
- * help with that needs no private details, then any other AI can help with. Null when there is none.
+ * help with that needs no private details, then any other AI can help with. A task that waits for her company's
+ * OK is never one. Null when there is none.
  */
 export function secondTask(map: readonly MapLine[], top: string): MapLine | null {
-  const others = map.filter((m) => m.ai && m.task.toLowerCase() !== top.toLowerCase());
+  const others = map.filter((m) => m.ai && !m.waits && m.task.toLowerCase() !== top.toLowerCase());
   return others.find((m) => recipeOf(m)) ?? others.find((m) => !m.private) ?? others[0] ?? null;
 }
 
@@ -110,17 +111,21 @@ export function workflowName(m: Pick<MapLine, "task" | "phrase" | "recipe">): st
   return `${taskForSetup(m)}, ${recipe ? recipe.offer : offerCopy.withAi}`;
 }
 
-/** The tasks her offer names, in order: her first win task, then her second. Only tasks AI can help with. */
+/**
+ * The tasks her offer names, in order: her first win task, then her second. Only tasks AI can help with, and
+ * never one that waits for her company's OK.
+ */
 export function offerTasks(map: readonly MapLine[], top: string): MapLine[] {
-  const first = map.find((m) => m.ai && m.task.toLowerCase() === top.toLowerCase());
+  const first = map.find((m) => m.ai && !m.waits && m.task.toLowerCase() === top.toLowerCase());
   const second = secondTask(map, top);
   return [...(first ? [first] : []), ...(second ? [second] : [])];
 }
 
 /**
- * Her offer by name, in the order of her path (DIRECTION.md, section 4). A Starter's path opens with two short
- * steps, her tool ready where she works and taught who she is, then her workflows. A Builder's skips them and
- * starts at the workflow. Each workflow is named by workflowName.
+ * Her offer by name (DIRECTION.md, section 3). `setups` is her workflows, each named by workflowName, and, when
+ * her company restricts AI, the message to ask what's allowed, which ends her path (section 4). `prep` is a
+ * Starter's two short steps, her tool ready where she works and taught who she is: her path opens with them,
+ * but the offer lists them under her workflows, under offerCopy.prepLead. A Builder has none.
  */
 export function offerFor({
   track,
@@ -128,6 +133,7 @@ export function offerFor({
   map,
   top,
   device,
+  restricted = false,
 }: {
   track: Track;
   tool: ChatTool;
@@ -135,13 +141,14 @@ export function offerFor({
   map: readonly MapLine[];
   top: string;
   device: Device | null;
-}): string[] {
-  const workflows = offerTasks(map, top).map(workflowName);
-  if (track === "builder") return workflows;
+  restricted?: boolean;
+}): { setups: string[]; prep: string[] } {
+  const setups = [...offerTasks(map, top).map(workflowName), ...(restricted ? [offerCopy.askAllowed] : [])];
+  if (track === "builder") return { setups, prep: [] };
   const name = toolLabels[tool];
   const where =
     device === "phone" ? "on your phone" : device === "computer" ? "on your computer" : "on your phone and computer";
-  return [`Get ${name} ready ${where}`, `Teach ${name} who you are`, ...workflows];
+  return { setups, prep: [`Get ${name} ready ${where}`, `Teach ${name} who you are`] };
 }
 
 /**

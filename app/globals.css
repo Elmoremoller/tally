@@ -5586,6 +5586,24 @@
   .win-setups .peek-card {
     text-align: left;
   }
+  /* A Starter's two prep steps, under her workflows on the paywall: quieter than the workflows they lead to. */
+  .win-prep {
+    width: 100%;
+    margin-top: 1.25rem;
+    text-align: left;
+  }
+  .win-prep-lead {
+    font-weight: 600;
+    color: var(--slate);
+  }
+  .win-prep-steps {
+    display: grid;
+    gap: 0.375rem;
+    margin: 0.5rem 0 0;
+    padding: 0;
+    list-style: none;
+    color: var(--ink);
+  }
   .win-example {
     padding: 0.875rem 1rem;
     border-radius: 1rem;

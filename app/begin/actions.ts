@@ -118,7 +118,7 @@ export async function readBeginner(input: {
       firstWin: result.first_win,
       firstStep: result.first_step,
       map,
-      setups: offerFor({ track, tool, map, top, device: who.device }),
+      ...offerFor({ track, tool, map, top, device: who.device, restricted: who.canUse === "restricted" }),
       freePlan: freePlanFor(map, top),
       tool,
       track,
@@ -148,7 +148,15 @@ export async function readBeginner(input: {
       // Idea titles are gone from the free result since beginner-intake-v5; the plan writer still takes the list.
       ideas: [],
       privateTasks: result.tasks.filter((t) => t.private).map((t) => t.name),
-      shown: { firstStep: free.firstStep, map: free.map, setups: free.setups, freePlan: free.freePlan, tool, track },
+      shown: {
+        firstStep: free.firstStep,
+        map: free.map,
+        setups: free.setups,
+        prep: free.prep,
+        freePlan: free.freePlan,
+        tool,
+        track,
+      },
     });
     if (followUp) await saveFollowUpAnswer(sessionId, followUp.answer);
     const { tasks } = await loadWeek(sessionId);

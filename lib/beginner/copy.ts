@@ -510,32 +510,46 @@ export const beginnerPaywall = {
   lead: "Your first setups, one step at a time.", // Approved by Karl 2026-11-14
   /** Only for answers saved before Phase 2, shown with the plan's five parts. */
   legacyLead: "Here’s what’s inside, built from your answers.",
-  /** Under her offer, only when every recipe in it says the free plan is enough (Phase 5). DRAFT */
+  /** Under her offer, only when every recipe in it says the free plan is enough (Phase 5). Approved by Karl 2026-11-15 */
   freePlan: "The free plan is enough to start.",
 };
 
-/** How her offer names a task that has no recipe: what it is at level 2. Karl's words, 2026-11-15. */
+/** Her offer's own lines (Phase 5). Karl's words or approved by Karl 2026-11-15, apart from askAllowed. */
 export const offerCopy = {
+  /** How her offer names a task that has no recipe: what it is at level 2. */
   withAi: "written with AI",
+  /** Over a Starter's two prep steps, which her offer lists under her workflows. */
+  prepLead: "Starts with two quick steps",
+  /** The last thing her offer names when her company restricts AI (DIRECTION.md, section 4). DRAFT */
+  askAllowed: "The message to ask what’s allowed",
 };
 
 /**
  * The map's lines for levels (Phase 5 of docs/DIRECTION.md). The level tags are LEVELS in recipes.ts, in the
  * words of section 3. A row whose level a rule held down says why in a few words; a row with a recipe that needs
- * no AI at work, for someone whose company restricts AI, says to ask first. Every line here is a DRAFT.
+ * no AI at work, for someone whose company restricts AI, says to ask first. Approved by Karl 2026-11-15, apart
+ * from forTask.
  */
 export const levelCopy = {
   /** For screen readers, before the tag. */
   levelLabel: "Level",
+  /** The tag, in place of a level, on a task that needs AI when her company restricts it. Karl's words. */
+  waits: "Waits for your company’s OK",
   held: {
-    restricted: "Held here because your company restricts AI.", // DRAFT
-    connect: "Connecting your work email needs your company’s OK first.", // DRAFT
-    private: "Other people’s private details stay out of your AI tool.", // DRAFT
-    track: "This can go further once your first workflow works.", // DRAFT
-    needs_computer: "The setup for this needs a computer.", // DRAFT
-    needs_phone: "The setup for this needs a phone.", // DRAFT
+    restricted: "Your company restricts AI, so this one waits.", // Karl's words, 2026-11-15
+    connect: "Connecting your work email needs your company’s OK first.",
+    private: "Other people’s private details stay out of your AI tool.",
+    track: "This can go further once your first workflow works.",
+    needs_computer: "The setup for this needs a computer.",
+    needs_phone: "The setup for this needs a phone.",
   } satisfies Record<Held, string>,
-  askFirst: "Ask first if your company’s rule covers any use of AI.", // DRAFT
+  /**
+   * A recipe's With your path line with her own name for the task in front, when that name can be trusted, so
+   * two tasks with the same recipe never read the same: "For your rescheduling texts, your common replies are
+   * saved on your phone, each a few letters away." DRAFT
+   */
+  forTask: (phrase: string, line: string) => `For your ${phrase}, ${line.charAt(0).toLowerCase()}${line.slice(1)}`,
+  askFirst: "Ask first if your company’s rule covers any use of AI.",
 };
 
 /** What people see on Stripe's page and their receipt. DRAFT */
