@@ -514,21 +514,20 @@ export const beginnerPaywall = {
   freePlan: "The free plan is enough to start.",
 };
 
-/** Her offer's own lines (Phase 5). Karl's words or approved by Karl 2026-11-15, apart from askAllowed. */
+/** Her offer's own lines (Phase 5). Karl's words or approved by Karl 2026-11-15. */
 export const offerCopy = {
   /** How her offer names a task that has no recipe: what it is at level 2. */
   withAi: "written with AI",
   /** Over a Starter's two prep steps, which her offer lists under her workflows. */
   prepLead: "Starts with two quick steps",
-  /** The last thing her offer names when her company restricts AI (DIRECTION.md, section 4). DRAFT */
+  /** The last thing her offer names when her company restricts AI (DIRECTION.md, section 4). */
   askAllowed: "The message to ask what’s allowed",
 };
 
 /**
  * The map's lines for levels (Phase 5 of docs/DIRECTION.md). The level tags are LEVELS in recipes.ts, in the
  * words of section 3. A row whose level a rule held down says why in a few words; a row with a recipe that needs
- * no AI at work, for someone whose company restricts AI, says to ask first. Approved by Karl 2026-11-15, apart
- * from forTask.
+ * no AI at work, for someone whose company restricts AI, says to ask first. Approved by Karl 2026-11-15.
  */
 export const levelCopy = {
   /** For screen readers, before the tag. */
@@ -546,7 +545,7 @@ export const levelCopy = {
   /**
    * A recipe's With your path line with her own name for the task in front, when that name can be trusted, so
    * two tasks with the same recipe never read the same: "For your rescheduling texts, your common replies are
-   * saved on your phone, each a few letters away." DRAFT
+   * saved on your phone, each a few letters away."
    */
   forTask: (phrase: string, line: string) => `For your ${phrase}, ${line.charAt(0).toLowerCase()}${line.slice(1)}`,
   askFirst: "Ask first if your company’s rule covers any use of AI.",
