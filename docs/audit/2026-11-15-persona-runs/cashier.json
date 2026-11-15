@@ -1,0 +1,673 @@
+{
+ "name": "cashier",
+ "group": "restricted employee",
+ "persona": {
+  "group": "restricted employee",
+  "bio": "Cashier at a big box store. Register and stocking shelves, sometimes self checkout. Mostly ringing people up and dealing with returns and coupons that don't scan. When it's slow she faces shelves and does go backs. She swaps shifts with coworkers by text. Few words, not much of a writer. She has never used AI, and the store's handbook says no AI tools at work.",
+  "job": "Cashier at a big box store.",
+  "level": "not_yet",
+  "device": "phone",
+  "phone": "android",
+  "canUse": "restricted",
+  "connect": null
+ },
+ "versions": {
+  "job": "beginner-job-v5",
+  "questions": "beginner-questions-v6",
+  "intake": "beginner-intake-v7",
+  "path": "beginner-path-v1"
+ },
+ "jobRead": {
+  "repeats": [
+   {
+    "label": "Scanning customer items",
+    "ai": false
+   },
+   {
+    "label": "Handling returns",
+    "ai": true
+   },
+   {
+    "label": "Restocking shelves",
+    "ai": false
+   },
+   {
+    "label": "Answering price questions",
+    "ai": true
+   },
+   {
+    "label": "Counting the till",
+    "ai": false
+   },
+   {
+    "label": "Writing shift notes",
+    "ai": true
+   }
+  ],
+  "aiFallback": [
+   "Return policy explainers",
+   "Shift swap messages",
+   "Store announcement drafts",
+   "Customer reply templates"
+  ],
+  "apps": [
+   "Point of sale till",
+   "Self checkout kiosk",
+   "Employee scheduling app",
+   "Microsoft Teams",
+   "Zebra handheld scanner",
+   "Store intranet"
+  ],
+  "aiUses": [
+   "Shift swap texts",
+   "Scheduling questions",
+   "Resume help",
+   "Job interview prep",
+   "Recipe ideas"
+  ],
+  "worksFor": "employer"
+ },
+ "jobReadFallback": false,
+ "asked": [
+  {
+   "id": "asked_1",
+   "title": "What slows down a return the most?",
+   "kind": "many",
+   "choices": [
+    "Finding the receipt",
+    "Looking up the price",
+    "Checking the return policy",
+    "Scanning the item twice"
+   ],
+   "hint": "Pick every one that happens for you."
+  }
+ ],
+ "screens": 8,
+ "worksForFromJob": "employer",
+ "answers": {
+  "job": "Cashier at a big box store.",
+  "experience": "not_yet",
+  "qas": [
+   {
+    "id": "level",
+    "title": "Where are you with AI?",
+    "picked": [
+     "Never used it"
+    ],
+    "text": null,
+    "shown": [
+     "Never used it",
+     "Tried it a few times",
+     "Use it some weeks",
+     "Use it most days"
+    ]
+   },
+   {
+    "id": "repeats",
+    "title": "What do you do over and over, every day or every week?",
+    "picked": [
+     "Scanning customer items",
+     "Handling returns",
+     "Restocking shelves",
+     "Answering price questions",
+     "Counting the till"
+    ],
+    "text": null,
+    "shown": [
+     "Scanning customer items",
+     "Handling returns",
+     "Restocking shelves",
+     "Answering price questions",
+     "Counting the till",
+     "Writing shift notes",
+     "Answering messages",
+     "Writing emails",
+     "Planning my week",
+     "Making lists"
+    ]
+   },
+   {
+    "id": "most",
+    "title": "Which would save you the most time if it got easier?",
+    "picked": [
+     "Handling returns",
+     "Scanning customer items"
+    ],
+    "text": null,
+    "shown": [
+     "Scanning customer items",
+     "Handling returns",
+     "Restocking shelves",
+     "Answering price questions",
+     "Counting the till"
+    ]
+   },
+   {
+    "id": "example",
+    "title": "Paste the last one you wrote, or what the last person asked you.",
+    "picked": [],
+    "text": "hey can u take my sat shift? i got a dr appt. ill cover ur tues if u need"
+   },
+   {
+    "id": "often",
+    "title": "How often do you do this?",
+    "picked": [
+     "Many times a day"
+    ],
+    "text": null,
+    "shown": [
+     "Many times a day",
+     "About once a day",
+     "A few times a week",
+     "Once a week or less"
+    ]
+   },
+   {
+    "id": "where",
+    "title": "Where does your work happen?",
+    "picked": [
+     "Point of sale till",
+     "Self checkout kiosk",
+     "Employee scheduling app",
+     "Zebra handheld scanner",
+     "Text messages",
+     "In person"
+    ],
+    "text": null,
+    "shown": [
+     "Point of sale till",
+     "Self checkout kiosk",
+     "Employee scheduling app",
+     "Microsoft Teams",
+     "Zebra handheld scanner",
+     "Store intranet",
+     "Text messages",
+     "Gmail",
+     "Outlook",
+     "Google Sheets",
+     "Instagram",
+     "A work system",
+     "Paper",
+     "In person"
+    ]
+   },
+   {
+    "id": "device",
+    "title": "Do you work on a phone, a computer or both?",
+    "picked": [
+     "Phone only"
+    ],
+    "text": null,
+    "shown": [
+     "Phone only",
+     "Computer only",
+     "Both"
+    ]
+   },
+   {
+    "id": "asked_1",
+    "title": "What slows down a return the most?",
+    "picked": [
+     "Finding the receipt",
+     "Looking up the price",
+     "Checking the return policy"
+    ],
+    "text": null,
+    "shown": [
+     "Finding the receipt",
+     "Looking up the price",
+     "Checking the return policy",
+     "Scanning the item twice"
+    ]
+   },
+   {
+    "id": "can_use",
+    "title": "Can you use AI for your work?",
+    "picked": [
+     "No, it’s restricted"
+    ],
+    "text": null,
+    "shown": [
+     "Yes",
+     "Not sure",
+     "No, it’s restricted",
+     "I work for myself"
+    ]
+   }
+  ],
+  "mostWanted": [
+   "Handling returns",
+   "Scanning customer items"
+  ],
+  "worksFor": "employer",
+  "aiTools": [
+   "none_yet"
+  ],
+  "aiToolsOther": null,
+  "aiPolicy": "restricted",
+  "often": "many_a_day"
+ },
+ "intake": {
+  "role_summary": "You’re a cashier at a big box store, handling scanning, returns, shelves, price questions and the till.",
+  "tasks": [
+   {
+    "name": "Handling returns",
+    "ai": true,
+    "private": false,
+    "kind": "repeat_texts"
+   },
+   {
+    "name": "Scanning customer items",
+    "ai": false,
+    "private": false,
+    "kind": null
+   },
+   {
+    "name": "Restocking shelves",
+    "ai": false,
+    "private": false,
+    "kind": null
+   },
+   {
+    "name": "Answering price questions",
+    "ai": false,
+    "private": false,
+    "kind": null
+   },
+   {
+    "name": "Counting the till",
+    "ai": false,
+    "private": false,
+    "kind": null
+   }
+  ],
+  "first_win": {
+   "task": "Handling returns",
+   "intro": "You said returns take the most time. Here is a reusable text for a shift swap, since your example was one, written so you can reuse it.",
+   "draft": "Hi [first name], I can cover your Saturday shift. I’m free [day or time] and happy to take it. Let me know if you’d like me to confirm with the manager."
+  },
+  "first_step": "I’m a cashier at a big box store and I handle returns and customer questions all day. I need a short, friendly text reply I can send to a coworker. Write it in a casual tone, under 50 words, with blanks for name, day and time. Here is the message I got: [paste the coworker’s text here].",
+  "map": [
+   {
+    "task": "Handling returns",
+    "phrase": null,
+    "today": "You handle returns many times a day, mostly by looking things up yourself.",
+    "withPath": "Each return question starts from a draft you only need to check before you use it.",
+    "ai": true,
+    "private": false,
+    "kind": "repeat_texts"
+   },
+   {
+    "task": "Scanning customer items",
+    "phrase": null,
+    "today": "You scan customer items all shift, by hand, at the till.",
+    "withPath": "This part stays yours at the till, since it happens in person and on the register.",
+    "ai": false,
+    "private": false,
+    "kind": null
+   },
+   {
+    "task": "Restocking shelves",
+    "phrase": null,
+    "today": "You restock shelves through your shift, in person on the floor.",
+    "withPath": "This part stays yours on the floor, since it is hands on work.",
+    "ai": false,
+    "private": false,
+    "kind": null
+   },
+   {
+    "task": "Answering price questions",
+    "phrase": "price questions",
+    "today": "You answer price questions many times a day, in person.",
+    "withPath": "This part stays yours at the counter, since customers ask you face to face.",
+    "ai": false,
+    "private": false,
+    "kind": null
+   },
+   {
+    "task": "Counting the till",
+    "phrase": "till counts",
+    "today": "You count the till at the start and end of your shift.",
+    "withPath": "This part stays yours at the register, since it is counted by hand.",
+    "ai": false,
+    "private": false,
+    "kind": null
+   }
+  ],
+  "needs_follow_up": false,
+  "follow_up_question": null
+ },
+ "free": {
+  "firstWin": {
+   "task": "Handling returns",
+   "intro": "You said returns take the most time. Here is a reusable text for a shift swap, since your example was one, written so you can reuse it.",
+   "draft": "Hi [first name], I can cover your Saturday shift. I’m free [day or time] and happy to take it. Let me know if you’d like me to confirm with the manager."
+  },
+  "firstStep": "I’m a cashier at a big box store and I handle returns and customer questions all day. I need a short, friendly text reply I can send to a coworker. Write it in a casual tone, under 50 words, with blanks for name, day and time. Here is the message I got: [paste the coworker’s text here].",
+  "map": [
+   {
+    "task": "Handling returns",
+    "phrase": null,
+    "today": "You handle returns many times a day, mostly by looking things up yourself.",
+    "withPath": "Your common replies are saved on your phone, each a few letters away.",
+    "ai": true,
+    "private": false,
+    "kind": "repeat_texts",
+    "level": 3,
+    "waits": false,
+    "recipe": "phone_quick_replies",
+    "held": null,
+    "askFirst": true
+   },
+   {
+    "task": "Scanning customer items",
+    "phrase": null,
+    "today": "You scan customer items all shift, by hand, at the till.",
+    "withPath": "This part stays yours at the till, since it happens in person and on the register.",
+    "ai": false,
+    "private": false,
+    "kind": null,
+    "level": 1,
+    "waits": false,
+    "recipe": null,
+    "held": null,
+    "askFirst": false
+   },
+   {
+    "task": "Restocking shelves",
+    "phrase": null,
+    "today": "You restock shelves through your shift, in person on the floor.",
+    "withPath": "This part stays yours on the floor, since it is hands on work.",
+    "ai": false,
+    "private": false,
+    "kind": null,
+    "level": 1,
+    "waits": false,
+    "recipe": null,
+    "held": null,
+    "askFirst": false
+   },
+   {
+    "task": "Answering price questions",
+    "phrase": "price questions",
+    "today": "You answer price questions many times a day, in person.",
+    "withPath": "This part stays yours at the counter, since customers ask you face to face.",
+    "ai": false,
+    "private": false,
+    "kind": null,
+    "level": 1,
+    "waits": false,
+    "recipe": null,
+    "held": null,
+    "askFirst": false
+   },
+   {
+    "task": "Counting the till",
+    "phrase": "till counts",
+    "today": "You count the till at the start and end of your shift.",
+    "withPath": "This part stays yours at the register, since it is counted by hand.",
+    "ai": false,
+    "private": false,
+    "kind": null,
+    "level": 1,
+    "waits": false,
+    "recipe": null,
+    "held": null,
+    "askFirst": false
+   }
+  ],
+  "setups": [
+   "Handling returns, saved once on your phone",
+   "The message to ask what’s allowed"
+  ],
+  "prep": [
+   "Get Claude ready on your phone",
+   "Teach Claude who you are"
+  ],
+  "freePlan": true,
+  "tool": "claude",
+  "track": "starter"
+ },
+ "who": {
+  "track": "starter",
+  "canUse": "restricted",
+  "connect": null,
+  "places": [
+   "Point of sale till",
+   "Self checkout kiosk",
+   "Employee scheduling app",
+   "Zebra handheld scanner",
+   "Text messages",
+   "In person"
+  ],
+  "device": "phone",
+  "aiTools": [
+   "none_yet"
+  ]
+ },
+ "outline": [
+  "ready:ready",
+  "about:about",
+  "task_1:workflow(phone_quick_replies)",
+  "end:end"
+ ],
+ "path": {
+  "version": 3,
+  "role": "You’re a cashier at a big box store, handling scanning, returns, shelves, price questions and the till.",
+  "track": "starter",
+  "tool": "claude",
+  "worksFor": "employer",
+  "policy": "restricted",
+  "device": "phone",
+  "apps": [
+   "any_chat",
+   "claude",
+   "iphone",
+   "gboard",
+   "samsung_keyboard"
+  ],
+  "skipped": [],
+  "steps": [
+   {
+    "id": "ready",
+    "kind": "ready",
+    "card": "claude_get_started",
+    "firstStep": "I’m a cashier at a big box store and I handle returns and customer questions all day. I need a short, friendly text reply I can send to a coworker. Write it in a casual tone, under 50 words, with blanks for name, day and time. Here is the message I got: [paste the coworker’s text here]."
+   },
+   {
+    "id": "about",
+    "kind": "about",
+    "card": "claude_about_you",
+    "note": "I work as a cashier at a big box store. I scan items, handle returns, answer price questions, restock shelves and count the till. I talk to customers in person and to coworkers by text. Keep every answer short, friendly and plain, the way I would say it out loud at the register. Write at a simple reading level and never use long paragraphs. Never add details I did not give you, like store rules, prices, dates or return windows. If something is missing, put it in square brackets so I can fill it in. Never use names of real people. Always leave the final check to me before anything goes out."
+   },
+   {
+    "id": "task_1",
+    "kind": "workflow",
+    "task": "Handling returns",
+    "title": "Handling returns, saved once on your phone",
+    "recipe": "phone_quick_replies",
+    "read": "Your return replies live on your phone’s keyboard, each a few letters away. You stop retyping the same message when you are short on time and a customer or coworker is waiting. You still read each reply before it goes out and fill in the brackets yourself.",
+    "material": [
+     {
+      "label": "Your replies",
+      "items": [
+       "Hi [first name], thanks for waiting. Do you have your receipt or the card you paid with? That helps me find your purchase.",
+       "I can help with that return. Can you tell me what the item is and when you bought it?",
+       "Let me check our return policy for that item. I’ll tell you what I find in a moment: [policy details from my manager or the posted policy].",
+       "I’m sorry, I can’t finish this return at my register. Let me get [role, like a supervisor] to help you.",
+       "Your return is done. You’ll get [refund method] back. Thanks for coming in, [first name].",
+       "Hey, can you cover my [day] shift? I have an appointment. I can take your [day] in return.",
+       "Thanks for covering. I’ll take your [day] shift, just like we said. I’ll check the schedule app too."
+      ]
+     },
+     {
+      "label": "Your shortcuts",
+      "items": [
+       "rcpt",
+       "rtnq",
+       "plcy",
+       "sprv",
+       "rfnd",
+       "cvrq",
+       "cvok"
+      ]
+     }
+    ]
+   },
+   {
+    "id": "end",
+    "kind": "end",
+    "safeUse": [
+     "Never type a customer’s name, card number, address or phone number into a chat tool.",
+     "Never type receipt numbers, account details or anything from the till into a chat tool.",
+     "Do not share coworkers’ names or schedules with a chat tool.",
+     "Check any return policy words against your store’s posted policy or your manager before you use them.",
+     "Read every reply before you send it or say it to a customer."
+    ],
+    "askMessage": "Hi [manager or IT], I’m a cashier and I’d like to know which AI tools the company has approved, and what I’m allowed to use them for. I have two tasks in mind: saving common return replies on my phone’s keyboard, and writing shift swap texts to coworkers. I won’t enter customer details or anything from the till. Until I hear back, I won’t use any AI tool for work. Can you tell me what is okay?"
+   }
+  ]
+ },
+ "design": [
+  {
+   "task": "Handling returns",
+   "today": "You handle returns many times a day, mostly by looking things up yourself. Finding the receipt, looking up the price and checking the return policy slow you down the most.",
+   "newWay": "Because your company restricts AI, AI never touches the return itself. The till, the receipt lookup, the price check and the policy stay exactly as your store runs them. What you can do is make the policy easier to reach in your own way, by asking your store's approved source or a lead for a short checklist and keeping it handy. Returns stay faster for you without any AI near customer or store information.",
+   "steps": [
+    {
+     "app": null,
+     "ref": null,
+     "goal": "Ask your manager or lead where the official return policy is kept and whether there is a one page checklist you can keep."
+    },
+    {
+     "app": null,
+     "ref": null,
+     "goal": "Write down the three questions that slow you most, which are finding the receipt, the price and the policy, and ask a lead how your store wants each handled."
+    },
+    {
+     "app": null,
+     "ref": null,
+     "goal": "Ask your lead whether the store can add a quick reference for common return cases to the area at your till."
+    }
+   ],
+   "material": [
+    {
+     "label": "Questions for your lead",
+     "what": "A short list of the receipt, price and policy questions to ask your manager so you get official answers."
+    },
+    {
+     "label": "Return checklist idea",
+     "what": "A plain outline of the steps you follow on each return, to compare with your store's official checklist."
+    }
+   ],
+   "checkPoint": "Every return follows your store's official policy and your lead's answers, with no AI involved."
+  }
+ ],
+ "checks": [
+  {
+   "id": "screens",
+   "pass": true,
+   "detail": "8 screens, at most 9 for a starter"
+  },
+  {
+   "id": "levels_in_code",
+   "pass": true,
+   "detail": "Every row has a level or waits"
+  },
+  {
+   "id": "level3_not_writing_help",
+   "pass": true,
+   "detail": "No line at level 3 or higher reads like writing help"
+  },
+  {
+   "id": "path_line_from_recipe",
+   "pass": true,
+   "detail": "Every line at level 3 or higher is its recipe's"
+  },
+  {
+   "id": "no_connect_without_ok",
+   "pass": true,
+   "detail": "No row connects a work app"
+  },
+  {
+   "id": "restricted_waits",
+   "pass": true,
+   "detail": "Every AI task waits or needs no AI at work"
+  },
+  {
+   "id": "path_written",
+   "pass": true,
+   "detail": "4 steps"
+  },
+  {
+   "id": "workflow_parts",
+   "pass": true,
+   "detail": "1 workflows, each with a test, an approval point and a cost line"
+  },
+  {
+   "id": "setup_from_recipe_or_card",
+   "pass": true,
+   "detail": "card claude_get_started, card claude_about_you, recipe phone_quick_replies"
+  },
+  {
+   "id": "no_click_paths_from_model",
+   "pass": true,
+   "detail": "The model wrote no menu paths or button names"
+  },
+  {
+   "id": "copy_rules",
+   "pass": true,
+   "detail": "No dashes, promised times, prices or percents"
+  },
+  {
+   "id": "offer_matches_path",
+   "pass": true,
+   "detail": "Offer names 1, path has 1 workflows, 1 match by name"
+  }
+ ],
+ "recipes": {
+  "total": 5,
+  "aiTasks": 1,
+  "withRecipe": [
+   {
+    "task": "Handling returns",
+    "recipe": "phone_quick_replies",
+    "level": 3
+   }
+  ],
+  "without": [
+   {
+    "task": "Scanning customer items",
+    "level": 1,
+    "waits": false
+   },
+   {
+    "task": "Restocking shelves",
+    "level": 1,
+    "waits": false
+   },
+   {
+    "task": "Answering price questions",
+    "level": 1,
+    "waits": false
+   },
+   {
+    "task": "Counting the till",
+    "level": 1,
+    "waits": false
+   }
+  ],
+  "noRecipe": false,
+  "mostlyAssistant": false
+ },
+ "designCount": {
+  "steps": 3,
+  "checked": 0,
+  "unchecked": 0,
+  "noApp": 3,
+  "badRefs": [],
+  "clickPaths": [],
+  "apps": [],
+  "refs": []
+ }
+}

@@ -1,0 +1,805 @@
+{
+ "name": "jess",
+ "group": "allowed employee",
+ "persona": {
+  "group": "allowed employee",
+  "bio": "Jess, 29, event coordinator at a restaurant group in Chicago. Her Gmail inbox is full of clients, caterers, florists and AV people. She keeps the run of show, floor plans and vendor timelines in Google Sheets, collects headcounts and dietary lists the week before each event, and is on site with a headset on event nights. Vendor follow ups eat her afternoons, and she loses track of who hasn't replied. She uses ChatGPT a few times a week for emails. Her company is fine with AI and IT said she can connect ChatGPT to her work Gmail.",
+  "job": "Event coordinator for a restaurant group in Chicago. I plan private events and run them on the night.",
+  "level": "uses",
+  "device": "both",
+  "phone": "iphone",
+  "canUse": "yes",
+  "connect": "yes",
+  "expect": {
+   "taskLevel": {
+    "task": "vendor",
+    "level": 4
+   }
+  }
+ },
+ "versions": {
+  "job": "beginner-job-v5",
+  "questions": "beginner-questions-v6",
+  "intake": "beginner-intake-v7",
+  "path": "beginner-path-v1"
+ },
+ "jobRead": {
+  "repeats": [
+   {
+    "label": "Writing event proposals",
+    "ai": true
+   },
+   {
+    "label": "Texting clients",
+    "ai": true
+   },
+   {
+    "label": "Building floor plans",
+    "ai": false
+   },
+   {
+    "label": "Setting up rooms",
+    "ai": false
+   },
+   {
+    "label": "Writing post event recaps",
+    "ai": true
+   },
+   {
+    "label": "Managing vendor schedules",
+    "ai": false
+   }
+  ],
+  "aiFallback": [
+   "Proposal first drafts",
+   "Client follow up texts",
+   "Menu descriptions",
+   "Thank you notes"
+  ],
+  "apps": [
+   "Tripleseat",
+   "OpenTable",
+   "Toast",
+   "Google Sheets",
+   "Canva",
+   "Slack"
+  ],
+  "aiUses": [
+   "Proposal drafts",
+   "Client emails",
+   "Menu descriptions",
+   "Event timelines",
+   "Social captions"
+  ],
+  "worksFor": "employer"
+ },
+ "jobReadFallback": false,
+ "asked": [
+  {
+   "id": "asked_1",
+   "title": "How do you track who still owes you a reply?",
+   "kind": "many",
+   "choices": [
+    "Mental note",
+    "Gmail labels or stars",
+    "Text thread scrolling",
+    "Sticky notes"
+   ],
+   "hint": "Pick all that you actually use."
+  }
+ ],
+ "screens": 11,
+ "worksForFromJob": "employer",
+ "answers": {
+  "job": "Event coordinator for a restaurant group in Chicago. I plan private events and run them on the night.",
+  "experience": "uses",
+  "qas": [
+   {
+    "id": "level",
+    "title": "Where are you with AI?",
+    "picked": [
+     "Use it some weeks"
+    ],
+    "text": null,
+    "shown": [
+     "Never used it",
+     "Tried it a few times",
+     "Use it some weeks",
+     "Use it most days"
+    ]
+   },
+   {
+    "id": "done",
+    "title": "What have you already done with AI?",
+    "picked": [
+     "Pasted in my own text",
+     "Connected an app"
+    ],
+    "text": null,
+    "shown": [
+     "Pasted in my own text",
+     "Saved instructions about myself",
+     "Made a project",
+     "Connected an app",
+     "Pay for a plan",
+     "None of these"
+    ]
+   },
+   {
+    "id": "tools",
+    "title": "Which AI have you used?",
+    "picked": [
+     "ChatGPT"
+    ],
+    "text": null,
+    "shown": [
+     "ChatGPT",
+     "Copilot",
+     "Gemini",
+     "Claude",
+     "Other",
+     "None yet",
+     "Not sure"
+    ]
+   },
+   {
+    "id": "repeats",
+    "title": "What do you do over and over, every day or every week?",
+    "picked": [
+     "Texting clients",
+     "Managing vendor schedules",
+     "Answering messages",
+     "Writing emails",
+     "Making lists"
+    ],
+    "text": "Chasing vendor follow ups and tracking who never replied",
+    "shown": [
+     "Writing event proposals",
+     "Texting clients",
+     "Building floor plans",
+     "Setting up rooms",
+     "Writing post event recaps",
+     "Managing vendor schedules",
+     "Answering messages",
+     "Writing emails",
+     "Planning my week",
+     "Making lists"
+    ]
+   },
+   {
+    "id": "most",
+    "title": "Which would save you the most time if it got easier?",
+    "picked": [
+     "Chasing vendor follow ups and tracking who never replied",
+     "Managing vendor schedules"
+    ],
+    "text": null,
+    "shown": [
+     "Texting clients",
+     "Managing vendor schedules",
+     "Answering messages",
+     "Writing emails",
+     "Making lists",
+     "Chasing vendor follow ups and tracking who never replied"
+    ]
+   },
+   {
+    "id": "example",
+    "title": "Paste the last one you wrote, or what the last person asked you.",
+    "picked": [],
+    "text": "Hi Marco, following up on the AV load-in time for the 14th. Can you confirm 2pm still works? Need it locked by Friday for the floor plan."
+   },
+   {
+    "id": "often",
+    "title": "How often do you do this?",
+    "picked": [
+     "Many times a day"
+    ],
+    "text": null,
+    "shown": [
+     "Many times a day",
+     "About once a day",
+     "A few times a week",
+     "Once a week or less"
+    ]
+   },
+   {
+    "id": "where",
+    "title": "Where does your work happen?",
+    "picked": [
+     "Google Sheets",
+     "Gmail",
+     "Text messages",
+     "In person"
+    ],
+    "text": "Mostly Gmail and Sheets. Headset on event nights.",
+    "shown": [
+     "Tripleseat",
+     "OpenTable",
+     "Toast",
+     "Google Sheets",
+     "Canva",
+     "Slack",
+     "Text messages",
+     "Gmail",
+     "Outlook",
+     "Instagram",
+     "A work system",
+     "Paper",
+     "In person"
+    ]
+   },
+   {
+    "id": "device",
+    "title": "Do you work on a phone, a computer or both?",
+    "picked": [
+     "Both"
+    ],
+    "text": null,
+    "shown": [
+     "Phone only",
+     "Computer only",
+     "Both"
+    ]
+   },
+   {
+    "id": "asked_1",
+    "title": "How do you track who still owes you a reply?",
+    "picked": [
+     "Mental note"
+    ],
+    "text": "Gmail labels are a mess lol. Mostly I just keep a mental lis",
+    "shown": [
+     "Mental note",
+     "Gmail labels or stars",
+     "Text thread scrolling",
+     "Sticky notes"
+    ]
+   },
+   {
+    "id": "can_use",
+    "title": "Can you use AI for your work?",
+    "picked": [
+     "Yes"
+    ],
+    "text": null,
+    "shown": [
+     "Yes",
+     "Not sure",
+     "No, it’s restricted",
+     "I work for myself"
+    ]
+   },
+   {
+    "id": "connect",
+    "title": "Would your company let you link your work email to an AI tool?",
+    "picked": [
+     "Yes"
+    ],
+    "text": null,
+    "shown": [
+     "Yes",
+     "No",
+     "Not sure"
+    ]
+   }
+  ],
+  "mostWanted": [
+   "Chasing vendor follow ups and tracking who never replied",
+   "Managing vendor schedules"
+  ],
+  "worksFor": "employer",
+  "aiTools": [
+   "chatgpt"
+  ],
+  "aiToolsOther": null,
+  "aiPolicy": "encouraged",
+  "often": "many_a_day"
+ },
+ "intake": {
+  "role_summary": "You’re an event coordinator for a restaurant group in Chicago, planning private events and running them on the night.",
+  "tasks": [
+   {
+    "name": "Vendor follow ups",
+    "ai": true,
+    "private": false,
+    "kind": "email_follow_ups"
+   },
+   {
+    "name": "Vendor schedules",
+    "ai": true,
+    "private": true,
+    "kind": null
+   },
+   {
+    "name": "Client texts",
+    "ai": true,
+    "private": true,
+    "kind": "repeat_texts"
+   },
+   {
+    "name": "Emails",
+    "ai": true,
+    "private": false,
+    "kind": "repeat_emails"
+   },
+   {
+    "name": "Event lists",
+    "ai": true,
+    "private": false,
+    "kind": null
+   }
+  ],
+  "first_win": {
+   "task": "Vendor follow ups",
+   "intro": "Here is your follow up to the AV vendor about load in time, rewritten so it’s ready to send.",
+   "draft": "Hi there,\n\nFollowing up on the AV load in time for [event date]. Could you confirm whether 2pm still works? We need it locked in by [day] for the floor plan."
+  },
+  "first_step": "I’m an event coordinator for a restaurant group in Chicago. I plan private events and run them on the night. I often need to follow up with vendors who haven’t replied, like AV, catering or florists. Write a short, polite follow up email I can send. Keep it under 80 words, friendly but direct, and end by asking for a reply by a specific day. Here are the details for this one: [paste the vendor name, what you are waiting on, the event date and the deadline here].",
+  "map": [
+   {
+    "task": "Vendor follow ups",
+    "phrase": "vendor follow ups",
+    "today": "You chase these many times a day, often from memory.",
+    "withPath": "Each follow up starts from a draft you only need to check and send.",
+    "ai": true,
+    "private": false,
+    "kind": "email_follow_ups"
+   },
+   {
+    "task": "Vendor schedules",
+    "phrase": "vendor schedules",
+    "today": "You manage these many times a day across Sheets and Gmail.",
+    "withPath": "The schedule stays yours, and AI helps you draft the messages around it.",
+    "ai": true,
+    "private": true,
+    "kind": null
+   },
+   {
+    "task": "Client texts",
+    "phrase": "client texts",
+    "today": "You text clients many times a day.",
+    "withPath": "Each text starts from a reusable reply you only need to fill in.",
+    "ai": true,
+    "private": true,
+    "kind": "repeat_texts"
+   },
+   {
+    "task": "Emails",
+    "phrase": "emails",
+    "today": "You write these many times a day.",
+    "withPath": "Each email starts from a draft you only need to check and send.",
+    "ai": true,
+    "private": false,
+    "kind": "repeat_emails"
+   },
+   {
+    "task": "Event lists",
+    "phrase": "event lists",
+    "today": "You make these as part of each event.",
+    "withPath": "Lists start from a draft you only need to check and adjust.",
+    "ai": true,
+    "private": false,
+    "kind": null
+   }
+  ],
+  "needs_follow_up": false,
+  "follow_up_question": null
+ },
+ "free": {
+  "firstWin": {
+   "task": "Vendor follow ups",
+   "intro": "Here is your follow up to the AV vendor about load in time, rewritten so it’s ready to send.",
+   "draft": "Hi there,\n\nFollowing up on the AV load in time for [event date]. Could you confirm whether 2pm still works? We need it locked in by [day] for the floor plan."
+  },
+  "firstStep": "I’m an event coordinator for a restaurant group in Chicago. I plan private events and run them on the night. I often need to follow up with vendors who haven’t replied, like AV, catering or florists. Write a short, polite follow up email I can send. Keep it under 80 words, friendly but direct, and end by asking for a reply by a specific day. Here are the details for this one: [paste the vendor name, what you are waiting on, the event date and the deadline here].",
+  "map": [
+   {
+    "task": "Vendor follow ups",
+    "phrase": "vendor follow ups",
+    "today": "You chase these many times a day, often from memory.",
+    "withPath": "For your vendor follow ups, follow ups are drafted from your Gmail and wait for your OK.",
+    "ai": true,
+    "private": false,
+    "kind": "email_follow_ups",
+    "level": 4,
+    "waits": false,
+    "recipe": "gmail_claude_follow_ups",
+    "held": null,
+    "askFirst": false
+   },
+   {
+    "task": "Vendor schedules",
+    "phrase": "vendor schedules",
+    "today": "You manage these many times a day across Sheets and Gmail.",
+    "withPath": "The schedule stays yours, and AI helps you draft the messages around it.",
+    "ai": true,
+    "private": true,
+    "kind": null,
+    "level": 2,
+    "waits": false,
+    "recipe": null,
+    "held": null,
+    "askFirst": false
+   },
+   {
+    "task": "Client texts",
+    "phrase": "client texts",
+    "today": "You text clients many times a day.",
+    "withPath": "For your client texts, your common replies are saved on your phone, each a few letters away.",
+    "ai": true,
+    "private": true,
+    "kind": "repeat_texts",
+    "level": 3,
+    "waits": false,
+    "recipe": "phone_quick_replies",
+    "held": null,
+    "askFirst": false
+   },
+   {
+    "task": "Emails",
+    "phrase": "emails",
+    "today": "You write these many times a day.",
+    "withPath": "For your emails, your common emails are saved in Gmail as templates, ready to fill in.",
+    "ai": true,
+    "private": false,
+    "kind": "repeat_emails",
+    "level": 3,
+    "waits": false,
+    "recipe": "gmail_templates",
+    "held": null,
+    "askFirst": false
+   },
+   {
+    "task": "Event lists",
+    "phrase": "event lists",
+    "today": "You make these as part of each event.",
+    "withPath": "Lists start from a draft you only need to check and adjust.",
+    "ai": true,
+    "private": false,
+    "kind": null,
+    "level": 2,
+    "waits": false,
+    "recipe": null,
+    "held": null,
+    "askFirst": false
+   }
+  ],
+  "setups": [
+   "Your vendor follow ups, drafted from your inbox for your OK",
+   "Your client texts, saved once on your phone"
+  ],
+  "prep": [],
+  "freePlan": false,
+  "tool": "chatgpt",
+  "track": "builder"
+ },
+ "who": {
+  "track": "builder",
+  "canUse": "yes",
+  "connect": "yes",
+  "places": [
+   "Google Sheets",
+   "Gmail",
+   "Text messages",
+   "In person",
+   "Mostly Gmail and Sheets. Headset on event nights."
+  ],
+  "device": "both",
+  "aiTools": [
+   "chatgpt"
+  ]
+ },
+ "outline": [
+  "about:about",
+  "task_1:workflow(gmail_claude_follow_ups)",
+  "task_2:workflow(phone_quick_replies)",
+  "end:end"
+ ],
+ "path": {
+  "version": 3,
+  "role": "You’re an event coordinator for a restaurant group in Chicago, planning private events and running them on the night.",
+  "track": "builder",
+  "tool": "chatgpt",
+  "worksFor": "employer",
+  "policy": "encouraged",
+  "device": "both",
+  "apps": [
+   "any_chat",
+   "chatgpt",
+   "iphone",
+   "gboard",
+   "samsung_keyboard",
+   "gmail",
+   "google_sheets"
+  ],
+  "skipped": [
+   "ready"
+  ],
+  "steps": [
+   {
+    "id": "about",
+    "kind": "about",
+    "card": "chatgpt_about_you",
+    "note": "I coordinate private events for a restaurant group in Chicago. I plan them with clients and run them on the night. I write to vendors, clients and my own team. My tone is warm, direct and professional, never stiff. I keep messages short, usually two to four sentences, with one clear ask and a clear deadline. Never add details I did not give you, like times, prices, headcounts or menu items. If something is missing, put it in square brackets so I can fill it in. Never invent a reason or a promise on my behalf. Give me a draft I can read and change before anything goes out."
+   },
+   {
+    "id": "task_1",
+    "kind": "workflow",
+    "task": "Vendor follow ups",
+    "title": "Your vendor follow ups, drafted from your inbox for your OK",
+    "recipe": "gmail_claude_follow_ups",
+    "read": "Your vendor follow ups now start from your Gmail, not your memory. ChatGPT drafts each follow up and waits for your OK before anything goes out. That suits your job, because vendors who go quiet can hold up a floor plan or a load in time. You read every draft and you choose what to send.",
+    "material": [
+     {
+      "label": "Instructions for your assistant",
+      "items": [
+       "I am an event coordinator for a restaurant group in Chicago. I plan private events and run them on the night. Look through my Gmail for emails I sent to vendors, like AV, florists, rentals and music, where I asked a question or for a confirmation and have not had a reply. Count an email as waiting if it has a clear ask and no answer yet. Wait two business days before a first nudge and another two business days before a second one. If the email mentions a deadline, like needing something locked by a certain day, mention it in the nudge. Write the way I do: warm, short, direct, one clear ask, two to four sentences. Do not add details I did not give you. Use square brackets for anything missing. Draft each follow up in the chat, tell me who it is for and which email it is about, and never send anything. Give back a short list of who is still waiting at the end."
+      ]
+     },
+     {
+      "label": "Your follow up wording",
+      "items": [
+       "Hi [first name], following up on [the item] for the [date] event. Can you confirm [what you need] by [day]? I need it settled for [what depends on it]. Thank you!",
+       "Hi [first name], checking in again on [the item] for [date]. I still need your confirmation on [what you need] by [day] so I can finalize [what depends on it]. If something changed, please let me know and we will work around it. Thanks, [your name]"
+      ]
+     }
+    ]
+   },
+   {
+    "id": "task_2",
+    "kind": "workflow",
+    "task": "Client texts",
+    "title": "Your client texts, saved once on your phone",
+    "recipe": "phone_quick_replies",
+    "read": "Your common client replies now live on your phone’s keyboard. Each one is a few letters away, so you stop retyping the same message many times a day. You change a name or a time and send. That keeps your answers steady, even while you are on your feet on an event night.",
+    "material": [
+     {
+      "label": "Your common replies",
+      "items": [
+       "Hi [first name], thank you for reaching out about your event! I would love to help. Could you tell me your date, guest count and the kind of event you have in mind?",
+       "Hi [first name], thanks for your patience. I am checking on that and will get back to you by [day].",
+       "Hi [first name], your date of [date] is confirmed. I will send the next details shortly.",
+       "Hi [first name], I can send over our event options. What is the best email to reach you?",
+       "Hi [first name], just checking in. Could you confirm [what you need] by [day]? That lets me keep everything on track for your event.",
+       "Hi [first name], we are all set for [date]. I will be there on the night. If anything changes before then, text me here.",
+       "Thank you so much for celebrating with us, [first name]! It was a pleasure hosting you."
+      ]
+     },
+     {
+      "label": "Your shortcuts",
+      "items": [
+       "inqr",
+       "chk",
+       "cfmd",
+       "opts",
+       "need",
+       "setn",
+       "thnk"
+      ]
+     }
+    ]
+   },
+   {
+    "id": "end",
+    "kind": "end",
+    "safeUse": [
+     "Never type a client’s full name, phone number, email or home address into ChatGPT. Use square brackets instead.",
+     "Keep payment details, card numbers and contract amounts out of the chat.",
+     "Leave out guests’ allergy and health details tied to a name.",
+     "Do not paste vendor contact details or private account information.",
+     "Read every draft before it goes out, and check dates, times and counts against your own records."
+    ],
+    "askMessage": "Hi [manager’s name], I would like to use ChatGPT to help with my day to day work as an event coordinator. I have in mind drafting vendor follow ups from my Gmail, keeping vendor schedules organized, writing client texts and emails, and making event lists. Which AI tools are approved for work, and what am I allowed to use them for? I also want to know if I may connect my work email, since I would read and approve every draft before it is sent. Please let me know so I can set this up the right way."
+   }
+  ]
+ },
+ "design": [
+  {
+   "task": "Vendor follow ups",
+   "today": "You chase vendor follow ups many times a day, often from a mental list. Gmail labels are a mess, so you mostly remember who still owes you an answer.",
+   "newWay": "Once a week, a read-only task checks your Gmail and gives you a list of vendors who have not answered. For the ones you decide to chase, your chat tool drafts the follow up in your voice, using the details from the original thread like the load-in time and the Friday deadline. You read each draft and send it yourself. The list replaces the mental note, so nothing slips on a busy event week.",
+   "steps": [
+    {
+     "app": "ChatGPT",
+     "ref": "chatgpt_get_started",
+     "goal": "Get ChatGPT ready on your phone and computer so the same setup works wherever you are."
+    },
+    {
+     "app": "ChatGPT",
+     "ref": "chatgpt_about_you",
+     "goal": "Save a short note about your role, your tone with vendors and how you sign off, so every draft sounds like you."
+    },
+    {
+     "app": "ChatGPT",
+     "ref": "weekly_no_reply_list",
+     "goal": "Set up a weekly list of vendors who have not answered your emails, read from Gmail only."
+    },
+    {
+     "app": "ChatGPT",
+     "ref": "gmail_claude_follow_ups",
+     "goal": "Have your chat tool draft follow ups from the Gmail threads you pick, asking before it sends anything."
+    },
+    {
+     "app": null,
+     "ref": null,
+     "goal": "Pick the three or four follow up situations you write most, like confirming a time, a missing quote or a late delivery, and note the details each one needs."
+    }
+   ],
+   "material": [
+    {
+     "label": "Tone notes",
+     "what": "How you write to vendors: direct, friendly, with a clear deadline and the reason for it."
+    },
+    {
+     "label": "No reply list instructions",
+     "what": "A plain request to read your Gmail and list vendors who have not answered, with the event date and what you asked for."
+    },
+    {
+     "label": "Follow up draft instructions",
+     "what": "Instructions for turning a thread into a short follow up that restates the question, the date and the deadline."
+    },
+    {
+     "label": "Example follow ups",
+     "what": "Your Marco AV load-in message and a few similar ones, so drafts match your style."
+    }
+   ],
+   "checkPoint": "You read each draft and the list before anything goes out, and you send every email yourself."
+  },
+  {
+   "task": "Client texts",
+   "today": "You text clients many times a day. Many of the answers are ones you have given before.",
+   "newWay": "Your most common client replies are saved on your phone, each a few letters away, like a confirmation of the arrival time or a reminder about the final headcount. For texts that need a little thought, you can ask your chat tool for a draft. You fill in the names, dates and numbers and send each text yourself. Quick, steady answers keep you free to run the room on event nights.",
+   "steps": [
+    {
+     "app": null,
+     "ref": null,
+     "goal": "List the ten replies you send clients most often, like timing, headcount, menu changes and payment reminders."
+    },
+    {
+     "app": "ChatGPT",
+     "ref": "chatgpt_about_you",
+     "goal": "Save a short note about your voice with clients so drafted replies sound like you."
+    },
+    {
+     "app": "her phone's keyboard",
+     "ref": "phone_quick_replies",
+     "goal": "Save the ten replies on your phone so each one is a few letters away."
+    },
+    {
+     "app": null,
+     "ref": null,
+     "goal": "Leave gaps for client names, dates and numbers in each saved reply so you fill them in before sending."
+    }
+   ],
+   "material": [
+    {
+     "label": "Saved quick replies",
+     "what": "Ten ready to send client texts with gaps for the name, date and numbers."
+    },
+    {
+     "label": "Shortcut list",
+     "what": "A short list of the letters that bring up each saved reply."
+    },
+    {
+     "label": "Tone notes",
+     "what": "How you sound with clients: warm, clear and brief."
+    }
+   ],
+   "checkPoint": "You read every text and fill in each gap before you send it, and nothing is sent by itself."
+  }
+ ],
+ "checks": [
+  {
+   "id": "screens",
+   "pass": true,
+   "detail": "11 screens, at most 11 for a builder"
+  },
+  {
+   "id": "levels_in_code",
+   "pass": true,
+   "detail": "Every row has a level or waits"
+  },
+  {
+   "id": "level3_not_writing_help",
+   "pass": true,
+   "detail": "No line at level 3 or higher reads like writing help"
+  },
+  {
+   "id": "path_line_from_recipe",
+   "pass": true,
+   "detail": "Every line at level 3 or higher is its recipe's"
+  },
+  {
+   "id": "vendor_level_4",
+   "pass": true,
+   "detail": "Vendor follow ups at level 4"
+  },
+  {
+   "id": "path_written",
+   "pass": true,
+   "detail": "4 steps"
+  },
+  {
+   "id": "builder_no_sign_up",
+   "pass": true,
+   "detail": "No sign up step or line"
+  },
+  {
+   "id": "workflow_parts",
+   "pass": true,
+   "detail": "2 workflows, each with a test, an approval point and a cost line"
+  },
+  {
+   "id": "setup_from_recipe_or_card",
+   "pass": true,
+   "detail": "card chatgpt_about_you, recipe gmail_claude_follow_ups, recipe phone_quick_replies"
+  },
+  {
+   "id": "no_click_paths_from_model",
+   "pass": true,
+   "detail": "The model wrote no menu paths or button names"
+  },
+  {
+   "id": "copy_rules",
+   "pass": true,
+   "detail": "No dashes, promised times, prices or percents"
+  },
+  {
+   "id": "offer_matches_path",
+   "pass": true,
+   "detail": "Offer names 2, path has 2 workflows, 2 match by name"
+  }
+ ],
+ "recipes": {
+  "total": 5,
+  "aiTasks": 5,
+  "withRecipe": [
+   {
+    "task": "Vendor follow ups",
+    "recipe": "gmail_claude_follow_ups",
+    "level": 4
+   },
+   {
+    "task": "Client texts",
+    "recipe": "phone_quick_replies",
+    "level": 3
+   },
+   {
+    "task": "Emails",
+    "recipe": "gmail_templates",
+    "level": 3
+   }
+  ],
+  "without": [
+   {
+    "task": "Vendor schedules",
+    "level": 2,
+    "waits": false
+   },
+   {
+    "task": "Event lists",
+    "level": 2,
+    "waits": false
+   }
+  ],
+  "noRecipe": false,
+  "mostlyAssistant": false
+ },
+ "designCount": {
+  "steps": 9,
+  "checked": 6,
+  "unchecked": 0,
+  "noApp": 3,
+  "badRefs": [],
+  "clickPaths": [],
+  "apps": [],
+  "refs": [
+   "chatgpt_get_started",
+   "chatgpt_about_you",
+   "weekly_no_reply_list",
+   "gmail_claude_follow_ups",
+   "phone_quick_replies"
+  ]
+ }
+}

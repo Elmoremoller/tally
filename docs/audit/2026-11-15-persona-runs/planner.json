@@ -1,0 +1,785 @@
+{
+ "name": "planner",
+ "group": "self employed Builder",
+ "persona": {
+  "group": "self employed Builder",
+  "bio": "Rosa, 38, runs her own wedding planning business with about twenty weddings a year. Everything runs through Gmail: couples, venues, florists, photographers, caterers. She answers inquiry emails, writes the same welcome and contract emails again and again, chases vendors and couples who haven't replied, and keeps budgets, timelines and guest lists in Google Sheets. She uses ChatGPT every day and pays for it. She has saved instructions about herself in it but never connected it to Gmail.",
+  "job": "I run my own wedding planning business.",
+  "level": "heavy",
+  "device": "both",
+  "phone": "iphone",
+  "canUse": "self",
+  "connect": null,
+  "expect": {
+   "gmailBuilderTop": true
+  }
+ },
+ "versions": {
+  "job": "beginner-job-v5",
+  "questions": "beginner-questions-v6",
+  "intake": "beginner-intake-v7",
+  "path": "beginner-path-v1"
+ },
+ "jobRead": {
+  "repeats": [
+   {
+    "label": "Writing client emails",
+    "ai": true
+   },
+   {
+    "label": "Texting couples",
+    "ai": true
+   },
+   {
+    "label": "Building timelines",
+    "ai": true
+   },
+   {
+    "label": "Vendor calls",
+    "ai": false
+   },
+   {
+    "label": "Setting up venues",
+    "ai": false
+   },
+   {
+    "label": "Writing proposals",
+    "ai": true
+   }
+  ],
+  "aiFallback": [
+   "Proposal drafts",
+   "Venue tour questions",
+   "Thank you notes",
+   "Social media captions"
+  ],
+  "apps": [
+   "Honeybook",
+   "Dubsado",
+   "Canva",
+   "Google Calendar",
+   "Pinterest",
+   "Instagram"
+  ],
+  "aiUses": [
+   "Captions",
+   "Email replies",
+   "Timeline drafts",
+   "Vendor questions",
+   "Contract wording"
+  ],
+  "worksFor": "self"
+ },
+ "jobReadFallback": false,
+ "asked": [
+  {
+   "id": "asked_1",
+   "title": "How do you reply to most inquiries today?",
+   "kind": "many",
+   "choices": [
+    "Copy an old reply",
+    "Type from scratch",
+    "Ask a teammate",
+    "Check the calendar first",
+    "Look up their details"
+   ],
+   "hint": "Pick every one that fits your usual routine."
+  }
+ ],
+ "screens": 9,
+ "worksForFromJob": "self",
+ "answers": {
+  "job": "I run my own wedding planning business.",
+  "experience": "heavy",
+  "qas": [
+   {
+    "id": "level",
+    "title": "Where are you with AI?",
+    "picked": [
+     "Use it most days"
+    ],
+    "text": null,
+    "shown": [
+     "Never used it",
+     "Tried it a few times",
+     "Use it some weeks",
+     "Use it most days"
+    ]
+   },
+   {
+    "id": "done",
+    "title": "What have you already done with AI?",
+    "picked": [
+     "Pasted in my own text",
+     "Saved instructions about myself",
+     "Pay for a plan"
+    ],
+    "text": null,
+    "shown": [
+     "Pasted in my own text",
+     "Saved instructions about myself",
+     "Made a project",
+     "Connected an app",
+     "Pay for a plan",
+     "None of these"
+    ]
+   },
+   {
+    "id": "tools",
+    "title": "Which AI have you used?",
+    "picked": [
+     "ChatGPT"
+    ],
+    "text": null,
+    "shown": [
+     "ChatGPT",
+     "Copilot",
+     "Gemini",
+     "Claude",
+     "Other",
+     "None yet",
+     "Not sure"
+    ]
+   },
+   {
+    "id": "repeats",
+    "title": "What do you do over and over, every day or every week?",
+    "picked": [
+     "Writing client emails",
+     "Building timelines",
+     "Vendor calls",
+     "Writing proposals",
+     "Answering messages",
+     "Writing emails",
+     "Making lists"
+    ],
+    "text": "Chasing vendors and couples who don't reply",
+    "shown": [
+     "Writing client emails",
+     "Texting couples",
+     "Building timelines",
+     "Vendor calls",
+     "Setting up venues",
+     "Writing proposals",
+     "Answering messages",
+     "Writing emails",
+     "Planning my week",
+     "Making lists"
+    ]
+   },
+   {
+    "id": "most",
+    "title": "Which would save you the most time if it got easier?",
+    "picked": [
+     "Writing emails",
+     "Answering messages"
+    ],
+    "text": null,
+    "shown": [
+     "Writing client emails",
+     "Building timelines",
+     "Vendor calls",
+     "Writing proposals",
+     "Answering messages",
+     "Writing emails"
+    ]
+   },
+   {
+    "id": "example",
+    "title": "Paste the last one you wrote, or what the last person asked you.",
+    "picked": [],
+    "text": "Hi! Thanks so much for your inquiry. Our Saturday in October is still open. Could you send me your rough guest count and budget range so I can put together options for you?"
+   },
+   {
+    "id": "often",
+    "title": "How often do you do this?",
+    "picked": [
+     "Many times a day"
+    ],
+    "text": null,
+    "shown": [
+     "Many times a day",
+     "About once a day",
+     "A few times a week",
+     "Once a week or less"
+    ]
+   },
+   {
+    "id": "where",
+    "title": "Where does your work happen?",
+    "picked": [
+     "Gmail",
+     "Google Sheets",
+     "Google Calendar",
+     "Instagram",
+     "Text messages"
+    ],
+    "text": null,
+    "shown": [
+     "Honeybook",
+     "Dubsado",
+     "Canva",
+     "Google Calendar",
+     "Pinterest",
+     "Instagram",
+     "Text messages",
+     "Gmail",
+     "Outlook",
+     "Google Sheets",
+     "A work system",
+     "Paper",
+     "In person"
+    ]
+   },
+   {
+    "id": "device",
+    "title": "Do you work on a phone, a computer or both?",
+    "picked": [
+     "Both"
+    ],
+    "text": null,
+    "shown": [
+     "Phone only",
+     "Computer only",
+     "Both"
+    ]
+   },
+   {
+    "id": "asked_1",
+    "title": "How do you reply to most inquiries today?",
+    "picked": [
+     "Copy an old reply",
+     "Check the calendar first",
+     "Look up their details"
+    ],
+    "text": null,
+    "shown": [
+     "Copy an old reply",
+     "Type from scratch",
+     "Ask a teammate",
+     "Check the calendar first",
+     "Look up their details"
+    ]
+   }
+  ],
+  "mostWanted": [
+   "Writing emails",
+   "Answering messages"
+  ],
+  "worksFor": "self",
+  "aiTools": [
+   "chatgpt"
+  ],
+  "aiToolsOther": null,
+  "aiPolicy": null,
+  "often": "many_a_day"
+ },
+ "intake": {
+  "role_summary": "You run your own wedding planning business, handling client inquiries, timelines, vendor calls and proposals.",
+  "tasks": [
+   {
+    "name": "Answering inquiry messages",
+    "ai": true,
+    "private": true,
+    "kind": "repeat_texts"
+   },
+   {
+    "name": "Writing client emails",
+    "ai": true,
+    "private": true,
+    "kind": "repeat_emails"
+   },
+   {
+    "name": "Writing proposals",
+    "ai": true,
+    "private": true,
+    "kind": "repeat_writing"
+   },
+   {
+    "name": "Building timelines",
+    "ai": true,
+    "private": true,
+    "kind": "notes_to_table"
+   },
+   {
+    "name": "Chasing replies",
+    "ai": true,
+    "private": true,
+    "kind": "email_follow_ups"
+   }
+  ],
+  "first_win": {
+   "task": "Answering inquiry messages",
+   "intro": "You said answering messages takes a lot of your time. Here is a reply to your last inquiry, ready to send.",
+   "draft": "Hi there, thanks so much for reaching out! Our Saturday in [month] is still open. To put together the right options for you, could you share your rough guest count and budget range? I look forward to hearing from you and helping plan your day."
+  },
+  "first_step": "I’m a wedding planner running my own business. I answer inquiries from couples by text and Instagram. Write a warm, friendly reply of 60 to 90 words that confirms availability for their date, then asks for guest count and budget range. Keep it casual and professional. Here is the inquiry: [paste the couple’s message here]",
+  "map": [
+   {
+    "task": "Answering inquiry messages",
+    "phrase": "inquiry replies",
+    "today": "You answer these many times a day, often by copying an old reply and checking the calendar.",
+    "withPath": "Each reply starts from a draft you only need to check before sending.",
+    "ai": true,
+    "private": true,
+    "kind": "repeat_texts"
+   },
+   {
+    "task": "Writing client emails",
+    "phrase": "client emails",
+    "today": "You write these many times a day, usually from scratch or from an old email.",
+    "withPath": "Each email starts from a draft in your own voice that you only need to check.",
+    "ai": true,
+    "private": true,
+    "kind": "repeat_emails"
+   },
+   {
+    "task": "Writing proposals",
+    "phrase": "proposals",
+    "today": "You write proposals for couples, each one built from your package details.",
+    "withPath": "Each proposal starts from a structured draft you only need to fill in and polish.",
+    "ai": true,
+    "private": true,
+    "kind": "repeat_writing"
+   },
+   {
+    "task": "Building timelines",
+    "phrase": "day of timelines",
+    "today": "You build timelines by hand for each wedding, often moving items around.",
+    "withPath": "Each timeline starts from a list of key moments you only need to adjust.",
+    "ai": true,
+    "private": true,
+    "kind": "notes_to_table"
+   },
+   {
+    "task": "Chasing replies",
+    "phrase": null,
+    "today": "You chase vendors and couples who don’t reply, writing each nudge yourself.",
+    "withPath": "Each follow up starts from a polite nudge draft you only need to tweak.",
+    "ai": true,
+    "private": true,
+    "kind": "email_follow_ups"
+   }
+  ],
+  "needs_follow_up": false,
+  "follow_up_question": null
+ },
+ "free": {
+  "firstWin": {
+   "task": "Answering inquiry messages",
+   "intro": "You said answering messages takes a lot of your time. Here is a reply to your last inquiry, ready to send.",
+   "draft": "Hi there, thanks so much for reaching out! Our Saturday in [month] is still open. To put together the right options for you, could you share your rough guest count and budget range? I look forward to hearing from you and helping plan your day."
+  },
+  "firstStep": "I’m a wedding planner running my own business. I answer inquiries from couples by text and Instagram. Write a warm, friendly reply of 60 to 90 words that confirms availability for their date, then asks for guest count and budget range. Keep it casual and professional. Here is the inquiry: [paste the couple’s message here]",
+  "map": [
+   {
+    "task": "Answering inquiry messages",
+    "phrase": "inquiry replies",
+    "today": "You answer these many times a day, often by copying an old reply and checking the calendar.",
+    "withPath": "For your inquiry replies, your common replies are saved on your phone, each a few letters away.",
+    "ai": true,
+    "private": true,
+    "kind": "repeat_texts",
+    "level": 3,
+    "waits": false,
+    "recipe": "phone_quick_replies",
+    "held": null,
+    "askFirst": false
+   },
+   {
+    "task": "Writing client emails",
+    "phrase": "client emails",
+    "today": "You write these many times a day, usually from scratch or from an old email.",
+    "withPath": "For your client emails, your common emails are saved in Gmail as templates, ready to fill in.",
+    "ai": true,
+    "private": true,
+    "kind": "repeat_emails",
+    "level": 3,
+    "waits": false,
+    "recipe": "gmail_templates",
+    "held": null,
+    "askFirst": false
+   },
+   {
+    "task": "Writing proposals",
+    "phrase": "proposals",
+    "today": "You write proposals for couples, each one built from your package details.",
+    "withPath": "For your proposals, you hand it the job, and it writes in your voice with your details already in.",
+    "ai": true,
+    "private": true,
+    "kind": "repeat_writing",
+    "level": 3,
+    "waits": false,
+    "recipe": "saved_assistant",
+    "held": null,
+    "askFirst": false
+   },
+   {
+    "task": "Building timelines",
+    "phrase": "day of timelines",
+    "today": "You build timelines by hand for each wedding, often moving items around.",
+    "withPath": "For your day of timelines, your notes go in as they are and come out as rows for your sheet.",
+    "ai": true,
+    "private": true,
+    "kind": "notes_to_table",
+    "level": 3,
+    "waits": false,
+    "recipe": "notes_to_sheet",
+    "held": null,
+    "askFirst": false
+   },
+   {
+    "task": "Chasing replies",
+    "phrase": null,
+    "today": "You chase vendors and couples who don’t reply, writing each nudge yourself.",
+    "withPath": "Follow ups are drafted from your Gmail and wait for your OK.",
+    "ai": true,
+    "private": true,
+    "kind": "email_follow_ups",
+    "level": 4,
+    "waits": false,
+    "recipe": "gmail_claude_follow_ups",
+    "held": null,
+    "askFirst": false
+   }
+  ],
+  "setups": [
+   "Your inquiry replies, saved once on your phone",
+   "Your client emails, saved once as Gmail templates"
+  ],
+  "prep": [],
+  "freePlan": true,
+  "tool": "chatgpt",
+  "track": "builder"
+ },
+ "who": {
+  "track": "builder",
+  "canUse": "self",
+  "connect": null,
+  "places": [
+   "Gmail",
+   "Google Sheets",
+   "Google Calendar",
+   "Instagram",
+   "Text messages"
+  ],
+  "device": "both",
+  "aiTools": [
+   "chatgpt"
+  ]
+ },
+ "outline": [
+  "task_1:workflow(phone_quick_replies)",
+  "task_2:workflow(gmail_templates)",
+  "end:end"
+ ],
+ "path": {
+  "version": 3,
+  "role": "You run your own wedding planning business, handling client inquiries, timelines, vendor calls and proposals.",
+  "track": "builder",
+  "tool": "chatgpt",
+  "worksFor": "self",
+  "policy": null,
+  "device": "both",
+  "apps": [
+   "any_chat",
+   "chatgpt",
+   "iphone",
+   "gboard",
+   "samsung_keyboard",
+   "gmail",
+   "google_sheets"
+  ],
+  "skipped": [
+   "ready",
+   "about"
+  ],
+  "steps": [
+   {
+    "id": "task_1",
+    "kind": "workflow",
+    "task": "Answering inquiry messages",
+    "title": "Your inquiry replies, saved once on your phone",
+    "recipe": "phone_quick_replies",
+    "read": "Your common replies are saved on your phone, each a few letters away. You type a short shortcut, tap the reply, and change only the name or the date. Inquiries come in many times a day, so the same answers stop being copied from old messages and are ready where you already type.",
+    "material": [
+     {
+      "label": "Your inquiry replies",
+      "items": [
+       "Hi [first name]! Thanks so much for your inquiry. [Date] is still open. Could you send me your rough guest count and budget range so I can put together options for you?",
+       "Hi [first name]! Thank you for reaching out and congratulations. I would love to hear more about your day. What season and rough guest count are you picturing?",
+       "Hi [first name]! Thanks for your message. I’m checking my calendar for [date] and will get back to you by [day] with an answer.",
+       "Hi [first name]! Unfortunately [date] is already booked. I do have [other date] open if that could work for you. Want me to send details?",
+       "Hi [first name]! I’d love to talk it through. Are you free for a quick call on [day and time]? If not, send me a few times that suit you.",
+       "Hi [first name]! Just checking in on my last message. Do you still want to go ahead with [next step]? No pressure, I’m happy to answer any questions.",
+       "Hi [first name]! Thanks for sending that over. I’m putting together options for you now and will send them by [day]."
+      ]
+     },
+     {
+      "label": "Shortcuts for replies",
+      "items": [
+       "opn",
+       "gst",
+       "chk",
+       "bkd",
+       "cll",
+       "fup",
+       "thx"
+      ]
+     }
+    ]
+   },
+   {
+    "id": "task_2",
+    "kind": "workflow",
+    "task": "Writing client emails",
+    "title": "Your client emails, saved once as Gmail templates",
+    "recipe": "gmail_templates",
+    "read": "Your common emails are saved in Gmail as templates, ready to fill in. You pick the template, fill the gaps, read it through, and send. Client emails come up many times a day, so each one starts from your own wording instead of an old email you have to clean up.",
+    "material": [
+     {
+      "label": "Your client emails",
+      "items": [
+       "Subject: Your wedding inquiry\n\nHi [first name],\n\nThank you so much for reaching out about your wedding on [date]. I’d love to learn more about what you have in mind. Could you send me your rough guest count, your budget range and your venue ideas, if you have any? Then I can put together options for you.\n\nWarmly,\n[my name]",
+       "Subject: Next steps for your wedding\n\nHi [first name],\n\nIt was great talking with you on [day]. Here is what we agreed on: [short summary]. Next I will [my next step] by [date]. Please [their next step] by [date]. Let me know if anything looks off.\n\nBest,\n[my name]",
+       "Subject: Your proposal is ready\n\nHi [first name],\n\nI’ve attached your proposal for [date and venue]. It covers [what is included]. Take your time looking it over and send me any questions. I’m happy to talk it through on a call, just tell me a time that works.\n\nBest,\n[my name]",
+       "Subject: Checking in on [topic]\n\nHi [first name],\n\nI wanted to follow up on my note from [day] about [topic]. I need [what I need] by [date] so we can keep everything on track. If something has changed, just let me know and we’ll adjust.\n\nThank you,\n[my name]",
+       "Subject: Timeline for [date]\n\nHi [first name],\n\nAttached is the draft timeline for your day. Please look at [key times] and tell me what you’d like to change. Once you approve it, I will share it with your vendors.\n\nBest,\n[my name]"
+      ]
+     },
+     {
+      "label": "Template names",
+      "items": [
+       "New inquiry reply",
+       "After our call",
+       "Proposal ready",
+       "Gentle follow up",
+       "Draft timeline sent"
+      ]
+     }
+    ]
+   },
+   {
+    "id": "end",
+    "kind": "end",
+    "safeUse": [
+     "Never type a couple’s full names, phone numbers, home addresses or email addresses into ChatGPT. Use brackets instead.",
+     "Keep contracts, payment details and card or bank information out of it.",
+     "Leave out guest lists and any private family or health details a client shared with you.",
+     "Read every reply and email before it goes out, and check dates, prices and vendor details against your own calendar and contracts.",
+     "Fill in names, dates and venues yourself, after the draft is written."
+    ],
+    "askMessage": null
+   }
+  ]
+ },
+ "design": [
+  {
+   "task": "Answering inquiry messages",
+   "today": "You answer these many times a day, often by copying an old reply and checking the calendar first. You also look up the person's details before you answer.",
+   "newWay": "Your most common replies are saved once, so a first answer to a new inquiry is a few letters away on your phone. You still check the calendar and look up their details, then fill the date and the person's name into the saved reply. Every reply is read by you before it goes out, and it keeps the same warm voice every time instead of depending on which old message you found.",
+   "steps": [
+    {
+     "app": null,
+     "ref": null,
+     "goal": "Pick your ten most common inquiry replies, such as date open, date taken, and asking for guest count and budget."
+    },
+    {
+     "app": "ChatGPT",
+     "ref": "chatgpt_about_you",
+     "goal": "Save instructions about you and your business so every reply sounds like you."
+    },
+    {
+     "app": "ChatGPT",
+     "ref": "chatgpt_project",
+     "goal": "Make a project for inquiry replies and put your ten replies and tone notes inside it."
+    },
+    {
+     "app": "her phone's keyboard",
+     "ref": "phone_quick_replies",
+     "goal": "Save the ten replies so each one is a few letters away in text and chat."
+    },
+    {
+     "app": "Google Calendar",
+     "ref": null,
+     "goal": "Keep checking the date yourself before you pick which saved reply to use."
+    }
+   ],
+   "material": [
+    {
+     "label": "Ten saved replies",
+     "what": "Your most common inquiry answers, with gaps for name, date and details."
+    },
+    {
+     "label": "Tone notes",
+     "what": "A short description of how you greet people, how warm you are and how you sign off."
+    },
+    {
+     "label": "Project instructions",
+     "what": "Tells your assistant to draft a reply from an inquiry you paste in, leaving the date answer for you to confirm."
+    }
+   ],
+   "checkPoint": "You read every reply and confirm the date against your calendar before you send it."
+  },
+  {
+   "task": "Writing client emails",
+   "today": "You write these many times a day, usually from scratch or from an old email.",
+   "newWay": "Your most common client emails are saved as Gmail templates, and for the ones that need thought you describe what you want to say out loud or in rough notes. Your assistant turns that into a finished email in your voice. You keep the personal parts and stop rebuilding the same email each time, so each one starts from something close to done.",
+   "steps": [
+    {
+     "app": null,
+     "ref": null,
+     "goal": "List the five to eight client emails you write most, such as proposals, timeline updates and vendor introductions."
+    },
+    {
+     "app": "Gmail",
+     "ref": "gmail_templates",
+     "goal": "Save your most common emails as templates with clear gaps for names, dates and prices."
+    },
+    {
+     "app": "ChatGPT",
+     "ref": "saved_assistant",
+     "goal": "Set up a saved assistant that writes your client emails in your voice from rough notes."
+    },
+    {
+     "app": "ChatGPT",
+     "ref": "say_it_out_loud",
+     "goal": "Speak the points of a one-off email and get back finished text to edit."
+    }
+   ],
+   "material": [
+    {
+     "label": "Email templates",
+     "what": "Your most common client emails written once, with gaps to fill in."
+    },
+    {
+     "label": "Assistant instructions",
+     "what": "Explains your business, your voice and how your client emails are usually structured."
+    },
+    {
+     "label": "Tone notes",
+     "what": "Examples of phrases you use and ones you avoid in client emails."
+    }
+   ],
+   "checkPoint": "You fill in every gap and check every name, date and price before you press Send yourself."
+  }
+ ],
+ "checks": [
+  {
+   "id": "screens",
+   "pass": true,
+   "detail": "9 screens, at most 11 for a builder"
+  },
+  {
+   "id": "levels_in_code",
+   "pass": true,
+   "detail": "Every row has a level or waits"
+  },
+  {
+   "id": "level3_not_writing_help",
+   "pass": true,
+   "detail": "No line at level 3 or higher reads like writing help"
+  },
+  {
+   "id": "path_line_from_recipe",
+   "pass": true,
+   "detail": "Every line at level 3 or higher is its recipe's"
+  },
+  {
+   "id": "gmail_builder_top_level_4",
+   "pass": false,
+   "detail": "Top task Answering inquiry messages at level 3 with phone_quick_replies"
+  },
+  {
+   "id": "path_written",
+   "pass": true,
+   "detail": "3 steps"
+  },
+  {
+   "id": "builder_no_sign_up",
+   "pass": true,
+   "detail": "No sign up step or line"
+  },
+  {
+   "id": "workflow_parts",
+   "pass": true,
+   "detail": "2 workflows, each with a test, an approval point and a cost line"
+  },
+  {
+   "id": "setup_from_recipe_or_card",
+   "pass": true,
+   "detail": "recipe phone_quick_replies, recipe gmail_templates"
+  },
+  {
+   "id": "no_click_paths_from_model",
+   "pass": true,
+   "detail": "The model wrote no menu paths or button names"
+  },
+  {
+   "id": "copy_rules",
+   "pass": true,
+   "detail": "No dashes, promised times, prices or percents"
+  },
+  {
+   "id": "offer_matches_path",
+   "pass": true,
+   "detail": "Offer names 2, path has 2 workflows, 2 match by name"
+  }
+ ],
+ "recipes": {
+  "total": 5,
+  "aiTasks": 5,
+  "withRecipe": [
+   {
+    "task": "Answering inquiry messages",
+    "recipe": "phone_quick_replies",
+    "level": 3
+   },
+   {
+    "task": "Writing client emails",
+    "recipe": "gmail_templates",
+    "level": 3
+   },
+   {
+    "task": "Writing proposals",
+    "recipe": "saved_assistant",
+    "level": 3
+   },
+   {
+    "task": "Building timelines",
+    "recipe": "notes_to_sheet",
+    "level": 3
+   },
+   {
+    "task": "Chasing replies",
+    "recipe": "gmail_claude_follow_ups",
+    "level": 4
+   }
+  ],
+  "without": [],
+  "noRecipe": false,
+  "mostlyAssistant": false
+ },
+ "designCount": {
+  "steps": 9,
+  "checked": 6,
+  "unchecked": 1,
+  "noApp": 2,
+  "badRefs": [],
+  "clickPaths": [],
+  "apps": [
+   [
+    "Google Calendar",
+    1
+   ]
+  ],
+  "refs": [
+   "chatgpt_about_you",
+   "chatgpt_project",
+   "phone_quick_replies",
+   "gmail_templates",
+   "saved_assistant",
+   "say_it_out_loud"
+  ]
+ }
+}

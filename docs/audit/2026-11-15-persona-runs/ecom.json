@@ -1,0 +1,807 @@
+{
+ "name": "ecom",
+ "group": "experiment",
+ "persona": {
+  "group": "experiment",
+  "bio": "Nina, 36, ecommerce manager at a home goods brand. She runs the Shopify store: product pages, launches, discount codes, the email flows in Klaviyo, customer service escalations in Gorgias, and weekly sales numbers in Google Sheets. She writes product descriptions for every new item, plans promotions with the team over Gmail and Slack, and chases suppliers for images and specs. She uses ChatGPT and Claude every day. Her company encourages AI, and she can connect her work Gmail.",
+  "job": "Ecommerce manager at a home goods brand. I run our Shopify store.",
+  "level": "heavy",
+  "device": "both",
+  "phone": "iphone",
+  "canUse": "yes",
+  "connect": "yes"
+ },
+ "versions": {
+  "job": "beginner-job-v5",
+  "questions": "beginner-questions-v6",
+  "intake": "beginner-intake-v7",
+  "path": "beginner-path-v1"
+ },
+ "jobRead": {
+  "repeats": [
+   {
+    "label": "Writing product descriptions",
+    "ai": true
+   },
+   {
+    "label": "Updating product listings",
+    "ai": false
+   },
+   {
+    "label": "Writing promo emails",
+    "ai": true
+   },
+   {
+    "label": "Planning sales calendar",
+    "ai": true
+   },
+   {
+    "label": "Checking inventory levels",
+    "ai": false
+   },
+   {
+    "label": "Replying to customer messages",
+    "ai": true
+   }
+  ],
+  "aiFallback": [
+   "Product description drafts",
+   "Promo email copy",
+   "Social post captions",
+   "Customer reply templates"
+  ],
+  "apps": [
+   "Shopify",
+   "Klaviyo",
+   "Google Sheets",
+   "Instagram",
+   "Canva",
+   "Gorgias"
+  ],
+  "aiUses": [
+   "Product descriptions",
+   "Email copy",
+   "Social captions",
+   "Ad copy ideas"
+  ],
+  "worksFor": "unclear"
+ },
+ "jobReadFallback": false,
+ "asked": [
+  {
+   "id": "asked_1",
+   "title": "How do you get the product details to AI today?",
+   "kind": "many",
+   "choices": [
+    "Copy from Shopify",
+    "Type them from memory",
+    "Paste from a Sheet"
+   ],
+   "hint": "Pick all that fit. Any guess is fine."
+  }
+ ],
+ "screens": 11,
+ "worksForFromJob": "unclear",
+ "answers": {
+  "job": "Ecommerce manager at a home goods brand. I run our Shopify store.",
+  "experience": "heavy",
+  "qas": [
+   {
+    "id": "level",
+    "title": "Where are you with AI?",
+    "picked": [
+     "Use it most days"
+    ],
+    "text": null,
+    "shown": [
+     "Never used it",
+     "Tried it a few times",
+     "Use it some weeks",
+     "Use it most days"
+    ]
+   },
+   {
+    "id": "done",
+    "title": "What have you already done with AI?",
+    "picked": [
+     "Pasted in my own text",
+     "Connected an app",
+     "Pay for a plan"
+    ],
+    "text": null,
+    "shown": [
+     "Pasted in my own text",
+     "Saved instructions about myself",
+     "Made a project",
+     "Connected an app",
+     "Pay for a plan",
+     "None of these"
+    ]
+   },
+   {
+    "id": "tools",
+    "title": "Which AI have you used?",
+    "picked": [
+     "ChatGPT",
+     "Claude"
+    ],
+    "text": null,
+    "shown": [
+     "ChatGPT",
+     "Copilot",
+     "Gemini",
+     "Claude",
+     "Other",
+     "None yet",
+     "Not sure"
+    ]
+   },
+   {
+    "id": "repeats",
+    "title": "What do you do over and over, every day or every week?",
+    "picked": [
+     "Writing product descriptions",
+     "Updating product listings",
+     "Writing promo emails",
+     "Planning sales calendar",
+     "Replying to customer messages",
+     "Writing emails"
+    ],
+    "text": "Weekly sales numbers in Sheets, every Monday",
+    "shown": [
+     "Writing product descriptions",
+     "Updating product listings",
+     "Writing promo emails",
+     "Planning sales calendar",
+     "Checking inventory levels",
+     "Replying to customer messages",
+     "Answering messages",
+     "Writing emails",
+     "Planning my week",
+     "Making lists"
+    ]
+   },
+   {
+    "id": "most",
+    "title": "Which would save you the most time if it got easier?",
+    "picked": [
+     "Writing product descriptions",
+     "Replying to customer messages"
+    ],
+    "text": null,
+    "shown": [
+     "Writing product descriptions",
+     "Updating product listings",
+     "Writing promo emails",
+     "Planning sales calendar",
+     "Replying to customer messages",
+     "Writing emails"
+    ]
+   },
+   {
+    "id": "example",
+    "title": "Paste the last one you wrote, or what the last person asked you.",
+    "picked": [],
+    "text": "Can you tighten the copy on the new linen throw? Its too long for the PDP and i need it live before the Friday launch. Keep the fabric details."
+   },
+   {
+    "id": "often",
+    "title": "How often do you do this?",
+    "picked": [
+     "About once a day"
+    ],
+    "text": null,
+    "shown": [
+     "Many times a day",
+     "About once a day",
+     "A few times a week",
+     "Once a week or less"
+    ]
+   },
+   {
+    "id": "where",
+    "title": "Where does your work happen?",
+    "picked": [
+     "Shopify",
+     "Klaviyo",
+     "Google Sheets",
+     "Gorgias",
+     "Gmail"
+    ],
+    "text": "Mostly Slack too, but that's not on the list. Plus I chase s",
+    "shown": [
+     "Shopify",
+     "Klaviyo",
+     "Google Sheets",
+     "Instagram",
+     "Canva",
+     "Gorgias",
+     "Text messages",
+     "Gmail",
+     "Outlook",
+     "A work system",
+     "Paper",
+     "In person"
+    ]
+   },
+   {
+    "id": "device",
+    "title": "Do you work on a phone, a computer or both?",
+    "picked": [
+     "Both"
+    ],
+    "text": null,
+    "shown": [
+     "Phone only",
+     "Computer only",
+     "Both"
+    ]
+   },
+   {
+    "id": "asked_1",
+    "title": "How do you get the product details to AI today?",
+    "picked": [
+     "Copy from Shopify",
+     "Paste from a Sheet"
+    ],
+    "text": null,
+    "shown": [
+     "Copy from Shopify",
+     "Type them from memory",
+     "Paste from a Sheet"
+    ]
+   },
+   {
+    "id": "can_use",
+    "title": "Can you use AI for your work?",
+    "picked": [
+     "Yes"
+    ],
+    "text": null,
+    "shown": [
+     "Yes",
+     "Not sure",
+     "No, it’s restricted",
+     "I work for myself"
+    ]
+   },
+   {
+    "id": "connect",
+    "title": "Would your company let you link your work email to an AI tool?",
+    "picked": [
+     "Yes"
+    ],
+    "text": null,
+    "shown": [
+     "Yes",
+     "No",
+     "Not sure"
+    ]
+   }
+  ],
+  "mostWanted": [
+   "Writing product descriptions",
+   "Replying to customer messages"
+  ],
+  "worksFor": "employer",
+  "aiTools": [
+   "chatgpt",
+   "claude"
+  ],
+  "aiToolsOther": null,
+  "aiPolicy": "encouraged",
+  "often": "daily"
+ },
+ "intake": {
+  "role_summary": "You’re the ecommerce manager at a home goods brand, running the Shopify store day to day.",
+  "tasks": [
+   {
+    "name": "Product descriptions",
+    "ai": true,
+    "private": false,
+    "kind": "repeat_writing"
+   },
+   {
+    "name": "Customer message replies",
+    "ai": true,
+    "private": true,
+    "kind": "email_replies"
+   },
+   {
+    "name": "Promo emails",
+    "ai": true,
+    "private": false,
+    "kind": "repeat_emails"
+   },
+   {
+    "name": "Product listing updates",
+    "ai": true,
+    "private": false,
+    "kind": "repeat_writing"
+   },
+   {
+    "name": "Sales calendar planning",
+    "ai": true,
+    "private": false,
+    "kind": null
+   }
+  ],
+  "first_win": {
+   "task": "Product descriptions",
+   "intro": "You asked to tighten the linen throw copy for the PDP. Here is a shorter version that keeps the fabric details.",
+   "draft": "Hi there,\n\nHere is a tighter version of the linen throw description for the product page:\n\nSoft, breathable linen throw in [color] with a relaxed weave that softens with every wash. Made from [fabric details, kept exactly as written], it works on a bed, sofa or chair year round.\n\n[Size and care line]\n\nLaunches Friday, [launch date]."
+  },
+  "first_step": "I’m the ecommerce manager at a home goods brand, and I write product descriptions for our Shopify store. Rewrite the description below so it is shorter and suits a product page, keeping every fabric detail exactly as written. Keep the tone warm and practical, under 60 words, with no emoji. Put the product’s name, fabric details and launch date in square brackets if they are missing. Here is the product and its current copy: [paste the product name, fabric details and current description here]",
+  "map": [
+   {
+    "task": "Product descriptions",
+    "phrase": "product descriptions",
+    "today": "You rewrite these about once a day, often from copy that runs too long.",
+    "withPath": "Each one starts from a tighter draft you only need to check before it goes live.",
+    "ai": true,
+    "private": false,
+    "kind": "repeat_writing"
+   },
+   {
+    "task": "Customer message replies",
+    "phrase": "customer message replies",
+    "today": "You answer these from Gorgias and Gmail, each one needing a little thought.",
+    "withPath": "Each reply starts from a draft with the order details left as blanks for you to fill.",
+    "ai": true,
+    "private": true,
+    "kind": "email_replies"
+   },
+   {
+    "task": "Promo emails",
+    "phrase": "promo emails",
+    "today": "You write these for each sale, starting from a blank page each time.",
+    "withPath": "Each email starts from a draft you adjust for the offer and date.",
+    "ai": true,
+    "private": false,
+    "kind": "repeat_emails"
+   },
+   {
+    "task": "Product listing updates",
+    "phrase": "listing updates",
+    "today": "You update listings by hand whenever copy or details change.",
+    "withPath": "Each update starts from a clean draft you check against the product sheet.",
+    "ai": true,
+    "private": false,
+    "kind": "repeat_writing"
+   },
+   {
+    "task": "Sales calendar planning",
+    "phrase": "sales calendar",
+    "today": "You plan the calendar by hand across the weeks ahead.",
+    "withPath": "The planning stays yours, with AI helping you think through the order and timing.",
+    "ai": true,
+    "private": false,
+    "kind": null
+   }
+  ],
+  "needs_follow_up": false,
+  "follow_up_question": null
+ },
+ "free": {
+  "firstWin": {
+   "task": "Product descriptions",
+   "intro": "You asked to tighten the linen throw copy for the PDP. Here is a shorter version that keeps the fabric details.",
+   "draft": "Hi there,\n\nHere is a tighter version of the linen throw description for the product page:\n\nSoft, breathable linen throw in [color] with a relaxed weave that softens with every wash. Made from [fabric details, kept exactly as written], it works on a bed, sofa or chair year round.\n\n[Size and care line]\n\nLaunches Friday, [launch date]."
+  },
+  "firstStep": "I’m the ecommerce manager at a home goods brand, and I write product descriptions for our Shopify store. Rewrite the description below so it is shorter and suits a product page, keeping every fabric detail exactly as written. Keep the tone warm and practical, under 60 words, with no emoji. Put the product’s name, fabric details and launch date in square brackets if they are missing. Here is the product and its current copy: [paste the product name, fabric details and current description here]",
+  "map": [
+   {
+    "task": "Product descriptions",
+    "phrase": "product descriptions",
+    "today": "You rewrite these about once a day, often from copy that runs too long.",
+    "withPath": "For your product descriptions, you hand it the job, and it writes in your voice with your details already in.",
+    "ai": true,
+    "private": false,
+    "kind": "repeat_writing",
+    "level": 3,
+    "waits": false,
+    "recipe": "saved_assistant",
+    "held": null,
+    "askFirst": false
+   },
+   {
+    "task": "Customer message replies",
+    "phrase": "customer message replies",
+    "today": "You answer these from Gorgias and Gmail, each one needing a little thought.",
+    "withPath": "For your customer message replies, reply drafts appear inside Gmail, and you check each one before you send.",
+    "ai": true,
+    "private": true,
+    "kind": "email_replies",
+    "level": 4,
+    "waits": false,
+    "recipe": "gmail_help_me_write",
+    "held": null,
+    "askFirst": false
+   },
+   {
+    "task": "Promo emails",
+    "phrase": "promo emails",
+    "today": "You write these for each sale, starting from a blank page each time.",
+    "withPath": "For your promo emails, your common emails are saved in Gmail as templates, ready to fill in.",
+    "ai": true,
+    "private": false,
+    "kind": "repeat_emails",
+    "level": 3,
+    "waits": false,
+    "recipe": "gmail_templates",
+    "held": null,
+    "askFirst": false
+   },
+   {
+    "task": "Product listing updates",
+    "phrase": "listing updates",
+    "today": "You update listings by hand whenever copy or details change.",
+    "withPath": "For your listing updates, you hand it the job, and it writes in your voice with your details already in.",
+    "ai": true,
+    "private": false,
+    "kind": "repeat_writing",
+    "level": 3,
+    "waits": false,
+    "recipe": "saved_assistant",
+    "held": null,
+    "askFirst": false
+   },
+   {
+    "task": "Sales calendar planning",
+    "phrase": "sales calendar",
+    "today": "You plan the calendar by hand across the weeks ahead.",
+    "withPath": "The planning stays yours, with AI helping you think through the order and timing.",
+    "ai": true,
+    "private": false,
+    "kind": null,
+    "level": 2,
+    "waits": false,
+    "recipe": null,
+    "held": null,
+    "askFirst": false
+   }
+  ],
+  "setups": [
+   "Your product descriptions, with a saved assistant",
+   "Your customer message replies, drafted in your inbox"
+  ],
+  "prep": [],
+  "freePlan": true,
+  "tool": "chatgpt",
+  "track": "builder"
+ },
+ "who": {
+  "track": "builder",
+  "canUse": "yes",
+  "connect": "yes",
+  "places": [
+   "Shopify",
+   "Klaviyo",
+   "Google Sheets",
+   "Gorgias",
+   "Gmail",
+   "Mostly Slack too",
+   "but that's not on the list. Plus I chase s"
+  ],
+  "device": "both",
+  "aiTools": [
+   "chatgpt",
+   "claude"
+  ]
+ },
+ "outline": [
+  "about:about",
+  "task_1:workflow(saved_assistant)",
+  "task_2:workflow(gmail_help_me_write)",
+  "end:end"
+ ],
+ "path": {
+  "version": 3,
+  "role": "You’re the ecommerce manager at a home goods brand, running the Shopify store day to day.",
+  "track": "builder",
+  "tool": "chatgpt",
+  "worksFor": "employer",
+  "policy": "encouraged",
+  "device": "both",
+  "apps": [
+   "any_chat",
+   "chatgpt",
+   "claude",
+   "iphone",
+   "gboard",
+   "samsung_keyboard",
+   "gmail",
+   "google_sheets"
+  ],
+  "skipped": [
+   "ready"
+  ],
+  "steps": [
+   {
+    "id": "about",
+    "kind": "about",
+    "card": "chatgpt_about_you",
+    "note": "I’m the ecommerce manager at a home goods brand, and I run our online store day to day. I write product descriptions, promo emails and replies to customers. I write to shoppers who want clear, honest details about what they are buying. My tone is warm, plain and confident, never pushy. I like short sentences and tight copy that fits a product page. Keep the fabric, size and care details I give you, and never add details I did not give you, like materials, measurements, prices or claims. If something is missing, ask me or leave a square bracket. Give me a draft I can read and change before it goes live."
+   },
+   {
+    "id": "task_1",
+    "kind": "workflow",
+    "task": "Product descriptions",
+    "title": "Your product descriptions, with a saved assistant",
+    "recipe": "saved_assistant",
+    "read": "Your product descriptions now live in a saved ChatGPT project that already knows your voice and your store. You hand it the product details, and it gives back copy that fits the page and keeps the fabric facts. That is better in your job because every listing sounds like your brand, and you stop re explaining it each time.",
+    "material": [
+     {
+      "label": "Instructions for your assistant",
+      "items": [
+       "You are my writing assistant for product descriptions at a home goods brand. I’m the ecommerce manager and I run our Shopify store. I paste in product details from Shopify or a Sheet, and sometimes an existing description that runs too long. Write for shoppers who want clear, honest details. Keep the tone warm, plain and confident, with short sentences. Keep every fabric, size, care and material detail I give you. Never add details I did not give you, and never invent claims, prices or measurements. If something is missing, put it in square brackets and tell me. Keep copy short enough to fit a product page, and avoid filler like ’perfect for any home’. Give me back one tightened description first, then a one line version for a product card. Flag anything you cut so I can check it."
+      ]
+     },
+     {
+      "label": "Examples to start with",
+      "items": [
+       "Before: The new [product name] is made from [fabric] and is a wonderful addition to any room, bringing comfort and style that you will love for years to come. It measures [size] and is machine washable. After: [Product name] is made from [fabric]. It measures [size] and is machine washable. Soft, easy to style and ready for everyday use.",
+       "Before: Can you tighten the copy on the new [product name]? It’s too long for the product page and I need it live before [launch day]. Keep the fabric details. After: [Product name] in [fabric], [size]. [One line on how it feels or looks.] Care: [care instructions].",
+       "Before: Our [product name] is handcrafted with care using [material], and every piece is a little different, which makes it special in your home. After: [Product name] is made with [material]. Each piece varies slightly. [Size and care details]."
+      ]
+     }
+    ]
+   },
+   {
+    "id": "task_2",
+    "kind": "workflow",
+    "task": "Customer message replies",
+    "title": "Your customer message replies, drafted in your inbox",
+    "recipe": "gmail_help_me_write",
+    "read": "Your customer replies get drafted right inside Gmail, and you check each one before you send. You type a short line about what you want to say, and the draft fills in the rest. That is better in your job because each reply still sounds like you, without starting from a blank box.",
+    "material": [
+     {
+      "label": "Your starting lines",
+      "items": [
+       "Reply to a customer asking where their order is. Say I’m checking on it and will update them by [day]. Warm and short.",
+       "Reply to a customer who got a damaged item. Say I’m sorry, and ask for a photo of the damage and their order number.",
+       "Reply to a customer asking about a return. Say I can help, and explain the steps from [our return policy]. Keep it friendly.",
+       "Reply to a customer asking about the size or fabric of [product name]. Share these details: [details]. Don’t add anything else.",
+       "Reply to a customer asking when [product name] is back in stock. Say I don’t have a date yet and offer [what we can do].",
+       "Reply to a customer who wants to change their order address. Say what I can do before it ships: [details].",
+       "Reply to an unhappy customer. Thank them for telling me, say what I’ll do next: [next step], and keep it calm and plain."
+      ]
+     },
+     {
+      "label": "Notes on your tone",
+      "items": [
+       "Press Friendly when a draft sounds stiff or like a form letter, especially for shoppers asking simple questions.",
+       "Press Shorten when a draft runs long, like order status updates, where a customer wants the answer fast.",
+       "Press Formalize only for serious issues, like a complaint or a damaged item, and reread it to make sure it still sounds warm.",
+       "If a draft makes a promise I did not type, such as a date, refund or policy, I fix it or delete it before I send."
+      ]
+     }
+    ]
+   },
+   {
+    "id": "end",
+    "kind": "end",
+    "safeUse": [
+     "Never type customer names, home addresses, phone numbers, emails or order numbers into a chat tool. Use square brackets instead.",
+     "Never paste payment details or anything from a customer’s account.",
+     "Keep unreleased products, launch dates and pricing out of chats unless my company says it is OK.",
+     "Check every product detail, like fabric, size and care, against my own product data before it goes live.",
+     "Read every description and every customer reply before it goes out, and send it myself."
+    ],
+    "askMessage": "Hi [manager’s name], I’d like to confirm which AI tools the company has approved and what I may use them for. I have two tasks in mind: drafting product descriptions in ChatGPT, and drafting customer replies inside Gmail with Help me write. I would only use product details, never customer names, addresses or order numbers, and I would read everything before it goes out. Can you tell me what is approved, or point me to who can?"
+   }
+  ]
+ },
+ "design": [
+  {
+   "task": "Product descriptions",
+   "today": "You rewrite product descriptions about once a day, often from copy that runs too long. You copy the product details from Shopify or paste them from a Sheet into ChatGPT or Claude.",
+   "newWay": "You set up a saved assistant that already knows your brand voice, your length limit for the product page and the rule to keep fabric details. Each day you paste in the product details and the long copy, and it gives back a tightened version in your format. You read it and paste it into Shopify yourself, so the copy stays consistent across launches like Friday's without you re-explaining it each time.",
+   "steps": [
+    {
+     "app": null,
+     "ref": null,
+     "goal": "Pick two or three of your best live product descriptions and note your length limit and which details must always stay, like fabric and care."
+    },
+    {
+     "app": "Claude",
+     "ref": "claude_project",
+     "goal": "Make a project for product descriptions so your voice and rules are kept in one place."
+    },
+    {
+     "app": "Claude",
+     "ref": "saved_assistant",
+     "goal": "Save the assistant instructions and your example descriptions so each new description follows the same shape."
+    },
+    {
+     "app": "Claude",
+     "ref": "claude_about_you",
+     "goal": "Save short notes about you and your brand tone so every chat starts with them."
+    },
+    {
+     "app": null,
+     "ref": null,
+     "goal": "Test it on the linen throw copy and adjust the instructions until the length and fabric details are right."
+    }
+   ],
+   "material": [
+    {
+     "label": "Assistant instructions",
+     "what": "Tells the assistant to tighten long copy to your product page length and keep every fabric detail."
+    },
+    {
+     "label": "Tone notes",
+     "what": "Describes how your brand sounds, with words you use and words you avoid."
+    },
+    {
+     "label": "Example descriptions",
+     "what": "Holds two or three of your best live descriptions as the pattern to follow."
+    },
+    {
+     "label": "Paste template",
+     "what": "A simple layout for pasting product name, details and current copy so nothing is missed."
+    }
+   ],
+   "checkPoint": "You read the tightened copy and check every fabric detail, size and name against Shopify before you publish it."
+  },
+  {
+   "task": "Customer message replies",
+   "today": "You answer customer messages from Gorgias and Gmail, each one needing a little thought.",
+   "newWay": "Gmail drafts replies inside your inbox, and for Gorgias you paste the customer's message into a saved assistant that knows your policies and tone. You get a draft for each one, change what needs your judgment and send it yourself. Replies sound like you and stay consistent with your policies, and you spend your thinking on the tricky ones.",
+   "steps": [
+    {
+     "app": null,
+     "ref": null,
+     "goal": "Write down your policies on shipping, returns and care, plus the tone you use with customers."
+    },
+    {
+     "app": "Gmail",
+     "ref": "gmail_help_me_write",
+     "goal": "Get reply drafts inside Gmail for the emails that each need a little thought."
+    },
+    {
+     "app": "ChatGPT",
+     "ref": "chatgpt_project",
+     "goal": "Make a project for customer replies that holds your policies and tone."
+    },
+    {
+     "app": "ChatGPT",
+     "ref": "saved_assistant",
+     "goal": "Save an assistant that drafts a reply from a pasted customer message using your policies."
+    },
+    {
+     "app": null,
+     "ref": null,
+     "goal": "Leave out customers' private details like full addresses or payment information when you paste a message."
+    }
+   ],
+   "material": [
+    {
+     "label": "Policy sheet",
+     "what": "Holds your shipping, returns and care rules in plain words for the assistant to follow."
+    },
+    {
+     "label": "Reply instructions",
+     "what": "Tells the assistant how to draft a reply in your voice and when to flag a message for you."
+    },
+    {
+     "label": "Tone notes",
+     "what": "Describes how warm and direct your customer replies should be."
+    },
+    {
+     "label": "Sample replies",
+     "what": "A few of your own past replies to show the style you want."
+    }
+   ],
+   "checkPoint": "You read every draft, check it against the order and your policy, and press Send yourself."
+  }
+ ],
+ "checks": [
+  {
+   "id": "screens",
+   "pass": true,
+   "detail": "11 screens, at most 11 for a builder"
+  },
+  {
+   "id": "levels_in_code",
+   "pass": true,
+   "detail": "Every row has a level or waits"
+  },
+  {
+   "id": "level3_not_writing_help",
+   "pass": true,
+   "detail": "No line at level 3 or higher reads like writing help"
+  },
+  {
+   "id": "path_line_from_recipe",
+   "pass": true,
+   "detail": "Every line at level 3 or higher is its recipe's"
+  },
+  {
+   "id": "path_written",
+   "pass": true,
+   "detail": "4 steps"
+  },
+  {
+   "id": "builder_no_sign_up",
+   "pass": true,
+   "detail": "No sign up step or line"
+  },
+  {
+   "id": "workflow_parts",
+   "pass": true,
+   "detail": "2 workflows, each with a test, an approval point and a cost line"
+  },
+  {
+   "id": "setup_from_recipe_or_card",
+   "pass": true,
+   "detail": "card chatgpt_about_you, recipe saved_assistant, recipe gmail_help_me_write"
+  },
+  {
+   "id": "no_click_paths_from_model",
+   "pass": true,
+   "detail": "The model wrote no menu paths or button names"
+  },
+  {
+   "id": "copy_rules",
+   "pass": true,
+   "detail": "No dashes, promised times, prices or percents"
+  },
+  {
+   "id": "offer_matches_path",
+   "pass": true,
+   "detail": "Offer names 2, path has 2 workflows, 2 match by name"
+  }
+ ],
+ "recipes": {
+  "total": 5,
+  "aiTasks": 5,
+  "withRecipe": [
+   {
+    "task": "Product descriptions",
+    "recipe": "saved_assistant",
+    "level": 3
+   },
+   {
+    "task": "Customer message replies",
+    "recipe": "gmail_help_me_write",
+    "level": 4
+   },
+   {
+    "task": "Promo emails",
+    "recipe": "gmail_templates",
+    "level": 3
+   },
+   {
+    "task": "Product listing updates",
+    "recipe": "saved_assistant",
+    "level": 3
+   }
+  ],
+  "without": [
+   {
+    "task": "Sales calendar planning",
+    "level": 2,
+    "waits": false
+   }
+  ],
+  "noRecipe": false,
+  "mostlyAssistant": false
+ },
+ "designCount": {
+  "steps": 10,
+  "checked": 6,
+  "unchecked": 0,
+  "noApp": 4,
+  "badRefs": [],
+  "clickPaths": [],
+  "apps": [],
+  "refs": [
+   "claude_project",
+   "saved_assistant",
+   "claude_about_you",
+   "gmail_help_me_write",
+   "chatgpt_project"
+  ]
+ }
+}

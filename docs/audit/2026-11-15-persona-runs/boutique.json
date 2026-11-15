@@ -1,0 +1,750 @@
+{
+ "name": "boutique",
+ "group": "self employed Builder",
+ "persona": {
+  "group": "self employed Builder",
+  "bio": "Owns a small women's clothing boutique, just her and two part timers. Working the floor, buying at markets twice a year, posting new arrivals on Instagram, steaming and tagging stock, window displays every month, payroll and paying vendors, answering DMs about sizes and holds. She does most of it on her iPhone between customers. Instagram and the DMs take the most time, then tagging stock. She uses ChatGPT some weeks for captions and Canva's AI for posts.",
+  "job": "I own a small women's clothing boutique, just me and two part timers.",
+  "level": "uses",
+  "device": "phone",
+  "phone": "iphone",
+  "canUse": "self",
+  "connect": null
+ },
+ "versions": {
+  "job": "beginner-job-v5",
+  "questions": "beginner-questions-v6",
+  "intake": "beginner-intake-v7",
+  "path": "beginner-path-v1"
+ },
+ "jobRead": {
+  "repeats": [
+   {
+    "label": "Restocking racks",
+    "ai": false
+   },
+   {
+    "label": "Writing product captions",
+    "ai": true
+   },
+   {
+    "label": "Texting regular customers",
+    "ai": true
+   },
+   {
+    "label": "Folding and styling displays",
+    "ai": false
+   },
+   {
+    "label": "Scheduling part timer shifts",
+    "ai": true
+   },
+   {
+    "label": "Ordering new stock",
+    "ai": true
+   }
+  ],
+  "aiFallback": [
+   "Sale announcement posts",
+   "Thank you notes",
+   "Window display ideas",
+   "Return policy wording"
+  ],
+  "apps": [
+   "Shopify",
+   "Square",
+   "Instagram",
+   "Canva",
+   "Google Drive",
+   "QuickBooks"
+  ],
+  "aiUses": [
+   "Captions",
+   "Product descriptions",
+   "Customer texts",
+   "Shift schedules",
+   "Sale posts"
+  ],
+  "worksFor": "self"
+ },
+ "jobReadFallback": false,
+ "asked": [
+  {
+   "id": "asked_1",
+   "title": "How do most customer messages reach you?",
+   "kind": "many",
+   "choices": [
+    "Instagram DMs",
+    "Text messages",
+    "Phone calls",
+    "Walk in asks",
+    "Email"
+   ],
+   "hint": "Pick every one that fits."
+  }
+ ],
+ "screens": 9,
+ "worksForFromJob": "self",
+ "answers": {
+  "job": "I own a small women's clothing boutique, just me and two part timers.",
+  "experience": "uses",
+  "qas": [
+   {
+    "id": "level",
+    "title": "Where are you with AI?",
+    "picked": [
+     "Use it some weeks"
+    ],
+    "text": null,
+    "shown": [
+     "Never used it",
+     "Tried it a few times",
+     "Use it some weeks",
+     "Use it most days"
+    ]
+   },
+   {
+    "id": "done",
+    "title": "What have you already done with AI?",
+    "picked": [
+     "Pasted in my own text"
+    ],
+    "text": null,
+    "shown": [
+     "Pasted in my own text",
+     "Saved instructions about myself",
+     "Made a project",
+     "Connected an app",
+     "Pay for a plan",
+     "None of these"
+    ]
+   },
+   {
+    "id": "tools",
+    "title": "Which AI have you used?",
+    "picked": [
+     "ChatGPT"
+    ],
+    "text": null,
+    "shown": [
+     "ChatGPT",
+     "Copilot",
+     "Gemini",
+     "Claude",
+     "Other",
+     "None yet",
+     "Not sure"
+    ]
+   },
+   {
+    "id": "repeats",
+    "title": "What do you do over and over, every day or every week?",
+    "picked": [
+     "Restocking racks",
+     "Writing product captions",
+     "Texting regular customers",
+     "Folding and styling displays",
+     "Ordering new stock",
+     "Answering messages"
+    ],
+    "text": "Steaming and tagging stock, every single day",
+    "shown": [
+     "Restocking racks",
+     "Writing product captions",
+     "Texting regular customers",
+     "Folding and styling displays",
+     "Scheduling part timer shifts",
+     "Ordering new stock",
+     "Answering messages",
+     "Writing emails",
+     "Planning my week",
+     "Making lists"
+    ]
+   },
+   {
+    "id": "most",
+    "title": "Which would save you the most time if it got easier?",
+    "picked": [
+     "Answering messages",
+     "Writing product captions"
+    ],
+    "text": null,
+    "shown": [
+     "Restocking racks",
+     "Writing product captions",
+     "Texting regular customers",
+     "Folding and styling displays",
+     "Ordering new stock",
+     "Answering messages"
+    ]
+   },
+   {
+    "id": "example",
+    "title": "Paste the last one you wrote, or what the last person asked you.",
+    "picked": [],
+    "text": "Hi! Is the rust linen set still in a size 12? I can hold it until 5 if you want. Thanks!"
+   },
+   {
+    "id": "often",
+    "title": "How often do you do this?",
+    "picked": [
+     "Many times a day"
+    ],
+    "text": null,
+    "shown": [
+     "Many times a day",
+     "About once a day",
+     "A few times a week",
+     "Once a week or less"
+    ]
+   },
+   {
+    "id": "where",
+    "title": "Where does your work happen?",
+    "picked": [
+     "Instagram",
+     "Canva",
+     "Text messages",
+     "Google Sheets",
+     "In person"
+    ],
+    "text": "Mostly the boutique floor and my phone. Square for sales, DM",
+    "shown": [
+     "Shopify",
+     "Square",
+     "Instagram",
+     "Canva",
+     "Google Drive",
+     "QuickBooks",
+     "Text messages",
+     "Gmail",
+     "Outlook",
+     "Google Sheets",
+     "A work system",
+     "Paper",
+     "In person"
+    ]
+   },
+   {
+    "id": "device",
+    "title": "Do you work on a phone, a computer or both?",
+    "picked": [
+     "Phone only"
+    ],
+    "text": null,
+    "shown": [
+     "Phone only",
+     "Computer only",
+     "Both"
+    ]
+   },
+   {
+    "id": "asked_1",
+    "title": "How do most customer messages reach you?",
+    "picked": [
+     "Instagram DMs",
+     "Text messages",
+     "Walk in asks"
+    ],
+    "text": null,
+    "shown": [
+     "Instagram DMs",
+     "Text messages",
+     "Phone calls",
+     "Walk in asks",
+     "Email"
+    ]
+   }
+  ],
+  "mostWanted": [
+   "Answering messages",
+   "Writing product captions"
+  ],
+  "worksFor": "self",
+  "aiTools": [
+   "chatgpt"
+  ],
+  "aiToolsOther": null,
+  "aiPolicy": null,
+  "often": "many_a_day"
+ },
+ "intake": {
+  "role_summary": "You run your own small women’s clothing boutique with two part timers, handling the floor, stock, customer messages and social media.",
+  "tasks": [
+   {
+    "name": "Answering messages",
+    "ai": true,
+    "private": true,
+    "kind": "repeat_texts"
+   },
+   {
+    "name": "Writing product captions",
+    "ai": true,
+    "private": false,
+    "kind": "repeat_writing"
+   },
+   {
+    "name": "Texting regular customers",
+    "ai": true,
+    "private": true,
+    "kind": "repeat_texts"
+   },
+   {
+    "name": "Ordering new stock",
+    "ai": true,
+    "private": true,
+    "kind": null
+   }
+  ],
+  "first_win": {
+   "task": "Answering messages",
+   "intro": "A customer asked if the rust linen set is still in a size 12 and if you can hold it. Here is your reply, ready to send.",
+   "draft": "Hi there! I’ll check on the size 12 in the rust linen set and get right back to you. I can hold it for you until [hold time] if you’d like. Thanks so much for reaching out!"
+  },
+  "first_step": "I run a small women’s clothing boutique and answer customer messages from Instagram DMs, text messages and walk in asks. Write a short, friendly reply in my voice, about 2 to 4 sentences, that answers the customer’s question and offers to hold an item if they want it. Use no prices or stock facts I didn’t give you. Here is this one: [paste the customer’s message here]",
+  "map": [
+   {
+    "task": "Answering messages",
+    "phrase": "customer messages",
+    "today": "You answer these many times a day, each one from scratch.",
+    "withPath": "Each reply starts from a draft you only need to check and send.",
+    "ai": true,
+    "private": true,
+    "kind": "repeat_texts"
+   },
+   {
+    "task": "Writing product captions",
+    "phrase": "product captions",
+    "today": "You write these for every new piece, one at a time.",
+    "withPath": "Each caption starts from a draft in your voice that you only need to tweak.",
+    "ai": true,
+    "private": false,
+    "kind": "repeat_writing"
+   },
+   {
+    "task": "Texting regular customers",
+    "phrase": "texts to regulars",
+    "today": "You text your regulars often, each message written fresh.",
+    "withPath": "Each text starts from a draft you adjust for the customer.",
+    "ai": true,
+    "private": true,
+    "kind": "repeat_texts"
+   },
+   {
+    "task": "Ordering new stock",
+    "phrase": "stock orders",
+    "today": "You place your orders as needed, mostly by hand.",
+    "withPath": "Your AI tool helps you draft the order note, while you keep the decisions.",
+    "ai": true,
+    "private": true,
+    "kind": null
+   }
+  ],
+  "needs_follow_up": false,
+  "follow_up_question": null
+ },
+ "free": {
+  "firstWin": {
+   "task": "Answering messages",
+   "intro": "A customer asked if the rust linen set is still in a size 12 and if you can hold it. Here is your reply, ready to send.",
+   "draft": "Hi there! I’ll check on the size 12 in the rust linen set and get right back to you. I can hold it for you until [hold time] if you’d like. Thanks so much for reaching out!"
+  },
+  "firstStep": "I run a small women’s clothing boutique and answer customer messages from Instagram DMs, text messages and walk in asks. Write a short, friendly reply in my voice, about 2 to 4 sentences, that answers the customer’s question and offers to hold an item if they want it. Use no prices or stock facts I didn’t give you. Here is this one: [paste the customer’s message here]",
+  "map": [
+   {
+    "task": "Answering messages",
+    "phrase": "customer messages",
+    "today": "You answer these many times a day, each one from scratch.",
+    "withPath": "For your customer messages, your common replies are saved on your phone, each a few letters away.",
+    "ai": true,
+    "private": true,
+    "kind": "repeat_texts",
+    "level": 3,
+    "waits": false,
+    "recipe": "phone_quick_replies",
+    "held": null,
+    "askFirst": false
+   },
+   {
+    "task": "Writing product captions",
+    "phrase": "product captions",
+    "today": "You write these for every new piece, one at a time.",
+    "withPath": "Each caption starts from a draft in your voice that you only need to tweak.",
+    "ai": true,
+    "private": false,
+    "kind": "repeat_writing",
+    "level": 2,
+    "waits": false,
+    "recipe": null,
+    "held": "needs_computer",
+    "askFirst": false
+   },
+   {
+    "task": "Texting regular customers",
+    "phrase": "texts to regulars",
+    "today": "You text your regulars often, each message written fresh.",
+    "withPath": "For your texts to regulars, your common replies are saved on your phone, each a few letters away.",
+    "ai": true,
+    "private": true,
+    "kind": "repeat_texts",
+    "level": 3,
+    "waits": false,
+    "recipe": "phone_quick_replies",
+    "held": null,
+    "askFirst": false
+   },
+   {
+    "task": "Ordering new stock",
+    "phrase": "stock orders",
+    "today": "You place your orders as needed, mostly by hand.",
+    "withPath": "Your AI tool helps you draft the order note, while you keep the decisions.",
+    "ai": true,
+    "private": true,
+    "kind": null,
+    "level": 2,
+    "waits": false,
+    "recipe": null,
+    "held": null,
+    "askFirst": false
+   }
+  ],
+  "setups": [
+   "Your customer messages, saved once on your phone",
+   "Your texts to regulars, saved once on your phone"
+  ],
+  "prep": [],
+  "freePlan": true,
+  "tool": "chatgpt",
+  "track": "builder"
+ },
+ "who": {
+  "track": "builder",
+  "canUse": "self",
+  "connect": null,
+  "places": [
+   "Instagram",
+   "Canva",
+   "Text messages",
+   "Google Sheets",
+   "In person",
+   "Mostly the boutique floor and my phone. Square for sales",
+   "DM"
+  ],
+  "device": "phone",
+  "aiTools": [
+   "chatgpt"
+  ]
+ },
+ "outline": [
+  "about:about",
+  "task_1:workflow(phone_quick_replies)",
+  "task_2:extra(phone_quick_replies)",
+  "end:end"
+ ],
+ "path": {
+  "version": 3,
+  "role": "You run your own small women’s clothing boutique with two part timers, handling the floor, stock, customer messages and social media.",
+  "track": "builder",
+  "tool": "chatgpt",
+  "worksFor": "self",
+  "policy": null,
+  "device": "phone",
+  "apps": [
+   "any_chat",
+   "chatgpt",
+   "iphone",
+   "gboard",
+   "samsung_keyboard",
+   "google_sheets"
+  ],
+  "skipped": [
+   "ready"
+  ],
+  "steps": [
+   {
+    "id": "about",
+    "kind": "about",
+    "card": "chatgpt_about_you",
+    "note": "I own a small women’s clothing boutique with two part time helpers. I write to customers who message me on Instagram and by text, and to regulars I know well. I like a warm, friendly tone that sounds like me, with short messages that get to the point. For captions, I like a light, simple voice that describes the piece without big claims. Never add details I did not give you, like sizes, prices, fabrics or hours. If something is missing, ask me or leave a bracket I can fill in. Keep it plain, with no hype and no long paragraphs. Give me one version unless I ask for more."
+   },
+   {
+    "id": "task_1",
+    "kind": "workflow",
+    "task": "Answering messages",
+    "title": "Your customer messages, saved once on your phone",
+    "recipe": "phone_quick_replies",
+    "read": "Your replies live on your phone’s keyboard, each one a few letters away. When a customer asks about a size or a hold, you type a short shortcut and tap the reply instead of writing it again. It works in Instagram DMs and texts alike, and you still change the details before you send.",
+    "material": [
+     {
+      "label": "Your replies",
+      "items": [
+       "Hi [first name]! Yes, we have the [item] in a size [size]. Want me to hold it for you until [day and time]?",
+       "Hi [first name]! Sorry, the [item] is out of a size [size] right now. I can check [other option] for you if you like.",
+       "Thanks for asking! We’re open [days and hours]. Come by anytime, I’d love to see you.",
+       "Hi [first name]! Your [item] just came in. Want me to set it aside for you until [day and time]?",
+       "Yes, I can hold it for you until [day and time]. Just let me know when you’re coming in!",
+       "Thanks so much for your message! I’ll check on that and get back to you by [day and time].",
+       "Hi [first name]! The [item] is [price]. Let me know if you’d like me to hold it for you.",
+       "Thank you for coming in today! It was so nice to see you. Let me know if you have any questions about your [item]."
+      ]
+     },
+     {
+      "label": "Your shortcuts",
+      "items": [
+       "hsiz",
+       "nosz",
+       "hrs",
+       "narr",
+       "hldy",
+       "chek",
+       "prce",
+       "thnx"
+      ]
+     }
+    ]
+   },
+   {
+    "id": "task_2",
+    "kind": "extra",
+    "task": "Texting regular customers",
+    "title": "Your texts to regulars, saved once on your phone",
+    "recipe": "phone_quick_replies",
+    "sameAs": "task_1",
+    "read": "Texting regular customers is added to the setup you made in the step for answering messages. Your texts to regulars sit on your phone’s keyboard next to your other replies.",
+    "material": [
+     {
+      "label": "Your texts to regulars",
+      "items": [
+       "Hi [first name]! New [item or collection] just arrived and I thought of you. Want me to set something aside?",
+       "Hi [first name]! It’s been a while. Come see what’s new in the shop when you have a minute!",
+       "Hi [first name]! The [item] you liked is back in. Want me to hold it for you until [day and time]?",
+       "Hi [first name]! We’re having [event] on [day and time]. I’d love to see you there.",
+       "Thank you for shopping with me, [first name]! It means so much to have you as a regular."
+      ]
+     },
+     {
+      "label": "Your shortcuts",
+      "items": [
+       "nwin",
+       "miss",
+       "bkin",
+       "evnt",
+       "thkr"
+      ]
+     }
+    ]
+   },
+   {
+    "id": "end",
+    "kind": "end",
+    "safeUse": [
+     "Never type a customer’s full name, phone number, address or payment details into a chat tool. Use brackets instead.",
+     "Don’t paste in anything from Square, like card details or customer purchase records.",
+     "Keep supplier names, order numbers and wholesale prices out of your chats unless you are comfortable sharing them.",
+     "Read every caption and reply before you post or send it, and check sizes, prices and hours yourself.",
+     "Only use details you know are true about your pieces, like fabric or fit, and fix anything the AI guessed."
+    ],
+    "askMessage": null
+   }
+  ]
+ },
+ "design": [
+  {
+   "task": "Answering messages",
+   "today": "You answer customer messages many times a day, each one from scratch. They reach you by Instagram DMs, text messages and walk in asks, and you work from your phone only.",
+   "newWay": "Your most common replies, like size checks, holds and opening hours, are saved on your phone and are a few letters away. You tap one in, change the item or size, and send it yourself. Messages that are not routine you still answer in your own words, so the quick ones stop eating your day.",
+   "steps": [
+    {
+     "app": null,
+     "ref": null,
+     "goal": "Pick the ten questions customers ask you most, like size checks, holds, restocks and opening hours."
+    },
+    {
+     "app": "ChatGPT",
+     "ref": "chatgpt_get_started",
+     "goal": "Get ChatGPT ready on your phone so you can draft replies there."
+    },
+    {
+     "app": "ChatGPT",
+     "ref": "chatgpt_about_you",
+     "goal": "Save a short note about your boutique and how you like to sound, so every draft reads like you."
+    },
+    {
+     "app": "ChatGPT",
+     "ref": null,
+     "goal": "Paste in your real past replies and ask for a clean, short version of each of the ten answers with gaps for item and size."
+    },
+    {
+     "app": "her phone's keyboard",
+     "ref": "phone_quick_replies",
+     "goal": "Save the ten replies so each one is a few letters away in Instagram DMs and text messages."
+    }
+   ],
+   "material": [
+    {
+     "label": "Ten saved replies",
+     "what": "Short answers to your most common questions, with gaps for the item, size and hold time."
+    },
+    {
+     "label": "Tone notes",
+     "what": "A few lines on how you talk to customers, so drafts sound warm and like you."
+    },
+    {
+     "label": "Shortcut list",
+     "what": "A list of the letters that bring up each saved reply."
+    }
+   ],
+   "checkPoint": "You read every reply and fill in the item, size and hold time before you send it."
+  },
+  {
+   "task": "Texting regular customers",
+   "today": "You text your regulars often, each message written fresh.",
+   "newWay": "You keep a saved assistant in ChatGPT that knows your boutique and your voice. You tell it what you want to say, like new arrivals or a restock, and it gives you a friendly text you can adjust for each regular. You stay in charge of who gets which message and when, and the texts keep sounding personal.",
+   "steps": [
+    {
+     "app": "ChatGPT",
+     "ref": "chatgpt_project",
+     "goal": "Make a project for regular customer texts so your instructions and examples stay in one place."
+    },
+    {
+     "app": null,
+     "ref": null,
+     "goal": "Choose three or four past texts to regulars that sounded most like you."
+    },
+    {
+     "app": "ChatGPT",
+     "ref": "saved_assistant",
+     "goal": "Set up the assistant with those examples so it drafts new regular texts in your voice from a few words of input."
+    },
+    {
+     "app": "ChatGPT",
+     "ref": null,
+     "goal": "Try it with a real upcoming message, like a new arrival, and adjust the instructions until the draft feels right."
+    }
+   ],
+   "material": [
+    {
+     "label": "Assistant instructions",
+     "what": "What your boutique sells, who your regulars are in general terms, and how long and friendly the texts should be."
+    },
+    {
+     "label": "Example texts",
+     "what": "Your three or four best past texts to regulars, with no customer private details."
+    },
+    {
+     "label": "Quick prompt",
+     "what": "A short line to fill in each time, like the item, the occasion and any offer."
+    }
+   ],
+   "checkPoint": "You read each draft, check the item, price and any names, and send it yourself from your phone."
+  }
+ ],
+ "checks": [
+  {
+   "id": "screens",
+   "pass": true,
+   "detail": "9 screens, at most 11 for a builder"
+  },
+  {
+   "id": "levels_in_code",
+   "pass": true,
+   "detail": "Every row has a level or waits"
+  },
+  {
+   "id": "level3_not_writing_help",
+   "pass": true,
+   "detail": "No line at level 3 or higher reads like writing help"
+  },
+  {
+   "id": "path_line_from_recipe",
+   "pass": true,
+   "detail": "Every line at level 3 or higher is its recipe's"
+  },
+  {
+   "id": "path_written",
+   "pass": true,
+   "detail": "4 steps"
+  },
+  {
+   "id": "builder_no_sign_up",
+   "pass": true,
+   "detail": "No sign up step or line"
+  },
+  {
+   "id": "workflow_parts",
+   "pass": true,
+   "detail": "2 workflows, each with a test, an approval point and a cost line"
+  },
+  {
+   "id": "setup_from_recipe_or_card",
+   "pass": true,
+   "detail": "card chatgpt_about_you, recipe phone_quick_replies, recipe phone_quick_replies"
+  },
+  {
+   "id": "no_click_paths_from_model",
+   "pass": true,
+   "detail": "The model wrote no menu paths or button names"
+  },
+  {
+   "id": "copy_rules",
+   "pass": true,
+   "detail": "No dashes, promised times, prices or percents"
+  },
+  {
+   "id": "offer_matches_path",
+   "pass": true,
+   "detail": "Offer names 2, path has 2 workflows, 2 match by name"
+  }
+ ],
+ "recipes": {
+  "total": 4,
+  "aiTasks": 4,
+  "withRecipe": [
+   {
+    "task": "Answering messages",
+    "recipe": "phone_quick_replies",
+    "level": 3
+   },
+   {
+    "task": "Texting regular customers",
+    "recipe": "phone_quick_replies",
+    "level": 3
+   }
+  ],
+  "without": [
+   {
+    "task": "Writing product captions",
+    "level": 2,
+    "waits": false
+   },
+   {
+    "task": "Ordering new stock",
+    "level": 2,
+    "waits": false
+   }
+  ],
+  "noRecipe": false,
+  "mostlyAssistant": false
+ },
+ "designCount": {
+  "steps": 9,
+  "checked": 5,
+  "unchecked": 2,
+  "noApp": 2,
+  "badRefs": [],
+  "clickPaths": [],
+  "apps": [
+   [
+    "ChatGPT",
+    2
+   ]
+  ],
+  "refs": [
+   "chatgpt_get_started",
+   "chatgpt_about_you",
+   "phone_quick_replies",
+   "chatgpt_project",
+   "saved_assistant"
+  ]
+ }
+}

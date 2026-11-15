@@ -1,0 +1,779 @@
+{
+ "name": "groomer",
+ "group": "self employed Starter",
+ "persona": {
+  "group": "self employed Starter",
+  "bio": "Dani, 34, runs a mobile dog grooming van on her own in a suburb of Atlanta. Six or seven dogs a day. Clients book by text, and she answers the same questions all day: prices by breed, how long it takes, whether she does nails only, how to reschedule. She sends reminder texts the night before, writes a short note after each groom about matting or skin, and posts before and after photos on Instagram. Bookings live in a paper diary and her phone's calendar. She has never used AI.",
+  "job": "I run my own mobile dog grooming van.",
+  "level": "not_yet",
+  "device": "phone",
+  "phone": "iphone",
+  "canUse": "self",
+  "connect": null
+ },
+ "versions": {
+  "job": "beginner-job-v5",
+  "questions": "beginner-questions-v6",
+  "intake": "beginner-intake-v7",
+  "path": "beginner-path-v1"
+ },
+ "jobRead": {
+  "repeats": [
+   {
+    "label": "Booking grooming slots",
+    "ai": false
+   },
+   {
+    "label": "Texting appointment reminders",
+    "ai": true
+   },
+   {
+    "label": "Bathing and drying dogs",
+    "ai": false
+   },
+   {
+    "label": "Writing client follow ups",
+    "ai": true
+   },
+   {
+    "label": "Posting social media updates",
+    "ai": true
+   }
+  ],
+  "aiFallback": [
+   "Appointment reminder texts",
+   "Thank you messages",
+   "Van route planning",
+   "Social media captions"
+  ],
+  "apps": [
+   "Square Appointments",
+   "Vagaro",
+   "Google Calendar",
+   "Square",
+   "Facebook",
+   "Venmo"
+  ],
+  "aiUses": [
+   "Captions",
+   "Text message drafts",
+   "Pricing ideas",
+   "Client follow ups"
+  ],
+  "worksFor": "self"
+ },
+ "jobReadFallback": false,
+ "asked": [
+  {
+   "id": "asked_1",
+   "title": "How do you usually answer a client’s text?",
+   "kind": "many",
+   "choices": [
+    "Right between grooms",
+    "Ask a friend first",
+    "Think it through first"
+   ],
+   "hint": "Pick every one that fits, or the closest."
+  }
+ ],
+ "screens": 7,
+ "worksForFromJob": "self",
+ "answers": {
+  "job": "I run my own mobile dog grooming van.",
+  "experience": "not_yet",
+  "qas": [
+   {
+    "id": "level",
+    "title": "Where are you with AI?",
+    "picked": [
+     "Never used it"
+    ],
+    "text": null,
+    "shown": [
+     "Never used it",
+     "Tried it a few times",
+     "Use it some weeks",
+     "Use it most days"
+    ]
+   },
+   {
+    "id": "repeats",
+    "title": "What do you do over and over, every day or every week?",
+    "picked": [
+     "Booking grooming slots",
+     "Texting appointment reminders",
+     "Bathing and drying dogs",
+     "Writing client follow ups",
+     "Posting social media updates",
+     "Answering messages"
+    ],
+    "text": "Price and reschedule questions, same ones every day",
+    "shown": [
+     "Booking grooming slots",
+     "Texting appointment reminders",
+     "Bathing and drying dogs",
+     "Writing client follow ups",
+     "Posting social media updates",
+     "Answering messages",
+     "Writing emails",
+     "Planning my week",
+     "Making lists",
+     "Social posts"
+    ]
+   },
+   {
+    "id": "most",
+    "title": "Which would save you the most time if it got easier?",
+    "picked": [
+     "Answering messages",
+     "Texting appointment reminders"
+    ],
+    "text": null,
+    "shown": [
+     "Booking grooming slots",
+     "Texting appointment reminders",
+     "Bathing and drying dogs",
+     "Writing client follow ups",
+     "Posting social media updates",
+     "Answering messages"
+    ]
+   },
+   {
+    "id": "example",
+    "title": "Paste the last one you wrote, or what the last person asked you.",
+    "picked": [],
+    "text": "Hi, is Tuesday at 10 still open for a bath and trim for my poodle? He got really matted last time so maybe longer than usual. Thanks!"
+   },
+   {
+    "id": "often",
+    "title": "How often do you do this?",
+    "picked": [
+     "Many times a day"
+    ],
+    "text": null,
+    "shown": [
+     "Many times a day",
+     "About once a day",
+     "A few times a week",
+     "Once a week or less"
+    ]
+   },
+   {
+    "id": "where",
+    "title": "Where does your work happen?",
+    "picked": [
+     "Google Calendar",
+     "Text messages",
+     "Instagram",
+     "Paper",
+     "In person"
+    ],
+    "text": null,
+    "shown": [
+     "Square Appointments",
+     "Vagaro",
+     "Google Calendar",
+     "Square",
+     "Facebook",
+     "Venmo",
+     "Text messages",
+     "Gmail",
+     "Outlook",
+     "Google Sheets",
+     "Instagram",
+     "A work system",
+     "Paper",
+     "In person"
+    ]
+   },
+   {
+    "id": "device",
+    "title": "Do you work on a phone, a computer or both?",
+    "picked": [
+     "Phone only"
+    ],
+    "text": null,
+    "shown": [
+     "Phone only",
+     "Computer only",
+     "Both"
+    ]
+   },
+   {
+    "id": "asked_1",
+    "title": "How do you usually answer a client’s text?",
+    "picked": [
+     "Right between grooms"
+    ],
+    "text": "Usually from the van, wet hands and all. Price questions I j",
+    "shown": [
+     "Right between grooms",
+     "Ask a friend first",
+     "Think it through first"
+    ]
+   }
+  ],
+  "mostWanted": [
+   "Answering messages",
+   "Texting appointment reminders"
+  ],
+  "worksFor": "self",
+  "aiTools": [
+   "none_yet"
+  ],
+  "aiToolsOther": null,
+  "aiPolicy": null,
+  "often": "many_a_day"
+ },
+ "intake": {
+  "role_summary": "You run your own mobile dog grooming van, handling bookings, appointment reminders, client messages and social posts from your phone.",
+  "tasks": [
+   {
+    "name": "Booking grooming slots",
+    "ai": false,
+    "private": false,
+    "kind": null
+   },
+   {
+    "name": "Appointment reminders",
+    "ai": true,
+    "private": false,
+    "kind": "repeat_texts"
+   },
+   {
+    "name": "Client follow ups",
+    "ai": true,
+    "private": true,
+    "kind": "repeat_texts"
+   },
+   {
+    "name": "Social media updates",
+    "ai": true,
+    "private": false,
+    "kind": "repeat_writing"
+   },
+   {
+    "name": "Answering messages",
+    "ai": true,
+    "private": true,
+    "kind": "repeat_texts"
+   },
+   {
+    "name": "Price and reschedule questions",
+    "ai": true,
+    "private": true,
+    "kind": "repeat_texts"
+   }
+  ],
+  "first_win": {
+   "task": "Answering messages",
+   "intro": "You asked about a Tuesday slot for a poodle bath and trim. Here is a reply you can adjust and send from the van.",
+   "draft": "Hi there! Tuesday at 10 may be open, but I need to check my schedule first, and I’ll get back to you shortly. Since your poodle was matted last time, I’ll plan extra time for the bath and trim. I’ll confirm the price and timing once I’ve checked."
+  },
+  "first_step": "I’m a mobile dog groomer working from my van. When a client texts asking about an appointment, a price, or a reschedule, I need a short, friendly reply I can send from my phone between grooms. Write a text reply in a warm, plain tone, two to three sentences, no sign off. Tell me what the client asked and any details I know, and I will fill them in. The client’s message is: [paste the client’s message here]",
+  "map": [
+   {
+    "task": "Booking grooming slots",
+    "phrase": "booking calendar",
+    "today": "You fit bookings into your calendar as they come in, many times a day.",
+    "withPath": "Your calendar stays yours, and AI can only help with the wording of the messages around it.",
+    "ai": false,
+    "private": false,
+    "kind": null
+   },
+   {
+    "task": "Appointment reminders",
+    "phrase": "reminder texts",
+    "today": "You send reminder texts by hand, many times a day.",
+    "withPath": "Each reminder starts from a draft you only need to check and send.",
+    "ai": true,
+    "private": false,
+    "kind": "repeat_texts"
+   },
+   {
+    "task": "Client follow ups",
+    "phrase": null,
+    "today": "You write follow ups one at a time after each visit.",
+    "withPath": "Each follow up starts from a draft you only need to check, with client details kept out.",
+    "ai": true,
+    "private": true,
+    "kind": "repeat_texts"
+   },
+   {
+    "task": "Social media updates",
+    "phrase": "Instagram posts",
+    "today": "You write Instagram posts when you have time between jobs.",
+    "withPath": "Each post starts from a draft you tweak to match your day’s work.",
+    "ai": true,
+    "private": false,
+    "kind": "repeat_writing"
+   },
+   {
+    "task": "Answering messages",
+    "phrase": null,
+    "today": "You answer client texts from the van, often right between grooms.",
+    "withPath": "Each reply starts from a draft you only need to check and send from your phone.",
+    "ai": true,
+    "private": true,
+    "kind": "repeat_texts"
+   },
+   {
+    "task": "Price and reschedule questions",
+    "phrase": null,
+    "today": "You answer the same price and reschedule questions every day.",
+    "withPath": "Each reply starts from a draft you only need to fill in and send.",
+    "ai": true,
+    "private": true,
+    "kind": "repeat_texts"
+   }
+  ],
+  "needs_follow_up": false,
+  "follow_up_question": null
+ },
+ "free": {
+  "firstWin": {
+   "task": "Answering messages",
+   "intro": "You asked about a Tuesday slot for a poodle bath and trim. Here is a reply you can adjust and send from the van.",
+   "draft": "Hi there! Tuesday at 10 may be open, but I need to check my schedule first, and I’ll get back to you shortly. Since your poodle was matted last time, I’ll plan extra time for the bath and trim. I’ll confirm the price and timing once I’ve checked."
+  },
+  "firstStep": "I’m a mobile dog groomer working from my van. When a client texts asking about an appointment, a price, or a reschedule, I need a short, friendly reply I can send from my phone between grooms. Write a text reply in a warm, plain tone, two to three sentences, no sign off. Tell me what the client asked and any details I know, and I will fill them in. The client’s message is: [paste the client’s message here]",
+  "map": [
+   {
+    "task": "Answering messages",
+    "phrase": null,
+    "today": "You answer client texts from the van, often right between grooms.",
+    "withPath": "Your common replies are saved on your phone, each a few letters away.",
+    "ai": true,
+    "private": true,
+    "kind": "repeat_texts",
+    "level": 3,
+    "waits": false,
+    "recipe": "phone_quick_replies",
+    "held": null,
+    "askFirst": false
+   },
+   {
+    "task": "Booking grooming slots",
+    "phrase": "booking calendar",
+    "today": "You fit bookings into your calendar as they come in, many times a day.",
+    "withPath": "Your calendar stays yours, and AI can only help with the wording of the messages around it.",
+    "ai": false,
+    "private": false,
+    "kind": null,
+    "level": 1,
+    "waits": false,
+    "recipe": null,
+    "held": null,
+    "askFirst": false
+   },
+   {
+    "task": "Appointment reminders",
+    "phrase": "reminder texts",
+    "today": "You send reminder texts by hand, many times a day.",
+    "withPath": "For your reminder texts, your common replies are saved on your phone, each a few letters away.",
+    "ai": true,
+    "private": false,
+    "kind": "repeat_texts",
+    "level": 3,
+    "waits": false,
+    "recipe": "phone_quick_replies",
+    "held": null,
+    "askFirst": false
+   },
+   {
+    "task": "Client follow ups",
+    "phrase": null,
+    "today": "You write follow ups one at a time after each visit.",
+    "withPath": "Your common replies are saved on your phone, each a few letters away.",
+    "ai": true,
+    "private": true,
+    "kind": "repeat_texts",
+    "level": 3,
+    "waits": false,
+    "recipe": "phone_quick_replies",
+    "held": null,
+    "askFirst": false
+   },
+   {
+    "task": "Social media updates",
+    "phrase": "Instagram posts",
+    "today": "You write Instagram posts when you have time between jobs.",
+    "withPath": "Each post starts from a draft you tweak to match your day’s work.",
+    "ai": true,
+    "private": false,
+    "kind": "repeat_writing",
+    "level": 2,
+    "waits": false,
+    "recipe": null,
+    "held": "needs_computer",
+    "askFirst": false
+   },
+   {
+    "task": "Price and reschedule questions",
+    "phrase": null,
+    "today": "You answer the same price and reschedule questions every day.",
+    "withPath": "Your common replies are saved on your phone, each a few letters away.",
+    "ai": true,
+    "private": true,
+    "kind": "repeat_texts",
+    "level": 3,
+    "waits": false,
+    "recipe": "phone_quick_replies",
+    "held": null,
+    "askFirst": false
+   }
+  ],
+  "setups": [
+   "Answering messages, saved once on your phone",
+   "Your reminder texts, saved once on your phone"
+  ],
+  "prep": [
+   "Get Claude ready on your phone",
+   "Teach Claude who you are"
+  ],
+  "freePlan": true,
+  "tool": "claude",
+  "track": "starter"
+ },
+ "who": {
+  "track": "starter",
+  "canUse": "self",
+  "connect": null,
+  "places": [
+   "Google Calendar",
+   "Text messages",
+   "Instagram",
+   "Paper",
+   "In person"
+  ],
+  "device": "phone",
+  "aiTools": [
+   "none_yet"
+  ]
+ },
+ "outline": [
+  "ready:ready",
+  "about:about",
+  "task_1:workflow(phone_quick_replies)",
+  "task_2:extra(phone_quick_replies)",
+  "end:end"
+ ],
+ "path": {
+  "version": 3,
+  "role": "You run your own mobile dog grooming van, handling bookings, appointment reminders, client messages and social posts from your phone.",
+  "track": "starter",
+  "tool": "claude",
+  "worksFor": "self",
+  "policy": null,
+  "device": "phone",
+  "apps": [
+   "any_chat",
+   "claude",
+   "iphone",
+   "gboard",
+   "samsung_keyboard"
+  ],
+  "skipped": [],
+  "steps": [
+   {
+    "id": "ready",
+    "kind": "ready",
+    "card": "claude_get_started",
+    "firstStep": "I’m a mobile dog groomer working from my van. When a client texts asking about an appointment, a price, or a reschedule, I need a short, friendly reply I can send from my phone between grooms. Write a text reply in a warm, plain tone, two to three sentences, no sign off. Tell me what the client asked and any details I know, and I will fill them in. The client’s message is: [paste the client’s message here]"
+   },
+   {
+    "id": "about",
+    "kind": "about",
+    "card": "claude_about_you",
+    "note": "I run my own mobile dog grooming van. I handle bookings, appointment reminders, client messages and social posts from my phone, often between grooms. I write to dog owners who want a quick, friendly, clear answer. Keep a warm and plain tone, short sentences, and keep texts to two or three lines. Never add details I did not give you, like prices, openings or services I did not mention. Use square brackets for anything I need to fill in. Never promise a time slot for me. I read everything before I send it."
+   },
+   {
+    "id": "task_1",
+    "kind": "workflow",
+    "task": "Answering messages",
+    "title": "Answering messages, saved once on your phone",
+    "recipe": "phone_quick_replies",
+    "read": "Your replies live on your phone’s keyboard. Each one is a few letters away, so you can answer from the van with wet hands and change only a name or a time. Your answers stay in your own voice, and you read each one before it goes out.",
+    "material": [
+     {
+      "label": "Your replies",
+      "items": [
+       "Hi [first name], thanks for reaching out! Yes, [day and time] is open. Want me to book it for [dog’s name]?",
+       "Hi [first name], thanks for asking! [Day and time] is not open, but I have [other day and time]. Does that work?",
+       "Hi [first name], I’d be happy to help. The price depends on your dog’s size and coat. Can you tell me the breed and how long since the last groom?",
+       "Hi [first name], if [dog’s name] is matted, the groom can take longer and may cost more. I’ll check the coat when I arrive and talk with you first.",
+       "Hi [first name], no problem at all. I can move your appointment to [new day and time]. Does that work for you?",
+       "Hi [first name], thanks for letting me know. I’m with a dog right now and will reply properly as soon as I’m done. Talk soon!",
+       "Hi [first name], I’m on my way and will be there around [arrival time]. See you soon!"
+      ]
+     },
+     {
+      "label": "Your shortcuts",
+      "items": [
+       "opn",
+       "nope",
+       "prc",
+       "mtd",
+       "rsch",
+       "busy",
+       "eta"
+      ]
+     }
+    ]
+   },
+   {
+    "id": "task_2",
+    "kind": "extra",
+    "task": "Appointment reminders",
+    "title": "Your reminder texts, saved once on your phone",
+    "recipe": "phone_quick_replies",
+    "sameAs": "task_1",
+    "read": "Your reminder texts are added to the replies you saved in the step on answering messages. They sit on your phone’s keyboard, a few letters away, so you stop typing each one by hand.",
+    "material": [
+     {
+      "label": "Your reminder texts",
+      "items": [
+       "Hi [first name], a friendly reminder that [dog’s name] has a grooming appointment on [day and time]. Please reply to confirm.",
+       "Hi [first name], I’ll be at your place tomorrow at [time] for [dog’s name]. Please reply to confirm.",
+       "Hi [first name], I’m on my way for [dog’s name]’s groom and should arrive around [arrival time]. See you soon!",
+       "Hi [first name], just checking that [day and time] still works for [dog’s name]. Let me know if you need to change it.",
+       "Hi [first name], thanks for having us today! [dog’s name] did great. Let me know when you’d like to book the next visit."
+      ]
+     },
+     {
+      "label": "Your shortcuts",
+      "items": [
+       "rmdr",
+       "tmrw",
+       "otw",
+       "cfm",
+       "thx"
+      ]
+     }
+    ]
+   },
+   {
+    "id": "end",
+    "kind": "end",
+    "safeUse": [
+     "Never type a client’s full name, home address, phone number or gate code into a chat tool. Use square brackets instead.",
+     "Keep your dog’s health details, like medical notes or medication, out of what you type. Write a general draft and add them yourself.",
+     "Do not type payment details or account numbers into a chat tool.",
+     "Read every reply, reminder and post before it goes out, and fix anything that is not right.",
+     "Check prices, openings and your own rules yourself, since the AI does not know them."
+    ],
+    "askMessage": null
+   }
+  ]
+ },
+ "design": [
+  {
+   "task": "Answering messages",
+   "today": "You answer client texts from the van, often right between grooms, with wet hands. Price and reschedule questions come in the same ones every day, many times a day.",
+   "newWay": "Your most common replies are saved on your phone, so each one is a few letters away instead of typed from scratch. For a message that needs a little thought, like a matted poodle that may need a longer slot, you check your calendar and edit the saved reply before it goes. You read every reply and press send yourself, so the answers stay in your voice and are quicker to give between grooms.",
+   "steps": [
+    {
+     "app": null,
+     "ref": null,
+     "goal": "Pick the ten questions clients ask you most, such as price, open slots, reschedules and matted coats."
+    },
+    {
+     "app": "ChatGPT",
+     "ref": "chatgpt_get_started",
+     "goal": "Get ChatGPT ready on your phone so you can draft your replies there."
+    },
+    {
+     "app": "ChatGPT",
+     "ref": null,
+     "goal": "Turn your ten questions and your own past answers into short replies written in your voice, with gaps for the day, time and price."
+    },
+    {
+     "app": "her phone's keyboard",
+     "ref": "phone_quick_replies",
+     "goal": "Save the ten replies so each one is a few letters away when you answer a client."
+    },
+    {
+     "app": "Google Calendar",
+     "ref": null,
+     "goal": "Check the open slot in your calendar before you fill in the day and time in a reply."
+    }
+   ],
+   "material": [
+    {
+     "label": "Ten saved replies",
+     "what": "Short answers to your most common client questions, with gaps for day, time and price."
+    },
+    {
+     "label": "Matted coat reply",
+     "what": "A reply that explains a longer slot and any extra charge for heavily matted dogs, using your own wording and prices."
+    },
+    {
+     "label": "Shortcut list",
+     "what": "A list of the short letter codes that bring up each saved reply on your phone."
+    }
+   ],
+   "checkPoint": "You read every reply, fill in the day, time and price, and press send yourself."
+  },
+  {
+   "task": "Appointment reminders",
+   "today": "You send reminder texts by hand, many times a day.",
+   "newWay": "One saved reminder text sits on your phone, ready to use for each booking. You look at tomorrow's appointments in your calendar, bring up the reminder, fill in the client's name, dog and time, and send it. Every reminder stays consistent and takes far less typing, and nothing goes out unless you send it.",
+   "steps": [
+    {
+     "app": null,
+     "ref": null,
+     "goal": "Decide what every reminder must say, such as dog name, day, time, address and how to reschedule."
+    },
+    {
+     "app": "ChatGPT",
+     "ref": "chatgpt_get_started",
+     "goal": "Get ChatGPT ready on your phone so you can draft the reminder there."
+    },
+    {
+     "app": "ChatGPT",
+     "ref": null,
+     "goal": "Write one friendly reminder text in your voice, with gaps for name, dog, day and time."
+    },
+    {
+     "app": "her phone's keyboard",
+     "ref": "phone_quick_replies",
+     "goal": "Save the reminder so it is a few letters away whenever you text a client."
+    },
+    {
+     "app": "Google Calendar",
+     "ref": null,
+     "goal": "Go through the next day's appointments and send one reminder for each."
+    }
+   ],
+   "material": [
+    {
+     "label": "Reminder text",
+     "what": "One short reminder with gaps for client name, dog name, day and time."
+    },
+    {
+     "label": "Reschedule line",
+     "what": "A sentence you can add that tells clients how to change their slot."
+    },
+    {
+     "label": "Shortcut",
+     "what": "The short letter code that brings up the reminder on your phone."
+    }
+   ],
+   "checkPoint": "You fill in each name, dog and time from your calendar, read the text, and send it yourself."
+  }
+ ],
+ "checks": [
+  {
+   "id": "screens",
+   "pass": true,
+   "detail": "7 screens, at most 9 for a starter"
+  },
+  {
+   "id": "levels_in_code",
+   "pass": true,
+   "detail": "Every row has a level or waits"
+  },
+  {
+   "id": "level3_not_writing_help",
+   "pass": true,
+   "detail": "No line at level 3 or higher reads like writing help"
+  },
+  {
+   "id": "path_line_from_recipe",
+   "pass": true,
+   "detail": "Every line at level 3 or higher is its recipe's"
+  },
+  {
+   "id": "path_written",
+   "pass": true,
+   "detail": "5 steps"
+  },
+  {
+   "id": "workflow_parts",
+   "pass": true,
+   "detail": "2 workflows, each with a test, an approval point and a cost line"
+  },
+  {
+   "id": "setup_from_recipe_or_card",
+   "pass": true,
+   "detail": "card claude_get_started, card claude_about_you, recipe phone_quick_replies, recipe phone_quick_replies"
+  },
+  {
+   "id": "no_click_paths_from_model",
+   "pass": true,
+   "detail": "The model wrote no menu paths or button names"
+  },
+  {
+   "id": "copy_rules",
+   "pass": true,
+   "detail": "No dashes, promised times, prices or percents"
+  },
+  {
+   "id": "offer_matches_path",
+   "pass": true,
+   "detail": "Offer names 2, path has 2 workflows, 2 match by name"
+  }
+ ],
+ "recipes": {
+  "total": 6,
+  "aiTasks": 5,
+  "withRecipe": [
+   {
+    "task": "Answering messages",
+    "recipe": "phone_quick_replies",
+    "level": 3
+   },
+   {
+    "task": "Appointment reminders",
+    "recipe": "phone_quick_replies",
+    "level": 3
+   },
+   {
+    "task": "Client follow ups",
+    "recipe": "phone_quick_replies",
+    "level": 3
+   },
+   {
+    "task": "Price and reschedule questions",
+    "recipe": "phone_quick_replies",
+    "level": 3
+   }
+  ],
+  "without": [
+   {
+    "task": "Booking grooming slots",
+    "level": 1,
+    "waits": false
+   },
+   {
+    "task": "Social media updates",
+    "level": 2,
+    "waits": false
+   }
+  ],
+  "noRecipe": false,
+  "mostlyAssistant": false
+ },
+ "designCount": {
+  "steps": 10,
+  "checked": 4,
+  "unchecked": 4,
+  "noApp": 2,
+  "badRefs": [],
+  "clickPaths": [],
+  "apps": [
+   [
+    "ChatGPT",
+    2
+   ],
+   [
+    "Google Calendar",
+    2
+   ]
+  ],
+  "refs": [
+   "chatgpt_get_started",
+   "phone_quick_replies"
+  ]
+ }
+}

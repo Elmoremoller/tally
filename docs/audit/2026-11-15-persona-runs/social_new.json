@@ -1,0 +1,762 @@
+{
+ "name": "social_new",
+ "group": "experiment",
+ "persona": {
+  "group": "experiment",
+  "bio": "Tara, 25, social media manager at a regional chain of bakeries. She runs Instagram, Facebook and TikTok, plans posts in a shared Google Sheet, answers comments and DMs every morning, writes captions for every new product, pulls numbers for a monthly report and coordinates photo shoots with the store managers by email in Gmail. She has never used AI; her manager is not sure what the company allows.",
+  "job": "Social media manager at a chain of bakeries.",
+  "level": "not_yet",
+  "device": "both",
+  "phone": "iphone",
+  "canUse": "not_sure",
+  "connect": "not_sure"
+ },
+ "versions": {
+  "job": "beginner-job-v5",
+  "questions": "beginner-questions-v6",
+  "intake": "beginner-intake-v7",
+  "path": "beginner-path-v1"
+ },
+ "jobRead": {
+  "repeats": [
+   {
+    "label": "Writing captions",
+    "ai": true
+   },
+   {
+    "label": "Planning weekly posts",
+    "ai": true
+   },
+   {
+    "label": "Replying to comments",
+    "ai": true
+   },
+   {
+    "label": "Photographing new bakes",
+    "ai": false
+   },
+   {
+    "label": "Writing store newsletters",
+    "ai": true
+   },
+   {
+    "label": "Tracking post engagement",
+    "ai": false
+   }
+  ],
+  "aiFallback": [
+   "Caption ideas",
+   "Comment reply drafts",
+   "Weekly content calendar",
+   "Promo post copy"
+  ],
+  "apps": [
+   "Instagram",
+   "Facebook",
+   "Canva",
+   "Meta Business Suite",
+   "Later",
+   "Google Drive"
+  ],
+  "aiUses": [
+   "Captions",
+   "Post ideas",
+   "Comment replies",
+   "Hashtag lists",
+   "Newsletter drafts"
+  ],
+  "worksFor": "employer"
+ },
+ "jobReadFallback": false,
+ "asked": [
+  {
+   "id": "asked_1",
+   "title": "How do you come up with caption ideas today?",
+   "kind": "many",
+   "choices": [
+    "Ask the bakers",
+    "Check past posts",
+    "Copy a competitor",
+    "Look at trends",
+    "Just wing it"
+   ],
+   "hint": "Pick every one that fits."
+  }
+ ],
+ "screens": 9,
+ "worksForFromJob": "employer",
+ "answers": {
+  "job": "Social media manager at a chain of bakeries.",
+  "experience": "not_yet",
+  "qas": [
+   {
+    "id": "level",
+    "title": "Where are you with AI?",
+    "picked": [
+     "Never used it"
+    ],
+    "text": null,
+    "shown": [
+     "Never used it",
+     "Tried it a few times",
+     "Use it some weeks",
+     "Use it most days"
+    ]
+   },
+   {
+    "id": "repeats",
+    "title": "What do you do over and over, every day or every week?",
+    "picked": [
+     "Writing captions",
+     "Planning weekly posts",
+     "Replying to comments",
+     "Tracking post engagement",
+     "Answering messages",
+     "Writing emails"
+    ],
+    "text": "Coordinating shoots with store managers by email",
+    "shown": [
+     "Writing captions",
+     "Planning weekly posts",
+     "Replying to comments",
+     "Photographing new bakes",
+     "Writing store newsletters",
+     "Tracking post engagement",
+     "Answering messages",
+     "Writing emails",
+     "Planning my week",
+     "Making lists"
+    ]
+   },
+   {
+    "id": "most",
+    "title": "Which would save you the most time if it got easier?",
+    "picked": [
+     "Writing captions",
+     "Replying to comments"
+    ],
+    "text": null,
+    "shown": [
+     "Writing captions",
+     "Planning weekly posts",
+     "Replying to comments",
+     "Tracking post engagement",
+     "Answering messages",
+     "Writing emails"
+    ]
+   },
+   {
+    "id": "example",
+    "title": "Paste the last one you wrote, or what the last person asked you.",
+    "picked": [],
+    "text": "Caption for the new cinnamon swirl loaf, posted to Instagram. Fresh out of the oven every morning this week, grab yours before 11 🥐 link in bio for pre-orders."
+   },
+   {
+    "id": "often",
+    "title": "How often do you do this?",
+    "picked": [
+     "About once a day"
+    ],
+    "text": null,
+    "shown": [
+     "Many times a day",
+     "About once a day",
+     "A few times a week",
+     "Once a week or less"
+    ]
+   },
+   {
+    "id": "where",
+    "title": "Where does your work happen?",
+    "picked": [
+     "Instagram",
+     "Facebook",
+     "Gmail",
+     "Google Sheets"
+    ],
+    "text": null,
+    "shown": [
+     "Instagram",
+     "Facebook",
+     "Canva",
+     "Meta Business Suite",
+     "Later",
+     "Google Drive",
+     "Text messages",
+     "Gmail",
+     "Outlook",
+     "Google Sheets",
+     "A work system",
+     "Paper",
+     "In person"
+    ]
+   },
+   {
+    "id": "device",
+    "title": "Do you work on a phone, a computer or both?",
+    "picked": [
+     "Both"
+    ],
+    "text": null,
+    "shown": [
+     "Phone only",
+     "Computer only",
+     "Both"
+    ]
+   },
+   {
+    "id": "asked_1",
+    "title": "How do you come up with caption ideas today?",
+    "picked": [
+     "Ask the bakers",
+     "Check past posts",
+     "Look at trends"
+    ],
+    "text": "Mostly I ask the bakers what's new, then just write it up qu",
+    "shown": [
+     "Ask the bakers",
+     "Check past posts",
+     "Copy a competitor",
+     "Look at trends",
+     "Just wing it"
+    ]
+   },
+   {
+    "id": "can_use",
+    "title": "Can you use AI for your work?",
+    "picked": [
+     "Not sure"
+    ],
+    "text": null,
+    "shown": [
+     "Yes",
+     "Not sure",
+     "No, it’s restricted",
+     "I work for myself"
+    ]
+   },
+   {
+    "id": "connect",
+    "title": "Would your company let you link your work email to an AI tool?",
+    "picked": [
+     "Not sure"
+    ],
+    "text": null,
+    "shown": [
+     "Yes",
+     "No",
+     "Not sure"
+    ]
+   }
+  ],
+  "mostWanted": [
+   "Writing captions",
+   "Replying to comments"
+  ],
+  "worksFor": "employer",
+  "aiTools": [
+   "none_yet"
+  ],
+  "aiToolsOther": null,
+  "aiPolicy": "no_idea",
+  "often": "daily"
+ },
+ "intake": {
+  "role_summary": "You’re the social media manager for a chain of bakeries, running Instagram and Facebook, writing captions, replying to comments and coordinating shoots with store managers.",
+  "tasks": [
+   {
+    "name": "Writing captions",
+    "ai": true,
+    "private": false,
+    "kind": "repeat_writing"
+   },
+   {
+    "name": "Replying to comments",
+    "ai": true,
+    "private": false,
+    "kind": "repeat_texts"
+   },
+   {
+    "name": "Planning weekly posts",
+    "ai": true,
+    "private": false,
+    "kind": null
+   },
+   {
+    "name": "Writing emails",
+    "ai": true,
+    "private": false,
+    "kind": "repeat_emails"
+   },
+   {
+    "name": "Answering messages",
+    "ai": true,
+    "private": false,
+    "kind": "repeat_texts"
+   }
+  ],
+  "first_win": {
+   "task": "Writing captions",
+   "intro": "You shared your cinnamon swirl caption. Here is a fresh version you can post today.",
+   "draft": "Fresh out of the oven every morning this week, our cinnamon swirl loaf is ready for you. Grab yours before 11 🥐 Pre order yours now at the link in our bio. [pre order details]"
+  },
+  "first_step": "I’m the social media manager for a chain of bakeries, posting to Instagram and Facebook. Write one Instagram caption for a new bakery item. Keep it under 40 words, warm and playful, with one emoji and a call to action pointing to the link in bio. Here is what is new and when it is available: [paste what is new and any details here]",
+  "map": [
+   {
+    "task": "Writing captions",
+    "phrase": "captions",
+    "today": "You write a caption about once a day, starting from scratch each time.",
+    "withPath": "Each caption starts from a draft you only need to check and polish.",
+    "ai": true,
+    "private": false,
+    "kind": "repeat_writing"
+   },
+   {
+    "task": "Replying to comments",
+    "phrase": "comment replies",
+    "today": "You reply to comments as they come in, one at a time.",
+    "withPath": "Each reply starts from a draft in your voice that you only need to check.",
+    "ai": true,
+    "private": false,
+    "kind": "repeat_texts"
+   },
+   {
+    "task": "Planning weekly posts",
+    "phrase": "weekly post plans",
+    "today": "You plan your posts week by week by hand.",
+    "withPath": "Each week’s plan starts from a draft schedule you adjust to what the bakers have new.",
+    "ai": true,
+    "private": false,
+    "kind": null
+   },
+   {
+    "task": "Writing emails",
+    "phrase": "emails",
+    "today": "You write emails to store managers and others as they come up.",
+    "withPath": "Each email starts from a draft you tweak before sending.",
+    "ai": true,
+    "private": false,
+    "kind": "repeat_emails"
+   },
+   {
+    "task": "Answering messages",
+    "phrase": "message replies",
+    "today": "You answer direct messages as they arrive.",
+    "withPath": "Each reply starts from a draft you check before sending.",
+    "ai": true,
+    "private": false,
+    "kind": "repeat_texts"
+   }
+  ],
+  "needs_follow_up": false,
+  "follow_up_question": null
+ },
+ "free": {
+  "firstWin": {
+   "task": "Writing captions",
+   "intro": "You shared your cinnamon swirl caption. Here is a fresh version you can post today.",
+   "draft": "Fresh out of the oven every morning this week, our cinnamon swirl loaf is ready for you. Grab yours before 11 🥐 Pre order yours now at the link in our bio. [pre order details]"
+  },
+  "firstStep": "I’m the social media manager for a chain of bakeries, posting to Instagram and Facebook. Write one Instagram caption for a new bakery item. Keep it under 40 words, warm and playful, with one emoji and a call to action pointing to the link in bio. Here is what is new and when it is available: [paste what is new and any details here]",
+  "map": [
+   {
+    "task": "Writing captions",
+    "phrase": "captions",
+    "today": "You write a caption about once a day, starting from scratch each time.",
+    "withPath": "For your captions, you hand it the job, and it writes in your voice with your details already in.",
+    "ai": true,
+    "private": false,
+    "kind": "repeat_writing",
+    "level": 3,
+    "waits": false,
+    "recipe": "saved_assistant",
+    "held": null,
+    "askFirst": false
+   },
+   {
+    "task": "Replying to comments",
+    "phrase": "comment replies",
+    "today": "You reply to comments as they come in, one at a time.",
+    "withPath": "For your comment replies, your common replies are saved on your phone, each a few letters away.",
+    "ai": true,
+    "private": false,
+    "kind": "repeat_texts",
+    "level": 3,
+    "waits": false,
+    "recipe": "phone_quick_replies",
+    "held": null,
+    "askFirst": false
+   },
+   {
+    "task": "Planning weekly posts",
+    "phrase": "weekly post plans",
+    "today": "You plan your posts week by week by hand.",
+    "withPath": "Each week’s plan starts from a draft schedule you adjust to what the bakers have new.",
+    "ai": true,
+    "private": false,
+    "kind": null,
+    "level": 2,
+    "waits": false,
+    "recipe": null,
+    "held": null,
+    "askFirst": false
+   },
+   {
+    "task": "Writing emails",
+    "phrase": "emails",
+    "today": "You write emails to store managers and others as they come up.",
+    "withPath": "For your emails, your common emails are saved in Gmail as templates, ready to fill in.",
+    "ai": true,
+    "private": false,
+    "kind": "repeat_emails",
+    "level": 3,
+    "waits": false,
+    "recipe": "gmail_templates",
+    "held": null,
+    "askFirst": false
+   },
+   {
+    "task": "Answering messages",
+    "phrase": "message replies",
+    "today": "You answer direct messages as they arrive.",
+    "withPath": "For your message replies, your common replies are saved on your phone, each a few letters away.",
+    "ai": true,
+    "private": false,
+    "kind": "repeat_texts",
+    "level": 3,
+    "waits": false,
+    "recipe": "phone_quick_replies",
+    "held": null,
+    "askFirst": false
+   }
+  ],
+  "setups": [
+   "Your captions, with a saved assistant",
+   "Your comment replies, saved once on your phone"
+  ],
+  "prep": [
+   "Get Claude ready on your phone and computer",
+   "Teach Claude who you are"
+  ],
+  "freePlan": true,
+  "tool": "claude",
+  "track": "starter"
+ },
+ "who": {
+  "track": "starter",
+  "canUse": "not_sure",
+  "connect": "not_sure",
+  "places": [
+   "Instagram",
+   "Facebook",
+   "Gmail",
+   "Google Sheets"
+  ],
+  "device": "both",
+  "aiTools": [
+   "none_yet"
+  ]
+ },
+ "outline": [
+  "ready:ready",
+  "about:about",
+  "task_1:workflow(saved_assistant)",
+  "task_2:workflow(phone_quick_replies)",
+  "end:end"
+ ],
+ "path": {
+  "version": 3,
+  "role": "You’re the social media manager for a chain of bakeries, running Instagram and Facebook, writing captions, replying to comments and coordinating shoots with store managers.",
+  "track": "starter",
+  "tool": "claude",
+  "worksFor": "employer",
+  "policy": "no_idea",
+  "device": "both",
+  "apps": [
+   "any_chat",
+   "claude",
+   "iphone",
+   "gboard",
+   "samsung_keyboard",
+   "gmail",
+   "google_sheets"
+  ],
+  "skipped": [],
+  "steps": [
+   {
+    "id": "ready",
+    "kind": "ready",
+    "card": "claude_get_started",
+    "firstStep": "I’m the social media manager for a chain of bakeries, posting to Instagram and Facebook. Write one Instagram caption for a new bakery item. Keep it under 40 words, warm and playful, with one emoji and a call to action pointing to the link in bio. Here is what is new and when it is available: [paste what is new and any details here]"
+   },
+   {
+    "id": "about",
+    "kind": "about",
+    "card": "claude_about_you",
+    "note": "I am the social media manager for a chain of bakeries. I run Instagram and Facebook, write captions, reply to comments and coordinate photo shoots with store managers. I write to customers who love our bread and pastries, so my tone is warm, friendly and short. Captions are a line or two, with one emoji at most. Replies are quick and kind. Never add details I did not give you, like prices, flavors, opening hours or deals. If something is missing, ask me or leave a square bracket. Keep the wording simple and never sound pushy. Give me one draft that I can read and change before I post it."
+   },
+   {
+    "id": "task_1",
+    "kind": "workflow",
+    "task": "Writing captions",
+    "title": "Your captions, with a saved assistant",
+    "recipe": "saved_assistant",
+    "read": "Claude writes each caption in your voice and waits for your OK. Your bakery details and your wording are already saved, so you only say what is new today. That keeps every caption sounding like you, even on busy days.",
+    "material": [
+     {
+      "label": "Instructions for your assistant",
+      "items": [
+       "I am the social media manager for a chain of bakeries. I write captions for Instagram and Facebook, about one a day. Each time, I will tell you what is new, like a bread, a pastry or a seasonal item, and sometimes what the bakers told me. Write one caption in my voice: warm, short and friendly, one or two lines, with one emoji at most. Mention freshness or timing only if I give it to you. If I mention pre orders, end with a short line pointing to the link in bio. Never invent prices, flavors, hours, deals or ingredients. If something you need is missing, ask me, or put it in square brackets. Do not use hashtags unless I ask. Give me the caption first. Then give one alternate version with a different opening line, so I can choose and change it before I post."
+      ]
+     },
+     {
+      "label": "Examples to start with",
+      "items": [
+       "Fresh out of the oven every morning this week, grab yours before 11 🥐 Link in bio for pre orders.",
+       "Our [new item] is here! Soft, golden and baked fresh each morning. Come say hi at [store name] ☕",
+       "Weekend mornings call for something warm. [Item] is back at all of our shops, while it lasts."
+      ]
+     }
+    ]
+   },
+   {
+    "id": "task_2",
+    "kind": "workflow",
+    "task": "Replying to comments",
+    "title": "Your comment replies, saved once on your phone",
+    "recipe": "phone_quick_replies",
+    "read": "Your common replies live on your phone’s keyboard, each a few letters away. When a comment comes in, you type the shortcut, check the reply and change a name or a time. That keeps your answers warm and steady, even when comments come fast.",
+    "material": [
+     {
+      "label": "Your replies",
+      "items": [
+       "Thank you so much, [first name]! That makes our day 🥐",
+       "We are so glad you loved it! Our bakers will be thrilled to hear it.",
+       "Great question! You can find the details in the link in our bio.",
+       "Yes, we have it at [store name]. Please check the link in bio for the latest.",
+       "So sorry about that, [first name]. Please send us a message with the details and we will make it right.",
+       "Thank you for telling us. We will pass this on to our team at [store name].",
+       "We would love to see you! Stop by [store name] and say hi 😊"
+      ]
+     },
+     {
+      "label": "Your shortcuts",
+      "items": [
+       "thnx",
+       "loved",
+       "qlink",
+       "instore",
+       "sorry",
+       "passon",
+       "seeu"
+      ]
+     }
+    ]
+   },
+   {
+    "id": "end",
+    "kind": "end",
+    "safeUse": [
+     "Never type customer names, addresses, phone numbers or order details into a chat tool.",
+     "Do not paste private messages or comments that include a customer’s personal details.",
+     "Keep unreleased products, store plans and partner details out of the chat until your company says it is fine.",
+     "Never let AI invent prices, ingredients, allergy information or opening hours. Check them against your own approved sources.",
+     "Read every caption and reply before it goes out, and change anything that does not sound like you."
+    ],
+    "askMessage": "Hi [manager’s name], I am planning to use an AI tool to help with my day to day work on social media. I would like to draft captions and save common replies to comments, and I would never put customer details into it. Could you tell me which AI tools are approved and what I may use them for? I would also like to know if linking my work email to an AI tool is allowed, since I am not sure. I will read everything before it goes out, and I am happy to follow any rules you have."
+   }
+  ]
+ },
+ "design": [
+  {
+   "task": "Writing captions",
+   "today": "You write a caption about once a day, starting from scratch each time. Mostly you ask the bakers what's new, then write it up quickly.",
+   "newWay": "You set up a saved assistant once with your bakery voice and a few of your past captions. Each day you give it the baker's news in a line or two, and it drafts a caption for you to adjust. You still choose the final words, and you stop starting from a blank page. Because you have not confirmed that your company allows AI, you begin by checking that, and you give the assistant only public details like product names and pre-order info.",
+   "steps": [
+    {
+     "app": null,
+     "ref": null,
+     "goal": "Ask your company whether you may use AI for captions, and wait for a clear answer before you go further."
+    },
+    {
+     "app": "ChatGPT",
+     "ref": "chatgpt_get_started",
+     "goal": "Get ChatGPT ready on your phone and computer so you can use it where you work."
+    },
+    {
+     "app": "ChatGPT",
+     "ref": "chatgpt_about_you",
+     "goal": "Save a short note about your role and the bakery tone so every draft starts closer to your voice."
+    },
+    {
+     "app": null,
+     "ref": null,
+     "goal": "Pick five of your past captions that sound most like you and the bakery."
+    },
+    {
+     "app": "ChatGPT",
+     "ref": "saved_assistant",
+     "goal": "Build a saved assistant for captions that uses your tone notes and sample captions, then draft your next caption from the baker's news."
+    }
+   ],
+   "material": [
+    {
+     "label": "Caption assistant instructions",
+     "what": "Tells the assistant you write Instagram and Facebook captions for a bakery chain, how long they run, and when to add a link in bio line."
+    },
+    {
+     "label": "Tone notes",
+     "what": "Describes your warm, short style and how you use emoji, based on your own past captions."
+    },
+    {
+     "label": "Sample captions",
+     "what": "Holds your five best past captions, such as the cinnamon swirl loaf one, so the assistant can copy the pattern."
+    },
+    {
+     "label": "Daily prompt",
+     "what": "A short fill in line for the product, the baker's news, the timing and any pre-order link."
+    }
+   ],
+   "checkPoint": "You read each caption and check every product name, time and link before you post it yourself."
+  },
+  {
+   "task": "Replying to comments",
+   "today": "You reply to comments as they come in, one at a time.",
+   "newWay": "You save your most common replies on your phone, like thanks, opening hours and where to buy. When a comment arrives, you type a short shortcut and the reply appears, and you adjust it to fit the person. Comments that need real thought stay fully yours. Nothing is posted by itself, and this uses no AI on your company's data.",
+   "steps": [
+    {
+     "app": null,
+     "ref": null,
+     "goal": "Look through recent comments and choose the ten you answer most often."
+    },
+    {
+     "app": "her phone's keyboard",
+     "ref": "phone_quick_replies",
+     "goal": "Save those ten replies so each one is a few letters away when you answer comments on your phone."
+    }
+   ],
+   "material": [
+    {
+     "label": "Ten saved replies",
+     "what": "Short, friendly answers to your most common comments, written in your own voice."
+    },
+    {
+     "label": "Shortcut list",
+     "what": "A list of the short letter codes that bring up each saved reply."
+    },
+    {
+     "label": "Replies to rewrite by hand",
+     "what": "Notes on which kinds of comments, like complaints, you always answer personally."
+    }
+   ],
+   "checkPoint": "You read each reply and change the name or detail before you post it yourself."
+  }
+ ],
+ "checks": [
+  {
+   "id": "screens",
+   "pass": true,
+   "detail": "9 screens, at most 9 for a starter"
+  },
+  {
+   "id": "levels_in_code",
+   "pass": true,
+   "detail": "Every row has a level or waits"
+  },
+  {
+   "id": "level3_not_writing_help",
+   "pass": true,
+   "detail": "No line at level 3 or higher reads like writing help"
+  },
+  {
+   "id": "path_line_from_recipe",
+   "pass": true,
+   "detail": "Every line at level 3 or higher is its recipe's"
+  },
+  {
+   "id": "no_connect_without_ok",
+   "pass": true,
+   "detail": "No row connects a work app"
+  },
+  {
+   "id": "path_written",
+   "pass": true,
+   "detail": "5 steps"
+  },
+  {
+   "id": "workflow_parts",
+   "pass": true,
+   "detail": "2 workflows, each with a test, an approval point and a cost line"
+  },
+  {
+   "id": "setup_from_recipe_or_card",
+   "pass": true,
+   "detail": "card claude_get_started, card claude_about_you, recipe saved_assistant, recipe phone_quick_replies"
+  },
+  {
+   "id": "no_click_paths_from_model",
+   "pass": true,
+   "detail": "The model wrote no menu paths or button names"
+  },
+  {
+   "id": "copy_rules",
+   "pass": true,
+   "detail": "No dashes, promised times, prices or percents"
+  },
+  {
+   "id": "offer_matches_path",
+   "pass": true,
+   "detail": "Offer names 2, path has 2 workflows, 2 match by name"
+  }
+ ],
+ "recipes": {
+  "total": 5,
+  "aiTasks": 5,
+  "withRecipe": [
+   {
+    "task": "Writing captions",
+    "recipe": "saved_assistant",
+    "level": 3
+   },
+   {
+    "task": "Replying to comments",
+    "recipe": "phone_quick_replies",
+    "level": 3
+   },
+   {
+    "task": "Writing emails",
+    "recipe": "gmail_templates",
+    "level": 3
+   },
+   {
+    "task": "Answering messages",
+    "recipe": "phone_quick_replies",
+    "level": 3
+   }
+  ],
+  "without": [
+   {
+    "task": "Planning weekly posts",
+    "level": 2,
+    "waits": false
+   }
+  ],
+  "noRecipe": false,
+  "mostlyAssistant": false
+ },
+ "designCount": {
+  "steps": 7,
+  "checked": 4,
+  "unchecked": 0,
+  "noApp": 3,
+  "badRefs": [],
+  "clickPaths": [],
+  "apps": [],
+  "refs": [
+   "chatgpt_get_started",
+   "chatgpt_about_you",
+   "saved_assistant",
+   "phone_quick_replies"
+  ]
+ }
+}
