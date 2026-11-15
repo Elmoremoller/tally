@@ -2,68 +2,78 @@
 
 Designed by the model for her top two tasks with no fixed list of task kinds. Click paths come only from the checked cards and recipes, by id. Every other step in an app is its goal only and is not checked by us.
 
-10 steps: 4 checked, 4 not checked by us, 2 outside any app.
+9 steps: 5 checked, 0 not checked by us, 4 outside any app.
 
-## Answering messages
+## Answering client messages
 
-**Today.** You answer client texts from the van, often right between grooms, with wet hands. Price and reschedule questions come in the same ones every day, many times a day.
+**Today.** You answer client messages all day, each one from scratch, from your phone. They include price and timing questions by breed and requests to move a booking.
 
-**The new way.** Your most common replies are saved on your phone, so each one is a few letters away instead of typed from scratch. For a message that needs a little thought, like a matted poodle that may need a longer slot, you check your calendar and edit the saved reply before it goes. You read every reply and press send yourself, so the answers stay in your voice and are quicker to give between grooms.
+**The new way.** Your most common replies are saved on your phone, so each one is a few letters away. You pick the right one, fill in the dog's name and the day, read it, and send it yourself. Answers about price and timing by breed stay the same every time, and you stop retyping them.
 
 **Setup**
 
-1. Pick the ten questions clients ask you most, such as price, open slots, reschedules and matted coats.
-2. Get ChatGPT ready on your phone so you can draft your replies there. (ChatGPT). Checked: card chatgpt_get_started.
+1. Pick your ten most common messages, such as moving a booking, price by breed, how long a groom takes and how to book.
+2. Get ChatGPT ready on your phone so you have somewhere to turn those ten into clean replies. (ChatGPT). Checked: card chatgpt_get_started.
    * Open the App Store on an iPhone or Google Play on Android and search for OpenAI ChatGPT.
    * Check that the app comes from OpenAI before you download it.
    * Open the app and sign up with an email address you own, so your chats are saved.
    * Type what you need in the message box and send it.
-3. Turn your ten questions and your own past answers into short replies written in your voice, with gaps for the day, time and price. (ChatGPT). **Not checked by us.**
-4. Save the ten replies so each one is a few letters away when you answer a client. (her phone's keyboard). Checked: recipe phone_quick_replies.
+3. Write your ten replies in your own voice, with gaps for the dog's name, day and price. (ChatGPT). Checked: recipe saved_assistant.
+   * Select New project in the sidebar.
+   * Give the project a name, then pick an icon and a color.
+   * Open the menu with three dots and select Project settings.
+   * Type your instructions for this task, then select Save.
+   * Add your examples to the project by uploading a file or pasting text.
+   * Start a new chat inside the project. It uses your instructions and examples, and no other chat does.
+   * Use the instructions and examples Tally wrote for you when the card asks for them.
+   * Each time the task comes up, start a new chat in the project and say what you need.
+4. Save the ten replies so each one is a few letters away in any text or chat. (her phone's keyboard). Checked: recipe phone_quick_replies.
    * Keep the replies and shortcuts Tally wrote for you open, above.
    * In any app where you can type, touch and hold the Emoji button or the Switch Keyboard key.
    * Tap Keyboard Settings, then tap Text Replacement.
    * Tap the Add button.
    * Type one reply in the Phrase field and its shortcut in the Shortcut field.
    * Do the same for each reply on your list.
-5. Check the open slot in your calendar before you fill in the day and time in a reply. (Google Calendar). **Not checked by us.**
+5. Check the prices and timings by breed in each saved reply against your own price list.
 
 **What Tally would write for her**
 
-* Ten saved replies: Short answers to your most common client questions, with gaps for day, time and price.
-* Matted coat reply: A reply that explains a longer slot and any extra charge for heavily matted dogs, using your own wording and prices.
-* Shortcut list: A list of the short letter codes that bring up each saved reply on your phone.
+* Saved replies: Your ten most common replies, with gaps for dog name, day and price.
+* Breed price and timing sheet: A short list of your prices and grooming times by breed, for the replies to draw on.
+* Tone notes: A few lines on how you talk to clients so every reply sounds like you.
 
-**Where she checks.** You read every reply, fill in the day, time and price, and press send yourself.
+**Where she checks.** You read every reply and fill in the gaps before you send it, and nothing is sent by itself.
 
 ## Appointment reminders
 
-**Today.** You send reminder texts by hand, many times a day.
+**Today.** You text appointment reminders by hand from your paper diary. You check your day's appointments in the diary and your text messages.
 
-**The new way.** One saved reminder text sits on your phone, ready to use for each booking. You look at tomorrow's appointments in your calendar, bring up the reminder, fill in the client's name, dog and time, and send it. Every reminder stays consistent and takes far less typing, and nothing goes out unless you send it.
+**The new way.** You keep your reminder wording as one saved reply with gaps for name, dog, day and time. Each evening you look at your diary, tap the saved reply, fill in the gaps and send it yourself. The wording stays the same every time, and you only have the details to type.
 
 **Setup**
 
-1. Decide what every reminder must say, such as dog name, day, time, address and how to reschedule.
-2. Get ChatGPT ready on your phone so you can draft the reminder there. (ChatGPT). Checked: card chatgpt_get_started.
-   * Open the App Store on an iPhone or Google Play on Android and search for OpenAI ChatGPT.
-   * Check that the app comes from OpenAI before you download it.
-   * Open the app and sign up with an email address you own, so your chats are saved.
-   * Type what you need in the message box and send it.
-3. Write one friendly reminder text in your voice, with gaps for name, dog, day and time. (ChatGPT). **Not checked by us.**
-4. Save the reminder so it is a few letters away whenever you text a client. (her phone's keyboard). Checked: recipe phone_quick_replies.
+1. Write down the details every reminder needs, such as the dog's name, day, time and any note about parking or access.
+2. Turn your usual reminder into a short friendly message with gaps for the details. (ChatGPT). Checked: recipe saved_assistant.
+   * Select New project in the sidebar.
+   * Give the project a name, then pick an icon and a color.
+   * Open the menu with three dots and select Project settings.
+   * Type your instructions for this task, then select Save.
+   * Add your examples to the project by uploading a file or pasting text.
+   * Start a new chat inside the project. It uses your instructions and examples, and no other chat does.
+   * Use the instructions and examples Tally wrote for you when the card asks for them.
+   * Each time the task comes up, start a new chat in the project and say what you need.
+3. Save the reminder so it is a few letters away when you text. (her phone's keyboard). Checked: recipe phone_quick_replies.
    * Keep the replies and shortcuts Tally wrote for you open, above.
    * In any app where you can type, touch and hold the Emoji button or the Switch Keyboard key.
    * Tap Keyboard Settings, then tap Text Replacement.
    * Tap the Add button.
    * Type one reply in the Phrase field and its shortcut in the Shortcut field.
    * Do the same for each reply on your list.
-5. Go through the next day's appointments and send one reminder for each. (Google Calendar). **Not checked by us.**
+4. Choose a set time in your day to go through the diary and send the next day's reminders.
 
 **What Tally would write for her**
 
-* Reminder text: One short reminder with gaps for client name, dog name, day and time.
-* Reschedule line: A sentence you can add that tells clients how to change their slot.
-* Shortcut: The short letter code that brings up the reminder on your phone.
+* Reminder reply: One short saved reminder with gaps for client name, dog, day and time.
+* Reminder routine note: A short checklist for going through your diary and sending reminders.
 
-**Where she checks.** You fill in each name, dog and time from your calendar, read the text, and send it yourself.
+**Where she checks.** You check each name, dog, day and time against your diary before you send each reminder yourself.

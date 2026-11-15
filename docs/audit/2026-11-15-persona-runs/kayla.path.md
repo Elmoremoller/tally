@@ -4,26 +4,26 @@ self employed Starter. Tried it a few times, starter. Phone only. Can use AI: I 
 
 ## Her map
 
-* **Writing quotes** (level 2, Write it with AI, held: needs_computer)
-  * Today: You write these from scratch for each job, often several times a week.
-  * With your path: Each quote starts from a draft you only need to check and adjust.
-* **Chasing payment and asking for reviews** (level 3, Build once, reuse, recipe phone_quick_replies)
-  * Today: You chase payments and ask for reviews one by one, which takes time.
-  * With your path: For your payment and review messages, your common replies are saved on your phone, each a few letters away.
+* **Writing quotes** (level 3, Build once, reuse, recipe say_it_out_loud)
+  * Today: You write these a few times a week, usually at night after talking the job through on a voice memo.
+  * With your path: For your quotes, you say what you need out loud, and the finished text comes back.
+* **Invoicing jobs** (level 2, Write it with AI, held: needs_computer)
+  * Today: You write invoices by hand after each job, using the same layout again and again.
+  * With your path: Each invoice starts from a ready layout, so you only fill in the job details.
 * **Texting homeowners** (level 3, Build once, reuse, recipe phone_quick_replies)
-  * Today: You text homeowners through the day to schedule and update them.
-  * With your path: For your texts to homeowners, your common replies are saved on your phone, each a few letters away.
-* **Invoicing customers** (level 2, Write it with AI)
-  * Today: You send invoices to customers once jobs are done.
-  * With your path: This stays yours, since the invoice itself is done in Square.
-* **Answering messages** (level 3, Build once, reuse, recipe phone_quick_replies)
-  * Today: You answer customer messages as they come in during the day.
+  * Today: You text homeowners often, and many of the messages are about the same few things.
+  * With your path: For your homeowner texts, your common replies are saved on your phone, each a few letters away.
+* **Asking for reviews** (level 3, Build once, reuse, recipe phone_quick_replies)
+  * Today: You ask for reviews after jobs, and the request looks much the same each time.
+  * With your path: Your common replies are saved on your phone, each a few letters away.
+* **Chasing payments** (level 3, Build once, reuse, recipe phone_quick_replies)
+  * Today: You chase late payments as they come up, and each reminder takes time to word.
   * With your path: Your common replies are saved on your phone, each a few letters away.
 
 ## Her offer
 
-* Your quotes, written with AI
-* Your payment and review messages, saved once on your phone
+* Your quotes, said out loud, finished as text
+* Your homeowner texts, saved once on your phone
 
 Starts with two quick steps:
 * Get Claude ready on your phone
@@ -42,26 +42,44 @@ On a phone:
 2. Open the app and create a free account. You need to be 18 or older.
 3. Type what you need in the message box and send it.
 
-First message: I’m an electrician who runs my own one truck business, mostly doing homes in Phoenix. I write quotes for customers several times a week and want a quick, clear quote each time. Write a short, plain text quote I can send by text message, with a parts line, a labor line, a total, and a line saying how long the quote is good for. Keep it friendly and under 90 words. Here are the job details: [paste the job details, parts costs, labor hours and the quote’s validity here].
+First message: I’m a self employed electrician with one truck, mostly doing home jobs in Phoenix. Each time I finish a site visit, I need a clear written quote for the homeowner. Turn my notes into a clean quote with a parts line, a labor line, a permit fee line, and a total at the bottom. Include a line saying the quote is good for 30 days and a 50% deposit is needed to book. Keep it short, polite and easy to read on a phone. Here are my notes from this visit: [paste your voice memo notes or typed notes here]
 
 ### Step 2, about
 
 Card: claude_about_you
 
-Her note: I’m an electrician and I run my own one truck business, mostly doing work in homes around Phoenix. I write to homeowners, so I keep things short, friendly and plain. I text most of the time, so a few sentences is usually enough. I like a straight answer with the price or the next step up front. Never add details I did not give you, like a price, a date, a part or a promise. If something is missing, put it in square brackets and leave it for me to fill in. Never use big words or sales talk. Give me one version I can read, fix and send myself.
+Her note: I’m a self employed electrician with one truck, and most of my work is in homes around Phoenix. I write quotes, invoices and texts to homeowners, so write like a tradesperson talking to a neighbor: plain, friendly and direct. Keep messages short, usually a few sentences. Use simple words and no jargon unless I use it first. Never add details I did not give you, like prices, parts, dates or code rules. If something is missing, put it in square brackets and ask me. Do not make promises for me. I will read everything before it goes out.
 
-### Step 3, workflow: Your quotes, written with AI
+### Step 3, workflow: Your quotes, said out loud, finished as text
 
-From now on you tell Claude the job, the parts and the price, and it drafts the quote for you to read. You already know the numbers, so Claude only does the writing and you keep the final say. Every quote comes out in the same plain, clear shape, and you fix anything before it goes to the homeowner.
+From now on you say the job out loud and Claude turns it into a finished quote. You already talk it through on a voice memo, so this fits how you work in the truck and at night. Claude writes it in the same layout every time, with parts, labor, permit fee and total, and it only uses what you said.
 
-No recipe: Tally's own three steps for writing it with AI each time.
+Recipe say_it_out_loud, route claude
 
-**Your quote message**
-* I’m an electrician running my own one truck business, mostly doing homes in Phoenix. Write a quote I can text or email to a homeowner. Job: [what the work is, like a 200 amp panel swap]. Site notes: [anything that changes the work, like a tight attic and extra labor hours]. Parts: about [parts cost]. Total: [total price]. Good for: [number of days]. Keep it short, friendly and plain, in my voice. Use only the numbers I gave you. Do not add details, promises or prices I did not give. Put anything missing in square brackets. Give me one quote I can read, fix and send, and a one line text I can send with it.
+On a phone:
+1. Open the Claude app and start a new chat. Paste the opening line Tally wrote for you.
+2. Tap the microphone icon on the right side of the message box. The first time, choose your language.
+3. Say what you need, the way you would tell a colleague.
+4. Tap the arrow to send. Claude writes the finished text from what you said.
 
-### Step 4, workflow: Your payment and review messages, saved once on your phone
+Test: The next three times you would have typed this. Good: The text is ready to send after one read, with every detail you said and nothing you did not.
+Approval point: You read the finished text and check every name, number and price before you send it.
+Cost: Dictation in the Claude app is on every plan, including free, and counts toward your normal limits. OpenAI's page does not say whether ChatGPT's free plan limits dictation.
 
-Your payment and review messages live on your phone’s keyboard, each a few letters away. You type a short shortcut and the full message appears, so you stop writing the same nudge over and over. You still read it, change the name or amount, and then send it.
+**Instructions for your assistant**
+* I’m a self employed electrician with one truck, doing mostly homes in Phoenix. I’m going to talk through a job after a site visit. Turn what I say into a finished quote I can send to the homeowner. Use this layout: a short line naming the job and the type of home, then parts, labor, permit fee, and the total at the bottom. End with this line: Good for 30 days, 50% deposit to book. Use only the prices, parts and details I say out loud. Never add or guess any. If something is missing, such as a price or a quantity, leave it in square brackets and list what is missing after the quote. Keep the wording plain and friendly, like I’m talking to the homeowner. Give me back the quote as text I can read and send.
+
+**What to say each time**
+* The kind of job and the home, for example the type of house and its age.
+* Each part and how many, with its price.
+* Labor, and what you charge for it.
+* The permit fee, if the job needs one.
+* Anything that is not included, or anything the homeowner needs to do first.
+* The homeowner’s first name, and how long the quote is good for if it is not 30 days.
+
+### Step 4, workflow: Your homeowner texts, saved once on your phone
+
+Your common homeowner texts now live on your phone’s keyboard. You type a few letters and the full reply is ready to tap in. That keeps your texts consistent while you are on the job site, and you only change a name or a time.
 
 Recipe phone_quick_replies, route samsung_keyboard
 
@@ -80,27 +98,29 @@ Approval point: You read every reply before you send it. Nothing is sent by itse
 Cost: Text replacement on an iPhone, text shortcuts on a Samsung phone and the Gboard clipboard are free, and Tally writes the replies for you.
 
 **Your replies**
-* Hi [first name], this is [my name] with [my business]. Just a quick reminder that the invoice for [job] is still open. You can pay at [payment link]. Let me know if you have any questions.
-* Hi [first name], following up on the invoice for [job], [amount]. It’s past due now. Could you take care of it by [day]? Thank you.
-* Hi [first name], I want to check in about the invoice for [job]. Is there anything holding it up? I’m happy to answer any questions.
-* Hi [first name], thanks again for choosing me for [job]. The invoice is here: [payment link]. I appreciate your business.
-* Hi [first name], it was a pleasure working on your home. If you were happy with the work, would you leave me a quick review? Here’s the link: [review link]. It really helps a small business like mine.
-* Hi [first name], just a friendly reminder about the review. It only takes a minute here: [review link]. Thank you so much.
-* Hi [first name], thank you for the payment. I really appreciate it. If you need any more electrical work, just text me.
+* Hi [first name], thanks for reaching out. I can come take a look at [address or area] on [day and time]. Does that work for you?
+* Hi [first name], I’m on my way and should be there around [time]. See you soon.
+* Hi [first name], your quote is ready. I’ll send it over now. It’s good for 30 days, and a 50% deposit books the job.
+* Hi [first name], I got your deposit. You’re booked for [day and time]. Let me know if anything changes on your end.
+* Hi [first name], the work is done and your invoice is on its way. Thanks for choosing me. Call or text if you have any questions.
+* Hi [first name], a friendly reminder that invoice [number] is still open. Could you let me know when I can expect payment?
+* Hi [first name], it was good working with you. If you were happy with the job, would you leave me a quick review here? [review link]
+* Hi [first name], I’m running behind on a job and will be about [amount of time] late. Sorry for the wait, and thanks for your patience.
 
 **Your shortcuts**
-* pyn1
-* pyn2
-* pyn3
-* pyin
-* rvw1
-* rvw2
-* pdth
+* vsit
+* otwy
+* qtrd
+* depc
+* jdone
+* pyrm
+* revw
+* late
 
 ### Step 5, end
 
-* Never type a homeowner’s name, home address, phone number or gate code into Claude. Use square brackets and fill them in yourself.
-* Never type payment details like card numbers, bank info or a customer’s account numbers.
-* Check every price, parts count and labor hour in a quote against your own numbers before it goes out.
-* Check anything about permits, code or inspections against your local rules, because Claude can get these wrong.
-* Read every message before you send it, and change anything that does not sound like you.
+* Never type a homeowner’s full name, home address, phone number or gate and door codes into Claude. Use square brackets and add them yourself.
+* Keep payment details, like card numbers, bank info and account numbers, out of any chat.
+* Leave out anything that shows when a home is empty or how its security is set up.
+* Read every quote, invoice and text before it goes out. Check each price, part and total against your own numbers.
+* Check permit fees and code details against your city’s own sources, not what Claude says.

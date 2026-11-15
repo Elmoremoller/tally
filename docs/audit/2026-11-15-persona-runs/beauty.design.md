@@ -2,44 +2,44 @@
 
 Designed by the model for her top two tasks with no fixed list of task kinds. Click paths come only from the checked cards and recipes, by id. Every other step in an app is its goal only and is not checked by us.
 
-8 steps: 0 checked, 0 not checked by us, 8 outside any app.
+8 steps: 0 checked, 2 not checked by us, 6 outside any app.
 
 ## Follow up texts
 
-**Today.** You write these many times a day, each one from scratch. You work from your phone, and your last one was a short text about the new bronze palette and a lip gloss set aside.
+**Today.** You write these many times a day, often starting from your client book each time. You start from the paper client book, the Notes app or the last text thread.
 
-**The new way.** Your company restricts AI for work, so AI does not touch these texts or any client details. Instead you build a small set of your own follow up texts, written by you in your own voice, and keep them where you can reach them fast on your phone. Each day you pick the one that fits, add the client's name and the product, and send it yourself. That keeps your tone personal and spares you starting from a blank screen.
+**The new way.** Because your company restricts AI, AI does not touch this work. Instead you set up a small set of your own follow up texts, written by you, so each one is a few letters away on your phone. You open the client book, pick the matching text, add the name, shade and day yourself, and send it. The wording is already yours, so you stop starting from scratch each time.
 
 **Setup**
 
-1. List the few kinds of follow up you send most, such as a new arrival, a thank you after a makeover, or a restock of a favorite.
-2. Write one short text for each kind in your own words, with a gap where the name and product go.
-3. Keep the finished texts in one place on your phone that your company allows, so each is quick to find.
-4. Read through the set once a season and swap in new products and offers.
+1. Pick the four or five follow up texts you send most, such as a launch note, a held shade, and a thank you after a visit.
+2. Write each one yourself in your own voice, with clear gaps for the name, product and day.
+3. Keep the finished texts in one note, titled so you can find it fast between clients. (Notes app on phone). **Not checked by us.**
+4. Once a month, read the note again and remove any text you no longer use or that no longer fits a launch.
 
 **What Tally would write for her**
 
-* Follow up text set: Your own short texts for each kind of follow up, with gaps for the client's name and the product.
-* Tone notes: A few lines on how you sound with clients, so every text still reads like you.
+* Follow up text set: Your own four or five most common follow up texts, written by you, with gaps for name, product and day.
+* Gap checklist: A short list of what to fill in before sending: name, shade, hold day and any gift with purchase detail.
 
-**Where she checks.** You fill in each gap and read the text before you send it yourself.
+**Where she checks.** You read each text and fill in every gap before you send it yourself from your phone.
 
 ## Answering messages
 
-**Today.** Client messages come in all day and each needs a quick reply. Much of it happens in text messages on your phone.
+**Today.** You answer client texts many times a day, one at a time from scratch.
 
-**The new way.** Because AI is restricted at your company, no AI reads or answers client messages. You set up your own list of replies to the questions you hear most, such as what is in stock, what time you are in, and how to book. When a message comes in, you pick the matching reply, adjust a line for that client and send it. Answers stay consistent and quick, and you stay in control of every word.
+**The new way.** Because your company restricts AI, AI does not touch this work. You keep a short list of your own answers to the questions clients ask most, so you are not writing each reply from scratch. When a text comes in, you pick the matching answer, adjust it for that client and send it. Your replies stay in your voice and stay accurate, and the common ones take far less thought.
 
 **Setup**
 
-1. Pick the ten questions clients ask you most often.
-2. Write a short, friendly answer to each one in your own words.
-3. Save the answers on your phone in a way your company allows, so each one is a few taps away.
-4. Add a new answer whenever the same question comes up a third time.
+1. Look back through your recent client texts and choose the ten questions you hear most, like stock, holds, shade help and gift with purchase.
+2. Write one short answer to each question in your own words, with a gap wherever the answer depends on the client.
+3. Save the ten answers in one note so you can copy the right one quickly. (Notes app on phone). **Not checked by us.**
+4. Mark any question that needs a real conversation, so you answer it in person or by hand.
 
 **What Tally would write for her**
 
-* Top ten replies: Your own written answers to the ten questions clients ask most.
-* Booking reply: A short message with your hours and how a client can book a visit.
+* Ten common answers: Your own written replies to the ten questions clients ask most, with gaps for client details.
+* Answer by hand list: A short list of question types you always answer personally, such as skin concerns or price disputes.
 
-**Where she checks.** You read each reply and change anything that does not fit that client before you send it yourself.
+**Where she checks.** You read each reply against the client's question and fill in any gaps before you press send.

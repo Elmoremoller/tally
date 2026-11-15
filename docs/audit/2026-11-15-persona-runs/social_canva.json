@@ -14,7 +14,7 @@
  "versions": {
   "job": "beginner-job-v5",
   "questions": "beginner-questions-v6",
-  "intake": "beginner-intake-v7",
+  "intake": "beginner-intake-v8",
   "path": "beginner-path-v1"
  },
  "jobRead": {
@@ -28,7 +28,11 @@
     "ai": false
    },
    {
-    "label": "Planning content calendar",
+    "label": "Planning the content calendar",
+    "ai": true
+   },
+   {
+    "label": "Replying to comments",
     "ai": true
    },
    {
@@ -36,40 +40,50 @@
     "ai": false
    },
    {
-    "label": "Replying to comments",
+    "label": "Reviewing post metrics",
     "ai": true
-   },
-   {
-    "label": "Shooting product photos",
-    "ai": false
    }
   ],
   "aiFallback": [
    "Hashtag ideas",
-   "Post caption variations",
-   "Weekly content plans",
-   "Reply templates"
+   "Story poll questions",
+   "Product description rewrites",
+   "Influencer outreach messages"
   ],
   "apps": [
    "Canva",
    "Instagram",
    "Facebook",
    "TikTok",
-   "Later",
-   "Shopify"
+   "Shopify",
+   "Later"
   ],
   "aiUses": [
    "Captions",
    "Post ideas",
-   "Hashtag ideas",
    "Content calendars",
-   "Comment replies"
+   "Comment replies",
+   "Hashtag ideas"
   ],
   "worksFor": "unclear"
  },
  "jobReadFallback": false,
- "asked": [],
- "screens": 10,
+ "asked": [
+  {
+   "id": "asked_1",
+   "title": "Where does the caption idea usually start for you?",
+   "kind": "many",
+   "choices": [
+    "Looking at the design",
+    "A brand brief",
+    "Last week’s top posts",
+    "Asking a teammate",
+    "Blank page"
+   ],
+   "hint": "Pick all that apply."
+  }
+ ],
+ "screens": 11,
  "worksForFromJob": "unclear",
  "answers": {
   "job": "Social media manager at a fitness apparel brand. I do everything in Canva.",
@@ -94,8 +108,7 @@
     "title": "What have you already done with AI?",
     "picked": [
      "Pasted in my own text",
-     "Connected an app",
-     "Pay for a plan"
+     "Connected an app"
     ],
     "text": null,
     "shown": [
@@ -130,9 +143,10 @@
     "picked": [
      "Writing captions",
      "Designing posts in Canva",
-     "Planning content calendar",
-     "Scheduling posts",
+     "Planning the content calendar",
      "Replying to comments",
+     "Scheduling posts",
+     "Reviewing post metrics",
      "Answering messages",
      "Writing emails"
     ],
@@ -140,10 +154,10 @@
     "shown": [
      "Writing captions",
      "Designing posts in Canva",
-     "Planning content calendar",
-     "Scheduling posts",
+     "Planning the content calendar",
      "Replying to comments",
-     "Shooting product photos",
+     "Scheduling posts",
+     "Reviewing post metrics",
      "Answering messages",
      "Writing emails",
      "Planning my week",
@@ -155,23 +169,23 @@
     "title": "Which would save you the most time if it got easier?",
     "picked": [
      "Writing captions",
-     "Replying to comments"
+     "Designing posts in Canva"
     ],
     "text": null,
     "shown": [
      "Writing captions",
      "Designing posts in Canva",
-     "Planning content calendar",
-     "Scheduling posts",
+     "Planning the content calendar",
      "Replying to comments",
-     "Answering messages"
+     "Scheduling posts",
+     "Reviewing post metrics"
     ]
    },
    {
     "id": "example",
     "title": "Paste the last one you wrote, or what the last person asked you.",
     "picked": [],
-    "text": "Hey! Can you swap the hook on the leggings post? Try something less salesy, maybe lead with how they feel on a run. Need it by 3."
+    "text": "Need 3 captions for the new leggings drop, hook first, under 80 words. Make them sound less salesy, more like a real person wrote them."
    },
    {
     "id": "often",
@@ -193,7 +207,6 @@
     "picked": [
      "Canva",
      "Instagram",
-     "TikTok",
      "Later",
      "Gmail",
      "Google Sheets"
@@ -204,8 +217,8 @@
      "Instagram",
      "Facebook",
      "TikTok",
-     "Later",
      "Shopify",
+     "Later",
      "Text messages",
      "Gmail",
      "Outlook",
@@ -226,6 +239,22 @@
      "Phone only",
      "Computer only",
      "Both"
+    ]
+   },
+   {
+    "id": "asked_1",
+    "title": "Where does the caption idea usually start for you?",
+    "picked": [
+     "Looking at the design",
+     "Last week’s top posts"
+    ],
+    "text": null,
+    "shown": [
+     "Looking at the design",
+     "A brand brief",
+     "Last week’s top posts",
+     "Asking a teammate",
+     "Blank page"
     ]
    },
    {
@@ -258,7 +287,7 @@
   ],
   "mostWanted": [
    "Writing captions",
-   "Replying to comments"
+   "Designing posts in Canva"
   ],
   "worksFor": "employer",
   "aiTools": [
@@ -269,7 +298,7 @@
   "often": "many_a_day"
  },
  "intake": {
-  "role_summary": "You’re a social media manager at a fitness apparel brand, running everything through Canva and the main social platforms.",
+  "role_summary": "You’re the social media manager at a fitness apparel brand, running everything through Canva, Instagram, Later, Gmail and Google Sheets.",
   "tasks": [
    {
     "name": "Writing captions",
@@ -278,22 +307,28 @@
     "kind": "repeat_writing"
    },
    {
-    "name": "Replying to comments",
-    "ai": true,
-    "private": true,
-    "kind": "repeat_texts"
-   },
-   {
     "name": "Designing posts in Canva",
     "ai": false,
     "private": false,
     "kind": null
    },
    {
-    "name": "Planning content calendar",
+    "name": "Planning the content calendar",
     "ai": true,
     "private": false,
     "kind": null
+   },
+   {
+    "name": "Replying to comments",
+    "ai": true,
+    "private": false,
+    "kind": "repeat_texts"
+   },
+   {
+    "name": "Answering messages",
+    "ai": true,
+    "private": false,
+    "kind": "repeat_texts"
    },
    {
     "name": "Writing emails",
@@ -304,19 +339,37 @@
   ],
   "first_win": {
    "task": "Writing captions",
-   "intro": "You asked for a caption swap on the leggings post. Here is a version that leads with how they feel on a run.",
-   "draft": "Hi there, here is a new opening for the leggings post. Lead with the feeling: that first mile when everything just clicks, and your leggings move with you instead of against you. Built for the long run and the quick sprint alike. Shop the [leggings name] now, link in bio."
+   "intro": "You asked for three captions for the new leggings drop, hook first and a real person’s voice. Here they are.",
+   "draft": "Hi there, these leggings have been the thing we keep reaching for on heavy training days, and now the new drop is here. Stretch, stay put, and go a little harder. [Sizes available] and [colorways] are live now.\n\nFeeling strong starts with what you wear. Our new leggings are built for the workout you planned and the one you didn’t. [Key feature, e.g. four way stretch] keeps up with you.\n\nSome days you need a little more push. These new leggings were made for those days. [Drop date and where to find them] so you can see the full range."
   },
-  "first_step": "I’m a social media manager at a fitness apparel brand, and I write captions for our Instagram and TikTok posts, all in Canva. Write me a caption for the post below in a warm, energetic, not salesy tone, about 40 to 60 words, leading with how the product feels during a workout. Keep it to one short paragraph and end with a call to action. Here are the details for this post: [paste the product name, what the post shows and any key point to hit].",
+  "first_step": "I’m a social media manager at a fitness apparel brand, and I write Instagram captions for our new product drops. Write 3 captions for the post below. Put the hook in the first line, keep each caption under 80 words, and make them sound like a real person wrote them, not a salesperson. Keep it casual and confident, with no hashtags unless I ask. Here is what the post is about: [paste the product name, key features and the post details here].",
   "map": [
    {
     "task": "Writing captions",
     "phrase": "captions",
-    "today": "You write captions many times a day, often from scratch each time.",
-    "withPath": "Each caption starts from a draft you only need to check and polish.",
+    "today": "You write these many times a day, often starting from the design or last week’s top posts.",
+    "withPath": "Each caption starts from a draft you only need to check and adjust.",
     "ai": true,
     "private": false,
     "kind": "repeat_writing"
+   },
+   {
+    "task": "Designing posts in Canva",
+    "phrase": "post designs",
+    "today": "You design posts in Canva many times a day, working by hand.",
+    "withPath": "Your design work stays yours, with AI helping only with the caption text around it.",
+    "ai": false,
+    "private": false,
+    "kind": null
+   },
+   {
+    "task": "Planning the content calendar",
+    "phrase": "content calendar",
+    "today": "You plan the calendar in Google Sheets, usually week by week.",
+    "withPath": "You plan the calendar with AI as a sounding board, and you make the final call.",
+    "ai": true,
+    "private": false,
+    "kind": null
    },
    {
     "task": "Replying to comments",
@@ -324,32 +377,23 @@
     "today": "You reply to comments many times a day, one at a time.",
     "withPath": "Each reply starts from a draft in your brand voice that you check before posting.",
     "ai": true,
-    "private": true,
+    "private": false,
     "kind": "repeat_texts"
    },
    {
-    "task": "Designing posts in Canva",
-    "phrase": "Canva designs",
-    "today": "You design posts in Canva as part of your daily work.",
-    "withPath": "The design stays yours, with AI helping only with the words you put on it.",
-    "ai": false,
-    "private": false,
-    "kind": null
-   },
-   {
-    "task": "Planning content calendar",
-    "phrase": "calendar plans",
-    "today": "You plan the content calendar on a regular basis.",
-    "withPath": "Planning stays yours, with AI helping you sketch the ideas and themes first.",
+    "task": "Answering messages",
+    "phrase": "message replies",
+    "today": "You answer messages many times a day, one at a time.",
+    "withPath": "Each reply starts from a draft you only need to check and send.",
     "ai": true,
     "private": false,
-    "kind": null
+    "kind": "repeat_texts"
    },
    {
     "task": "Writing emails",
-    "phrase": null,
-    "today": "You write emails in your inbox as needed through the week.",
-    "withPath": "Each email starts from a draft you read over before sending.",
+    "phrase": "emails",
+    "today": "You write emails through Gmail, usually one at a time.",
+    "withPath": "Each email starts from a draft you adjust before sending.",
     "ai": true,
     "private": false,
     "kind": "repeat_emails"
@@ -361,15 +405,15 @@
  "free": {
   "firstWin": {
    "task": "Writing captions",
-   "intro": "You asked for a caption swap on the leggings post. Here is a version that leads with how they feel on a run.",
-   "draft": "Hi there, here is a new opening for the leggings post. Lead with the feeling: that first mile when everything just clicks, and your leggings move with you instead of against you. Built for the long run and the quick sprint alike. Shop the [leggings name] now, link in bio."
+   "intro": "You asked for three captions for the new leggings drop, hook first and a real person’s voice. Here they are.",
+   "draft": "Hi there, these leggings have been the thing we keep reaching for on heavy training days, and now the new drop is here. Stretch, stay put, and go a little harder. [Sizes available] and [colorways] are live now.\n\nFeeling strong starts with what you wear. Our new leggings are built for the workout you planned and the one you didn’t. [Key feature, e.g. four way stretch] keeps up with you.\n\nSome days you need a little more push. These new leggings were made for those days. [Drop date and where to find them] so you can see the full range."
   },
-  "firstStep": "I’m a social media manager at a fitness apparel brand, and I write captions for our Instagram and TikTok posts, all in Canva. Write me a caption for the post below in a warm, energetic, not salesy tone, about 40 to 60 words, leading with how the product feels during a workout. Keep it to one short paragraph and end with a call to action. Here are the details for this post: [paste the product name, what the post shows and any key point to hit].",
+  "firstStep": "I’m a social media manager at a fitness apparel brand, and I write Instagram captions for our new product drops. Write 3 captions for the post below. Put the hook in the first line, keep each caption under 80 words, and make them sound like a real person wrote them, not a salesperson. Keep it casual and confident, with no hashtags unless I ask. Here is what the post is about: [paste the product name, key features and the post details here].",
   "map": [
    {
     "task": "Writing captions",
     "phrase": "captions",
-    "today": "You write captions many times a day, often from scratch each time.",
+    "today": "You write these many times a day, often starting from the design or last week’s top posts.",
     "withPath": "For your captions, you hand it the job, and it writes in your voice with your details already in.",
     "ai": true,
     "private": false,
@@ -381,24 +425,10 @@
     "askFirst": false
    },
    {
-    "task": "Replying to comments",
-    "phrase": "comment replies",
-    "today": "You reply to comments many times a day, one at a time.",
-    "withPath": "For your comment replies, your common replies are saved on your phone, each a few letters away.",
-    "ai": true,
-    "private": true,
-    "kind": "repeat_texts",
-    "level": 3,
-    "waits": false,
-    "recipe": "phone_quick_replies",
-    "held": null,
-    "askFirst": false
-   },
-   {
     "task": "Designing posts in Canva",
-    "phrase": "Canva designs",
-    "today": "You design posts in Canva as part of your daily work.",
-    "withPath": "The design stays yours, with AI helping only with the words you put on it.",
+    "phrase": "post designs",
+    "today": "You design posts in Canva many times a day, working by hand.",
+    "withPath": "Your design work stays yours, with AI helping only with the caption text around it.",
     "ai": false,
     "private": false,
     "kind": null,
@@ -409,10 +439,10 @@
     "askFirst": false
    },
    {
-    "task": "Planning content calendar",
-    "phrase": "calendar plans",
-    "today": "You plan the content calendar on a regular basis.",
-    "withPath": "Planning stays yours, with AI helping you sketch the ideas and themes first.",
+    "task": "Planning the content calendar",
+    "phrase": "content calendar",
+    "today": "You plan the calendar in Google Sheets, usually week by week.",
+    "withPath": "You plan the calendar with AI as a sounding board, and you make the final call.",
     "ai": true,
     "private": false,
     "kind": null,
@@ -423,10 +453,38 @@
     "askFirst": false
    },
    {
+    "task": "Replying to comments",
+    "phrase": "comment replies",
+    "today": "You reply to comments many times a day, one at a time.",
+    "withPath": "For your comment replies, your common replies are saved on your phone, each a few letters away.",
+    "ai": true,
+    "private": false,
+    "kind": "repeat_texts",
+    "level": 3,
+    "waits": false,
+    "recipe": "phone_quick_replies",
+    "held": null,
+    "askFirst": false
+   },
+   {
+    "task": "Answering messages",
+    "phrase": "message replies",
+    "today": "You answer messages many times a day, one at a time.",
+    "withPath": "For your message replies, your common replies are saved on your phone, each a few letters away.",
+    "ai": true,
+    "private": false,
+    "kind": "repeat_texts",
+    "level": 3,
+    "waits": false,
+    "recipe": "phone_quick_replies",
+    "held": null,
+    "askFirst": false
+   },
+   {
     "task": "Writing emails",
-    "phrase": null,
-    "today": "You write emails in your inbox as needed through the week.",
-    "withPath": "Your common emails are saved in Gmail as templates, ready to fill in.",
+    "phrase": "emails",
+    "today": "You write emails through Gmail, usually one at a time.",
+    "withPath": "For your emails, your common emails are saved in Gmail as templates, ready to fill in.",
     "ai": true,
     "private": false,
     "kind": "repeat_emails",
@@ -453,7 +511,6 @@
   "places": [
    "Canva",
    "Instagram",
-   "TikTok",
    "Later",
    "Gmail",
    "Google Sheets"
@@ -471,7 +528,7 @@
  ],
  "path": {
   "version": 3,
-  "role": "You’re a social media manager at a fitness apparel brand, running everything through Canva and the main social platforms.",
+  "role": "You’re the social media manager at a fitness apparel brand, running everything through Canva, Instagram, Later, Gmail and Google Sheets.",
   "track": "builder",
   "tool": "chatgpt",
   "worksFor": "employer",
@@ -494,7 +551,7 @@
     "id": "about",
     "kind": "about",
     "card": "chatgpt_about_you",
-    "note": "I am a social media manager at a fitness apparel brand. I write captions, comment replies and short emails for our followers and customers. My tone is warm, upbeat and direct, like a friend who runs. I keep captions short, with a strong first line that leads with how something feels, not a sales pitch. Replies are one or two sentences. Never add details I did not give you, like prices, sizes, fabrics, dates or discount codes. Use a square bracket where something is missing. Do not use hype or pushy words. Give me a draft I can read and edit before anything goes out."
+    "note": "I’m a social media manager at a fitness apparel brand. I write captions, comment replies, messages and emails for our followers, customers and my manager. My tone is warm, upbeat and real, like a person talking, never salesy or pushy. I put the hook first and keep captions short, usually under 80 words. Replies are brief and friendly. Emails are clear and polite. Never add details I did not give you, like prices, sizes, dates, discounts or product claims. If something is missing, ask me or leave a square bracket. Give me clean text I can read and edit before it goes out."
    },
    {
     "id": "task_1",
@@ -502,20 +559,20 @@
     "task": "Writing captions",
     "title": "Your captions, with a saved assistant",
     "recipe": "saved_assistant",
-    "read": "Your captions now come from a saved assistant in ChatGPT that already knows your brand voice. You hand it the product and the angle, and it drafts in your words and waits for you to read it. That beats starting from scratch many times a day, because the tone stays the same from post to post.",
+    "read": "Your captions now come from a saved assistant in ChatGPT that already knows your brand voice. You hand it the design or a top post from last week, and it writes in your words and waits for you to read it. That beats starting from a blank chat many times a day, because the voice, the length and the things to avoid are already in.",
     "material": [
      {
       "label": "Instructions for your assistant",
       "items": [
-       "You are my caption writer. I am a social media manager at a fitness apparel brand, and I post on Instagram and TikTok many times a day. Write captions in my voice: warm, upbeat and direct, like a friend who runs. Start with a strong first line that leads with how the piece feels while moving, never with a sales pitch. Keep captions short, usually two to four lines, and end with a simple call to action only when I ask for one. Avoid hype words, pushy language and filler. Never add details I did not give you, like prices, fabrics, sizes, dates or discount codes. Put a square bracket where something is missing. When I describe a post, give me three caption options and one alternative first line for each. I will read and edit everything before it goes out."
+       "I’m the social media manager at a fitness apparel brand. You write Instagram captions for me. I will tell you what the post shows, or paste a top post from last week, and you write captions for it. Always put the hook in the first line. Keep each caption under 80 words. Sound like a real person talking to a friend, warm and upbeat, never salesy. Avoid pushy phrases, hype words, stacked emojis and lines that sound like an ad. Never add details I did not give you, like prices, sizes, dates, discounts or fabric claims. If you need a detail, put it in square brackets. Unless I ask for a different number, give me 3 captions, each with a different hook, and label them 1, 2 and 3. Give back only the captions, with no extra explanation."
       ]
      },
      {
       "label": "Examples to start with",
       "items": [
-       "Request: Swap the hook on the leggings post. Make it less salesy and lead with how they feel on a run.\nCaption: Mile three and you forget you are even wearing them. Our [product name] move with you, not against you. Tell us where your next run is taking you.",
-       "Request: Caption for a new sports bra photo, relaxed tone.\nCaption: Built for the days you want to move and not think about it. [Product name] is here. Which workout are you saving it for?",
-       "Request: Short caption for a behind the scenes video of the team testing gear.\nCaption: We tested it the only way we know how: by sweating in it. Watch the team put [product name] through a full session."
+       "Post: new leggings drop. Caption: Your next favorite leggings just landed. They stay put through squats, sprints and the walk to get coffee after. Which color are you grabbing first? [color options]",
+       "Post: a top post from last week, a customer in a workout set. Caption: This one got a lot of love last week, and we get why. It’s the kind of set you reach for when you don’t want to think about it. Tell us your go to workout outfit below.",
+       "Post: a rest day reminder. Caption: Rest days count too. Stretch, sleep in, take it easy. Your next workout will thank you. What does your rest day look like?"
       ]
      }
     ]
@@ -526,30 +583,30 @@
     "task": "Replying to comments",
     "title": "Your comment replies, saved once on your phone",
     "recipe": "phone_quick_replies",
-    "read": "Your common comment replies now live on your phone’s keyboard. You type a few letters and the full reply appears, then you change a name or a detail and send it. That keeps your answers friendly and consistent, and you still read every one before it goes.",
+    "read": "Your common comment replies now live on your phone’s keyboard. You type a few letters and the full reply appears, then you add the name or detail and read it before you post. It keeps your replies sounding like you, and you stop retyping the same lines many times a day.",
     "material": [
      {
       "label": "Your replies",
       "items": [
-       "Thank you so much, [first name]! We are so glad you love it. Tell us how your next workout goes!",
-       "Great question, [first name]! [Answer from your approved info]. Let us know if you need anything else.",
-       "We are so sorry about that, [first name]. Please send us a message with your order details and we will make it right.",
-       "Thanks for the love, [first name]! We will pass it along to the team.",
-       "Good news, [first name]! [Product name] is available in [sizes or colors]. Check the link in our bio for the latest.",
-       "Hi [first name], thanks for asking! We do not have an update on that yet, but follow along and you will be the first to know.",
-       "Love seeing this, [first name]! Tag us in your next workout so we can see it."
+       "Thank you so much, [first name]! That really made our day. Let us know how you like it!",
+       "Love this, [first name]! Thanks for sharing it with us.",
+       "Great question, [first name]! [answer from the product page]. Let us know if you want more details.",
+       "Thanks for telling us, [first name]. I’m sorry that happened. Please send us a message with your [order details] and we’ll look into it.",
+       "That color is so good, right? Thanks for the love, [first name]!",
+       "We hear you, [first name]. I’ll pass this along to our team. Thanks for the feedback!",
+       "Thanks for asking, [first name]! The details are on [where to find it]. Message us if you can’t find it."
       ]
      },
      {
       "label": "Your shortcuts",
       "items": [
        "thnx",
-       "qans",
+       "lvit",
+       "qstn",
        "sorr",
-       "pass",
-       "avail",
-       "noup",
-       "tagu"
+       "clrs",
+       "fdbk",
+       "dtls"
       ]
      }
     ]
@@ -558,130 +615,349 @@
     "id": "end",
     "kind": "end",
     "safeUse": [
-     "Never type customer names, addresses, order numbers or email addresses into ChatGPT. Use square brackets instead.",
-     "Keep unreleased products, launch dates and pricing out of the chat unless your company has approved it.",
-     "Do not paste private messages or comments that show a follower’s personal details.",
-     "Read every caption and reply before it goes out, and check product facts against your own approved info.",
-     "Never let a draft promise discounts, sizes or shipping that you have not confirmed."
+     "Never type customer names, addresses, order numbers or emails into ChatGPT. Use square brackets instead.",
+     "Never paste private messages or comments that show someone’s personal details.",
+     "Keep unreleased product details and launch dates out of the chat unless your company says it’s fine.",
+     "Check every caption and reply for prices, sizes, claims and dates before it goes out.",
+     "Read everything before you post or send it, every time."
     ],
-    "askMessage": "Hi [manager name], I would like to confirm which AI tools are approved for my work and what I may use them for. I am planning to use ChatGPT to draft captions and replies to comments, and possibly emails and content calendar ideas. I would not enter customer names, order details or unreleased product information, and I would read everything before it goes out. Could you let me know what is approved, and whether linking my work email to an AI tool is okay?"
+    "askMessage": "Hi [manager’s name], I use AI for some of my day to day work and I want to make sure I’m using approved tools the right way. Which AI tools are approved at our company, and what may I use them for? I have in mind drafting Instagram captions and comment replies, and I’d also like to link my work email to an AI tool. I’ll keep customer details and unreleased product information out of it, and I’ll read everything before it goes out. Could you let me know what’s allowed?"
    }
   ]
  },
  "design": [
   {
    "task": "Writing captions",
-   "today": "You write captions many times a day, often from scratch each time. A request like swapping the hook on the leggings post comes in with a deadline of 3.",
-   "newWay": "A saved assistant in ChatGPT knows your brand voice and how your captions are built, so you give it the product and the angle and it drafts a few options. You say the angle out loud or paste the request, and it writes the hook and caption. Every caption comes back in a form you can paste straight into Canva or Later, and you pick, tweak and post. Your voice stays the same across posts and you stop starting from a blank page.",
+   "today": "You write captions many times a day, often starting from the design or last week's top posts. A typical ask is three captions for a new drop, hook first, under 80 words, and less salesy.",
+   "newWay": "A saved assistant in ChatGPT already knows your brand voice, your length limit and the hook first shape. You give it the design details or paste last week's top posts, and it returns three captions that sound like a real person wrote them. You pick one, fix the details and post. Your voice stays the same across every post without you rewriting the same brief each time.",
    "steps": [
-    {
-     "app": null,
-     "ref": null,
-     "goal": "Collect five to ten of your best past captions and note what makes each one sound like your brand."
-    },
     {
      "app": "ChatGPT",
      "ref": "chatgpt_get_started",
-     "goal": "Get ChatGPT ready on both your phone and your computer."
+     "goal": "Get ChatGPT ready on your phone and computer so the assistant is there wherever you work."
     },
     {
      "app": "ChatGPT",
      "ref": "chatgpt_about_you",
-     "goal": "Save a short description of your role and brand tone so every chat starts with it."
-    },
-    {
-     "app": "ChatGPT",
-     "ref": "chatgpt_project",
-     "goal": "Make a project for captions and add your past captions and tone notes to it."
-    },
-    {
-     "app": "ChatGPT",
-     "ref": "saved_assistant",
-     "goal": "Set up the saved caption assistant so you can give it a product and an angle and get a few hook options back."
+     "goal": "Save a short note about your role and brand so every caption starts from the right context."
     },
     {
      "app": null,
      "ref": null,
-     "goal": "Try it on the leggings request about a less salesy hook that leads with how they feel on a run, and adjust the instructions until it sounds like you."
+     "goal": "Pick five or six of your best captions and last week's top posts to show what less salesy sounds like."
+    },
+    {
+     "app": "ChatGPT",
+     "ref": "chatgpt_project",
+     "goal": "Make a project for captions that holds your tone notes, your examples and the caption rules."
+    },
+    {
+     "app": "ChatGPT",
+     "ref": "saved_assistant",
+     "goal": "Set up the saved assistant to return three hook first captions under 80 words from a design description."
     }
    ],
    "material": [
     {
-     "label": "Brand voice notes",
-     "what": "How your brand sounds, words you use and words you avoid, in a few short lines."
+     "label": "Caption assistant instructions",
+     "what": "Tells the assistant to write three captions, hook first, under 80 words, in a casual human voice."
     },
     {
-     "label": "Caption assistant instructions",
-     "what": "Tells the assistant to write a hook, a body and a call to action from a product and an angle, and to give three options."
+     "label": "Tone notes",
+     "what": "Lists words and phrases that sound salesy and should be avoided, with plain alternatives."
     },
     {
      "label": "Example captions",
-     "what": "Your best past captions, so the assistant copies your style and not a generic one."
+     "what": "Holds your best past captions so the assistant can match your voice."
     },
     {
-     "label": "Hook swap request",
-     "what": "A ready prompt for requests like swapping a hook, with space for the post, the angle and the platform."
+     "label": "Input prompt",
+     "what": "A short fill in message for pasting the design details or last week's top post."
     }
    ],
-   "checkPoint": "You read every caption and check product names, claims and links before you paste it into Canva or Later and post."
+   "checkPoint": "You read each caption and check product names, drop details and links before you post anything."
   },
   {
    "task": "Replying to comments",
    "today": "You reply to comments many times a day, one at a time.",
-   "newWay": "Your most common replies are written once in your brand voice and kept ready, so a sizing, shipping or restock comment gets an answer in seconds. For comments that need some thought, you paste the comment into your saved ChatGPT project and get a draft that sounds like you. You still read and post each reply yourself, so it stays personal and you are not typing the same answer all day.",
+   "newWay": "The most common comments, like sizing, restock and shipping questions, get a saved reply in your own voice. For comments that need a little thought, you paste the comment into ChatGPT and it drafts a reply in your tone. You read it, adjust and post it yourself. Replies stay quick and consistent, and nothing goes out without you.",
    "steps": [
     {
      "app": null,
      "ref": null,
-     "goal": "List the ten comments you get most often, such as sizing, shipping, restocks and colors, and write down your usual answer to each."
-    },
-    {
-     "app": "ChatGPT",
-     "ref": "chatgpt_project",
-     "goal": "Make a project for comment replies and add your usual answers and tone notes."
-    },
-    {
-     "app": "ChatGPT",
-     "ref": "saved_assistant",
-     "goal": "Set up an assistant that turns a pasted comment into a short reply in your voice, using your usual answers where they fit."
+     "goal": "List the ten comments you answer most often, such as sizing, restocks and shipping."
     },
     {
      "app": "her phone's keyboard",
      "ref": "phone_quick_replies",
-     "goal": "Save your ten most common replies on your phone so each is a few letters away when you answer on the go."
+     "goal": "Save your common replies so each one is a few letters away when you answer comments on your phone."
     },
     {
-     "app": null,
-     "ref": null,
-     "goal": "Run a week of real comments through it and add any new question that keeps coming up to your list."
+     "app": "ChatGPT",
+     "ref": "chatgpt_project",
+     "goal": "Make a project for comment replies that holds your tone notes and your approved answers."
+    },
+    {
+     "app": "ChatGPT",
+     "ref": "saved_assistant",
+     "goal": "Set up the assistant to draft a short friendly reply when you paste in a comment that needs more thought."
     }
    ],
    "material": [
     {
-     "label": "Common replies",
-     "what": "Your ten most frequent comment answers, written short and in your voice."
+     "label": "Saved quick replies",
+     "what": "Your ten most common comment answers, written short and in your voice."
     },
     {
      "label": "Comment reply instructions",
-     "what": "Tells the assistant to answer briefly and warmly, use your usual answers, and flag anything it cannot answer."
+     "what": "Tells the assistant to reply briefly, warmly and only with facts you have given it."
     },
     {
-     "label": "Tricky comment guide",
-     "what": "How you want complaints, sizing problems and unclear questions handled, such as moving them to a direct message."
+     "label": "Approved facts sheet",
+     "what": "Holds sizing, shipping and restock facts so replies never guess."
     },
     {
-     "label": "Keyboard shortcuts list",
-     "what": "The short letter codes for each saved reply so you can find them fast."
+     "label": "Tone notes",
+     "what": "Describes how your brand sounds in comments, with a few example replies."
     }
    ],
-   "checkPoint": "You read every reply before you post it, and you answer complaints and anything about orders yourself."
+   "checkPoint": "You read every reply and check any size, date or shipping detail before you post it."
   }
  ],
+ "design2": [
+  {
+   "task": "Writing captions",
+   "stays": false,
+   "today": "You write captions many times a day, often starting from the design or last week's top posts. You have pasted your own text into ChatGPT before.",
+   "newWay": "A saved ChatGPT project holds your brand voice, a few of your best past captions and your rules like hook first and under 80 words. Each time, you paste in what the design shows and last week's top captions, and it gives you three options that sound like a person, not an ad. You pick and edit one, so the voice stays yours and you stop starting from a blank page.",
+   "steps": [
+    {
+     "app": "ChatGPT",
+     "ref": "chatgpt_about_you",
+     "feature": null,
+     "goal": "Save a short description of your brand, your audience and how you want to sound, so every chat starts with it.",
+     "clickPath": null
+    },
+    {
+     "app": "ChatGPT",
+     "ref": "chatgpt_project",
+     "feature": null,
+     "goal": "Make a project called Captions and add your voice notes and your best past captions as its instructions and files.",
+     "clickPath": null
+    },
+    {
+     "app": "ChatGPT",
+     "ref": null,
+     "feature": "ChatGPT Projects",
+     "goal": "Write the standing instruction: three captions, hook first, under 80 words, warm and plain, no salesy phrases, no invented product details.",
+     "clickPath": "Projects, then your Captions project, then Instructions"
+    },
+    {
+     "app": "Google Sheets",
+     "ref": null,
+     "feature": "Download as CSV or copy cells",
+     "goal": "Copy last week's top posts and their captions into the project chat when you want new ideas to echo what worked.",
+     "clickPath": null
+    }
+   ],
+   "material": [
+    {
+     "label": "Caption assistant instructions",
+     "what": "The standing brief with your voice, length limit, hook rule and phrases to avoid."
+    },
+    {
+     "label": "Voice examples",
+     "what": "A short set of your own captions that sound right, for the project to copy the tone from."
+    },
+    {
+     "label": "Caption request starter",
+     "what": "A fill-in message where you add the product, what the design shows and the top posts from last week."
+    }
+   ],
+   "checkPoint": "You read each caption, check product names, details and links, and edit it before it goes into Later or Instagram."
+  },
+  {
+   "task": "Designing posts in Canva",
+   "stays": true,
+   "today": "You design posts in Canva many times a day, working by hand.",
+   "newWay": "This stays yours. The look of your posts is your taste and your brand, and you already work fast in Canva. A workflow here would add steps without making the design better.",
+   "steps": [],
+   "material": [],
+   "checkPoint": "Nothing to check, since the task stays fully in your hands."
+  },
+  {
+   "task": "Planning the content calendar",
+   "stays": false,
+   "today": "You plan the calendar in Google Sheets, usually week by week.",
+   "newWay": "You keep your calendar in Sheets and paste in last week's metrics and your upcoming launches. ChatGPT suggests a week of post ideas, formats and days as a table, matched to what performed. You change what you do not like, then paste the rest into your sheet, so planning starts from a draft with real reasons behind it.",
+   "steps": [
+    {
+     "app": "ChatGPT",
+     "ref": "chatgpt_project",
+     "feature": null,
+     "goal": "Make a project called Content calendar with your brand notes, posting rhythm and content pillars.",
+     "clickPath": null
+    },
+    {
+     "app": "ChatGPT",
+     "ref": null,
+     "feature": "ChatGPT Projects",
+     "goal": "Set the instruction to turn pasted metrics and launch dates into a one week plan as a table with day, format, idea and goal.",
+     "clickPath": "Projects, then your Content calendar project, then Instructions"
+    },
+    {
+     "app": "Google Sheets",
+     "ref": null,
+     "feature": "Paste into a sheet",
+     "goal": "Paste the table into a new tab of your calendar sheet and move the ideas you keep into your main plan.",
+     "clickPath": null
+    }
+   ],
+   "material": [
+    {
+     "label": "Calendar planner instructions",
+     "what": "The rules for how many posts a week, which pillars to cover and what table columns to return."
+    },
+    {
+     "label": "Weekly planning prompt",
+     "what": "A fill-in message for last week's metrics, launches and any days you are away."
+    }
+   ],
+   "checkPoint": "You review every suggested post and date against your real launch plan before anything goes into the calendar or Later."
+  },
+  {
+   "task": "Replying to comments",
+   "stays": false,
+   "today": "You reply to comments many times a day, one at a time.",
+   "newWay": "You save your most common replies, like sizing questions, restock and thanks, as short texts on your phone. You type a short code and the reply appears, and you adjust a name or detail. Routine comments get fast, consistent answers while the odd ones still get your own words.",
+   "steps": [
+    {
+     "app": null,
+     "ref": "phone_quick_replies",
+     "feature": null,
+     "goal": "Save your most common comment replies as phone shortcuts you can type in a few letters.",
+     "clickPath": null
+    },
+    {
+     "app": "ChatGPT",
+     "ref": null,
+     "feature": "ChatGPT chat",
+     "goal": "Ask ChatGPT to turn a list of your usual comment types into short, friendly replies in your voice, with no private customer details.",
+     "clickPath": null
+    }
+   ],
+   "material": [
+    {
+     "label": "Comment reply set",
+     "what": "Short replies for your most common comment types, in your voice."
+    },
+    {
+     "label": "Shortcut list",
+     "what": "The code to type for each saved reply."
+    }
+   ],
+   "checkPoint": "You read each reply in the comment box and adjust it before you post it yourself."
+  },
+  {
+   "task": "Answering messages",
+   "stays": false,
+   "today": "You answer messages many times a day, one at a time.",
+   "newWay": "The same kind of saved shortcuts cover your repeated message answers, like shipping, sizing and returns. You type a code, adjust the details and send. Questions that need a real look at an order or a person stay fully yours.",
+   "steps": [
+    {
+     "app": null,
+     "ref": "phone_quick_replies",
+     "feature": null,
+     "goal": "Save your most common message answers as phone shortcuts for use in Instagram and other chats.",
+     "clickPath": null
+    },
+    {
+     "app": "ChatGPT",
+     "ref": null,
+     "feature": "ChatGPT chat",
+     "goal": "Draft the standard answers from your brand's shipping, sizing and returns policy that you paste in, without any customer names or order details.",
+     "clickPath": null
+    }
+   ],
+   "material": [
+    {
+     "label": "Message reply set",
+     "what": "Standard answers for shipping, sizing, returns and similar questions."
+    },
+    {
+     "label": "Shortcut list",
+     "what": "The code for each saved answer so you can find it fast."
+    }
+   ],
+   "checkPoint": "You read each message and check it against your real policy before you send it yourself."
+  },
+  {
+   "task": "Writing emails",
+   "stays": false,
+   "today": "You write emails through Gmail, usually one at a time.",
+   "newWay": "Your most common emails, like partner outreach, creator replies and status updates, become Gmail templates with gaps for names and details. You open a template, fill the gaps and send it yourself. The wording stays steady and you stop rewriting the same email.",
+   "steps": [
+    {
+     "app": "ChatGPT",
+     "ref": null,
+     "feature": "ChatGPT chat",
+     "goal": "Ask ChatGPT to write clean versions of your few most repeated emails with clear gaps to fill in.",
+     "clickPath": null
+    },
+    {
+     "app": "Gmail",
+     "ref": "gmail_templates",
+     "feature": null,
+     "goal": "Save each email as a Gmail template so you can insert it in a new message.",
+     "clickPath": null
+    }
+   ],
+   "material": [
+    {
+     "label": "Email templates",
+     "what": "Your most common emails with marked gaps for names, dates and details."
+    },
+    {
+     "label": "Template list",
+     "what": "A short note of which template to use for which situation."
+    }
+   ],
+   "checkPoint": "You fill every gap and read the email before you press Send yourself."
+  }
+ ],
+ "design2Links": {
+  "chatgpt|chatgpt projects": {
+   "app": "ChatGPT",
+   "feature": "ChatGPT Projects",
+   "url": "https://help.openai.com/en/articles/10169521-projects-in-chatgpt",
+   "title": "Projects in ChatGPT"
+  },
+  "google sheets|download as csv or copy cells": {
+   "app": "Google Sheets",
+   "feature": "Download as CSV or copy cells",
+   "url": null,
+   "title": null,
+   "why": "no vendor page in the results"
+  },
+  "google sheets|paste into a sheet": {
+   "app": "Google Sheets",
+   "feature": "Paste into a sheet",
+   "url": "https://support.google.com/docs/answer/161768?hl=en&co=GENIE.Platform%3DDesktop",
+   "title": "Copy and paste text and images - Computer - Google Docs Editors Help"
+  },
+  "chatgpt|chatgpt chat": {
+   "app": "ChatGPT",
+   "feature": "ChatGPT chat",
+   "url": null,
+   "title": null,
+   "why": "no vendor page in the results"
+  }
+ },
  "checks": [
   {
    "id": "screens",
    "pass": true,
-   "detail": "10 screens, at most 11 for a builder"
+   "detail": "11 screens, at most 11 for a builder"
   },
   {
    "id": "levels_in_code",
@@ -735,8 +1011,8 @@
   }
  ],
  "recipes": {
-  "total": 5,
-  "aiTasks": 4,
+  "total": 6,
+  "aiTasks": 5,
   "withRecipe": [
    {
     "task": "Writing captions",
@@ -745,6 +1021,11 @@
    },
    {
     "task": "Replying to comments",
+    "recipe": "phone_quick_replies",
+    "level": 3
+   },
+   {
+    "task": "Answering messages",
     "recipe": "phone_quick_replies",
     "level": 3
    },
@@ -761,7 +1042,7 @@
     "waits": false
    },
    {
-    "task": "Planning content calendar",
+    "task": "Planning the content calendar",
     "level": 2,
     "waits": false
    }
@@ -770,10 +1051,10 @@
   "mostlyAssistant": false
  },
  "designCount": {
-  "steps": 11,
+  "steps": 9,
   "checked": 7,
   "unchecked": 0,
-  "noApp": 4,
+  "noApp": 2,
   "badRefs": [],
   "clickPaths": [],
   "apps": [],
@@ -784,5 +1065,52 @@
    "saved_assistant",
    "phone_quick_replies"
   ]
+ },
+ "design2Count": {
+  "tasks": 6,
+  "stays": 1,
+  "steps": 13,
+  "checked": 6,
+  "unchecked": 7,
+  "linked": 3,
+  "noApp": 0,
+  "noFeature": 0,
+  "clickInGoal": [],
+  "clickPathsHidden": 0,
+  "apps": [
+   [
+    "ChatGPT",
+    {
+     "steps": 5,
+     "linked": 2
+    }
+   ],
+   [
+    "Google Sheets",
+    {
+     "steps": 2,
+     "linked": 1
+    }
+   ]
+  ],
+  "lowTasks": [
+   {
+    "task": "Designing posts in Canva",
+    "level": 1,
+    "designed": true,
+    "stays": true,
+    "steps": 0,
+    "unchecked": 0
+   },
+   {
+    "task": "Planning the content calendar",
+    "level": 2,
+    "designed": true,
+    "stays": false,
+    "steps": 3,
+    "unchecked": 2
+   }
+  ],
+  "missingTasks": []
  }
 }

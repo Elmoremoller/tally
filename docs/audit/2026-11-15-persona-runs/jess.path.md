@@ -4,26 +4,26 @@ allowed employee. Use it some weeks, builder. Both. Can use AI: Yes.
 
 ## Her map
 
-* **Vendor follow ups** (level 4, Inside your apps, recipe gmail_claude_follow_ups)
-  * Today: You chase these many times a day, often from memory.
-  * With your path: For your vendor follow ups, follow ups are drafted from your Gmail and wait for your OK.
-* **Vendor schedules** (level 2, Write it with AI)
-  * Today: You manage these many times a day across Sheets and Gmail.
-  * With your path: The schedule stays yours, and AI helps you draft the messages around it.
-* **Client texts** (level 3, Build once, reuse, recipe phone_quick_replies)
-  * Today: You text clients many times a day.
-  * With your path: For your client texts, your common replies are saved on your phone, each a few letters away.
-* **Emails** (level 3, Build once, reuse, recipe gmail_templates)
-  * Today: You write these many times a day.
-  * With your path: For your emails, your common emails are saved in Gmail as templates, ready to fill in.
-* **Event lists** (level 2, Write it with AI)
-  * Today: You make these as part of each event.
-  * With your path: Lists start from a draft you only need to check and adjust.
+* **Follow up emails to vendors and clients** (level 4, Inside your apps, recipe gmail_claude_follow_ups)
+  * Today: You write these a few times a week, often from scratch.
+  * With your path: For your follow up emails, follow ups are drafted from your Gmail and wait for your OK.
+* **Answering messages** (level 4, Inside your apps, recipe gmail_help_me_write)
+  * Today: You answer these throughout the week, one at a time.
+  * With your path: Reply drafts appear inside Gmail, and you check each one before you send.
+* **Building run of show** (level 3, Build once, reuse, recipe saved_assistant)
+  * Today: You build these for each event by hand.
+  * With your path: For your run of show plans, you hand it the job, and it writes in your voice with your details already in.
+* **Making lists** (level 3, Build once, reuse, recipe notes_to_sheet)
+  * Today: You put these together for each event.
+  * With your path: For your event lists, your notes go in as they are and come out as rows for your sheet.
+* **Calling vendors** (level 1, Stays yours)
+  * Today: You make these calls yourself each week.
+  * With your path: The calls stay yours, and AI can help you prepare what to say beforehand.
 
 ## Her offer
 
-* Your vendor follow ups, drafted from your inbox for your OK
-* Your client texts, saved once on your phone
+* Your follow up emails, drafted from your inbox for your OK
+* Answering messages, drafted in your inbox
 
 ## Her path
 
@@ -45,11 +45,11 @@ On a phone:
 3. Make sure Enable customization is turned on.
 4. Type your instructions in the Custom Instructions field. They apply to every chat right away.
 
-Her note: I coordinate private events for a restaurant group in Chicago. I plan them with clients and run them on the night. I write to vendors, clients and my own team. My tone is warm, direct and professional, never stiff. I keep messages short, usually two to four sentences, with one clear ask and a clear deadline. Never add details I did not give you, like times, prices, headcounts or menu items. If something is missing, put it in square brackets so I can fill it in. Never invent a reason or a promise on my behalf. Give me a draft I can read and change before anything goes out.
+Her note: I’m an event coordinator for a restaurant group in Chicago. I plan private events and run them on the night. I write to clients planning an event, to vendors, and to my own kitchen and floor team. My tone is warm, clear and direct, and I keep emails short, usually a few sentences. I put the date and what I need first, then the deadline. Never add details I did not give you, like prices, headcounts, menus or policies. If something is missing, leave a square bracket for me to fill in. Give me one draft at a time, and I will read it and change it before anything goes out.
 
-### Step 2, workflow: Your vendor follow ups, drafted from your inbox for your OK
+### Step 2, workflow: Your follow up emails, drafted from your inbox for your OK
 
-Your vendor follow ups now start from your Gmail, not your memory. ChatGPT drafts each follow up and waits for your OK before anything goes out. That suits your job, because vendors who go quiet can hold up a floor plan or a load in time. You read every draft and you choose what to send.
+Your follow ups are drafted from your Gmail by ChatGPT, and each one waits for your OK. You stop starting every vendor and client chase from a blank page. The draft goes to the right person about the right event, and you decide what gets sent.
 
 Recipe gmail_claude_follow_ups, route chatgpt + gmail
 
@@ -66,54 +66,56 @@ Approval point: Your chat tool asks before it sends anything. You read each draf
 Cost: Claude's page says the Gmail connector is for all users but does not say whether the free plan is enough. In ChatGPT, sending from the chat needs Plus or a higher plan.
 
 **Instructions for your assistant**
-* I am an event coordinator for a restaurant group in Chicago. I plan private events and run them on the night. Look through my Gmail for emails I sent to vendors, like AV, florists, rentals and music, where I asked a question or for a confirmation and have not had a reply. Count an email as waiting if it has a clear ask and no answer yet. Wait two business days before a first nudge and another two business days before a second one. If the email mentions a deadline, like needing something locked by a certain day, mention it in the nudge. Write the way I do: warm, short, direct, one clear ask, two to four sentences. Do not add details I did not give you. Use square brackets for anything missing. Draft each follow up in the chat, tell me who it is for and which email it is about, and never send anything. Give back a short list of who is still waiting at the end.
+* I’m an event coordinator for a restaurant group in Chicago. I plan private events and run them on the night. Look in my Gmail for threads where I asked a vendor or client for something and they have not answered. That includes final headcounts, dietary lists, deposits, signed contracts, delivery times and menu choices. Count a thread as waiting when my message was the last one and [number] days have passed. If the event is within a week, count it as waiting sooner. For each waiting thread, write a short follow up in my voice. Be warm, direct and brief. Put the event date and what I need first, then the deadline. Never add details I did not give you, like prices, numbers or policies. Use a square bracket where something is missing. Give me one draft per thread, with the person’s role and the event name above it, and wait for me to read it. Do not send anything.
 
 **Your follow up wording**
-* Hi [first name], following up on [the item] for the [date] event. Can you confirm [what you need] by [day]? I need it settled for [what depends on it]. Thank you!
-* Hi [first name], checking in again on [the item] for [date]. I still need your confirmation on [what you need] by [day] so I can finalize [what depends on it]. If something changed, please let me know and we will work around it. Thanks, [your name]
+* First nudge: Hi [first name], just checking in on [what I need] for [event name] on [date]. I need it by [deadline] so we can plan on our end. Let me know if anything is holding it up. Thanks!
+* Second nudge: Hi [first name], following up again on [what I need] for [event name] on [date]. We are getting close, and I need it by [deadline] to keep everything on track. Can you send it today, or call me at [phone] if it is easier? Thank you!
 
-### Step 3, workflow: Your client texts, saved once on your phone
+### Step 3, workflow: Answering messages, drafted in your inbox
 
-Your common client replies now live on your phone’s keyboard. Each one is a few letters away, so you stop retyping the same message many times a day. You change a name or a time and send. That keeps your answers steady, even while you are on your feet on an event night.
+Reply drafts appear right inside Gmail, so you answer from the email itself. You type what you mean in a few words, Help me write turns it into a draft, and you check it before you send. Your replies stay in your voice and your details stay yours.
 
-Recipe phone_quick_replies, route iphone + any_chat
+Recipe gmail_help_me_write, route gmail
+
+On a computer:
+1. Open the email in Gmail and click Reply.
+2. Type what you want to say in the prompt bar at the bottom. If you do not see it, click the Help me write icon.
+3. Click Create. To change the tone, click Formalize, Friendly or Shorten.
+4. Read the draft, fix anything that is wrong, then send it yourself.
 
 On a phone:
-1. Keep the replies and shortcuts Tally wrote for you open, above.
-2. In any app where you can type, touch and hold the Emoji button or the Switch Keyboard key.
-3. Tap Keyboard Settings, then tap Text Replacement.
-4. Tap the Add button.
-5. Type one reply in the Phrase field and its shortcut in the Shortcut field.
-6. Do the same for each reply on your list.
+1. Open the email in the Gmail app and reply.
+2. Tap Help me write at the top right.
+3. Type what you want to say and tap Create.
+4. Tap the text to change anything, then tap Insert.
+5. Read the draft, then send it yourself.
 
-Test: The next three messages that need one of these replies. Good: The reply fits after you change at most a name or a time.
-Approval point: You read every reply before you send it. Nothing is sent by itself.
-Cost: Text replacement on an iPhone, text shortcuts on a Samsung phone and the Gboard clipboard are free, and Tally writes the replies for you.
+Test: The next three emails that need a real reply. Good: The draft says what you meant, and you only change a detail or two.
+Approval point: Nothing is sent by itself. You read each draft and press Send yourself.
+Cost: Free personal Gmail accounts get Help me write in the US only. Elsewhere it needs a Google AI plan or an eligible Google Workspace plan, and on a work account your company decides.
 
-**Your common replies**
-* Hi [first name], thank you for reaching out about your event! I would love to help. Could you tell me your date, guest count and the kind of event you have in mind?
-* Hi [first name], thanks for your patience. I am checking on that and will get back to you by [day].
-* Hi [first name], your date of [date] is confirmed. I will send the next details shortly.
-* Hi [first name], I can send over our event options. What is the best email to reach you?
-* Hi [first name], just checking in. Could you confirm [what you need] by [day]? That lets me keep everything on track for your event.
-* Hi [first name], we are all set for [date]. I will be there on the night. If anything changes before then, text me here.
-* Thank you so much for celebrating with us, [first name]! It was a pleasure hosting you.
+**Starting lines for replies**
+* Thank [first name] for the update on [event name]. Confirm I have the headcount of [number] and ask for the dietary list by [day].
+* Tell the client we received their deposit for [event name] on [date] and the date is held. Say I will send the next details by [day].
+* Ask the vendor to confirm delivery time of [time] on [date] at [location], and ask who will be on site.
+* Tell the client the menu choices are due by [day] so the kitchen can plan. Offer a quick call at [day and time] if they have questions.
+* Reply that I can’t promise [request] yet. Say I am checking with [role] and will answer by [day].
+* Thank the guest for their message and say I will pass the request to the kitchen. Ask them to confirm [detail].
+* Ask the team to confirm arrival time of [time] for the event on [date] and reply with any questions by [day].
 
-**Your shortcuts**
-* inqr
-* chk
-* cfmd
-* opts
-* need
-* setn
-* thnk
+**Notes on your tone**
+* If the draft sounds stiff with a client who is already friendly, press Friendly.
+* If it sounds too casual for a first message to a new client or a formal request, press Formalize.
+* If it runs long for a vendor or a quick confirmation, press Shorten.
+* If a draft adds a detail I did not give, fix it or delete the line before sending. I read everything first.
 
 ### Step 4, end
 
-* Never type a client’s full name, phone number, email or home address into ChatGPT. Use square brackets instead.
-* Keep payment details, card numbers and contract amounts out of the chat.
-* Leave out guests’ allergy and health details tied to a name.
-* Do not paste vendor contact details or private account information.
-* Read every draft before it goes out, and check dates, times and counts against your own records.
+* Never type guest names, phone numbers, home addresses or payment details into a chat tool. Use square brackets instead.
+* Leave out allergy details tied to a named guest. Say ’one guest with a nut allergy’ without naming the person.
+* Do not paste contracts, deposit amounts or card numbers. Add those yourself after the draft.
+* Check every date, headcount, time and menu item against your own sheet before you send.
+* Read every draft before it goes out. You send it, never the tool.
 
-> Hi [manager’s name], I would like to use ChatGPT to help with my day to day work as an event coordinator. I have in mind drafting vendor follow ups from my Gmail, keeping vendor schedules organized, writing client texts and emails, and making event lists. Which AI tools are approved for work, and what am I allowed to use them for? I also want to know if I may connect my work email, since I would read and approve every draft before it is sent. Please let me know so I can set this up the right way.
+> Hi [manager’s name], I’m using AI to speed up the writing side of my event work and want to make sure I stay within company rules. Which AI tools are approved, and what may I use them for? I have in mind drafting follow up emails to vendors and clients, and drafting replies to messages in Gmail. I would link my work email to ChatGPT for the follow ups, with every draft waiting for my OK before anything is sent. Could you let me know what is allowed, or point me to the right person?

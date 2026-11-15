@@ -5,25 +5,25 @@ experiment. Use it most days, builder. Both. Can use AI: Yes.
 ## Her map
 
 * **Product descriptions** (level 3, Build once, reuse, recipe saved_assistant)
-  * Today: You rewrite these about once a day, often from copy that runs too long.
+  * Today: You write these from spec sheets and notes, usually one a day.
   * With your path: For your product descriptions, you hand it the job, and it writes in your voice with your details already in.
-* **Customer message replies** (level 4, Inside your apps, recipe gmail_help_me_write)
-  * Today: You answer these from Gorgias and Gmail, each one needing a little thought.
-  * With your path: For your customer message replies, reply drafts appear inside Gmail, and you check each one before you send.
-* **Promo emails** (level 3, Build once, reuse, recipe gmail_templates)
-  * Today: You write these for each sale, starting from a blank page each time.
-  * With your path: For your promo emails, your common emails are saved in Gmail as templates, ready to fill in.
 * **Product listing updates** (level 3, Build once, reuse, recipe saved_assistant)
-  * Today: You update listings by hand whenever copy or details change.
+  * Today: You refresh listing copy by hand, one product at a time.
   * With your path: For your listing updates, you hand it the job, and it writes in your voice with your details already in.
-* **Sales calendar planning** (level 2, Write it with AI)
-  * Today: You plan the calendar by hand across the weeks ahead.
-  * With your path: The planning stays yours, with AI helping you think through the order and timing.
+* **Promo emails** (level 3, Build once, reuse, recipe gmail_templates)
+  * Today: You write promo emails from scratch for each campaign.
+  * With your path: For your promo emails, your common emails are saved in Gmail as templates, ready to fill in.
+* **Customer message replies** (level 4, Inside your apps, recipe gmail_help_me_write)
+  * Today: You answer customer messages one by one as they come in.
+  * With your path: For your customer replies, reply drafts appear inside Gmail, and you check each one before you send.
+* **Weekly sales numbers** (level 2, Write it with AI, held: private)
+  * Today: You pull weekly sales numbers into Sheets by hand.
+  * With your path: Your sheet still holds the numbers, and AI helps you read the patterns in them.
 
 ## Her offer
 
 * Your product descriptions, with a saved assistant
-* Your customer message replies, drafted in your inbox
+* Your customer replies, drafted in your inbox
 
 ## Her path
 
@@ -45,11 +45,11 @@ On a phone:
 3. Make sure Enable customization is turned on.
 4. Type your instructions in the Custom Instructions field. They apply to every chat right away.
 
-Her note: I’m the ecommerce manager at a home goods brand, and I run our online store day to day. I write product descriptions, promo emails and replies to customers. I write to shoppers who want clear, honest details about what they are buying. My tone is warm, plain and confident, never pushy. I like short sentences and tight copy that fits a product page. Keep the fabric, size and care details I give you, and never add details I did not give you, like materials, measurements, prices or claims. If something is missing, ask me or leave a square bracket. Give me a draft I can read and change before it goes live.
+Her note: I am an ecommerce manager at a home goods brand, and I run our online store day to day. I write product descriptions, promo emails and replies to customers. My readers are shoppers deciding what to buy for their homes. I like a warm, clear and plain voice, with short sentences and no hype. Keep product copy to a short paragraph plus a few bullet free detail lines unless I say otherwise. Never add details I did not give you, like sizes, materials, finishes, prices or care claims. If something is missing, ask me or leave a square bracket. Do not make promises about shipping or returns.
 
 ### Step 2, workflow: Your product descriptions, with a saved assistant
 
-Your product descriptions now live in a saved ChatGPT project that already knows your voice and your store. You hand it the product details, and it gives back copy that fits the page and keeps the fabric facts. That is better in your job because every listing sounds like your brand, and you stop re explaining it each time.
+Your product descriptions now live in a saved assistant in ChatGPT. It already knows your brand voice, your layout and what to avoid, so you only hand it the spec sheet and your notes. It keeps every listing sounding like the same store, and you read each one before it goes live.
 
 Recipe saved_assistant, route chatgpt
 
@@ -68,16 +68,16 @@ Approval point: You read what it wrote and fix anything wrong before you send or
 Cost: The free plans of ChatGPT and Claude are enough. Claude's free plan allows up to five projects.
 
 **Instructions for your assistant**
-* You are my writing assistant for product descriptions at a home goods brand. I’m the ecommerce manager and I run our Shopify store. I paste in product details from Shopify or a Sheet, and sometimes an existing description that runs too long. Write for shoppers who want clear, honest details. Keep the tone warm, plain and confident, with short sentences. Keep every fabric, size, care and material detail I give you. Never add details I did not give you, and never invent claims, prices or measurements. If something is missing, put it in square brackets and tell me. Keep copy short enough to fit a product page, and avoid filler like ’perfect for any home’. Give me back one tightened description first, then a one line version for a product card. Flag anything you cut so I can check it.
+* You are my writing assistant for product descriptions. I am the ecommerce manager at a home goods brand and I run our Shopify store. Each time, I will give you a supplier spec sheet, my own notes, and sometimes old listing copy. Write a product description for our shoppers in a warm, clear, plain voice. Use short sentences. Start with one or two sentences on what the piece is and how it fits into a home. Then give a short list of key details: dimensions, materials, finish options and care, but only the ones I gave you. Never invent sizes, materials, certifications, prices or claims. If a detail is missing or unclear, list it at the end as a question for me. Avoid hype words and long adjective chains. Do not copy the supplier’s wording word for word. Give back the description, then the list of questions, and nothing else.
 
 **Examples to start with**
-* Before: The new [product name] is made from [fabric] and is a wonderful addition to any room, bringing comfort and style that you will love for years to come. It measures [size] and is machine washable. After: [Product name] is made from [fabric]. It measures [size] and is machine washable. Soft, easy to style and ready for everyday use.
-* Before: Can you tighten the copy on the new [product name]? It’s too long for the product page and I need it live before [launch day]. Keep the fabric details. After: [Product name] in [fabric], [size]. [One line on how it feels or looks.] Care: [care instructions].
-* Before: Our [product name] is handcrafted with care using [material], and every piece is a little different, which makes it special in your home. After: [Product name] is made with [material]. Each piece varies slightly. [Size and care details].
+* Example 1. Oak nightstand. Details: [width] by [depth] by [height] inches, solid oak, finish options [finish 1] and [finish 2]. Description: A solid oak nightstand that sits neatly beside your bed. It has [number] drawer(s) for the things you reach for at night. Choose from [finish 1] or [finish 2] to suit your room. Details: [width] x [depth] x [height] inches. Solid oak. Wipe clean with a dry cloth.
+* Example 2. Ceramic planter. Details: [diameter] inches wide, [material], drainage hole [yes or no]. Description: A simple ceramic planter for your favorite plant. The [color] glaze gives it a soft, matte look on a shelf or windowsill. Details: [diameter] inches wide. [Drainage hole note]. Hand wash only.
+* Example 3. Linen throw blanket. Details: [size], [fabric], colors [colors]. Description: A soft linen throw to keep on the sofa or at the foot of the bed. It gets softer with each wash. Available in [colors]. Details: [size]. [Fabric]. Machine wash cold.
 
-### Step 3, workflow: Your customer message replies, drafted in your inbox
+### Step 3, workflow: Your customer replies, drafted in your inbox
 
-Your customer replies get drafted right inside Gmail, and you check each one before you send. You type a short line about what you want to say, and the draft fills in the rest. That is better in your job because each reply still sounds like you, without starting from a blank box.
+Your customer replies are drafted right inside Gmail with Help me write. Gmail drafts each reply and waits for your OK. You keep your own voice because you give it the point and then check every line before you send, which matters when a reply touches an order.
 
 Recipe gmail_help_me_write, route gmail
 
@@ -98,27 +98,24 @@ Test: The next three emails that need a real reply. Good: The draft says what yo
 Approval point: Nothing is sent by itself. You read each draft and press Send yourself.
 Cost: Free personal Gmail accounts get Help me write in the US only. Elsewhere it needs a Google AI plan or an eligible Google Workspace plan, and on a work account your company decides.
 
-**Your starting lines**
-* Reply to a customer asking where their order is. Say I’m checking on it and will update them by [day]. Warm and short.
-* Reply to a customer who got a damaged item. Say I’m sorry, and ask for a photo of the damage and their order number.
-* Reply to a customer asking about a return. Say I can help, and explain the steps from [our return policy]. Keep it friendly.
-* Reply to a customer asking about the size or fabric of [product name]. Share these details: [details]. Don’t add anything else.
-* Reply to a customer asking when [product name] is back in stock. Say I don’t have a date yet and offer [what we can do].
-* Reply to a customer who wants to change their order address. Say what I can do before it ships: [details].
-* Reply to an unhappy customer. Thank them for telling me, say what I’ll do next: [next step], and keep it calm and plain.
+**Starting lines for replies**
+* Reply to [first name] with the dimensions and finish options for the [product name]. Say photos are attached or coming soon. Keep it friendly and short.
+* Tell [first name] that their order [order number] is being prepared and that I will send tracking when I have it. Thank them for waiting.
+* Thank [first name] for the question about [product name]. Say I am checking with our team and will reply by [day]. Keep it short.
+* Apologize to [first name] that the [product name] arrived [issue]. Ask for a photo and say I will follow up with next steps as soon as I check [our policy].
+* Tell [first name] that [product name] is out of stock right now and that I can [option, like notify them when it returns]. Keep it warm.
+* Answer [first name] about care for the [product name]. Use only this information: [care details]. Keep it plain.
+* Thank [first name] for their feedback on [product name]. Say I shared it with the team. Keep it two sentences.
 
 **Notes on your tone**
-* Press Friendly when a draft sounds stiff or like a form letter, especially for shoppers asking simple questions.
-* Press Shorten when a draft runs long, like order status updates, where a customer wants the answer fast.
-* Press Formalize only for serious issues, like a complaint or a damaged item, and reread it to make sure it still sounds warm.
-* If a draft makes a promise I did not type, such as a date, refund or policy, I fix it or delete it before I send.
+* Start with a plain, friendly draft. If it sounds stiff or too formal, press Friendly. If it sounds too casual for an upset customer or a formal request, press Formalize. If it runs long, press Shorten. If it adds a detail I did not give, like a date, price or policy, delete that line or fix it before sending. Always read the full draft and check the name, order details and any promise before I send it.
 
 ### Step 4, end
 
-* Never type customer names, home addresses, phone numbers, emails or order numbers into a chat tool. Use square brackets instead.
-* Never paste payment details or anything from a customer’s account.
-* Keep unreleased products, launch dates and pricing out of chats unless my company says it is OK.
-* Check every product detail, like fabric, size and care, against my own product data before it goes live.
-* Read every description and every customer reply before it goes out, and send it myself.
+* Never type customer names, addresses, emails, phone numbers or order details into a chat tool. Use square brackets instead.
+* Do not paste payment details, account logins or anything from your store admin that is private.
+* Check every size, material, finish and care detail against the supplier spec sheet before a listing goes live.
+* Do not let AI state shipping, returns or warranty terms. Use your approved wording.
+* Read everything before it goes out, whether it is a listing, an email or a reply.
 
-> Hi [manager’s name], I’d like to confirm which AI tools the company has approved and what I may use them for. I have two tasks in mind: drafting product descriptions in ChatGPT, and drafting customer replies inside Gmail with Help me write. I would only use product details, never customer names, addresses or order numbers, and I would read everything before it goes out. Can you tell me what is approved, or point me to who can?
+> Hi [manager name], I use AI to help with my work as the ecommerce manager and I want to make sure I do it the right way. Which AI tools are approved here, and what may I use them for? I have in mind drafting product descriptions, updating listings, and drafting replies to customer messages in Gmail. I would also like to know if linking my work email to an AI tool is okay. I will keep customer details out of chat tools and read everything before it goes out.

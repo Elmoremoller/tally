@@ -5,20 +5,23 @@ experiment. Use it most days, builder. Both. Can use AI: Yes.
 ## Her map
 
 * **Writing captions** (level 3, Build once, reuse, recipe saved_assistant)
-  * Today: You write captions many times a day, often from scratch each time.
+  * Today: You write these many times a day, often starting from the design or last week’s top posts.
   * With your path: For your captions, you hand it the job, and it writes in your voice with your details already in.
+* **Designing posts in Canva** (level 1, Stays yours)
+  * Today: You design posts in Canva many times a day, working by hand.
+  * With your path: Your design work stays yours, with AI helping only with the caption text around it.
+* **Planning the content calendar** (level 2, Write it with AI)
+  * Today: You plan the calendar in Google Sheets, usually week by week.
+  * With your path: You plan the calendar with AI as a sounding board, and you make the final call.
 * **Replying to comments** (level 3, Build once, reuse, recipe phone_quick_replies)
   * Today: You reply to comments many times a day, one at a time.
   * With your path: For your comment replies, your common replies are saved on your phone, each a few letters away.
-* **Designing posts in Canva** (level 1, Stays yours)
-  * Today: You design posts in Canva as part of your daily work.
-  * With your path: The design stays yours, with AI helping only with the words you put on it.
-* **Planning content calendar** (level 2, Write it with AI)
-  * Today: You plan the content calendar on a regular basis.
-  * With your path: Planning stays yours, with AI helping you sketch the ideas and themes first.
+* **Answering messages** (level 3, Build once, reuse, recipe phone_quick_replies)
+  * Today: You answer messages many times a day, one at a time.
+  * With your path: For your message replies, your common replies are saved on your phone, each a few letters away.
 * **Writing emails** (level 3, Build once, reuse, recipe gmail_templates)
-  * Today: You write emails in your inbox as needed through the week.
-  * With your path: Your common emails are saved in Gmail as templates, ready to fill in.
+  * Today: You write emails through Gmail, usually one at a time.
+  * With your path: For your emails, your common emails are saved in Gmail as templates, ready to fill in.
 
 ## Her offer
 
@@ -45,11 +48,11 @@ On a phone:
 3. Make sure Enable customization is turned on.
 4. Type your instructions in the Custom Instructions field. They apply to every chat right away.
 
-Her note: I am a social media manager at a fitness apparel brand. I write captions, comment replies and short emails for our followers and customers. My tone is warm, upbeat and direct, like a friend who runs. I keep captions short, with a strong first line that leads with how something feels, not a sales pitch. Replies are one or two sentences. Never add details I did not give you, like prices, sizes, fabrics, dates or discount codes. Use a square bracket where something is missing. Do not use hype or pushy words. Give me a draft I can read and edit before anything goes out.
+Her note: I’m a social media manager at a fitness apparel brand. I write captions, comment replies, messages and emails for our followers, customers and my manager. My tone is warm, upbeat and real, like a person talking, never salesy or pushy. I put the hook first and keep captions short, usually under 80 words. Replies are brief and friendly. Emails are clear and polite. Never add details I did not give you, like prices, sizes, dates, discounts or product claims. If something is missing, ask me or leave a square bracket. Give me clean text I can read and edit before it goes out.
 
 ### Step 2, workflow: Your captions, with a saved assistant
 
-Your captions now come from a saved assistant in ChatGPT that already knows your brand voice. You hand it the product and the angle, and it drafts in your words and waits for you to read it. That beats starting from scratch many times a day, because the tone stays the same from post to post.
+Your captions now come from a saved assistant in ChatGPT that already knows your brand voice. You hand it the design or a top post from last week, and it writes in your words and waits for you to read it. That beats starting from a blank chat many times a day, because the voice, the length and the things to avoid are already in.
 
 Recipe saved_assistant, route chatgpt
 
@@ -68,19 +71,16 @@ Approval point: You read what it wrote and fix anything wrong before you send or
 Cost: The free plans of ChatGPT and Claude are enough. Claude's free plan allows up to five projects.
 
 **Instructions for your assistant**
-* You are my caption writer. I am a social media manager at a fitness apparel brand, and I post on Instagram and TikTok many times a day. Write captions in my voice: warm, upbeat and direct, like a friend who runs. Start with a strong first line that leads with how the piece feels while moving, never with a sales pitch. Keep captions short, usually two to four lines, and end with a simple call to action only when I ask for one. Avoid hype words, pushy language and filler. Never add details I did not give you, like prices, fabrics, sizes, dates or discount codes. Put a square bracket where something is missing. When I describe a post, give me three caption options and one alternative first line for each. I will read and edit everything before it goes out.
+* I’m the social media manager at a fitness apparel brand. You write Instagram captions for me. I will tell you what the post shows, or paste a top post from last week, and you write captions for it. Always put the hook in the first line. Keep each caption under 80 words. Sound like a real person talking to a friend, warm and upbeat, never salesy. Avoid pushy phrases, hype words, stacked emojis and lines that sound like an ad. Never add details I did not give you, like prices, sizes, dates, discounts or fabric claims. If you need a detail, put it in square brackets. Unless I ask for a different number, give me 3 captions, each with a different hook, and label them 1, 2 and 3. Give back only the captions, with no extra explanation.
 
 **Examples to start with**
-* Request: Swap the hook on the leggings post. Make it less salesy and lead with how they feel on a run.
-Caption: Mile three and you forget you are even wearing them. Our [product name] move with you, not against you. Tell us where your next run is taking you.
-* Request: Caption for a new sports bra photo, relaxed tone.
-Caption: Built for the days you want to move and not think about it. [Product name] is here. Which workout are you saving it for?
-* Request: Short caption for a behind the scenes video of the team testing gear.
-Caption: We tested it the only way we know how: by sweating in it. Watch the team put [product name] through a full session.
+* Post: new leggings drop. Caption: Your next favorite leggings just landed. They stay put through squats, sprints and the walk to get coffee after. Which color are you grabbing first? [color options]
+* Post: a top post from last week, a customer in a workout set. Caption: This one got a lot of love last week, and we get why. It’s the kind of set you reach for when you don’t want to think about it. Tell us your go to workout outfit below.
+* Post: a rest day reminder. Caption: Rest days count too. Stretch, sleep in, take it easy. Your next workout will thank you. What does your rest day look like?
 
 ### Step 3, workflow: Your comment replies, saved once on your phone
 
-Your common comment replies now live on your phone’s keyboard. You type a few letters and the full reply appears, then you change a name or a detail and send it. That keeps your answers friendly and consistent, and you still read every one before it goes.
+Your common comment replies now live on your phone’s keyboard. You type a few letters and the full reply appears, then you add the name or detail and read it before you post. It keeps your replies sounding like you, and you stop retyping the same lines many times a day.
 
 Recipe phone_quick_replies, route iphone + any_chat
 
@@ -97,29 +97,29 @@ Approval point: You read every reply before you send it. Nothing is sent by itse
 Cost: Text replacement on an iPhone, text shortcuts on a Samsung phone and the Gboard clipboard are free, and Tally writes the replies for you.
 
 **Your replies**
-* Thank you so much, [first name]! We are so glad you love it. Tell us how your next workout goes!
-* Great question, [first name]! [Answer from your approved info]. Let us know if you need anything else.
-* We are so sorry about that, [first name]. Please send us a message with your order details and we will make it right.
-* Thanks for the love, [first name]! We will pass it along to the team.
-* Good news, [first name]! [Product name] is available in [sizes or colors]. Check the link in our bio for the latest.
-* Hi [first name], thanks for asking! We do not have an update on that yet, but follow along and you will be the first to know.
-* Love seeing this, [first name]! Tag us in your next workout so we can see it.
+* Thank you so much, [first name]! That really made our day. Let us know how you like it!
+* Love this, [first name]! Thanks for sharing it with us.
+* Great question, [first name]! [answer from the product page]. Let us know if you want more details.
+* Thanks for telling us, [first name]. I’m sorry that happened. Please send us a message with your [order details] and we’ll look into it.
+* That color is so good, right? Thanks for the love, [first name]!
+* We hear you, [first name]. I’ll pass this along to our team. Thanks for the feedback!
+* Thanks for asking, [first name]! The details are on [where to find it]. Message us if you can’t find it.
 
 **Your shortcuts**
 * thnx
-* qans
+* lvit
+* qstn
 * sorr
-* pass
-* avail
-* noup
-* tagu
+* clrs
+* fdbk
+* dtls
 
 ### Step 4, end
 
-* Never type customer names, addresses, order numbers or email addresses into ChatGPT. Use square brackets instead.
-* Keep unreleased products, launch dates and pricing out of the chat unless your company has approved it.
-* Do not paste private messages or comments that show a follower’s personal details.
-* Read every caption and reply before it goes out, and check product facts against your own approved info.
-* Never let a draft promise discounts, sizes or shipping that you have not confirmed.
+* Never type customer names, addresses, order numbers or emails into ChatGPT. Use square brackets instead.
+* Never paste private messages or comments that show someone’s personal details.
+* Keep unreleased product details and launch dates out of the chat unless your company says it’s fine.
+* Check every caption and reply for prices, sizes, claims and dates before it goes out.
+* Read everything before you post or send it, every time.
 
-> Hi [manager name], I would like to confirm which AI tools are approved for my work and what I may use them for. I am planning to use ChatGPT to draft captions and replies to comments, and possibly emails and content calendar ideas. I would not enter customer names, order details or unreleased product information, and I would read everything before it goes out. Could you let me know what is approved, and whether linking my work email to an AI tool is okay?
+> Hi [manager’s name], I use AI for some of my day to day work and I want to make sure I’m using approved tools the right way. Which AI tools are approved at our company, and what may I use them for? I have in mind drafting Instagram captions and comment replies, and I’d also like to link my work email to an AI tool. I’ll keep customer details and unreleased product information out of it, and I’ll read everything before it goes out. Could you let me know what’s allowed?

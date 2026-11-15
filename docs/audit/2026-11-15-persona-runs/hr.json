@@ -14,13 +14,17 @@
  "versions": {
   "job": "beginner-job-v5",
   "questions": "beginner-questions-v6",
-  "intake": "beginner-intake-v7",
+  "intake": "beginner-intake-v8",
   "path": "beginner-path-v1"
  },
  "jobRead": {
   "repeats": [
    {
     "label": "Onboarding new hires",
+    "ai": true
+   },
+   {
+    "label": "Answering benefits questions",
     "ai": true
    },
    {
@@ -32,38 +36,34 @@
     "ai": true
    },
    {
-    "label": "Answering policy questions",
-    "ai": true
-   },
-   {
     "label": "Updating employee records",
     "ai": false
    },
    {
-    "label": "Sending reminder emails",
+    "label": "Writing policy reminders",
     "ai": true
    }
   ],
   "aiFallback": [
-   "Training checklists",
-   "Benefits FAQ replies",
-   "Meeting agendas",
-   "Review reminder notes"
+   "Welcome message drafts",
+   "Interview question lists",
+   "Employee FAQ answers",
+   "Team announcement drafts"
   ],
   "apps": [
    "Workday",
    "ADP",
    "Microsoft Teams",
-   "Outlook",
-   "Excel",
+   "Zoom",
+   "LinkedIn Recruiter",
    "SharePoint"
   ],
   "aiUses": [
    "Job descriptions",
    "Email replies",
    "Policy summaries",
-   "Training outlines",
-   "Meeting notes"
+   "Interview questions",
+   "Training outlines"
   ],
   "worksFor": "employer"
  },
@@ -71,16 +71,16 @@
  "asked": [
   {
    "id": "asked_1",
-   "title": "How do policy questions usually reach you?",
+   "title": "How do benefits questions usually reach you?",
    "kind": "many",
    "choices": [
-    "Email",
+    "Teams chat",
+    "Outlook email",
     "Walk up in person",
     "Phone call",
-    "Chat message",
-    "Shared HR mailbox"
+    "Ticket form"
    ],
-   "hint": "Tap every one that happens."
+   "hint": "Pick every one that happens."
   }
  ],
  "screens": 9,
@@ -108,20 +108,21 @@
     "title": "What do you do over and over, every day or every week?",
     "picked": [
      "Onboarding new hires",
+     "Answering benefits questions",
      "Scheduling interviews",
-     "Answering policy questions",
      "Updating employee records",
-     "Sending reminder emails",
+     "Writing policy reminders",
+     "Answering messages",
      "Writing emails"
     ],
-    "text": "Also the monthly newsletter, every month",
+    "text": "Also the monthly newsletter, every month like clockwork",
     "shown": [
      "Onboarding new hires",
+     "Answering benefits questions",
      "Scheduling interviews",
      "Writing job postings",
-     "Answering policy questions",
      "Updating employee records",
-     "Sending reminder emails",
+     "Writing policy reminders",
      "Answering messages",
      "Writing emails",
      "Planning my week",
@@ -132,24 +133,24 @@
     "id": "most",
     "title": "Which would save you the most time if it got easier?",
     "picked": [
-     "Answering policy questions",
-     "Scheduling interviews"
+     "Answering benefits questions",
+     "Onboarding new hires"
     ],
     "text": null,
     "shown": [
      "Onboarding new hires",
+     "Answering benefits questions",
      "Scheduling interviews",
-     "Answering policy questions",
      "Updating employee records",
-     "Sending reminder emails",
-     "Writing emails"
+     "Writing policy reminders",
+     "Answering messages"
     ]
    },
    {
     "id": "example",
     "title": "Paste the last one you wrote, or what the last person asked you.",
     "picked": [],
-    "text": "Someone asked if they can carry over unused PTO into next year. I said up to 5 days, check the handbook section 4.2 and ask HR if they have a special case."
+    "text": "Someone asked how many days of parental leave they get and if it's paid. I told them to check the benefits portal under Leave Policies and said I'd confirm the paid portion with payroll."
    },
    {
     "id": "often",
@@ -169,20 +170,21 @@
     "id": "where",
     "title": "Where does your work happen?",
     "picked": [
-     "Outlook",
-     "Excel",
-     "A work system"
+     "Microsoft Teams",
+     "SharePoint",
+     "Outlook"
     ],
-    "text": "HR system mostly, plus Outlook and Excel for the onboarding",
+    "text": "HR system, Excel for the checklist. Not sure which others",
     "shown": [
      "Workday",
      "ADP",
      "Microsoft Teams",
-     "Outlook",
-     "Excel",
+     "Zoom",
+     "LinkedIn Recruiter",
      "SharePoint",
      "Text messages",
      "Gmail",
+     "Outlook",
      "Google Sheets",
      "Instagram",
      "A work system",
@@ -205,20 +207,19 @@
    },
    {
     "id": "asked_1",
-    "title": "How do policy questions usually reach you?",
+    "title": "How do benefits questions usually reach you?",
     "picked": [
-     "Email",
+     "Outlook email",
      "Walk up in person",
-     "Chat message",
-     "Shared HR mailbox"
+     "Teams chat"
     ],
-    "text": null,
+    "text": "Mostly email, but people also stop by my desk. Phone calls a",
     "shown": [
-     "Email",
+     "Teams chat",
+     "Outlook email",
      "Walk up in person",
      "Phone call",
-     "Chat message",
-     "Shared HR mailbox"
+     "Ticket form"
     ]
    },
    {
@@ -250,8 +251,8 @@
    }
   ],
   "mostWanted": [
-   "Answering policy questions",
-   "Scheduling interviews"
+   "Answering benefits questions",
+   "Onboarding new hires"
   ],
   "worksFor": "employer",
   "aiTools": [
@@ -262,19 +263,13 @@
   "often": "many_a_day"
  },
  "intake": {
-  "role_summary": "You’re an HR coordinator at a logistics company with about 300 employees, handling onboarding, interview scheduling, policy questions, records, reminders, emails and the monthly newsletter.",
+  "role_summary": "You’re the HR coordinator at a logistics company with about 300 employees, handling onboarding, benefits questions, interviews, records and communications.",
   "tasks": [
    {
-    "name": "Answering policy questions",
-    "ai": true,
-    "private": false,
-    "kind": "email_replies"
-   },
-   {
-    "name": "Scheduling interviews",
+    "name": "Answering benefits questions",
     "ai": true,
     "private": true,
-    "kind": "repeat_emails"
+    "kind": "email_replies"
    },
    {
     "name": "Onboarding new hires",
@@ -283,10 +278,10 @@
     "kind": null
    },
    {
-    "name": "Reminder emails",
+    "name": "Policy reminders",
     "ai": true,
     "private": false,
-    "kind": "repeat_emails"
+    "kind": "repeat_writing"
    },
    {
     "name": "Writing emails",
@@ -302,56 +297,38 @@
    }
   ],
   "first_win": {
-   "task": "Answering policy questions",
-   "intro": "Someone asked about carrying over unused PTO, so here is your reply, ready to send.",
-   "draft": "Hi there,\n\nThanks for reaching out about carrying over unused PTO into next year. In most cases, up to [carry over limit] days can move to the next year. The full details are in section [handbook section] of the employee handbook.\n\nIf your situation is special, please reach out to HR directly so we can review it with you. I’m happy to help you figure out the next step."
+   "task": "Answering benefits questions",
+   "intro": "Someone asked how many days of parental leave they get and whether it’s paid. Here is your reply, ready to send.",
+   "draft": "Hi there,\n\nThank you for your question about parental leave. You can find the full details under Leave Policies in the benefits portal. I’m checking the paid portion with payroll and will get back to you as soon as I have a confirmed answer.\n\nIn the meantime, if you have any other questions, just let me know."
   },
-  "first_step": "I’m an HR coordinator at a logistics company with about 300 employees. I answer many policy questions a day, by email, chat and in person, usually pointing people to the employee handbook. Write a short, friendly reply I can send, in plain language and under 90 words, that points to the right handbook section and invites them to contact HR for special cases. Use square brackets for the policy details and the handbook section. Here is the question: [paste the employee’s question here]",
+  "first_step": "I’m an HR coordinator at a logistics company with about 300 employees. Each time someone asks a benefits question, I need a short, friendly reply I can send by email. Keep it under 90 words, plain and warm, with no jargon. Point them to the right section of the benefits portal, and say I will confirm anything I can’t answer from the portal. Here is the question: [paste the employee’s question here]",
   "map": [
    {
-    "task": "Answering policy questions",
+    "task": "Answering benefits questions",
     "phrase": null,
-    "today": "You answer these many times a day, mostly one at a time.",
-    "withPath": "Each reply starts from a draft you only need to check and send.",
-    "ai": true,
-    "private": false,
-    "kind": "email_replies"
-   },
-   {
-    "task": "Scheduling interviews",
-    "phrase": "interview scheduling emails",
-    "today": "You send these by hand, back and forth, each time from scratch.",
-    "withPath": "Each email starts from a draft with the details left for you to fill in.",
+    "today": "You answer these many times a day, mostly by email and at your desk.",
+    "withPath": "Each reply starts from a draft you only need to check and personalize.",
     "ai": true,
     "private": true,
-    "kind": "repeat_emails"
+    "kind": "email_replies"
    },
    {
     "task": "Onboarding new hires",
     "phrase": null,
-    "today": "You handle these in Outlook and Excel, step by step for each new hire.",
-    "withPath": "Your checklists and welcome notes start from a draft you only adjust.",
+    "today": "You handle onboarding steps for each new hire, often with a checklist.",
+    "withPath": "The checklist and the people details stay yours, and AI helps with the wording around them.",
     "ai": true,
     "private": true,
     "kind": null
    },
    {
     "task": "Writing emails",
-    "phrase": "everyday emails",
-    "today": "You write these often, each one from a blank page.",
-    "withPath": "Each email starts from a draft you only need to check.",
+    "phrase": "emails",
+    "today": "You write a lot of emails, many of them repeats.",
+    "withPath": "Common emails start from a draft you only need to adjust.",
     "ai": true,
     "private": false,
     "kind": "repeat_emails"
-   },
-   {
-    "task": "Monthly newsletter",
-    "phrase": "monthly newsletter",
-    "today": "You put this together once a month, mostly from scratch.",
-    "withPath": "Each issue starts from an outline you fill in with this month’s news.",
-    "ai": true,
-    "private": false,
-    "kind": "repeat_writing"
    }
   ],
   "needs_follow_up": false,
@@ -359,45 +336,31 @@
  },
  "free": {
   "firstWin": {
-   "task": "Answering policy questions",
-   "intro": "Someone asked about carrying over unused PTO, so here is your reply, ready to send.",
-   "draft": "Hi there,\n\nThanks for reaching out about carrying over unused PTO into next year. In most cases, up to [carry over limit] days can move to the next year. The full details are in section [handbook section] of the employee handbook.\n\nIf your situation is special, please reach out to HR directly so we can review it with you. I’m happy to help you figure out the next step."
+   "task": "Answering benefits questions",
+   "intro": "Someone asked how many days of parental leave they get and whether it’s paid. Here is your reply, ready to send.",
+   "draft": "Hi there,\n\nThank you for your question about parental leave. You can find the full details under Leave Policies in the benefits portal. I’m checking the paid portion with payroll and will get back to you as soon as I have a confirmed answer.\n\nIn the meantime, if you have any other questions, just let me know."
   },
-  "firstStep": "I’m an HR coordinator at a logistics company with about 300 employees. I answer many policy questions a day, by email, chat and in person, usually pointing people to the employee handbook. Write a short, friendly reply I can send, in plain language and under 90 words, that points to the right handbook section and invites them to contact HR for special cases. Use square brackets for the policy details and the handbook section. Here is the question: [paste the employee’s question here]",
+  "firstStep": "I’m an HR coordinator at a logistics company with about 300 employees. Each time someone asks a benefits question, I need a short, friendly reply I can send by email. Keep it under 90 words, plain and warm, with no jargon. Point them to the right section of the benefits portal, and say I will confirm anything I can’t answer from the portal. Here is the question: [paste the employee’s question here]",
   "map": [
    {
-    "task": "Answering policy questions",
+    "task": "Answering benefits questions",
     "phrase": null,
-    "today": "You answer these many times a day, mostly one at a time.",
-    "withPath": "Each reply starts from a draft you only need to check and send.",
+    "today": "You answer these many times a day, mostly by email and at your desk.",
+    "withPath": "Each reply starts from a draft you only need to check and personalize.",
     "ai": true,
-    "private": false,
+    "private": true,
     "kind": "email_replies",
     "level": 2,
     "waits": false,
     "recipe": null,
     "held": null,
-    "askFirst": false
-   },
-   {
-    "task": "Scheduling interviews",
-    "phrase": "interview scheduling emails",
-    "today": "You send these by hand, back and forth, each time from scratch.",
-    "withPath": "Each email starts from a draft with the details left for you to fill in.",
-    "ai": true,
-    "private": true,
-    "kind": "repeat_emails",
-    "level": 2,
-    "waits": false,
-    "recipe": null,
-    "held": null,
-    "askFirst": false
+    "askFirst": true
    },
    {
     "task": "Onboarding new hires",
     "phrase": null,
-    "today": "You handle these in Outlook and Excel, step by step for each new hire.",
-    "withPath": "Your checklists and welcome notes start from a draft you only adjust.",
+    "today": "You handle onboarding steps for each new hire, often with a checklist.",
+    "withPath": "The checklist and the people details stay yours, and AI helps with the wording around them.",
     "ai": true,
     "private": true,
     "kind": null,
@@ -405,13 +368,13 @@
     "waits": false,
     "recipe": null,
     "held": null,
-    "askFirst": false
+    "askFirst": true
    },
    {
     "task": "Writing emails",
-    "phrase": "everyday emails",
-    "today": "You write these often, each one from a blank page.",
-    "withPath": "Each email starts from a draft you only need to check.",
+    "phrase": "emails",
+    "today": "You write a lot of emails, many of them repeats.",
+    "withPath": "Common emails start from a draft you only need to adjust.",
     "ai": true,
     "private": false,
     "kind": "repeat_emails",
@@ -419,26 +382,12 @@
     "waits": false,
     "recipe": null,
     "held": null,
-    "askFirst": false
-   },
-   {
-    "task": "Monthly newsletter",
-    "phrase": "monthly newsletter",
-    "today": "You put this together once a month, mostly from scratch.",
-    "withPath": "For your monthly newsletter, you hand it the job, and it writes in your voice with your details already in.",
-    "ai": true,
-    "private": false,
-    "kind": "repeat_writing",
-    "level": 3,
-    "waits": false,
-    "recipe": "saved_assistant",
-    "held": null,
-    "askFirst": false
+    "askFirst": true
    }
   ],
   "setups": [
-   "Answering policy questions, written with AI",
-   "Your monthly newsletter, with a saved assistant"
+   "Answering benefits questions, written with AI",
+   "Your emails, written with AI"
   ],
   "prep": [
    "Get Claude ready on your computer",
@@ -453,11 +402,11 @@
   "canUse": "not_sure",
   "connect": "not_sure",
   "places": [
+   "Microsoft Teams",
+   "SharePoint",
    "Outlook",
-   "Excel",
-   "A work system",
-   "HR system mostly",
-   "plus Outlook and Excel for the onboarding"
+   "HR system",
+   "Excel for the checklist. Not sure which others"
   ],
   "device": "computer",
   "aiTools": [
@@ -468,12 +417,12 @@
   "ready:ready",
   "about:about",
   "task_1:workflow",
-  "task_2:workflow(saved_assistant)",
+  "task_2:workflow",
   "end:end"
  ],
  "path": {
   "version": 3,
-  "role": "You’re an HR coordinator at a logistics company with about 300 employees, handling onboarding, interview scheduling, policy questions, records, reminders, emails and the monthly newsletter.",
+  "role": "You’re the HR coordinator at a logistics company with about 300 employees, handling onboarding, benefits questions, interviews, records and communications.",
   "track": "starter",
   "tool": "claude",
   "worksFor": "employer",
@@ -489,26 +438,26 @@
     "id": "ready",
     "kind": "ready",
     "card": "claude_get_started",
-    "firstStep": "I’m an HR coordinator at a logistics company with about 300 employees. I answer many policy questions a day, by email, chat and in person, usually pointing people to the employee handbook. Write a short, friendly reply I can send, in plain language and under 90 words, that points to the right handbook section and invites them to contact HR for special cases. Use square brackets for the policy details and the handbook section. Here is the question: [paste the employee’s question here]"
+    "firstStep": "I’m an HR coordinator at a logistics company with about 300 employees. Each time someone asks a benefits question, I need a short, friendly reply I can send by email. Keep it under 90 words, plain and warm, with no jargon. Point them to the right section of the benefits portal, and say I will confirm anything I can’t answer from the portal. Here is the question: [paste the employee’s question here]"
    },
    {
     "id": "about",
     "kind": "about",
     "card": "claude_about_you",
-    "note": "I’m an HR coordinator at a logistics company with about 300 employees. I handle onboarding, interview scheduling, policy questions, employee records, reminders and a monthly newsletter. I write to employees, new hires, candidates and hiring managers. My tone is warm, clear and professional, and I keep things short, usually a few sentences. Use plain words and no jargon. Never add details I did not give you, such as policy numbers, dates, benefits or rules. If you are missing a fact, leave a square bracket for me to fill in. When a question is about policy, give me a draft I will check against the handbook before it goes out."
+    "note": "I am an HR coordinator at a logistics company with about 300 employees. I handle onboarding, benefits questions, interviews, employee records and internal communications. I write mostly to employees and new hires, and sometimes to my manager and payroll. My tone is warm, clear and professional, and I keep messages short, usually a few sentences. I point people to the benefits portal or the right team when that is the answer. Never add details I did not give you, like policy numbers, dates, dollar amounts or rules. If something is missing, put it in square brackets so I can fill it in from our approved sources. Always tell me what you assumed."
    },
    {
     "id": "task_1",
     "kind": "workflow",
-    "task": "Answering policy questions",
-    "title": "Answering policy questions, written with AI",
+    "task": "Answering benefits questions",
+    "title": "Answering benefits questions, written with AI",
     "recipe": null,
-    "read": "Each policy question starts with a short message you paste into Claude, with the question and the handbook wording you checked. Claude drafts the reply and you read it before it goes out. Your answers stay consistent and point people to the right handbook section, even when questions come in by email, chat and the shared mailbox.",
+    "read": "Claude drafts each benefits answer and waits for your OK. You give it the question and the facts you already have from the benefits portal or payroll, and it writes a clear reply in your voice. That keeps the many daily questions consistent, and you check every answer against your approved sources before it goes out.",
     "material": [
      {
-      "label": "Your policy question message",
+      "label": "Your benefits question message",
       "items": [
-       "I’m an HR coordinator at a logistics company with about 300 employees. An employee asked me this: [paste the question without names]. Here is the wording from our handbook that applies: [paste the handbook section]. Write a short, warm reply in my voice that answers only from that wording. Name the handbook section [section number] and tell them to contact HR if their case is special. Do not add any rule, number or exception that is not in the text I gave you. If something is missing, put it in square brackets. Give me just the reply, ready for me to read and check."
+       "I am an HR coordinator at a logistics company with about 300 employees. An employee asked me this benefits question: [paste the question without names or personal details]. Here is what I know from our approved sources: [facts from the benefits portal or payroll]. Here is what I still need to confirm: [open points, for example the paid portion with payroll]. Write a short, warm reply in my voice that answers only what I gave you, points them to [where to look in the benefits portal], and says I will follow up on anything unconfirmed. Do not add any details I did not give you. Give back the reply, then list anything you assumed."
       ]
      }
     ]
@@ -516,23 +465,15 @@
    {
     "id": "task_2",
     "kind": "workflow",
-    "task": "Monthly newsletter",
-    "title": "Your monthly newsletter, with a saved assistant",
-    "recipe": "saved_assistant",
-    "read": "Claude keeps a saved assistant for your newsletter, with your voice and details already in. Each month you start a new chat, tell it what is going in, and it drafts the issue for you to read and edit. You stop starting from a blank page, and the newsletter sounds the same from month to month.",
+    "task": "Writing emails",
+    "title": "Your emails, written with AI",
+    "recipe": null,
+    "read": "Claude drafts each email and waits for your OK. You tell it who the email is for and what it needs to say, and it writes a clean draft in your voice. Many of your emails are repeats, so this keeps them steady and leaves you to read and send.",
     "material": [
      {
-      "label": "Instructions for your assistant",
+      "label": "Your email message",
       "items": [
-       "You help me write our monthly company newsletter. I’m an HR coordinator at a logistics company with about 300 employees. Readers are drivers, warehouse staff, dispatchers and office teams, so keep the words plain and the tone warm and friendly, never stiff. Each issue has a short welcome, [sections I usually include], and a closing line. I will tell you what is going in each month. Use only the facts I give you. Never invent dates, names, numbers, policies or events, and use square brackets where something is missing. Keep each item short and easy to skim. Avoid corporate jargon and hype. Give me a full draft of the issue with a subject line, ready for me to read and edit before it goes out."
-      ]
-     },
-     {
-      "label": "Examples to start with",
-      "items": [
-       "Welcome to the [month] issue. It’s been a busy few weeks, and we want to say thank you to every team for the work you put in. Here’s what’s new and what’s coming up.",
-       "New faces: Please say hello to [first name], who joined our [team] team on [date]. If you see them around, take a minute to welcome them.",
-       "Reminder: [short reminder, such as open enrollment or a form due date] is coming up on [date]. Questions? Reach out to HR at [contact]. Thanks for reading, and see you next month."
+       "I am an HR coordinator at a logistics company with about 300 employees. Write an email to [who it is for, for example a new hire, a candidate or a manager] about [topic]. The key points are: [point one], [point two]. The deadline or next step is [day and time or none]. Keep it short, warm and clear, in my voice, with a plain subject line. Do not add facts, dates or policies I did not give you. Put anything missing in square brackets. Give back the subject line and the email, then list what you assumed."
       ]
      }
     ]
@@ -541,108 +482,321 @@
     "id": "end",
     "kind": "end",
     "safeUse": [
-     "Never type employee names, ID numbers, pay, medical details or performance notes into Claude.",
-     "Leave out candidate names, contact details and résumés when you ask for help with interview scheduling or emails.",
-     "Policy answers are drafts. Check each one against your handbook before it goes out.",
-     "Read everything Claude writes before you send or post it.",
-     "Ask before you connect your work email or HR system to any AI tool."
+     "Never type employee names, ID numbers, home addresses, salary details or health information into a chat tool.",
+     "Never paste records from your HR system, only the question with the personal details taken out.",
+     "Check every benefits answer against the benefits portal or payroll before you send it.",
+     "Do not let AI state policy, leave rules or pay details you have not confirmed yourself.",
+     "Read every draft before it goes out."
     ],
-    "askMessage": "Hi [manager or IT contact], I’d like to know which AI tools the company has approved and what I’m allowed to use them for. I’m thinking of using one to draft replies to policy questions, to help with interview scheduling emails, and to help write the monthly newsletter. I would never enter employee records or other private details, and I would read everything before it goes out. Could you also tell me whether I may link my work email to an AI tool, or whether that needs approval first?"
+    "askMessage": "Hi [manager or IT contact], I would like to use an AI tool to help with my day to day work in HR. I am thinking of drafting replies to benefits questions, writing routine emails and preparing onboarding messages for new hires. Which AI tools are approved at our company, and what may I use them for? I would only use them with personal details removed, and I would read and check everything before it goes out. Could you let me know what is allowed, and whether linking my work email is permitted?"
    }
   ]
  },
  "design": [
   {
-   "task": "Answering policy questions",
-   "today": "You answer policy questions many times a day, mostly one at a time. They reach you by email, in person, by chat message and through the shared HR mailbox.",
-   "newWay": "Because you are not sure your company allows AI for work, AI does not touch any employee question, reply or record. Instead you build your own short answer sheet from the handbook yourself, outside any AI tool, so each common question has one checked answer with its handbook section. You paste from that sheet and add the special case note yourself. If your company confirms AI is allowed, the same sheet can later become the base for a saved assistant.",
+   "task": "Answering benefits questions",
+   "today": "You answer benefits questions many times a day, mostly by email and at your desk, and also by Teams chat. Your last one was a parental leave question, where you pointed to the benefits portal and said you would confirm the paid portion with payroll.",
+   "newWay": "Because you are not sure your company allows AI for work, the first step is to ask and get a clear answer, and nothing here touches real work until you have it. If the answer is yes, you keep a saved assistant loaded only with your public benefits policy wording, and it drafts a reply from the question you paste in, with no employee names or personal details. You read each draft, check it against the portal, and send it yourself. Answers stay consistent, and anything the policy does not cover is marked for you to confirm with payroll.",
    "steps": [
     {
      "app": null,
      "ref": null,
-     "goal": "Ask your manager or IT whether you may use AI for work, and whether work email may be linked to an AI tool, and write down the answer."
+     "goal": "Ask your manager or IT whether you may use AI for HR work, and what may be pasted into it, before doing anything else."
     },
     {
      "app": null,
      "ref": null,
-     "goal": "List the ten policy questions you get most often, such as PTO carry over, from your own sent replies."
+     "goal": "Pick the ten benefits questions you get most often and collect the approved policy wording that answers each one."
     },
     {
-     "app": "Excel",
-     "ref": null,
-     "goal": "Write one checked answer for each question with its handbook section, so you copy it instead of retyping it."
+     "app": "Claude",
+     "ref": "claude_get_started",
+     "goal": "Get Claude ready on your computer, only if your company says AI is allowed."
     },
     {
-     "app": null,
-     "ref": null,
-     "goal": "Add a line to each answer saying when the person should be sent to HR for a special case."
+     "app": "Claude",
+     "ref": "claude_project",
+     "goal": "Make a project for benefits questions and add the approved policy wording as its reference material."
     },
     {
-     "app": null,
-     "ref": null,
-     "goal": "Review the sheet against the handbook whenever the policy changes so the answers stay current."
-    }
-   ],
-   "material": [
-    {
-     "label": "Question to ask",
-     "what": "A short note for your manager or IT asking if AI may be used for HR work and if work email may be linked."
-    },
-    {
-     "label": "Policy answer sheet",
-     "what": "Your ten most common questions, each with a checked answer, its handbook section and when to refer to HR."
-    }
-   ],
-   "checkPoint": "You read every answer against the handbook before you send it, and nothing from an employee goes into an AI tool until your company says yes."
-  },
-  {
-   "task": "Monthly newsletter",
-   "today": "You put this together once a month, mostly from scratch.",
-   "newWay": "Once your company confirms AI is allowed, a saved assistant holds your newsletter layout and tone, so each month you only give it the news items and it returns a first draft in your usual structure. You stay in charge of what is included and how it sounds. Until you get that answer, AI is not used, and you keep the same structure as a reusable template of your own so you stop starting from a blank page. Use only public or approved company news in the tool, never private employee details.",
-   "steps": [
-    {
-     "app": null,
-     "ref": null,
-     "goal": "Get your company's answer on whether AI may be used for work like the newsletter."
-    },
-    {
-     "app": null,
-     "ref": null,
-     "goal": "Pick two or three past newsletters you liked and note their sections, length and tone."
-    },
-    {
-     "app": "ChatGPT",
-     "ref": "chatgpt_get_started",
-     "goal": "Get ChatGPT ready on your computer, only after your company says AI is allowed."
-    },
-    {
-     "app": "ChatGPT",
-     "ref": "chatgpt_project",
-     "goal": "Make a project for the monthly newsletter that holds your sections, tone notes and past examples."
-    },
-    {
-     "app": "ChatGPT",
+     "app": "Claude",
      "ref": "saved_assistant",
-     "goal": "Set up the saved assistant so each month you paste in approved news items and get a draft in your usual layout."
+     "goal": "Set up a saved assistant that drafts benefits replies from the policy wording and flags anything it cannot answer."
+    },
+    {
+     "app": null,
+     "ref": null,
+     "goal": "Test it with three past questions that have names and personal details removed, and compare each draft with the portal."
     }
    ],
    "material": [
     {
      "label": "Assistant instructions",
-     "what": "Your newsletter sections, order, length and friendly work tone, written so the assistant drafts the same way every month."
+     "what": "Tells the assistant to answer only from your policy wording, to say when something needs payroll or you to confirm, and to never ask for personal details."
+    },
+    {
+     "label": "Policy reference sheet",
+     "what": "Holds your approved wording on leave, health cover and other common benefits topics, with the portal section for each."
     },
     {
      "label": "Tone notes",
-     "what": "A few lines and example phrases from past issues showing how your newsletter sounds."
+     "what": "Describes how you like to sound with colleagues: warm, short and clear."
     },
     {
-     "label": "Monthly input list",
-     "what": "A checklist of items to gather each month, such as announcements, birthdays approved for sharing and policy reminders."
+     "label": "Escalation list",
+     "what": "Lists the question types that always go to payroll or to you, such as paid portions and individual cases."
     }
    ],
-   "checkPoint": "You read the whole draft and check every name, date and announcement before it goes out."
+   "checkPoint": "You read every draft, check it against the benefits portal, and send it yourself, and nothing goes out without you."
+  },
+  {
+   "task": "Writing emails",
+   "today": "You write a lot of emails, many of them repeats, covering onboarding, policy reminders and interview scheduling.",
+   "newWay": "Your most repeated emails become saved templates in Outlook-style wording, each with clear gaps for names and dates. This works without connecting your work email to anything, since you only copy the finished wording across yourself. For the monthly newsletter and one-off emails, you say what you want out loud or in rough notes, and an AI tool turns it into a draft, but only if your company allows AI. You fill the gaps and read each email before it goes, so the repeats take less effort and still sound like you.",
+   "steps": [
+    {
+     "app": null,
+     "ref": null,
+     "goal": "List your five most repeated emails, such as welcome note, interview invite, policy reminder and newsletter intro."
+    },
+    {
+     "app": null,
+     "ref": null,
+     "goal": "Ask your manager or IT whether AI may be used for drafting work emails, and keep real employee details out of any tool until you have the answer."
+    },
+    {
+     "app": "ChatGPT",
+     "ref": "chatgpt_get_started",
+     "goal": "Get ChatGPT ready on your computer, only if your company allows AI."
+    },
+    {
+     "app": "ChatGPT",
+     "ref": "chatgpt_about_you",
+     "goal": "Save short notes about your role and writing style so drafts sound like you."
+    },
+    {
+     "app": "ChatGPT",
+     "ref": "saved_assistant",
+     "goal": "Set up a saved assistant that writes your repeated emails as drafts with gaps left for names, dates and details."
+    },
+    {
+     "app": "ChatGPT",
+     "ref": "say_it_out_loud",
+     "goal": "Use rough spoken or typed notes to get a finished draft of the monthly newsletter or a one-off email."
+    }
+   ],
+   "material": [
+    {
+     "label": "Email templates",
+     "what": "Holds your five most repeated emails with clear gaps for names, dates and details."
+    },
+    {
+     "label": "Assistant instructions",
+     "what": "Tells the assistant to write in your voice, keep emails short, and leave gaps instead of guessing facts."
+    },
+    {
+     "label": "Tone notes",
+     "what": "Describes your usual greeting, sign off and level of formality."
+    },
+    {
+     "label": "Newsletter outline",
+     "what": "Lists the sections of your monthly newsletter so each issue starts from the same shape."
+    }
+   ],
+   "checkPoint": "You fill every gap, check every name, date and policy detail, and send each email yourself."
   }
  ],
+ "design2": [
+  {
+   "task": "Answering benefits questions",
+   "stays": false,
+   "today": "You answer these many times a day, mostly by email, but also at your desk and in Teams chat. Your last answer pointed to the benefits portal under Leave Policies and promised to confirm the paid portion with payroll.",
+   "newWay": "You keep one saved assistant that holds your approved benefits answers and drafts a reply in your voice from the question you paste in. It points to the right portal page and flags anything it cannot confirm, such as pay details, so you check with payroll before you answer. You answer faster and more consistently, and the same answers work for email, Teams and walk ups. Since you are not sure what your company allows, ask first before you put any work content into an AI tool, and paste only the question with names and personal details removed.",
+   "steps": [
+    {
+     "app": null,
+     "ref": null,
+     "feature": null,
+     "goal": "Ask your manager or IT whether you may use an AI tool for work, and which one, before you paste anything in.",
+     "clickPath": null
+    },
+    {
+     "app": "ChatGPT",
+     "ref": "chatgpt_get_started",
+     "feature": null,
+     "goal": "Get ChatGPT or Claude ready on your computer, whichever your company allows.",
+     "clickPath": null
+    },
+    {
+     "app": "ChatGPT",
+     "ref": "chatgpt_project",
+     "feature": null,
+     "goal": "Make a project for benefits answers so your approved wording stays in one place for every question.",
+     "clickPath": null
+    },
+    {
+     "app": "Microsoft Word",
+     "ref": null,
+     "feature": null,
+     "goal": "Collect your approved benefits answers and the portal page names into one plain document with no employee details, and add it to the project.",
+     "clickPath": null
+    },
+    {
+     "app": "ChatGPT",
+     "ref": "saved_assistant",
+     "feature": null,
+     "goal": "Set the assistant to draft short replies from your approved answers and to mark any pay, eligibility or date it cannot confirm.",
+     "clickPath": null
+    }
+   ],
+   "material": [
+    {
+     "label": "Benefits answer bank",
+     "what": "Your approved answers by topic, with the portal page to point to and who confirms what, such as payroll for paid portions."
+    },
+    {
+     "label": "Assistant instructions",
+     "what": "Tells the assistant to use only your answer bank, keep a warm plain tone, and flag anything it cannot confirm."
+    },
+    {
+     "label": "Reply format",
+     "what": "A short reply layout with the answer, the portal link or page name, and a line on what you are still confirming."
+    }
+   ],
+   "checkPoint": "You read each reply and confirm every number, pay detail and eligibility rule with payroll or the portal before you send it."
+  },
+  {
+   "task": "Onboarding new hires",
+   "stays": false,
+   "today": "You handle onboarding steps for each new hire, often with a checklist in Excel. The steps repeat for every person.",
+   "newWay": "You keep one master checklist in Excel and one saved assistant that turns it into a welcome email, a first week plan and task reminders for each new hire from a few details you give it. You stop rebuilding the same messages and lists each time, and the checklist stays the single source. Ask first about your company's AI rules before you use any tool, and give it only the role and start date, never personal details like address or ID numbers.",
+   "steps": [
+    {
+     "app": null,
+     "ref": null,
+     "feature": null,
+     "goal": "Ask your manager or IT whether you may use an AI tool for onboarding material, and which one.",
+     "clickPath": null
+    },
+    {
+     "app": "Excel",
+     "ref": null,
+     "feature": "Excel Copilot",
+     "goal": "Tidy your onboarding checklist into clear columns for task, owner, due day and status, if Copilot is included in your Microsoft 365 and your company allows it.",
+     "clickPath": "Home, then Copilot"
+    },
+    {
+     "app": "ChatGPT",
+     "ref": "chatgpt_project",
+     "feature": null,
+     "goal": "Make a project for onboarding and add your checklist with no names or personal details.",
+     "clickPath": null
+    },
+    {
+     "app": "ChatGPT",
+     "ref": "saved_assistant",
+     "feature": null,
+     "goal": "Set the assistant to draft the welcome email, first week schedule and reminders to managers and IT from the role and start date.",
+     "clickPath": null
+    },
+    {
+     "app": "Outlook",
+     "ref": null,
+     "feature": "Outlook Quick Parts",
+     "goal": "Save the final welcome email text as a reusable block with gaps for name, date and manager.",
+     "clickPath": "Insert, then Quick Parts"
+    }
+   ],
+   "material": [
+    {
+     "label": "Master onboarding checklist",
+     "what": "Every step with owner, timing and status, written so it works for any role."
+    },
+    {
+     "label": "Welcome email draft",
+     "what": "A friendly first email with gaps for name, start date, manager and where to go on day one."
+    },
+    {
+     "label": "First week plan template",
+     "what": "A day by day outline you adjust for each role."
+    },
+    {
+     "label": "Assistant instructions",
+     "what": "Tells the assistant to use only the role and start date, follow your checklist and leave gaps for anything it does not know."
+    }
+   ],
+   "checkPoint": "You fill every gap, check dates and names against the HR system, and read each message before you send it yourself."
+  },
+  {
+   "task": "Writing emails",
+   "stays": false,
+   "today": "You write a lot of emails, many of them repeats such as policy reminders and benefits replies.",
+   "newWay": "You save your most common emails as reusable blocks in Outlook, and use a saved assistant for the ones that need a fresh version, like policy reminders or the monthly newsletter. The repeats take less effort and the wording stays consistent. Ask first what your company allows before pasting any work text into an AI tool, and leave out names and personal details.",
+   "steps": [
+    {
+     "app": null,
+     "ref": null,
+     "feature": null,
+     "goal": "Ask your manager or IT whether you may use an AI tool for drafting work emails.",
+     "clickPath": null
+    },
+    {
+     "app": null,
+     "ref": null,
+     "feature": null,
+     "goal": "List your five or six most repeated emails from your Sent folder so you know what to save.",
+     "clickPath": null
+    },
+    {
+     "app": "Outlook",
+     "ref": null,
+     "feature": "Outlook Quick Parts",
+     "goal": "Save each repeated email as a block with clear gaps for name, date and details.",
+     "clickPath": "Insert, then Quick Parts"
+    },
+    {
+     "app": "ChatGPT",
+     "ref": "saved_assistant",
+     "feature": null,
+     "goal": "Make an assistant for policy reminders and the monthly newsletter that drafts from the key points you give it, in your tone.",
+     "clickPath": null
+    }
+   ],
+   "material": [
+    {
+     "label": "Email blocks",
+     "what": "Ready to use versions of your most common emails with gaps to fill."
+    },
+    {
+     "label": "Policy reminder prompt",
+     "what": "A short format for turning the policy name, date and action into a clear reminder."
+    },
+    {
+     "label": "Newsletter outline",
+     "what": "A monthly layout with sections you fill from your notes each month."
+    },
+    {
+     "label": "Assistant instructions",
+     "what": "Describes your tone, length and rules such as never inventing dates or policy details."
+    }
+   ],
+   "checkPoint": "You fill every gap, check dates and policy details, and read each email before you send it yourself."
+  }
+ ],
+ "design2Links": {
+  "excel|excel copilot": {
+   "app": "Excel",
+   "feature": "Excel Copilot",
+   "url": "https://support.microsoft.com/en-us/excel/copilot/get-started-with-copilot-in-excel",
+   "title": "Get started with Copilot in Excel"
+  },
+  "outlook|outlook quick parts": {
+   "app": "Outlook",
+   "feature": "Outlook Quick Parts",
+   "url": "https://support.microsoft.com/en-us/word/quick-parts",
+   "title": "Quick Parts"
+  }
+ },
  "checks": [
   {
    "id": "screens",
@@ -670,6 +824,11 @@
    "detail": "No row connects a work app"
   },
   {
+   "id": "not_sure_ask_first",
+   "pass": true,
+   "detail": "Every task AI touches says to ask first"
+  },
+  {
    "id": "path_written",
    "pass": true,
    "detail": "5 steps"
@@ -682,7 +841,7 @@
   {
    "id": "setup_from_recipe_or_card",
    "pass": true,
-   "detail": "card claude_get_started, card claude_about_you, Tally's own steps for writing with AI, recipe saved_assistant"
+   "detail": "card claude_get_started, card claude_about_you, Tally's own steps for writing with AI, Tally's own steps for writing with AI"
   },
   {
    "id": "no_click_paths_from_model",
@@ -691,8 +850,8 @@
   },
   {
    "id": "copy_rules",
-   "pass": false,
-   "detail": "New faces: Please say hello to [first name], who joined our [team] team on [date]. If you see them around, take a minute"
+   "pass": true,
+   "detail": "No dashes, promised times, prices or percents"
   },
   {
    "id": "offer_matches_path",
@@ -701,23 +860,12 @@
   }
  ],
  "recipes": {
-  "total": 5,
-  "aiTasks": 5,
-  "withRecipe": [
-   {
-    "task": "Monthly newsletter",
-    "recipe": "saved_assistant",
-    "level": 3
-   }
-  ],
+  "total": 3,
+  "aiTasks": 3,
+  "withRecipe": [],
   "without": [
    {
-    "task": "Answering policy questions",
-    "level": 2,
-    "waits": false
-   },
-   {
-    "task": "Scheduling interviews",
+    "task": "Answering benefits questions",
     "level": 2,
     "waits": false
    },
@@ -732,26 +880,86 @@
     "waits": false
    }
   ],
-  "noRecipe": false,
+  "noRecipe": true,
   "mostlyAssistant": false
  },
  "designCount": {
-  "steps": 10,
-  "checked": 3,
-  "unchecked": 1,
-  "noApp": 6,
+  "steps": 12,
+  "checked": 7,
+  "unchecked": 0,
+  "noApp": 5,
   "badRefs": [],
   "clickPaths": [],
+  "apps": [],
+  "refs": [
+   "claude_get_started",
+   "claude_project",
+   "saved_assistant",
+   "chatgpt_get_started",
+   "chatgpt_about_you",
+   "say_it_out_loud"
+  ]
+ },
+ "design2Count": {
+  "tasks": 3,
+  "stays": 0,
+  "steps": 14,
+  "checked": 6,
+  "unchecked": 4,
+  "linked": 3,
+  "noApp": 4,
+  "noFeature": 1,
+  "clickInGoal": [],
+  "clickPathsHidden": 0,
   "apps": [
    [
+    "Outlook",
+    {
+     "steps": 2,
+     "linked": 2
+    }
+   ],
+   [
+    "Microsoft Word",
+    {
+     "steps": 1,
+     "linked": 0
+    }
+   ],
+   [
     "Excel",
-    1
+    {
+     "steps": 1,
+     "linked": 1
+    }
    ]
   ],
-  "refs": [
-   "chatgpt_get_started",
-   "chatgpt_project",
-   "saved_assistant"
-  ]
+  "lowTasks": [
+   {
+    "task": "Answering benefits questions",
+    "level": 2,
+    "designed": true,
+    "stays": false,
+    "steps": 5,
+    "unchecked": 1
+   },
+   {
+    "task": "Onboarding new hires",
+    "level": 2,
+    "designed": true,
+    "stays": false,
+    "steps": 5,
+    "unchecked": 2
+   },
+   {
+    "task": "Writing emails",
+    "level": 2,
+    "designed": true,
+    "stays": false,
+    "steps": 4,
+    "unchecked": 1
+   }
+  ],
+  "missingTasks": []
  }
 }

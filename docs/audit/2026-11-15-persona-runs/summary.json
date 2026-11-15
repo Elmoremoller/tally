@@ -1,9 +1,9 @@
 {
- "ranAt": "2026-11-15T16:10:47.807Z",
+ "ranAt": "2026-11-15T16:39:11.474Z",
  "versions": {
   "job": "beginner-job-v5",
   "questions": "beginner-questions-v6",
-  "intake": "beginner-intake-v7",
+  "intake": "beginner-intake-v8",
   "path": "beginner-path-v1"
  },
  "runs": {
@@ -73,8 +73,8 @@
     }
    ],
    "recipes": {
-    "total": 4,
-    "aiTasks": 3,
+    "total": 5,
+    "aiTasks": 2,
     "withRecipe": [
      {
       "task": "Follow up texts",
@@ -89,12 +89,17 @@
     ],
     "without": [
      {
-      "task": "Client book updates",
-      "level": null,
-      "waits": true
+      "task": "Client consultations",
+      "level": 1,
+      "waits": false
      },
      {
-      "task": "Appointment bookings",
+      "task": "Product demos",
+      "level": 1,
+      "waits": false
+     },
+     {
+      "task": "Restocking testers",
       "level": 1,
       "waits": false
      }
@@ -105,13 +110,19 @@
    "designCount": {
     "steps": 8,
     "checked": 0,
-    "unchecked": 0,
-    "noApp": 8,
+    "unchecked": 2,
+    "noApp": 6,
     "badRefs": [],
     "clickPaths": [],
-    "apps": [],
+    "apps": [
+     [
+      "Notes app on phone",
+      2
+     ]
+    ],
     "refs": []
    },
+   "design2Count": null,
    "pathRecipes": [
     "phone_quick_replies",
     "phone_quick_replies"
@@ -153,47 +164,21 @@
      "detail": "Every AI task waits or needs no AI at work"
     },
     {
-     "id": "path_written",
+     "id": "ask_only_no_path",
      "pass": true,
-     "detail": "4 steps"
-    },
-    {
-     "id": "workflow_parts",
-     "pass": true,
-     "detail": "1 workflows, each with a test, an approval point and a cost line"
-    },
-    {
-     "id": "setup_from_recipe_or_card",
-     "pass": true,
-     "detail": "card claude_get_started, card claude_about_you, recipe phone_quick_replies"
-    },
-    {
-     "id": "no_click_paths_from_model",
-     "pass": true,
-     "detail": "The model wrote no menu paths or button names"
-    },
-    {
-     "id": "copy_rules",
-     "pass": true,
-     "detail": "No dashes, promised times, prices or percents"
-    },
-    {
-     "id": "offer_matches_path",
-     "pass": true,
-     "detail": "Offer names 1, path has 1 workflows, 1 match by name"
+     "detail": "Every task waits: no offer, no path, only the message to ask"
     }
    ],
    "recipes": {
     "total": 5,
     "aiTasks": 1,
-    "withRecipe": [
+    "withRecipe": [],
+    "without": [
      {
       "task": "Handling returns",
-      "recipe": "phone_quick_replies",
-      "level": 3
-     }
-    ],
-    "without": [
+      "level": null,
+      "waits": true
+     },
      {
       "task": "Scanning customer items",
       "level": 1,
@@ -205,33 +190,32 @@
       "waits": false
      },
      {
-      "task": "Answering price questions",
+      "task": "Answering customer questions",
       "level": 1,
       "waits": false
      },
      {
-      "task": "Counting the till",
+      "task": "Counting the drawer",
       "level": 1,
       "waits": false
      }
     ],
-    "noRecipe": false,
+    "noRecipe": true,
     "mostlyAssistant": false
    },
    "designCount": {
-    "steps": 3,
+    "steps": 8,
     "checked": 0,
     "unchecked": 0,
-    "noApp": 3,
+    "noApp": 8,
     "badRefs": [],
     "clickPaths": [],
     "apps": [],
     "refs": []
    },
-   "pathRecipes": [
-    "phone_quick_replies"
-   ],
-   "askOnly": false
+   "design2Count": null,
+   "pathRecipes": [],
+   "askOnly": true
   },
   "dental": {
    "group": "allowed employee",
@@ -265,7 +249,7 @@
     {
      "id": "dental_top_level_3",
      "pass": true,
-     "detail": "Top task Appointment reminder texts at level 3 with phone_quick_replies"
+     "detail": "Top task Appointment reminders at level 3 with phone_quick_replies"
     },
     {
      "id": "path_written",
@@ -303,17 +287,17 @@
     "aiTasks": 3,
     "withRecipe": [
      {
-      "task": "Appointment reminder texts",
+      "task": "Appointment reminders",
       "recipe": "phone_quick_replies",
       "level": 3
      },
      {
-      "task": "Recall reminders",
+      "task": "Recall messages",
       "recipe": "phone_quick_replies",
       "level": 3
      },
      {
-      "task": "Moving appointments",
+      "task": "Rescheduling when a dentist is out",
       "recipe": "phone_quick_replies",
       "level": 3
      }
@@ -340,20 +324,20 @@
    },
    "designCount": {
     "steps": 8,
-    "checked": 5,
+    "checked": 4,
     "unchecked": 0,
-    "noApp": 3,
+    "noApp": 4,
     "badRefs": [],
     "clickPaths": [],
     "apps": [],
     "refs": [
      "chatgpt_get_started",
      "phone_quick_replies",
-     "claude_get_started",
-     "claude_project",
+     "chatgpt_project",
      "saved_assistant"
     ]
    },
+   "design2Count": null,
    "pathRecipes": [
     "phone_quick_replies",
     "phone_quick_replies"
@@ -387,7 +371,7 @@
     {
      "id": "vendor_level_4",
      "pass": true,
-     "detail": "Vendor follow ups at level 4"
+     "detail": "Follow up emails to vendors and clients at level 4"
     },
     {
      "id": "path_written",
@@ -407,7 +391,7 @@
     {
      "id": "setup_from_recipe_or_card",
      "pass": true,
-     "detail": "card chatgpt_about_you, recipe gmail_claude_follow_ups, recipe phone_quick_replies"
+     "detail": "card chatgpt_about_you, recipe gmail_claude_follow_ups, recipe gmail_help_me_write"
     },
     {
      "id": "no_click_paths_from_model",
@@ -427,33 +411,33 @@
    ],
    "recipes": {
     "total": 5,
-    "aiTasks": 5,
+    "aiTasks": 4,
     "withRecipe": [
      {
-      "task": "Vendor follow ups",
+      "task": "Follow up emails to vendors and clients",
       "recipe": "gmail_claude_follow_ups",
       "level": 4
      },
      {
-      "task": "Client texts",
-      "recipe": "phone_quick_replies",
+      "task": "Answering messages",
+      "recipe": "gmail_help_me_write",
+      "level": 4
+     },
+     {
+      "task": "Building run of show",
+      "recipe": "saved_assistant",
       "level": 3
      },
      {
-      "task": "Emails",
-      "recipe": "gmail_templates",
+      "task": "Making lists",
+      "recipe": "notes_to_sheet",
       "level": 3
      }
     ],
     "without": [
      {
-      "task": "Vendor schedules",
-      "level": 2,
-      "waits": false
-     },
-     {
-      "task": "Event lists",
-      "level": 2,
+      "task": "Calling vendors",
+      "level": 1,
       "waits": false
      }
     ],
@@ -461,24 +445,51 @@
     "mostlyAssistant": false
    },
    "designCount": {
-    "steps": 9,
-    "checked": 6,
+    "steps": 11,
+    "checked": 9,
     "unchecked": 0,
-    "noApp": 3,
+    "noApp": 2,
     "badRefs": [],
     "clickPaths": [],
     "apps": [],
     "refs": [
      "chatgpt_get_started",
      "chatgpt_about_you",
+     "chatgpt_project",
      "weekly_no_reply_list",
      "gmail_claude_follow_ups",
-     "phone_quick_replies"
+     "phone_quick_replies",
+     "say_it_out_loud",
+     "gmail_templates"
     ]
+   },
+   "design2Count": {
+    "tasks": 5,
+    "stays": 1,
+    "steps": 11,
+    "checked": 11,
+    "unchecked": 0,
+    "linked": 0,
+    "noApp": 0,
+    "noFeature": 0,
+    "clickInGoal": [],
+    "clickPathsHidden": 0,
+    "apps": [],
+    "lowTasks": [
+     {
+      "task": "Calling vendors",
+      "level": 1,
+      "designed": true,
+      "stays": true,
+      "steps": 0,
+      "unchecked": 0
+     }
+    ],
+    "missingTasks": []
    },
    "pathRecipes": [
     "gmail_claude_follow_ups",
-    "phone_quick_replies"
+    "gmail_help_me_write"
    ],
    "askOnly": false
   },
@@ -508,8 +519,8 @@
     },
     {
      "id": "quote_level_3",
-     "pass": false,
-     "detail": "Writing quotes at level 2, held: needs_computer"
+     "pass": true,
+     "detail": "Writing quotes at level 3"
     },
     {
      "id": "path_written",
@@ -524,7 +535,7 @@
     {
      "id": "setup_from_recipe_or_card",
      "pass": true,
-     "detail": "card claude_get_started, card claude_about_you, Tally's own steps for writing with AI, recipe phone_quick_replies"
+     "detail": "card claude_get_started, card claude_about_you, recipe say_it_out_loud, recipe phone_quick_replies"
     },
     {
      "id": "no_click_paths_from_model",
@@ -533,8 +544,8 @@
     },
     {
      "id": "copy_rules",
-     "pass": false,
-     "detail": "Hi [first name], just a friendly reminder about the review. It only takes a minute here: [review link]. Thank you so muc"
+     "pass": true,
+     "detail": "No dashes, promised times, prices or percents"
     },
     {
      "id": "offer_matches_path",
@@ -547,8 +558,8 @@
     "aiTasks": 5,
     "withRecipe": [
      {
-      "task": "Chasing payment and asking for reviews",
-      "recipe": "phone_quick_replies",
+      "task": "Writing quotes",
+      "recipe": "say_it_out_loud",
       "level": 3
      },
      {
@@ -557,19 +568,19 @@
       "level": 3
      },
      {
-      "task": "Answering messages",
+      "task": "Asking for reviews",
+      "recipe": "phone_quick_replies",
+      "level": 3
+     },
+     {
+      "task": "Chasing payments",
       "recipe": "phone_quick_replies",
       "level": 3
      }
     ],
     "without": [
      {
-      "task": "Writing quotes",
-      "level": 2,
-      "waits": false
-     },
-     {
-      "task": "Invoicing customers",
+      "task": "Invoicing jobs",
       "level": 2,
       "waits": false
      }
@@ -587,16 +598,15 @@
     "apps": [],
     "refs": [
      "claude_get_started",
+     "claude_about_you",
      "claude_project",
      "saved_assistant",
-     "say_it_out_loud",
-     "chatgpt_get_started",
-     "chatgpt_about_you",
      "phone_quick_replies"
     ]
    },
+   "design2Count": null,
    "pathRecipes": [
-    "with_ai",
+    "say_it_out_loud",
     "phone_quick_replies"
    ],
    "askOnly": false
@@ -657,11 +667,11 @@
     }
    ],
    "recipes": {
-    "total": 6,
+    "total": 5,
     "aiTasks": 5,
     "withRecipe": [
      {
-      "task": "Answering messages",
+      "task": "Answering client messages",
       "recipe": "phone_quick_replies",
       "level": 3
      },
@@ -671,24 +681,19 @@
       "level": 3
      },
      {
-      "task": "Client follow ups",
+      "task": "Booking new clients",
       "recipe": "phone_quick_replies",
       "level": 3
      },
      {
-      "task": "Price and reschedule questions",
+      "task": "Price and timing questions",
       "recipe": "phone_quick_replies",
       "level": 3
      }
     ],
     "without": [
      {
-      "task": "Booking grooming slots",
-      "level": 1,
-      "waits": false
-     },
-     {
-      "task": "Social media updates",
+      "task": "Social media posts",
       "level": 2,
       "waits": false
      }
@@ -697,27 +702,20 @@
     "mostlyAssistant": false
    },
    "designCount": {
-    "steps": 10,
-    "checked": 4,
-    "unchecked": 4,
-    "noApp": 2,
+    "steps": 9,
+    "checked": 5,
+    "unchecked": 0,
+    "noApp": 4,
     "badRefs": [],
     "clickPaths": [],
-    "apps": [
-     [
-      "ChatGPT",
-      2
-     ],
-     [
-      "Google Calendar",
-      2
-     ]
-    ],
+    "apps": [],
     "refs": [
      "chatgpt_get_started",
+     "saved_assistant",
      "phone_quick_replies"
     ]
    },
+   "design2Count": null,
    "pathRecipes": [
     "phone_quick_replies",
     "phone_quick_replies"
@@ -766,7 +764,7 @@
     {
      "id": "setup_from_recipe_or_card",
      "pass": true,
-     "detail": "card chatgpt_about_you, recipe phone_quick_replies, recipe phone_quick_replies"
+     "detail": "card chatgpt_about_you, Tally's own steps for writing with AI, recipe phone_quick_replies"
     },
     {
      "id": "no_click_paths_from_model",
@@ -789,24 +787,24 @@
     "aiTasks": 4,
     "withRecipe": [
      {
-      "task": "Answering messages",
+      "task": "Customer messages",
       "recipe": "phone_quick_replies",
       "level": 3
      },
      {
-      "task": "Texting regular customers",
+      "task": "Texts to regulars",
       "recipe": "phone_quick_replies",
       "level": 3
      }
     ],
     "without": [
      {
-      "task": "Writing product captions",
+      "task": "Social posts",
       "level": 2,
       "waits": false
      },
      {
-      "task": "Ordering new stock",
+      "task": "Scheduling part timers",
       "level": 2,
       "waits": false
      }
@@ -816,27 +814,27 @@
    },
    "designCount": {
     "steps": 9,
-    "checked": 5,
-    "unchecked": 2,
+    "checked": 6,
+    "unchecked": 1,
     "noApp": 2,
     "badRefs": [],
     "clickPaths": [],
     "apps": [
      [
-      "ChatGPT",
-      2
+      "Instagram",
+      1
      ]
     ],
     "refs": [
      "chatgpt_get_started",
      "chatgpt_about_you",
-     "phone_quick_replies",
-     "chatgpt_project",
-     "saved_assistant"
+     "saved_assistant",
+     "phone_quick_replies"
     ]
    },
+   "design2Count": null,
    "pathRecipes": [
-    "phone_quick_replies",
+    "with_ai",
     "phone_quick_replies"
    ],
    "askOnly": false
@@ -867,8 +865,8 @@
     },
     {
      "id": "gmail_builder_top_level_4",
-     "pass": false,
-     "detail": "Top task Answering inquiry messages at level 3 with phone_quick_replies"
+     "pass": true,
+     "detail": "Top task Answering messages at level 4 with gmail_help_me_write"
     },
     {
      "id": "path_written",
@@ -888,7 +886,7 @@
     {
      "id": "setup_from_recipe_or_card",
      "pass": true,
-     "detail": "recipe phone_quick_replies, recipe gmail_templates"
+     "detail": "recipe gmail_help_me_write, recipe gmail_claude_follow_ups"
     },
     {
      "id": "no_click_paths_from_model",
@@ -907,64 +905,111 @@
     }
    ],
    "recipes": {
-    "total": 5,
-    "aiTasks": 5,
+    "total": 6,
+    "aiTasks": 6,
     "withRecipe": [
      {
-      "task": "Answering inquiry messages",
-      "recipe": "phone_quick_replies",
-      "level": 3
+      "task": "Answering messages",
+      "recipe": "gmail_help_me_write",
+      "level": 4
      },
      {
-      "task": "Writing client emails",
+      "task": "Vendor booking emails",
       "recipe": "gmail_templates",
       "level": 3
      },
      {
-      "task": "Writing proposals",
-      "recipe": "saved_assistant",
+      "task": "Writing emails",
+      "recipe": "gmail_templates",
       "level": 3
      },
      {
-      "task": "Building timelines",
+      "task": "Making lists",
       "recipe": "notes_to_sheet",
       "level": 3
      },
      {
-      "task": "Chasing replies",
+      "task": "Chasing vendors",
       "recipe": "gmail_claude_follow_ups",
       "level": 4
      }
     ],
-    "without": [],
+    "without": [
+     {
+      "task": "Timeline planning",
+      "level": 2,
+      "waits": false
+     }
+    ],
     "noRecipe": false,
     "mostlyAssistant": false
    },
    "designCount": {
-    "steps": 9,
+    "steps": 8,
     "checked": 6,
-    "unchecked": 1,
+    "unchecked": 0,
     "noApp": 2,
     "badRefs": [],
     "clickPaths": [],
-    "apps": [
-     [
-      "Google Calendar",
-      1
-     ]
-    ],
+    "apps": [],
     "refs": [
      "chatgpt_about_you",
-     "chatgpt_project",
-     "phone_quick_replies",
      "gmail_templates",
-     "saved_assistant",
-     "say_it_out_loud"
+     "gmail_help_me_write",
+     "chatgpt_get_started",
+     "weekly_no_reply_list",
+     "gmail_claude_follow_ups"
     ]
    },
+   "design2Count": {
+    "tasks": 6,
+    "stays": 0,
+    "steps": 14,
+    "checked": 11,
+    "unchecked": 3,
+    "linked": 3,
+    "noApp": 0,
+    "noFeature": 0,
+    "clickInGoal": [],
+    "clickPathsHidden": 0,
+    "apps": [
+     [
+      "Gmail",
+      {
+       "steps": 1,
+       "linked": 1
+      }
+     ],
+     [
+      "Google Sheets",
+      {
+       "steps": 1,
+       "linked": 1
+      }
+     ],
+     [
+      "ChatGPT",
+      {
+       "steps": 1,
+       "linked": 1
+      }
+     ]
+    ],
+    "lowTasks": [
+     {
+      "task": "Timeline planning",
+      "level": 2,
+      "designed": true,
+      "stays": false,
+      "steps": 3,
+      "unchecked": 2
+     }
+    ],
+    "missingTasks": []
+   },
    "pathRecipes": [
-    "phone_quick_replies",
-    "gmail_templates"
+    "gmail_help_me_write",
+    "gmail_claude_follow_ups"
    ],
    "askOnly": false
   },
@@ -996,6 +1041,11 @@
      "id": "no_connect_without_ok",
      "pass": true,
      "detail": "No row connects a work app"
+    },
+    {
+     "id": "not_sure_ask_first",
+     "pass": true,
+     "detail": "Every task AI touches says to ask first"
     },
     {
      "id": "path_written",
@@ -1033,29 +1083,29 @@
     "aiTasks": 5,
     "withRecipe": [
      {
-      "task": "Writing captions",
+      "task": "Post captions",
       "recipe": "saved_assistant",
       "level": 3
      },
      {
-      "task": "Replying to comments",
+      "task": "Comment replies",
       "recipe": "phone_quick_replies",
       "level": 3
      },
      {
-      "task": "Writing emails",
+      "task": "Direct messages",
+      "recipe": "phone_quick_replies",
+      "level": 3
+     },
+     {
+      "task": "Emails",
       "recipe": "gmail_templates",
-      "level": 3
-     },
-     {
-      "task": "Answering messages",
-      "recipe": "phone_quick_replies",
       "level": 3
      }
     ],
     "without": [
      {
-      "task": "Planning weekly posts",
+      "task": "Weekly content planning",
       "level": 2,
       "waits": false
      }
@@ -1064,19 +1114,57 @@
     "mostlyAssistant": false
    },
    "designCount": {
-    "steps": 7,
+    "steps": 9,
     "checked": 4,
     "unchecked": 0,
-    "noApp": 3,
+    "noApp": 5,
     "badRefs": [],
     "clickPaths": [],
     "apps": [],
     "refs": [
      "chatgpt_get_started",
-     "chatgpt_about_you",
      "saved_assistant",
      "phone_quick_replies"
     ]
+   },
+   "design2Count": {
+    "tasks": 5,
+    "stays": 0,
+    "steps": 15,
+    "checked": 8,
+    "unchecked": 2,
+    "linked": 2,
+    "noApp": 5,
+    "noFeature": 0,
+    "clickInGoal": [],
+    "clickPathsHidden": 0,
+    "apps": [
+     [
+      "ChatGPT",
+      {
+       "steps": 1,
+       "linked": 1
+      }
+     ],
+     [
+      "Google Sheets",
+      {
+       "steps": 1,
+       "linked": 1
+      }
+     ]
+    ],
+    "lowTasks": [
+     {
+      "task": "Weekly content planning",
+      "level": 2,
+      "designed": true,
+      "stays": false,
+      "steps": 4,
+      "unchecked": 1
+     }
+    ],
+    "missingTasks": []
    },
    "pathRecipes": [
     "saved_assistant",
@@ -1086,12 +1174,12 @@
   },
   "social_canva": {
    "group": "experiment",
-   "screens": 10,
+   "screens": 11,
    "checks": [
     {
      "id": "screens",
      "pass": true,
-     "detail": "10 screens, at most 11 for a builder"
+     "detail": "11 screens, at most 11 for a builder"
     },
     {
      "id": "levels_in_code",
@@ -1145,8 +1233,8 @@
     }
    ],
    "recipes": {
-    "total": 5,
-    "aiTasks": 4,
+    "total": 6,
+    "aiTasks": 5,
     "withRecipe": [
      {
       "task": "Writing captions",
@@ -1155,6 +1243,11 @@
      },
      {
       "task": "Replying to comments",
+      "recipe": "phone_quick_replies",
+      "level": 3
+     },
+     {
+      "task": "Answering messages",
       "recipe": "phone_quick_replies",
       "level": 3
      },
@@ -1171,7 +1264,7 @@
       "waits": false
      },
      {
-      "task": "Planning content calendar",
+      "task": "Planning the content calendar",
       "level": 2,
       "waits": false
      }
@@ -1180,10 +1273,10 @@
     "mostlyAssistant": false
    },
    "designCount": {
-    "steps": 11,
+    "steps": 9,
     "checked": 7,
     "unchecked": 0,
-    "noApp": 4,
+    "noApp": 2,
     "badRefs": [],
     "clickPaths": [],
     "apps": [],
@@ -1194,6 +1287,53 @@
      "saved_assistant",
      "phone_quick_replies"
     ]
+   },
+   "design2Count": {
+    "tasks": 6,
+    "stays": 1,
+    "steps": 13,
+    "checked": 6,
+    "unchecked": 7,
+    "linked": 3,
+    "noApp": 0,
+    "noFeature": 0,
+    "clickInGoal": [],
+    "clickPathsHidden": 0,
+    "apps": [
+     [
+      "ChatGPT",
+      {
+       "steps": 5,
+       "linked": 2
+      }
+     ],
+     [
+      "Google Sheets",
+      {
+       "steps": 2,
+       "linked": 1
+      }
+     ]
+    ],
+    "lowTasks": [
+     {
+      "task": "Designing posts in Canva",
+      "level": 1,
+      "designed": true,
+      "stays": true,
+      "steps": 0,
+      "unchecked": 0
+     },
+     {
+      "task": "Planning the content calendar",
+      "level": 2,
+      "designed": true,
+      "stays": false,
+      "steps": 3,
+      "unchecked": 2
+     }
+    ],
+    "missingTasks": []
    },
    "pathRecipes": [
     "saved_assistant",
@@ -1231,6 +1371,11 @@
      "detail": "No row connects a work app"
     },
     {
+     "id": "not_sure_ask_first",
+     "pass": true,
+     "detail": "Every task AI touches says to ask first"
+    },
+    {
      "id": "path_written",
      "pass": true,
      "detail": "5 steps"
@@ -1243,7 +1388,7 @@
     {
      "id": "setup_from_recipe_or_card",
      "pass": true,
-     "detail": "card claude_get_started, card claude_about_you, Tally's own steps for writing with AI, recipe saved_assistant"
+     "detail": "card claude_get_started, card claude_about_you, Tally's own steps for writing with AI, Tally's own steps for writing with AI"
     },
     {
      "id": "no_click_paths_from_model",
@@ -1252,8 +1397,8 @@
     },
     {
      "id": "copy_rules",
-     "pass": false,
-     "detail": "New faces: Please say hello to [first name], who joined our [team] team on [date]. If you see them around, take a minute"
+     "pass": true,
+     "detail": "No dashes, promised times, prices or percents"
     },
     {
      "id": "offer_matches_path",
@@ -1262,23 +1407,12 @@
     }
    ],
    "recipes": {
-    "total": 5,
-    "aiTasks": 5,
-    "withRecipe": [
-     {
-      "task": "Monthly newsletter",
-      "recipe": "saved_assistant",
-      "level": 3
-     }
-    ],
+    "total": 3,
+    "aiTasks": 3,
+    "withRecipe": [],
     "without": [
      {
-      "task": "Answering policy questions",
-      "level": 2,
-      "waits": false
-     },
-     {
-      "task": "Scheduling interviews",
+      "task": "Answering benefits questions",
       "level": 2,
       "waits": false
      },
@@ -1293,31 +1427,91 @@
       "waits": false
      }
     ],
-    "noRecipe": false,
+    "noRecipe": true,
     "mostlyAssistant": false
    },
    "designCount": {
-    "steps": 10,
-    "checked": 3,
-    "unchecked": 1,
-    "noApp": 6,
+    "steps": 12,
+    "checked": 7,
+    "unchecked": 0,
+    "noApp": 5,
     "badRefs": [],
     "clickPaths": [],
+    "apps": [],
+    "refs": [
+     "claude_get_started",
+     "claude_project",
+     "saved_assistant",
+     "chatgpt_get_started",
+     "chatgpt_about_you",
+     "say_it_out_loud"
+    ]
+   },
+   "design2Count": {
+    "tasks": 3,
+    "stays": 0,
+    "steps": 14,
+    "checked": 6,
+    "unchecked": 4,
+    "linked": 3,
+    "noApp": 4,
+    "noFeature": 1,
+    "clickInGoal": [],
+    "clickPathsHidden": 0,
     "apps": [
      [
+      "Outlook",
+      {
+       "steps": 2,
+       "linked": 2
+      }
+     ],
+     [
+      "Microsoft Word",
+      {
+       "steps": 1,
+       "linked": 0
+      }
+     ],
+     [
       "Excel",
-      1
+      {
+       "steps": 1,
+       "linked": 1
+      }
      ]
     ],
-    "refs": [
-     "chatgpt_get_started",
-     "chatgpt_project",
-     "saved_assistant"
-    ]
+    "lowTasks": [
+     {
+      "task": "Answering benefits questions",
+      "level": 2,
+      "designed": true,
+      "stays": false,
+      "steps": 5,
+      "unchecked": 1
+     },
+     {
+      "task": "Onboarding new hires",
+      "level": 2,
+      "designed": true,
+      "stays": false,
+      "steps": 5,
+      "unchecked": 2
+     },
+     {
+      "task": "Writing emails",
+      "level": 2,
+      "designed": true,
+      "stays": false,
+      "steps": 4,
+      "unchecked": 1
+     }
+    ],
+    "missingTasks": []
    },
    "pathRecipes": [
     "with_ai",
-    "saved_assistant"
+    "with_ai"
    ],
    "askOnly": false
   },
@@ -1391,9 +1585,9 @@
       "level": 3
      },
      {
-      "task": "Customer message replies",
-      "recipe": "gmail_help_me_write",
-      "level": 4
+      "task": "Product listing updates",
+      "recipe": "saved_assistant",
+      "level": 3
      },
      {
       "task": "Promo emails",
@@ -1401,14 +1595,14 @@
       "level": 3
      },
      {
-      "task": "Product listing updates",
-      "recipe": "saved_assistant",
-      "level": 3
+      "task": "Customer message replies",
+      "recipe": "gmail_help_me_write",
+      "level": 4
      }
     ],
     "without": [
      {
-      "task": "Sales calendar planning",
+      "task": "Weekly sales numbers",
       "level": 2,
       "waits": false
      }
@@ -1419,18 +1613,87 @@
    "designCount": {
     "steps": 10,
     "checked": 6,
-    "unchecked": 0,
-    "noApp": 4,
+    "unchecked": 2,
+    "noApp": 2,
     "badRefs": [],
     "clickPaths": [],
-    "apps": [],
+    "apps": [
+     [
+      "Shopify",
+      1
+     ],
+     [
+      "Gorgias",
+      1
+     ]
+    ],
     "refs": [
+     "claude_get_started",
      "claude_project",
      "saved_assistant",
-     "claude_about_you",
-     "gmail_help_me_write",
+     "chatgpt_get_started",
      "chatgpt_project"
     ]
+   },
+   "design2Count": {
+    "tasks": 5,
+    "stays": 0,
+    "steps": 14,
+    "checked": 8,
+    "unchecked": 6,
+    "linked": 6,
+    "noApp": 0,
+    "noFeature": 0,
+    "clickInGoal": [],
+    "clickPathsHidden": 0,
+    "apps": [
+     [
+      "Shopify",
+      {
+       "steps": 2,
+       "linked": 2
+      }
+     ],
+     [
+      "ChatGPT",
+      {
+       "steps": 1,
+       "linked": 1
+      }
+     ],
+     [
+      "Klaviyo",
+      {
+       "steps": 1,
+       "linked": 1
+      }
+     ],
+     [
+      "Gmail",
+      {
+       "steps": 1,
+       "linked": 1
+      }
+     ],
+     [
+      "Google Sheets",
+      {
+       "steps": 1,
+       "linked": 1
+      }
+     ]
+    ],
+    "lowTasks": [
+     {
+      "task": "Weekly sales numbers",
+      "level": 2,
+      "designed": true,
+      "stays": false,
+      "steps": 3,
+      "unchecked": 2
+     }
+    ],
+    "missingTasks": []
    },
    "pathRecipes": [
     "saved_assistant",
@@ -1441,241 +1704,108 @@
  },
  "similarity": [
   {
-   "a": "social_new",
-   "b": "social_canva",
+   "a": "jess",
+   "b": "planner",
    "recipes": 1,
-   "steps": 0.8,
-   "words": 0.39
-  },
-  {
-   "a": "dental",
-   "b": "groomer",
-   "recipes": 1,
-   "steps": 1,
-   "words": 0.36
+   "steps": 0.75,
+   "words": 0.4
   },
   {
    "a": "beauty",
    "b": "dental",
    "recipes": 1,
    "steps": 1,
-   "words": 0.35
+   "words": 0.34
+  },
+  {
+   "a": "dental",
+   "b": "groomer",
+   "recipes": 1,
+   "steps": 1,
+   "words": 0.34
+  },
+  {
+   "a": "social_new",
+   "b": "social_canva",
+   "recipes": 1,
+   "steps": 0.8,
+   "words": 0.34
+  },
+  {
+   "a": "jess",
+   "b": "ecom",
+   "recipes": 0.33,
+   "steps": 0.6,
+   "words": 0.32
+  },
+  {
+   "a": "dental",
+   "b": "hr",
+   "recipes": 0,
+   "steps": 0.5,
+   "words": 0.31
+  },
+  {
+   "a": "jess",
+   "b": "hr",
+   "recipes": 0,
+   "steps": 0.33,
+   "words": 0.31
   },
   {
    "a": "beauty",
    "b": "groomer",
    "recipes": 1,
    "steps": 1,
-   "words": 0.33
+   "words": 0.3
   },
   {
-   "a": "beauty",
-   "b": "jess",
-   "recipes": 0.5,
-   "steps": 0.5,
-   "words": 0.32
+   "a": "planner",
+   "b": "ecom",
+   "recipes": 0.33,
+   "steps": 0.4,
+   "words": 0.3
   },
   {
    "a": "beauty",
    "b": "boutique",
-   "recipes": 1,
-   "steps": 0.8,
-   "words": 0.32
-  },
-  {
-   "a": "dental",
-   "b": "jess",
    "recipes": 0.5,
    "steps": 0.5,
-   "words": 0.32
+   "words": 0.29
   },
   {
-   "a": "jess",
-   "b": "planner",
-   "recipes": 0.33,
-   "steps": 0.4,
-   "words": 0.32
+   "a": "beauty",
+   "b": "social_canva",
+   "recipes": 0.5,
+   "steps": 0.5,
+   "words": 0.29
   },
   {
    "a": "jess",
    "b": "social_canva",
-   "recipes": 0.33,
-   "steps": 0.6,
-   "words": 0.31
-  },
-  {
-   "a": "kayla",
-   "b": "groomer",
-   "recipes": 0.5,
-   "steps": 0.67,
-   "words": 0.31
-  },
-  {
-   "a": "groomer",
-   "b": "boutique",
-   "recipes": 1,
-   "steps": 0.8,
-   "words": 0.31
+   "recipes": 0,
+   "steps": 0.33,
+   "words": 0.29
   },
   {
    "a": "social_canva",
    "b": "ecom",
    "recipes": 0.33,
    "steps": 0.6,
-   "words": 0.31
-  },
-  {
-   "a": "jess",
-   "b": "social_new",
-   "recipes": 0.33,
-   "steps": 0.5,
-   "words": 0.3
-  },
-  {
-   "a": "beauty",
-   "b": "social_new",
-   "recipes": 0.5,
-   "steps": 0.67,
-   "words": 0.29
-  },
-  {
-   "a": "cashier",
-   "b": "dental",
-   "recipes": 1,
-   "steps": 0.8,
-   "words": 0.29
-  },
-  {
-   "a": "dental",
-   "b": "social_new",
-   "recipes": 0.5,
-   "steps": 0.67,
-   "words": 0.29
-  },
-  {
-   "a": "dental",
-   "b": "hr",
-   "recipes": 0,
-   "steps": 0.43,
-   "words": 0.29
-  },
-  {
-   "a": "jess",
-   "b": "kayla",
-   "recipes": 0.33,
-   "steps": 0.5,
-   "words": 0.29
-  },
-  {
-   "a": "social_new",
-   "b": "ecom",
-   "recipes": 0.33,
-   "steps": 0.5,
    "words": 0.29
   },
   {
    "a": "beauty",
-   "b": "cashier",
-   "recipes": 1,
-   "steps": 0.8,
-   "words": 0.28
-  },
-  {
-   "a": "beauty",
-   "b": "social_canva",
-   "recipes": 0.5,
-   "steps": 0.5,
-   "words": 0.28
-  },
-  {
-   "a": "cashier",
-   "b": "kayla",
-   "recipes": 0.5,
-   "steps": 0.8,
-   "words": 0.28
-  },
-  {
-   "a": "dental",
-   "b": "boutique",
-   "recipes": 1,
-   "steps": 0.8,
-   "words": 0.28
-  },
-  {
-   "a": "jess",
-   "b": "groomer",
-   "recipes": 0.5,
-   "steps": 0.5,
-   "words": 0.28
-  },
-  {
-   "a": "jess",
-   "b": "hr",
+   "b": "jess",
    "recipes": 0,
    "steps": 0.29,
    "words": 0.28
   },
   {
-   "a": "kayla",
-   "b": "boutique",
-   "recipes": 0.5,
-   "steps": 0.5,
-   "words": 0.28
-  },
-  {
-   "a": "social_new",
-   "b": "hr",
-   "recipes": 0.33,
-   "steps": 0.67,
-   "words": 0.28
-  },
-  {
-   "a": "social_canva",
-   "b": "hr",
-   "recipes": 0.33,
-   "steps": 0.5,
-   "words": 0.28
-  },
-  {
    "a": "beauty",
-   "b": "kayla",
+   "b": "social_new",
    "recipes": 0.5,
    "steps": 0.67,
-   "words": 0.27
-  },
-  {
-   "a": "beauty",
-   "b": "planner",
-   "recipes": 0.5,
-   "steps": 0.33,
-   "words": 0.27
-  },
-  {
-   "a": "beauty",
-   "b": "hr",
-   "recipes": 0,
-   "steps": 0.43,
-   "words": 0.27
-  },
-  {
-   "a": "cashier",
-   "b": "boutique",
-   "recipes": 1,
-   "steps": 0.6,
-   "words": 0.27
-  },
-  {
-   "a": "dental",
-   "b": "kayla",
-   "recipes": 0.5,
-   "steps": 0.67,
-   "words": 0.27
-  },
-  {
-   "a": "dental",
-   "b": "planner",
-   "recipes": 0.5,
-   "steps": 0.33,
    "words": 0.27
   },
   {
@@ -1686,221 +1816,277 @@
    "words": 0.27
   },
   {
-   "a": "groomer",
-   "b": "planner",
+   "a": "kayla",
+   "b": "groomer",
    "recipes": 0.5,
-   "steps": 0.33,
+   "steps": 0.67,
+   "words": 0.27
+  },
+  {
+   "a": "groomer",
+   "b": "boutique",
+   "recipes": 0.5,
+   "steps": 0.5,
+   "words": 0.27
+  },
+  {
+   "a": "boutique",
+   "b": "social_new",
+   "recipes": 0.33,
+   "steps": 0.5,
+   "words": 0.27
+  },
+  {
+   "a": "planner",
+   "b": "hr",
+   "recipes": 0,
+   "steps": 0.17,
+   "words": 0.27
+  },
+  {
+   "a": "social_new",
+   "b": "hr",
+   "recipes": 0,
+   "steps": 0.5,
    "words": 0.27
   },
   {
    "a": "hr",
    "b": "ecom",
+   "recipes": 0,
+   "steps": 0.33,
+   "words": 0.27
+  },
+  {
+   "a": "dental",
+   "b": "jess",
+   "recipes": 0,
+   "steps": 0.29,
+   "words": 0.26
+  },
+  {
+   "a": "dental",
+   "b": "boutique",
+   "recipes": 0.5,
+   "steps": 0.5,
+   "words": 0.26
+  },
+  {
+   "a": "jess",
+   "b": "social_new",
+   "recipes": 0,
+   "steps": 0.29,
+   "words": 0.26
+  },
+  {
+   "a": "kayla",
+   "b": "social_canva",
    "recipes": 0.33,
    "steps": 0.5,
-   "words": 0.27
+   "words": 0.26
+  },
+  {
+   "a": "planner",
+   "b": "social_canva",
+   "recipes": 0,
+   "steps": 0.17,
+   "words": 0.26
+  },
+  {
+   "a": "social_canva",
+   "b": "hr",
+   "recipes": 0,
+   "steps": 0.33,
+   "words": 0.26
+  },
+  {
+   "a": "dental",
+   "b": "kayla",
+   "recipes": 0.5,
+   "steps": 0.67,
+   "words": 0.25
+  },
+  {
+   "a": "jess",
+   "b": "boutique",
+   "recipes": 0,
+   "steps": 0.33,
+   "words": 0.25
+  },
+  {
+   "a": "kayla",
+   "b": "planner",
+   "recipes": 0,
+   "steps": 0.14,
+   "words": 0.25
+  },
+  {
+   "a": "kayla",
+   "b": "hr",
+   "recipes": 0,
+   "steps": 0.5,
+   "words": 0.25
+  },
+  {
+   "a": "groomer",
+   "b": "planner",
+   "recipes": 0,
+   "steps": 0.14,
+   "words": 0.25
+  },
+  {
+   "a": "groomer",
+   "b": "social_new",
+   "recipes": 0.5,
+   "steps": 0.67,
+   "words": 0.25
+  },
+  {
+   "a": "boutique",
+   "b": "planner",
+   "recipes": 0,
+   "steps": 0.17,
+   "words": 0.25
+  },
+  {
+   "a": "boutique",
+   "b": "social_canva",
+   "recipes": 0.33,
+   "steps": 0.6,
+   "words": 0.25
+  },
+  {
+   "a": "social_new",
+   "b": "ecom",
+   "recipes": 0.33,
+   "steps": 0.5,
+   "words": 0.25
+  },
+  {
+   "a": "beauty",
+   "b": "planner",
+   "recipes": 0,
+   "steps": 0.14,
+   "words": 0.24
+  },
+  {
+   "a": "beauty",
+   "b": "hr",
+   "recipes": 0,
+   "steps": 0.5,
+   "words": 0.24
+  },
+  {
+   "a": "jess",
+   "b": "kayla",
+   "recipes": 0,
+   "steps": 0.29,
+   "words": 0.24
+  },
+  {
+   "a": "kayla",
+   "b": "boutique",
+   "recipes": 0.33,
+   "steps": 0.5,
+   "words": 0.24
+  },
+  {
+   "a": "kayla",
+   "b": "social_new",
+   "recipes": 0.33,
+   "steps": 0.67,
+   "words": 0.24
+  },
+  {
+   "a": "groomer",
+   "b": "social_canva",
+   "recipes": 0.5,
+   "steps": 0.5,
+   "words": 0.24
+  },
+  {
+   "a": "groomer",
+   "b": "hr",
+   "recipes": 0,
+   "steps": 0.5,
+   "words": 0.24
+  },
+  {
+   "a": "boutique",
+   "b": "ecom",
+   "recipes": 0,
+   "steps": 0.33,
+   "words": 0.24
+  },
+  {
+   "a": "beauty",
+   "b": "kayla",
+   "recipes": 0.5,
+   "steps": 0.67,
+   "words": 0.23
+  },
+  {
+   "a": "dental",
+   "b": "planner",
+   "recipes": 0,
+   "steps": 0.14,
+   "words": 0.23
+  },
+  {
+   "a": "dental",
+   "b": "social_new",
+   "recipes": 0.5,
+   "steps": 0.67,
+   "words": 0.23
+  },
+  {
+   "a": "jess",
+   "b": "groomer",
+   "recipes": 0,
+   "steps": 0.29,
+   "words": 0.23
+  },
+  {
+   "a": "boutique",
+   "b": "hr",
+   "recipes": 0.5,
+   "steps": 0.6,
+   "words": 0.23
+  },
+  {
+   "a": "planner",
+   "b": "social_new",
+   "recipes": 0,
+   "steps": 0.14,
+   "words": 0.23
+  },
+  {
+   "a": "kayla",
+   "b": "ecom",
+   "recipes": 0,
+   "steps": 0.29,
+   "words": 0.22
   },
   {
    "a": "beauty",
    "b": "ecom",
    "recipes": 0,
    "steps": 0.29,
-   "words": 0.26
-  },
-  {
-   "a": "cashier",
-   "b": "jess",
-   "recipes": 0.5,
-   "steps": 0.6,
-   "words": 0.26
-  },
-  {
-   "a": "cashier",
-   "b": "groomer",
-   "recipes": 1,
-   "steps": 0.8,
-   "words": 0.26
-  },
-  {
-   "a": "cashier",
-   "b": "social_new",
-   "recipes": 0.5,
-   "steps": 0.8,
-   "words": 0.26
-  },
-  {
-   "a": "kayla",
-   "b": "planner",
-   "recipes": 0.33,
-   "steps": 0.33,
-   "words": 0.26
-  },
-  {
-   "a": "boutique",
-   "b": "social_new",
-   "recipes": 0.5,
-   "steps": 0.5,
-   "words": 0.26
-  },
-  {
-   "a": "boutique",
-   "b": "ecom",
-   "recipes": 0,
-   "steps": 0.33,
-   "words": 0.26
-  },
-  {
-   "a": "cashier",
-   "b": "ecom",
-   "recipes": 0,
-   "steps": 0.33,
-   "words": 0.25
-  },
-  {
-   "a": "jess",
-   "b": "ecom",
-   "recipes": 0,
-   "steps": 0.33,
-   "words": 0.25
-  },
-  {
-   "a": "kayla",
-   "b": "social_new",
-   "recipes": 0.33,
-   "steps": 0.67,
-   "words": 0.25
-  },
-  {
-   "a": "groomer",
-   "b": "social_new",
-   "recipes": 0.5,
-   "steps": 0.67,
-   "words": 0.25
-  },
-  {
-   "a": "cashier",
-   "b": "hr",
-   "recipes": 0,
-   "steps": 0.5,
-   "words": 0.24
+   "words": 0.21
   },
   {
    "a": "dental",
    "b": "ecom",
    "recipes": 0,
    "steps": 0.29,
-   "words": 0.24
-  },
-  {
-   "a": "jess",
-   "b": "boutique",
-   "recipes": 0.5,
-   "steps": 0.6,
-   "words": 0.24
-  },
-  {
-   "a": "kayla",
-   "b": "hr",
-   "recipes": 0.33,
-   "steps": 0.67,
-   "words": 0.24
-  },
-  {
-   "a": "groomer",
-   "b": "social_canva",
-   "recipes": 0.5,
-   "steps": 0.5,
-   "words": 0.24
-  },
-  {
-   "a": "groomer",
-   "b": "hr",
-   "recipes": 0,
-   "steps": 0.43,
-   "words": 0.24
-  },
-  {
-   "a": "boutique",
-   "b": "social_canva",
-   "recipes": 0.5,
-   "steps": 0.6,
-   "words": 0.24
-  },
-  {
-   "a": "kayla",
-   "b": "social_canva",
-   "recipes": 0.33,
-   "steps": 0.5,
-   "words": 0.23
-  },
-  {
-   "a": "kayla",
-   "b": "ecom",
-   "recipes": 0,
-   "steps": 0.29,
-   "words": 0.23
+   "words": 0.2
   },
   {
    "a": "groomer",
    "b": "ecom",
    "recipes": 0,
    "steps": 0.29,
-   "words": 0.23
-  },
-  {
-   "a": "planner",
-   "b": "social_canva",
-   "recipes": 0.33,
-   "steps": 0.4,
-   "words": 0.23
-  },
-  {
-   "a": "cashier",
-   "b": "planner",
-   "recipes": 0.5,
-   "steps": 0.4,
-   "words": 0.22
-  },
-  {
-   "a": "boutique",
-   "b": "planner",
-   "recipes": 0.5,
-   "steps": 0.4,
-   "words": 0.22
-  },
-  {
-   "a": "planner",
-   "b": "social_new",
-   "recipes": 0.33,
-   "steps": 0.33,
-   "words": 0.22
-  },
-  {
-   "a": "planner",
-   "b": "hr",
-   "recipes": 0,
-   "steps": 0.14,
-   "words": 0.22
-  },
-  {
-   "a": "cashier",
-   "b": "social_canva",
-   "recipes": 0.5,
-   "steps": 0.6,
-   "words": 0.21
-  },
-  {
-   "a": "boutique",
-   "b": "hr",
-   "recipes": 0,
-   "steps": 0.29,
-   "words": 0.21
-  },
-  {
-   "a": "planner",
-   "b": "ecom",
-   "recipes": 0,
-   "steps": 0.17,
-   "words": 0.21
+   "words": 0.2
   }
  ]
 }
