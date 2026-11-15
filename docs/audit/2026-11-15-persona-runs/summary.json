@@ -1,5 +1,5 @@
 {
- "ranAt": "2026-11-15T18:44:13.549Z",
+ "ranAt": "2026-11-15T19:04:09.584Z",
  "versions": {
   "job": "beginner-job-v5",
   "questions": "beginner-questions-v6",
@@ -684,7 +684,7 @@
     {
      "id": "setup_from_recipe_or_card",
      "pass": true,
-     "detail": "card claude_get_started, card claude_about_you, recipe phone_quick_replies, recipe phone_quick_replies"
+     "detail": "card claude_get_started, card claude_about_you, recipe phone_quick_replies, recipe say_it_out_loud"
     },
     {
      "id": "no_click_paths_from_model",
@@ -703,16 +703,16 @@
     }
    ],
    "recipes": {
-    "total": 4,
-    "aiTasks": 4,
+    "total": 6,
+    "aiTasks": 3,
     "withRecipe": [
      {
-      "task": "Owner reminder texts",
+      "task": "Answering owner messages",
       "recipe": "phone_quick_replies",
       "level": 3
      },
      {
-      "task": "Booking appointments",
+      "task": "Owner reminder texts",
       "recipe": "phone_quick_replies",
       "level": 3
      },
@@ -720,47 +720,57 @@
       "task": "Social posts",
       "recipe": "say_it_out_loud",
       "level": 3
-     },
-     {
-      "task": "Grooming notes",
-      "recipe": "say_it_out_loud",
-      "level": 3
      }
     ],
-    "without": [],
+    "without": [
+     {
+      "task": "Booking appointments",
+      "level": 1,
+      "waits": false
+     },
+     {
+      "task": "Bathing and drying dogs",
+      "level": 1,
+      "waits": false
+     },
+     {
+      "task": "Cutting and styling coats",
+      "level": 1,
+      "waits": false
+     }
+    ],
     "noRecipe": false,
     "mostlyAssistant": false
    },
    "designCount": {
-    "steps": 10,
-    "checked": 4,
-    "unchecked": 4,
-    "noApp": 2,
+    "steps": 8,
+    "checked": 5,
+    "unchecked": 2,
+    "noApp": 1,
     "badRefs": [],
     "clickPaths": [],
     "apps": [
      [
-      "Claude",
-      2
-     ],
-     [
-      "Text messages",
+      "Google Calendar",
       1
      ],
      [
-      "Google Calendar",
+      "Instagram",
       1
      ]
     ],
     "refs": [
+     "chatgpt_get_started",
+     "phone_quick_replies",
      "claude_get_started",
-     "phone_quick_replies"
+     "claude_project",
+     "saved_assistant"
     ]
    },
    "design2Count": null,
    "pathRecipes": [
     "phone_quick_replies",
-    "phone_quick_replies"
+    "say_it_out_loud"
    ],
    "askOnly": false
   },
@@ -1758,18 +1768,18 @@
    "words": 0.4
   },
   {
+   "a": "groomer",
+   "b": "boutique",
+   "recipes": 1,
+   "steps": 0.8,
+   "words": 0.36
+  },
+  {
    "a": "social_new",
    "b": "social_canva",
    "recipes": 1,
    "steps": 0.8,
    "words": 0.34
-  },
-  {
-   "a": "dental",
-   "b": "groomer",
-   "recipes": 1,
-   "steps": 1,
-   "words": 0.33
   },
   {
    "a": "beauty",
@@ -1800,11 +1810,18 @@
    "words": 0.31
   },
   {
-   "a": "kayla",
-   "b": "groomer",
+   "a": "groomer",
+   "b": "dental",
    "recipes": 0.5,
    "steps": 0.67,
-   "words": 0.31
+   "words": 0.3
+  },
+  {
+   "a": "groomer",
+   "b": "kayla",
+   "recipes": 1,
+   "steps": 1,
+   "words": 0.3
   },
   {
    "a": "beauty",
@@ -1819,13 +1836,6 @@
    "recipes": 0.33,
    "steps": 0.4,
    "words": 0.3
-  },
-  {
-   "a": "beauty",
-   "b": "groomer",
-   "recipes": 1,
-   "steps": 1,
-   "words": 0.29
   },
   {
    "a": "beauty",
@@ -1884,11 +1894,46 @@
    "words": 0.29
   },
   {
+   "a": "groomer",
+   "b": "beauty",
+   "recipes": 0.5,
+   "steps": 0.67,
+   "words": 0.28
+  },
+  {
    "a": "cashier",
    "b": "hr",
    "recipes": 0,
    "steps": 0.6,
    "words": 0.28
+  },
+  {
+   "a": "groomer",
+   "b": "cashier",
+   "recipes": 0.5,
+   "steps": 0.8,
+   "words": 0.27
+  },
+  {
+   "a": "groomer",
+   "b": "planner",
+   "recipes": 0,
+   "steps": 0.14,
+   "words": 0.27
+  },
+  {
+   "a": "groomer",
+   "b": "social_new",
+   "recipes": 0.33,
+   "steps": 0.67,
+   "words": 0.27
+  },
+  {
+   "a": "groomer",
+   "b": "social_canva",
+   "recipes": 0.33,
+   "steps": 0.5,
+   "words": 0.27
   },
   {
    "a": "beauty",
@@ -1928,13 +1973,6 @@
   {
    "a": "dental",
    "b": "social_canva",
-   "recipes": 0.5,
-   "steps": 0.5,
-   "words": 0.27
-  },
-  {
-   "a": "groomer",
-   "b": "boutique",
    "recipes": 0.5,
    "steps": 0.5,
    "words": 0.27
@@ -1996,13 +2034,6 @@
    "words": 0.26
   },
   {
-   "a": "groomer",
-   "b": "social_canva",
-   "recipes": 0.5,
-   "steps": 0.5,
-   "words": 0.26
-  },
-  {
    "a": "boutique",
    "b": "planner",
    "recipes": 0,
@@ -2022,6 +2053,13 @@
    "recipes": 0,
    "steps": 0.33,
    "words": 0.26
+  },
+  {
+   "a": "groomer",
+   "b": "jess",
+   "recipes": 0,
+   "steps": 0.29,
+   "words": 0.25
   },
   {
    "a": "beauty",
@@ -2059,13 +2097,6 @@
    "words": 0.25
   },
   {
-   "a": "cashier",
-   "b": "groomer",
-   "recipes": 1,
-   "steps": 0.8,
-   "words": 0.25
-  },
-  {
    "a": "dental",
    "b": "kayla",
    "recipes": 0.5,
@@ -2085,6 +2116,13 @@
    "recipes": 0.33,
    "steps": 0.5,
    "words": 0.25
+  },
+  {
+   "a": "groomer",
+   "b": "hr",
+   "recipes": 0,
+   "steps": 0.5,
+   "words": 0.24
   },
   {
    "a": "cashier",
@@ -2116,10 +2154,10 @@
   },
   {
    "a": "groomer",
-   "b": "social_new",
-   "recipes": 0.5,
-   "steps": 0.67,
-   "words": 0.24
+   "b": "ecom",
+   "recipes": 0,
+   "steps": 0.29,
+   "words": 0.23
   },
   {
    "a": "cashier",
@@ -2143,13 +2181,6 @@
    "words": 0.23
   },
   {
-   "a": "jess",
-   "b": "groomer",
-   "recipes": 0,
-   "steps": 0.29,
-   "words": 0.23
-  },
-  {
    "a": "kayla",
    "b": "social_canva",
    "recipes": 0.33,
@@ -2158,20 +2189,6 @@
   },
   {
    "a": "kayla",
-   "b": "hr",
-   "recipes": 0,
-   "steps": 0.5,
-   "words": 0.23
-  },
-  {
-   "a": "groomer",
-   "b": "planner",
-   "recipes": 0,
-   "steps": 0.14,
-   "words": 0.23
-  },
-  {
-   "a": "groomer",
    "b": "hr",
    "recipes": 0,
    "steps": 0.5,
@@ -2190,13 +2207,6 @@
    "recipes": 0,
    "steps": 0.14,
    "words": 0.23
-  },
-  {
-   "a": "groomer",
-   "b": "ecom",
-   "recipes": 0,
-   "steps": 0.29,
-   "words": 0.21
   },
   {
    "a": "dental",

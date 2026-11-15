@@ -124,6 +124,25 @@ test("secondTask takes a task with a recipe before one without", () => {
   assert.equal(secondTask(leveled, "Vendor emails")?.task, "Schedule changes");
 });
 
+test("on a tie in level, secondTask takes another recipe than her top task's, and a higher level still wins", () => {
+  const groomer: MapLine[] = [
+    { ...line("Reminder texts", "reminder texts", true, false), level: 3, recipe: "phone_quick_replies" },
+    { ...line("Booking", "booking", true, false), level: 3, recipe: "phone_quick_replies" },
+    { ...line("Social posts", "social posts", true, false), level: 3, recipe: "say_it_out_loud" },
+    { ...line("Grooming notes", "grooming notes", true, false), level: 3, recipe: "say_it_out_loud" },
+  ];
+  assert.equal(secondTask(groomer, "Reminder texts")?.task, "Social posts", "the first with another recipe");
+  assert.equal(secondTask(groomer.slice(0, 2), "Reminder texts")?.task, "Booking", "the same recipe when nothing else has one");
+  const higher = [...groomer.slice(0, 3), { ...line("Replies", "replies", true, false), level: 4 as const, recipe: "gmail_help_me_write" }];
+  assert.equal(secondTask(higher, "Reminder texts")?.task, "Replies");
+  const sameHigher = [
+    { ...line("Answering", "answering", true, false), level: 4 as const, recipe: "gmail_help_me_write" },
+    { ...line("Notes", "notes", true, false), level: 3 as const, recipe: "notes_to_sheet" },
+    { ...line("Vendor emails", "vendor emails", true, false), level: 4 as const, recipe: "gmail_help_me_write" },
+  ];
+  assert.equal(secondTask(sameHigher, "Answering")?.task, "Vendor emails", "level beats a different recipe");
+});
+
 /** A map with levels, as withLevels gives it: rescheduling texts with a recipe, booking replies at level 2. */
 const leveled: MapLine[] = [
   { ...line("Rescheduling texts", "rescheduling texts", true, false), level: 3, recipe: "phone_quick_replies" },

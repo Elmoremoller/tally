@@ -94,15 +94,19 @@ export function orderMap(map: readonly MapLine[], top: string): MapLine[] {
 }
 
 /**
- * The task her offer names after her top task: the one with a recipe at the highest level, the first on her map
- * when two tie (Karl, 2026-11-15, after the Phase 7 runs gave a Gmail Builder a level 3 second task over her
- * level 4 one), then the next one AI can help with that needs no private details, then any other AI can help
- * with. A task that waits for her company's OK is never one. Null when there is none.
+ * The task her offer names after her top task: the one with a recipe at the highest level (Karl, 2026-11-15,
+ * after the Phase 7 runs gave a Gmail Builder a level 3 second task over her level 4 one). When two tie on level,
+ * one with another recipe than her top task's wins, so she learns two ways of working, not one twice (Karl,
+ * 2026-11-15, after a dog groomer got quick replies twice over say it out loud); then the first on her map. With
+ * no recipe, the next one AI can help with that needs no private details, then any other AI can help with. A task
+ * that waits for her company's OK is never one. Null when there is none.
  */
 export function secondTask(map: readonly MapLine[], top: string): MapLine | null {
   const others = map.filter((m) => m.ai && !m.waits && m.task.toLowerCase() !== top.toLowerCase());
+  const topRecipe = map.find((m) => m.task.toLowerCase() === top.toLowerCase())?.recipe ?? null;
+  const rank = (m: MapLine) => (m.level ?? 0) * 2 + (m.recipe !== topRecipe ? 1 : 0);
   const withRecipe = others.filter((m) => recipeOf(m));
-  const best = withRecipe.reduce<MapLine | null>((a, m) => (!a || (m.level ?? 0) > (a.level ?? 0) ? m : a), null);
+  const best = withRecipe.reduce<MapLine | null>((a, m) => (!a || rank(m) > rank(a) ? m : a), null);
   return best ?? others.find((m) => !m.private) ?? others[0] ?? null;
 }
 
