@@ -47,6 +47,7 @@ The code chooses the level, never the model. A task gets the highest level where
 2. She controls the app, or she is allowed to connect it.
 3. The task does not put other people's private details into a tool that may not hold them.
 4. It fits her track. A Starter path normally stops at level 3. A Builder path aims for level 4, and level 5 when a recipe exists.
+5. The recipe has steps for the device she uses.
 
 Two principles guide every recommendation.
 
