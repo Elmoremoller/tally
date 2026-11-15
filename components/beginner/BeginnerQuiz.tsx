@@ -17,9 +17,9 @@ import {
   mostOptions,
   repeatChoices,
   skipsMost,
-  softwareOptions,
   stepsFor,
   toggleKind,
+  whereOptions,
   type AskedQuestion,
   type JobRead,
   type QA,
@@ -27,6 +27,9 @@ import {
 } from "@/lib/beginner/quiz";
 import {
   canUseQuestion,
+  CONNECT,
+  CONNECT_ID,
+  connectQuestion,
   DEVICES,
   deviceQuestion,
   doneWithAi,
@@ -38,6 +41,8 @@ import {
   readingLines,
   repeatsLine,
   thinAnswers,
+  whereScreen,
+  type Connect,
   type Device,
   type Often,
 } from "@/lib/beginner/quiz-copy";
@@ -63,9 +68,9 @@ import { PICK_BEAT, PickStep } from "./PickStep";
 // job and where she is with AI. A Builder (Use it some weeks, Use it most days) then says what she has already
 // done with AI and which AI she has used. Everyone: what she does over and over, with a line on how many of
 // those AI can help with, which would save her the most time (unless that is only one), a real example of it
-// with how often she does it (she may skip the example), then phone or computer for a Starter or her software
-// for a Builder, one question the AI writes for her, and Can you use AI for your work (unless her job said she
-// works for herself). The AI reads her job while she answers the screens before what she does over and over,
+// with how often she does it (she may skip the example), then where her work happens with what she uses for
+// work under it, one question the AI writes for her, Can you use AI for your work (unless her job said she works
+// for herself), and for Yes or Not sure there whether she could connect her work email herself. The AI reads her job while she answers the screens before what she does over and over,
 // and writes her question after the screen before it; when either is slow or fails, the quiz carries on with
 // the fixed lists or without that question. Then the final read drafts her first win while lines on what is
 // happening show in turn; if her answers were too thin it asks one follow up, once. Then her first win and the
@@ -92,6 +97,7 @@ type Picks = { picked: string[]; other: string | null };
 type Snapshot = {
   level: Experience | null;
   canUse: CanUse | null;
+  connect: Connect | null;
   askedCount: number | null;
   device: Device | null;
   /**
@@ -139,7 +145,7 @@ export function BeginnerQuiz({ home }: { home: string }) {
   const [mostOther, setMostOther] = useState<string | null>(null);
   const [example, setExample] = useState("");
   const [often, setOften] = useState<Often | null>(null);
-  const [apps, setApps] = useState<Picks>(NO_PICKS);
+  const [where, setWhere] = useState<Picks>(NO_PICKS);
   const [tools, setTools] = useState<AiTool[]>([]);
   const [otherTools, setOtherTools] = useState("");
   const [device, setDevice] = useState<Device | null>(null);
@@ -147,6 +153,7 @@ export function BeginnerQuiz({ home }: { home: string }) {
   const [askedPicks, setAskedPicks] = useState<Record<string, Picks>>({});
   const [askedText, setAskedText] = useState<Record<string, string>>({});
   const [canUse, setCanUse] = useState<CanUse | null>(null);
+  const [connect, setConnect] = useState<Connect | null>(null);
   const [followUp, setFollowUp] = useState<string | null>(null);
   const [followUpAnswer, setFollowUpAnswer] = useState("");
   const [win, setWin] = useState<Win | null>(null);
@@ -179,7 +186,7 @@ export function BeginnerQuiz({ home }: { home: string }) {
     return () => window.clearInterval(timer);
   }, [phase]);
 
-  const now: Snapshot = { level, canUse, askedCount: asked ? asked.questions.length : null, device };
+  const now: Snapshot = { level, canUse, connect, askedCount: asked ? asked.questions.length : null, device };
   /** True when the read of her job says she works for herself: Can you use AI for your work is then not asked. */
   const selfFromJob = jobRead?.read.worksFor === "self";
   const most = jobRead ? mostOptions(jobRead.read, repeats.picked, repeats.other) : { options: [], fallback: false };
@@ -189,6 +196,7 @@ export function BeginnerQuiz({ home }: { home: string }) {
       level: s.level,
       askedCount: s.askedCount,
       worksForFromJob: jobRead?.read.worksFor ?? null,
+      canUse: s.canUse,
       skipMost,
     });
   const steps = stepsWith(now);
@@ -201,14 +209,14 @@ export function BeginnerQuiz({ home }: { home: string }) {
         0,
         MOST_WANTED_MAX,
       );
-  const software = jobRead ? softwareOptions(jobRead.read) : [];
+  const places = jobRead ? whereOptions(jobRead.read) : [];
   const helpCount = jobRead ? aiHelpCount(jobRead.read, repeats.picked) : { helps: 0, picked: 0 };
 
   /**
    * The screens before the AI's question, in order: her level, then for a Builder what she has done and the AI
-   * she has used, then what she repeats, her top task, her example and how often, then phone or computer for a
-   * Starter or her software for a Builder. What she repeats and her top task are always there: the first win is
-   * found through them.
+   * she has used, then what she repeats, her top task, her example and how often, then where her work happens
+   * and what she uses for work. What she repeats and her top task are always there: the first win is found
+   * through them.
    */
   const baseQas = (s: Snapshot): QA[] =>
     jobRead && s.level
@@ -240,16 +248,20 @@ export function BeginnerQuiz({ home }: { home: string }) {
             text: s.skipped === "example" ? null : example.trim() || null,
           },
           ...(often ? [choiceQA("often", oftenQuestion.title, OFTEN, oftenQuestion.labels, often)] : []),
-          ...(usesAi(s.level)
-            ? [pickedQA("apps", questions.apps.title, software, apps)]
-            : s.device
-              ? [choiceQA("device", deviceQuestion.title, DEVICES, deviceQuestion.labels, s.device)]
-              : []),
+          pickedQA("where", whereScreen.title, places, where),
+          ...(s.device ? [choiceQA("device", deviceQuestion.title, DEVICES, deviceQuestion.labels, s.device)] : []),
         ]
       : [];
-  /** Can you use AI for your work, when she was shown it. */
+  /** Can you use AI for your work, and whether she could connect her work email, when she was shown them. */
   const workQas = (s: Snapshot): QA[] =>
-    !selfFromJob && s.canUse ? [choiceQA(CAN_USE_ID, canUseQuestion.title, CAN_USE, canUseLabels, s.canUse)] : [];
+    !selfFromJob && s.canUse
+      ? [
+          choiceQA(CAN_USE_ID, canUseQuestion.title, CAN_USE, canUseLabels, s.canUse),
+          ...((s.canUse === "yes" || s.canUse === "not_sure") && s.connect
+            ? [choiceQA(CONNECT_ID, connectQuestion.title, CONNECT, connectQuestion.labels, s.connect)]
+            : []),
+        ]
+      : [];
   const askedQas = (s: Snapshot): QA[] =>
     (asked?.questions ?? []).map((q) =>
       q.kind === "text"
@@ -285,9 +297,9 @@ export function BeginnerQuiz({ home }: { home: string }) {
   /** The read her screens use from now on. Picks that aren't on its screens any more are dropped. */
   const keepRead = (text: string, result: Read) => {
     const labels = repeatChoices(result.read).map((r) => r.label);
-    const names = softwareOptions(result.read);
+    const names = whereOptions(result.read);
     setRepeats((p) => ({ ...p, picked: p.picked.filter((l) => labels.includes(l)) }));
-    setApps((p) => ({ ...p, picked: p.picked.filter((a) => names.includes(a)) }));
+    setWhere((p) => ({ ...p, picked: p.picked.filter((a) => names.includes(a)) }));
     setJobRead({ job: text, ...result });
   };
 
@@ -625,20 +637,48 @@ export function BeginnerQuiz({ home }: { home: string }) {
             {skipButton("example", () => setExample(""))}
           </>
         );
-      case "apps":
+      case "where":
         return jobRead ? (
           <PickStep
-            title={questions.apps.title}
-            hint={questions.apps.hint}
-            options={software}
-            picked={apps.picked}
-            onPicked={(picked) => setApps((p) => ({ ...p, picked }))}
+            title={whereScreen.title}
+            hint={whereScreen.hint}
+            options={places}
+            picked={where.picked}
+            onPicked={(picked) => setWhere((p) => ({ ...p, picked }))}
             many
-            other={apps.other}
-            onOther={(other) => setApps((p) => ({ ...p, other }))}
-            onSubmit={() => advance()}
+            other={where.other}
+            onOther={(other) => setWhere((p) => ({ ...p, other }))}
+            onSubmit={() => (device ? advance() : setError(whereScreen.needsDevice))}
             error={error}
             headingRef={headingRef}
+            after={
+              <div className="quiz-often">
+                <p className="quiz-often-title" id="q-device">
+                  {deviceQuestion.title}
+                </p>
+                <div className="quiz-topics" role="group" aria-labelledby="q-device">
+                  {DEVICES.map((d) => {
+                    const on = device === d;
+                    return (
+                      <button
+                        key={d}
+                        type="button"
+                        className="quiz-topic"
+                        aria-pressed={on}
+                        data-on={on || undefined}
+                        onClick={() => {
+                          setDevice(d);
+                          setError("");
+                        }}
+                      >
+                        {on ? <Check /> : null}
+                        {deviceQuestion.labels[d]}
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+            }
           />
         ) : null;
       case "tools":
@@ -657,21 +697,6 @@ export function BeginnerQuiz({ home }: { home: string }) {
             headingRef={headingRef}
           />
         );
-      case "device":
-        return (
-          <ChoiceStep
-            title={deviceQuestion.title}
-            options={DEVICES}
-            labels={deviceQuestion.labels}
-            value={device}
-            onPick={(value) => {
-              setDevice(value);
-              pickThen({ device: value });
-            }}
-            error={error}
-            headingRef={headingRef}
-          />
-        );
       case "can_use":
         return (
           <ChoiceStep
@@ -682,6 +707,21 @@ export function BeginnerQuiz({ home }: { home: string }) {
             onPick={(value) => {
               setCanUse(value);
               pickThen({ canUse: value });
+            }}
+            error={error}
+            headingRef={headingRef}
+          />
+        );
+      case "connect":
+        return (
+          <ChoiceStep
+            title={connectQuestion.title}
+            options={CONNECT}
+            labels={connectQuestion.labels}
+            value={connect}
+            onPick={(value) => {
+              setConnect(value);
+              pickThen({ connect: value });
             }}
             error={error}
             headingRef={headingRef}
@@ -753,7 +793,7 @@ export function BeginnerQuiz({ home }: { home: string }) {
           </div>
         ) : phase === "result" && win ? (
           <FirstWinResult result={win} restricted={win.restricted} headingRef={headingRef}>
-            <BeginnerPaywall setups={win.setups} />
+            <BeginnerPaywall setups={win.setups} freePlan={win.freePlan} />
           </FirstWinResult>
         ) : (
           <div key={phase === "questions" ? step : phase} className="quiz-step" data-dir={direction}>

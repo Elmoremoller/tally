@@ -28,17 +28,46 @@ export const FALLBACK_AI_USES = ["Writing messages", "Social posts", "Planning",
 
 export const DEVICES = ["phone", "computer", "both"] as const;
 export type Device = (typeof DEVICES)[number];
-/** Asked of Starters: it decides whether her setup steps are for a phone, a computer or both. */
+/**
+ * What she has for work, asked of everyone under Where does your work happen (Phase 5). It decides which
+ * recipes have steps for her (DIRECTION.md, section 2, condition 5) and whether her setup steps are for a phone,
+ * a computer or both. The ids stay as they were, so answers saved before keep loading. Choices from Karl's
+ * review of the Phase 5 plan, 2026-11-15; the title is a DRAFT.
+ */
 export const deviceQuestion = {
-  title: "Where would you use AI most?",
-  labels: { phone: "Phone", computer: "Computer", both: "Both" } satisfies Record<Device, string>,
+  title: "What do you use for work?", // DRAFT
+  labels: { phone: "Phone only", computer: "Computer only", both: "Both" } satisfies Record<Device, string>,
+  /** The labels on answers saved before Phase 5, when the question was Where would you use AI most? */
+  legacyLabels: { phone: "Phone", computer: "Computer", both: "Both" } satisfies Record<Device, string>,
 };
 
 /**
- * Software everyone might use, always offered after the software the read of her job names, each once. The
- * read's own picks come first, since they fit her job best.
+ * Where does your work happen, for everyone (DIRECTION.md, Phase 5). The choices are the apps the read of her job
+ * names, then these. She ticks all that fit, and they count as the apps she uses for every task. Title and hint
+ * from Karl's review of the Phase 5 plan, 2026-11-15; DRAFT until he approves them as built.
  */
-export const EVERYDAY_SOFTWARE = ["Outlook", "Gmail", "Excel", "Google Sheets", "Word", "Google Drive", "Teams", "Zoom"];
+export const whereScreen = {
+  title: "Where does your work happen?", // DRAFT
+  hint: "Tick all that fit.", // DRAFT
+  places: ["Text messages", "Gmail", "Outlook", "Google Sheets", "Instagram", "A work system", "Paper", "In person"], // DRAFT
+  /** Places that name no software, left out of the tools her plan teaches. */
+  notSoftware: ["Text messages", "A work system", "Paper", "In person"],
+  /** When she taps Continue without saying what she uses for work. DRAFT */
+  needsDevice: "Tell us what you use for work, then go on.",
+};
+
+export const CONNECT = ["yes", "no", "not_sure"] as const;
+export type Connect = (typeof CONNECT)[number];
+/** The screen id of the connect question, as kept in her answered screens. */
+export const CONNECT_ID = "connect";
+/**
+ * For an employee who answered Yes or Not sure to Can you use AI for your work (DIRECTION.md, Phase 5). Only Yes
+ * lets a recipe connect one of her work apps. The title is from DIRECTION.md; the labels are DRAFT.
+ */
+export const connectQuestion = {
+  title: "Could you connect your work email or calendar to an AI tool yourself?",
+  labels: { yes: "Yes", no: "No", not_sure: "Not sure" } satisfies Record<Connect, string>,
+};
 
 /** The wait while the AI writes her questions. */
 export const questionsWait = "Writing a question for your job"; // Approved by Karl 2026-11-14

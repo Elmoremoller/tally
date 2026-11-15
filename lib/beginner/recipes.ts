@@ -10,7 +10,8 @@ import { CARD_IDS, type CardId } from "./cards";
 // steps for a device means the pages give none for that device. Steps about Tally's own material ("paste the
 // instructions Tally wrote for you") are Tally's, not the vendor's.
 //
-// Every title, step, note and line of copy here is a DRAFT until Karl approves it. Imports nothing from the server.
+// Every title, step, note and line of copy here is a DRAFT until Karl approves it, the withPath and offer lines
+// added in Phase 5 too. Imports nothing from the server.
 
 /** The five levels a task can get, in the plain words of DIRECTION.md, section 3. */
 export const LEVELS = {
@@ -93,6 +94,13 @@ export type Recipe = {
   level: RecipeLevel;
   /** The workflow as the offer names it. */
   title: string;
+  /**
+   * The "With your path" line on the map for a task that gets this recipe (DIRECTION.md, section 3): the new way
+   * the task gets done, never writing help. Phase 5.
+   */
+  withPath: string;
+  /** How the offer ends her task's name, as in "Your rescheduling texts, saved once on your phone". Phase 5. */
+  offer: string;
   conditions: RecipeConditions;
   routes: RecipeRoute[];
   /** What Tally writes for her, one line per piece. */
@@ -127,6 +135,8 @@ export const recipes: readonly Recipe[] = [
     kind: "repeat_texts",
     level: 3,
     title: "Your most common replies, saved on your phone",
+    withPath: "Your common replies are saved on your phone, each a few letters away.",
+    offer: "saved once on your phone",
     conditions: { needsAiAllowed: false, connectsApp: false, taskContent: "none" },
     routes: [
       {
@@ -184,6 +194,8 @@ export const recipes: readonly Recipe[] = [
     kind: "repeat_writing",
     level: 3,
     title: "A saved assistant for the writing you repeat",
+    withPath: "A saved assistant holds your details and examples, ready each time this comes up.",
+    offer: "with a saved assistant",
     conditions: { needsAiAllowed: true, connectsApp: false, taskContent: "chat_tool" },
     routes: [
       {
@@ -237,6 +249,8 @@ export const recipes: readonly Recipe[] = [
     kind: "spoken_writing",
     level: 3,
     title: "Say it out loud, get the finished text",
+    withPath: "You say what you need out loud, and the finished text comes back.",
+    offer: "said out loud, finished as text",
     conditions: { needsAiAllowed: true, connectsApp: false, taskContent: "chat_tool" },
     routes: [
       {
@@ -305,6 +319,8 @@ export const recipes: readonly Recipe[] = [
     kind: "notes_to_table",
     level: 3,
     title: "Your messy notes, turned into a clean table",
+    withPath: "Your notes go in as they are and come out as rows for your sheet.",
+    offer: "turned into rows for your sheet",
     conditions: { needsAiAllowed: true, connectsApp: false, taskContent: "chat_tool" },
     routes: [
       {
@@ -360,6 +376,8 @@ export const recipes: readonly Recipe[] = [
     kind: "repeat_emails",
     level: 3,
     title: "Your most common emails, saved as Gmail templates",
+    withPath: "Your common emails are saved in Gmail as templates, ready to fill in.",
+    offer: "saved once as Gmail templates",
     conditions: { needsAiAllowed: false, connectsApp: false, taskContent: "none" },
     routes: [
       {
@@ -404,6 +422,8 @@ export const recipes: readonly Recipe[] = [
     kind: "email_replies",
     level: 4,
     title: "Reply drafts inside Gmail, from Google's own AI",
+    withPath: "Reply drafts appear inside Gmail, and you check each one before you send.",
+    offer: "drafted in your inbox",
     conditions: { needsAiAllowed: true, connectsApp: true, taskContent: "in_app" },
     routes: [
       {
@@ -457,6 +477,8 @@ export const recipes: readonly Recipe[] = [
     kind: "email_follow_ups",
     level: 4,
     title: "Follow ups drafted from your Gmail, sent only with your OK",
+    withPath: "Follow ups are drafted from your Gmail and wait for your OK.",
+    offer: "drafted from your inbox for your OK",
     conditions: { needsAiAllowed: true, connectsApp: true, taskContent: "chat_tool" },
     routes: [
       {
@@ -521,6 +543,8 @@ export const recipes: readonly Recipe[] = [
     kind: "awaiting_replies",
     level: 5,
     title: "A weekly list of who has not answered you",
+    withPath: "Once a week you get a list of who still owes you an answer.",
+    offer: "listed for you every week",
     conditions: { needsAiAllowed: true, connectsApp: true, taskContent: "chat_tool" },
     routes: [
       {

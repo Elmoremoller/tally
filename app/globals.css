@@ -5513,6 +5513,27 @@
       0 0 0 1px var(--line-strong),
       var(--shadow-2);
   }
+  /* The level tag over each task (Phase 5), in the plain words of DIRECTION.md, section 3. */
+  .win-map-level {
+    justify-self: start;
+    padding: 0.25rem 0.625rem;
+    border-radius: 999px;
+    background: var(--tint);
+    font-size: var(--fs-micro);
+    font-weight: 700;
+    line-height: var(--lh-micro);
+    letter-spacing: var(--tr-micro);
+    color: var(--slate);
+  }
+  .win-map-level + .win-map-task {
+    margin-top: -0.25rem;
+  }
+  /* Why a rule held the level down, or to ask her company first: a few quiet words under the lines. */
+  .win-map-why {
+    font-size: var(--fs-small);
+    line-height: var(--lh-small);
+    color: var(--muted);
+  }
   .win-map-task {
     font-family: var(--stack-text);
     font-size: 1.125rem;

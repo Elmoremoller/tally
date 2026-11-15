@@ -146,8 +146,10 @@ Read docs/DIRECTION.md and do Phase 4. Follow the working rules in section 7.
 2. Phase 1. A shorter quiz with a real example, a count, four levels of experience and one work question.
 3. Phase 2. The free result opens with the map, with the finished result inside the top row.
 4. Phase 3. Six setup cards for ChatGPT and Claude, checked against the vendors' help pages.
+5. Phase 4. Eight workflow recipes, checked against the vendors' help pages.
+6. Phase 5. The quiz asks where her work happens, what she uses for work and whether she can connect her work email, and the code gives every task a level and a recipe.
 
-All of it stays. Phases 4 to 7 build on it.
+All of it stays. Phases 6 and 7 build on it.
 
 ### Phase 4. Workflow recipes
 

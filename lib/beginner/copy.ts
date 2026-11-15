@@ -1,6 +1,6 @@
 import type { ChatTool } from "../week";
 import type { JobRead } from "./quiz";
-import type { Mark } from "./types";
+import type { Held, Mark } from "./types";
 import { FALLBACK_AI_USES } from "./quiz-copy";
 
 // The beginner version's words. The landing page, the quiz questions, the free result and the seven days were
@@ -510,11 +510,32 @@ export const beginnerPaywall = {
   lead: "Your first setups, one step at a time.", // Approved by Karl 2026-11-14
   /** Only for answers saved before Phase 2, shown with the plan's five parts. */
   legacyLead: "Here’s what’s inside, built from your answers.",
-  /**
-   * Her tool, and whether its free plan is enough. Hidden until Phase 4 reads it from the setup cards
-   * (lib/beginner/cards.ts), so nothing shows it today. DRAFT
-   */
-  toolLine: (tool: string) => `In ${tool}. The free plan is enough to start.`,
+  /** Under her offer, only when every recipe in it says the free plan is enough (Phase 5). DRAFT */
+  freePlan: "The free plan is enough to start.",
+};
+
+/** How her offer names a task that has no recipe: what it is at level 2. Karl's words, 2026-11-15. */
+export const offerCopy = {
+  withAi: "written with AI",
+};
+
+/**
+ * The map's lines for levels (Phase 5 of docs/DIRECTION.md). The level tags are LEVELS in recipes.ts, in the
+ * words of section 3. A row whose level a rule held down says why in a few words; a row with a recipe that needs
+ * no AI at work, for someone whose company restricts AI, says to ask first. Every line here is a DRAFT.
+ */
+export const levelCopy = {
+  /** For screen readers, before the tag. */
+  levelLabel: "Level",
+  held: {
+    restricted: "Held here because your company restricts AI.", // DRAFT
+    connect: "Connecting your work email needs your company’s OK first.", // DRAFT
+    private: "Other people’s private details stay out of your AI tool.", // DRAFT
+    track: "This can go further once your first workflow works.", // DRAFT
+    needs_computer: "The setup for this needs a computer.", // DRAFT
+    needs_phone: "The setup for this needs a phone.", // DRAFT
+  } satisfies Record<Held, string>,
+  askFirst: "Ask first if your company’s rule covers any use of AI.", // DRAFT
 };
 
 /** What people see on Stripe's page and their receipt. DRAFT */

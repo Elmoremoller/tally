@@ -4,7 +4,9 @@ import { beginnerFollowUp } from "./quiz-copy";
 import { tidy as tidyLines } from "../plan-writer";
 import { TASKS_MAX, toolLabels, type AiPolicy, type AiTool } from "../week";
 import { BLANKS_MAX, blanksIn, countsNotHers, exampleOf, phraseFor, TIME_PROMISE } from "./free-result";
+import { kindOf } from "./levels";
 import { levelWords, type QA } from "./quiz";
+import { TASK_KINDS, taskKindMeaning, type TaskKind } from "./recipes";
 import {
   beginnerTool,
   experienceLabels,
@@ -21,9 +23,10 @@ import {
 // to make easier), so her free result is something real instead of a number. It also writes the message that
 // makes the next one (saved for her paid path), and a map of her week: for each task she named, where she is
 // today and what changes with her path. The answer is checked in code before anything is saved. Same model and
-// key as lib/intake.ts. Phase 2 of docs/DIRECTION.md.
+// key as lib/intake.ts. Phase 2 of docs/DIRECTION.md. From Phase 5 it also names each task's kind, from a fixed
+// list the code checks, so the code can choose its level and recipe (lib/beginner/levels.ts).
 
-export const BEGINNER_INTAKE_VERSION = "beginner-intake-v6";
+export const BEGINNER_INTAKE_VERSION = "beginner-intake-v7";
 
 export type BeginnerIntakeInput = {
   job: string;
@@ -40,8 +43,14 @@ export type BeginnerIntakeInput = {
   followUp?: { question: string; answer: string };
 };
 
-/** `ai` is true when a chat assistant can draft or plan it; `private` when doing so needs private details. */
-export type BeginnerTask = { name: string; ai: boolean; private: boolean };
+/**
+ * `ai` is true when a chat assistant can draft or plan it; `private` when doing so needs private details. `kind`
+ * is one of TASK_KINDS, or null when none fits or AI can't help with it.
+ */
+export type BeginnerTask = { name: string; ai: boolean; private: boolean; kind: TaskKind | null };
+
+/** The kinds as the prompt lists them, one line each, from the recipes' own meanings. */
+const KIND_LINES = TASK_KINDS.map((kind) => `  - ${kind}: ${taskKindMeaning[kind]}`).join("\n");
 
 export type BeginnerIntakeResult = {
   role_summary: string;
@@ -68,6 +77,9 @@ Tasks:
 - name: a few plain words, the way she'd say it, like "Appointment reminders" or "Emails to parents". Start with a capital letter, no full stop.
 - ai: true when a free chat assistant could draft, plan, summarize, rewrite or think it through with her. False for work that is hands on, in person or on the phone, like cutting hair, showing a house or answering calls.
 - private: true when doing it with AI would mean typing in private details about other people, like patients, students, clients, customers or staff, or confidential company information like financials. False when a version with no names and no private details works just as well, like a template with blanks.
+- kind: what kind of task it is, from this list, or "none":
+${KIND_LINES}
+  Pick a kind only when the task plainly is that kind. The task itself says how it goes, by text, by email or on paper, and her answer on where her work happens says which apps she uses: replies she sends by text, WhatsApp or Instagram are repeat_texts, and replies to emails in her inbox are email_replies. When no kind fits well, or ai is false, use "none". Never stretch a task to fit a kind.
 
 first_win: one of her tasks, done for her now.
 - task: the exact name of one of the tasks above, with ai true. Pick what she most wants to make easier whenever a chat assistant can help with it and it needs no private details. When doing it in full would need private details, still pick it and draft a version that needs none: a text, reply or message she can reuse, with blanks like [first name], [day] or [item]. Pick another task only when no such version would help her. Otherwise pick one that needs no private details, is about writing or planning, and that she does often. If every task is private, pick the one that works best as a template with blanks.
@@ -84,8 +96,7 @@ If first_win is null, first_step is null.
 map: one entry for each of her tasks, in the same order, with the task's exact name. It shows her the change in her week, not the method.
 - phrase: what she calls these things, as a short noun phrase that fits "Your ___", in her own words, lower case except names, like "rescheduling texts", "prep lists" for "Writing the prep list", "replies to buyers" for "Replying to buyer inquiries", "booking DMs" or "Instagram posts". Never start it with a verb.
 - today: where she is with this task now, one sentence of at most 16 words, spoken to her as "you". When her answers say how often she does it, use her own words for it, like "You write these a few times a week, each one from scratch". Never guess a count she didn't give.
-- with_path: what changes for her once her path is set up, one sentence of at most 16 words. Say how it is different for her, not the steps or the tool, like "Each one starts from a reply that already sounds like you".
-- Her path decides with_path. Starter: what she can now do herself. Builder: name the kind of setup it becomes, a saved project with her instructions, saved instructions, the right tool for it, or a routine she reuses, and what that changes, like "A saved project holds your voice, so each caption starts from your notes". Never sign up steps or beginner explanations for a Builder.
+- with_path: what changes for her when she asks her AI tool for help with this task each time, one sentence of at most 16 words. Say how it is different for her, not the steps or the tool, like "Each one starts from a draft you only need to check". Never name a saved project, saved instructions, a template, a connected app or a routine: when one fits the task, our code puts its own line in place of yours. Never sign up steps or beginner explanations for a Builder.
 - When ai is false, with_path says it stays hers, and names the small part around it AI can help with, if there is one.
 - Never promise time saved: no minutes, no hours, no "faster", no "in seconds".
 
@@ -114,8 +125,9 @@ const schema = {
           name: { type: "string" },
           ai: { type: "boolean" },
           private: { type: "boolean" },
+          kind: { type: "string", enum: [...TASK_KINDS, "none"] },
         },
-        required: ["quote", "name", "ai", "private"],
+        required: ["quote", "name", "ai", "private", "kind"],
         additionalProperties: false,
       },
     },
@@ -320,7 +332,8 @@ export function checkBeginnerIntake(
     if (!name || typeof t.ai !== "boolean" || typeof t.private !== "boolean") return null;
     if (!isHers(t.quote, hers) || seen.has(name.toLowerCase())) continue;
     seen.add(name.toLowerCase());
-    tasks.push({ name, ai: t.ai, private: t.private });
+    // The kind must be on the list, and a task AI can't help with has none, whatever the model said.
+    tasks.push({ name, ai: t.ai, private: t.private, kind: t.ai ? kindOf(t.kind) : null });
   }
   tasks.splice(Math.min(6, TASKS_MAX));
 
@@ -340,7 +353,6 @@ export function checkBeginnerIntake(
   const stepLeft = withoutScarcity(stepText);
   const firstStep = stepLeft.length >= 60 && stepLeft.length <= 1200 ? stepLeft : null;
 
-  // The map holds only tasks she named, each once, in the order of her tasks, and never a promise of time.
   // The map holds only tasks she named, each once, in the order of her tasks: never a promise of time, and no
   // count she didn't give.
   const rows = new Map<string, MapLine>();
@@ -362,6 +374,7 @@ export function checkBeginnerIntake(
       withPath,
       ai: mine.ai,
       private: mine.private,
+      kind: mine.kind,
     });
   }
   const map: MapLine[] = tasks.flatMap((t) => rows.get(t.name) ?? []);

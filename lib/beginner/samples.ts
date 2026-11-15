@@ -8,12 +8,15 @@ import type { FirstWin, MapLine, Track } from "./types";
 // restricted). Nothing here is shown on the live site. The free result parts (`free`, and the dental and salon
 // first wins, done from a real example) were written by hand on 2026-11-14 for Phase 2 of docs/DIRECTION.md, in
 // the shape beginner-intake-v5 returns: the dental receptionist and the nurse are Starters, the salon owner a
-// Builder. Her setups are built from them in code, as on the live result.
+// Builder. Her setups are built from them in code, as on the live result. Phase 5 added each task's kind, what
+// each woman ticked on Where does your work happen and what she uses for work, by hand, in the shape
+// beginner-intake-v7 returns; the levels and the offer are chosen in code, as on the live result.
 
 type Sample = {
   firstWin: FirstWin;
   ideas: string[];
-  free: { firstStep: string; map: MapLine[]; track: Track; device: Device | null };
+  /** `places` is what she ticked on Where does your work happen (Phase 5). */
+  free: { firstStep: string; map: MapLine[]; track: Track; device: Device | null; places: string[] };
   plan: BeginnerPlan;
 };
 
@@ -36,6 +39,7 @@ export const beginnerSamples: Record<"dental" | "salon" | "nurse", Sample> = {
           withPath: "Every reply starts from words that already sound like your office.",
           ai: true,
           private: false,
+          kind: "repeat_texts",
         },
         {
           task: "Appointment reminders",
@@ -44,6 +48,7 @@ export const beginnerSamples: Record<"dental" | "salon" | "nurse", Sample> = {
           withPath: "One reminder you trust, ready for every patient.",
           ai: true,
           private: false,
+          kind: "repeat_texts",
         },
         {
           task: "Insurance questions",
@@ -52,6 +57,7 @@ export const beginnerSamples: Record<"dental" | "salon" | "nurse", Sample> = {
           withPath: "Clear answers to the common questions, with no patient details in them.",
           ai: true,
           private: true,
+          kind: "repeat_writing",
         },
         {
           task: "Answering phones",
@@ -60,10 +66,12 @@ export const beginnerSamples: Record<"dental" | "salon" | "nurse", Sample> = {
           withPath: "Stays yours. A short script makes the common calls easier.",
           ai: false,
           private: false,
+          kind: null,
         },
       ],
       track: "starter",
       device: "phone",
+      places: ["Text messages", "A work system", "In person"],
     },
     ideas: [
       "A script for confirming appointments by phone",
@@ -211,6 +219,7 @@ export const beginnerSamples: Record<"dental" | "salon" | "nurse", Sample> = {
           withPath: "A saved project holds your salon’s voice, so each caption starts from your notes.",
           ai: true,
           private: false,
+          kind: "repeat_writing",
         },
         {
           task: "Booking DMs",
@@ -219,14 +228,16 @@ export const beginnerSamples: Record<"dental" | "salon" | "nurse", Sample> = {
           withPath: "Saved instructions answer the common questions in your voice, ready to send.",
           ai: true,
           private: false,
+          kind: "repeat_texts",
         },
         {
           task: "Ordering stock",
           phrase: "ordering stock",
           today: "You work out each order from memory.",
-          withPath: "A weekly routine turns what you used into an order list to check.",
+          withPath: "You say what you used, and AI turns it into an order list to check.",
           ai: true,
           private: false,
+          kind: null,
         },
         {
           task: "Cutting hair",
@@ -235,10 +246,12 @@ export const beginnerSamples: Record<"dental" | "salon" | "nurse", Sample> = {
           withPath: "Stays yours, as it should.",
           ai: false,
           private: false,
+          kind: null,
         },
       ],
       track: "builder",
-      device: null,
+      device: "both",
+      places: ["Instagram", "Square", "Text messages"],
     },
     ideas: [
       "Auto replies for common DM questions",
@@ -400,6 +413,7 @@ export const beginnerSamples: Record<"dental" | "salon" | "nurse", Sample> = {
           withPath: "Every new nurse gets a clear first week plan you only adjust.",
           ai: true,
           private: false,
+          kind: "repeat_writing",
         },
         {
           task: "Family calls",
@@ -408,6 +422,7 @@ export const beginnerSamples: Record<"dental" | "salon" | "nurse", Sample> = {
           withPath: "You go into hard calls with calm words ready, and no patient details in them.",
           ai: true,
           private: true,
+          kind: "repeat_writing",
         },
         {
           task: "Shift handoffs",
@@ -416,6 +431,7 @@ export const beginnerSamples: Record<"dental" | "salon" | "nurse", Sample> = {
           withPath: "Waits until you know what your hospital allows.",
           ai: true,
           private: true,
+          kind: null,
         },
         {
           task: "Patient education",
@@ -424,10 +440,12 @@ export const beginnerSamples: Record<"dental" | "salon" | "nurse", Sample> = {
           withPath: "Stays yours, since it is medical advice.",
           ai: false,
           private: false,
+          kind: null,
         },
       ],
       track: "starter",
       device: "computer",
+      places: ["A work system", "In person", "Paper"],
     },
     ideas: [
       "Shift handoff summary template",

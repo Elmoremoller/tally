@@ -63,8 +63,8 @@ const raw = () => ({
   follow_up_question: null,
 });
 
-test("the prompt version is v6", () => {
-  assert.equal(BEGINNER_INTAKE_VERSION, "beginner-intake-v6");
+test("the prompt version is v7", () => {
+  assert.equal(BEGINNER_INTAKE_VERSION, "beginner-intake-v7");
 });
 
 test("beginnerHers holds her job, every pick and typed answer, and the follow up answer, but not the titles", () => {
@@ -447,4 +447,37 @@ test("a draft that says she has open times is asked again", () => {
   const hers = beginnerHers(input());
   assert.equal(checkBeginnerIntake(made, { followUpAsked: false, hers, lastAttempt: false }), null);
   assert.ok(checkBeginnerIntake(made, { followUpAsked: false, hers, lastAttempt: true }));
+});
+
+test("each task keeps a kind from the recipes' list, and anything else becomes none", () => {
+  const made = raw();
+  const kinds = ["repeat_writing", "repeat_texts", "repeat_texts", "gmail_auto_send"];
+  made.tasks = made.tasks.map((t, i) => ({ ...t, kind: kinds[i] }));
+  const result = checkBeginnerIntake(made, { followUpAsked: false, hers: beginnerHers(input()) });
+  assert.deepEqual(
+    result?.tasks.map((t) => t.kind),
+    ["repeat_writing", "repeat_texts", null, null],
+    "Attic work is hands on, so it has no kind, and a kind that is not on the list is dropped",
+  );
+  assert.deepEqual(
+    result?.map.map((m) => m.kind),
+    ["repeat_writing", "repeat_texts", null, null],
+  );
+});
+
+test("an answer from before Phase 5, with no kind, still passes with none", () => {
+  const result = checkBeginnerIntake(raw(), { followUpAsked: false, hers: beginnerHers(input()) });
+  assert.ok(result?.tasks.every((t) => t.kind === null));
+});
+
+test("the prompt lists every kind and lets a task have none rather than a forced one", () => {
+  for (const kind of ["repeat_texts", "repeat_writing", "spoken_writing", "notes_to_table", "repeat_emails", "email_replies", "email_follow_ups", "awaiting_replies"]) {
+    assert.ok(BEGINNER_INTAKE_SYSTEM.includes(`- ${kind}: `), kind);
+  }
+  assert.match(BEGINNER_INTAKE_SYSTEM, /Never stretch a task to fit a kind/);
+});
+
+test("the prompt keeps with_path to asking AI each time, since the code writes the line for a saved setup", () => {
+  assert.match(BEGINNER_INTAKE_SYSTEM, /Never name a saved project, saved instructions, a template, a connected app or a routine/);
+  assert.doesNotMatch(BEGINNER_INTAKE_SYSTEM, /name the kind of setup it becomes/);
 });

@@ -3,8 +3,9 @@
 import { cookies } from "next/headers";
 import { allowAiCall } from "@/lib/ai-allowance";
 import { cleanAnswers, type BeginnerAnswers } from "@/lib/beginner/answers";
-import { deviceOf, orderMap, setupsFor, setupTasks } from "@/lib/beginner/free-result";
+import { freePlanFor, offerFor, orderMap } from "@/lib/beginner/free-result";
 import { readBeginnerIntake } from "@/lib/beginner/intake";
+import { whoFrom, withLevels } from "@/lib/beginner/levels";
 import { digest, type QuizStep } from "@/lib/beginner/quiz";
 import { beginnerTool, trackFor, type FreeResult } from "@/lib/beginner/types";
 import { cleanText } from "@/lib/clean";
@@ -107,21 +108,18 @@ export async function readBeginner(input: {
       return { ok: false, error: quizErrors.thin, thin: true };
     }
 
-    // Her setups are named in code, from her path, her tool and her own tasks, never by the model.
+    // Each task's level and recipe, and her offer, are chosen in code from her answers, never by the model.
     const track = trackFor(answers.experience);
     const tool = beginnerTool(answers.aiTools);
     const top = result.first_win.task;
-    const map = orderMap(result.map, top);
+    const who = whoFrom({ track, ...answers });
+    const map = orderMap(withLevels(result.map, who), top);
     const free: FreeResult = {
       firstWin: result.first_win,
       firstStep: result.first_step,
       map,
-      setups: setupsFor({
-        track,
-        tool,
-        ...setupTasks(map, top),
-        device: deviceOf(answers.qas),
-      }),
+      setups: offerFor({ track, tool, map, top, device: who.device }),
+      freePlan: freePlanFor(map, top),
       tool,
       track,
     };
@@ -150,7 +148,7 @@ export async function readBeginner(input: {
       // Idea titles are gone from the free result since beginner-intake-v5; the plan writer still takes the list.
       ideas: [],
       privateTasks: result.tasks.filter((t) => t.private).map((t) => t.name),
-      shown: { firstStep: free.firstStep, map: free.map, setups: free.setups, tool, track },
+      shown: { firstStep: free.firstStep, map: free.map, setups: free.setups, freePlan: free.freePlan, tool, track },
     });
     if (followUp) await saveFollowUpAnswer(sessionId, followUp.answer);
     const { tasks } = await loadWeek(sessionId);

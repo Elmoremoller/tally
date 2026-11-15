@@ -1,8 +1,8 @@
 import { cleanText } from "../clean";
 import { ANSWER_MAX } from "../week";
 import { FALLBACK_JOB_READ } from "./copy";
-import { EVERYDAY_SOFTWARE, EVERYDAY_TASKS } from "./quiz-copy";
-import { usesAi, type Experience, type WorksFor } from "./types";
+import { EVERYDAY_TASKS, whereScreen } from "./quiz-copy";
+import { usesAi, type CanUse, type Experience, type WorksFor } from "./types";
 
 // The context quiz's shapes and the pure helpers behind its screens. Imports nothing from the server, so the
 // browser, the server actions and the tests can all use it.
@@ -35,7 +35,9 @@ export type QA = { id: string; title: string; picked: string[]; text: string | n
 
 /**
  * Every screen the quiz can show. Answers saved before 2026-11-14 may also hold held_back, picture, ai_uses,
- * works_for and policy, screens that are gone; they still load, since a saved answer is only read by its id.
+ * works_for and policy, and answers saved before Phase 5 may hold apps and device as screens of their own;
+ * they still load, since a saved answer is only read by its id. What she uses for work is kept as the device
+ * answer, from the where screen.
  */
 export type QuizStep =
   | "job"
@@ -45,10 +47,10 @@ export type QuizStep =
   | "repeats"
   | "most"
   | "example"
-  | "apps"
-  | "device"
+  | "where"
   | `asked_${number}`
-  | "can_use";
+  | "can_use"
+  | "connect";
 
 export const QAS_MAX = 16;
 export const PICKS_MAX = 16;
@@ -117,10 +119,16 @@ export const hasKind = (job: string, kind: string) =>
 /** A list of one needs no question: that one is her answer, and the screen is skipped. */
 export const skipsMost = (most: { options: string[]; fallback: boolean }) => !most.fallback && most.options.length === 1;
 
-/** The software screen's choices: what the read of her job names first, then the everyday set, each once. */
-export function softwareOptions(read: JobRead): string[] {
+/** Names for texting that mean the same place as Text messages, so the where screen shows it once. */
+const TEXTING = /^(texts?|text messages?|sms|texting)$/i;
+
+/**
+ * The where screen's choices: the apps the read of her job names first, then the fixed places, each once. Texts,
+ * SMS and the like are left for the fixed Text messages.
+ */
+export function whereOptions(read: JobRead): string[] {
   const seen = new Set<string>();
-  return [...read.apps, ...EVERYDAY_SOFTWARE].filter((name) => {
+  return [...read.apps.filter((name) => !TEXTING.test(name.trim())), ...whereScreen.places].filter((name) => {
     const key = name.toLowerCase();
     if (seen.has(key)) return false;
     seen.add(key);
@@ -142,19 +150,21 @@ export function aiHelpCount(read: JobRead, picked: string[]): { helps: number; p
 
 /**
  * Every screen she will see, in order, so the progress bar knows the length. A Starter (Never used it, Tried it
- * a few times) sees at most 8 screens and a Builder at most 10:
+ * a few times) sees at most 9 screens and a Builder at most 11 (DIRECTION.md, Phase 5):
  *
- * Starter: job, level, repeats, most, example, device, one asked question, can_use.
- * Builder: job, level, done, tools, repeats, most, example, apps, one asked question, can_use.
+ * Starter: job, level, repeats, most, example, where, one asked question, can_use, connect.
+ * Builder: job, level, done, tools, repeats, most, example, where, one asked question, can_use, connect.
  *
- * Where an answer isn't known yet, the step is assumed: the asked screen while the AI writes it, and the
- * Builder screens before she picks a level. Can you use AI for your work is left out when her job already
- * said she works for herself. `skipMost` leaves out the most wanted screen when it would show one choice.
+ * Where an answer isn't known yet, the step is assumed: the asked screen while the AI writes it, the Builder
+ * screens before she picks a level, and connect before she answers can_use. Can you use AI for your work is
+ * left out when her job already said she works for herself, and connect is only for Yes or Not sure there.
+ * `skipMost` leaves out the most wanted screen when it would show one choice.
  */
 export function stepsFor(s: {
   level: Experience | null;
   askedCount: number | null;
   worksForFromJob: WorksFor | "unclear" | null;
+  canUse?: CanUse | null;
   skipMost?: boolean;
 }): QuizStep[] {
   const builder = usesAi(s.level);
@@ -162,11 +172,13 @@ export function stepsFor(s: {
   if (builder) steps.push("done", "tools");
   steps.push("repeats");
   if (!s.skipMost) steps.push("most");
-  steps.push("example");
-  steps.push(builder ? "apps" : "device");
+  steps.push("example", "where");
   const asked = Math.min(s.askedCount ?? ASKED_ASSUMED, ASKED_ASSUMED);
   for (let i = 1; i <= asked; i++) steps.push(`asked_${i}`);
-  if (s.worksForFromJob !== "self") steps.push("can_use");
+  if (s.worksForFromJob !== "self") {
+    steps.push("can_use");
+    if (!s.canUse || s.canUse === "yes" || s.canUse === "not_sure") steps.push("connect");
+  }
   return steps;
 }
 

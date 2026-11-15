@@ -3,6 +3,7 @@ import { fence, planModel, text } from "../plan-writer";
 import { toolLabels, type AiPolicy, type AiTool, type ChatTool } from "../week";
 import { withoutScarcity } from "./intake";
 import { levelWords, type QA } from "./quiz";
+import { whereScreen } from "./quiz-copy";
 import {
   beginnerTool,
   experienceLabels,
@@ -149,18 +150,23 @@ Copy rules:
 /** What she picked and typed on one screen, as one line. */
 const answerOf = (qa: QA) => [...qa.picked, ...(qa.text ? [qa.text] : [])].join(", ");
 
-/** Labels on the AI tools screen that name no tool. */
-const NOT_TOOLS = (["none_yet", "not_sure", "other"] as const).map((t) => toolLabels[t].toLowerCase());
+/** Labels on the AI tools screen, and places on the where screen, that name no tool. */
+const NOT_TOOLS = [
+  ...(["none_yet", "not_sure", "other"] as const).map((t) => toolLabels[t].toLowerCase()),
+  ...whereScreen.notSoftware.map((p) => p.toLowerCase()),
+];
 
 /**
- * The other tools she named, for her Your tools part: her apps (picked, then typed) and the AI she has used
+ * The other tools she named, for her Your tools part: her apps (picked, then typed, from the where screen or,
+ * on answers saved before Phase 5, the apps screen) and the AI she has used
  * (picked, then typed under Other), in screen order. What she typed is split at commas, so "Square, Canva" is
  * two tools. Her main chat tool, None yet, Not sure and Other are left out, and a name she gave twice counts once.
  */
 export function herTools(qas: QA[], mainTool: ChatTool): string[] {
   const skip = new Set([toolLabels[mainTool].toLowerCase(), ...NOT_TOOLS]);
   const names: string[] = [];
-  for (const qa of qas.filter((q) => q.id === "apps" || q.id === "tools")) {
+  // The where screen took the place of the apps screen in Phase 5; answers saved before still have apps.
+  for (const qa of qas.filter((q) => q.id === "apps" || q.id === "where" || q.id === "tools")) {
     const typed = (qa.text ?? "").split(/[,;/\n]/);
     for (const raw of [...qa.picked, ...typed]) {
       const name = raw.trim().replace(/[.!]+$/, "");
