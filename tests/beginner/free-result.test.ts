@@ -156,7 +156,7 @@ test("a task with a recipe is named by what its recipe makes of it", () => {
 
 test("a task with no recipe is named for what it is, written with AI, never a saved setup", () => {
   assert.equal(workflowName(leveled[1]), "Your booking replies, written with AI");
-  assert.equal(workflowName({ task: "Writing the prep list", phrase: null, recipe: null }), "Writing the prep list, written with AI");
+  assert.equal(workflowName({ task: "Writing the prep list", phrase: null, recipe: null }), "Writing the prep list, drafted with AI");
 });
 
 test("a Starter's offer lists her workflows first, and her two prep steps apart", () => {

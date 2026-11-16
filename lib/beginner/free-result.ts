@@ -147,7 +147,67 @@ export function secondTask(map: readonly MapLine[], top: string): MapLine | null
 export function workflowName(m: Pick<MapLine, "task" | "phrase" | "recipe" | "workflow">): string {
   const recipe = recipeOf(m);
   const workflow = m.workflow ? patternWorkflowById(m.workflow) : undefined;
-  return `${taskForSetup(m)}, ${recipe ? recipe.offer : workflow ? workflow.offer : offerCopy.withAi}`;
+  const start = taskForSetup(m);
+  return `${start}, ${endingFor(start, recipe ? recipe.offer : workflow ? workflow.offer : offerCopy.withAi)}`;
+}
+
+/**
+ * The second ending for each ending a workflow name can have, used when her words already hold one of its words, so
+ * a name never repeats itself, like "Your employee answers, answered from your own documents" (Karl, 2026-11-16).
+ * Every ending in the recipes, the pattern workflows and offerCopy.withAi has one here; a test holds that. DRAFT
+ */
+export const SECOND_ENDINGS: Record<string, string> = {
+  // Pattern workflows
+  "saved once, ready to send": "kept for next time",
+  "from one template": "with the blanks marked",
+  "counted against your usual amounts": "checked against what you normally keep",
+  "collected and counted": "gathered in one place",
+  "tracked from the start day": "with every step dated",
+  "collected in one place": "gathered in one list",
+  "on a schedule that reminds you": "set to come round again",
+  "with follow ups ready to send": "chased with emails written for you",
+  "straight into one sheet": "kept in one table",
+  "answered from your own documents": "found in your own files",
+  // Recipes
+  "saved once on your phone": "kept as quick replies",
+  "with a saved assistant": "with an AI helper set up once",
+  "said out loud, finished as text": "spoken, then turned into writing",
+  "turned into rows for your sheet": "kept as a table",
+  "saved once as Gmail templates": "kept ready to reuse",
+  "drafted in your inbox": "started for you, ready to finish",
+  "drafted from your inbox for your OK": "written for you to approve",
+  "listed for you every week": "gathered for you regularly",
+  // No workflow
+  "written with AI": "drafted with AI",
+};
+
+/** Small words two halves of a name may share without repeating themselves. */
+const NAME_GLUE = new Set(["your", "you", "the", "a", "an", "and", "for", "with", "from", "in", "on", "of", "to", "as", "one", "once", "every", "each", "my", "her", "ok", "own", "that", "then", "into", "against", "what"]);
+
+const nameWords = (text: string) =>
+  (text.toLowerCase().match(/\p{L}+/gu) ?? []).filter((w) => w.length >= 3 && !NAME_GLUE.has(w));
+
+/**
+ * Two words share a root when their first four letters match, like "answers" and "answered", "orders" and "order" or
+ * "writing" and "written". Shorter words must match whole. A match that isn't a real repeat only swaps in the
+ * second ending, which is harmless.
+ */
+function sameRoot(a: string, b: string): boolean {
+  if (Math.min(a.length, b.length) < 4) return a === b;
+  return a.slice(0, 4) === b.slice(0, 4);
+}
+
+/** The words of an ending that repeat a word of her own, by root. */
+export const repeatsIn = (start: string, ending: string) => {
+  const hers = nameWords(start);
+  return nameWords(ending).filter((w) => hers.some((h) => sameRoot(h, w)));
+};
+
+/** The ending for a name: its own, or its second one when her words already hold one of its words. */
+export function endingFor(start: string, ending: string): string {
+  if (!repeatsIn(start, ending).length) return ending;
+  const second = SECOND_ENDINGS[ending];
+  return second && !repeatsIn(start, second).length ? second : ending;
 }
 
 /**
