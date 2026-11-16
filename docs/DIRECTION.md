@@ -184,12 +184,14 @@ Phases 8 and 9 touch different files and can run side by side. Phase 10 needs bo
 
 Phases 0 to 7 built the quiz, the free result with the map, the cards, the recipes, the levels, the paid path and the test script. Three experiments followed. All of it stays. The prompts and checks of experiment three in `scripts/persona-runs.ts` and `scripts/persona-checks.ts` are a starting point for Phases 8 and 10.
 
-### Phase 8. The quiz and the map read responsibilities
+Phase 8 is done. It was merged on 16 November 2026 as pull request 14. Its proof runs are in `docs/audit/2026-11-16-phase-8-runs`.
+
+### Phase 8. The quiz and the map read responsibilities (done)
 
 **Goal.** A short quiz, and a map that shows her real job with a direction for each part.
 
 1. Change the read of her job. It returns responsibilities, with the workflow around each one. Remove the rule that work done with her hands is not something AI can help with.
-2. Change the "What do you do over and over" screen. At most three choices from her own words. Five she did not mention, that people in her role usually handle. Two small groups, "From what you told us" and "Often part of a job like yours". The four fixed choices stay only as the fallback when the AI call fails.
+2. Change the "What do you do over and over" screen. Her own responsibilities first, up to five, in her own words. Then ones she did not mention, that people in her role usually handle, until the screen shows eight in all. Two small groups, "From what you told us" and "Often part of a job like yours". The four fixed choices stay only as the fallback when the AI call fails.
 3. Remove the real example screen and the question written by AI from the quiz. Move "How often do you do this?" to the top task screen.
 4. Change the final read. For each responsibility she picked it gives the patterns, the Today line, the With your path line as a direction, and one preview piece for her top row. It stays one fast call.
 5. Change the level function to work from patterns, following section 2. "Ask first" only on rows that put work into an AI tool.
