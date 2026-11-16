@@ -6,13 +6,16 @@ Printed from the code by `scripts/print-cards.ts`, so this file and the cards al
 
 ## Could not confirm
 
-These are left out, or left without phone steps, because the vendor's pages don't give the steps.
+These are left out, left without phone steps, or confirmed only in part, because the vendor's pages don't say.
 
 1. **Excel, highlight a whole row.** Left out. Microsoft's pages show a highlight rule written as a formula, but none shows one that colors a whole row. Google's page does, so Google Sheets has this card.
 2. **Excel on a phone.** No phone steps on any Excel card. Microsoft says Excel on an iPhone can show highlights and pick from drop down lists, but can't make either. For Android, Microsoft's pages don't say.
 3. **Microsoft Forms and Outlook on a phone.** No phone steps. Microsoft's pages for these features give computer steps only.
 4. **Google Forms on a phone.** No phone steps. Google gives the first steps in a phone's browser, but not how to add questions there.
 5. **Gmail templates on a phone.** No phone steps. Google says templates work only on a computer.
+6. **Google Sheets outside the US.** Google's pages don't say whether a formula needs semicolons instead of commas with a European locale. They do say function names stay in English unless you turn off Always use English function names under File, then Settings. So the Google formula cards are confirmed for US English settings only, and have no region note.
+7. **Excel function names in another language.** Microsoft's page on translated function names is gone, and no current page says which names Excel in another language expects. The Excel formula cards are confirmed with English function names only.
+8. **What clearing answers does to the sheet.** Neither Microsoft nor Google says whether deleting all answers in a form also clears the workbook or sheet the answers go to. Both clearing cards say so.
 
 ## Worth a close look when you walk through
 
@@ -22,6 +25,8 @@ These are confirmed, but less directly than the rest.
 2. **Adding days in Google Sheets.** Google's pages never show a date plus a number of days. The card uses DATE(YEAR(B2),MONTH(B2),DAY(B2)+7) instead, which the DATE page documents, including carrying extra days into the next month.
 3. **Opening Forms answers in Excel.** Microsoft describes answers that keep arriving for work and school accounts. With a personal account, choose Download a copy, which does not update.
 4. **Outlook saved emails.** Microsoft says these need a qualifying Microsoft 365 subscription, so the card says the free plan is not enough.
+5. **Counting Microsoft Forms answers.** Microsoft says a formula or table added to the workbook that Forms fills stops new answers arriving. So the count card says to count in a downloaded copy. This matters for the lunch workflow in Phase 10.
+6. **Semicolons in Excel.** Microsoft says Excel uses the list separator of your region between the parts of a formula, a comma for US English. The Excel formula cards say to type a semicolon where Excel won't take a comma. The drop down list card now takes its choices from cells, so it needs no separator.
 
 ## A sheet to try the tracker on
 
@@ -90,11 +95,37 @@ Id `ms_forms_to_excel`. Checked 2026-11-16.
 3. Select Open results in Excel. The answers open in Excel in your browser, one row for each answer and one column for each question.
 4. New answers show up in the same workbook, so keep using that one rather than making a new one.
 
+Note. Don't add your own formulas or tables to this workbook, or new answers stop arriving. Count in a copy instead, made with Download a copy.
+
 Free plan. Not enough. Answers that keep arriving in Excel need a work or school account. Otherwise choose Download a copy, which does not update.
 
 Checked against
 
 * <https://support.microsoft.com/en-us/forms/check-and-share-your-form-results>
+* <https://support.microsoft.com/en-us/forms/how-to-ensure-your-form-and-workbook-are-in-sync>
+
+### Clear last week's answers in Microsoft Forms
+
+Id `ms_forms_clear`. Checked 2026-11-16.
+
+* [ ] Walked through on a computer
+
+**On a computer**
+
+1. If you want to keep last week's answers, open them in Excel first and choose Download a copy.
+2. Go to forms.office.com and open your form.
+3. Select View responses.
+4. Select More options for responses, then Delete all responses.
+5. The answers are gone from the form, ready for this week.
+
+Note. Microsoft's pages don't say whether this also clears the workbook made with Open results in Excel.
+
+Free plan. Enough.
+
+Checked against
+
+* <https://support.microsoft.com/en-us/forms/check-and-share-your-form-results>
+* <https://support.microsoft.com/en-us/forms/form-question-response-and-character-limits-in-microsoft-forms>
 
 ## Excel
 
@@ -109,7 +140,7 @@ Id `excel_dropdown`. Checked 2026-11-16.
 1. Open your workbook in Excel and select the cells where the drop down list goes.
 2. Go to the Data tab, then select Data Validation. In Excel in a browser it sits under Data Tools.
 3. On the Settings tab, in the Allow box, select List.
-4. In the Source box, paste the choices Tally wrote, with a comma between each one.
+4. Type the choices Tally wrote in a spare column, one in each cell. Then select in the Source box and drag over those cells, without a heading.
 5. Check In-cell dropdown, then select OK.
 
 Note. Excel on an iPhone can pick from a drop down list but can't make one.
@@ -129,9 +160,13 @@ Id `excel_count_each`. Checked 2026-11-16.
 
 **On a computer**
 
-1. Open your workbook in Excel and select an empty cell beside the answers, where the count goes.
+1. Open the workbook with your answers and select an empty cell beside them, where the count goes.
 2. Paste the formula Tally wrote, like =COUNTIF(C2:C100,"Vegetarian"). The first part says where to look, the second what to count.
 3. Press Enter. Add a count for each choice the same way.
+
+Note. If the answers come from Microsoft Forms, count in a downloaded copy. A formula added to the form's own workbook stops new answers arriving.
+
+Outside the US. If Excel won't take the formula, type a semicolon wherever it has a comma. Excel uses the separator of your region, and many European regions use a semicolon.
 
 Free plan. Enough. Excel in a browser is free with a Microsoft account.
 
@@ -139,6 +174,9 @@ Checked against
 
 * <https://support.microsoft.com/en-us/excel/get-started/use-the-countif-function-in-microsoft-excel>
 * <https://support.microsoft.com/en-us/excel/differences-between-using-a-workbook-in-the-browser-and-in-excel>
+* <https://support.microsoft.com/en-us/forms/how-to-ensure-your-form-and-workbook-are-in-sync>
+* <https://learn.microsoft.com/en-us/troubleshoot/microsoft-365-apps/excel/formula-errors>
+* <https://support.microsoft.com/en-us/excel/change-regional-format-settings-in-excel-for-the-web>
 
 ### List what is below its usual amount in Excel
 
@@ -153,12 +191,16 @@ Id `excel_below_usual`. Checked 2026-11-16.
 3. Paste the formula Tally wrote, like =FILTER(A2:A30,B2:B30<C2:C30,"Nothing low"), and press Enter.
 4. The list fills the cells below by itself and changes when you update what you have. When nothing is low it says Nothing low.
 
+Outside the US. If Excel won't take the formula, type a semicolon wherever it has a comma. Excel uses the separator of your region, and many European regions use a semicolon.
+
 Free plan. Enough. Excel in a browser is free with a Microsoft account.
 
 Checked against
 
 * <https://support.microsoft.com/en-us/excel/functions/filter-function>
 * <https://support.microsoft.com/en-us/excel/differences-between-using-a-workbook-in-the-browser-and-in-excel>
+* <https://learn.microsoft.com/en-us/troubleshoot/microsoft-365-apps/excel/formula-errors>
+* <https://support.microsoft.com/en-us/excel/change-regional-format-settings-in-excel-for-the-web>
 
 ### Date each step from the start day in Excel
 
@@ -194,6 +236,8 @@ Id `excel_next_due`. Checked 2026-11-16.
 
 Note. Excel in a browser takes today's date from Microsoft's server, not from your computer.
 
+Outside the US. If Excel won't take the formula, type a semicolon wherever it has a comma. Excel uses the separator of your region, and many European regions use a semicolon.
+
 Free plan. Enough. Excel in a browser is free with a Microsoft account.
 
 Checked against
@@ -204,6 +248,8 @@ Checked against
 * <https://support.microsoft.com/en-us/excel/using-if-with-and-or-and-not-functions-in-excel>
 * <https://support.microsoft.com/en-us/excel/functions/today-function>
 * <https://support.microsoft.com/en-us/excel/differences-between-using-a-workbook-in-the-browser-and-in-excel>
+* <https://learn.microsoft.com/en-us/troubleshoot/microsoft-365-apps/excel/formula-errors>
+* <https://support.microsoft.com/en-us/excel/change-regional-format-settings-in-excel-for-the-web>
 
 ### Highlight a date in Excel once it has come
 
@@ -221,6 +267,8 @@ Id `excel_due_highlight`. Checked 2026-11-16.
 
 Note. Excel on an iPhone shows the highlight but can't make it. The Due column from the next due card works everywhere.
 
+Outside the US. If Excel won't take the formula, type a semicolon wherever it has a comma. Excel uses the separator of your region, and many European regions use a semicolon.
+
 Free plan. Enough. Excel in a browser is free with a Microsoft account.
 
 Checked against
@@ -229,6 +277,8 @@ Checked against
 * <https://support.microsoft.com/en-us/excel/using-if-with-and-or-and-not-functions-in-excel>
 * <https://support.microsoft.com/en-us/excel/functions/today-function>
 * <https://support.microsoft.com/en-us/excel/excel-for-iphone-features>
+* <https://learn.microsoft.com/en-us/troubleshoot/microsoft-365-apps/excel/formula-errors>
+* <https://support.microsoft.com/en-us/excel/change-regional-format-settings-in-excel-for-the-web>
 
 ## Outlook
 
@@ -335,6 +385,27 @@ Id `google_forms_to_sheets`. Checked 2026-11-16.
 3. At the top right, click More, then Select destination for responses.
 4. Choose Create a new spreadsheet, then click Create.
 5. Each new answer now arrives as a row in that sheet. You find it on the Google Sheets home screen and in Google Drive.
+
+Free plan. Enough.
+
+Checked against
+
+* <https://support.google.com/docs/answer/2917686?hl=en>
+
+### Clear last week's answers in Google Forms
+
+Id `google_forms_clear`. Checked 2026-11-16.
+
+* [ ] Walked through on a computer
+
+**On a computer**
+
+1. Open your form in Google Forms.
+2. At the top, click Responses, then Summary.
+3. At the top right, click More, then Delete all responses.
+4. Click OK. This can't be undone.
+
+Note. Your answers sheet is a separate file, and Google's pages don't say whether its rows are cleared too.
 
 Free plan. Enough.
 

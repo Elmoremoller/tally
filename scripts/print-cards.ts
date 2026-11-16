@@ -24,13 +24,16 @@ push(
   "",
   "## Could not confirm",
   "",
-  "These are left out, or left without phone steps, because the vendor's pages don't give the steps.",
+  "These are left out, left without phone steps, or confirmed only in part, because the vendor's pages don't say.",
   "",
   "1. **Excel, highlight a whole row.** Left out. Microsoft's pages show a highlight rule written as a formula, but none shows one that colors a whole row. Google's page does, so Google Sheets has this card.",
   "2. **Excel on a phone.** No phone steps on any Excel card. Microsoft says Excel on an iPhone can show highlights and pick from drop down lists, but can't make either. For Android, Microsoft's pages don't say.",
   "3. **Microsoft Forms and Outlook on a phone.** No phone steps. Microsoft's pages for these features give computer steps only.",
   "4. **Google Forms on a phone.** No phone steps. Google gives the first steps in a phone's browser, but not how to add questions there.",
   "5. **Gmail templates on a phone.** No phone steps. Google says templates work only on a computer.",
+  "6. **Google Sheets outside the US.** Google's pages don't say whether a formula needs semicolons instead of commas with a European locale. They do say function names stay in English unless you turn off Always use English function names under File, then Settings. So the Google formula cards are confirmed for US English settings only, and have no region note.",
+  "7. **Excel function names in another language.** Microsoft's page on translated function names is gone, and no current page says which names Excel in another language expects. The Excel formula cards are confirmed with English function names only.",
+  "8. **What clearing answers does to the sheet.** Neither Microsoft nor Google says whether deleting all answers in a form also clears the workbook or sheet the answers go to. Both clearing cards say so.",
   "",
   "## Worth a close look when you walk through",
   "",
@@ -40,6 +43,8 @@ push(
   "2. **Adding days in Google Sheets.** Google's pages never show a date plus a number of days. The card uses DATE(YEAR(B2),MONTH(B2),DAY(B2)+7) instead, which the DATE page documents, including carrying extra days into the next month.",
   "3. **Opening Forms answers in Excel.** Microsoft describes answers that keep arriving for work and school accounts. With a personal account, choose Download a copy, which does not update.",
   "4. **Outlook saved emails.** Microsoft says these need a qualifying Microsoft 365 subscription, so the card says the free plan is not enough.",
+  "5. **Counting Microsoft Forms answers.** Microsoft says a formula or table added to the workbook that Forms fills stops new answers arriving. So the count card says to count in a downloaded copy. This matters for the lunch workflow in Phase 10.",
+  "6. **Semicolons in Excel.** Microsoft says Excel uses the list separator of your region between the parts of a formula, a comma for US English. The Excel formula cards say to type a semicolon where Excel won't take a comma. The drop down list card now takes its choices from cells, so it needs no separator.",
   "",
   "## A sheet to try the tracker on",
   "",
@@ -62,6 +67,7 @@ const blockCard = (card: BlockCard) => {
   steps("On an Android phone", card.steps.android);
   steps("On an iPhone", card.steps.iphone);
   if (card.note) push(`Note. ${card.note}`, "");
+  if (card.region) push(`Outside the US. ${card.region}`, "");
   push(`Free plan. ${card.freePlan.enough ? "Enough." : "Not enough."}${card.freePlan.note ? ` ${card.freePlan.note}` : ""}`, "");
   push("Checked against", "", ...links(card.sources), "");
 };

@@ -208,12 +208,16 @@ export const BLOCK_APP_NAMES: Record<BlockApp, string> = {
 };
 
 /** The vendor help sites a building block card may be checked against. */
-export const BLOCK_HELP = ["https://support.microsoft.com/", "https://support.google.com/"] as const;
+export const BLOCK_HELP = {
+  microsoft: ["https://support.microsoft.com/", "https://learn.microsoft.com/"],
+  google: ["https://support.google.com/"],
+} as const;
 
 export const BLOCK_CARD_IDS = [
   "ms_forms_create",
   "ms_forms_share",
   "ms_forms_to_excel",
+  "ms_forms_clear",
   "excel_dropdown",
   "excel_count_each",
   "excel_below_usual",
@@ -225,6 +229,7 @@ export const BLOCK_CARD_IDS = [
   "google_forms_create",
   "google_forms_share",
   "google_forms_to_sheets",
+  "google_forms_clear",
   "sheets_dropdown",
   "sheets_count_each",
   "sheets_highlight_row",
@@ -242,6 +247,7 @@ export const BLOCK_FEATURES = [
   "form_create",
   "form_share",
   "form_to_sheet",
+  "form_clear",
   "dropdown",
   "count_each",
   "highlight_row",
@@ -263,6 +269,8 @@ export type BlockCard = {
   steps: { computer?: string[]; android?: string[]; iphone?: string[] };
   /** Something she should know before she starts, like a device it can't be made on. */
   note?: string;
+  /** What changes outside US English settings, for a card whose formula has commas. */
+  region?: string;
   /** Whether a free account is enough, and what it limits when that matters. */
   freePlan: { enough: boolean; note?: string };
   /** The day every step was checked, as YYYY-MM-DD. */
@@ -277,6 +285,10 @@ const MS = {
   formsCreate: "https://support.microsoft.com/en-us/forms/create-a-form-with-microsoft-forms",
   formsSend: "https://support.microsoft.com/en-us/forms/send-a-form-and-collect-responses",
   formsResults: "https://support.microsoft.com/en-us/forms/check-and-share-your-form-results",
+  formsSync: "https://support.microsoft.com/en-us/forms/how-to-ensure-your-form-and-workbook-are-in-sync",
+  formsLimits: "https://support.microsoft.com/en-us/forms/form-question-response-and-character-limits-in-microsoft-forms",
+  separator: "https://learn.microsoft.com/en-us/troubleshoot/microsoft-365-apps/excel/formula-errors",
+  region: "https://support.microsoft.com/en-us/excel/change-regional-format-settings-in-excel-for-the-web",
   dropdown: "https://support.microsoft.com/en-us/excel/get-started/create-a-drop-down-list",
   iphone: "https://support.microsoft.com/en-us/excel/excel-for-iphone-features",
   browser: "https://support.microsoft.com/en-us/excel/differences-between-using-a-workbook-in-the-browser-and-in-excel",
@@ -326,6 +338,13 @@ const sheetsAppFormula = (cell: string, formula: string, after: string) => [
   `Type the formula Tally wrote, like ${formula}.`,
   `Tap Done. ${after}`,
 ];
+
+/**
+ * Excel uses the list separator of her region between the parts of a formula: a comma with US English settings, often
+ * a semicolon in Europe (Microsoft, checked 2026-11-16). Excel in a browser follows its own regional setting. DRAFT
+ */
+const EXCEL_REGION =
+  "If Excel won't take the formula, type a semicolon wherever it has a comma. Excel uses the separator of your region, and many European regions use a semicolon.";
 
 const NEXT_DUE = '=IF(COUNT(C2:F2)=0,"All done",MIN(C2:F2))';
 const DUE_WORD = '=IF(AND(G2<>"",G2<=TODAY()),"Due","")';
@@ -386,12 +405,32 @@ export const blockCards: readonly BlockCard[] = [
         "New answers show up in the same workbook, so keep using that one rather than making a new one.",
       ],
     },
+    note: "Don't add your own formulas or tables to this workbook, or new answers stop arriving. Count in a copy instead, made with Download a copy.",
     freePlan: {
       enough: false,
       note: "Answers that keep arriving in Excel need a work or school account. Otherwise choose Download a copy, which does not update.",
     },
     checked: CHECKED_P9,
-    sources: [MS.formsResults],
+    sources: [MS.formsResults, MS.formsSync],
+  },
+  {
+    id: "ms_forms_clear",
+    app: "microsoft_forms",
+    feature: "form_clear",
+    title: "Clear last week's answers in Microsoft Forms",
+    steps: {
+      computer: [
+        "If you want to keep last week's answers, open them in Excel first and choose Download a copy.",
+        "Go to forms.office.com and open your form.",
+        "Select View responses.",
+        "Select More options for responses, then Delete all responses.",
+        "The answers are gone from the form, ready for this week.",
+      ],
+    },
+    note: "Microsoft's pages don't say whether this also clears the workbook made with Open results in Excel.",
+    freePlan: { enough: true },
+    checked: CHECKED_P9,
+    sources: [MS.formsResults, MS.formsLimits],
   },
   // Excel, in a browser. DRAFT
   {
@@ -404,7 +443,7 @@ export const blockCards: readonly BlockCard[] = [
         "Open your workbook in Excel and select the cells where the drop down list goes.",
         "Go to the Data tab, then select Data Validation. In Excel in a browser it sits under Data Tools.",
         "On the Settings tab, in the Allow box, select List.",
-        "In the Source box, paste the choices Tally wrote, with a comma between each one.",
+        "Type the choices Tally wrote in a spare column, one in each cell. Then select in the Source box and drag over those cells, without a heading.",
         "Check In-cell dropdown, then select OK.",
       ],
     },
@@ -420,14 +459,16 @@ export const blockCards: readonly BlockCard[] = [
     title: "Count each answer in Excel",
     steps: {
       computer: [
-        "Open your workbook in Excel and select an empty cell beside the answers, where the count goes.",
+        "Open the workbook with your answers and select an empty cell beside them, where the count goes.",
         'Paste the formula Tally wrote, like =COUNTIF(C2:C100,"Vegetarian"). The first part says where to look, the second what to count.',
         "Press Enter. Add a count for each choice the same way.",
       ],
     },
+    note: "If the answers come from Microsoft Forms, count in a downloaded copy. A formula added to the form's own workbook stops new answers arriving.",
+    region: EXCEL_REGION,
     freePlan: { enough: true, note: "Excel in a browser is free with a Microsoft account." },
     checked: CHECKED_P9,
-    sources: [MS.countif, MS.browser],
+    sources: [MS.countif, MS.browser, MS.formsSync, MS.separator, MS.region],
   },
   {
     id: "excel_below_usual",
@@ -442,9 +483,10 @@ export const blockCards: readonly BlockCard[] = [
         "The list fills the cells below by itself and changes when you update what you have. When nothing is low it says Nothing low.",
       ],
     },
+    region: EXCEL_REGION,
     freePlan: { enough: true, note: "Excel in a browser is free with a Microsoft account." },
     checked: CHECKED_P9,
-    sources: [MS.filter, MS.browser],
+    sources: [MS.filter, MS.browser, MS.separator, MS.region],
   },
   {
     id: "excel_days_after",
@@ -477,9 +519,10 @@ export const blockCards: readonly BlockCard[] = [
       ],
     },
     note: "Excel in a browser takes today's date from Microsoft's server, not from your computer.",
+    region: EXCEL_REGION,
     freePlan: { enough: true, note: "Excel in a browser is free with a Microsoft account." },
     checked: CHECKED_P9,
-    sources: [MS.min, MS.count, MS.if, MS.ifAnd, MS.today, MS.browser],
+    sources: [MS.min, MS.count, MS.if, MS.ifAnd, MS.today, MS.browser, MS.separator, MS.region],
   },
   {
     id: "excel_due_highlight",
@@ -496,9 +539,10 @@ export const blockCards: readonly BlockCard[] = [
       ],
     },
     note: "Excel on an iPhone shows the highlight but can't make it. The Due column from the next due card works everywhere.",
+    region: EXCEL_REGION,
     freePlan: { enough: true, note: "Excel in a browser is free with a Microsoft account." },
     checked: CHECKED_P9,
-    sources: [MS.highlight, MS.ifAnd, MS.today, MS.iphone],
+    sources: [MS.highlight, MS.ifAnd, MS.today, MS.iphone, MS.separator, MS.region],
   },
   // Outlook, in a browser or the new Outlook. DRAFT
   {
@@ -592,6 +636,24 @@ export const blockCards: readonly BlockCard[] = [
         "Each new answer now arrives as a row in that sheet. You find it on the Google Sheets home screen and in Google Drive.",
       ],
     },
+    freePlan: { enough: true },
+    checked: CHECKED_P9,
+    sources: [GOOGLE.formSheet],
+  },
+  {
+    id: "google_forms_clear",
+    app: "google_forms",
+    feature: "form_clear",
+    title: "Clear last week's answers in Google Forms",
+    steps: {
+      computer: [
+        "Open your form in Google Forms.",
+        "At the top, click Responses, then Summary.",
+        "At the top right, click More, then Delete all responses.",
+        "Click OK. This can't be undone.",
+      ],
+    },
+    note: "Your answers sheet is a separate file, and Google's pages don't say whether its rows are cleared too.",
     freePlan: { enough: true },
     checked: CHECKED_P9,
     sources: [GOOGLE.formSheet],
