@@ -1,10 +1,16 @@
 # Tally direction and build plan
 
-Second version, written 14 November 2026. It replaces the first version from the same day. Sections 1 to 6, 8 and 9 changed. Section 7 is the same.
+Fourth version, written 16 November 2026. It replaces the third version, which was never built. Section 7 is the same as before.
+
+What changed since the second version.
+
+1. A job is read as responsibilities with workflows behind them, not as writing tasks. This comes from experiment three (`docs/audit/2026-11-15-experiment-three.md`).
+2. The quiz only finds what can run better. The details of how she does each thing today are asked after she pays, one workflow at a time.
+3. Everything she pays for is either a checked step or a plain goal. Nothing is marked "not checked".
 
 ## 1. What Tally is
 
-Tally shows a person how AI can change the way a task in her job gets done, and then walks her through setting that up. The promise is one workflow set up and working, then the next.
+Tally reads a person's job as a set of responsibilities, shows her which ones can run better, and then sets up a better way to run them with her, one workflow at a time.
 
 It is not a prompt pack, a course or a report. A prompt is sometimes one part of a workflow. It is never the product.
 
@@ -13,83 +19,110 @@ Two things must both be true for a buyer.
 1. She understands what she is doing and why. The path is worth reading.
 2. She gets it running by herself. The path is worth doing.
 
-## 2. Who it is for and what each task gets
+## 2. Who it is for and how a job is read
 
-### The audience
+### The two customers
 
-1. First, people who control their own tools. The self employed and small business owners.
-2. Second, employees who are allowed to use AI at work.
-3. People whose employer restricts AI, or who work in systems they do not control, still get an honest path. It stays at the levels they can reach on their own, and the map says why.
+1. **Beginners, the main focus.** She has never used AI, or tried it a few times. In the code this is the Starter track.
+2. **People who use AI but still do most things by hand.** She never sees sign up steps or beginner explanations, and her workflows may go further, into connected apps. In the code this is the Builder track.
 
-Do not design around jobs where AI has little room. When AI can help with fewer than half of her tasks, say so plainly.
+The jobs we design for are desk and coordination jobs, such as office coordination, HR, social media, ecommerce, admin and running a small business.
 
-### Two tracks
+### A job is responsibilities, not writing tasks
 
-**Starter.** Has never used AI, or tried it a few times. Her path begins with getting one tool ready and seeing one real result, so she trusts it. Then it lifts her top task to a workflow she can reuse.
+Work done with her hands still has a workflow around it. Restocking fridges means knowing what is low, deciding what to order, preparing the order and doing it again next week. The product reads that workflow. It never marks a responsibility as "Stays yours" only because her hands are involved.
 
-**Builder.** Uses AI some weeks or most days. She never sees sign up steps or beginner explanations. Her path starts at the workflow.
+A responsibility stays hers only when nothing repeats around it, or when it holds other people's private details. The map says which.
 
-### Five levels for a task
+### Ten patterns
 
-Every task on her map gets one level.
+Each responsibility is matched to one or more patterns. The patterns are the fixed list. The workflows built from them are not.
 
-1. **Stays yours.** AI has no real part in it.
-2. **Write it with AI.** She asks each time and uses the answer. The old product stopped here.
-3. **Build once, reuse.** Saved replies, templates, or a saved assistant that knows her details. Sometimes no AI is involved when she does the task, because AI helped her build it once.
-4. **Inside your apps.** AI works where the task lives, like her inbox, calendar or sheet.
-5. **Runs with your OK.** Parts of the task happen without her starting them. She approves before anything goes out.
+1. Messages she repeats
+2. Documents she repeats
+3. Stock that runs low and gets reordered
+4. Orders prepared from a short count
+5. Events that repeat, run from a checklist
+6. Requests from colleagues, collected in one place
+7. Routines and reminders on a schedule
+8. An inbox that needs sorting and follow up
+9. Notes that become tables or reports
+10. Answers looked up in documents she already has
 
-### How the level is chosen
+### Two moments of asking
 
-The code chooses the level, never the model. A task gets the highest level where all of these are true.
+1. **The quiz, before she pays.** Short, almost all taps. It learns her job, her responsibilities, the one she most wants easier, where her work happens, her device, her level and what her workplace allows. It does not ask how she does each thing.
+2. **Follow up questions, after she pays.** Before each workflow is written, she answers three or four questions about how that one thing is done today. Each pattern has its own fixed questions. This is also where she can paste one real example.
 
-1. A checked recipe exists for that kind of task and the apps she uses.
+The workflow is designed from those answers. If her answers show the thing is already solved, for example she already uses an app for it, the path says so and lets her pick another responsibility.
+
+### How a workflow is designed
+
+1. **Fewest manual steps wins.** Ask what would remove the most repeated work. When other people send her things one by one, let them enter it themselves in one place. A neater version of the same manual work is not a workflow.
+2. **Tally builds what it can.** The form questions, the sheet layout with its formulas, the checklist, the standard order, the saved emails. She copies them in. A path never tells her to ask an AI tool for something Tally has already written.
+3. **AI where the content changes each time.** An assistant that knows her office for the odd email or the next event plan. More AI is not the goal. Less repeated work is.
+4. **Use what she already has.** The apps she named come before a new tool.
+
+### Five levels
+
+1. **Stays yours.**
+2. **Write it with AI.** She asks each time. A fallback only.
+3. **Build once, reuse.** A form, a tracker, a checklist, a standard order, saved replies or a saved assistant.
+4. **Inside your apps.** AI works where the work lives, like her inbox.
+5. **Runs with your OK.** Parts happen without her starting them. She approves before anything goes out.
+
+The code chooses the level, never the model. The model names the patterns. A responsibility gets the highest level where all of these are true.
+
+1. A workflow exists for its pattern and the apps she uses.
 2. She controls the app, or she is allowed to connect it.
-3. The task does not put other people's private details into a tool that may not hold them.
-4. It fits her track. A Starter path normally stops at level 3. A Builder path aims for level 4, and level 5 when a recipe exists.
-5. The recipe has steps for the device she uses.
+3. It does not put other people's private details into a tool that may not hold them.
+4. It fits her track. A Starter path stops at level 3.
+5. It has steps for the device she uses.
 
-Two principles guide every recommendation.
-
-1. Use what she already has first. The AI built into the Google or Microsoft apps she already uses comes before a new tool.
-2. More AI is not the goal. A better way of doing the task is.
-
-Three examples.
-
-1. A dental receptionist who has never used AI and works in her employer's systems. Her rescheduling texts get level 3. AI writes her ten most common replies once, and she saves them as quick replies in the texting system she already uses. No patient details touch AI.
-2. An electrician with her own business who tried ChatGPT and dropped it. Her quotes get level 3. A saved quote builder with her prices and wording. She says the job out loud and gets the quote text back.
-3. An event coordinator who uses ChatGPT with Gmail and Sheets. With her company's OK, vendor follow ups get level 4. They arrive as drafts in her inbox, in her tone, for her to approve. Without that OK, she gets level 3.
+A workflow that puts none of her work into an AI tool needs no company OK. Only rows where she would put work into an AI tool carry the "Ask first" line.
 
 ## 3. What the free result must do
 
-The free result must give real value in the first seconds, so the price feels small. It opens with the map of her week and has three parts, in this order.
+The free result is the pitch. It does not have to deliver a working result. It has to make clear exactly what she gets, so that saying no feels silly. It opens with the map of her week and appears within a few seconds, from one fast call.
 
-1. **A map of her week.** One line above it counts how many of her tasks AI can help with, like "AI can help with 3 of your 4 tasks". When AI can help with fewer than half of them, the line is "Here is where AI fits in your week" and the tasks AI can help with come first. Each task has a small tag with its level and two lines. "Today" says where she is with it now, using her own count from the quiz where she gave one. "With your path" describes the new way the task gets done, taken from its recipe. It must never read like writing help when the level is 3 or higher. When a rule held the level down, the line says why in a few words. No promised time.
-2. **A finished result, inside the top row of the map.** Her real example from the quiz, answered or rewritten, ready to copy and use, behind a "See it" tap. No more than two blanks. It is proof of quality, not the product.
-3. **An offer that names her own workflows.** The names come from the recipes she gets, like "Your rescheduling replies, saved once" or "Vendor follow ups, drafted in your inbox". Whether the free plan of her tool is enough is shown only when the recipe says so.
-
-The level tags, in plain words. Stays yours. Write it with AI. Build once, reuse. Inside your apps. Runs with your OK.
+1. **A map of her week.** One line above it counts her responsibilities, like "7 parts of your week can run smoother". Each row is one responsibility with its level tag and two lines. "Today" uses only what she told us. "With your path" names the direction, not the details, because we have not yet asked how she does it. For example "Orders collected in one place and counted for you". No promised time.
+2. **A preview inside the top row,** behind a "See it" tap. One piece Tally will build for her, such as the questions for her order form or her standard order.
+3. **An offer that names her own workflows,** like "Your lunch orders, collected and counted". Under each name it lists the pieces Tally will build for her, in a few words each, such as "Your order form, written for you. Your counting sheet. Your order email, ready to send." It says that her path starts with a few questions about how she does each one today.
 
 Everything the free result shows must also be in the paid path.
 
 ## 4. What the paid path is
 
-The paid path is her first workflow set up and working, then her second. It is shown one step at a time, like the quiz.
+Her first two workflows, set up and working, one step at a time.
 
-A Starter path opens with two short steps before the first workflow. Get her tool ready, then teach it who she is. A Builder path skips them and says so.
+1. **She confirms where to start.** Her top two are chosen for her, and she can swap one for another row on her map.
+2. **Three or four follow up questions** about how she does it today, with room to paste one real example.
+3. **Her workflow is written** from those answers. Each workflow has these parts.
+    1. A short read. How this responsibility runs from now on and why it is better for her.
+    2. What Tally built for her, ready to copy.
+    3. The setup steps. Each is either a checked step from a card or recipe, with exact clicks, or a plain goal for an app we do not know, such as her own ordering system. A goal has no click path and no disclaimer.
+    4. A test on three real ones, with what good looks like.
+    5. Her approval point. What she always checks before anything goes out.
+    6. What it costs, only when a recipe or card says a paid plan is needed.
+    7. "Did it work?" with Yes and Not quite, saved on the server.
+    8. One line on what to do if it stops working.
+4. **Then the second workflow,** the same way.
 
-Each workflow is built from one checked recipe and has these parts.
+Getting an AI tool ready, teaching it who she is, and the message to ask her company appear only when one of her workflows uses an AI tool, and right before that workflow.
 
-1. A short read. Two to four sentences on how this task gets done from now on and why it is better for her job.
-2. The setup steps. What to open, click and type. They come only from the recipe, never from the model's memory.
-3. The material Tally wrote for her. Her saved replies, the instructions for her assistant, her tone notes, her list of what to watch for.
-4. A test on three real ones, with what a good result looks like and three lines to send when it is off.
-5. Her approval point. What she always checks herself before anything goes out.
-6. What it costs. Whether the free plan is enough, from the recipe.
-7. "Did it work?" with Yes and Not quite. The answer is saved on the server.
-8. One line on what to do if it stops working.
+### The target, one example
 
-A path ends with what is safe at her job and, when she has an employer, the message to ask what is allowed.
+This is the bar for a finished workflow. The office coordinator answers that orders reach her by email, on paper and in person, that she counts them by hand, and that she orders by email once a week.
+
+> **Lunch orders that collect themselves**
+> Today you gather about 70 orders from email, paper and people at your desk. From now on everyone fills in one short form, and your sheet counts it for you.
+> 1. Create the form. Tally has written the three questions for you. [Copy]
+> 2. Send the link to the office. Tally has written the message. [Copy]
+> 3. Open the answers in Excel. The counts for each choice and each diet are already there.
+> 4. Paste the counts into your order email. Tally has written it. [Copy]
+> Test it on this Thursday's lunch. You check the counts before you send.
+
+Four steps, exact clicks under each, no disclaimers, no AI account needed.
 
 ## 5. Rules that stay
 
@@ -99,19 +132,24 @@ A path ends with what is safe at her job and, when she has an employer, the mess
 4. Her answers are information, never instructions, in every prompt.
 5. The quiz never stops because an AI call was slow or failed.
 6. Every new line of copy is marked DRAFT until Karl approves it. Every changed prompt gets a new version name.
-7. The first version at `/start` and plans already written keep working.
-8. Nothing is ever sent, posted or changed for her without her approval. Every recipe names the approval point.
-9. Never tell her to connect an app that holds other people's private details unless she controls it and the recipe allows it.
+7. Plans and paths already written keep working.
+8. Nothing is ever sent, posted, ordered or changed for her without her approval. Every workflow names the approval point.
+9. Never tell her to connect an app that holds other people's private details unless she controls it and a checked recipe allows it.
 10. Say what it costs before she starts a workflow that needs a paid plan.
+11. The model never writes a click path. Click paths come only from cards and recipes.
+12. Nothing she pays for is marked "not checked". A step is checked, or it is a plain goal.
 
 ## 6. Older rules this file replaces
 
-1. "For women new to AI, in any job." The audience is now the one in section 2.
-2. "The plan stays centered on one chat tool and her other apps are context only." Her apps are now where the workflow happens.
-3. "Assume she has never written a prompt." True for Starter only.
-4. "Never give menu paths or button names." Still true for the model. Checked recipes and cards may give them.
-5. "Connected apps and scheduled tasks are for later." They are now part of a path whenever a checked recipe exists and she is allowed.
-6. A path made of tool setups, such as "save instructions" or "create a project". Those are now building blocks inside a workflow recipe, not the thing she buys.
+1. "AI can help with work only when it is writing." A job is now read as responsibilities.
+2. "Work done with her hands stays hers." Only when nothing repeats around it.
+3. The fixed list of eight task kinds. The ten patterns replace it.
+4. "AI can help with 3 of your 4 tasks." The heading now counts the parts of her week that can run smoother.
+5. The quiz choices that echo her own words and add four fixed ones.
+6. The real example screen and the question written by AI in the quiz. Both move to the follow up questions after payment.
+7. The "Ask first" line on every row for someone who is not sure.
+8. Steps marked "not checked by us" with a vendor link. Looking up vendor pages stays as a tool for finding what to check next, in the test script only.
+9. "Pick the simplest system." Fewest manual steps wins.
 
 ## 7. Working rules for Claude Code
 
@@ -125,96 +163,87 @@ A path ends with what is safe at her job and, when she has an employer, the mess
 
 ## 8. Decisions Karl needs to make
 
-Decisions already made and approved in the code stay as they are. These are new, and each has a default.
+Each has a default.
 
-1. The first apps that get recipes. Default is Gmail with Google's own AI, the phone she texts from, and the two chat tools that already have cards, ChatGPT and Claude. Microsoft comes later.
+1. The first apps that get checked steps. Default is Microsoft, with Forms, Excel and Outlook, then Google, with Forms, Sheets and Gmail.
 2. Whether the copy keeps speaking only to women. Default is to keep that for now.
 3. The price. Default is to keep $19.99 until five real people have finished a workflow.
-4. When the new version becomes the home page. Default is after Phase 7 passes.
+4. When the new version becomes the home page. Default is after Phase 11 passes.
 
 ## 9. The phases
 
-Run them in order, one per session. The prompt for each phase is the same line with a new number.
+One phase per session. The prompt is the same line with a new number.
 
 ```
-Read docs/DIRECTION.md and do Phase 4. Follow the working rules in section 7.
+Read docs/DIRECTION.md and do Phase 8. Follow the working rules in section 7.
 ```
+
+Phases 8 and 9 touch different files and can run side by side. Phase 10 needs both merged. After Phase 8 Karl can take the quiz and see the new map. After Phase 10 he can go through the whole thing as a buyer.
 
 ### Done so far
 
-1. Phase 0. The repo describes Tally, and the refund line and support email are in place.
-2. Phase 1. A shorter quiz with a real example, a count, four levels of experience and one work question.
-3. Phase 2. The free result opens with the map, with the finished result inside the top row.
-4. Phase 3. Six setup cards for ChatGPT and Claude, checked against the vendors' help pages.
-5. Phase 4. Eight workflow recipes, checked against the vendors' help pages.
-6. Phase 5. The quiz asks where her work happens, what she uses for work and whether she can connect her work email, and the code gives every task a level and a recipe.
-7. Phase 6. The paid path replaces the plan page for new buyers. One step at a time, with the setup steps from recipes and cards, "Did it work?" saved in the events table, the phone asked on the path, a second task with the same recipe as a short extra step, and a free result with no price when every task waits for her company's OK.
+Phases 0 to 7 built the quiz, the free result with the map, the cards, the recipes, the levels, the paid path and the test script. Three experiments followed. All of it stays. The prompts and checks of experiment three in `scripts/persona-runs.ts` and `scripts/persona-checks.ts` are a starting point for Phases 8 and 10.
 
-All of it stays. Phase 7 builds on it.
+### Phase 8. The quiz and the map read responsibilities
 
-### Phase 4. Workflow recipes
+**Goal.** A short quiz, and a map that shows her real job with a direction for each part.
 
-**Goal.** A small library of checked recipes, so the map and the path can offer real workflows.
+1. Change the read of her job. It returns responsibilities, with the workflow around each one. Remove the rule that work done with her hands is not something AI can help with.
+2. Change the "What do you do over and over" screen. At most three choices from her own words. Five she did not mention, that people in her role usually handle. Two small groups, "From what you told us" and "Often part of a job like yours". The four fixed choices stay only as the fallback when the AI call fails.
+3. Remove the real example screen and the question written by AI from the quiz. Move "How often do you do this?" to the top task screen.
+4. Change the final read. For each responsibility she picked it gives the patterns, the Today line, the With your path line as a direction, and one preview piece for her top row. It stays one fast call.
+5. Change the level function to work from patterns, following section 2. "Ask first" only on rows that put work into an AI tool.
+6. Change the map and the offer to match section 3, with the pieces Tally will build listed under each workflow name.
 
-1. Add recipes beside the setup cards in `lib/beginner`. The six cards stay as they are and become building blocks that a recipe can point to.
-2. Each recipe has an id, the kind of task it is for, its level from section 2, the apps it needs, what must be true of her (she controls the app, she is allowed, no private details of others), the setup steps per device, the material Tally writes for her, the test, the approval point, what it costs, the date checked and the links it was checked against.
-3. Write the first recipes from this list. Check every step against the vendor's own help pages today. Leave out any recipe that cannot be confirmed and tell Karl.
-    1. Her most common replies saved as quick replies on her phone or in her messaging app. Level 3.
-    2. A saved assistant for one repeating writing task, with her details and examples. Level 3.
-    3. Say it out loud, get the finished text. Level 3.
-    4. Messy notes or replies turned into a clean table for her sheet. Level 3.
-    5. Email templates in Gmail for her most common emails, written once with AI. Level 3.
-    6. Reply drafts inside Gmail with Google's own AI. Level 4.
-    7. Gmail connected to her chat tool, so follow ups arrive as drafts for her approval. Level 4.
-    8. A weekly list of who has not replied. Level 5.
-4. Add tests like the ones for the cards, and widen the backlog line so the daily run also flags recipes older than 30 days.
+Code to read first. `JOB_SYSTEM` in `lib/beginner/questions-ai.ts`, `lib/beginner/quiz.ts`, `BeginnerQuiz.tsx`, `lib/beginner/intake.ts`, `lib/beginner/levels.ts`, the free result file in `lib/beginner`, `FirstWinResult.tsx`, and the experiment three prompt in `scripts/persona-runs.ts`.
 
-Code to read first. `lib/beginner/cards.ts` and its test file.
+**Done when.** The office coordinator from experiment three gets at least five responsibilities on her map, with lunch and restocking at "Build once, reuse" and no "Ask first" line on them. A Starter sees at most 7 screens and a Builder at most 9. The free result appears within a few seconds. Old saved answers still load.
 
-**Done when.** At least six recipes exist across levels 3 to 5. Each has a date, links, its conditions, an approval point and a cost line. Karl has walked through each one himself.
+### Phase 9. Checked steps for the common building blocks
 
-### Phase 5. The quiz and the levels
+**Goal.** Exact, checked steps for the app features that workflows are built from.
 
-**Goal.** The quiz collects what a workflow needs, and the map shows the right level for each task.
+1. Add these as cards beside the existing ones, each checked today against the vendor's own help pages, with the date and the links. Leave out any that cannot be confirmed and tell Karl.
+    1. Microsoft Forms. Create a form, share its link, open the answers in Excel.
+    2. Excel. A drop down list, a count of each answer, highlighting a row, a list that shows what is below its usual amount.
+    3. Outlook. A saved email she can insert, and a reminder that repeats.
+    4. Google Forms, Google Sheets, Gmail and Google Calendar. The same features.
+2. Add tests like the ones for the existing cards, and widen the backlog line so the daily run flags these too.
+3. Give Karl one file with every new card written out as plain steps.
 
-1. Add "Where does this task happen?" for everyone, with choices from the read of her job plus fixed ones such as text messages, Gmail, Outlook, Instagram, a work system, paper or in person.
-2. For an employee who answered Yes or Not sure to the work question, add "Would your company let you link your work email to an AI tool?" Yes. No. Not sure.
-3. Have the intake give each task a kind from a fixed list that matches the recipes. The code checks it.
-4. Write the level function in code, following "How the level is chosen" in section 2. It returns the level and the recipe for each task, and the reason when a rule held the level down.
-5. Change the map to match section 3. A level tag on each row, a "With your path" line taken from the recipe, and offer names that come from the recipes.
-6. Keep the limits. A Starter sees at most 9 screens and a Builder at most 11, with one typed answer.
+Code to read first. `lib/beginner/cards.ts`, `lib/beginner/recipes.ts` and their tests.
 
-Code to read first. `stepsFor` in `lib/beginner/quiz.ts`, `BeginnerQuiz.tsx`, `lib/beginner/types.ts`, `lib/beginner/intake.ts`, the free result file in `lib/beginner`, `FirstWinResult.tsx`.
+**Done when.** Each card has a date, links and steps, and Karl has walked through each one himself.
 
-**Done when.** The dental sample gets "Build once, reuse" for rescheduling texts and never a connected app. A self employed Builder who works in Gmail gets "Inside your apps" for her top email task. No "With your path" line at level 3 or higher reads like writing help. Old saved answers still load.
+### Phase 10. The paid path, with follow up questions
 
-### Phase 6. The paid path
+**Goal.** After paying she gets her workflows as in section 4.
 
-**Goal.** The path in section 4 replaces the long plan page for new buyers.
+1. Write three or four fixed follow up questions for each of the ten patterns, mostly taps, with room to paste one real example.
+2. Build the start of the path. She confirms or swaps her top two, then answers the questions for the first one.
+3. One call then designs that workflow from her answers, following "How a workflow is designed" in section 2. Steps are card or recipe ids, or plain goals. The code rejects any id that does not exist, any click path written by the model, and any workflow without an approval point.
+4. When her answers show the thing is already solved, say so and let her pick another responsibility.
+5. Show it on the path screen that Phase 6 built. The second workflow runs the same way. Paths written before keep their page.
+6. Save her follow up answers with her path. Avoid a database change, and stop and ask if one is needed.
+7. Tell Karl how long a workflow takes to write after her answers. If it is more than a minute, propose how to shorten it.
 
-1. Add a new plan version with her track and an ordered list of steps. Two opening steps for a Starter, then one workflow per recipe with the parts in section 4.
-2. Rewrite the plan prompt. The model writes the reads and the material. It gets the recipes the code chose for her, and the code rejects any recipe or card id that is not on that list.
-3. Skip what she has already done, using her answers, and say so.
-4. Build the path screen. One step at a time, a progress line, a big copy button, "Did it work?" saved through a server action into the existing events table.
-5. Plans written with the old version keep their old page.
+Code to read first. The path writer and `lib/beginner/path.ts`, the path screen components, the plan generation file in `lib`, and the design and screens prompts of experiment three.
 
-Code to read first. `BEGINNER_PLAN_SYSTEM` and `checkBeginnerPlan` in the plan writer in `lib/beginner`, `BeginnerPlanPage.tsx`, `Ticks.tsx`, the plan generation file in `lib`.
+**Done when.** The office coordinator, answering as in the target in section 4, gets a lunch workflow that matches that target, made only of checked steps and goals. Nothing is marked "not checked". No step asks an AI tool for what Tally wrote. "Did it work?" still reaches the events table.
 
-**Done when.** Every setup step comes from a recipe or a card. Every workflow has a test, an approval point and a cost line. A Builder path has no sign up steps. "Did it work?" shows up in the events table.
+### Phase 11. Test and truth check
 
-### Phase 7. Test and truth check
+**Goal.** Proof that it works for more than one job, and a landing page that promises only what exists.
 
-**Goal.** Proof that paths differ by person, and a landing page that speaks to the new audience and promises only what exists.
-
-1. Update `scripts/persona-runs.ts` for the new quiz. Run at least eight people. Two employees with restricted AI, two employees who are allowed, two self employed Starters and two self employed Builders. Save the output in `docs/audit`.
-2. Check each run against the "Done when" lines of Phases 5 and 6, and write a short readout with what failed.
-3. Rewrite the beginner landing page in `lib/beginner/copy.ts` for the audience in section 2. List every promise on it and hide or reword any that the path cannot keep.
-4. Then Karl puts five real people through it and watches the first session.
+1. Run at least ten people through the live quiz and path, beginners first, with follow up answers written for each. Include the office coordinator, HR, a social media manager, an ecommerce manager and the electrician.
+2. Write a readout. For each person, her responsibilities, their levels, how many steps are checked and how many are goals, and anything that failed.
+3. Rewrite the beginner landing page for section 2. Hide or reword every promise the path cannot keep.
+4. Karl puts five real people through it and watches the first session.
 
 **Done when.** The readout shows no failed checks, the landing page has no promise the path cannot keep, and five real people have tried it.
 
 ### Later
 
-1. Recipes for Microsoft apps.
+1. More apps and more checked cards, led by what real buyers get.
 2. Follow up emails, one on day three with her next workflow.
 3. A higher priced tier, once people finish workflows and say what they would pay for.
