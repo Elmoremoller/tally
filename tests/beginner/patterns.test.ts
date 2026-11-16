@@ -1,7 +1,8 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { levelCopy, offerCopy, firstWinCopy } from "../../lib/beginner/copy";
-import { freeResultFor, offerTasks, orderMap, piecesFor, singularLast, smootherCount, thingFor, usesAiTool, withoutDoubles, workflowName } from "../../lib/beginner/free-result";
+import { endingFor, freeResultFor, offerTasks, orderMap, piecesFor, repeatsIn, SECOND_ENDINGS, singularLast, smootherCount, thingFor, usesAiTool, withoutDoubles, workflowName } from "../../lib/beginner/free-result";
+import { recipes } from "../../lib/beginner/recipes";
 import { levelFor, withLevels, type LevelTask, type Who } from "../../lib/beginner/levels";
 import { PATTERN_IDS, PATTERN_WORKFLOWS, patternOf, placeFor, emailAppOf, type PatternId } from "../../lib/beginner/patterns";
 import type { QA } from "../../lib/beginner/quiz";
@@ -327,4 +328,37 @@ test("no pattern's own direction line sounds automatic or promises speed", async
 test("a tracker for a thing ending in ing says one row each time", () => {
   const ctx = { thing: "vendor scheduling", tool: "claude" as const, emailApp: null, onPhone: false };
   assert.equal(PATTERN_WORKFLOWS[5].pieces(ctx)[0], "Your vendor scheduling tracker, one row each time");
+});
+
+// A name never repeats its own ending (Karl, 2026-11-16, after "Your employee answers, answered from your own documents").
+
+const ENDINGS = [...PATTERN_IDS.map((p) => PATTERN_WORKFLOWS[p].offer), ...recipes.map((r) => r.offer), offerCopy.withAi];
+
+test("the HR name no longer repeats itself", () => {
+  const hr = row("Answering employee questions", [10], { phrase: "employee answers", workflow: "pattern_10" });
+  assert.equal(workflowName(hr), "Your employee answers, found in your own files");
+  assert.equal(workflowName({ task: "Writing the prep list", phrase: null, recipe: null }), "Writing the prep list, drafted with AI");
+});
+
+test("a name keeps its own ending when her words don't repeat it", () => {
+  const lunch = row("Lunch orders", [4], { workflow: "pattern_4" });
+  assert.equal(workflowName(lunch), "Your lunch orders, collected and counted");
+});
+
+test("every ending has a second ending that shares no word with the first", () => {
+  for (const ending of ENDINGS) {
+    const second = SECOND_ENDINGS[ending];
+    assert.ok(second, `"${ending}" has a second ending`);
+    assert.deepEqual(repeatsIn(ending, second), [], `"${second}" repeats nothing of "${ending}"`);
+  }
+});
+
+test("whatever word of an ending her words hold, the name never repeats itself", () => {
+  for (const ending of ENDINGS) {
+    for (const word of ending.toLowerCase().match(/\p{L}+/gu) ?? []) {
+      for (const start of [`Your team ${word}`, `Your ${word}s`, `Your ${word}ed requests`]) {
+        assert.deepEqual(repeatsIn(start, endingFor(start, ending)), [], `"${start}, ${endingFor(start, ending)}"`);
+      }
+    }
+  }
 });

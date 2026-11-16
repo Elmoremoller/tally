@@ -292,6 +292,7 @@ const MS = {
   templates: "https://support.microsoft.com/en-us/outlook/create-email-templates-in-outlook",
   useTemplate: "https://support.microsoft.com/en-us/outlook/send-an-email-message-based-on-a-template",
   event: "https://support.microsoft.com/en-us/outlook/create-modify-or-delete-a-meeting-request-or-appointment-in-outlook-on-the-web",
+  eventFree: "https://support.microsoft.com/en-us/outlook/create-modify-or-delete-a-meeting-request-or-appointment-in-outlook-com",
 };
 
 const GOOGLE = {
@@ -527,17 +528,17 @@ export const blockCards: readonly BlockCard[] = [
     title: "Set a reminder that repeats in Outlook",
     steps: {
       computer: [
-        "Open the calendar in Outlook in your browser.",
+        "Open the calendar in Outlook in your browser, or in Outlook.com.",
         "Select New event at the top of the page.",
         "Add the title Tally wrote for the job.",
-        "Select More details, then Repeat, and choose when the series begins and ends.",
+        "Select More details, then Repeat. Choose how often from the list, then when the series begins and ends.",
         "Select Remind me and choose when you want to be reminded. It starts at 15 minutes before.",
         "Select Save.",
       ],
     },
-    freePlan: { enough: true },
+    freePlan: { enough: true, note: "Outlook.com is free and has the same Repeat and Remind me choices." },
     checked: CHECKED_P9,
-    sources: [MS.event],
+    sources: [MS.event, MS.eventFree],
   },
   // Google Forms. DRAFT
   {

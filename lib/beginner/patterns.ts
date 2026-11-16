@@ -7,8 +7,8 @@ import type { TaskKind } from "./recipes";
 // one workflow Tally can set up with her at level 3, Build once, reuse: Tally writes the pieces, she copies them
 // into apps she already has. Most of them put none of her work into an AI tool, so they need no company OK.
 //
-// None of these workflows has checked steps yet: Phase 9 adds the cards for Microsoft and Google, and Phase 10
-// writes each workflow from her follow up answers. Until then a step is a plain goal, so the only condition
+// None of these workflows points at checked steps yet. Phase 9 added the building block cards for Microsoft and
+// Google (`blockCards` in cards.ts), and Phase 10 writes each workflow from her follow up answers using them. Until then a step is a plain goal, so the only condition
 // that can hold a workflow back here is the device: a sheet, a form or a template is set up on a computer.
 //
 // Every offer name and piece below is a DRAFT until Karl approves it. Each piece names the thing in her own words
