@@ -87,7 +87,7 @@ The free result is the pitch. It does not have to deliver a working result. It h
 
 1. **A map of her week.** One line above it counts her responsibilities, like "7 parts of your week can run smoother". Each row is one responsibility with its level tag and two lines. "Today" uses only what she told us. The second line names the direction, not the details, because we have not yet asked how she does it. For example "Orders collected in one place and counted for you". No promised time, and nothing that sounds as if it happens without her. Only her top two rows are tagged "In your path" and have the line "With your path". Every other row says "What could change", so the map never suggests it is included.
 2. **A preview inside the top row,** behind a "See it" tap. One piece Tally will build for her, such as the questions for her order form or her standard order.
-3. **An offer that names her top two workflows,** like "Your lunch orders, collected and counted". One plain line says that Tally builds these two workflows with her. Under each name it lists the pieces Tally will build for her, in a few words each and in her own words, such as "Your lunch order form, written for you. Your lunch order sheet, counted for you. Your lunch order email, ready to send." It says that her path starts with a few questions about how she does each one today.
+3. **An offer that names her top two workflows,** like "Your lunch orders, collected and counted". One plain line says that Tally builds these two workflows with her. Under each name it lists the pieces Tally will build for her, in a few words each and in her own words, such as "Your lunch order form, written for you. Your lunch order counts, ready in your form. Your lunch order email, ready to send." It says that her path starts with a few questions about how she does each one today.
 
 Everything the offer lists must be in the paid path: both workflows and every piece under them. The offer never promises a third workflow or any row it does not name.
 
@@ -101,11 +101,12 @@ Her top two workflows, the two her offer named, set up and working, one step at 
     1. A short read. How this responsibility runs from now on and why it is better for her.
     2. What Tally built for her, ready to copy.
     3. The setup steps. Each is either a checked step from a card or recipe, with exact clicks, or a plain goal for an app we do not know, such as her own ordering system. A goal has no click path and no disclaimer.
-    4. A test on three real ones, with what good looks like.
-    5. Her approval point. What she always checks before anything goes out.
-    6. What it costs, only when a recipe or card says a paid plan is needed.
-    7. "Did it work?" with Yes and Not quite, saved on the server.
-    8. One line on what to do if it stops working.
+    4. What she does the next time, and every time after. For lunch, that is reading the counts and clearing the answers after she orders.
+    5. A test on three real ones, with what good looks like.
+    6. Her approval point. What she always checks before anything goes out.
+    7. What it costs, only when a recipe or card says a paid plan is needed.
+    8. "Did it work?" with Yes and Not quite, saved on the server.
+    9. One line on what to do if it stops working.
 4. **Then the second workflow,** the same way.
 
 Getting an AI tool ready, teaching it who she is, and the message to ask her company appear only when one of her workflows uses an AI tool, and right before that workflow.
@@ -115,14 +116,17 @@ Getting an AI tool ready, teaching it who she is, and the message to ask her com
 This is the bar for a finished workflow. The office coordinator answers that orders reach her by email, on paper and in person, that she counts them by hand, and that she orders by email once a week.
 
 > **Lunch orders that collect themselves**
-> Today you gather about 70 orders from email, paper and people at your desk. From now on everyone fills in one short form, and your sheet counts it for you.
-> 1. Create the form. Tally has written the three questions for you. [Copy]
+> Today you gather about 70 orders from email, paper and people at your desk. From now on everyone fills in one short form, and the form counts it for you.
+> 1. Create the form. Tally has written the questions for you. [Copy]
 > 2. Send the link to the office. Tally has written the message. [Copy]
-> 3. Open the answers in Excel. The counts for each choice and each diet are already there.
+> 3. On order day, open the answers in Forms. The count for each choice is already there.
 > 4. Paste the counts into your order email. Tally has written it. [Copy]
+> 5. After you order, clear the answers, so next week starts from nothing.
 > Test it on this Thursday's lunch. You check the counts before you send.
 
-Four steps, exact clicks under each, no disclaimers, no AI account needed.
+Five steps, exact clicks under each, no disclaimers, no AI account needed, and no sheet.
+
+Why no sheet (Karl, 16 November 2026). Microsoft Forms shows the count for each choice on its results page. A formula or table added to the workbook that Forms fills stops new answers arriving, so counting there breaks the workflow. The results page counts each question on its own, so when the order depends on two things, like dish and diet, the form asks one question whose choices combine them, like "Pasta, vegetarian". With Google Forms the answers still go to a sheet that counts them, until Karl confirms that the Summary tab shows a count for each choice. Google's pages don't say so.
 
 ## 5. Rules that stay
 
@@ -186,6 +190,8 @@ Phases 0 to 7 built the quiz, the free result with the map, the cards, the recip
 
 Phase 8 is done. It was merged on 16 November 2026 as pull request 14. Its proof runs are in `docs/audit/2026-11-16-phase-8-runs`.
 
+Phase 9 was merged on 16 November 2026 as pull requests 15 and 16. Its cards stay DRAFT until Karl has walked through them.
+
 ### Phase 8. The quiz and the map read responsibilities (done)
 
 **Goal.** A short quiz, and a map that shows her real job with a direction for each part.
@@ -228,10 +234,20 @@ Code to read first. `lib/beginner/cards.ts`, `lib/beginner/recipes.ts` and their
 5. Show it on the path screen that Phase 6 built. The second workflow runs the same way. Paths written before keep their page.
 6. Save her follow up answers with her path. Avoid a database change, and stop and ask if one is needed.
 7. Tell Karl how long a workflow takes to write after her answers. If it is more than a minute, propose how to shorten it.
+8. Orders prepared from a short count (pattern 4) follow the target in section 4. With Microsoft Forms there is no sheet, and the offer piece "Your X sheet, counted for you" becomes "Your X counts, ready in your form" (DRAFT). With Google Forms the sheet piece stays until Karl confirms the counts on the Summary tab himself.
+
+Rules for this phase (Karl, 16 November 2026).
+
+1. Fewest steps wins. Before a workflow uses a sheet, check whether the app already does the job, like the Forms results page does.
+2. Every workflow says what she does the second time. For lunch, that is clearing the answers after she orders.
+3. Never give her a step her device or account cannot do. Use what each card says about phones, free plans and work accounts.
+4. The follow up questions for an order form ask whether she needs combined choices, like "Pasta, vegetarian", since the results page counts each question on its own.
+5. A pattern with no checked card gets plain goals. Documents (pattern 2) and the inbox (pattern 8) have none. She never sees "not checked".
+6. The cards are confirmed for US English settings only. Formula steps keep their "Outside the US" note.
 
 Code to read first. The path writer and `lib/beginner/path.ts`, the path screen components, the plan generation file in `lib`, and the design and screens prompts of experiment three.
 
-**Done when.** The office coordinator, answering as in the target in section 4, gets a lunch workflow that matches that target, made only of checked steps and goals. Nothing is marked "not checked". No step asks an AI tool for what Tally wrote. "Did it work?" still reaches the events table.
+**Done when.** The office coordinator, answering as in the target in section 4, gets a lunch workflow that matches that target. It runs in Microsoft Forms with no sheet, she reads the count for each choice on the Forms results page, the form asks one combined question when the order depends on two things, and she clears the answers after she orders. It is made only of checked steps and plain goals. Nothing is marked "not checked". No step asks an AI tool for what Tally wrote. No step is one her device or account cannot do. Every workflow says what she does the next time. The office coordinator, the property manager and Priya each get both of their workflows through the full paid path, printed word for word with the seconds and the AI cost of each. "Did it work?" still reaches the events table.
 
 ### Phase 11. Test and truth check
 

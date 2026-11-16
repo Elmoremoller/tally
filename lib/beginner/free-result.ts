@@ -2,7 +2,7 @@ import { toolLabels, type ChatTool } from "../week";
 import { askFirstCopy, offerCopy } from "./copy";
 import type { AiPolicy, AiTool } from "../week";
 import { recipeOf, whoFrom, withLevels, type Who } from "./levels";
-import { emailAppOf, patternWorkflowById, placeFor, type PatternWorkflow } from "./patterns";
+import { emailAppOf, patternWorkflowById, placeFor, suiteOf, type PatternWorkflow } from "./patterns";
 import type { QA } from "./quiz";
 import type { Device } from "./quiz-copy";
 import { beginnerTool, trackFor, type Experience, type FirstWin, type FreeResult, type MapLine, type OfferItem, type Track, type WorksFor } from "./types";
@@ -272,7 +272,7 @@ function rawPieces(m: MapLine, her: { tool: ChatTool } & Pick<Who, "device" | "p
   const workflow: PatternWorkflow | undefined = m.workflow ? patternWorkflowById(m.workflow) : undefined;
   if (workflow) {
     const onPhone = placeFor(workflow, her) === "phone";
-    return workflow.pieces({ thing, tool: her.tool, emailApp: emailAppOf(her.places), onPhone }).slice(0, 3);
+    return workflow.pieces({ thing, tool: her.tool, emailApp: emailAppOf(her.places), onPhone, suite: suiteOf(her.places) }).slice(0, 3);
   }
   return [offerCopy.toolMessage(thing, toolLabels[her.tool])];
 }
