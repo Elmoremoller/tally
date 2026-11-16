@@ -41,37 +41,37 @@ const end: EndStep = { id: "end", kind: "end", safeUse: ["Read every reply befor
 const failed = (checks: ReturnType<typeof runChecks>) => checks.filter((c) => !c.pass).map((c) => c.id);
 
 test("a clean run passes every check", () => {
-  const checks = runChecks({ track: "starter", who: who(), screens: 9, free: free([row("Texts")]), path: path([workflow, end]) });
+  const checks = runChecks({ track: "starter", who: who(), screens: 7, free: free([row("Texts")]), path: path([workflow, end]) });
   assert.deepEqual(failed(checks), []);
 });
 
 test("too many screens, writing help at level 3 and a missing path all fail", () => {
   const map = [row("Texts", { withPath: "Paste a prompt into Claude each time." })];
-  const checks = runChecks({ track: "starter", who: who(), screens: 10, free: free(map), path: null });
+  const checks = runChecks({ track: "starter", who: who(), screens: 8, free: free(map), path: null });
   assert.deepEqual(failed(checks).sort(), ["level3_not_writing_help", "path_line_from_recipe", "path_written", "screens"]);
 });
 
 test("an employee who may not connect never gets a recipe that connects an app", () => {
   const map = [row("Follow ups", { recipe: "gmail_claude_follow_ups", level: 4, withPath: "x" })];
-  const checks = runChecks({ track: "builder", who: who({ canUse: "yes", connect: "no", track: "builder" }), screens: 11, free: free(map), path: null });
+  const checks = runChecks({ track: "builder", who: who({ canUse: "yes", connect: "no", track: "builder" }), screens: 9, free: free(map), path: null });
   assert.ok(failed(checks).includes("no_connect_without_ok"));
 });
 
 test("a Builder path with a get ready step or a sign up line fails", () => {
   const ready = { id: "ready", kind: "ready", card: "claude_get_started", firstStep: null } as const;
-  const checks = runChecks({ track: "builder", who: who({ track: "builder" }), screens: 11, free: free([row("Texts")]), path: path([ready, workflow, end], "builder") });
+  const checks = runChecks({ track: "builder", who: who({ track: "builder" }), screens: 9, free: free([row("Texts")]), path: path([ready, workflow, end], "builder") });
   assert.ok(failed(checks).includes("builder_no_sign_up"));
 });
 
 test("menu words, dashes and promised minutes in the model's text are caught", () => {
   const bad = { ...workflow, read: "Go to Settings and click Save. It takes 5 minutes — easy." };
-  const checks = runChecks({ track: "starter", who: who(), screens: 9, free: free([row("Texts")]), path: path([bad, end]) });
+  const checks = runChecks({ track: "starter", who: who(), screens: 7, free: free([row("Texts")]), path: path([bad, end]) });
   assert.deepEqual(failed(checks).sort(), ["copy_rules", "no_click_paths_from_model"]);
 });
 
 test("every task waiting means no path, and that passes", () => {
   const map = [row("Notes", { level: null, waits: true, recipe: null, withPath: "Waits." })];
-  const checks = runChecks({ track: "starter", who: who({ canUse: "restricted" }), screens: 8, free: free(map, { askOnly: true, setups: [] }), path: null });
+  const checks = runChecks({ track: "starter", who: who({ canUse: "restricted" }), screens: 6, free: free(map, { askOnly: true, setups: [] }), path: null });
   assert.deepEqual(failed(checks), []);
   assert.ok(checks.some((c) => c.id === "ask_only_no_path"));
 });
@@ -127,7 +127,7 @@ test("time as content and food menus are not flagged, promises and click paths a
 
 test("a task named in Expect must reach its level", () => {
   const map = [row("Writing quotes", { level: 2, recipe: null, held: "needs_computer", withPath: "Quotes, written with AI." })];
-  const checks = runChecks({ track: "starter", who: who(), screens: 9, free: free(map), path: null, expect: { taskLevel: { task: "quote", level: 3 } } });
+  const checks = runChecks({ track: "starter", who: who(), screens: 7, free: free(map), path: null, expect: { taskLevel: { task: "quote", level: 3 } } });
   const c = checks.find((x) => x.id === "quote_level_3");
   assert.equal(c?.pass, false);
   assert.match(c?.detail ?? "", /needs_computer/);
@@ -135,7 +135,7 @@ test("a task named in Expect must reach its level", () => {
 
 test("someone who is Not sure needs the ask first line on every task AI touches", () => {
   const map = [row("Texts", { askFirst: true }), row("Notes", { level: 2, recipe: null, withPath: "Notes, written with AI.", askFirst: false })];
-  const checks = runChecks({ track: "starter", who: who({ canUse: "not_sure" }), screens: 9, free: free(map), path: null });
+  const checks = runChecks({ track: "starter", who: who({ canUse: "not_sure" }), screens: 7, free: free(map), path: null });
   assert.equal(checks.find((c) => c.id === "not_sure_ask_first")?.pass, false);
 });
 

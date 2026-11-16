@@ -250,3 +250,10 @@ test("secondTask takes the recipe task at the highest level, the first on her ma
   assert.equal(secondTask(rows, "Inquiries")?.task, "Chasing replies");
   assert.equal(secondTask(rows.slice(0, 2).concat(rows[3]), "Inquiries")?.task, "Client emails");
 });
+
+test("a free result saved before Phase 8 still renders its way: no pieces, the old heading rules", async () => {
+  const { readAsResponsibilities } = await import("../../lib/beginner/free-result");
+  const old = [{ task: "Rescheduling texts", phrase: null, today: "t.", withPath: "w.", ai: true, private: false, kind: null }];
+  assert.equal(readAsResponsibilities(old), false);
+  assert.equal(readAsResponsibilities([{ ...old[0], patterns: [1 as const] }]), true);
+});

@@ -30,8 +30,8 @@ import { ANSWER_MAX } from "@/lib/week";
 // the session always comes from this browser's cookie. Nothing she answers is saved until the final read: then
 // her answers go in with the first quiz's database functions (every screen as one plain text digest in place
 // of her week), and what is its own (every screen she answered, what she most wants to make easier, and
-// everything her free result showed: her first win, her first step, the map of her week and her setups) beside
-// them, so her paid path can be held to what she was shown.
+// everything her free result showed: her preview, the map of her week, her workflows and the pieces under each)
+// beside them, so her paid path can be held to what she was shown.
 
 export type { BeginnerAnswers };
 export type BeginnerStep = QuizStep | "follow_up";
@@ -103,7 +103,7 @@ export async function readBeginner(input: {
     const { result } = read;
 
     if (result.needs_follow_up) return { ok: true, win: null, followUp: result.follow_up_question };
-    if (!result.tasks.length || !result.first_win || !result.first_step) {
+    if (!result.tasks.length || !result.first_win) {
       return { ok: false, error: quizErrors.thin, thin: true };
     }
 
@@ -140,6 +140,7 @@ export async function readBeginner(input: {
         firstStep: free.firstStep,
         map: free.map,
         setups: free.setups,
+        ...(free.offer ? { offer: free.offer } : {}),
         prep: free.prep,
         freePlan: free.freePlan,
         ...(askOnly ? { askOnly } : {}),

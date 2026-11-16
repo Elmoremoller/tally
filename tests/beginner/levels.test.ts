@@ -42,7 +42,15 @@ test("kindOf keeps only kinds on the list", () => {
 });
 
 test("a task AI can't help with stays hers at level 1", () => {
-  assert.deepEqual(levelFor(task(null, { ai: false }), who()), { level: 1, waits: false, recipe: null, held: null, askFirst: false });
+  assert.deepEqual(levelFor(task(null, { ai: false }), who()), {
+    level: 1,
+    waits: false,
+    recipe: null,
+    workflow: null,
+    held: null,
+    askFirst: false,
+    stays: null,
+  });
   assert.equal(levelFor(task(null, { ai: false }), who({ canUse: "restricted" })).level, 1, "even when AI is restricted");
 });
 

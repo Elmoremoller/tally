@@ -29,8 +29,8 @@ export type RunForChecks = {
  */
 export type Expect = { dentalTop?: boolean; gmailBuilderTop?: boolean; taskLevel?: { task: string; level: number } };
 
-/** Starter and Builder screen limits (DIRECTION.md, Phase 5). */
-export const SCREENS_MAX: Record<Track, number> = { starter: 9, builder: 11 };
+/** Starter and Builder screen limits (DIRECTION.md, Phase 8; they were 9 and 11 in Phase 5). */
+export const SCREENS_MAX: Record<Track, number> = { starter: 7, builder: 9 };
 
 /** A With your path line that reads like writing help: asking AI each time, or pasting a prompt. */
 export const WRITING_HELP = /\b(ask (ai|claude|chatgpt|it)|paste|prompt|each time|every time|help(s)? you write|writes? it for you)\b/i;
@@ -341,19 +341,9 @@ export function countDesign2(tasks: readonly Design2Task[], links: Record<string
 // path for the top two, as she would see them.
 
 /** The ten patterns a responsibility can match, numbered as in Karl's brief. */
-export const PATTERNS = {
-  1: "Messages she repeats",
-  2: "Documents she repeats",
-  3: "Stock that runs low and gets reordered",
-  4: "Orders prepared from a short count",
-  5: "Events that repeat, run from a checklist",
-  6: "Requests from colleagues, collected in one place",
-  7: "Routines and reminders on a schedule",
-  8: "An inbox that needs sorting and follow up",
-  9: "Notes that become tables or reports",
-  10: "Answers looked up in documents she already has",
-} as const;
-export type PatternId = keyof typeof PATTERNS;
+// The ten patterns now live in the product (lib/beginner/patterns.ts, Phase 8).
+export { PATTERNS, type PatternId } from "../lib/beginner/patterns";
+import { PATTERNS } from "../lib/beginner/patterns";
 
 export type Responsibility = {
   name: string;

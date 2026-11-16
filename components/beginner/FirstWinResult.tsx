@@ -1,9 +1,9 @@
 import type { ReactNode, RefObject } from "react";
 import { Paywall } from "@/components/quiz/Paywall";
 import { askFirstCopy, beginnerParts, beginnerPaywall, firstWinCopy, levelCopy, offerCopy } from "@/lib/beginner/copy";
-import { fewHelp, orderMap } from "@/lib/beginner/free-result";
+import { fewHelp, offerTasks, orderMap, readAsResponsibilities, smootherCount } from "@/lib/beginner/free-result";
 import { LEVELS } from "@/lib/beginner/recipes";
-import { IDEAS_MIN, IDEAS_SHOWN, type FirstWin, type MapLine } from "@/lib/beginner/types";
+import { IDEAS_MIN, IDEAS_SHOWN, type FirstWin, type MapLine, type OfferItem } from "@/lib/beginner/types";
 import { CopyButton } from "./CopyButton";
 import { SeeIt } from "./SeeIt";
 
@@ -23,7 +23,10 @@ export type ShownResult = {
  * path. Her finished result sits behind See it in the top row. Then the offer, which is `children`: the
  * paywall. `restricted` adds a line for a company that restricts AI. From Phase 5 each row has its level tag, or
  * Waits for your company's OK in its place, and a short line when a rule held its level down; rows saved before
- * have neither.
+ * have neither. From Phase 8 a map read as responsibilities opens with how many parts of her week can run
+ * smoother, puts what stays hers last with the reason, and her preview is one piece Tally will build for her. Only the
+ * rows her offer names are tagged In your path with a With your path line; every other row says What could change,
+ * so the map never suggests it is included (Karl, 2026-11-16).
  */
 export function FirstWinResult({
   result,
@@ -41,37 +44,49 @@ export function FirstWinResult({
 
   const rows = orderMap(map, firstWin.task);
   const helps = rows.filter((m) => m.ai).length;
-  const heading = rows.length < 2 || fewHelp(rows) ? firstWinCopy.fewHeading : firstWinCopy.heading(helps, rows.length);
+  const responsibilities = readAsResponsibilities(rows);
+  const heading = responsibilities
+    ? firstWinCopy.smoother(smootherCount(rows))
+    : rows.length < 2 || fewHelp(rows)
+      ? firstWinCopy.fewHeading
+      : firstWinCopy.heading(helps, rows.length);
+  const inPath = new Set(responsibilities ? offerTasks(rows, firstWin.task).map((m) => m.task) : rows.map((m) => m.task));
   return (
     <div className="quiz-step quiz-reveal" data-dir="forward">
-      <p className="quiz-eyebrow">{firstWinCopy.eyebrow}</p>
+      <p className="quiz-eyebrow">{responsibilities ? firstWinCopy.weekEyebrow : firstWinCopy.eyebrow}</p>
       <h1 ref={headingRef} tabIndex={-1} className="quiz-moment win-intro">
         {heading}
       </h1>
       <ul className="win-map">
         {rows.map((m) => (
           <li key={m.task} data-ai={m.ai || undefined}>
-            {m.waits ? (
-              <p className="win-map-level" data-level="waits">
-                {levelCopy.waits}
-              </p>
-            ) : m.level ? (
-              <p className="win-map-level" data-level={m.level}>
-                <span className="sr-only">{levelCopy.levelLabel} </span>
-                {LEVELS[m.level]}
-              </p>
-            ) : null}
+            <div className="win-map-tags">
+              {m.waits ? (
+                <p className="win-map-level" data-level="waits">
+                  {levelCopy.waits}
+                </p>
+              ) : m.level ? (
+                <p className="win-map-level" data-level={m.level}>
+                  <span className="sr-only">{levelCopy.levelLabel} </span>
+                  {LEVELS[m.level]}
+                </p>
+              ) : null}
+              {responsibilities && inPath.has(m.task) ? <p className="win-map-level win-map-in">{firstWinCopy.inPath}</p> : null}
+            </div>
             <h2 className="win-map-task">{m.task}</h2>
             <dl className="win-map-lines">
               <div>
                 <dt>{firstWinCopy.today}</dt>
                 <dd>{m.today}</dd>
               </div>
-              <div>
-                <dt>{firstWinCopy.withPath}</dt>
-                <dd>{m.withPath}</dd>
-              </div>
+              {m.stays ? null : (
+                <div>
+                  <dt>{inPath.has(m.task) ? firstWinCopy.withPath : firstWinCopy.couldChange}</dt>
+                  <dd>{m.withPath}</dd>
+                </div>
+              )}
             </dl>
+            {m.stays ? <p className="win-map-why">{levelCopy.stays[m.stays]}</p> : null}
             {m.held ? <p className="win-map-why">{levelCopy.held[m.held]}</p> : null}
             {m.askFirst ? <p className="win-map-why">{restricted ? levelCopy.askFirst : levelCopy.askFirstNotSure}</p> : null}
             {m.task === firstWin.task ? <SeeIt firstWin={firstWin} /> : null}
@@ -127,17 +142,52 @@ function LegacyResult({
 /**
  * The beginner paywall: her own workflows by name, then a Starter's two prep steps under a short line, then the
  * line on the free plan when every recipe in her offer says it is enough. Without setups, for answers saved
- * before Phase 2, it shows the plan's five parts as it did.
+ * before Phase 2, it shows the plan's five parts as it did. From Phase 8 (`offer`), each workflow lists the pieces
+ * Tally builds for it, under one plain line on what she gets, and her path starts with a few questions.
  */
 export function BeginnerPaywall({
   setups,
+  offer,
   prep = [],
   freePlan = false,
 }: {
   setups?: string[];
+  offer?: OfferItem[];
   prep?: string[];
   freePlan?: boolean;
 }) {
+  if (offer?.length) {
+    return (
+      <Paywall title={beginnerPaywall.title} lead={offerCopy.whatYouGet(offer.length)}>
+        <ol className="peek win-setups">
+          {offer.map((item) => (
+            <li key={item.name} className="peek-card">
+              <h3 className="peek-title">{item.name}</h3>
+              {item.pieces.length ? (
+                <ul className="win-pieces">
+                  {item.pieces.map((piece) => (
+                    <li key={piece}>{piece}</li>
+                  ))}
+                </ul>
+              ) : null}
+            </li>
+          ))}
+        </ol>
+        <p className="win-offer-line">{offerCopy.startsWithQuestions}</p>
+        {prep.length ? (
+          <div className="win-prep">
+            <p className="win-prep-lead">{offerCopy.prepLead}</p>
+            <ol className="win-prep-steps">
+              {prep.map((step) => (
+                <li key={step}>{step}</li>
+              ))}
+            </ol>
+          </div>
+        ) : null}
+        {freePlan ? <p className="quiz-type-text win-made">{beginnerPaywall.freePlan}</p> : null}
+      </Paywall>
+    );
+  }
   if (!setups?.length) {
     return (
       <Paywall title={beginnerPaywall.title} lead={beginnerPaywall.legacyLead}>

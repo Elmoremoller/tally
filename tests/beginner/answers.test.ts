@@ -114,3 +114,14 @@ test("old saved answers, with the screens that are gone, still pass", () => {
   });
   assert.deepEqual(cleanAnswers(old), old);
 });
+
+test("answers saved before Phase 8, with the real example and the question the AI wrote, still load", () => {
+  const old = answers({
+    qas: [
+      ...answers().qas,
+      { id: "example", title: "Paste the last one you wrote, or what the last person asked you.", picked: [], text: "Hi, can you quote a panel upgrade?" },
+      { id: "asked_1", title: "How do you send a quote today?", picked: ["Text"], text: null, shown: ["Text", "Email", "Paper"] },
+    ],
+  });
+  assert.deepEqual(cleanAnswers(old)?.qas.map((qa) => qa.id), ["repeats", "most", "picture", "example", "asked_1"]);
+});

@@ -1,7 +1,6 @@
 import type { ChatTool } from "../week";
 import type { JobRead } from "./quiz";
-import type { Held, Mark } from "./types";
-import { FALLBACK_AI_USES } from "./quiz-copy";
+import type { Held, Mark, Stays } from "./types";
 
 // The beginner version's words. The landing page, the quiz questions, the free result and the seven days were
 // approved on 2026-11-10 (docs/audit/2026-11-10-beginner-draft.md). Lines marked DRAFT fill a gap and wait for
@@ -455,19 +454,22 @@ export const beginnerQuestions = {
   waitLine: "One moment", // DRAFT
 } as const;
 
-/** What the quiz uses when the AI can't read her job in time. Its labels follow the limits set on the AI's output. DRAFT */
+/**
+ * What the quiz uses when the AI can't read her job in time: four fixed responsibilities and no apps of its own
+ * (DIRECTION.md, Phase 8: the four fixed choices stay only as the fallback). Labels follow the limits set on the
+ * AI's output. The choices are DRAFT.
+ */
 export const FALLBACK_JOB_READ: JobRead = {
-  repeats: [
-    { label: "Answering messages", ai: true },
-    { label: "Writing emails", ai: true },
-    { label: "Helping people in person", ai: false },
-    { label: "Planning my week", ai: true },
-    { label: "Keeping records", ai: true },
-  ],
-  aiFallback: ["Answering messages", "Writing emails", "Planning my week", "Keeping records"],
+  hers: [],
+  usual: ["Answering the same questions", "Ordering supplies", "Keeping track of requests", "Planning events"],
   apps: ["Texts", "WhatsApp", "Instagram", "Facebook", "Canva", "Google Calendar"],
-  aiUses: FALLBACK_AI_USES,
   worksFor: "unclear",
+};
+
+/** The two small groups on What do you do over and over (DIRECTION.md, Phase 8, its words). */
+export const repeatGroups = {
+  hers: "From what you told us",
+  usual: "Often part of a job like yours",
 };
 
 // The free result and the paywall
@@ -487,6 +489,22 @@ export const firstWinCopy = {
         : `AI can help with ${helps} of your ${total} tasks`,
   /** In place of the count when AI fits fewer than half of her tasks, or she named only one. Karl, 2026-11-14 */
   fewHeading: "Here is where AI fits in your week",
+  /**
+   * The heading over a map read as responsibilities (Phase 8): how many parts of her week can run smoother, from
+   * DIRECTION.md, section 3. With none, her week as she told it. DRAFT
+   */
+  smoother: (count: number) =>
+    count === 0
+      ? "Here is your week, as you told us"
+      : count === 1
+        ? "1 part of your week can run smoother"
+        : `${count} parts of your week can run smoother`,
+  /** The eyebrow over a map read as responsibilities. DRAFT */
+  weekEyebrow: "Your week",
+  /** The tag on the rows her offer names, the workflows Tally builds with her (Karl, 2026-11-16). DRAFT */
+  inPath: "In your path",
+  /** In place of With your path on every other row, so the map never suggests it is included. DRAFT */
+  couldChange: "What could change",
   today: "Today", // Approved by Karl 2026-11-14
   withPath: "With your path", // Approved by Karl 2026-11-14
   seeIt: "See it", // Approved by Karl 2026-11-14
@@ -522,6 +540,18 @@ export const offerCopy = {
   prepLead: "Starts with two quick steps",
   /** The last thing her offer names when her company restricts AI (DIRECTION.md, section 4). */
   askAllowed: "The message to ask what’s allowed",
+  /** The one piece of a workflow she writes with AI each time (Phase 8). DRAFT */
+  toolMessage: (thing: string, tool: string) => `Your ${thing} message for ${tool}, written for you`,
+  /**
+   * What she gets for the price, in one plain line: Tally builds her top two workflows with her, and nothing more is
+   * promised (Karl, 2026-11-16; DIRECTION.md, sections 3 and 4). DRAFT
+   */
+  whatYouGet: (workflows: number) =>
+    workflows === 1
+      ? "Tally builds this workflow with you, one step at a time."
+      : "Tally builds these two workflows with you, one step at a time.",
+  /** Under her workflows: her path starts with the follow up questions (DIRECTION.md, section 3). DRAFT */
+  startsWithQuestions: "Your path starts with a few questions about how you do each one today.",
 };
 
 /**
@@ -549,6 +579,11 @@ export const levelCopy = {
    */
   forTask: (phrase: string, line: string) => `For your ${phrase}, ${line.charAt(0).toLowerCase()}${line.slice(1)}`,
   askFirst: "Ask first if your company’s rule covers any use of AI.",
+  /** Why a responsibility stays hers, on a map read as responsibilities (Phase 8). DRAFT */
+  stays: {
+    private: "This holds other people’s private details, so it stays yours.",
+    nothing_repeats: "Nothing repeats around this one, so it stays yours.",
+  } satisfies Record<Stays, string>,
   /** The same line for someone who is Not sure whether she can use AI for her work. DRAFT */
   askFirstNotSure: "Ask first what your company allows with AI.",
 };

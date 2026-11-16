@@ -1,21 +1,19 @@
 "use server";
 
 import { allowAiCall } from "@/lib/ai-allowance";
-import { readJob, writeQuestions } from "@/lib/beginner/questions-ai";
+import { readJob } from "@/lib/beginner/questions-ai";
 import { FALLBACK_JOB_READ } from "@/lib/beginner/copy";
-import { cleanQAs, jobReadOrFallback, PICK_MAX, type AskedQuestion, type JobRead, type QA } from "@/lib/beginner/quiz";
-import { EXPERIENCE, type Experience } from "@/lib/beginner/types";
-import { cleanText, oneOf } from "@/lib/clean";
+import { jobReadOrFallback, type JobRead } from "@/lib/beginner/quiz";
+import { cleanText } from "@/lib/clean";
 import { spendQuestionCall } from "@/lib/funnel-db";
 import { readSessionId } from "@/lib/session-cookie";
 import { ANSWER_MAX } from "@/lib/week";
 
-// How the context quiz reaches its two AI calls: reading her job, and writing her questions. Nothing sent from
-// the page is trusted, the session comes from her cookie, and each call is counted against the session and the
-// site. Neither action ever throws or holds the quiz up: when anything goes wrong she gets the fixed list or no
-// asked screens, and the quiz carries on. BEGINNER_QUESTIONS_OFF=1 forces that, so both paths can be tried.
-
-const MOST_WANTED_MAX = 6;
+// How the context quiz reaches its AI call in the middle: reading her job. Nothing sent from the page is trusted,
+// the session comes from her cookie, and the call is counted against the session and the site. It never throws
+// or holds the quiz up: when anything goes wrong she gets the fixed list, and the quiz carries on.
+// BEGINNER_QUESTIONS_OFF=1 forces that, so the fallback can be tried. The question the AI wrote for her later in
+// the quiz went in Phase 8 of docs/DIRECTION.md.
 
 const off = () => process.env.BEGINNER_QUESTIONS_OFF === "1";
 
@@ -33,31 +31,5 @@ export async function readJobAction(job: string): Promise<{ read: JobRead; fallb
   } catch (error) {
     console.error("readJobAction failed", error);
     return fallback;
-  }
-}
-
-export async function writeQuestionsAction(input: {
-  job: string;
-  experience: Experience;
-  qas: QA[];
-  mostWanted: string[];
-}): Promise<AskedQuestion[]> {
-  try {
-    if (off()) return [];
-    const sessionId = await readSessionId();
-    const job = cleanText(input?.job, ANSWER_MAX);
-    const qas = cleanQAs(input?.qas);
-    const mostWanted = (Array.isArray(input?.mostWanted) ? input.mostWanted : [])
-      .map((m) => cleanText(m, PICK_MAX))
-      .filter((m): m is string => m !== null)
-      .slice(0, MOST_WANTED_MAX);
-    if (!sessionId || !job || !qas || !oneOf(EXPERIENCE, input?.experience)) return [];
-    return await writeQuestions(
-      { job, experience: input.experience, qas, mostWanted },
-      { allowCall: allowCallFor(sessionId) },
-    );
-  } catch (error) {
-    console.error("writeQuestionsAction failed", error);
-    return [];
   }
 }
