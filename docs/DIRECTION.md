@@ -87,7 +87,7 @@ The free result is the pitch. It does not have to deliver a working result. It h
 
 1. **A map of her week.** One line above it counts her responsibilities, like "7 parts of your week can run smoother". Each row is one responsibility with its level tag and two lines. "Today" uses only what she told us. The second line names the direction, not the details, because we have not yet asked how she does it. For example "Orders collected in one place and counted for you". No promised time, and nothing that sounds as if it happens without her. Only her top two rows are tagged "In your path" and have the line "With your path". Every other row says "What could change", so the map never suggests it is included.
 2. **A preview inside the top row,** behind a "See it" tap. One piece Tally will build for her, such as the questions for her order form or her standard order.
-3. **An offer that names her top two workflows,** like "Your lunch orders, collected and counted". One plain line says that Tally builds these two workflows with her. Under each name it lists the pieces Tally will build for her, in a few words each and in her own words, such as "Your lunch order form, written for you. Your lunch order sheet, counted for you. Your lunch order email, ready to send." It says that her path starts with a few questions about how she does each one today.
+3. **An offer that names her top two workflows,** like "Your lunch orders, collected and counted". One plain line says that Tally builds these two workflows with her. Under each name it lists the pieces Tally will build for her, in a few words each and in her own words, such as "Your lunch order form, written for you. Your lunch order counts, ready in your form. Your lunch order email, ready to send." It says that her path starts with a few questions about how she does each one today.
 
 Everything the offer lists must be in the paid path: both workflows and every piece under them. The offer never promises a third workflow or any row it does not name.
 
@@ -115,14 +115,17 @@ Getting an AI tool ready, teaching it who she is, and the message to ask her com
 This is the bar for a finished workflow. The office coordinator answers that orders reach her by email, on paper and in person, that she counts them by hand, and that she orders by email once a week.
 
 > **Lunch orders that collect themselves**
-> Today you gather about 70 orders from email, paper and people at your desk. From now on everyone fills in one short form, and your sheet counts it for you.
-> 1. Create the form. Tally has written the three questions for you. [Copy]
+> Today you gather about 70 orders from email, paper and people at your desk. From now on everyone fills in one short form, and the form counts it for you.
+> 1. Create the form. Tally has written the questions for you. [Copy]
 > 2. Send the link to the office. Tally has written the message. [Copy]
-> 3. Open the answers in Excel. The counts for each choice and each diet are already there.
+> 3. On order day, open the answers in Forms. The count for each choice is already there.
 > 4. Paste the counts into your order email. Tally has written it. [Copy]
+> 5. After you order, clear the answers, so next week starts from nothing.
 > Test it on this Thursday's lunch. You check the counts before you send.
 
-Four steps, exact clicks under each, no disclaimers, no AI account needed.
+Five steps, exact clicks under each, no disclaimers, no AI account needed, and no sheet.
+
+Why no sheet (Karl, 16 November 2026). Microsoft Forms shows the count for each choice on its results page. A formula or table added to the workbook that Forms fills stops new answers arriving, so counting there breaks the workflow. The results page counts each question on its own, so when the order depends on two things, like dish and diet, the form asks one question whose choices combine them, like "Pasta, vegetarian". With Google Forms the answers still go to a sheet that counts them, until Karl confirms that the Summary tab shows a count for each choice. Google's pages don't say so.
 
 ## 5. Rules that stay
 
@@ -228,6 +231,7 @@ Code to read first. `lib/beginner/cards.ts`, `lib/beginner/recipes.ts` and their
 5. Show it on the path screen that Phase 6 built. The second workflow runs the same way. Paths written before keep their page.
 6. Save her follow up answers with her path. Avoid a database change, and stop and ask if one is needed.
 7. Tell Karl how long a workflow takes to write after her answers. If it is more than a minute, propose how to shorten it.
+8. Orders prepared from a short count (pattern 4) follow the target in section 4. With Microsoft Forms there is no sheet, and the offer piece "Your X sheet, counted for you" becomes "Your X counts, ready in your form" (DRAFT). With Google Forms the sheet piece stays.
 
 Code to read first. The path writer and `lib/beginner/path.ts`, the path screen components, the plan generation file in `lib`, and the design and screens prompts of experiment three.
 
