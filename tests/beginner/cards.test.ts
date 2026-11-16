@@ -79,6 +79,7 @@ const blockLines = (card: (typeof blockCards)[number]) => [
   card.title,
   card.note ?? "",
   card.freePlan.note ?? "",
+  card.region ?? "",
   ...(card.steps.computer ?? []),
   ...(card.steps.android ?? []),
   ...(card.steps.iphone ?? []),
@@ -106,15 +107,15 @@ test("every building block card has steps, a free plan answer, a real check date
       const steps = card.steps[device];
       if (steps) assert.ok(steps.length >= 2, `${card.id} has ${device} steps, or none`);
     }
-    assert.ok(blockLines(card).every((line, i) => i < 3 || line.trim()), `${card.id} has no empty step`);
+    assert.ok(blockLines(card).every((line, i) => i < 4 || line.trim()), `${card.id} has no empty step`);
     assert.equal(typeof card.freePlan.enough, "boolean");
     assert.match(card.checked, /^\d{4}-\d{2}-\d{2}$/);
     const checked = new Date(`${card.checked}T00:00:00Z`);
     assert.ok(!Number.isNaN(checked.getTime()), `${card.id} has a real date`);
     assert.ok(checked.getTime() <= Date.now(), `${card.id} was not checked in the future`);
     assert.ok(card.sources.length >= 1, `${card.id} names the page it was checked against`);
-    const help = card.app.startsWith("google") || card.app === "gmail" ? BLOCK_HELP[1] : BLOCK_HELP[0];
-    for (const source of card.sources) assert.ok(source.startsWith(help), `${source} is the vendor's own help for ${card.id}`);
+    const help: readonly string[] = card.app.startsWith("google") || card.app === "gmail" ? BLOCK_HELP.google : BLOCK_HELP.microsoft;
+    for (const source of card.sources) assert.ok(help.some((h) => source.startsWith(h)), `${source} is the vendor's own help for ${card.id}`);
   }
 });
 
@@ -156,4 +157,31 @@ test("building block copy follows the copy rules", () => {
     }
     assert.doesNotMatch(card.title, /:/, `no colon in the title "${card.title}"`);
   }
+});
+
+/** The formulas in a card's steps, from the equals sign on. */
+const formulasIn = (card: (typeof blockCards)[number]) =>
+  [...(card.steps.computer ?? []), ...(card.steps.android ?? []), ...(card.steps.iphone ?? [])].flatMap((step) => step.match(/=[A-Z$][^ ]*/g) ?? []);
+
+test("every Excel card with a comma in a formula says what to do with a semicolon region", () => {
+  for (const card of blockCards.filter((c) => c.app === "excel")) {
+    if (formulasIn(card).some((f) => f.includes(","))) assert.match(card.region ?? "", /semicolon/, `${card.id} has the region note`);
+  }
+  assert.ok(blockCards.some((c) => c.region), "at least one card has a region note");
+});
+
+test("the Excel drop down list takes its choices from cells, so no separator is needed", () => {
+  const steps = blockCardById("excel_dropdown")?.steps.computer?.join(" ") ?? "";
+  assert.doesNotMatch(steps, /comma/i);
+  assert.match(steps, /one in each cell/);
+});
+
+test("both form apps have a card for clearing last week's answers", () => {
+  const apps = blockCardsFor("form_clear").map((c) => c.app);
+  assert.deepEqual(apps, ["microsoft_forms", "google_forms"]);
+});
+
+test("counting Forms answers in Excel never adds a formula to the form's own workbook", () => {
+  assert.match(blockCardById("ms_forms_to_excel")?.note ?? "", /Download a copy/);
+  assert.match(blockCardById("excel_count_each")?.note ?? "", /downloaded copy/);
 });
