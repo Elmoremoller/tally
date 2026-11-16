@@ -1,0 +1,555 @@
+{
+ "name": "office",
+ "persona": {
+  "who": "The office coordinator from experiment three, Karl's job text word for word. Starter, computer and phone, Outlook, Teams and Excel, not sure what her company allows.",
+  "bio": "Office coordinator for an office of about 70 people. In her own words: I am an office coordinator for an office of about 70 people. I prepare and organize lunch for everyone. I order drinks, restock the fridges and keep the office clean and organized. I take care of the plants and general maintenance. I handle special orders and preparations for company events. I coordinate suppliers and make sure we have what we need. I am the person everyone comes to when something is missing or needs fixing. If the printer runs out of ink I find a replacement, and if we have none I order more. She works in Outlook, Teams and Excel, on a computer and on her phone. Lunch for the whole office and keeping the fridges stocked take the most time. She is new to AI and has never really used it. She is an employee and is not sure what her company allows.",
+  "job": "I am an office coordinator for an office of about 70 people. I prepare and organize lunch for everyone. I order drinks, restock the fridges and keep the office clean and organized. I take care of the plants and general maintenance. I handle special orders and preparations for company events. I coordinate suppliers and make sure we have what we need. I am the person everyone comes to when something is missing or needs fixing. If the printer runs out of ink I find a replacement, and if we have none I order more.",
+  "level": "not_yet",
+  "device": "both",
+  "canUse": "not_sure",
+  "connect": "not_sure"
+ },
+ "jobRead": {
+  "hers": [
+   "Restocking the fridges",
+   "Keeping the office clean",
+   "Event preparations",
+   "Supplier coordination"
+  ],
+  "usual": [
+   "Office supplies",
+   "Vendor invoices",
+   "Visitor check ins",
+   "Meeting room bookings",
+   "Maintenance requests",
+   "Plant care schedule",
+   "Mail and deliveries",
+   "Staff birthday orders"
+  ],
+  "apps": [
+   "Microsoft Excel",
+   "Google Sheets",
+   "QuickBooks",
+   "Square",
+   "Slack",
+   "Trello",
+   "Canva",
+   "Zoom"
+  ],
+  "worksFor": "employer"
+ },
+ "jobReadFallback": false,
+ "jobSeconds": 2.1,
+ "readSeconds": 4.1,
+ "attempts": 1,
+ "steps": [
+  "job",
+  "level",
+  "repeats",
+  "most",
+  "where",
+  "can_use",
+  "connect"
+ ],
+ "answers": {
+  "job": "I am an office coordinator for an office of about 70 people. I prepare and organize lunch for everyone. I order drinks, restock the fridges and keep the office clean and organized. I take care of the plants and general maintenance. I handle special orders and preparations for company events. I coordinate suppliers and make sure we have what we need. I am the person everyone comes to when something is missing or needs fixing. If the printer runs out of ink I find a replacement, and if we have none I order more.",
+  "experience": "not_yet",
+  "qas": [
+   {
+    "id": "level",
+    "title": "Where are you with AI?",
+    "picked": [
+     "Never used it"
+    ],
+    "text": null,
+    "shown": [
+     "Never used it",
+     "Tried it a few times",
+     "Use it some weeks",
+     "Use it most days"
+    ]
+   },
+   {
+    "id": "repeats",
+    "title": "What do you do over and over, every day or every week?",
+    "picked": [
+     "Restocking the fridges",
+     "Keeping the office clean",
+     "Supplier coordination",
+     "Office supplies"
+    ],
+    "text": "Lunch for everyone, drink orders",
+    "shown": [
+     "Restocking the fridges",
+     "Keeping the office clean",
+     "Event preparations",
+     "Supplier coordination",
+     "Office supplies",
+     "Vendor invoices",
+     "Visitor check ins",
+     "Meeting room bookings"
+    ]
+   },
+   {
+    "id": "most",
+    "title": "Which would save you the most time if it got easier?",
+    "picked": [
+     "Lunch for everyone, drink orders",
+     "Restocking the fridges"
+    ],
+    "text": null,
+    "shown": [
+     "Restocking the fridges",
+     "Keeping the office clean",
+     "Supplier coordination",
+     "Office supplies",
+     "Lunch for everyone, drink orders"
+    ]
+   },
+   {
+    "id": "often",
+    "title": "How often do you do this?",
+    "picked": [
+     "Many times a day"
+    ],
+    "text": null,
+    "shown": [
+     "Many times a day",
+     "About once a day",
+     "A few times a week",
+     "Once a week or less"
+    ]
+   },
+   {
+    "id": "where",
+    "title": "Where does your work happen?",
+    "picked": [
+     "Microsoft Excel",
+     "Outlook",
+     "In person",
+     "Text messages",
+     "Paper"
+    ],
+    "text": null,
+    "shown": [
+     "Microsoft Excel",
+     "Google Sheets",
+     "QuickBooks",
+     "Square",
+     "Slack",
+     "Trello",
+     "Canva",
+     "Zoom",
+     "Text messages",
+     "Gmail",
+     "Outlook",
+     "Instagram",
+     "A work system",
+     "Paper",
+     "In person"
+    ]
+   },
+   {
+    "id": "device",
+    "title": "Do you work on a phone, a computer or both?",
+    "picked": [
+     "Both"
+    ],
+    "text": null,
+    "shown": [
+     "Phone only",
+     "Computer only",
+     "Both"
+    ]
+   },
+   {
+    "id": "can_use",
+    "title": "Can you use AI for your work?",
+    "picked": [
+     "Not sure"
+    ],
+    "text": null,
+    "shown": [
+     "Yes",
+     "Not sure",
+     "No, it’s restricted",
+     "I work for myself"
+    ]
+   },
+   {
+    "id": "connect",
+    "title": "Would your company let you link your work email to an AI tool?",
+    "picked": [
+     "Not sure"
+    ],
+    "text": null,
+    "shown": [
+     "Yes",
+     "No",
+     "Not sure"
+    ]
+   }
+  ],
+  "mostWanted": [
+   "Lunch for everyone, drink orders",
+   "Restocking the fridges"
+  ],
+  "worksFor": "employer",
+  "aiTools": [
+   "none_yet"
+  ],
+  "aiToolsOther": null,
+  "aiPolicy": "no_idea",
+  "often": "many_a_day"
+ },
+ "intake": {
+  "role_summary": "You’re the office coordinator for about 70 people, keeping the office fed, stocked and running.",
+  "tasks": [
+   {
+    "name": "Lunch and drink orders",
+    "ai": true,
+    "private": false,
+    "kind": null,
+    "patterns": [
+     4,
+     6
+    ]
+   },
+   {
+    "name": "Restocking the fridges",
+    "ai": true,
+    "private": false,
+    "kind": null,
+    "patterns": [
+     3
+    ]
+   },
+   {
+    "name": "Keeping the office clean",
+    "ai": true,
+    "private": false,
+    "kind": null,
+    "patterns": [
+     7
+    ]
+   },
+   {
+    "name": "Supplier coordination",
+    "ai": true,
+    "private": false,
+    "kind": "email_follow_ups",
+    "patterns": [
+     8
+    ]
+   },
+   {
+    "name": "Office supplies",
+    "ai": true,
+    "private": false,
+    "kind": null,
+    "patterns": [
+     3
+    ]
+   }
+  ],
+  "first_win": {
+   "task": "Lunch and drink orders",
+   "intro": "Here are the questions for your lunch and drink order form.",
+   "draft": "What is the order for? (Lunch, Drinks, Both)\nHow many people? [headcount]\nDietary needs? (None, Vegetarian, Gluten free, Other)\nDrink choices? (Water, Soda, Coffee, Tea, Other)\nDeadline for orders? [day and time]\nDelivery or pickup? (Delivery, Pickup)"
+  },
+  "first_step": null,
+  "map": [
+   {
+    "task": "Lunch and drink orders",
+    "phrase": "lunch and drink orders",
+    "thing": "lunch order",
+    "today": "Many times a day, your own count, in person and on paper.",
+    "withPath": "Orders collected in one place and counted for you.",
+    "ai": true,
+    "private": false,
+    "kind": null,
+    "patterns": [
+     4,
+     6
+    ]
+   },
+   {
+    "task": "Restocking the fridges",
+    "phrase": "fridge restocks",
+    "thing": "fridge restock",
+    "today": "You check the fridges and reorder what runs low.",
+    "withPath": "One standard list, ready whenever the fridges run low.",
+    "ai": true,
+    "private": false,
+    "kind": null,
+    "patterns": [
+     3
+    ]
+   },
+   {
+    "task": "Keeping the office clean",
+    "phrase": null,
+    "thing": "office cleaning",
+    "today": "Cleaning and tidying is part of your regular week.",
+    "withPath": "Cleaning jobs set out on a schedule so nothing gets missed.",
+    "ai": true,
+    "private": false,
+    "kind": null,
+    "patterns": [
+     7
+    ]
+   },
+   {
+    "task": "Supplier coordination",
+    "phrase": null,
+    "thing": "supplier",
+    "today": "You chase suppliers over email to make sure orders arrive.",
+    "withPath": "Follow ups to suppliers tracked so none slip.",
+    "ai": true,
+    "private": false,
+    "kind": "email_follow_ups",
+    "patterns": [
+     8
+    ]
+   },
+   {
+    "task": "Office supplies",
+    "phrase": "supply restocks",
+    "thing": "office supplies",
+    "today": "You keep office supplies stocked and reorder when low.",
+    "withPath": "One standard list, ready whenever supplies run low.",
+    "ai": true,
+    "private": false,
+    "kind": null,
+    "patterns": [
+     3
+    ]
+   }
+  ],
+  "needs_follow_up": false,
+  "follow_up_question": null
+ },
+ "free": {
+  "firstWin": {
+   "task": "Lunch and drink orders",
+   "intro": "Here are the questions for your lunch and drink order form.",
+   "draft": "What is the order for? (Lunch, Drinks, Both)\nHow many people? [headcount]\nDietary needs? (None, Vegetarian, Gluten free, Other)\nDrink choices? (Water, Soda, Coffee, Tea, Other)\nDeadline for orders? [day and time]\nDelivery or pickup? (Delivery, Pickup)"
+  },
+  "firstStep": null,
+  "map": [
+   {
+    "task": "Lunch and drink orders",
+    "phrase": "lunch and drink orders",
+    "thing": "lunch order",
+    "today": "Many times a day, your own count, in person and on paper.",
+    "withPath": "Orders collected in one place and counted for you.",
+    "ai": true,
+    "private": false,
+    "kind": null,
+    "patterns": [
+     4,
+     6
+    ],
+    "level": 3,
+    "waits": false,
+    "recipe": null,
+    "held": null,
+    "askFirst": false,
+    "workflow": "pattern_4",
+    "stays": null
+   },
+   {
+    "task": "Restocking the fridges",
+    "phrase": "fridge restocks",
+    "thing": "fridge restock",
+    "today": "You check the fridges and reorder what runs low.",
+    "withPath": "One standard list, ready whenever the fridges run low.",
+    "ai": true,
+    "private": false,
+    "kind": null,
+    "patterns": [
+     3
+    ],
+    "level": 3,
+    "waits": false,
+    "recipe": null,
+    "held": null,
+    "askFirst": false,
+    "workflow": "pattern_3",
+    "stays": null
+   },
+   {
+    "task": "Keeping the office clean",
+    "phrase": null,
+    "thing": "office cleaning",
+    "today": "Cleaning and tidying is part of your regular week.",
+    "withPath": "Cleaning jobs set out on a schedule so nothing gets missed.",
+    "ai": true,
+    "private": false,
+    "kind": null,
+    "patterns": [
+     7
+    ],
+    "level": 3,
+    "waits": false,
+    "recipe": null,
+    "held": null,
+    "askFirst": false,
+    "workflow": "pattern_7",
+    "stays": null
+   },
+   {
+    "task": "Supplier coordination",
+    "phrase": null,
+    "thing": "supplier",
+    "today": "You chase suppliers over email to make sure orders arrive.",
+    "withPath": "Follow ups to suppliers tracked so none slip.",
+    "ai": true,
+    "private": false,
+    "kind": "email_follow_ups",
+    "patterns": [
+     8
+    ],
+    "level": 3,
+    "waits": false,
+    "recipe": null,
+    "held": null,
+    "askFirst": false,
+    "workflow": "pattern_8",
+    "stays": null
+   },
+   {
+    "task": "Office supplies",
+    "phrase": "supply restocks",
+    "thing": "office supplies",
+    "today": "You keep office supplies stocked and reorder when low.",
+    "withPath": "One standard list, ready whenever supplies run low.",
+    "ai": true,
+    "private": false,
+    "kind": null,
+    "patterns": [
+     3
+    ],
+    "level": 3,
+    "waits": false,
+    "recipe": null,
+    "held": null,
+    "askFirst": false,
+    "workflow": "pattern_3",
+    "stays": null
+   }
+  ],
+  "setups": [
+   "Your lunch and drink orders, collected and counted",
+   "Your fridge restocks, counted against your usual amounts"
+  ],
+  "prep": [],
+  "offer": [
+   {
+    "name": "Your lunch and drink orders, collected and counted",
+    "pieces": [
+     "Your lunch order form, written for you",
+     "Your lunch order sheet, counted for you",
+     "Your lunch order email, ready to send"
+    ]
+   },
+   {
+    "name": "Your fridge restocks, counted against your usual amounts",
+    "pieces": [
+     "Your fridge restock list, with the usual amounts",
+     "Your fridge restock order, ready to send"
+    ]
+   }
+  ],
+  "freePlan": false,
+  "tool": "claude",
+  "track": "starter"
+ },
+ "checks": [
+  {
+   "id": "screens",
+   "pass": true,
+   "detail": "7 screens (job, level, repeats, most, where, can_use, connect), at most 7 for a starter"
+  },
+  {
+   "id": "job_read",
+   "pass": true,
+   "detail": "4 of hers and 8 usual, 2.1 s"
+  },
+  {
+   "id": "fast",
+   "pass": true,
+   "detail": "free result in 4.1 s, 1 attempt"
+  },
+  {
+   "id": "no_stays_on_better_rows",
+   "pass": true,
+   "detail": "no row that can run better says it stays hers"
+  },
+  {
+   "id": "two_workflows",
+   "pass": true,
+   "detail": "2 workflows offered, 5 rows can run smoother"
+  },
+  {
+   "id": "read_as_responsibilities",
+   "pass": true,
+   "detail": "every row has its patterns"
+  },
+  {
+   "id": "offer_pieces",
+   "pass": true,
+   "detail": "2 workflows, each with pieces"
+  },
+  {
+   "id": "pieces_her_words",
+   "pass": true,
+   "detail": "things: lunch order; fridge restock; office cleaning; supplier; office supplies"
+  },
+  {
+   "id": "no_dash",
+   "pass": true,
+   "detail": "no dash in the map or offer"
+  },
+  {
+   "id": "no_time_promise",
+   "pass": true,
+   "detail": "no minutes or hours on the map"
+  },
+  {
+   "id": "level3_not_writing_help",
+   "pass": true,
+   "detail": "none read like writing help"
+  },
+  {
+   "id": "no_click_paths",
+   "pass": true,
+   "detail": "no menu words on the map"
+  },
+  {
+   "id": "ask_first_only_with_ai",
+   "pass": true,
+   "detail": "no row asks first"
+  },
+  {
+   "id": "starter_at_most_3",
+   "pass": true,
+   "detail": "a Starter stops at level 3"
+  },
+  {
+   "id": "office_five",
+   "pass": true,
+   "detail": "5 responsibilities on her map"
+  },
+  {
+   "id": "office_lunch",
+   "pass": true,
+   "detail": "Lunch and drink orders: Build once, reuse"
+  },
+  {
+   "id": "office_restock",
+   "pass": true,
+   "detail": "Restocking the fridges: Build once, reuse"
+  }
+ ]
+}

@@ -1,0 +1,632 @@
+{
+ "name": "kayla",
+ "persona": {
+  "who": "Someone who only uses a phone: Kayla, the electrician from the earlier runs. Self employed Starter on a Samsung phone.",
+  "bio": "Kayla, 27, electrician who owns a one truck business in Phoenix. She is in attics by 7am and on job sites all day; she has no office and works from her Samsung phone in the truck. The paperwork around the job is what drags: writing quotes, sending invoices, texting homeowners about times, chasing payment, asking for reviews, and keeping the truck stocked with breakers, wire and fittings so she doesn't run to the supply house mid job. She does quotes on her phone at night, often by talking them through. She tried ChatGPT once to write a review request and forgot about it.",
+  "job": "Electrician. I own my own business, one truck, mostly homes in Phoenix.",
+  "level": "tried",
+  "device": "phone",
+  "canUse": "self",
+  "connect": null
+ },
+ "jobRead": {
+  "hers": [
+   "Electrical service calls",
+   "Own business",
+   "One truck"
+  ],
+  "usual": [
+   "Quotes and estimates",
+   "Scheduling jobs",
+   "Ordering parts and supplies",
+   "Invoicing customers",
+   "Permit paperwork",
+   "Following up on quotes",
+   "Restocking the truck",
+   "Tracking hours and expenses"
+  ],
+  "apps": [
+   "Jobber",
+   "QuickBooks",
+   "Google Calendar",
+   "Square",
+   "Google Maps",
+   "Excel",
+   "Gusto",
+   "Housecall Pro"
+  ],
+  "worksFor": "self"
+ },
+ "jobReadFallback": false,
+ "jobSeconds": 2.3,
+ "readSeconds": 5.4,
+ "attempts": 1,
+ "steps": [
+  "job",
+  "level",
+  "repeats",
+  "most",
+  "where"
+ ],
+ "answers": {
+  "job": "Electrician. I own my own business, one truck, mostly homes in Phoenix.",
+  "experience": "tried",
+  "qas": [
+   {
+    "id": "level",
+    "title": "Where are you with AI?",
+    "picked": [
+     "Tried it a few times"
+    ],
+    "text": null,
+    "shown": [
+     "Never used it",
+     "Tried it a few times",
+     "Use it some weeks",
+     "Use it most days"
+    ]
+   },
+   {
+    "id": "repeats",
+    "title": "What do you do over and over, every day or every week?",
+    "picked": [
+     "Electrical service calls",
+     "Quotes and estimates",
+     "Scheduling jobs",
+     "Ordering parts and supplies",
+     "Invoicing customers"
+    ],
+    "text": "Chasing payment, texting homeowners, reviews",
+    "shown": [
+     "Electrical service calls",
+     "Own business",
+     "One truck",
+     "Quotes and estimates",
+     "Scheduling jobs",
+     "Ordering parts and supplies",
+     "Invoicing customers",
+     "Permit paperwork"
+    ]
+   },
+   {
+    "id": "most",
+    "title": "Which would save you the most time if it got easier?",
+    "picked": [
+     "Quotes and estimates",
+     "Invoicing customers"
+    ],
+    "text": null,
+    "shown": [
+     "Electrical service calls",
+     "Quotes and estimates",
+     "Scheduling jobs",
+     "Ordering parts and supplies",
+     "Invoicing customers",
+     "Chasing payment, texting homeowners, reviews"
+    ]
+   },
+   {
+    "id": "often",
+    "title": "How often do you do this?",
+    "picked": [
+     "About once a day"
+    ],
+    "text": null,
+    "shown": [
+     "Many times a day",
+     "About once a day",
+     "A few times a week",
+     "Once a week or less"
+    ]
+   },
+   {
+    "id": "where",
+    "title": "Where does your work happen?",
+    "picked": [
+     "Text messages",
+     "Gmail",
+     "In person"
+    ],
+    "text": null,
+    "shown": [
+     "Jobber",
+     "QuickBooks",
+     "Google Calendar",
+     "Square",
+     "Google Maps",
+     "Excel",
+     "Gusto",
+     "Housecall Pro",
+     "Text messages",
+     "Gmail",
+     "Outlook",
+     "Google Sheets",
+     "Instagram",
+     "A work system",
+     "Paper",
+     "In person"
+    ]
+   },
+   {
+    "id": "device",
+    "title": "Do you work on a phone, a computer or both?",
+    "picked": [
+     "Phone only"
+    ],
+    "text": null,
+    "shown": [
+     "Phone only",
+     "Computer only",
+     "Both"
+    ]
+   }
+  ],
+  "mostWanted": [
+   "Quotes and estimates",
+   "Invoicing customers"
+  ],
+  "worksFor": "self",
+  "aiTools": [
+   "not_sure"
+  ],
+  "aiToolsOther": null,
+  "aiPolicy": null,
+  "often": "daily"
+ },
+ "intake": {
+  "role_summary": "You’re a self employed electrician running one truck, mostly doing homes around Phoenix.",
+  "tasks": [
+   {
+    "name": "Quotes and estimates",
+    "ai": true,
+    "private": false,
+    "kind": "repeat_writing",
+    "patterns": [
+     2,
+     1
+    ]
+   },
+   {
+    "name": "Invoicing customers",
+    "ai": true,
+    "private": false,
+    "kind": "repeat_emails",
+    "patterns": [
+     2,
+     8
+    ]
+   },
+   {
+    "name": "Electrical service calls",
+    "ai": true,
+    "private": false,
+    "kind": null,
+    "patterns": [
+     5
+    ]
+   },
+   {
+    "name": "Ordering parts and supplies",
+    "ai": true,
+    "private": false,
+    "kind": null,
+    "patterns": [
+     3
+    ]
+   },
+   {
+    "name": "Scheduling jobs",
+    "ai": false,
+    "private": false,
+    "kind": null,
+    "patterns": []
+   },
+   {
+    "name": "Texting homeowners",
+    "ai": true,
+    "private": false,
+    "kind": "repeat_texts",
+    "patterns": [
+     1
+    ]
+   },
+   {
+    "name": "Chasing payment",
+    "ai": true,
+    "private": false,
+    "kind": "email_follow_ups",
+    "patterns": [
+     8
+    ]
+   },
+   {
+    "name": "Asking for reviews",
+    "ai": true,
+    "private": false,
+    "kind": "repeat_texts",
+    "patterns": [
+     1
+    ]
+   }
+  ],
+  "first_win": {
+   "task": "Quotes and estimates",
+   "intro": "Here is a quote template you can fill in for each estimate.",
+   "draft": "Customer name: [customer]\nAddress: [address]\nJob description: [job]\nParts: [parts list]\nLabor hours: [hours]\nTotal price: [price]\nValid until: [date]\nAsk: Does this work for you, or would you like to talk it through?"
+  },
+  "first_step": null,
+  "map": [
+   {
+    "task": "Quotes and estimates",
+    "phrase": null,
+    "thing": "quote",
+    "today": "You write a quote or estimate about once a day, on your own count.",
+    "withPath": "Each quote starts from a standard layout, filled in with the job details.",
+    "ai": true,
+    "private": false,
+    "kind": "repeat_writing",
+    "patterns": [
+     2,
+     1
+    ]
+   },
+   {
+    "task": "Invoicing customers",
+    "phrase": null,
+    "thing": "invoice",
+    "today": "You send invoices to customers as jobs finish, from your own work.",
+    "withPath": "Invoices start from a standard layout, with each job’s details filled in.",
+    "ai": true,
+    "private": false,
+    "kind": "repeat_emails",
+    "patterns": [
+     2,
+     8
+    ]
+   },
+   {
+    "task": "Electrical service calls",
+    "phrase": null,
+    "thing": "service call",
+    "today": "You handle service calls in person, one job at a time, from your own schedule.",
+    "withPath": "Each service call follows the same checklist of steps, every time.",
+    "ai": true,
+    "private": false,
+    "kind": null,
+    "patterns": [
+     5
+    ]
+   },
+   {
+    "task": "Ordering parts and supplies",
+    "phrase": null,
+    "thing": "parts",
+    "today": "You keep parts and supplies stocked for your one truck, reordering as they run low.",
+    "withPath": "One standard list of parts, ready to reorder whenever the truck runs low.",
+    "ai": true,
+    "private": false,
+    "kind": null,
+    "patterns": [
+     3
+    ]
+   },
+   {
+    "task": "Scheduling jobs",
+    "phrase": null,
+    "thing": null,
+    "today": "You book and move jobs around your own calendar as the week goes.",
+    "withPath": "This stays yours.",
+    "ai": false,
+    "private": false,
+    "kind": null,
+    "patterns": []
+   },
+   {
+    "task": "Texting homeowners",
+    "phrase": "homeowner texts",
+    "thing": "homeowner",
+    "today": "You text homeowners often, with the same few updates each time.",
+    "withPath": "The same few updates to homeowners, ready to send by text.",
+    "ai": true,
+    "private": false,
+    "kind": "repeat_texts",
+    "patterns": [
+     1
+    ]
+   },
+   {
+    "task": "Chasing payment",
+    "phrase": null,
+    "thing": "payment",
+    "today": "You chase customers who have not paid yet, from your own records.",
+    "withPath": "A follow up email for unpaid invoices, ready to send.",
+    "ai": true,
+    "private": false,
+    "kind": "email_follow_ups",
+    "patterns": [
+     8
+    ]
+   },
+   {
+    "task": "Asking for reviews",
+    "phrase": null,
+    "thing": "review",
+    "today": "You ask customers for reviews after finished jobs, one at a time.",
+    "withPath": "A review request message, ready to send after each job.",
+    "ai": true,
+    "private": false,
+    "kind": "repeat_texts",
+    "patterns": [
+     1
+    ]
+   }
+  ],
+  "needs_follow_up": false,
+  "follow_up_question": null
+ },
+ "free": {
+  "firstWin": {
+   "task": "Quotes and estimates",
+   "intro": "Here is a quote template you can fill in for each estimate.",
+   "draft": "Customer name: [customer]\nAddress: [address]\nJob description: [job]\nParts: [parts list]\nLabor hours: [hours]\nTotal price: [price]\nValid until: [date]\nAsk: Does this work for you, or would you like to talk it through?"
+  },
+  "firstStep": null,
+  "map": [
+   {
+    "task": "Quotes and estimates",
+    "phrase": null,
+    "thing": "quote",
+    "today": "You write a quote or estimate about once a day, on your own count.",
+    "withPath": "Each quote starts from a standard layout, filled in with the job details.",
+    "ai": true,
+    "private": false,
+    "kind": "repeat_writing",
+    "patterns": [
+     2,
+     1
+    ],
+    "level": 3,
+    "waits": false,
+    "recipe": null,
+    "held": null,
+    "askFirst": false,
+    "workflow": "pattern_2",
+    "stays": null
+   },
+   {
+    "task": "Invoicing customers",
+    "phrase": null,
+    "thing": "invoice",
+    "today": "You send invoices to customers as jobs finish, from your own work.",
+    "withPath": "Invoices start from a standard layout, with each job’s details filled in.",
+    "ai": true,
+    "private": false,
+    "kind": "repeat_emails",
+    "patterns": [
+     2,
+     8
+    ],
+    "level": 3,
+    "waits": false,
+    "recipe": null,
+    "held": null,
+    "askFirst": false,
+    "workflow": "pattern_2",
+    "stays": null
+   },
+   {
+    "task": "Electrical service calls",
+    "phrase": null,
+    "thing": "service call",
+    "today": "You handle service calls in person, one job at a time, from your own schedule.",
+    "withPath": "Each service call follows the same checklist of steps, every time.",
+    "ai": true,
+    "private": false,
+    "kind": null,
+    "patterns": [
+     5
+    ],
+    "level": 3,
+    "waits": false,
+    "recipe": null,
+    "held": null,
+    "askFirst": false,
+    "workflow": "pattern_5",
+    "stays": null
+   },
+   {
+    "task": "Ordering parts and supplies",
+    "phrase": null,
+    "thing": "parts",
+    "today": "You keep parts and supplies stocked for your one truck, reordering as they run low.",
+    "withPath": "One standard list of parts, ready to reorder whenever the truck runs low.",
+    "ai": true,
+    "private": false,
+    "kind": null,
+    "patterns": [
+     3
+    ],
+    "level": 3,
+    "waits": false,
+    "recipe": null,
+    "held": null,
+    "askFirst": false,
+    "workflow": "pattern_3",
+    "stays": null
+   },
+   {
+    "task": "Texting homeowners",
+    "phrase": "homeowner texts",
+    "thing": "homeowner",
+    "today": "You text homeowners often, with the same few updates each time.",
+    "withPath": "For your homeowner texts, your common replies are saved on your phone, each a few letters away.",
+    "ai": true,
+    "private": false,
+    "kind": "repeat_texts",
+    "patterns": [
+     1
+    ],
+    "level": 3,
+    "waits": false,
+    "recipe": "phone_quick_replies",
+    "held": null,
+    "askFirst": false,
+    "workflow": null,
+    "stays": null
+   },
+   {
+    "task": "Chasing payment",
+    "phrase": null,
+    "thing": "payment",
+    "today": "You chase customers who have not paid yet, from your own records.",
+    "withPath": "A follow up email for unpaid invoices, ready to send.",
+    "ai": true,
+    "private": false,
+    "kind": "email_follow_ups",
+    "patterns": [
+     8
+    ],
+    "level": 2,
+    "waits": false,
+    "recipe": null,
+    "held": "track",
+    "askFirst": false,
+    "workflow": null,
+    "stays": null
+   },
+   {
+    "task": "Asking for reviews",
+    "phrase": null,
+    "thing": "review",
+    "today": "You ask customers for reviews after finished jobs, one at a time.",
+    "withPath": "Your common replies are saved on your phone, each a few letters away.",
+    "ai": true,
+    "private": false,
+    "kind": "repeat_texts",
+    "patterns": [
+     1
+    ],
+    "level": 3,
+    "waits": false,
+    "recipe": "phone_quick_replies",
+    "held": null,
+    "askFirst": false,
+    "workflow": null,
+    "stays": null
+   },
+   {
+    "task": "Scheduling jobs",
+    "phrase": null,
+    "thing": null,
+    "today": "You book and move jobs around your own calendar as the week goes.",
+    "withPath": "This stays yours.",
+    "ai": false,
+    "private": false,
+    "kind": null,
+    "patterns": [],
+    "level": 1,
+    "waits": false,
+    "recipe": null,
+    "held": null,
+    "askFirst": false,
+    "workflow": null,
+    "stays": "nothing_repeats"
+   }
+  ],
+  "setups": [
+   "Quotes and estimates, from one template",
+   "Electrical service calls, run from one checklist"
+  ],
+  "prep": [],
+  "offer": [
+   {
+    "name": "Quotes and estimates, from one template",
+    "pieces": [
+     "Your quote template, with the blanks marked"
+    ]
+   },
+   {
+    "name": "Electrical service calls, run from one checklist",
+    "pieces": [
+     "Your service call checklist, ready to copy for each one",
+     "Your service call messages, written for you"
+    ]
+   }
+  ],
+  "freePlan": false,
+  "tool": "claude",
+  "track": "starter"
+ },
+ "checks": [
+  {
+   "id": "screens",
+   "pass": true,
+   "detail": "5 screens (job, level, repeats, most, where), at most 7 for a starter"
+  },
+  {
+   "id": "job_read",
+   "pass": true,
+   "detail": "3 of hers and 8 usual, 2.3 s"
+  },
+  {
+   "id": "fast",
+   "pass": true,
+   "detail": "free result in 5.4 s, 1 attempt"
+  },
+  {
+   "id": "no_stays_on_better_rows",
+   "pass": true,
+   "detail": "no row that can run better says it stays hers"
+  },
+  {
+   "id": "two_workflows",
+   "pass": true,
+   "detail": "2 workflows offered, 7 rows can run smoother"
+  },
+  {
+   "id": "read_as_responsibilities",
+   "pass": true,
+   "detail": "every row has its patterns"
+  },
+  {
+   "id": "offer_pieces",
+   "pass": true,
+   "detail": "2 workflows, each with pieces"
+  },
+  {
+   "id": "pieces_her_words",
+   "pass": true,
+   "detail": "things: quote; invoice; service call; parts; homeowner; payment; review; (none, Scheduling jobs)"
+  },
+  {
+   "id": "no_dash",
+   "pass": true,
+   "detail": "no dash in the map or offer"
+  },
+  {
+   "id": "no_time_promise",
+   "pass": true,
+   "detail": "no minutes or hours on the map"
+  },
+  {
+   "id": "level3_not_writing_help",
+   "pass": true,
+   "detail": "none read like writing help"
+  },
+  {
+   "id": "no_click_paths",
+   "pass": true,
+   "detail": "no menu words on the map"
+  },
+  {
+   "id": "ask_first_only_with_ai",
+   "pass": true,
+   "detail": "no row asks first"
+  },
+  {
+   "id": "starter_at_most_3",
+   "pass": true,
+   "detail": "a Starter stops at level 3"
+  }
+ ]
+}

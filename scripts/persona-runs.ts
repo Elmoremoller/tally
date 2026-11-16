@@ -31,17 +31,15 @@ import { readBeginnerIntake, BEGINNER_INTAKE_VERSION } from "../lib/beginner/int
 import { whoFrom } from "../lib/beginner/levels";
 import { cardFor, pathApps, phoneApp, routeFor, stepLines, devicesFor, type PathPlan, type Phone } from "../lib/beginner/path";
 import { pathParts, writePath, PATH_PROMPT_VERSION, type PathInput } from "../lib/beginner/path-writer";
-import { readJob, writeQuestions, JOB_PROMPT_VERSION, QUESTIONS_PROMPT_VERSION } from "../lib/beginner/questions-ai";
+import { readJob, JOB_PROMPT_VERSION } from "../lib/beginner/questions-ai";
 import {
   digest,
   jobReadOrFallback,
   mostOptions,
   PICK_MAX,
   repeatChoices,
-  skipsMost,
   stepsFor,
   whereOptions,
-  type AskedQuestion,
   type QA,
 } from "../lib/beginner/quiz";
 import {
@@ -51,7 +49,6 @@ import {
   DEVICES,
   deviceQuestion,
   doneWithAi,
-  exampleScreen,
   OFTEN,
   oftenQuestion,
   whereScreen,
@@ -1070,7 +1067,7 @@ function screensMarkdown(o: Saved): string {
 
 // One woman through the quiz, her free result, her path and her free design
 
-const versions = { job: JOB_PROMPT_VERSION, questions: QUESTIONS_PROMPT_VERSION, intake: BEGINNER_INTAKE_VERSION, path: PATH_PROMPT_VERSION };
+const versions = { job: JOB_PROMPT_VERSION, intake: BEGINNER_INTAKE_VERSION, path: PATH_PROMPT_VERSION };
 const allowCall = async () => true;
 
 async function run(name: string, p: Persona) {
@@ -1096,22 +1093,16 @@ async function run(name: string, p: Persona) {
     qas.push({ id: "tools", title: screens.tools.title, picked: aiTools.map((t) => toolLabels[t]), text: null, shown: toolChoices });
   }
 
-  // What she does over and over, and which would save her the most time (skipped when only one).
+  // What she does over and over, and which would save her the most time, with how often (Phase 8).
   const repeatList = repeatChoices(read).map((r) => r.label);
   const repeats = await answerAs(p.bio, { title: screens.repeats.title, hint: screens.repeats.hint, kind: "many", choices: repeatList, somethingElse: true });
   qas.push({ id: "repeats", title: screens.repeats.title, picked: repeats.picked, text: repeats.text, shown: repeatList });
   const most = mostOptions(read, repeats.picked, repeats.text);
-  const skipMost = skipsMost(most);
-  const mostTitle = most.fallback ? screens.most.fallbackTitle : screens.most.title;
-  const mostWanted = skipMost
-    ? most.options
-    : (await answerAs(p.bio, { title: mostTitle, hint: most.fallback ? screens.most.fallbackHint : screens.most.hint, kind: "upto2", choices: most.options, somethingElse: false })).picked;
-  if (!mostWanted.length) mostWanted.push(most.options[0]);
-  qas.push({ id: "most", title: mostTitle, picked: mostWanted, text: null, shown: most.options });
-
-  // Her real example and how often.
-  const example = await answerAs(p.bio, { title: exampleScreen.title, hint: exampleScreen.hint(mostWanted[0]), kind: "text", choices: [], somethingElse: false });
-  qas.push({ id: "example", title: exampleScreen.title, picked: [], text: example.text });
+  const mostWanted = most.length === 1
+    ? most
+    : (await answerAs(p.bio, { title: screens.most.title, hint: screens.most.hint, kind: "upto2", choices: most, somethingElse: false })).picked;
+  if (!mostWanted.length) mostWanted.push(most[0]);
+  qas.push({ id: "most", title: screens.most.title, picked: mostWanted, text: null, shown: most });
   const oftenLabels = OFTEN.map((o) => oftenQuestion.labels[o]);
   const oftenPick = (await answerAs(p.bio, { title: `${oftenQuestion.title} (${mostWanted[0]})`, kind: "one", choices: oftenLabels, somethingElse: false })).picked[0];
   const often = OFTEN.find((o) => oftenQuestion.labels[o] === oftenPick) as Often | undefined;
@@ -1123,14 +1114,6 @@ async function run(name: string, p: Persona) {
   qas.push({ id: "where", title: whereScreen.title, picked: where.picked, text: where.text, shown: places });
   qas.push(choiceQA("device", deviceQuestion.title, DEVICES, deviceQuestion.labels, p.device));
 
-  // The question the AI writes for her.
-  const asked: AskedQuestion[] = await writeQuestions({ job: p.job, experience: p.level, qas, mostWanted }, { allowCall, timeoutMs: 30_000 });
-  out.asked = asked;
-  for (const q of asked) {
-    const a = await answerAs(p.bio, { title: q.title, hint: q.hint, kind: q.kind, choices: q.choices, somethingElse: q.kind !== "text" });
-    qas.push(q.kind === "text" ? { id: q.id, title: q.title, picked: [], text: a.text } : { id: q.id, title: q.title, picked: a.picked, text: a.text, shown: q.choices });
-  }
-
   // Can you use AI for your work, unless her job said she works for herself, then the connect question.
   const selfFromJob = read.worksFor === "self";
   const canUse: CanUse = selfFromJob ? "self" : p.canUse;
@@ -1138,7 +1121,7 @@ async function run(name: string, p: Persona) {
     qas.push(choiceQA("can_use", canUseQuestion.title, CAN_USE, canUseLabels, canUse));
     if ((canUse === "yes" || canUse === "not_sure") && p.connect) qas.push(choiceQA("connect", connectQuestion.title, CONNECT, connectQuestion.labels, p.connect));
   }
-  const screensShown = stepsFor({ level: p.level, askedCount: asked.length, worksForFromJob: read.worksFor, canUse: selfFromJob ? null : canUse, skipMost }).length;
+  const screensShown = stepsFor({ level: p.level, worksForFromJob: read.worksFor, canUse: selfFromJob ? null : canUse }).length;
   out.screens = screensShown;
   out.worksForFromJob = read.worksFor;
 
@@ -1161,7 +1144,7 @@ async function run(name: string, p: Persona) {
     intake = await readBeginnerIntake({ ...answers, followUp }, { timeoutMs: 60_000 });
   }
   const r = intake?.result;
-  if (!r?.first_win || !r.first_step || !r.tasks.length) throw new Error("The final read gave no result");
+  if (!r?.first_win || !r.tasks.length) throw new Error("The final read gave no result");
   out.intake = r;
 
   // Her free result, built as the live server builds it.

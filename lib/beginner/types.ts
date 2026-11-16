@@ -1,3 +1,4 @@
+import type { PatternId } from "./patterns";
 import type { QA } from "./quiz";
 import type { Often } from "./quiz-copy";
 import type { Level, TaskKind } from "./recipes";
@@ -139,11 +140,25 @@ export type MapLine = {
   /** The rule that held its level down, when one did. */
   held?: Held | null;
   /**
-   * She asks first: she works where AI is restricted and this recipe needs no AI at work, or she is Not sure
-   * whether she can use AI and AI touches this task.
+   * She asks first. From Phase 8: she is Not sure whether she can use AI, and its workflow puts her work into an
+   * AI tool. Before Phase 8 also a recipe that needs no AI at work, for someone whose company restricts AI.
    */
   askFirst?: boolean;
+  /** The patterns the final read named for it, most fitting first (DIRECTION.md, section 2). Phase 8. */
+  patterns?: PatternId[];
+  /** The thing in her own words, as it fits "Your ___ form", for the pieces her offer lists. Phase 8. */
+  thing?: string | null;
+  /** The id of the pattern workflow that gave it its level, like "pattern_4", when no recipe did. Phase 8. */
+  workflow?: string | null;
+  /** Why it stays hers, on the map (DIRECTION.md, section 2). Phase 8. */
+  stays?: Stays | null;
 };
+
+/** It stays hers: it holds other people's private details, or nothing repeats around it. */
+export type Stays = "private" | "nothing_repeats";
+
+/** One workflow her offer names, with the pieces Tally builds for it (DIRECTION.md, section 3). Phase 8. */
+export type OfferItem = { name: string; pieces: string[] };
 
 /**
  * Why a rule held a task's level down (DIRECTION.md, section 2, How the level is chosen): her company restricts
@@ -160,9 +175,12 @@ export type Held = (typeof HELD)[number];
  */
 export type FreeResult = {
   firstWin: FirstWin;
-  firstStep: string;
+  /** The message she pastes into her AI tool. Null from beginner-intake-v9, which no longer writes it. */
+  firstStep: string | null;
   map: MapLine[];
   setups: string[];
+  /** Her workflows with the pieces Tally builds for each, in the order of `setups`. Phase 8. */
+  offer?: OfferItem[];
   /** A Starter's two prep steps, which her offer lists under her workflows. Empty for a Builder. Phase 5. */
   prep: string[];
   /** Every recipe in her offer says the free plan is enough. Phase 5. */
@@ -198,10 +216,11 @@ export type BeginnerIntake = {
    * answers saved before beginner-intake-v5 (Phase 2 of docs/DIRECTION.md).
    */
   shown?: {
-    firstStep: string;
+    firstStep: string | null;
     map: MapLine[];
     /** Her workflows by name, in order. Before Phase 5, every setup her offer named. */
     setups: string[];
+    offer?: OfferItem[];
     prep?: string[];
     freePlan?: boolean;
     askOnly?: boolean;

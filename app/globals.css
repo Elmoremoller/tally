@@ -2575,7 +2575,23 @@
     border: 0;
     font-family: inherit;
   }
-  /* How often, under the box on the example screen: a small heading, then one row of chips she taps once. */
+  /* What she does over and over, in two small groups (Phase 8): her own responsibilities, then the usual ones. */
+  .quiz-groups {
+    display: grid;
+    gap: 1.25rem;
+    margin-top: clamp(1.75rem, 1.4rem + 1.5vw, 2.5rem);
+  }
+  .quiz-groups .quiz-topics {
+    margin: 0;
+  }
+  .quiz-group-label {
+    flex-basis: 100%;
+    margin-bottom: 0.125rem;
+    padding: 0;
+    font-weight: 600;
+    color: var(--slate);
+  }
+  /* How often, under her picks on the most wanted screen: a small heading, then one row of chips she taps once. */
   .quiz-often {
     margin-top: 1.5rem;
   }
@@ -5585,6 +5601,24 @@
   }
   .win-setups .peek-card {
     text-align: left;
+  }
+  /* The pieces Tally builds for each workflow, under its name (Phase 8). */
+  .win-pieces {
+    display: grid;
+    gap: 0.25rem;
+    margin: 0.375rem 0 0;
+    padding: 0 0 0 1.1rem;
+    list-style: disc;
+    color: var(--ink);
+  }
+  .win-pieces li::marker {
+    color: var(--slate);
+  }
+  .win-offer-line {
+    width: 100%;
+    margin-top: 1rem;
+    text-align: left;
+    color: var(--ink);
   }
   /* A Starter's two prep steps, under her workflows on the paywall: quieter than the workflows they lead to. */
   .win-prep {

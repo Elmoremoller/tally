@@ -47,7 +47,7 @@ async function SavedResult() {
         result={{ firstWin: beginner.firstWin, ideas: beginner.ideas, map: shown?.map }}
         restricted={week.intake?.ai_policy === "restricted"}
       >
-        <BeginnerPaywall setups={shown?.setups} prep={shown?.prep} freePlan={shown?.freePlan} />
+        <BeginnerPaywall setups={shown?.setups} offer={shown?.offer} prep={shown?.prep} freePlan={shown?.freePlan} />
       </FirstWinResult>
     );
   }

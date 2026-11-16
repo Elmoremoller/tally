@@ -1,0 +1,139 @@
+{
+ "ranAt": "2026-11-16T08:01:49.652Z",
+ "versions": {
+  "job": "beginner-job-v6",
+  "intake": "beginner-intake-v9",
+  "model": "claude-haiku-5-5"
+ },
+ "runs": {
+  "office": {
+   "screens": 7,
+   "jobSeconds": 2.1,
+   "readSeconds": 4.1,
+   "attempts": 1,
+   "responsibilities": 5,
+   "levels": [
+    "Lunch and drink orders: Build once, reuse",
+    "Restocking the fridges: Build once, reuse",
+    "Keeping the office clean: Build once, reuse",
+    "Supplier coordination: Build once, reuse",
+    "Office supplies: Build once, reuse"
+   ],
+   "offer": [
+    {
+     "name": "Your lunch and drink orders, collected and counted",
+     "pieces": [
+      "Your lunch order form, written for you",
+      "Your lunch order sheet, counted for you",
+      "Your lunch order email, ready to send"
+     ]
+    },
+    {
+     "name": "Your fridge restocks, counted against your usual amounts",
+     "pieces": [
+      "Your fridge restock list, with the usual amounts",
+      "Your fridge restock order, ready to send"
+     ]
+    }
+   ],
+   "failed": []
+  },
+  "hr": {
+   "screens": 7,
+   "jobSeconds": 1.8,
+   "readSeconds": 4.5,
+   "attempts": 1,
+   "responsibilities": 6,
+   "levels": [
+    "Onboarding new hires: Build once, reuse",
+    "Handling policy questions: Build once, reuse (Ask first)",
+    "Benefits enrollment: Build once, reuse",
+    "Scheduling interviews: Build once, reuse",
+    "Preparing offer letters: Build once, reuse (Ask first)",
+    "Updating employee records: Stays yours"
+   ],
+   "offer": [
+    {
+     "name": "Onboarding new hires, run from one checklist",
+     "pieces": [
+      "Your new hire checklist, ready to copy for each one",
+      "Your new hire messages, written for you"
+     ]
+    },
+    {
+     "name": "Handling policy questions, answered from your own documents",
+     "pieces": [
+      "Your policy assistant in Claude, set up with your own documents",
+      "Your policy instructions, so it answers only from them"
+     ]
+    }
+   ],
+   "failed": []
+  },
+  "kayla": {
+   "screens": 5,
+   "jobSeconds": 2.3,
+   "readSeconds": 5.4,
+   "attempts": 1,
+   "responsibilities": 8,
+   "levels": [
+    "Quotes and estimates: Build once, reuse",
+    "Invoicing customers: Build once, reuse",
+    "Electrical service calls: Build once, reuse",
+    "Ordering parts and supplies: Build once, reuse",
+    "Texting homeowners: Build once, reuse",
+    "Chasing payment: Write it with AI",
+    "Asking for reviews: Build once, reuse",
+    "Scheduling jobs: Stays yours"
+   ],
+   "offer": [
+    {
+     "name": "Quotes and estimates, from one template",
+     "pieces": [
+      "Your quote template, with the blanks marked"
+     ]
+    },
+    {
+     "name": "Electrical service calls, run from one checklist",
+     "pieces": [
+      "Your service call checklist, ready to copy for each one",
+      "Your service call messages, written for you"
+     ]
+    }
+   ],
+   "failed": []
+  },
+  "property": {
+   "screens": 9,
+   "jobSeconds": 1.8,
+   "readSeconds": 5.2,
+   "attempts": 1,
+   "responsibilities": 6,
+   "levels": [
+    "Repairs: Build once, reuse",
+    "Inspections: Build once, reuse",
+    "Tenant requests: Build once, reuse",
+    "Move ins and outs: Build once, reuse",
+    "Rent collection: Build once, reuse",
+    "Maintenance scheduling: Build once, reuse"
+   ],
+   "offer": [
+    {
+     "name": "Your repair requests, collected in one place",
+     "pieces": [
+      "Your repair form, written for you",
+      "Your repair list, all in one place"
+     ]
+    },
+    {
+     "name": "Inspections, run from one checklist",
+     "pieces": [
+      "Your inspection checklist, ready to copy for each one",
+      "Your inspection messages, written for you"
+     ]
+    }
+   ],
+   "failed": []
+  }
+ }
+}

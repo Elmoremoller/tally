@@ -1,0 +1,625 @@
+{
+ "name": "property",
+ "persona": {
+  "who": "A job never tested before: a property manager for 40 rental apartments. Builder who uses ChatGPT some weeks, Gmail and Google Sheets, computer and phone, her company is fine with AI.",
+  "bio": "Dana, 41, property manager for a small company that owns 40 rental apartments in three buildings. Tenants text and email her about repairs all day, and she books the plumber or the handyman and tells the tenant when they are coming. She does a walk through of each building every month with a checklist, sends rent reminders on the 1st, handles move ins and move outs with a key handover and an inspection, and answers the same questions about parking, trash days and laundry. She keeps a repair log and the rent roll in Google Sheets and works from Gmail. Repair requests and the monthly walk throughs take the most time. She uses ChatGPT some weeks for tricky emails. Her company is fine with AI, but no one has said anything about connecting her Gmail.",
+  "job": "Property manager for 40 rental apartments in three buildings. Repairs, tenants, move ins and outs, inspections.",
+  "level": "uses",
+  "device": "both",
+  "canUse": "yes",
+  "connect": "not_sure"
+ },
+ "jobRead": {
+  "hers": [
+   "Repairs",
+   "Tenant requests",
+   "Move ins and outs",
+   "Inspections"
+  ],
+  "usual": [
+   "Rent collection",
+   "Lease renewals",
+   "Maintenance scheduling",
+   "Vendor invoices",
+   "Tenant communications",
+   "Building budgets",
+   "Utility bills",
+   "Unit turnovers"
+  ],
+  "apps": [
+   "AppFolio",
+   "Buildium",
+   "QuickBooks",
+   "Excel",
+   "Outlook",
+   "Google Drive",
+   "Zillow Rental Manager",
+   "Microsoft Teams"
+  ],
+  "worksFor": "unclear"
+ },
+ "jobReadFallback": false,
+ "jobSeconds": 1.8,
+ "readSeconds": 5.2,
+ "attempts": 1,
+ "steps": [
+  "job",
+  "level",
+  "done",
+  "tools",
+  "repeats",
+  "most",
+  "where",
+  "can_use",
+  "connect"
+ ],
+ "answers": {
+  "job": "Property manager for 40 rental apartments in three buildings. Repairs, tenants, move ins and outs, inspections.",
+  "experience": "uses",
+  "qas": [
+   {
+    "id": "level",
+    "title": "Where are you with AI?",
+    "picked": [
+     "Use it some weeks"
+    ],
+    "text": null,
+    "shown": [
+     "Never used it",
+     "Tried it a few times",
+     "Use it some weeks",
+     "Use it most days"
+    ]
+   },
+   {
+    "id": "done",
+    "title": "What have you already done with AI?",
+    "picked": [
+     "Pasted in my own text"
+    ],
+    "text": null,
+    "shown": [
+     "Pasted in my own text",
+     "Saved instructions about myself",
+     "Made a project",
+     "Connected an app",
+     "Pay for a plan",
+     "None of these"
+    ]
+   },
+   {
+    "id": "tools",
+    "title": "Which AI have you used?",
+    "picked": [
+     "ChatGPT"
+    ],
+    "text": null,
+    "shown": [
+     "ChatGPT",
+     "Copilot",
+     "Gemini",
+     "Claude",
+     "Other",
+     "None yet",
+     "Not sure"
+    ]
+   },
+   {
+    "id": "repeats",
+    "title": "What do you do over and over, every day or every week?",
+    "picked": [
+     "Repairs",
+     "Tenant requests",
+     "Move ins and outs",
+     "Inspections",
+     "Rent collection",
+     "Maintenance scheduling"
+    ],
+    "text": null,
+    "shown": [
+     "Repairs",
+     "Tenant requests",
+     "Move ins and outs",
+     "Inspections",
+     "Rent collection",
+     "Lease renewals",
+     "Maintenance scheduling",
+     "Vendor invoices"
+    ]
+   },
+   {
+    "id": "most",
+    "title": "Which would save you the most time if it got easier?",
+    "picked": [
+     "Repairs",
+     "Inspections"
+    ],
+    "text": null,
+    "shown": [
+     "Repairs",
+     "Tenant requests",
+     "Move ins and outs",
+     "Inspections",
+     "Rent collection",
+     "Maintenance scheduling"
+    ]
+   },
+   {
+    "id": "often",
+    "title": "How often do you do this?",
+    "picked": [
+     "Many times a day"
+    ],
+    "text": null,
+    "shown": [
+     "Many times a day",
+     "About once a day",
+     "A few times a week",
+     "Once a week or less"
+    ]
+   },
+   {
+    "id": "where",
+    "title": "Where does your work happen?",
+    "picked": [
+     "Text messages",
+     "Gmail",
+     "Google Sheets",
+     "Google Drive",
+     "In person"
+    ],
+    "text": null,
+    "shown": [
+     "AppFolio",
+     "Buildium",
+     "QuickBooks",
+     "Excel",
+     "Outlook",
+     "Google Drive",
+     "Zillow Rental Manager",
+     "Microsoft Teams",
+     "Text messages",
+     "Gmail",
+     "Google Sheets",
+     "Instagram",
+     "A work system",
+     "Paper",
+     "In person"
+    ]
+   },
+   {
+    "id": "device",
+    "title": "Do you work on a phone, a computer or both?",
+    "picked": [
+     "Both"
+    ],
+    "text": null,
+    "shown": [
+     "Phone only",
+     "Computer only",
+     "Both"
+    ]
+   },
+   {
+    "id": "can_use",
+    "title": "Can you use AI for your work?",
+    "picked": [
+     "Yes"
+    ],
+    "text": null,
+    "shown": [
+     "Yes",
+     "Not sure",
+     "No, it’s restricted",
+     "I work for myself"
+    ]
+   },
+   {
+    "id": "connect",
+    "title": "Would your company let you link your work email to an AI tool?",
+    "picked": [
+     "Not sure"
+    ],
+    "text": null,
+    "shown": [
+     "Yes",
+     "No",
+     "Not sure"
+    ]
+   }
+  ],
+  "mostWanted": [
+   "Repairs",
+   "Inspections"
+  ],
+  "worksFor": "employer",
+  "aiTools": [
+   "chatgpt"
+  ],
+  "aiToolsOther": null,
+  "aiPolicy": "encouraged",
+  "often": "many_a_day"
+ },
+ "intake": {
+  "role_summary": "You’re the property manager for 40 rental apartments across three buildings, keeping repairs, tenants, move ins and outs and inspections running.",
+  "tasks": [
+   {
+    "name": "Repairs",
+    "ai": true,
+    "private": false,
+    "kind": "repeat_texts",
+    "patterns": [
+     6,
+     5
+    ]
+   },
+   {
+    "name": "Inspections",
+    "ai": true,
+    "private": false,
+    "kind": "notes_to_table",
+    "patterns": [
+     5,
+     9
+    ]
+   },
+   {
+    "name": "Tenant requests",
+    "ai": true,
+    "private": false,
+    "kind": "repeat_texts",
+    "patterns": [
+     6
+    ]
+   },
+   {
+    "name": "Move ins and outs",
+    "ai": true,
+    "private": false,
+    "kind": null,
+    "patterns": [
+     5
+    ]
+   },
+   {
+    "name": "Rent collection",
+    "ai": true,
+    "private": false,
+    "kind": "email_follow_ups",
+    "patterns": [
+     7,
+     8
+    ]
+   },
+   {
+    "name": "Maintenance scheduling",
+    "ai": true,
+    "private": false,
+    "kind": null,
+    "patterns": [
+     7
+    ]
+   }
+  ],
+  "first_win": {
+   "task": "Repairs",
+   "intro": "Here are the questions for your repair request form.",
+   "draft": "What is the apartment number? [building] [unit]\nWhat is the problem? (Plumbing, Electrical, Heating or cooling, Appliance, Other)\nHow urgent is it? (Emergency, Soon, Whenever suits)\nCan we enter while you are out? (Yes, No, Call first)\nBest number to reach you? [phone]\nPhotos of the problem? (Yes, No)"
+  },
+  "first_step": null,
+  "map": [
+   {
+    "task": "Repairs",
+    "phrase": "repair requests",
+    "thing": "repair",
+    "today": "Repairs reach you many times a day, by text and email.",
+    "withPath": "Repair requests collected in one place with the details you need.",
+    "ai": true,
+    "private": false,
+    "kind": "repeat_texts",
+    "patterns": [
+     6,
+     5
+    ]
+   },
+   {
+    "task": "Inspections",
+    "phrase": null,
+    "thing": "inspection",
+    "today": "Your inspection notes end up in sheets and drive files by hand.",
+    "withPath": "Inspection checklists that turn straight into a tidy sheet.",
+    "ai": true,
+    "private": false,
+    "kind": "notes_to_table",
+    "patterns": [
+     5,
+     9
+    ]
+   },
+   {
+    "task": "Tenant requests",
+    "phrase": "tenant requests",
+    "thing": "tenant request",
+    "today": "Tenant requests come in one by one across texts and email.",
+    "withPath": "Tenant requests gathered in one place for you to review.",
+    "ai": true,
+    "private": false,
+    "kind": "repeat_texts",
+    "patterns": [
+     6
+    ]
+   },
+   {
+    "task": "Move ins and outs",
+    "phrase": null,
+    "thing": null,
+    "today": "Move ins and outs repeat across all 40 apartments in your buildings.",
+    "withPath": "One checklist for each move in and move out, run the same way every time.",
+    "ai": true,
+    "private": false,
+    "kind": null,
+    "patterns": [
+     5
+    ]
+   },
+   {
+    "task": "Rent collection",
+    "phrase": null,
+    "thing": "rent",
+    "today": "You chase rent across 40 apartments through texts and email.",
+    "withPath": "Rent reminders sent on schedule, with follow ups tracked for you.",
+    "ai": true,
+    "private": false,
+    "kind": "email_follow_ups",
+    "patterns": [
+     7,
+     8
+    ]
+   },
+   {
+    "task": "Maintenance scheduling",
+    "phrase": "maintenance schedule",
+    "thing": "maintenance",
+    "today": "Maintenance jobs are scheduled across three buildings in your own sheets.",
+    "withPath": "Routine maintenance on a schedule so nothing gets missed.",
+    "ai": true,
+    "private": false,
+    "kind": null,
+    "patterns": [
+     7
+    ]
+   }
+  ],
+  "needs_follow_up": false,
+  "follow_up_question": null
+ },
+ "free": {
+  "firstWin": {
+   "task": "Repairs",
+   "intro": "Here are the questions for your repair request form.",
+   "draft": "What is the apartment number? [building] [unit]\nWhat is the problem? (Plumbing, Electrical, Heating or cooling, Appliance, Other)\nHow urgent is it? (Emergency, Soon, Whenever suits)\nCan we enter while you are out? (Yes, No, Call first)\nBest number to reach you? [phone]\nPhotos of the problem? (Yes, No)"
+  },
+  "firstStep": null,
+  "map": [
+   {
+    "task": "Repairs",
+    "phrase": "repair requests",
+    "thing": "repair",
+    "today": "Repairs reach you many times a day, by text and email.",
+    "withPath": "Repair requests collected in one place with the details you need.",
+    "ai": true,
+    "private": false,
+    "kind": "repeat_texts",
+    "patterns": [
+     6,
+     5
+    ],
+    "level": 3,
+    "waits": false,
+    "recipe": null,
+    "held": null,
+    "askFirst": false,
+    "workflow": "pattern_6",
+    "stays": null
+   },
+   {
+    "task": "Inspections",
+    "phrase": null,
+    "thing": "inspection",
+    "today": "Your inspection notes end up in sheets and drive files by hand.",
+    "withPath": "Inspection checklists that turn straight into a tidy sheet.",
+    "ai": true,
+    "private": false,
+    "kind": "notes_to_table",
+    "patterns": [
+     5,
+     9
+    ],
+    "level": 3,
+    "waits": false,
+    "recipe": null,
+    "held": null,
+    "askFirst": false,
+    "workflow": "pattern_5",
+    "stays": null
+   },
+   {
+    "task": "Tenant requests",
+    "phrase": "tenant requests",
+    "thing": "tenant request",
+    "today": "Tenant requests come in one by one across texts and email.",
+    "withPath": "Tenant requests gathered in one place for you to review.",
+    "ai": true,
+    "private": false,
+    "kind": "repeat_texts",
+    "patterns": [
+     6
+    ],
+    "level": 3,
+    "waits": false,
+    "recipe": null,
+    "held": null,
+    "askFirst": false,
+    "workflow": "pattern_6",
+    "stays": null
+   },
+   {
+    "task": "Move ins and outs",
+    "phrase": null,
+    "thing": null,
+    "today": "Move ins and outs repeat across all 40 apartments in your buildings.",
+    "withPath": "One checklist for each move in and move out, run the same way every time.",
+    "ai": true,
+    "private": false,
+    "kind": null,
+    "patterns": [
+     5
+    ],
+    "level": 3,
+    "waits": false,
+    "recipe": null,
+    "held": null,
+    "askFirst": false,
+    "workflow": "pattern_5",
+    "stays": null
+   },
+   {
+    "task": "Rent collection",
+    "phrase": null,
+    "thing": "rent",
+    "today": "You chase rent across 40 apartments through texts and email.",
+    "withPath": "Rent reminders sent on schedule, with follow ups tracked for you.",
+    "ai": true,
+    "private": false,
+    "kind": "email_follow_ups",
+    "patterns": [
+     7,
+     8
+    ],
+    "level": 3,
+    "waits": false,
+    "recipe": null,
+    "held": "connect",
+    "askFirst": false,
+    "workflow": "pattern_7",
+    "stays": null
+   },
+   {
+    "task": "Maintenance scheduling",
+    "phrase": "maintenance schedule",
+    "thing": "maintenance",
+    "today": "Maintenance jobs are scheduled across three buildings in your own sheets.",
+    "withPath": "Routine maintenance on a schedule so nothing gets missed.",
+    "ai": true,
+    "private": false,
+    "kind": null,
+    "patterns": [
+     7
+    ],
+    "level": 3,
+    "waits": false,
+    "recipe": null,
+    "held": null,
+    "askFirst": false,
+    "workflow": "pattern_7",
+    "stays": null
+   }
+  ],
+  "setups": [
+   "Your repair requests, collected in one place",
+   "Inspections, run from one checklist"
+  ],
+  "prep": [],
+  "offer": [
+   {
+    "name": "Your repair requests, collected in one place",
+    "pieces": [
+     "Your repair form, written for you",
+     "Your repair list, all in one place"
+    ]
+   },
+   {
+    "name": "Inspections, run from one checklist",
+    "pieces": [
+     "Your inspection checklist, ready to copy for each one",
+     "Your inspection messages, written for you"
+    ]
+   }
+  ],
+  "freePlan": false,
+  "tool": "chatgpt",
+  "track": "builder"
+ },
+ "checks": [
+  {
+   "id": "screens",
+   "pass": true,
+   "detail": "9 screens (job, level, done, tools, repeats, most, where, can_use, connect), at most 9 for a builder"
+  },
+  {
+   "id": "job_read",
+   "pass": true,
+   "detail": "4 of hers and 8 usual, 1.8 s"
+  },
+  {
+   "id": "fast",
+   "pass": true,
+   "detail": "free result in 5.2 s, 1 attempt"
+  },
+  {
+   "id": "no_stays_on_better_rows",
+   "pass": true,
+   "detail": "no row that can run better says it stays hers"
+  },
+  {
+   "id": "two_workflows",
+   "pass": true,
+   "detail": "2 workflows offered, 6 rows can run smoother"
+  },
+  {
+   "id": "read_as_responsibilities",
+   "pass": true,
+   "detail": "every row has its patterns"
+  },
+  {
+   "id": "offer_pieces",
+   "pass": true,
+   "detail": "2 workflows, each with pieces"
+  },
+  {
+   "id": "pieces_her_words",
+   "pass": true,
+   "detail": "things: repair; inspection; tenant request; (none, Move ins and outs); rent; maintenance"
+  },
+  {
+   "id": "no_dash",
+   "pass": true,
+   "detail": "no dash in the map or offer"
+  },
+  {
+   "id": "no_time_promise",
+   "pass": true,
+   "detail": "no minutes or hours on the map"
+  },
+  {
+   "id": "level3_not_writing_help",
+   "pass": true,
+   "detail": "none read like writing help"
+  },
+  {
+   "id": "no_click_paths",
+   "pass": true,
+   "detail": "no menu words on the map"
+  },
+  {
+   "id": "ask_first_only_with_ai",
+   "pass": true,
+   "detail": "no row asks first"
+  },
+  {
+   "id": "starter_at_most_3",
+   "pass": true,
+   "detail": "a Starter stops at level 3"
+  }
+ ]
+}
