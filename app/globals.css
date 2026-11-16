@@ -5541,8 +5541,22 @@
     letter-spacing: var(--tr-micro);
     color: var(--slate);
   }
-  .win-map-level + .win-map-task {
+  .win-map-level + .win-map-task,
+  .win-map-tags + .win-map-task {
     margin-top: -0.25rem;
+  }
+  /* The level tag and, on the rows her offer names, In your path, side by side (Phase 8). */
+  .win-map-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.375rem;
+  }
+  .win-map-tags:empty {
+    display: none;
+  }
+  .win-map-in {
+    background: var(--slate);
+    color: var(--off-white);
   }
   /* Why a rule held the level down, or to ask her company first: a few quiet words under the lines. */
   .win-map-why {

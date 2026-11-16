@@ -10,27 +10,22 @@
   "connect": "not_sure"
  },
  "jobRead": {
-  "hers": [
+  "hers": [],
+  "usual": [
    "Onboarding new hires",
    "Payroll questions",
+   "Leave requests",
    "Benefits enrollment",
-   "Managing time off requests"
-  ],
-  "usual": [
-   "Scheduling interviews",
-   "Updating employee records",
-   "Handling policy questions",
-   "Preparing offer letters",
-   "Tracking training completions",
-   "Running performance review reminders",
-   "Processing expense reports",
-   "Managing exit paperwork"
+   "Employee records",
+   "Interview scheduling",
+   "Policy updates",
+   "Training reminders"
   ],
   "apps": [
    "Workday",
-   "Excel",
+   "Microsoft Excel",
    "Outlook",
-   "Teams",
+   "Microsoft Teams",
    "ADP",
    "DocuSign",
    "SharePoint",
@@ -39,7 +34,7 @@
   "worksFor": "employer"
  },
  "jobReadFallback": false,
- "jobSeconds": 1.8,
+ "jobSeconds": 1.4,
  "readSeconds": 4.5,
  "attempts": 1,
  "steps": [
@@ -74,22 +69,21 @@
     "title": "What do you do over and over, every day or every week?",
     "picked": [
      "Onboarding new hires",
+     "Leave requests",
      "Benefits enrollment",
-     "Scheduling interviews",
-     "Updating employee records",
-     "Handling policy questions",
-     "Preparing offer letters"
+     "Employee records",
+     "Interview scheduling"
     ],
     "text": null,
     "shown": [
      "Onboarding new hires",
      "Payroll questions",
+     "Leave requests",
      "Benefits enrollment",
-     "Managing time off requests",
-     "Scheduling interviews",
-     "Updating employee records",
-     "Handling policy questions",
-     "Preparing offer letters"
+     "Employee records",
+     "Interview scheduling",
+     "Policy updates",
+     "Training reminders"
     ]
    },
    {
@@ -97,23 +91,22 @@
     "title": "Which would save you the most time if it got easier?",
     "picked": [
      "Onboarding new hires",
-     "Handling policy questions"
+     "Benefits enrollment"
     ],
     "text": null,
     "shown": [
      "Onboarding new hires",
+     "Leave requests",
      "Benefits enrollment",
-     "Scheduling interviews",
-     "Updating employee records",
-     "Handling policy questions",
-     "Preparing offer letters"
+     "Employee records",
+     "Interview scheduling"
     ]
    },
    {
     "id": "often",
     "title": "How often do you do this?",
     "picked": [
-     "About once a day"
+     "A few times a week"
     ],
     "text": null,
     "shown": [
@@ -127,16 +120,16 @@
     "id": "where",
     "title": "Where does your work happen?",
     "picked": [
-     "Excel",
+     "Microsoft Excel",
      "Outlook",
      "A work system"
     ],
     "text": null,
     "shown": [
      "Workday",
-     "Excel",
+     "Microsoft Excel",
      "Outlook",
-     "Teams",
+     "Microsoft Teams",
      "ADP",
      "DocuSign",
      "SharePoint",
@@ -192,7 +185,7 @@
   ],
   "mostWanted": [
    "Onboarding new hires",
-   "Handling policy questions"
+   "Benefits enrollment"
   ],
   "worksFor": "employer",
   "aiTools": [
@@ -200,72 +193,61 @@
   ],
   "aiToolsOther": null,
   "aiPolicy": "no_idea",
-  "often": "daily"
+  "often": "few_a_week"
  },
  "intake": {
-  "role_summary": "You’re the HR coordinator for about 300 people at a logistics company, keeping hiring, benefits and records running day to day.",
+  "role_summary": "You’re the HR coordinator for about 300 people at a logistics company, keeping onboarding, benefits, leave and records running smoothly.",
   "tasks": [
    {
     "name": "Onboarding new hires",
     "ai": true,
     "private": false,
-    "kind": null,
+    "kind": "repeat_emails",
     "patterns": [
      5,
-     2
-    ]
-   },
-   {
-    "name": "Handling policy questions",
-    "ai": true,
-    "private": false,
-    "kind": null,
-    "patterns": [
-     10
+     1
     ]
    },
    {
     "name": "Benefits enrollment",
     "ai": true,
     "private": false,
-    "kind": null,
+    "kind": "repeat_emails",
     "patterns": [
-     5,
-     7
+     6,
+     1
     ]
    },
    {
-    "name": "Scheduling interviews",
+    "name": "Leave requests",
+    "ai": true,
+    "private": false,
+    "kind": null,
+    "patterns": [
+     6
+    ]
+   },
+   {
+    "name": "Employee records",
+    "ai": false,
+    "private": true,
+    "kind": null,
+    "patterns": []
+   },
+   {
+    "name": "Interview scheduling",
     "ai": true,
     "private": false,
     "kind": "repeat_emails",
     "patterns": [
      1
     ]
-   },
-   {
-    "name": "Preparing offer letters",
-    "ai": true,
-    "private": false,
-    "kind": "repeat_writing",
-    "patterns": [
-     2
-    ]
-   },
-   {
-    "name": "Updating employee records",
-    "ai": false,
-    "private": true,
-    "kind": null,
-    "patterns": [
-     9
-    ]
    }
   ],
   "first_win": {
    "task": "Onboarding new hires",
-   "intro": "Here is a starting checklist for onboarding new hires.",
-   "draft": "Confirm start date and send welcome email\nSend offer letter for signature [signing deadline]\nCollect tax and ID forms (Complete, Partly complete, Not started)\nSet up benefits enrollment window [enrollment dates]\nBook orientation and first day meeting [day]\nShare policy handbook [handbook link]\nCheck IT access and equipment ready (Ready, Not ready)\nSchedule 30 day check in [date]"
+   "intro": "Here are the steps for your new hire checklist.",
+   "draft": "Welcome email, day 0\nSend login details and first day plan, day 1\nBenefits enrollment reminder, day 3\nManager check in, day 7\nFirst month review, day 30\nHR system access confirmed, day 1"
   },
   "first_step": null,
   "map": [
@@ -273,80 +255,65 @@
     "task": "Onboarding new hires",
     "phrase": null,
     "thing": "new hire",
-    "today": "You onboard new hires about once a day, from your own count.",
-    "withPath": "One onboarding checklist and set of welcome documents, ready for each new hire.",
+    "today": "You onboard new hires a few times a week, all on your own.",
+    "withPath": "New hire steps run from one checklist you follow each time.",
     "ai": true,
     "private": false,
-    "kind": null,
+    "kind": "repeat_emails",
     "patterns": [
      5,
-     2
-    ]
-   },
-   {
-    "task": "Handling policy questions",
-    "phrase": null,
-    "thing": "policy",
-    "today": "You answer policy questions as they come in, looking things up each time.",
-    "withPath": "Policy questions answered from your own handbook documents.",
-    "ai": true,
-    "private": false,
-    "kind": null,
-    "patterns": [
-     10
+     1
     ]
    },
    {
     "task": "Benefits enrollment",
-    "phrase": "benefits enrollment",
-    "thing": "benefits",
-    "today": "You run benefits enrollment for employees as it comes round.",
-    "withPath": "Enrollment steps and reminders laid out on a set schedule.",
+    "phrase": null,
+    "thing": "benefits enrollment",
+    "today": "You answer benefits enrollment questions as they come in, one by one.",
+    "withPath": "Benefits questions collected in one place with saved replies ready.",
+    "ai": true,
+    "private": false,
+    "kind": "repeat_emails",
+    "patterns": [
+     6,
+     1
+    ]
+   },
+   {
+    "task": "Leave requests",
+    "phrase": "leave requests",
+    "thing": "leave request",
+    "today": "Leave requests reach you one at a time from employees.",
+    "withPath": "Leave requests collected in one place for you to review.",
     "ai": true,
     "private": false,
     "kind": null,
     "patterns": [
-     5,
-     7
+     6
     ]
    },
    {
-    "task": "Scheduling interviews",
+    "task": "Employee records",
+    "phrase": "employee records",
+    "thing": "employee record",
+    "today": "You keep employee records up to date in your own systems.",
+    "withPath": "This stays yours.",
+    "ai": false,
+    "private": true,
+    "kind": null,
+    "patterns": []
+   },
+   {
+    "task": "Interview scheduling",
     "phrase": null,
     "thing": "interview",
-    "today": "You schedule interviews as candidates come in, one at a time.",
-    "withPath": "Interview confirmation emails ready to send with the times filled in.",
+    "today": "You schedule interviews by email, one candidate at a time.",
+    "withPath": "Interview emails you send again and again, ready to reuse.",
     "ai": true,
     "private": false,
     "kind": "repeat_emails",
     "patterns": [
      1
-    ]
-   },
-   {
-    "task": "Preparing offer letters",
-    "phrase": "offer letters",
-    "thing": "offer letter",
-    "today": "You prepare offer letters for each new hire, one at a time.",
-    "withPath": "One offer letter template with the details changed for each hire.",
-    "ai": true,
-    "private": false,
-    "kind": "repeat_writing",
-    "patterns": [
-     2
-    ]
-   },
-   {
-    "task": "Updating employee records",
-    "phrase": "employee records",
-    "thing": "employee record",
-    "today": "You keep employee records up to date in your own sheets.",
-    "withPath": "This stays yours.",
-    "ai": false,
-    "private": true,
-    "kind": null,
-    "patterns": [
-     9
     ]
    }
   ],
@@ -356,8 +323,8 @@
  "free": {
   "firstWin": {
    "task": "Onboarding new hires",
-   "intro": "Here is a starting checklist for onboarding new hires.",
-   "draft": "Confirm start date and send welcome email\nSend offer letter for signature [signing deadline]\nCollect tax and ID forms (Complete, Partly complete, Not started)\nSet up benefits enrollment window [enrollment dates]\nBook orientation and first day meeting [day]\nShare policy handbook [handbook link]\nCheck IT access and equipment ready (Ready, Not ready)\nSchedule 30 day check in [date]"
+   "intro": "Here are the steps for your new hire checklist.",
+   "draft": "Welcome email, day 0\nSend login details and first day plan, day 1\nBenefits enrollment reminder, day 3\nManager check in, day 7\nFirst month review, day 30\nHR system access confirmed, day 1"
   },
   "firstStep": null,
   "map": [
@@ -365,14 +332,14 @@
     "task": "Onboarding new hires",
     "phrase": null,
     "thing": "new hire",
-    "today": "You onboard new hires about once a day, from your own count.",
-    "withPath": "One onboarding checklist and set of welcome documents, ready for each new hire.",
+    "today": "You onboard new hires a few times a week, all on your own.",
+    "withPath": "New hire steps run from one checklist you follow each time.",
     "ai": true,
     "private": false,
-    "kind": null,
+    "kind": "repeat_emails",
     "patterns": [
      5,
-     2
+     1
     ],
     "level": 3,
     "waits": false,
@@ -380,55 +347,55 @@
     "held": null,
     "askFirst": false,
     "workflow": "pattern_5",
-    "stays": null
-   },
-   {
-    "task": "Handling policy questions",
-    "phrase": null,
-    "thing": "policy",
-    "today": "You answer policy questions as they come in, looking things up each time.",
-    "withPath": "Policy questions answered from your own handbook documents.",
-    "ai": true,
-    "private": false,
-    "kind": null,
-    "patterns": [
-     10
-    ],
-    "level": 3,
-    "waits": false,
-    "recipe": null,
-    "held": null,
-    "askFirst": true,
-    "workflow": "pattern_10",
     "stays": null
    },
    {
     "task": "Benefits enrollment",
-    "phrase": "benefits enrollment",
-    "thing": "benefits",
-    "today": "You run benefits enrollment for employees as it comes round.",
-    "withPath": "Enrollment steps and reminders laid out on a set schedule.",
+    "phrase": null,
+    "thing": "benefits enrollment",
+    "today": "You answer benefits enrollment questions as they come in, one by one.",
+    "withPath": "Benefits questions collected in one place with saved replies ready.",
     "ai": true,
     "private": false,
-    "kind": null,
+    "kind": "repeat_emails",
     "patterns": [
-     5,
-     7
+     6,
+     1
     ],
     "level": 3,
     "waits": false,
     "recipe": null,
     "held": null,
     "askFirst": false,
-    "workflow": "pattern_5",
+    "workflow": "pattern_6",
     "stays": null
    },
    {
-    "task": "Scheduling interviews",
+    "task": "Leave requests",
+    "phrase": "leave requests",
+    "thing": "leave request",
+    "today": "Leave requests reach you one at a time from employees.",
+    "withPath": "Leave requests collected in one place for you to review.",
+    "ai": true,
+    "private": false,
+    "kind": null,
+    "patterns": [
+     6
+    ],
+    "level": 3,
+    "waits": false,
+    "recipe": null,
+    "held": null,
+    "askFirst": false,
+    "workflow": "pattern_6",
+    "stays": null
+   },
+   {
+    "task": "Interview scheduling",
     "phrase": null,
     "thing": "interview",
-    "today": "You schedule interviews as candidates come in, one at a time.",
-    "withPath": "Interview confirmation emails ready to send with the times filled in.",
+    "today": "You schedule interviews by email, one candidate at a time.",
+    "withPath": "Interview emails you send again and again, ready to reuse.",
     "ai": true,
     "private": false,
     "kind": "repeat_emails",
@@ -444,37 +411,15 @@
     "stays": null
    },
    {
-    "task": "Preparing offer letters",
-    "phrase": "offer letters",
-    "thing": "offer letter",
-    "today": "You prepare offer letters for each new hire, one at a time.",
-    "withPath": "For your offer letters, you hand it the job, and it writes in your voice with your details already in.",
-    "ai": true,
-    "private": false,
-    "kind": "repeat_writing",
-    "patterns": [
-     2
-    ],
-    "level": 3,
-    "waits": false,
-    "recipe": "saved_assistant",
-    "held": null,
-    "askFirst": true,
-    "workflow": null,
-    "stays": null
-   },
-   {
-    "task": "Updating employee records",
+    "task": "Employee records",
     "phrase": "employee records",
     "thing": "employee record",
-    "today": "You keep employee records up to date in your own sheets.",
+    "today": "You keep employee records up to date in your own systems.",
     "withPath": "This stays yours.",
     "ai": false,
     "private": true,
     "kind": null,
-    "patterns": [
-     9
-    ],
+    "patterns": [],
     "level": 1,
     "waits": false,
     "recipe": null,
@@ -485,26 +430,24 @@
    }
   ],
   "setups": [
-   "Onboarding new hires, run from one checklist",
-   "Handling policy questions, answered from your own documents"
+   "Onboarding new hires, tracked from the start day",
+   "Benefits enrollment, collected in one place"
   ],
-  "prep": [
-   "Get Claude ready on your computer",
-   "Teach Claude who you are"
-  ],
+  "prep": [],
   "offer": [
    {
-    "name": "Onboarding new hires, run from one checklist",
+    "name": "Onboarding new hires, tracked from the start day",
     "pieces": [
-     "Your new hire checklist, ready to copy for each one",
-     "Your new hire messages, written for you"
+     "Your new hire tracker, one row for each new hire",
+     "Your new hire steps, each dated from the start day",
+     "Your new hire due dates, highlighted when they come round"
     ]
    },
    {
-    "name": "Handling policy questions, answered from your own documents",
+    "name": "Benefits enrollment, collected in one place",
     "pieces": [
-     "Your policy assistant in Claude, set up with your own documents",
-     "Your policy instructions, so it answers only from them"
+     "Your benefits enrollment form, written for you",
+     "Your benefits enrollment list, all in one place"
     ]
    }
   ],
@@ -521,7 +464,7 @@
   {
    "id": "job_read",
    "pass": true,
-   "detail": "4 of hers and 8 usual, 1.8 s"
+   "detail": "0 of hers and 8 usual, 1.4 s"
   },
   {
    "id": "fast",
@@ -536,7 +479,7 @@
   {
    "id": "two_workflows",
    "pass": true,
-   "detail": "2 workflows offered, 5 rows can run smoother"
+   "detail": "2 workflows offered, 4 rows can run smoother"
   },
   {
    "id": "read_as_responsibilities",
@@ -551,7 +494,7 @@
   {
    "id": "pieces_her_words",
    "pass": true,
-   "detail": "things: new hire; policy; benefits; interview; offer letter; employee record"
+   "detail": "things: new hire; benefits enrollment; leave request; interview; employee record"
   },
   {
    "id": "no_dash",
@@ -561,7 +504,7 @@
   {
    "id": "no_time_promise",
    "pass": true,
-   "detail": "no minutes or hours on the map"
+   "detail": "no minutes, hours or faster on the map"
   },
   {
    "id": "level3_not_writing_help",
@@ -574,9 +517,14 @@
    "detail": "no menu words on the map"
   },
   {
+   "id": "nothing_sounds_automatic",
+   "pass": true,
+   "detail": "no line says anything happens without her"
+  },
+  {
    "id": "ask_first_only_with_ai",
    "pass": true,
-   "detail": "Handling policy questions, Preparing offer letters"
+   "detail": "no row asks first"
   },
   {
    "id": "starter_at_most_3",

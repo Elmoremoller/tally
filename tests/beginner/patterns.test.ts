@@ -1,7 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { levelCopy, offerCopy, firstWinCopy } from "../../lib/beginner/copy";
-import { freeResultFor, offerTasks, orderMap, piecesFor, singularLast, smootherCount, thingFor, usesAiTool, workflowName } from "../../lib/beginner/free-result";
+import { freeResultFor, offerTasks, orderMap, piecesFor, singularLast, smootherCount, thingFor, usesAiTool, withoutDoubles, workflowName } from "../../lib/beginner/free-result";
 import { levelFor, withLevels, type LevelTask, type Who } from "../../lib/beginner/levels";
 import { PATTERN_IDS, PATTERN_WORKFLOWS, patternOf, placeFor, emailAppOf, type PatternId } from "../../lib/beginner/patterns";
 import type { QA } from "../../lib/beginner/quiz";
@@ -189,7 +189,7 @@ test("pieces use her own name for the thing, and fall back to her name for the t
   const her = { tool: "claude" as const, device: "both" as const, places: ["Outlook", "Excel"] };
   assert.deepEqual(piecesFor(map[2], her), ["Your supplier emails, written for you and saved in Outlook"]);
   const noThing = { ...map[3], thing: null };
-  assert.ok(piecesFor(noThing, her)[0].startsWith("Your company event checklist"), "her name for the task, made singular");
+  assert.ok(piecesFor(noThing, her)[0].startsWith("Your company event tracker"), "her name for the task, made singular");
   const level2: MapLine = { ...row("Writing posts", []), ai: true, level: 2, thing: "Instagram post" };
   assert.deepEqual(piecesFor(level2, her), ["Your Instagram post message for Claude, written for you"]);
   assert.equal(usesAiTool(level2), true);
@@ -213,9 +213,16 @@ test("thingFor keeps her words and turns down anything else", () => {
 test("every offer ending, piece and new line follows the copy rules", () => {
   const ctx = { thing: "lunch order", tool: "claude" as const, emailApp: "Outlook" as const, onPhone: false };
   const lines = [
-    ...PATTERN_IDS.flatMap((p) => [PATTERN_WORKFLOWS[p].offer, ...PATTERN_WORKFLOWS[p].pieces(ctx), ...PATTERN_WORKFLOWS[p].pieces({ ...ctx, onPhone: true })]),
+    ...PATTERN_IDS.flatMap((p) => [
+      PATTERN_WORKFLOWS[p].offer,
+      PATTERN_WORKFLOWS[p].direction,
+      ...PATTERN_WORKFLOWS[p].pieces(ctx),
+      ...PATTERN_WORKFLOWS[p].pieces({ ...ctx, onPhone: true }),
+    ]),
     offerCopy.whatYouGet(1),
     offerCopy.whatYouGet(2),
+    firstWinCopy.inPath,
+    firstWinCopy.couldChange,
     offerCopy.startsWithQuestions,
     offerCopy.toolMessage("lunch order", "Claude"),
     ...Object.values(levelCopy.stays),
@@ -259,4 +266,65 @@ test("singularLast makes the last word singular in front of a piece's word", () 
   assert.equal(singularLast("office lunches"), "office lunch");
   assert.equal(singularLast("tenant repair requests"), "tenant repair request");
   for (const same of ["sales", "news", "office cleaning", "payroll", "business"]) assert.equal(singularLast(same), same);
+});
+
+test("the offer line says plainly that Tally builds her top two, and promises nothing more (Karl, 2026-11-16)", () => {
+  assert.equal(offerCopy.whatYouGet(2), "Tally builds these two workflows with you, one step at a time.");
+  assert.equal(offerCopy.whatYouGet(1), "Tally builds this workflow with you, one step at a time.");
+  for (const n of [1, 2]) assert.ok(!/\b(every|all|rest|more|later)\b/i.test(offerCopy.whatYouGet(n)), "no promise past her top two");
+});
+
+test("events, onboarding and inspections get a tracker on a computer and a dated checklist on a phone", () => {
+  const ctx = { thing: "new hire", tool: "claude" as const, emailApp: null, onPhone: false };
+  assert.deepEqual(PATTERN_WORKFLOWS[5].pieces(ctx), [
+    "Your new hire tracker, one row for each new hire",
+    "Your new hire steps, each dated from the start day",
+    "Your new hire due dates, highlighted when they come round",
+  ]);
+  assert.deepEqual(PATTERN_WORKFLOWS[5].pieces({ ...ctx, onPhone: true }), [
+    "Your new hire checklist, each step with its day from the start",
+    "Your new hire reminders, one for each due day",
+  ]);
+  const map = withLevels([row("Onboarding", [5], { phrase: "onboarding", thing: "new hire" })], who({ device: "phone", places: ["Text messages"] }));
+  assert.ok(piecesFor(map[0], { tool: "claude", device: "phone", places: [] })[0].includes("checklist"));
+  assert.ok(!PATTERN_WORKFLOWS[5].offer.includes("checklist"));
+});
+
+test("a short word matches its plural, and a task with no trusted name loses its verb", () => {
+  assert.equal(thingFor("Quoting jobs", "job quote", "quoting jobs, ordering parts"), "job quote");
+  const her = { tool: "claude" as const, device: "phone" as const, places: [] };
+  const [quotes] = withLevels([row("Quoting jobs", [2], { phrase: null, thing: null })], who({ device: "phone", places: [] }));
+  assert.deepEqual(piecesFor(quotes, her), ["Your job template, with the blanks marked"]);
+});
+
+test("a word said twice where her name meets a piece is said once, so no piece reads order order", () => {
+  assert.equal(withoutDoubles("Your parts order order, ready to send"), "Your parts order, ready to send");
+  assert.equal(withoutDoubles("Your lunch order form, written for you"), "Your lunch order form, written for you");
+  assert.equal(thingFor("Onboarding", "new hire tracker", "onboarding new hires tracker"), null);
+  const [parts] = withLevels([row("Ordering parts", [3], { phrase: "parts orders", thing: "parts order" })], who());
+  assert.deepEqual(piecesFor(parts, { tool: "claude", device: "both", places: [] }), ["Your parts order list, with the usual amounts", "Your parts order, ready to send"]);
+});
+
+test("her top two come first on the map, then the rest, then what stays hers", () => {
+  const map = withLevels(
+    [row("Quoting jobs", [2]), row("Invoicing", [2]), row("Records", [], { ai: false, private: true }), row("Ordering parts", [3])],
+    who({ canUse: "self", connect: null }),
+  );
+  const top = orderMap(map, "Quoting jobs");
+  const second = offerTasks(top, "Quoting jobs")[1].task;
+  assert.deepEqual(top.slice(0, 2).map((m) => m.task), ["Quoting jobs", second]);
+  assert.equal(top[top.length - 1].task, "Records");
+});
+
+test("no pattern's own direction line sounds automatic or promises speed", async () => {
+  const { SOUNDS_AUTOMATIC, SPEED_PROMISE } = await import("../../lib/beginner/intake");
+  for (const p of PATTERN_IDS) {
+    assert.ok(!SOUNDS_AUTOMATIC.test(PATTERN_WORKFLOWS[p].direction), PATTERN_WORKFLOWS[p].direction);
+    assert.ok(!SPEED_PROMISE.test(PATTERN_WORKFLOWS[p].direction), PATTERN_WORKFLOWS[p].direction);
+  }
+});
+
+test("a tracker for a thing ending in ing says one row each time", () => {
+  const ctx = { thing: "vendor scheduling", tool: "claude" as const, emailApp: null, onPhone: false };
+  assert.equal(PATTERN_WORKFLOWS[5].pieces(ctx)[0], "Your vendor scheduling tracker, one row each time");
 });

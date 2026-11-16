@@ -15,8 +15,8 @@ import { mkdirSync, writeFileSync } from "node:fs";
 import Anthropic from "@anthropic-ai/sdk";
 import { cleanAnswers } from "../lib/beginner/answers";
 import { beginnerPaywall, beginnerQuestions as screens, firstWinCopy, levelCopy, offerCopy, repeatGroups } from "../lib/beginner/copy";
-import { orderMap, readAsResponsibilities, smootherCount, TIME_PROMISE } from "../lib/beginner/free-result";
-import { readBeginnerIntake, BEGINNER_INTAKE_VERSION } from "../lib/beginner/intake";
+import { offerTasks, orderMap, readAsResponsibilities, smootherCount, thingOf, TIME_PROMISE } from "../lib/beginner/free-result";
+import { readBeginnerIntake, BEGINNER_INTAKE_VERSION, SOUNDS_AUTOMATIC, SPEED_PROMISE } from "../lib/beginner/intake";
 import { PATTERNS } from "../lib/beginner/patterns";
 import { readJob, JOB_PROMPT_VERSION } from "../lib/beginner/questions-ai";
 import { jobReadOrFallback, mostOptions, PICK_MAX, repeatChoices, stepsFor, whereOptions, type QA } from "../lib/beginner/quiz";
@@ -293,18 +293,23 @@ function checksFor(o: Run): Check[] {
       "pieces_her_words",
       (free.offer ?? []).every((w, i) => {
         const m = free.map.find((row) => free.setups[i]?.startsWith(row.phrase ? `Your ${row.phrase}` : row.task));
-        return !m || w.pieces.every((p) => p.includes(m.thing ?? m.phrase ?? m.task.toLowerCase()));
+        return !m || w.pieces.every((p) => p.includes(thingOf(m)));
       }),
-      `things: ${free.map.map((m) => m.thing ?? `(none, ${m.phrase ?? m.task})`).join("; ")}`,
+      `things: ${free.map.map((m) => (m.thing ? m.thing : `${thingOf(m)} (from her name for the task)`)).join("; ")}`,
     ),
     check("no_dash", ![...offerLines(free), ...free.map.flatMap((m) => [m.today, m.withPath])].some((l) => DASH.test(l)), "no dash in the map or offer"),
-    check("no_time_promise", !free.map.some((m) => TIME_PROMISE.test(`${m.today} ${m.withPath}`)), "no minutes or hours on the map"),
+    check("no_time_promise", !free.map.some((m) => TIME_PROMISE.test(`${m.today} ${m.withPath}`) || SPEED_PROMISE.test(`${m.today} ${m.withPath}`)), "no minutes, hours or faster on the map"),
     check(
       "level3_not_writing_help",
       free.map.filter((m) => (m.level ?? 0) >= 3).every((m) => !WRITING_HELP.test(m.withPath)),
       free.map.filter((m) => (m.level ?? 0) >= 3 && WRITING_HELP.test(m.withPath)).map((m) => m.task).join(", ") || "none read like writing help",
     ),
     check("no_click_paths", !free.map.some((m) => MENU.test(m.withPath)), "no menu words on the map"),
+    check(
+      "nothing_sounds_automatic",
+      ![...free.map.map((m) => m.withPath), ...(free.offer ?? []).flatMap((o) => [o.name, ...o.pieces])].some((l) => SOUNDS_AUTOMATIC.test(l)),
+      free.map.filter((m) => SOUNDS_AUTOMATIC.test(m.withPath)).map((m) => `${m.task}: ${m.withPath}`).join("; ") || "no line says anything happens without her",
+    ),
     check(
       "ask_first_only_with_ai",
       free.map.every((m) => !m.askFirst || !m.workflow || m.workflow === "pattern_10"),
@@ -359,9 +364,11 @@ function markdown(o: Run, checks: Check[]): string {
     `### ${firstWinCopy.smoother(smootherCount(free.map))}`,
     "",
   ];
+  const inPath = new Set(offerTasks(rows, free.firstWin.task).map((m) => m.task));
   for (const m of rows) {
-    L.push(`**${m.task}** \`${lvl(m)}\``, "");
-    L.push(`* ${firstWinCopy.today}: ${m.today}`, `* ${firstWinCopy.withPath}: ${m.withPath}`);
+    L.push(`**${m.task}** \`${lvl(m)}\`${inPath.has(m.task) ? ` \`${firstWinCopy.inPath}\`` : ""}`, "");
+    L.push(`* ${firstWinCopy.today}: ${m.today}`);
+    if (!m.stays) L.push(`* ${inPath.has(m.task) ? firstWinCopy.withPath : firstWinCopy.couldChange}: ${m.withPath}`);
     if (m.stays) L.push(`* ${levelCopy.stays[m.stays]}`);
     if (m.held) L.push(`* ${levelCopy.held[m.held]}`);
     if (m.askFirst) L.push(`* ${levelCopy.askFirstNotSure}`);

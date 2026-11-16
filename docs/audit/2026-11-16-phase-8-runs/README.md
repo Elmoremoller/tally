@@ -32,12 +32,20 @@ The two group labels, "From what you told us" and "Often part of a job like your
 
 1. The eyebrow: Your week.
 2. The heading: "7 parts of your week can run smoother", "1 part of your week can run smoother", and with none, "Here is your week, as you told us".
-3. Why a row stays hers: "This holds other people’s private details, so it stays yours." and "Nothing repeats around this one, so it stays yours."
+3. The tag on her top two rows: "In your path". Every other row says "What could change" in place of "With your path" (Karl, 16 November).
+4. Why a row stays hers: "This holds other people’s private details, so it stays yours." and "Nothing repeats around this one, so it stays yours."
+5. Each pattern's own direction line, used when the model's line breaks a rule, in `lib/beginner/patterns.ts`. For example "A routine with how often each job comes round."
 
 **The offer**
 
-1. The line on what she gets (Karl's view): "You get every part of your map that can run smoother set up with you, one at a time, starting with these two." With one workflow it ends "starting with this one".
+1. The line on what she gets: "Tally builds these two workflows with you, one step at a time." With one workflow: "Tally builds this workflow with you, one step at a time."
 2. Under her workflows: "Your path starts with a few questions about how you do each one today."
-3. How each pattern ends a workflow's name, in `lib/beginner/patterns.ts`. For example "collected and counted", "counted against your usual amounts", "run from one checklist", "collected in one place", "on a schedule that reminds you".
-4. The pieces for each pattern and each checked recipe, in `lib/beginner/patterns.ts` and `lib/beginner/free-result.ts`. For example "Your lunch order form, written for you".
+3. How each pattern ends a workflow's name, in `lib/beginner/patterns.ts`. For example "collected and counted", "counted against your usual amounts", "tracked from the start day", "collected in one place", "on a schedule that reminds you", "with follow ups ready to send".
+4. The pieces for each pattern and each checked recipe, in `lib/beginner/patterns.ts` and `lib/beginner/free-result.ts`. For example "Your lunch order form, written for you". Events, onboarding and inspections get a tracker on a computer ("Your new hire tracker, one row for each new hire", "Your new hire steps, each dated from the start day", "Your new hire due dates, highlighted when they come round") and a dated checklist on a phone only ("Your new hire checklist, each step with its day from the start", "Your new hire reminders, one for each due day").
 5. The piece for a row she writes with AI: "Your quote message for Claude, written for you".
+
+## The tracker, checked against the vendors' pages on 16 November 2026
+
+* Excel on Windows: a formula rule highlights a date once it has come ([Microsoft](https://support.microsoft.com/en-us/excel/use-conditional-formatting-to-highlight-information-in-excel)), and a date plus a number of days gives a later date ([Microsoft](https://support.microsoft.com/en-us/excel/add-or-subtract-dates)).
+* Google Sheets on a computer and on Android: custom formula rules ([Google](https://support.google.com/docs/answer/78413?hl=en&co=GENIE.Platform%3DDesktop)). On an iPhone the app shows rules but cannot make them ([Google](https://support.google.com/docs/answer/78413?hl=en&co=GENIE.Platform%3DiOS)), so Next due, the earliest date left in a row ([MIN](https://support.google.com/docs/answer/3094017?hl=en)), shows what is due without a highlight.
+* Not yet checked: Excel for the web and Excel on a phone. Phase 9 checks these.

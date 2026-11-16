@@ -9,6 +9,8 @@ import {
   describeBeginnerIntake,
   OPENINGS_PATTERN,
   RESPONSIBILITIES_MAX,
+  SOUNDS_AUTOMATIC,
+  SPEED_PROMISE,
   withoutSignOff,
   withoutStays,
   type BeginnerIntakeInput,
@@ -181,9 +183,15 @@ test("a short preview, like a form's three questions, is enough", () => {
   assert.equal(read(raw())?.first_win?.draft, preview);
 });
 
-test("a map row that promises time is asked again, and left off the map on the last attempt", () => {
+test("a direction line that promises time gets its pattern's own line, with no second call", () => {
   const made = raw();
   made.responsibilities[1] = resp("Restocking the fridges", [3], { with_path: "Each restock takes two minutes." });
+  assert.equal(read(made, { lastAttempt: false })?.map[1].withPath, "One list with the usual amounts, ready whenever stock runs low.");
+});
+
+test("a Today line that promises time is asked again, and left off the map on the last attempt", () => {
+  const made = raw();
+  made.responsibilities[1] = resp("Restocking the fridges", [3], { today: "Each restock takes you two hours." });
   assert.equal(read(made, { lastAttempt: false }), null);
   const last = read(made, { lastAttempt: true });
   assert.deepEqual(last?.map.map((m) => m.task), ["Ordering lunch", "Employee records", "Watering the plants"]);
@@ -308,7 +316,7 @@ test("a row that can run better never says it stays hers: the sentence goes, or 
   made.responsibilities[0] = resp("Ordering lunch", [4], { with_path: "Orders counted for you. This stays yours." });
   assert.equal(read(made)?.map[0].withPath, "Orders counted for you.");
   made.responsibilities[0] = resp("Ordering lunch", [4], { with_path: "A checklist that stays yours." });
-  assert.equal(read(made, { lastAttempt: false }), null);
+  assert.equal(read(made, { lastAttempt: false })?.map[0].withPath, "Orders collected in one place and counted for you.", "its pattern's own line");
   assert.equal(read(raw())?.map[2].withPath, "This stays yours.", "a private row keeps it");
 });
 
@@ -322,4 +330,38 @@ test("the prompt explains each pattern, keeps private for records, and how often
 
 test("the read is told that how often is about her first pick only", () => {
   assert.ok(describeBeginnerIntake(input()).includes("How often do you do this (Ordering lunch)?"));
+});
+
+test("a map line that sounds as if it happens without her is asked again, and left off on the last attempt", () => {
+  for (const line of [
+    "Rent reminders sent on schedule.",
+    "Drink stock counted against usual amounts and reordered for you.",
+    "One maintenance schedule that sets its own reminders.",
+    "Follow ups go out automatically.",
+    "Rent reminders sent on schedule without you chasing each one.",
+    "Quotes built from a standard template with the job details filled in for you.",
+    "Repair requests collected in one place so they reach you already sorted.",
+  ]) {
+    assert.ok(SOUNDS_AUTOMATIC.test(line), line);
+  }
+  for (const line of [
+    "Orders collected in one place and counted for you.",
+    "Reminders that come round on schedule, ready for you to send.",
+    "One standard order, ready whenever the fridges run low.",
+    "Requests from colleagues collected in one place for you.",
+    "Quotes built from one template, with blanks for each job’s details.",
+  ]) {
+    assert.ok(!SOUNDS_AUTOMATIC.test(line), line);
+  }
+  const made = raw();
+  made.responsibilities[3] = resp("Watering the plants", [7], { with_path: "Watering reminders sent on schedule." });
+  assert.equal(read(made, { lastAttempt: false })?.map[3].withPath, "A routine with how often each job comes round.");
+});
+
+test("a map line that promises speed is asked again", () => {
+  for (const line of ["So you can reply faster.", "Done in seconds.", "It saves you time."]) assert.ok(SPEED_PROMISE.test(line), line);
+  assert.ok(!SPEED_PROMISE.test("One standard order, ready whenever the fridges run low."));
+  const made = raw();
+  made.responsibilities[0] = resp("Ordering lunch", [4], { with_path: "Orders counted for you, so you order faster." });
+  assert.equal(read(made, { lastAttempt: false })?.map[0].withPath, "Orders collected in one place and counted for you.");
 });

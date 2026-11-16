@@ -73,12 +73,14 @@ export function phraseFor(name: string, phrase: unknown, hers: string): string |
   // words, like "rescheduling texts", read fine.
   if (/ing$/.test(words[0]) && words.length > 2) return null;
   if (/ing$/.test(words[0]) && words.length > 1 && SMALL_WORDS.has(words[1])) return null;
-  const known = new Set([...wordsOf(name), ...wordsOf(hers)].map(stem));
-  return words.every((w) => SMALL_WORDS.has(w) || known.has(stem(w))) ? tidy : null;
+  // A word and its plural count as the same, so "job" matches "jobs" though it is under four letters.
+  const forms = (w: string) => [stem(w), stem(w.replace(/s$/, ""))];
+  const known = new Set([...wordsOf(name), ...wordsOf(hers)].flatMap(forms));
+  return words.every((w) => SMALL_WORDS.has(w) || forms(w).some((f) => known.has(f))) ? tidy : null;
 }
 
 /** The last words of the pieces, which her name for the thing must not end with, or "Your lunch order form form". */
-const PIECE_WORDS = /\b(forms?|sheets?|lists?|emails?|checklists?|templates?|replies|routines?|reminders?|messages?|orders? email)$/i;
+const PIECE_WORDS = /\b(forms?|sheets?|lists?|emails?|checklists?|templates?|replies|routines?|reminders?|messages?|orders? email|trackers?)$/i;
 
 /**
  * Her name for the thing a responsibility handles, as it fits "Your ___ form" in the pieces her offer lists: "lunch
@@ -110,10 +112,11 @@ export const smootherCount = (map: readonly MapLine[]) => map.filter((m) => m.ai
  */
 export function orderMap(map: readonly MapLine[], top: string): MapLine[] {
   const first = map.filter((m) => m.task.toLowerCase() === top.toLowerCase());
-  const rest = map.filter((m) => m.task.toLowerCase() !== top.toLowerCase());
-  // From Phase 8 what stays hers always goes last, under the parts that can run smoother.
-  return fewHelp(map) || readAsResponsibilities(map)
-    ? [...first, ...rest.filter((m) => m.ai), ...rest.filter((m) => !m.ai)]
+  // From Phase 8 her top two come first, the two her offer names, and what stays hers goes last.
+  const second = readAsResponsibilities(map) ? secondTask(map, top) : null;
+  const rest = map.filter((m) => m.task.toLowerCase() !== top.toLowerCase() && m !== second);
+  return fewHelp(map) || second
+    ? [...first, ...(second ? [second] : []), ...rest.filter((m) => m.ai), ...rest.filter((m) => !m.ai)]
     : [...first, ...rest];
 }
 
@@ -180,15 +183,29 @@ export function singularLast(phrase: string): string {
   });
 }
 
-/** The thing a row handles, in her words: the trusted thing, else her name for the task made singular, else the task. */
-const thingOf = (m: Pick<MapLine, "task" | "phrase" | "thing">) =>
-  m.thing ?? (m.phrase ? singularLast(m.phrase) : m.task.charAt(0).toLowerCase() + m.task.slice(1));
+/**
+ * The thing a row handles, in her words: the trusted thing, else her name for the task made singular, else the task
+ * made singular without a verb in front, so "Quoting jobs" reads "job" and "Ordering lunch" reads "lunch".
+ */
+export const thingOf = (m: Pick<MapLine, "task" | "phrase" | "thing">) => {
+  if (m.thing) return m.thing;
+  if (m.phrase) return singularLast(m.phrase);
+  const task = m.task.charAt(0).toLowerCase() + m.task.slice(1);
+  return singularLast(task.replace(/^\p{L}+ing\s+(?=\p{L})/u, ""));
+};
 
 /**
  * The pieces Tally builds for one workflow in her offer (DIRECTION.md, section 3), each with her name for the thing:
  * from its recipe, its pattern workflow, or at level 2 the message for her chat tool. At most three.
  */
 export function piecesFor(m: MapLine, her: { tool: ChatTool } & Pick<Who, "device" | "places">): string[] {
+  return rawPieces(m, her).map(withoutDoubles);
+}
+
+/** A word said twice in a row once, as when "parts order" meets the piece "order": "Your parts order, ready to send". */
+export const withoutDoubles = (piece: string) => piece.replace(/\b(\p{L}+) \1\b/giu, "$1");
+
+function rawPieces(m: MapLine, her: { tool: ChatTool } & Pick<Who, "device" | "places">): string[] {
   const thing = thingOf(m);
   const recipe = recipeOf(m);
   if (recipe) return (RECIPE_PIECES[recipe.id]?.(thing) ?? []).slice(0, 3);

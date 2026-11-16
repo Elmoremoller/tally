@@ -10,7 +10,7 @@ What changed since the second version.
 
 ## 1. What Tally is
 
-Tally reads a person's job as a set of responsibilities, shows her which ones can run better, and then sets up a better way to run them with her, one workflow at a time.
+Tally reads a person's job as a set of responsibilities and shows her which ones can run better. What she buys is her top two of those, set up and working with her, one workflow at a time. The rest of her map shows what could change. It is not part of what she buys.
 
 It is not a prompt pack, a course or a report. A prompt is sometimes one part of a workflow. It is never the product.
 
@@ -85,17 +85,17 @@ A workflow that puts none of her work into an AI tool needs no company OK. Only 
 
 The free result is the pitch. It does not have to deliver a working result. It has to make clear exactly what she gets, so that saying no feels silly. It opens with the map of her week and appears within a few seconds, from one fast call.
 
-1. **A map of her week.** One line above it counts her responsibilities, like "7 parts of your week can run smoother". Each row is one responsibility with its level tag and two lines. "Today" uses only what she told us. "With your path" names the direction, not the details, because we have not yet asked how she does it. For example "Orders collected in one place and counted for you". No promised time.
+1. **A map of her week.** One line above it counts her responsibilities, like "7 parts of your week can run smoother". Each row is one responsibility with its level tag and two lines. "Today" uses only what she told us. The second line names the direction, not the details, because we have not yet asked how she does it. For example "Orders collected in one place and counted for you". No promised time, and nothing that sounds as if it happens without her. Only her top two rows are tagged "In your path" and have the line "With your path". Every other row says "What could change", so the map never suggests it is included.
 2. **A preview inside the top row,** behind a "See it" tap. One piece Tally will build for her, such as the questions for her order form or her standard order.
-3. **An offer that names her own workflows,** like "Your lunch orders, collected and counted". Under each name it lists the pieces Tally will build for her, in a few words each, such as "Your order form, written for you. Your counting sheet. Your order email, ready to send." It says that her path starts with a few questions about how she does each one today.
+3. **An offer that names her top two workflows,** like "Your lunch orders, collected and counted". One plain line says that Tally builds these two workflows with her. Under each name it lists the pieces Tally will build for her, in a few words each and in her own words, such as "Your lunch order form, written for you. Your lunch order sheet, counted for you. Your lunch order email, ready to send." It says that her path starts with a few questions about how she does each one today.
 
-Everything the free result shows must also be in the paid path.
+Everything the offer lists must be in the paid path: both workflows and every piece under them. The offer never promises a third workflow or any row it does not name.
 
 ## 4. What the paid path is
 
-Her first two workflows, set up and working, one step at a time.
+Her top two workflows, the two her offer named, set up and working, one step at a time. Nothing else on her map is part of the paid path.
 
-1. **She confirms where to start.** Her top two are chosen for her, and she can swap one for another row on her map.
+1. **She confirms where to start.** Her top two are chosen for her, the two her offer named. She can swap one for another row on her map, and the row she swaps in gets the same follow up questions and pieces. It is still two workflows in all.
 2. **Three or four follow up questions** about how she does it today, with room to paste one real example.
 3. **Her workflow is written** from those answers. Each workflow has these parts.
     1. A short read. How this responsibility runs from now on and why it is better for her.
@@ -205,9 +205,9 @@ Code to read first. `JOB_SYSTEM` in `lib/beginner/questions-ai.ts`, `lib/beginne
 
 1. Add these as cards beside the existing ones, each checked today against the vendor's own help pages, with the date and the links. Leave out any that cannot be confirmed and tell Karl.
     1. Microsoft Forms. Create a form, share its link, open the answers in Excel.
-    2. Excel. A drop down list, a count of each answer, highlighting a row, a list that shows what is below its usual amount.
+    2. Excel. A drop down list, a count of each answer, highlighting a row, a list that shows what is below its usual amount. For the tracker that events, onboarding and inspections get: a date a set number of days after a start day, the earliest date left in a row, and a date highlighted once it has come.
     3. Outlook. A saved email she can insert, and a reminder that repeats.
-    4. Google Forms, Google Sheets, Gmail and Google Calendar. The same features.
+    4. Google Forms, Google Sheets, Gmail and Google Calendar. The same features. Google Sheets on an iPhone cannot make a highlight rule (checked 16 November 2026), so the tracker's Next due column must show what is due without one.
 2. Add tests like the ones for the existing cards, and widen the backlog line so the daily run flags these too.
 3. Give Karl one file with every new card written out as plain steps.
 

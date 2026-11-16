@@ -5,7 +5,7 @@ import { tidy as tidyLines } from "../plan-writer";
 import { toolLabels, type AiPolicy, type AiTool } from "../week";
 import { BLANKS_MAX, blanksIn, countsNotHers, exampleOf, phraseFor, thingFor, TIME_PROMISE } from "./free-result";
 import { kindOf } from "./levels";
-import { PATTERN_GUIDE, PATTERNS, PATTERN_IDS, patternOf, PREVIEW_GUIDE, type PatternId } from "./patterns";
+import { PATTERN_GUIDE, PATTERN_WORKFLOWS, PATTERNS, PATTERN_IDS, patternOf, PREVIEW_GUIDE, type PatternId } from "./patterns";
 import { levelWords, type QA } from "./quiz";
 import { TASK_KINDS, taskKindMeaning, type TaskKind } from "./recipes";
 import {
@@ -93,7 +93,7 @@ ${KIND_LINES}
 - phrase: what she calls these things, as a short noun phrase that fits "Your ___", in her own words, lower case except names, like "lunch orders", "fridge restocks" or "supplier emails". Never start it with a verb.
 - thing: the thing it handles, in her own words, as it fits all of "Your ___ form", "Your ___ sheet", "Your ___ checklist" and "Your ___ email", like "lunch order", "fridge restock", "supplier", "company event" or "plant care". One to three words, lower case except names, never ending in form, sheet, list, email or checklist.
 - today: how it is today, one sentence of at most 16 words, to her as "you". Use only what she told us: that it is hers, her own count, where her work happens. Her answer to "How often do you do this?" is about the first thing she most wants only: never use it for another one. We have not asked how she does it, so never describe her method, like email, paper or by hand, unless her own words say so. Never guess a count she didn't give.
-- with_path: the direction its first pattern takes with her path, one sentence of at most 14 words, like "Orders collected in one place and counted for you" or "One standard order, ready whenever the fridges run low". Name the change, not the steps, the app or a tool. Never say she asks AI, pastes, prompts or writes it with AI, and never say it stays hers. Only when patterns is empty or private is true, with_path is exactly "This stays yours."
+- with_path: the direction its first pattern takes with her path, one sentence of at most 14 words, like "Orders collected in one place and counted for you" or "One standard order, ready whenever the fridges run low". Name the change, not the steps, the app or a tool. She still does the work, with what Tally built: never say anything is sent, ordered, posted, booked, paid or chased for her, or happens on its own or on a schedule without her. "Reminders that come round on schedule" is right, "Rent reminders sent on schedule" is wrong. Never say she asks AI, pastes, prompts or writes it with AI, and never say it stays hers. Only when patterns is empty or private is true, with_path is exactly "This stays yours."
 - Never promise time saved in today or with_path: no minutes, no hours, no "faster", no "in seconds".
 
 first_win: the preview inside the top row of her map: one piece Tally will build for her, so she sees exactly what she gets.
@@ -273,6 +273,20 @@ export function withoutScarcity(draft: string): string {
     .trim();
 }
 
+/**
+ * A map line that sounds as if something happens without her: sent, ordered, posted, booked, paid or chased for her,
+ * on its own or on a schedule. None of the level 3 workflows does that (Karl, 2026-11-16). "Counted for you" and
+ * "collected in one place" are fine: a sheet counts and a form collects, and she still acts.
+ */
+export const SOUNDS_AUTOMATIC =
+  /\b(automatic(ally)?|by itself|on its own|without you|sets? (its|their) own|already (sorted|done|filled in|sent|ordered))\b|\b(sent|sends|send out|posted|posts|ordered|reorder(s|ed)?|booked|paid|chased|goes out|go out|filled in|fills in|sorted)\b[^.]*\b(for you|on (a |its |their )?schedule|by itself|on its own|automatically)\b/i;
+
+/** A promise of speed on the map, which the prompt forbids beside minutes and hours (DIRECTION.md, section 5, rule 3). */
+export const SPEED_PROMISE = /\b(faster|quicker|in (a few )?seconds|in no time|instantly|save[sd]? (you )?time)\b/i;
+
+/** A map line that promises time or speed, or gives a count she never gave (DIRECTION.md, section 5, rule 3). */
+const breaksMapRules = (line: string, hers: string) => TIME_PROMISE.test(line) || SPEED_PROMISE.test(line) || countsNotHers(line, hers).length > 0;
+
 /** A with_path line without any sentence that says it stays hers, for a row that can run better. */
 export const withoutStays = (line: string) =>
   line
@@ -341,13 +355,16 @@ export function checkBeginnerIntake(
     tasks.push(task);
 
     const today = mapLine(t.today);
-    // A row that can run better never says it stays hers: those sentences go, and an empty line asks again.
+    // A row that can run better never says it stays hers: those sentences go.
     const keptPath = ai ? withoutStays(typeof t.with_path === "string" ? t.with_path : "") : t.with_path;
-    if (ai && keptPath !== t.with_path && !keptPath && !lastAttempt) return null;
-    const withPath = mapLine(keptPath);
+    let withPath = mapLine(keptPath);
+    // A direction line that breaks a rule is swapped for its first pattern's own line, so one line never costs her a
+    // second call (the Phase 8 runs took 9 seconds when it did).
+    if (ai && patterns.length && (!withPath || breaksMapRules(withPath, hers) || SOUNDS_AUTOMATIC.test(withPath))) {
+      withPath = PATTERN_WORKFLOWS[patterns[0]].direction;
+    }
     if (!today || !withPath) continue;
-    const both = `${today} ${withPath}`;
-    if (TIME_PROMISE.test(both) || countsNotHers(both, hers).length) {
+    if (breaksMapRules(`${today} ${withPath}`, hers) || SOUNDS_AUTOMATIC.test(withPath)) {
       if (!lastAttempt) return null;
       continue;
     }

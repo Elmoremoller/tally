@@ -95,6 +95,8 @@ export type PatternWorkflow = {
   offer: string;
   /** The pieces Tally builds for her, each with her name for the thing. DRAFT */
   pieces: (c: PieceContext) => string[];
+  /** The With your path line when the model's breaks a rule: the direction, plainly, with nothing done for her. DRAFT */
+  direction: string;
 };
 
 const workflow = (pattern: PatternId, w: Omit<PatternWorkflow, "id" | "pattern" | "level">): PatternWorkflow => ({
@@ -106,6 +108,7 @@ const workflow = (pattern: PatternId, w: Omit<PatternWorkflow, "id" | "pattern" 
 
 export const PATTERN_WORKFLOWS: Record<PatternId, PatternWorkflow> = {
   1: workflow(1, {
+    direction: "Your common messages saved once, ready to send.",
     usesAi: false,
     where: "email_or_phone",
     offer: "saved once, ready to send",
@@ -115,6 +118,7 @@ export const PATTERN_WORKFLOWS: Record<PatternId, PatternWorkflow> = {
         : [`Your ${thing} emails, written for you and saved in ${emailApp}`],
   }),
   2: workflow(2, {
+    direction: "One template, with blanks for what changes.",
     usesAi: false,
     // A template with blanks works in a phone's notes as well as in a document.
     where: "anywhere",
@@ -122,6 +126,7 @@ export const PATTERN_WORKFLOWS: Record<PatternId, PatternWorkflow> = {
     pieces: ({ thing }) => [`Your ${thing} template, with the blanks marked`],
   }),
   3: workflow(3, {
+    direction: "One list with the usual amounts, ready whenever stock runs low.",
     usesAi: false,
     // A list with the usual amounts works in a phone's notes as well as in a sheet.
     where: "anywhere",
@@ -129,6 +134,7 @@ export const PATTERN_WORKFLOWS: Record<PatternId, PatternWorkflow> = {
     pieces: ({ thing }) => [`Your ${thing} list, with the usual amounts`, `Your ${thing} order, ready to send`],
   }),
   4: workflow(4, {
+    direction: "Orders collected in one place and counted for you.",
     usesAi: false,
     where: "suite",
     offer: "collected and counted",
@@ -138,37 +144,58 @@ export const PATTERN_WORKFLOWS: Record<PatternId, PatternWorkflow> = {
       `Your ${thing} email, ready to send`,
     ],
   }),
+  // A tracker, not a checklist (Karl, 2026-11-16): one row for each new hire, inspection or service call, each step
+  // dated from its start day, with what is due showing. On a computer it is a sheet in Excel or Google Sheets: Tally
+  // writes the columns and the formulas (each step's date is the start day plus its days, Next due is the earliest
+  // date left in the row), and a highlight rule marks a date once it has come. Microsoft's and Google's help pages
+  // give computer steps for all of it, and Google's give Android steps for the highlight; Google Sheets on an iPhone
+  // can't make the rule (checked 2026-11-16), so Next due shows what is due without it. On a phone only, she gets the
+  // same steps as a dated checklist in her notes, with a reminder for each due day.
   5: workflow(5, {
+    direction: "One tracker, with each step dated from the start day.",
     usesAi: false,
     where: "anywhere",
-    offer: "run from one checklist",
-    pieces: ({ thing }) => [`Your ${thing} checklist, ready to copy for each one`, `Your ${thing} messages, written for you`],
+    offer: "tracked from the start day",
+    pieces: ({ thing, onPhone }) =>
+      onPhone
+        ? [`Your ${thing} checklist, each step with its day from the start`, `Your ${thing} reminders, one for each due day`]
+        : [
+            // "One row for each" needs a thing she can count: "vendor scheduling" gets "one row each time".
+            /ing$/i.test(thing) ? `Your ${thing} tracker, one row each time` : `Your ${thing} tracker, one row for each ${thing}`,
+            `Your ${thing} steps, each dated from the start day`,
+            `Your ${thing} due dates, highlighted when they come round`,
+          ],
   }),
   6: workflow(6, {
+    direction: "Requests collected in one place.",
     usesAi: false,
     where: "suite",
     offer: "collected in one place",
     pieces: ({ thing }) => [`Your ${thing} form, written for you`, `Your ${thing} list, all in one place`],
   }),
   7: workflow(7, {
+    direction: "A routine with how often each job comes round.",
     usesAi: false,
     where: "anywhere",
     offer: "on a schedule that reminds you",
     pieces: ({ thing }) => [`Your ${thing} routine, with how often each job comes round`, `Your ${thing} reminders, set to repeat`],
   }),
   8: workflow(8, {
+    direction: "One list of who still owes you an answer, with follow ups ready.",
     usesAi: false,
     where: "email",
-    offer: "sorted, with follow ups ready",
+    offer: "with follow ups ready to send",
     pieces: ({ thing }) => [`Your ${thing} follow up emails, written for you`, `Your ${thing} waiting list, so nothing is forgotten`],
   }),
   9: workflow(9, {
+    direction: "One sheet your notes go straight into.",
     usesAi: false,
     where: "suite",
     offer: "straight into one sheet",
     pieces: ({ thing }) => [`Your ${thing} sheet, with the columns set up`, `Your ${thing} form, so notes go straight in`],
   }),
   10: workflow(10, {
+    direction: "Answers found in your own documents.",
     usesAi: true,
     where: "chat_tool",
     offer: "answered from your own documents",
@@ -194,7 +221,7 @@ export const PREVIEW_GUIDE: Record<PatternId, string> = {
   2: "her template, with blanks in square brackets for what changes",
   3: "her list of the items she named, each with [usual amount], and the order she sends",
   4: "the questions for her order form, each with its choices",
-  5: "the first lines of her checklist, in the order she does them",
+  5: "the first steps of her tracker, in order, each with the day it is due counted from the start day, like \"Welcome email, day 0\" or \"Check in, day 7\"",
   6: "the questions for her request form, each with its choices",
   7: "her routine, each job with how often it comes round",
   8: "her follow up email, ready to send",

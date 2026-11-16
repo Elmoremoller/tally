@@ -501,6 +501,10 @@ export const firstWinCopy = {
         : `${count} parts of your week can run smoother`,
   /** The eyebrow over a map read as responsibilities. DRAFT */
   weekEyebrow: "Your week",
+  /** The tag on the rows her offer names, the workflows Tally builds with her (Karl, 2026-11-16). DRAFT */
+  inPath: "In your path",
+  /** In place of With your path on every other row, so the map never suggests it is included. DRAFT */
+  couldChange: "What could change",
   today: "Today", // Approved by Karl 2026-11-14
   withPath: "With your path", // Approved by Karl 2026-11-14
   seeIt: "See it", // Approved by Karl 2026-11-14
@@ -538,9 +542,14 @@ export const offerCopy = {
   askAllowed: "The message to ask what’s allowed",
   /** The one piece of a workflow she writes with AI each time (Phase 8). DRAFT */
   toolMessage: (thing: string, tool: string) => `Your ${thing} message for ${tool}, written for you`,
-  /** What she gets for the price, in one plain line, in Karl's words of 2026-11-16 (Phase 8). DRAFT */
+  /**
+   * What she gets for the price, in one plain line: Tally builds her top two workflows with her, and nothing more is
+   * promised (Karl, 2026-11-16; DIRECTION.md, sections 3 and 4). DRAFT
+   */
   whatYouGet: (workflows: number) =>
-    `You get every part of your map that can run smoother set up with you, one at a time, starting with ${workflows === 1 ? "this one" : "these two"}.`,
+    workflows === 1
+      ? "Tally builds this workflow with you, one step at a time."
+      : "Tally builds these two workflows with you, one step at a time.",
   /** Under her workflows: her path starts with the follow up questions (DIRECTION.md, section 3). DRAFT */
   startsWithQuestions: "Your path starts with a few questions about how you do each one today.",
 };
