@@ -1,43 +1,42 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useRef, useState, type SetStateAction } from "react";
+import { useEffect, useRef, useState } from "react";
 import { noteBeginnerStep, readBeginner, type BeginnerAnswers, type BeginnerRead } from "@/app/begin/actions";
-import { readJobAction, writeQuestionsAction } from "@/app/begin/questions";
+import { readJobAction } from "@/app/begin/questions";
 import { Backdrop } from "@/components/Backdrop";
 import { ArrowLeft, Check } from "@/components/icons";
 import { QuizHeader } from "@/components/quiz/QuizHeader";
 import { TextStep } from "@/components/quiz/TextStep";
 import { ToolsStep } from "@/components/quiz/ToolsStep";
-import { beginnerQuestions as questions } from "@/lib/beginner/copy";
+import { beginnerQuestions as questions, repeatGroups } from "@/lib/beginner/copy";
 import {
-  aiHelpCount,
   jobReadOrFallback,
   hasKind,
   mostOptions,
   repeatChoices,
-  skipsMost,
-  softwareOptions,
   stepsFor,
   toggleKind,
-  type AskedQuestion,
+  whereOptions,
   type JobRead,
   type QA,
   type QuizStep,
 } from "@/lib/beginner/quiz";
 import {
   canUseQuestion,
+  CONNECT,
+  CONNECT_ID,
+  connectQuestion,
   DEVICES,
   deviceQuestion,
   doneWithAi,
-  exampleScreen,
   jobKinds,
   OFTEN,
   oftenQuestion,
-  questionsWait,
   readingLines,
-  repeatsLine,
   thinAnswers,
+  whereScreen,
+  type Connect,
   type Device,
   type Often,
 } from "@/lib/beginner/quiz-copy";
@@ -56,28 +55,25 @@ import {
 import { followUpCopy, quizErrors } from "@/lib/questions";
 import { AI_TOOLS, toolLabels, type AiTool } from "@/lib/week";
 import { ChoiceStep } from "./ChoiceStep";
-import { BeginnerPaywall, FirstWinResult } from "./FirstWinResult";
+import { AskFirst, BeginnerPaywall, FirstWinResult } from "./FirstWinResult";
 import { PICK_BEAT, PickStep } from "./PickStep";
 
 // The beginner quiz, one screen at a time, in the order stepsFor gives (lib/beginner/quiz.ts). Everyone: her
 // job and where she is with AI. A Builder (Use it some weeks, Use it most days) then says what she has already
-// done with AI and which AI she has used. Everyone: what she does over and over, with a line on how many of
-// those AI can help with, which would save her the most time (unless that is only one), a real example of it
-// with how often she does it (she may skip the example), then phone or computer for a Starter or her software
-// for a Builder, one question the AI writes for her, and Can you use AI for your work (unless her job said she
-// works for herself). The AI reads her job while she answers the screens before what she does over and over,
-// and writes her question after the screen before it; when either is slow or fails, the quiz carries on with
-// the fixed lists or without that question. Then the final read drafts her first win while lines on what is
-// happening show in turn; if her answers were too thin it asks one follow up, once. Then her first win and the
-// paywall. Built like components/quiz/Quiz.tsx.
+// done with AI and which AI she has used. Everyone: what she does over and over, her own responsibilities first and
+// then the ones usual for her role, which would save her the most time with how often she does it, then where her
+// work happens with what she uses for work under it, Can you use AI for your work (unless her job said she works
+// for herself), and for Yes or Not sure there whether she could connect her work email herself. The AI reads her
+// job while she answers the screens before what she does over and over; when it is slow or fails, the quiz carries
+// on with the fixed list. Then the final read maps her week while lines on what is happening show in turn; if her
+// answers were too thin it asks one follow up, once. Then the map of her week and the paywall. Built like
+// components/quiz/Quiz.tsx. Phase 8 of docs/DIRECTION.md took out the real example and the question the AI wrote.
 
 const READING_MIN = 1200;
 /** How long each line shows while her answers are read, before the next one. The last one stays. */
 const READING_LINE_MS = 2400;
 /** How long screen 3 waits for the read of her job before it uses the fixed list. */
 const JOB_READ_WAIT = 4000;
-/** How long the quiz waits for her questions before it goes on without them. */
-const QUESTIONS_WAIT = 12000;
 /** She picks one or two things she'd most like to make easier. */
 const MOST_WANTED_MAX = 2;
 
@@ -92,13 +88,8 @@ type Picks = { picked: string[]; other: string | null };
 type Snapshot = {
   level: Experience | null;
   canUse: CanUse | null;
-  askedCount: number | null;
+  connect: Connect | null;
   device: Device | null;
-  /**
-   * The type or talk screen she has just skipped. Its words count as cleared in this click, since clearing
-   * them in state only lands on the next render, after the final read may already have been sent.
-   */
-  skipped?: string;
 };
 
 const NO_PICKS: Picks = { picked: [], other: null };
@@ -113,9 +104,6 @@ const choiceQA = <T extends string>(id: string, title: string, options: readonly
   text: null,
   shown: options.map((o) => labels[o]),
 });
-
-/** Her answers as Call B gets them: the same answers keep the question already written. */
-const questionsKey = (input: { qas: QA[] }) => JSON.stringify(input);
 
 /** A chips screen as an answered screen: what it showed, what she tapped and what she wrote. */
 const pickedQA = (id: string, title: string, shown: readonly string[], picks: Picks): QA => ({
@@ -137,21 +125,17 @@ export function BeginnerQuiz({ home }: { home: string }) {
   const [repeats, setRepeats] = useState<Picks>(NO_PICKS);
   const [mostWanted, setMostWanted] = useState<string[]>([]);
   const [mostOther, setMostOther] = useState<string | null>(null);
-  const [example, setExample] = useState("");
   const [often, setOften] = useState<Often | null>(null);
-  const [apps, setApps] = useState<Picks>(NO_PICKS);
+  const [where, setWhere] = useState<Picks>(NO_PICKS);
   const [tools, setTools] = useState<AiTool[]>([]);
   const [otherTools, setOtherTools] = useState("");
   const [device, setDevice] = useState<Device | null>(null);
-  const [asked, setAsked] = useState<{ key: string; questions: AskedQuestion[] } | null>(null);
-  const [askedPicks, setAskedPicks] = useState<Record<string, Picks>>({});
-  const [askedText, setAskedText] = useState<Record<string, string>>({});
   const [canUse, setCanUse] = useState<CanUse | null>(null);
+  const [connect, setConnect] = useState<Connect | null>(null);
   const [followUp, setFollowUp] = useState<string | null>(null);
   const [followUpAnswer, setFollowUpAnswer] = useState("");
   const [win, setWin] = useState<Win | null>(null);
   const [error, setError] = useState("");
-  const [waitFor, setWaitFor] = useState<"job" | "questions">("job");
   const [readingAt, setReadingAt] = useState(0);
   const headingRef = useRef<HTMLHeadingElement>(null);
   const moved = useRef(false);
@@ -161,8 +145,6 @@ export function BeginnerQuiz({ home }: { home: string }) {
   const beat = useRef<number | undefined>(undefined);
   const jobCall = useRef<JobCall | null>(null);
   const lastRead = useRef<{ key: string; result: BeginnerRead } | null>(null);
-  /** Her questions on their way, kept for the answers they were asked from, so going back and on again waits for the same call. */
-  const questionsCall = useRef<{ key: string; promise: Promise<AskedQuestion[]> } | null>(null);
 
   useEffect(() => {
     if (moved.current) headingRef.current?.focus({ preventScroll: true });
@@ -179,36 +161,38 @@ export function BeginnerQuiz({ home }: { home: string }) {
     return () => window.clearInterval(timer);
   }, [phase]);
 
-  const now: Snapshot = { level, canUse, askedCount: asked ? asked.questions.length : null, device };
+  const now: Snapshot = { level, canUse, connect, device };
   /** True when the read of her job says she works for herself: Can you use AI for your work is then not asked. */
   const selfFromJob = jobRead?.read.worksFor === "self";
-  const most = jobRead ? mostOptions(jobRead.read, repeats.picked, repeats.other) : { options: [], fallback: false };
-  const skipMost = skipsMost(most);
+  const most = jobRead ? mostOptions(jobRead.read, repeats.picked, repeats.other) : [];
   const stepsWith = (s: Snapshot) =>
-    stepsFor({
-      level: s.level,
-      askedCount: s.askedCount,
-      worksForFromJob: jobRead?.read.worksFor ?? null,
-      skipMost,
-    });
+    stepsFor({ level: s.level, worksForFromJob: jobRead?.read.worksFor ?? null, canUse: s.canUse });
   const steps = stepsWith(now);
   const mostTyped = mostOther?.trim() || null;
-  // A list of one is her answer without asking. Otherwise changing her picks on the repeats screen keeps only
-  // the most wanted picks still offered, and her own words there count as one of her two.
-  const wanted = skipMost
-    ? most.options
-    : [...mostWanted.filter((m) => most.options.includes(m)), ...(mostTyped && !most.options.includes(mostTyped) ? [mostTyped] : [])].slice(
-        0,
-        MOST_WANTED_MAX,
-      );
-  const software = jobRead ? softwareOptions(jobRead.read) : [];
-  const helpCount = jobRead ? aiHelpCount(jobRead.read, repeats.picked) : { helps: 0, picked: 0 };
+  // A list of one is her answer without a tap. Otherwise changing her picks on the repeats screen keeps only the
+  // most wanted picks still offered, and her own words there count as one of her two.
+  const wanted =
+    most.length === 1 && !mostTyped
+      ? most
+      : [...mostWanted.filter((m) => most.includes(m)), ...(mostTyped && !most.includes(mostTyped) ? [mostTyped] : [])].slice(
+          0,
+          MOST_WANTED_MAX,
+        );
+  const places = jobRead ? whereOptions(jobRead.read) : [];
+  const choices = jobRead ? repeatChoices(jobRead.read) : [];
+  // Her own responsibilities and the usual ones in two small groups; the fixed list on its own, with no labels.
+  const groups =
+    jobRead && !jobRead.fallback
+      ? [
+          { label: repeatGroups.hers, options: choices.filter((c) => c.group === "hers").map((c) => c.label) },
+          { label: repeatGroups.usual, options: choices.filter((c) => c.group === "usual").map((c) => c.label) },
+        ].filter((g) => g.options.length)
+      : undefined;
 
   /**
-   * The screens before the AI's question, in order: her level, then for a Builder what she has done and the AI
-   * she has used, then what she repeats, her top task, her example and how often, then phone or computer for a
-   * Starter or her software for a Builder. What she repeats and her top task are always there: the first win is
-   * found through them.
+   * The screens before the questions about her work, in order: her level, then for a Builder what she has done and
+   * the AI she has used, then what she repeats, her top task and how often, then where her work happens and what she
+   * uses for work. What she repeats and her top task are always there: her map is read through them.
    */
   const baseQas = (s: Snapshot): QA[] =>
     jobRead && s.level
@@ -225,38 +209,23 @@ export function BeginnerQuiz({ home }: { home: string }) {
                 ),
               ]
             : []),
-          pickedQA("repeats", questions.repeats.title, repeatChoices(jobRead.read).map((r) => r.label), repeats),
-          {
-            id: "most",
-            title: most.fallback ? questions.most.fallbackTitle : questions.most.title,
-            picked: wanted,
-            text: null,
-            shown: most.options,
-          },
-          {
-            id: "example",
-            title: exampleScreen.title,
-            picked: [],
-            text: s.skipped === "example" ? null : example.trim() || null,
-          },
+          pickedQA("repeats", questions.repeats.title, choices.map((r) => r.label), repeats),
+          { id: "most", title: questions.most.title, picked: wanted, text: null, shown: most },
           ...(often ? [choiceQA("often", oftenQuestion.title, OFTEN, oftenQuestion.labels, often)] : []),
-          ...(usesAi(s.level)
-            ? [pickedQA("apps", questions.apps.title, software, apps)]
-            : s.device
-              ? [choiceQA("device", deviceQuestion.title, DEVICES, deviceQuestion.labels, s.device)]
-              : []),
+          pickedQA("where", whereScreen.title, places, where),
+          ...(s.device ? [choiceQA("device", deviceQuestion.title, DEVICES, deviceQuestion.labels, s.device)] : []),
         ]
       : [];
-  /** Can you use AI for your work, when she was shown it. */
+  /** Can you use AI for your work, and whether she could connect her work email, when she was shown them. */
   const workQas = (s: Snapshot): QA[] =>
-    !selfFromJob && s.canUse ? [choiceQA(CAN_USE_ID, canUseQuestion.title, CAN_USE, canUseLabels, s.canUse)] : [];
-  const askedQas = (s: Snapshot): QA[] =>
-    (asked?.questions ?? []).map((q) =>
-      q.kind === "text"
-        ? { id: q.id, title: q.title, picked: [], text: s.skipped === q.id ? null : askedText[q.id]?.trim() || null }
-        : pickedQA(q.id, q.title, q.choices, askedPicks[q.id] ?? NO_PICKS),
-    );
-
+    !selfFromJob && s.canUse
+      ? [
+          choiceQA(CAN_USE_ID, canUseQuestion.title, CAN_USE, canUseLabels, s.canUse),
+          ...((s.canUse === "yes" || s.canUse === "not_sure") && s.connect
+            ? [choiceQA(CONNECT_ID, connectQuestion.title, CONNECT, connectQuestion.labels, s.connect)]
+            : []),
+        ]
+      : [];
   const show = (next: Phase, to: QuizStep = step, way: "forward" | "back" = "forward") => {
     moved.current = true;
     setDirection(way);
@@ -285,9 +254,9 @@ export function BeginnerQuiz({ home }: { home: string }) {
   /** The read her screens use from now on. Picks that aren't on its screens any more are dropped. */
   const keepRead = (text: string, result: Read) => {
     const labels = repeatChoices(result.read).map((r) => r.label);
-    const names = softwareOptions(result.read);
+    const names = whereOptions(result.read);
     setRepeats((p) => ({ ...p, picked: p.picked.filter((l) => labels.includes(l)) }));
-    setApps((p) => ({ ...p, picked: p.picked.filter((a) => names.includes(a)) }));
+    setWhere((p) => ({ ...p, picked: p.picked.filter((a) => names.includes(a)) }));
     setJobRead({ job: text, ...result });
   };
 
@@ -301,48 +270,12 @@ export function BeginnerQuiz({ home }: { home: string }) {
     let result = call.result;
     if (!result) {
       const ticket = ++pending.current;
-      setWaitFor("job");
       show("waiting", from);
       result = await Promise.race([call.promise, wait(JOB_READ_WAIT).then(() => null)]);
       if (ticket !== pending.current) return;
     }
     keepRead(text, result ?? jobReadOrFallback(null));
     show("questions", "repeats");
-  };
-
-  /** Has the AI write her questions from what she has said so far, unless it already has for the same answers. */
-  const toAsked = async (from: QuizStep, s: Snapshot) => {
-    const experience = s.level;
-    if (!experience) return;
-    const input = { job: job.trim(), experience, qas: baseQas(s), mostWanted: wanted };
-    const key = questionsKey(input);
-    let written = asked?.key === key ? asked.questions : null;
-    if (!written) {
-      // A call already on its way for the same answers is waited for, not asked again.
-      if (questionsCall.current?.key !== key) {
-        const promise = Promise.race([
-          notes.current.then(() => writeQuestionsAction(input)).catch((): AskedQuestion[] => []),
-          wait(QUESTIONS_WAIT).then((): AskedQuestion[] => []),
-        ]);
-        questionsCall.current = { key, promise };
-      }
-      const call = questionsCall.current;
-      const ticket = ++pending.current;
-      setWaitFor("questions");
-      show("waiting", from);
-      const fresh = await call.promise;
-      if (ticket !== pending.current) return;
-      if (fresh.length || !asked?.questions.length) {
-        written = fresh;
-        setAskedPicks({});
-        setAskedText({});
-      } else {
-        // No new questions: the ones she has already seen stay, with her answers to them.
-        written = asked.questions;
-      }
-      setAsked({ key, questions: written });
-    }
-    moveOn(from, { ...s, askedCount: written.length });
   };
 
   /** The screen after `from`, or the final read after the last one. */
@@ -358,9 +291,6 @@ export function BeginnerQuiz({ home }: { home: string }) {
     const s = { ...now, ...patch };
     note(step);
     if (step === "job") startJobRead(job.trim());
-    // The screen before her question has the AI write it: the list with the question assumed says which.
-    const assumed = stepsWith({ ...s, askedCount: null });
-    if (assumed[assumed.indexOf(step) + 1] === "asked_1") return void toAsked(step, s);
     const list = stepsWith(s);
     if (list[list.indexOf(step) + 1] === "repeats") return void toRepeats(step);
     moveOn(step, s);
@@ -414,7 +344,7 @@ export function BeginnerQuiz({ home }: { home: string }) {
     const answers: BeginnerAnswers = {
       job,
       experience,
-      qas: [...baseQas(s), ...askedQas(s), ...workQas(s)],
+      qas: [...baseQas(s), ...workQas(s)],
       mostWanted: wanted,
       worksFor: work.worksFor,
       aiTools: builder ? tools : experience === "not_yet" ? ["none_yet"] : ["not_sure"],
@@ -436,24 +366,6 @@ export function BeginnerQuiz({ home }: { home: string }) {
     handle(result, s);
   };
 
-  const setAskedTextFor = (id: string) => (value: SetStateAction<string>) =>
-    setAskedText((all) => ({ ...all, [id]: typeof value === "function" ? value(all[id] ?? "") : value }));
-
-  /** Skip under a type or talk question: her words there are cleared, and the quiz moves on without them. */
-  const skipButton = (id: string, clear: () => void) => (
-    <button
-      type="button"
-      className="btn btn-lg btn-quiet quiz-next"
-      style={{ marginTop: "0.75rem" }}
-      onClick={() => {
-        clear();
-        advance({ skipped: id });
-      }}
-    >
-      {exampleScreen.skip}
-    </button>
-  );
-
   const at = Math.max(steps.indexOf(step), 0);
   const screens = steps.length + 1;
   const progress =
@@ -464,7 +376,6 @@ export function BeginnerQuiz({ home }: { home: string }) {
         : phase === "result"
           ? 1
           : steps.length / screens;
-  const question = asked?.questions.find((q) => q.id === step) ?? null;
 
   const screen = () => {
     if (phase === "follow-up" && followUp) {
@@ -554,7 +465,8 @@ export function BeginnerQuiz({ home }: { home: string }) {
           <PickStep
             title={questions.repeats.title}
             hint={questions.repeats.hint}
-            options={repeatChoices(jobRead.read).map((r) => r.label)}
+            options={choices.map((r) => r.label)}
+            groups={groups}
             picked={repeats.picked}
             onPicked={(picked) => setRepeats((p) => ({ ...p, picked }))}
             many
@@ -563,82 +475,94 @@ export function BeginnerQuiz({ home }: { home: string }) {
             onSubmit={() => advance()}
             error={error}
             headingRef={headingRef}
-            note={helpCount.picked ? repeatsLine(helpCount.helps, helpCount.picked) : null}
           />
         ) : null;
       case "most":
         return (
           <PickStep
-            title={most.fallback ? questions.most.fallbackTitle : questions.most.title}
-            hint={most.fallback ? questions.most.fallbackHint : questions.most.hint}
-            options={most.options}
-            picked={wanted.filter((w) => most.options.includes(w))}
+            title={questions.most.title}
+            hint={questions.most.hint}
+            options={most}
+            picked={wanted.filter((w) => most.includes(w))}
             onPicked={(picked) => setMostWanted(picked.slice(-(MOST_WANTED_MAX - (mostOther !== null ? 1 : 0))))}
             many
             other={mostOther}
             onOther={(other) => {
               setMostOther(other);
-              if (other !== null) setMostWanted((m) => m.filter((w) => most.options.includes(w)).slice(-(MOST_WANTED_MAX - 1)));
+              if (other !== null) setMostWanted((m) => m.filter((w) => most.includes(w)).slice(-(MOST_WANTED_MAX - 1)));
             }}
             onSubmit={() => advance()}
             error={error}
             headingRef={headingRef}
+            after={
+              <div className="quiz-often">
+                <p className="quiz-often-title" id="q-often">
+                  {oftenQuestion.title}
+                </p>
+                <div className="quiz-topics" role="group" aria-labelledby="q-often">
+                  {OFTEN.map((o) => {
+                    const on = often === o;
+                    return (
+                      <button
+                        key={o}
+                        type="button"
+                        className="quiz-topic"
+                        aria-pressed={on}
+                        data-on={on || undefined}
+                        onClick={() => setOften(on ? null : o)}
+                      >
+                        {on ? <Check /> : null}
+                        {oftenQuestion.labels[o]}
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+            }
           />
         );
-      case "example":
-        return (
-          <>
-            <TextStep
-              title={exampleScreen.title}
-              hint={wanted[0] ? exampleScreen.hint(wanted[0]) : exampleScreen.hintPlain}
-              value={example}
-              setValue={setExample}
-              onSubmit={() => advance()}
-              error={error}
-              headingRef={headingRef}
-              afterBox={
-                <div className="quiz-often">
-                  <p className="quiz-often-title" id="q-often">
-                    {oftenQuestion.title}
-                  </p>
-                  <div className="quiz-topics" role="group" aria-labelledby="q-often">
-                    {OFTEN.map((o) => {
-                      const on = often === o;
-                      return (
-                        <button
-                          key={o}
-                          type="button"
-                          className="quiz-topic"
-                          aria-pressed={on}
-                          data-on={on || undefined}
-                          onClick={() => setOften(on ? null : o)}
-                        >
-                          {on ? <Check /> : null}
-                          {oftenQuestion.labels[o]}
-                        </button>
-                      );
-                    })}
-                  </div>
-                </div>
-              }
-            />
-            {skipButton("example", () => setExample(""))}
-          </>
-        );
-      case "apps":
+      case "where":
         return jobRead ? (
           <PickStep
-            title={questions.apps.title}
-            hint={questions.apps.hint}
-            options={software}
-            picked={apps.picked}
-            onPicked={(picked) => setApps((p) => ({ ...p, picked }))}
+            title={whereScreen.title}
+            hint={whereScreen.hint}
+            options={places}
+            picked={where.picked}
+            onPicked={(picked) => setWhere((p) => ({ ...p, picked }))}
             many
-            other={apps.other}
-            onOther={(other) => setApps((p) => ({ ...p, other }))}
-            onSubmit={() => advance()}
+            other={where.other}
+            onOther={(other) => setWhere((p) => ({ ...p, other }))}
+            onSubmit={() => (device ? advance() : setError(whereScreen.needsDevice))}
             error={error}
             headingRef={headingRef}
+            after={
+              <div className="quiz-often">
+                <p className="quiz-often-title" id="q-device">
+                  {deviceQuestion.title}
+                </p>
+                <div className="quiz-topics" role="group" aria-labelledby="q-device">
+                  {DEVICES.map((d) => {
+                    const on = device === d;
+                    return (
+                      <button
+                        key={d}
+                        type="button"
+                        className="quiz-topic"
+                        aria-pressed={on}
+                        data-on={on || undefined}
+                        onClick={() => {
+                          setDevice(d);
+                          setError("");
+                        }}
+                      >
+                        {on ? <Check /> : null}
+                        {deviceQuestion.labels[d]}
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+            }
           />
         ) : null;
       case "tools":
@@ -653,21 +577,6 @@ export function BeginnerQuiz({ home }: { home: string }) {
             policy={null}
             onPolicy={() => {}}
             onSubmit={() => advance()}
-            error={error}
-            headingRef={headingRef}
-          />
-        );
-      case "device":
-        return (
-          <ChoiceStep
-            title={deviceQuestion.title}
-            options={DEVICES}
-            labels={deviceQuestion.labels}
-            value={device}
-            onPick={(value) => {
-              setDevice(value);
-              pickThen({ device: value });
-            }}
             error={error}
             headingRef={headingRef}
           />
@@ -687,41 +596,23 @@ export function BeginnerQuiz({ home }: { home: string }) {
             headingRef={headingRef}
           />
         );
-    }
-    if (!question) return null;
-    if (question.kind === "text") {
-      return (
-        <>
-          <TextStep
-            title={question.title}
-            hint={question.hint ?? undefined}
-            value={askedText[question.id] ?? ""}
-            setValue={setAskedTextFor(question.id)}
-            onSubmit={() => advance()}
+      case "connect":
+        return (
+          <ChoiceStep
+            title={connectQuestion.title}
+            options={CONNECT}
+            labels={connectQuestion.labels}
+            value={connect}
+            onPick={(value) => {
+              setConnect(value);
+              pickThen({ connect: value });
+            }}
             error={error}
             headingRef={headingRef}
           />
-          {skipButton(question.id, () => setAskedText((all) => ({ ...all, [question.id]: "" })))}
-        </>
-      );
+        );
     }
-    // Every tap question lets her pick as many as fit, even one the AI wrote for one answer: real answers overlap.
-    const picks = askedPicks[question.id] ?? NO_PICKS;
-    return (
-      <PickStep
-        title={question.title}
-        hint={question.hint ?? questions.repeats.hint}
-        options={question.choices}
-        picked={picks.picked}
-        onPicked={(picked) => setAskedPicks((all) => ({ ...all, [question.id]: { ...(all[question.id] ?? NO_PICKS), picked } }))}
-        many
-        other={picks.other}
-        onOther={(other) => setAskedPicks((all) => ({ ...all, [question.id]: { ...(all[question.id] ?? NO_PICKS), other } }))}
-        onSubmit={() => advance()}
-        error={error}
-        headingRef={headingRef}
-      />
-    );
+    return null;
   };
 
   return (
@@ -748,12 +639,16 @@ export function BeginnerQuiz({ home }: { home: string }) {
           <div className="quiz-making" role="status">
             <span className="quiz-spinner" aria-hidden="true" />
             <h1 ref={headingRef} tabIndex={-1} className="quiz-title">
-              {phase === "reading" ? readingLines[readingAt] : waitFor === "questions" ? questionsWait : questions.waitLine}
+              {phase === "reading" ? readingLines[readingAt] : questions.waitLine}
             </h1>
           </div>
         ) : phase === "result" && win ? (
-          <FirstWinResult result={win} restricted={win.restricted} headingRef={headingRef}>
-            <BeginnerPaywall setups={win.setups} />
+          <FirstWinResult result={win} restricted={win.restricted && !win.askOnly} headingRef={headingRef}>
+            {win.askOnly && win.askMessage ? (
+              <AskFirst message={win.askMessage} />
+            ) : (
+              <BeginnerPaywall setups={win.setups} offer={win.offer} prep={win.prep} freePlan={win.freePlan} />
+            )}
           </FirstWinResult>
         ) : (
           <div key={phase === "questions" ? step : phase} className="quiz-step" data-dir={direction}>

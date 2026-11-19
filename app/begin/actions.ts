@@ -3,10 +3,10 @@
 import { cookies } from "next/headers";
 import { allowAiCall } from "@/lib/ai-allowance";
 import { cleanAnswers, type BeginnerAnswers } from "@/lib/beginner/answers";
-import { deviceOf, orderMap, setupsFor, setupTasks } from "@/lib/beginner/free-result";
+import { freeResultFor } from "@/lib/beginner/free-result";
 import { readBeginnerIntake } from "@/lib/beginner/intake";
 import { digest, type QuizStep } from "@/lib/beginner/quiz";
-import { beginnerTool, trackFor, type FreeResult } from "@/lib/beginner/types";
+import type { FreeResult } from "@/lib/beginner/types";
 import { cleanText } from "@/lib/clean";
 import {
   confirmTasks,
@@ -30,8 +30,8 @@ import { ANSWER_MAX } from "@/lib/week";
 // the session always comes from this browser's cookie. Nothing she answers is saved until the final read: then
 // her answers go in with the first quiz's database functions (every screen as one plain text digest in place
 // of her week), and what is its own (every screen she answered, what she most wants to make easier, and
-// everything her free result showed: her first win, her first step, the map of her week and her setups) beside
-// them, so her paid path can be held to what she was shown.
+// everything her free result showed: her preview, the map of her week, her workflows and the pieces under each)
+// beside them, so her paid path can be held to what she was shown.
 
 export type { BeginnerAnswers };
 export type BeginnerStep = QuizStep | "follow_up";
@@ -103,28 +103,14 @@ export async function readBeginner(input: {
     const { result } = read;
 
     if (result.needs_follow_up) return { ok: true, win: null, followUp: result.follow_up_question };
-    if (!result.tasks.length || !result.first_win || !result.first_step) {
+    if (!result.tasks.length || !result.first_win) {
       return { ok: false, error: quizErrors.thin, thin: true };
     }
 
-    // Her setups are named in code, from her path, her tool and her own tasks, never by the model.
-    const track = trackFor(answers.experience);
-    const tool = beginnerTool(answers.aiTools);
-    const top = result.first_win.task;
-    const map = orderMap(result.map, top);
-    const free: FreeResult = {
-      firstWin: result.first_win,
-      firstStep: result.first_step,
-      map,
-      setups: setupsFor({
-        track,
-        tool,
-        ...setupTasks(map, top),
-        device: deviceOf(answers.qas),
-      }),
-      tool,
-      track,
-    };
+    // Each task's level and recipe, and her offer, are chosen in code from her answers, never by the model.
+    const free = freeResultFor(answers, { first_win: result.first_win, first_step: result.first_step, map: result.map });
+    const { tool, track } = free;
+    const askOnly = free.askOnly === true;
 
     // Her tasks go in the first version's table: what AI can help with as hand to AI, the rest as hers to keep.
     await saveIntakeResult(sessionId, {
@@ -150,7 +136,17 @@ export async function readBeginner(input: {
       // Idea titles are gone from the free result since beginner-intake-v5; the plan writer still takes the list.
       ideas: [],
       privateTasks: result.tasks.filter((t) => t.private).map((t) => t.name),
-      shown: { firstStep: free.firstStep, map: free.map, setups: free.setups, tool, track },
+      shown: {
+        firstStep: free.firstStep,
+        map: free.map,
+        setups: free.setups,
+        ...(free.offer ? { offer: free.offer } : {}),
+        prep: free.prep,
+        freePlan: free.freePlan,
+        ...(askOnly ? { askOnly } : {}),
+        tool,
+        track,
+      },
     });
     if (followUp) await saveFollowUpAnswer(sessionId, followUp.answer);
     const { tasks } = await loadWeek(sessionId);

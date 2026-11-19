@@ -20,6 +20,7 @@ const VENDOR_HELP = [
   "https://support.claude.com/",
   "https://support.google.com/",
   "https://support.apple.com/",
+  "https://www.samsung.com/us/support/",
 ];
 
 const stepsOf = (recipe: Recipe) =>

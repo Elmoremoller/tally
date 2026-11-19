@@ -1,7 +1,13 @@
 import { toolLabels, type ChatTool } from "../week";
+import { askFirstCopy, offerCopy } from "./copy";
+import type { AiPolicy, AiTool } from "../week";
+import { recipeOf, whoFrom, withLevels, type Who } from "./levels";
+import { emailAppOf, patternWorkflowById, placeFor, type PatternWorkflow } from "./patterns";
 import type { QA } from "./quiz";
-import { deviceQuestion, DEVICES, type Device } from "./quiz-copy";
-import type { MapLine, Track } from "./types";
+import type { Device } from "./quiz-copy";
+import { beginnerTool, trackFor, type Experience, type FirstWin, type FreeResult, type MapLine, type OfferItem, type Track, type WorksFor } from "./types";
+
+export { deviceOf } from "./levels";
 
 // The free result's rules from docs/DIRECTION.md, section 3 and Phase 2: the map of her week, with her
 // finished result inside its top row, and the offer that names her own setups. Her first step message is
@@ -28,9 +34,10 @@ export function blanksIn(text: string): string[] {
 
 /**
  * A map line must never promise time saved (DIRECTION.md, section 5, rule 3). Her own count from the quiz,
- * like "many times a day", is fine; minutes, hours and seconds are not.
+ * like "many times a day", is fine; minutes, hours and seconds are not. Case matters only for "hrs": "HR" is a
+ * department, so "You answer HR questions" stays (the Phase 7 readout found it dropped rows before).
  */
-export const TIME_PROMISE = /\b(minutes?|mins?|hours?|hrs?|seconds?|secs?)\b/i;
+export const TIME_PROMISE = /\b(?:[Mm]inutes?|[Mm]ins?|[Hh]ours?|[Hh]rs?|[Ss]econds?|[Ss]ecs?|MINUTES?|HOURS?|SECONDS?)\b/;
 
 /**
  * Counts on the map must be hers (DIRECTION.md, section 5, rule 3): a digit or a number word in a map line has
@@ -66,22 +73,37 @@ export function phraseFor(name: string, phrase: unknown, hers: string): string |
   // words, like "rescheduling texts", read fine.
   if (/ing$/.test(words[0]) && words.length > 2) return null;
   if (/ing$/.test(words[0]) && words.length > 1 && SMALL_WORDS.has(words[1])) return null;
-  const known = new Set([...wordsOf(name), ...wordsOf(hers)].map(stem));
-  return words.every((w) => SMALL_WORDS.has(w) || known.has(stem(w))) ? tidy : null;
+  // A word and its plural count as the same, so "job" matches "jobs" though it is under four letters.
+  const forms = (w: string) => [stem(w), stem(w.replace(/s$/, ""))];
+  const known = new Set([...wordsOf(name), ...wordsOf(hers)].flatMap(forms));
+  return words.every((w) => SMALL_WORDS.has(w) || forms(w).some((f) => known.has(f))) ? tidy : null;
+}
+
+/** The last words of the pieces, which her name for the thing must not end with, or "Your lunch order form form". */
+const PIECE_WORDS = /\b(forms?|sheets?|lists?|emails?|checklists?|templates?|replies|routines?|reminders?|messages?|orders? email|trackers?)$/i;
+
+/**
+ * Her name for the thing a responsibility handles, as it fits "Your ___ form" in the pieces her offer lists: "lunch
+ * order", "fridge restock", "supplier". Held to the rules of phraseFor, at most four words, without "the" or "your"
+ * in front and without a piece's own word at the end. Null when the model's words can't be trusted.
+ */
+export function thingFor(name: string, thing: unknown, hers: string): string | null {
+  const text = phraseFor(name, thing, hers)?.replace(/^(the|your|my)\s+/i, "");
+  if (!text || wordsOf(text).length > 4 || PIECE_WORDS.test(text)) return null;
+  return text;
 }
 
 /** A task as a setup name starts: "Your rescheduling texts", or the task's own name when no phrase is trusted. */
 export const taskForSetup = (m: Pick<MapLine, "task" | "phrase">) => (m.phrase ? `Your ${m.phrase}` : m.task);
 
-/** Her first win task and her second task, as her setup names start them. */
-export function setupTasks(map: readonly MapLine[], top: string): { top: string; second: string | null } {
-  const first = map.find((m) => m.task.toLowerCase() === top.toLowerCase());
-  const second = secondTask(map, top);
-  return { top: first ? taskForSetup(first) : top, second: second ? taskForSetup(second) : null };
-}
-
-/** AI fits fewer than half of her tasks: the map opens with a softer heading and those tasks first. */
+/** AI fits fewer than half of her tasks: the map opens with a softer heading and those tasks first. Before Phase 8. */
 export const fewHelp = (map: readonly MapLine[]) => map.filter((m) => m.ai).length * 2 < map.length;
+
+/** Her map was read as responsibilities with patterns (Phase 8), not as tasks. */
+export const readAsResponsibilities = (map: readonly MapLine[]) => map.some((m) => m.patterns !== undefined);
+
+/** How many parts of her week can run smoother: every row that doesn't stay hers. */
+export const smootherCount = (map: readonly MapLine[]) => map.filter((m) => m.ai).length;
 
 /**
  * The map in the order she sees it: her first win task first, since her finished result sits inside its row.
@@ -90,61 +112,295 @@ export const fewHelp = (map: readonly MapLine[]) => map.filter((m) => m.ai).leng
  */
 export function orderMap(map: readonly MapLine[], top: string): MapLine[] {
   const first = map.filter((m) => m.task.toLowerCase() === top.toLowerCase());
-  const rest = map.filter((m) => m.task.toLowerCase() !== top.toLowerCase());
-  return fewHelp(map) ? [...first, ...rest.filter((m) => m.ai), ...rest.filter((m) => !m.ai)] : [...first, ...rest];
-}
-
-/** Where she said she would use AI most, a Starter's answer on the device screen. */
-export function deviceOf(qas: readonly QA[]): Device | null {
-  const picked = qas.find((qa) => qa.id === "device")?.picked[0];
-  return DEVICES.find((d) => deviceQuestion.labels[d] === picked) ?? null;
+  // From Phase 8 her top two come first, the two her offer names, and what stays hers goes last.
+  const second = readAsResponsibilities(map) ? secondTask(map, top) : null;
+  const rest = map.filter((m) => m.task.toLowerCase() !== top.toLowerCase() && m !== second);
+  return fewHelp(map) || second
+    ? [...first, ...(second ? [second] : []), ...rest.filter((m) => m.ai), ...rest.filter((m) => !m.ai)]
+    : [...first, ...rest];
 }
 
 /**
- * The second task her setups name: the next task on her map that AI can help with without private details,
- * then any other task AI can help with. Null when she named only one.
+ * The task her offer names after her top task: the one with a recipe at the highest level (Karl, 2026-11-15,
+ * after the Phase 7 runs gave a Gmail Builder a level 3 second task over her level 4 one). When two tie on level,
+ * one with another recipe than her top task's wins, so she learns two ways of working, not one twice (Karl,
+ * 2026-11-15, after a dog groomer got quick replies twice over say it out loud); then the first on her map. With
+ * no recipe, the next one AI can help with that needs no private details, then any other AI can help with. A task
+ * that waits for her company's OK is never one. Null when there is none.
  */
 export function secondTask(map: readonly MapLine[], top: string): MapLine | null {
-  const others = map.filter((m) => m.ai && m.task.toLowerCase() !== top.toLowerCase());
-  return others.find((m) => !m.private) ?? others[0] ?? null;
+  const others = map.filter((m) => m.ai && !m.waits && m.task.toLowerCase() !== top.toLowerCase());
+  // A row's way of working: its recipe, or from Phase 8 its pattern workflow.
+  const way = (m: MapLine | undefined) => m?.recipe ?? m?.workflow ?? null;
+  const topWay = way(map.find((m) => m.task.toLowerCase() === top.toLowerCase()));
+  const rank = (m: MapLine) => (m.level ?? 0) * 2 + (way(m) !== topWay ? 1 : 0);
+  const withRecipe = others.filter((m) => way(m));
+  const best = withRecipe.reduce<MapLine | null>((a, m) => (!a || rank(m) > rank(a) ? m : a), null);
+  return best ?? others.find((m) => !m.private) ?? others[0] ?? null;
 }
 
 /**
- * Her first setups by name, in the order of her path (DIRECTION.md, section 4), each task as it reads mid
- * sentence. A Builder's names say the kind of setup, so her path looks different from a Starter's at a glance.
- * Starter: her tool ready where she uses it, her top task set up, her tool taught who she is, a second task.
- * Builder: her top task as a saved project, tested on real ones, a second task with the right tool, a routine.
- * DRAFT, every line: the Starter pattern is Karl's from 2026-11-14, the rest follows it.
+ * A task as her offer names it (DIRECTION.md, section 3): what its recipe makes of it, like "Your rescheduling
+ * texts, saved once on your phone", or, with no recipe, what it is at level 2, like "Your booking replies,
+ * written with AI". Never a saved setup the task doesn't get.
  */
-export function setupsFor({
+export function workflowName(m: Pick<MapLine, "task" | "phrase" | "recipe" | "workflow">): string {
+  const recipe = recipeOf(m);
+  const workflow = m.workflow ? patternWorkflowById(m.workflow) : undefined;
+  const start = taskForSetup(m);
+  return `${start}, ${endingFor(start, recipe ? recipe.offer : workflow ? workflow.offer : offerCopy.withAi)}`;
+}
+
+/**
+ * The second ending for each ending a workflow name can have, used when her words already hold one of its words, so
+ * a name never repeats itself, like "Your employee answers, answered from your own documents" (Karl, 2026-11-16).
+ * Every ending in the recipes, the pattern workflows and offerCopy.withAi has one here; a test holds that. DRAFT
+ */
+export const SECOND_ENDINGS: Record<string, string> = {
+  // Pattern workflows
+  "saved once, ready to send": "kept for next time",
+  "from one template": "with the blanks marked",
+  "counted against your usual amounts": "checked against what you normally keep",
+  "collected and counted": "gathered in one place",
+  "tracked from the start day": "with every step dated",
+  "collected in one place": "gathered in one list",
+  "on a schedule that reminds you": "set to come round again",
+  "with follow ups ready to send": "chased with emails written for you",
+  "straight into one sheet": "kept in one table",
+  "answered from your own documents": "found in your own files",
+  // Recipes
+  "saved once on your phone": "kept as quick replies",
+  "with a saved assistant": "with an AI helper set up once",
+  "said out loud, finished as text": "spoken, then turned into writing",
+  "turned into rows for your sheet": "kept as a table",
+  "saved once as Gmail templates": "kept ready to reuse",
+  "drafted in your inbox": "started for you, ready to finish",
+  "drafted from your inbox for your OK": "written for you to approve",
+  "listed for you every week": "gathered for you regularly",
+  // No workflow
+  "written with AI": "drafted with AI",
+};
+
+/** Small words two halves of a name may share without repeating themselves. */
+const NAME_GLUE = new Set(["your", "you", "the", "a", "an", "and", "for", "with", "from", "in", "on", "of", "to", "as", "one", "once", "every", "each", "my", "her", "ok", "own", "that", "then", "into", "against", "what"]);
+
+const nameWords = (text: string) =>
+  (text.toLowerCase().match(/\p{L}+/gu) ?? []).filter((w) => w.length >= 3 && !NAME_GLUE.has(w));
+
+/**
+ * Two words share a root when their first four letters match, like "answers" and "answered", "orders" and "order" or
+ * "writing" and "written". Shorter words must match whole. A match that isn't a real repeat only swaps in the
+ * second ending, which is harmless.
+ */
+function sameRoot(a: string, b: string): boolean {
+  if (Math.min(a.length, b.length) < 4) return a === b;
+  return a.slice(0, 4) === b.slice(0, 4);
+}
+
+/** The words of an ending that repeat a word of her own, by root. */
+export const repeatsIn = (start: string, ending: string) => {
+  const hers = nameWords(start);
+  return nameWords(ending).filter((w) => hers.some((h) => sameRoot(h, w)));
+};
+
+/** The ending for a name: its own, or its second one when her words already hold one of its words. */
+export function endingFor(start: string, ending: string): string {
+  if (!repeatsIn(start, ending).length) return ending;
+  const second = SECOND_ENDINGS[ending];
+  return second && !repeatsIn(start, second).length ? second : ending;
+}
+
+/**
+ * The pieces Tally builds for a checked recipe, with her name for the thing (Karl, 2026-11-16). They follow each
+ * recipe's own material. DRAFT
+ */
+const RECIPE_PIECES: Record<string, (thing: string) => string[]> = {
+  phone_quick_replies: (t) => [`Your ${t} replies, written for you and saved on your phone`],
+  saved_assistant: (t) => [`Your ${t} assistant’s instructions, written for you`, `Your ${t} examples, with names taken out`],
+  say_it_out_loud: (t) => [`Your ${t} opening line, so what you say comes back finished`, `Your ${t} list of what to say each time`],
+  notes_to_sheet: (t) => [`Your ${t} sheet columns, set up for you`, `Your ${t} instructions that turn notes into rows`],
+  gmail_templates: (t) => [`Your ${t} emails, written for you and saved as Gmail templates`],
+  gmail_help_me_write: (t) => [`Your ${t} starting lines for Help me write`, `Your ${t} tone notes`],
+  gmail_claude_follow_ups: (t) => [`Your ${t} follow up instructions, written for you`, `Your ${t} first and second nudge`],
+  weekly_no_reply_list: (t) => [`Your ${t} waiting list instructions, written for you`, `Your ${t} list layout`],
+};
+
+/** Words that end in s and stay as they are in front of another word, like "news sheet" or "sales list". */
+const KEEPS_S = new Set(["news", "series", "sales", "this", "his", "bus", "gas", "plus"]);
+
+/**
+ * Her name for the task as it reads in front of a piece's word: the last word singular, so "fridge restocks" makes
+ * "Your fridge restock list", never "Your fridge restocks list".
+ */
+export function singularLast(phrase: string): string {
+  return phrase.replace(/(\p{L}+)$/u, (word) => {
+    const w = word.toLowerCase();
+    if (KEEPS_S.has(w) || /(ss|us|is)$/.test(w)) return word;
+    if (/ies$/.test(w)) return `${word.slice(0, -3)}y`;
+    if (/(ch|sh|x)es$/.test(w)) return word.slice(0, -2);
+    if (/s$/.test(w)) return word.slice(0, -1);
+    return word;
+  });
+}
+
+/**
+ * The thing a row handles, in her words: the trusted thing, else her name for the task made singular, else the task
+ * made singular without a verb in front, so "Quoting jobs" reads "job" and "Ordering lunch" reads "lunch".
+ */
+export const thingOf = (m: Pick<MapLine, "task" | "phrase" | "thing">) => {
+  if (m.thing) return m.thing;
+  if (m.phrase) return singularLast(m.phrase);
+  const task = m.task.charAt(0).toLowerCase() + m.task.slice(1);
+  return singularLast(task.replace(/^\p{L}+ing\s+(?=\p{L})/u, ""));
+};
+
+/**
+ * The pieces Tally builds for one workflow in her offer (DIRECTION.md, section 3), each with her name for the thing:
+ * from its recipe, its pattern workflow, or at level 2 the message for her chat tool. At most three.
+ */
+export function piecesFor(m: MapLine, her: { tool: ChatTool } & Pick<Who, "device" | "places">): string[] {
+  return rawPieces(m, her).map(withoutDoubles);
+}
+
+/** A word said twice in a row once, as when "parts order" meets the piece "order": "Your parts order, ready to send". */
+export const withoutDoubles = (piece: string) => piece.replace(/\b(\p{L}+) \1\b/giu, "$1");
+
+function rawPieces(m: MapLine, her: { tool: ChatTool } & Pick<Who, "device" | "places">): string[] {
+  const thing = thingOf(m);
+  const recipe = recipeOf(m);
+  if (recipe) return (RECIPE_PIECES[recipe.id]?.(thing) ?? []).slice(0, 3);
+  const workflow: PatternWorkflow | undefined = m.workflow ? patternWorkflowById(m.workflow) : undefined;
+  if (workflow) {
+    const onPhone = placeFor(workflow, her) === "phone";
+    return workflow.pieces({ thing, tool: her.tool, emailApp: emailAppOf(her.places), onPhone }).slice(0, 3);
+  }
+  return [offerCopy.toolMessage(thing, toolLabels[her.tool])];
+}
+
+/**
+ * The tasks her offer names, in order: her first win task, then her second. Only tasks AI can help with, and
+ * never one that waits for her company's OK.
+ */
+export function offerTasks(map: readonly MapLine[], top: string): MapLine[] {
+  const first = map.find((m) => m.ai && !m.waits && m.task.toLowerCase() === top.toLowerCase());
+  const second = secondTask(map, top);
+  return [...(first ? [first] : []), ...(second ? [second] : [])];
+}
+
+/**
+ * Her offer by name (DIRECTION.md, section 3). `setups` is her workflows, each named by workflowName, and, when
+ * her company restricts AI, the message to ask what's allowed, which ends her path (section 4). `prep` is a
+ * Starter's two short steps, her tool ready where she works and taught who she is: her path opens with them,
+ * but the offer lists them under her workflows, under offerCopy.prepLead. A Builder has none.
+ */
+export function offerFor({
   track,
   tool,
+  map,
   top,
-  second,
   device,
+  restricted = false,
 }: {
   track: Track;
   tool: ChatTool;
-  /** Her first win task and her second, as taskForSetup gives them: "Your rescheduling texts". */
+  /** Her map with levels, as withLevels gives it. */
+  map: readonly MapLine[];
   top: string;
-  second: string | null;
   device: Device | null;
-}): string[] {
-  const name = toolLabels[tool];
-  if (track === "starter") {
-    const where =
-      device === "phone" ? "on your phone" : device === "computer" ? "on your computer" : "on your phone and computer";
-    return [
-      `Get ${name} ready ${where}`,
-      `${top}, set up`,
-      `Teach ${name} who you are`,
-      ...(second ? [`${second}, set up`] : []),
-    ];
+  restricted?: boolean;
+}): { setups: string[]; prep: string[] } {
+  const tasks = offerTasks(map, top);
+  // From Phase 8 getting her AI tool ready and teaching it who she is come only with a workflow that uses an AI
+  // tool, and nothing that puts work into AI is offered under a company that restricts it, so there is no message
+  // to ask (DIRECTION.md, section 4).
+  if (readAsResponsibilities(map)) {
+    const setups = tasks.map(workflowName);
+    if (track === "builder" || !tasks.some(usesAiTool)) return { setups, prep: [] };
+    const { ready, about } = prepTitles(tool, device);
+    return { setups, prep: [ready, about] };
   }
-  return [
-    `${top}, as a saved project`,
-    "Test it on three real ones",
-    ...(second ? [`${second}, with the right tool`] : []),
-    "Turn it into a routine you reuse",
-  ];
+  const setups = [...tasks.map(workflowName), ...(restricted ? [offerCopy.askAllowed] : [])];
+  if (track === "builder") return { setups, prep: [] };
+  const { ready, about } = prepTitles(tool, device);
+  return { setups, prep: [ready, about] };
+}
+
+/** Her work goes into an AI tool on this row: a recipe or workflow that needs AI, or writing it with AI each time. */
+export function usesAiTool(m: Pick<MapLine, "recipe" | "workflow" | "level">): boolean {
+  const recipe = recipeOf(m);
+  if (recipe) return recipe.conditions.needsAiAllowed;
+  const workflow = m.workflow ? patternWorkflowById(m.workflow) : undefined;
+  if (workflow) return workflow.usesAi;
+  return m.level === 2;
+}
+
+/** A Starter's two prep steps by name, as her offer lists them and her path titles them. Approved by Karl 2026-11-15. */
+export function prepTitles(tool: ChatTool, device: Device | null) {
+  const name = toolLabels[tool];
+  const where =
+    device === "phone" ? "on your phone" : device === "computer" ? "on your computer" : "on your phone and computer";
+  return { ready: `Get ${name} ready ${where}`, about: `Teach ${name} who you are` };
+}
+
+/**
+ * Her company restricts AI and her offer would name no workflow, because every task waits for its OK and no recipe
+ * fits (Karl, 2026-11-15). Her free result then shows no price and no pay button, only the message to ask what's
+ * allowed, free.
+ */
+export const askOnlyFor = (map: readonly MapLine[], top: string, restricted: boolean) =>
+  restricted && offerTasks(map, top).length === 0;
+
+/** The free message to ask what's allowed, naming the tasks that wait the way her map names them. */
+export function askMessageFor(map: readonly MapLine[]): string {
+  const tasks = map
+    .filter((m) => m.waits)
+    .map((m) => m.phrase ?? m.task.charAt(0).toLowerCase() + m.task.slice(1))
+    .slice(0, 3);
+  return askFirstCopy.message(tasks);
+}
+
+/**
+ * Whether her offer says the free plan is enough (DIRECTION.md, section 3): only when every task it names has a
+ * recipe, and every one of those recipes says so.
+ */
+export function freePlanFor(map: readonly MapLine[], top: string): boolean {
+  const tasks = offerTasks(map, top);
+  return tasks.length > 0 && tasks.every((m) => recipeOf(m)?.cost.freePlanEnough === true);
+}
+
+/**
+ * Her whole free result from her checked answers and the intake's read of them: each task's level and recipe,
+ * the map in the order she sees it, and her offer, all chosen in code, never by the model. The server
+ * (app/begin/actions.ts) and scripts/persona-runs.ts both use it, so the test runs check what the live site shows.
+ */
+export function freeResultFor(
+  answers: { experience: Experience; aiTools: AiTool[]; worksFor: WorksFor; aiPolicy: AiPolicy | null; qas: QA[] },
+  result: { first_win: FirstWin; first_step: string | null; map: MapLine[] },
+): FreeResult {
+  const track = trackFor(answers.experience);
+  const tool = beginnerTool(answers.aiTools);
+  const top = result.first_win.task;
+  const who = whoFrom({ track, ...answers });
+  const map = orderMap(withLevels(result.map, who), top);
+  const restricted = who.canUse === "restricted";
+  // With every task waiting for her company's OK there is nothing to sell: no offer, only the free message.
+  const askOnly = askOnlyFor(map, top, restricted);
+  // From Phase 8 her offer lists the pieces Tally builds under each workflow.
+  const offer: OfferItem[] | undefined = readAsResponsibilities(map)
+    ? offerTasks(map, top).map((m) => ({ name: workflowName(m), pieces: piecesFor(m, { tool, device: who.device, places: who.places }) }))
+    : undefined;
+  return {
+    firstWin: result.first_win,
+    firstStep: result.first_step,
+    map,
+    ...(askOnly
+      ? { setups: [], prep: [], freePlan: false, askOnly, askMessage: askMessageFor(map) }
+      : {
+          ...offerFor({ track, tool, map, top, device: who.device, restricted }),
+          ...(offer ? { offer } : {}),
+          freePlan: freePlanFor(map, top),
+        }),
+    tool,
+    track,
+  };
 }

@@ -23,46 +23,50 @@ export const planToolsCopy = {
 // Added 2026-11-13 from Elmore's walkthrough of the quiz (docs/superpowers/plans/2026-11-13-quiz-feedback.md).
 // He approved these lines in chat the same day.
 
-/** What someone in her job might use AI for, when the read of her job has no list of its own. */
-export const FALLBACK_AI_USES = ["Writing messages", "Social posts", "Planning", "Answering questions", "Summing things up"];
-
 export const DEVICES = ["phone", "computer", "both"] as const;
 export type Device = (typeof DEVICES)[number];
-/** Asked of Starters: it decides whether her setup steps are for a phone, a computer or both. */
+/**
+ * What she has for work, asked of everyone under Where does your work happen (Phase 5). It decides which
+ * recipes have steps for her (DIRECTION.md, section 2, condition 5) and whether her setup steps are for a phone,
+ * a computer or both. The ids stay as they were, so answers saved before keep loading. Karl's words, 2026-11-15.
+ */
 export const deviceQuestion = {
-  title: "Where would you use AI most?",
-  labels: { phone: "Phone", computer: "Computer", both: "Both" } satisfies Record<Device, string>,
+  title: "Do you work on a phone, a computer or both?",
+  labels: { phone: "Phone only", computer: "Computer only", both: "Both" } satisfies Record<Device, string>,
+  /** The labels on answers saved before Phase 5, when the question was Where would you use AI most? */
+  legacyLabels: { phone: "Phone", computer: "Computer", both: "Both" } satisfies Record<Device, string>,
 };
 
 /**
- * Software everyone might use, always offered after the software the read of her job names, each once. The
- * read's own picks come first, since they fit her job best.
+ * Where does your work happen, for everyone (DIRECTION.md, Phase 5). The choices are the apps the read of her job
+ * names, then these. She ticks all that fit, and they count as the apps she uses for every task. Karl's words,
+ * and every line approved by Karl 2026-11-15.
  */
-export const EVERYDAY_SOFTWARE = ["Outlook", "Gmail", "Excel", "Google Sheets", "Word", "Google Drive", "Teams", "Zoom"];
+export const whereScreen = {
+  title: "Where does your work happen?",
+  hint: "Tick all that fit.",
+  places: ["Text messages", "Gmail", "Outlook", "Google Sheets", "Instagram", "A work system", "Paper", "In person"],
+  /** Places that name no software, left out of the tools her plan teaches. */
+  notSoftware: ["Text messages", "A work system", "Paper", "In person"],
+  /** When she taps Continue without saying what she uses for work. */
+  needsDevice: "Tell us what you use for work, then go on.",
+};
 
-/** The wait while the AI writes her questions. */
-export const questionsWait = "Writing a question for your job"; // Approved by Karl 2026-11-14
+export const CONNECT = ["yes", "no", "not_sure"] as const;
+export type Connect = (typeof CONNECT)[number];
+/** The screen id of the connect question, as kept in her answered screens. */
+export const CONNECT_ID = "connect";
+/**
+ * For an employee who answered Yes or Not sure to Can you use AI for your work (DIRECTION.md, Phase 5). Only Yes
+ * lets a recipe connect one of her work apps. Karl's words and approved labels, 2026-11-15.
+ */
+export const connectQuestion = {
+  title: "Would your company let you link your work email to an AI tool?",
+  labels: { yes: "Yes", no: "No", not_sure: "Not sure" } satisfies Record<Connect, string>,
+};
 
 /** Shown in turn while her answers are read and her first win is written, ending where her result begins. */
-export const readingLines = ["Reading your answers", "Finding the easiest place to start", "Writing your first win"];
-
-// Added 2026-11-13 after Elmore's note that a short first answer leaves the next screens thin: people like
-// taking more than giving, so every screen should offer plenty to tap whatever she typed.
-
-/**
- * Work almost every job has, always offered on the repeats screen after what the read of her job names, so
- * the screen is never thin. Each is something AI can help with.
- */
-export const EVERYDAY_TASKS = [
-  "Answering messages",
-  "Writing emails",
-  "Planning my week",
-  "Making lists",
-  "Social posts",
-  "Meeting notes",
-  "Looking things up",
-  "Keeping records",
-];
+export const readingLines = ["Reading your answers", "Finding what can run smoother", "Mapping your week"]; // DRAFT, Phase 8
 
 /** Kinds of work she can tap on the job screen. Each tap adds its words to her answer, so a short answer still says enough. */
 export const jobKinds = {
@@ -70,21 +74,13 @@ export const jobKinds = {
   list: ["Office and admin", "Shop or salon", "Health care", "Teaching", "My own business", "Social media and marketing"],
 };
 
-// Added 2026-11-14 for Phase 1 of docs/DIRECTION.md, all approved by Karl the same day: the real example screen, how often she does her top task,
-// what a Builder has already done with AI, Can you use AI for your work, and the line on the repeats screen.
-
-/** After her top task: one she really did. She can type or talk, and skip it. */
-export const exampleScreen = {
-  title: "Paste the last one you wrote, or what the last person asked you.", // from DIRECTION.md
-  /** Her top task, as she picked or typed it, then the note on names. */
-  hint: (task: string) => `${task}. Leave out names.`, // Approved by Karl 2026-11-14
-  hintPlain: "Leave out names.", // from DIRECTION.md
-  skip: "Skip", // Approved by Karl 2026-11-14
-};
+// Added 2026-11-14 for Phase 1 of docs/DIRECTION.md, all approved by Karl the same day: how often she does her top task,
+// what a Builder has already done with AI, and Can you use AI for your work. Phase 8 took out the real example
+// screen and the line on the repeats screen.
 
 export const OFTEN = ["many_a_day", "daily", "few_a_week", "weekly_or_less"] as const;
 export type Often = (typeof OFTEN)[number];
-/** One tap on the example screen, under the box. Approved by Karl 2026-11-14. */
+/** One tap row on the most wanted screen, under her picks (Phase 8; it was on the example screen). Approved by Karl 2026-11-14. */
 export const oftenQuestion = {
   title: "How often do you do this?",
   labels: {
@@ -112,14 +108,3 @@ export const doneWithAi = {
 
 /** One tap in place of who she works for and her company's view on AI. Approved by Karl 2026-11-14. */
 export const canUseQuestion = { title: "Can you use AI for your work?" };
-
-/**
- * Under the repeats screen's choices once she has picked one: how many of her picks AI can help with. Null, and
- * no line, when it can help with none of them. Approved by Karl 2026-11-14.
- */
-export function repeatsLine(helps: number, picked: number): string | null {
-  if (!helps || !picked) return null;
-  if (picked === 1) return "AI can help with this one";
-  if (helps === picked) return picked === 2 ? "AI can help with both of these" : `AI can help with all ${picked} of these`;
-  return `AI can help with ${helps} of these ${picked}`;
-}

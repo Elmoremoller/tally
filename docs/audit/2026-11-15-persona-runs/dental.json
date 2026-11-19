@@ -1,0 +1,815 @@
+{
+ "name": "dental",
+ "group": "allowed employee",
+ "persona": {
+  "group": "allowed employee",
+  "bio": "Receptionist at a family dental office with two dentists. Phones all morning, booking and moving appointments, texting patients to reschedule when a dentist is out, checking insurance, reminding people about cleanings, and answering the same questions about parking, payment plans and what to bring. She texts patients from the office system and her work phone. Her office manager said AI is fine as long as no patient details go in. She tried ChatGPT twice for a letter.",
+  "job": "Receptionist at a dental office. Phones, scheduling, insurance.",
+  "level": "tried",
+  "device": "both",
+  "phone": "iphone",
+  "canUse": "yes",
+  "connect": "no",
+  "expect": {
+   "dentalTop": true
+  }
+ },
+ "versions": {
+  "job": "beginner-job-v5",
+  "questions": "beginner-questions-v6",
+  "intake": "beginner-intake-v8",
+  "path": "beginner-path-v1"
+ },
+ "jobRead": {
+  "repeats": [
+   {
+    "label": "Booking patient appointments",
+    "ai": false
+   },
+   {
+    "label": "Answering phone calls",
+    "ai": false
+   },
+   {
+    "label": "Writing appointment reminders",
+    "ai": true
+   },
+   {
+    "label": "Checking insurance coverage",
+    "ai": false
+   },
+   {
+    "label": "Writing recall messages",
+    "ai": true
+   },
+   {
+    "label": "Checking in patients",
+    "ai": false
+   }
+  ],
+  "aiFallback": [
+   "Appointment reminder texts",
+   "Patient follow up messages",
+   "Office newsletter posts",
+   "Front desk phone scripts"
+  ],
+  "apps": [
+   "Dentrix",
+   "Eaglesoft",
+   "Open Dental",
+   "Curve Dental",
+   "Weave",
+   "Google Calendar"
+  ],
+  "aiUses": [
+   "Reminder texts",
+   "Email replies",
+   "Social media posts",
+   "Phone scripts",
+   "Newsletters"
+  ],
+  "worksFor": "unclear"
+ },
+ "jobReadFallback": false,
+ "asked": [
+  {
+   "id": "asked_1",
+   "title": "When a patient calls, what do they usually ask?",
+   "kind": "many",
+   "choices": [
+    "Insurance coverage",
+    "Move an appointment",
+    "Cancel a visit",
+    "Office hours",
+    "Directions"
+   ],
+   "hint": "Tap every kind of call you get."
+  }
+ ],
+ "screens": 9,
+ "worksForFromJob": "unclear",
+ "answers": {
+  "job": "Receptionist at a dental office. Phones, scheduling, insurance.",
+  "experience": "tried",
+  "qas": [
+   {
+    "id": "level",
+    "title": "Where are you with AI?",
+    "picked": [
+     "Tried it a few times"
+    ],
+    "text": null,
+    "shown": [
+     "Never used it",
+     "Tried it a few times",
+     "Use it some weeks",
+     "Use it most days"
+    ]
+   },
+   {
+    "id": "repeats",
+    "title": "What do you do over and over, every day or every week?",
+    "picked": [
+     "Booking patient appointments",
+     "Answering phone calls",
+     "Writing appointment reminders",
+     "Checking insurance coverage",
+     "Writing recall messages",
+     "Checking in patients",
+     "Answering messages"
+    ],
+    "text": "Rescheduling when a dentist is out. Same questions about par",
+    "shown": [
+     "Booking patient appointments",
+     "Answering phone calls",
+     "Writing appointment reminders",
+     "Checking insurance coverage",
+     "Writing recall messages",
+     "Checking in patients",
+     "Answering messages",
+     "Writing emails",
+     "Planning my week",
+     "Making lists"
+    ]
+   },
+   {
+    "id": "most",
+    "title": "Which would save you the most time if it got easier?",
+    "picked": [
+     "Answering phone calls",
+     "Writing appointment reminders"
+    ],
+    "text": null,
+    "shown": [
+     "Booking patient appointments",
+     "Answering phone calls",
+     "Writing appointment reminders",
+     "Checking insurance coverage",
+     "Writing recall messages",
+     "Checking in patients"
+    ]
+   },
+   {
+    "id": "example",
+    "title": "Paste the last one you wrote, or what the last person asked you.",
+    "picked": [],
+    "text": "Hi, Dr. Patel is out today so Thursday's cleaning moved to Tuesday 10:15. Reply here if that doesn't work and we'll find another time."
+   },
+   {
+    "id": "often",
+    "title": "How often do you do this?",
+    "picked": [
+     "Many times a day"
+    ],
+    "text": null,
+    "shown": [
+     "Many times a day",
+     "About once a day",
+     "A few times a week",
+     "Once a week or less"
+    ]
+   },
+   {
+    "id": "where",
+    "title": "Where does your work happen?",
+    "picked": [
+     "A work system",
+     "Text messages",
+     "Gmail",
+     "Paper",
+     "In person"
+    ],
+    "text": null,
+    "shown": [
+     "Dentrix",
+     "Eaglesoft",
+     "Open Dental",
+     "Curve Dental",
+     "Weave",
+     "Google Calendar",
+     "Text messages",
+     "Gmail",
+     "Outlook",
+     "Google Sheets",
+     "Instagram",
+     "A work system",
+     "Paper",
+     "In person"
+    ]
+   },
+   {
+    "id": "device",
+    "title": "Do you work on a phone, a computer or both?",
+    "picked": [
+     "Both"
+    ],
+    "text": null,
+    "shown": [
+     "Phone only",
+     "Computer only",
+     "Both"
+    ]
+   },
+   {
+    "id": "asked_1",
+    "title": "When a patient calls, what do they usually ask?",
+    "picked": [
+     "Insurance coverage",
+     "Move an appointment",
+     "Cancel a visit",
+     "Office hours",
+     "Directions"
+    ],
+    "text": null,
+    "shown": [
+     "Insurance coverage",
+     "Move an appointment",
+     "Cancel a visit",
+     "Office hours",
+     "Directions"
+    ]
+   },
+   {
+    "id": "can_use",
+    "title": "Can you use AI for your work?",
+    "picked": [
+     "Yes"
+    ],
+    "text": null,
+    "shown": [
+     "Yes",
+     "Not sure",
+     "No, it’s restricted",
+     "I work for myself"
+    ]
+   },
+   {
+    "id": "connect",
+    "title": "Would your company let you link your work email to an AI tool?",
+    "picked": [
+     "No"
+    ],
+    "text": null,
+    "shown": [
+     "Yes",
+     "No",
+     "Not sure"
+    ]
+   }
+  ],
+  "mostWanted": [
+   "Answering phone calls",
+   "Writing appointment reminders"
+  ],
+  "worksFor": "employer",
+  "aiTools": [
+   "not_sure"
+  ],
+  "aiToolsOther": null,
+  "aiPolicy": "encouraged",
+  "often": "many_a_day"
+ },
+ "intake": {
+  "role_summary": "You’re the receptionist at a dental office, handling phones, scheduling, insurance and patient messages.",
+  "tasks": [
+   {
+    "name": "Booking appointments",
+    "ai": false,
+    "private": true,
+    "kind": null
+   },
+   {
+    "name": "Answering phone calls",
+    "ai": false,
+    "private": true,
+    "kind": null
+   },
+   {
+    "name": "Appointment reminders",
+    "ai": true,
+    "private": false,
+    "kind": "repeat_texts"
+   },
+   {
+    "name": "Checking insurance coverage",
+    "ai": false,
+    "private": true,
+    "kind": null
+   },
+   {
+    "name": "Recall messages",
+    "ai": true,
+    "private": false,
+    "kind": "repeat_texts"
+   },
+   {
+    "name": "Rescheduling when a dentist is out",
+    "ai": true,
+    "private": false,
+    "kind": "repeat_texts"
+   }
+  ],
+  "first_win": {
+   "task": "Appointment reminders",
+   "intro": "Here is your reschedule message from your last example, rewritten and ready to send.",
+   "draft": "Hi there, we’re sorry for the change. Your appointment has moved from Thursday to Tuesday at 10:15 because the dentist is out that day. If Tuesday doesn’t work for you, just reply here and we’ll find another time that suits you."
+  },
+  "first_step": "I’m a receptionist at a dental office. I write text messages to patients about appointment changes and reminders. Write a short, friendly text in plain language, under 50 words, that tells the patient about the change below and invites them to reply if the new time doesn’t work. Keep it warm and professional, with no medical advice. Details for this message: [paste the appointment change details here].",
+  "map": [
+   {
+    "task": "Booking appointments",
+    "phrase": "booking work",
+    "today": "You book these by phone and in person throughout the day.",
+    "withPath": "This stays yours, since it happens face to face and on the phone with patients.",
+    "ai": false,
+    "private": true,
+    "kind": null
+   },
+   {
+    "task": "Answering phone calls",
+    "phrase": "phone calls",
+    "today": "You answer many calls a day, many of them the same few questions.",
+    "withPath": "This stays yours, but the scripted answers you reuse can be drafted ahead with AI.",
+    "ai": false,
+    "private": true,
+    "kind": null
+   },
+   {
+    "task": "Appointment reminders",
+    "phrase": "reminder texts",
+    "today": "You write these many times a day, each one from scratch.",
+    "withPath": "Each one starts from a draft you only need to check and fill in.",
+    "ai": true,
+    "private": false,
+    "kind": "repeat_texts"
+   },
+   {
+    "task": "Checking insurance coverage",
+    "phrase": "insurance checks",
+    "today": "You check coverage for patients throughout the week, by phone and in the system.",
+    "withPath": "This stays yours, since it depends on patient and insurance details that should not be typed into AI.",
+    "ai": false,
+    "private": true,
+    "kind": null
+   },
+   {
+    "task": "Recall messages",
+    "phrase": "recall messages",
+    "today": "You write these regularly, often the same few messages.",
+    "withPath": "Each one starts from a reusable template with blanks you fill in.",
+    "ai": true,
+    "private": false,
+    "kind": "repeat_texts"
+   },
+   {
+    "task": "Rescheduling when a dentist is out",
+    "phrase": "reschedule messages",
+    "today": "You send these when a dentist is out, each time with new dates.",
+    "withPath": "Each one starts from a draft you only need to fill in with the new times.",
+    "ai": true,
+    "private": false,
+    "kind": "repeat_texts"
+   }
+  ],
+  "needs_follow_up": false,
+  "follow_up_question": null
+ },
+ "free": {
+  "firstWin": {
+   "task": "Appointment reminders",
+   "intro": "Here is your reschedule message from your last example, rewritten and ready to send.",
+   "draft": "Hi there, we’re sorry for the change. Your appointment has moved from Thursday to Tuesday at 10:15 because the dentist is out that day. If Tuesday doesn’t work for you, just reply here and we’ll find another time that suits you."
+  },
+  "firstStep": "I’m a receptionist at a dental office. I write text messages to patients about appointment changes and reminders. Write a short, friendly text in plain language, under 50 words, that tells the patient about the change below and invites them to reply if the new time doesn’t work. Keep it warm and professional, with no medical advice. Details for this message: [paste the appointment change details here].",
+  "map": [
+   {
+    "task": "Appointment reminders",
+    "phrase": "reminder texts",
+    "today": "You write these many times a day, each one from scratch.",
+    "withPath": "For your reminder texts, your common replies are saved on your phone, each a few letters away.",
+    "ai": true,
+    "private": false,
+    "kind": "repeat_texts",
+    "level": 3,
+    "waits": false,
+    "recipe": "phone_quick_replies",
+    "held": null,
+    "askFirst": false
+   },
+   {
+    "task": "Booking appointments",
+    "phrase": "booking work",
+    "today": "You book these by phone and in person throughout the day.",
+    "withPath": "This stays yours, since it happens face to face and on the phone with patients.",
+    "ai": false,
+    "private": true,
+    "kind": null,
+    "level": 1,
+    "waits": false,
+    "recipe": null,
+    "held": null,
+    "askFirst": false
+   },
+   {
+    "task": "Answering phone calls",
+    "phrase": "phone calls",
+    "today": "You answer many calls a day, many of them the same few questions.",
+    "withPath": "This stays yours, but the scripted answers you reuse can be drafted ahead with AI.",
+    "ai": false,
+    "private": true,
+    "kind": null,
+    "level": 1,
+    "waits": false,
+    "recipe": null,
+    "held": null,
+    "askFirst": false
+   },
+   {
+    "task": "Checking insurance coverage",
+    "phrase": "insurance checks",
+    "today": "You check coverage for patients throughout the week, by phone and in the system.",
+    "withPath": "This stays yours, since it depends on patient and insurance details that should not be typed into AI.",
+    "ai": false,
+    "private": true,
+    "kind": null,
+    "level": 1,
+    "waits": false,
+    "recipe": null,
+    "held": null,
+    "askFirst": false
+   },
+   {
+    "task": "Recall messages",
+    "phrase": "recall messages",
+    "today": "You write these regularly, often the same few messages.",
+    "withPath": "For your recall messages, your common replies are saved on your phone, each a few letters away.",
+    "ai": true,
+    "private": false,
+    "kind": "repeat_texts",
+    "level": 3,
+    "waits": false,
+    "recipe": "phone_quick_replies",
+    "held": null,
+    "askFirst": false
+   },
+   {
+    "task": "Rescheduling when a dentist is out",
+    "phrase": "reschedule messages",
+    "today": "You send these when a dentist is out, each time with new dates.",
+    "withPath": "For your reschedule messages, your common replies are saved on your phone, each a few letters away.",
+    "ai": true,
+    "private": false,
+    "kind": "repeat_texts",
+    "level": 3,
+    "waits": false,
+    "recipe": "phone_quick_replies",
+    "held": null,
+    "askFirst": false
+   }
+  ],
+  "setups": [
+   "Your reminder texts, saved once on your phone",
+   "Your recall messages, saved once on your phone"
+  ],
+  "prep": [
+   "Get Claude ready on your phone and computer",
+   "Teach Claude who you are"
+  ],
+  "freePlan": true,
+  "tool": "claude",
+  "track": "starter"
+ },
+ "who": {
+  "track": "starter",
+  "canUse": "yes",
+  "connect": "no",
+  "places": [
+   "A work system",
+   "Text messages",
+   "Gmail",
+   "Paper",
+   "In person"
+  ],
+  "device": "both",
+  "aiTools": [
+   "not_sure"
+  ]
+ },
+ "outline": [
+  "ready:ready",
+  "about:about",
+  "task_1:workflow(phone_quick_replies)",
+  "task_2:extra(phone_quick_replies)",
+  "end:end"
+ ],
+ "path": {
+  "version": 3,
+  "role": "You’re the receptionist at a dental office, handling phones, scheduling, insurance and patient messages.",
+  "track": "starter",
+  "tool": "claude",
+  "worksFor": "employer",
+  "policy": "encouraged",
+  "device": "both",
+  "apps": [
+   "any_chat",
+   "claude",
+   "iphone",
+   "gboard",
+   "samsung_keyboard",
+   "gmail"
+  ],
+  "skipped": [],
+  "steps": [
+   {
+    "id": "ready",
+    "kind": "ready",
+    "card": "claude_get_started",
+    "firstStep": "I’m a receptionist at a dental office. I write text messages to patients about appointment changes and reminders. Write a short, friendly text in plain language, under 50 words, that tells the patient about the change below and invites them to reply if the new time doesn’t work. Keep it warm and professional, with no medical advice. Details for this message: [paste the appointment change details here]."
+   },
+   {
+    "id": "about",
+    "kind": "about",
+    "card": "claude_about_you",
+    "note": "I am a receptionist at a dental office. I handle phones, scheduling, insurance questions and patient messages. I write short, warm, clear texts to patients, usually a few sentences, in plain words. I never want details added that I did not give you, like times, prices, office rules or insurance facts. If something is missing, put it in square brackets for me to fill in. I never share patient names or health details with you. Give me one draft at a time, and tell me what you assumed so I can check it before anything goes out."
+   },
+   {
+    "id": "task_1",
+    "kind": "workflow",
+    "task": "Appointment reminders",
+    "title": "Your reminder texts, saved once on your phone",
+    "recipe": "phone_quick_replies",
+    "read": "Your reminder texts live on your phone’s keyboard, each one a few letters away. You stop rewriting the same message many times a day, and each one still sounds like you. You only change the name or the time before you send.",
+    "material": [
+     {
+      "label": "Your reminder replies",
+      "items": [
+       "Hi [first name], this is a reminder about your visit at [office name] on [day and time]. Reply here to confirm, or call us if you need to change it.",
+       "Hi [first name], the dentist is out on [day], so your visit is moved to [new day and time]. Reply here if that doesn’t work and we’ll find another time.",
+       "Hi [first name], we have you down for [day and time]. Please reply here to let us know you’re coming.",
+       "Hi [first name], we have an opening on [day and time] if you’d like to move your visit. Reply here and we’ll hold it for you.",
+       "Hi [first name], your visit is tomorrow at [time]. Please bring [what to bring]. See you then.",
+       "Hi [first name], we got your note that you can’t make [day and time]. Reply with a few days that work and we’ll find a new time."
+      ]
+     },
+     {
+      "label": "Shortcuts for each reply",
+      "items": [
+       "rmnd",
+       "dsmv",
+       "cfmv",
+       "opnx",
+       "tmrw",
+       "rscx"
+      ]
+     }
+    ]
+   },
+   {
+    "id": "task_2",
+    "kind": "extra",
+    "task": "Recall messages",
+    "title": "Your recall messages, saved once on your phone",
+    "recipe": "phone_quick_replies",
+    "sameAs": "task_1",
+    "read": "Recall messages are added to the same saved replies you set up for reminders. They sit on your phone’s keyboard next to the others, each a few letters away.",
+    "material": [
+     {
+      "label": "Your recall replies",
+      "items": [
+       "Hi [first name], it’s time to schedule your next cleaning at [office name]. Reply here with a few days that work, or call us at [phone number].",
+       "Hi [first name], we haven’t seen you in a while and we’d love to get you back on the schedule. Reply here and we’ll find a time.",
+       "Hi [first name], we have openings on [days] for your cleaning. Reply with the one you’d like and we’ll book it.",
+       "Hi [first name], just a friendly follow up about your cleaning. Reply here when you’re ready to pick a time.",
+       "Hi [first name], your next visit is due. Reply with times that work and we’ll set it up."
+      ]
+     },
+     {
+      "label": "Shortcuts for each reply",
+      "items": [
+       "rclm",
+       "rcls",
+       "rcop",
+       "rcfu",
+       "rcdu"
+      ]
+     }
+    ]
+   },
+   {
+    "id": "end",
+    "kind": "end",
+    "safeUse": [
+     "Never type patient names, birth dates, phone numbers, addresses or health details into a chat tool. Use square brackets and fill them in yourself.",
+     "Never type insurance member numbers or claim details. Check coverage in your office system.",
+     "Saved replies are templates only. Keep names, times and anything private out of them.",
+     "Read every reply before it goes out, and check the day, time and name.",
+     "Only use tools and tasks your office has approved."
+    ],
+    "askMessage": "Hi [manager’s name], I’d like to know which AI tools the office has approved and what I may use them for. I have two tasks in mind: appointment reminder texts and recall messages. I would write general templates with no patient names or health details, and I would read every message before it goes out. Could you let me know what is allowed, or point me to who can say?"
+   }
+  ]
+ },
+ "design": [
+  {
+   "task": "Appointment reminders",
+   "today": "You write these many times a day, each one from scratch. Many are short texts like the one you pasted about Dr. Patel being out and a cleaning moving to Tuesday.",
+   "newWay": "You keep a small set of saved replies on your phone for the reminder and reschedule messages you send most, like a dentist being out or a visit moving to a new time. When one is needed, you type a few letters, the saved text appears, and you fill in the day, time and name yourself. Nothing is sent by itself and no work email is connected. Your wording stays the same each time and you stop rewriting the same message.",
+   "steps": [
+    {
+     "app": null,
+     "ref": null,
+     "goal": "List the reminder and reschedule messages you send most, such as a standard reminder, a dentist out today, and a visit moved to a new time."
+    },
+    {
+     "app": "ChatGPT",
+     "ref": "chatgpt_get_started",
+     "goal": "Get ChatGPT ready on your phone and computer so you can tidy your wording."
+    },
+    {
+     "app": "ChatGPT",
+     "ref": "phone_quick_replies",
+     "goal": "Turn your most common reminder messages into short saved replies that are a few letters away on your phone."
+    },
+    {
+     "app": null,
+     "ref": null,
+     "goal": "Leave clear gaps in each reply for the patient's first name, day and time, so you fill them in by hand and never paste private details into the AI tool."
+    }
+   ],
+   "material": [
+    {
+     "label": "Reminder replies",
+     "what": "Short saved replies for a standard appointment reminder, with gaps for name, day and time."
+    },
+    {
+     "label": "Dentist out reply",
+     "what": "A saved reply like your Dr. Patel message that offers a new time and invites the patient to answer if it does not work."
+    },
+    {
+     "label": "Shortcut list",
+     "what": "A list of the few letters that bring up each saved reply, so you can find them quickly."
+    }
+   ],
+   "checkPoint": "You read every reply and check the name, day and time before you send it."
+  },
+  {
+   "task": "Recall messages",
+   "today": "You write these regularly, often the same few messages.",
+   "newWay": "You set up a saved assistant that writes your recall messages in your office's voice. Each time, you give it only the kind of recall, like a six month cleaning or an overdue check up, and it writes a short message with gaps for the details. You fill in the patient's name and any dates yourself and send it from your own system. Because the messages are so alike, one saved assistant keeps the tone steady without writing each from scratch.",
+   "steps": [
+    {
+     "app": null,
+     "ref": null,
+     "goal": "Collect three or four recall messages you have already sent and pick the ones that sound most like your office."
+    },
+    {
+     "app": "ChatGPT",
+     "ref": "chatgpt_project",
+     "goal": "Make a project for recall messages so your instructions and examples stay together."
+    },
+    {
+     "app": "ChatGPT",
+     "ref": "saved_assistant",
+     "goal": "Save instructions and your example messages so the assistant writes new recall messages in your tone with blanks for names and dates."
+    },
+    {
+     "app": null,
+     "ref": null,
+     "goal": "Decide to give the assistant only the type of recall, never patient names, health details or insurance information."
+    }
+   ],
+   "material": [
+    {
+     "label": "Assistant instructions",
+     "what": "Plain directions telling the assistant to write short, friendly recall messages with blanks for patient details."
+    },
+    {
+     "label": "Example recalls",
+     "what": "Your own past recall messages, with names removed, so it copies your wording."
+    },
+    {
+     "label": "Tone notes",
+     "what": "A few lines on how your office sounds, such as warm, brief and clear about how to book."
+    }
+   ],
+   "checkPoint": "You read each message, fill in every gap yourself and send it from your own system only when it is right."
+  }
+ ],
+ "checks": [
+  {
+   "id": "screens",
+   "pass": true,
+   "detail": "9 screens, at most 9 for a starter"
+  },
+  {
+   "id": "levels_in_code",
+   "pass": true,
+   "detail": "Every row has a level or waits"
+  },
+  {
+   "id": "level3_not_writing_help",
+   "pass": true,
+   "detail": "No line at level 3 or higher reads like writing help"
+  },
+  {
+   "id": "path_line_from_recipe",
+   "pass": true,
+   "detail": "Every line at level 3 or higher is its recipe's"
+  },
+  {
+   "id": "no_connect_without_ok",
+   "pass": true,
+   "detail": "No row connects a work app"
+  },
+  {
+   "id": "dental_top_level_3",
+   "pass": true,
+   "detail": "Top task Appointment reminders at level 3 with phone_quick_replies"
+  },
+  {
+   "id": "path_written",
+   "pass": true,
+   "detail": "5 steps"
+  },
+  {
+   "id": "workflow_parts",
+   "pass": true,
+   "detail": "2 workflows, each with a test, an approval point and a cost line"
+  },
+  {
+   "id": "setup_from_recipe_or_card",
+   "pass": true,
+   "detail": "card claude_get_started, card claude_about_you, recipe phone_quick_replies, recipe phone_quick_replies"
+  },
+  {
+   "id": "no_click_paths_from_model",
+   "pass": true,
+   "detail": "The model wrote no menu paths or button names"
+  },
+  {
+   "id": "copy_rules",
+   "pass": true,
+   "detail": "No dashes, promised times, prices or percents"
+  },
+  {
+   "id": "offer_matches_path",
+   "pass": true,
+   "detail": "Offer names 2, path has 2 workflows, 2 match by name"
+  }
+ ],
+ "recipes": {
+  "total": 6,
+  "aiTasks": 3,
+  "withRecipe": [
+   {
+    "task": "Appointment reminders",
+    "recipe": "phone_quick_replies",
+    "level": 3
+   },
+   {
+    "task": "Recall messages",
+    "recipe": "phone_quick_replies",
+    "level": 3
+   },
+   {
+    "task": "Rescheduling when a dentist is out",
+    "recipe": "phone_quick_replies",
+    "level": 3
+   }
+  ],
+  "without": [
+   {
+    "task": "Booking appointments",
+    "level": 1,
+    "waits": false
+   },
+   {
+    "task": "Answering phone calls",
+    "level": 1,
+    "waits": false
+   },
+   {
+    "task": "Checking insurance coverage",
+    "level": 1,
+    "waits": false
+   }
+  ],
+  "noRecipe": false,
+  "mostlyAssistant": false
+ },
+ "designCount": {
+  "steps": 8,
+  "checked": 4,
+  "unchecked": 0,
+  "noApp": 4,
+  "badRefs": [],
+  "clickPaths": [],
+  "apps": [],
+  "refs": [
+   "chatgpt_get_started",
+   "phone_quick_replies",
+   "chatgpt_project",
+   "saved_assistant"
+  ]
+ }
+}

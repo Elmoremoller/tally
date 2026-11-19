@@ -1,0 +1,774 @@
+{
+ "name": "groomer",
+ "group": "self employed Starter",
+ "persona": {
+  "group": "self employed Starter",
+  "bio": "Dani, 34, runs a mobile dog grooming van on her own in a suburb of Atlanta. Six or seven dogs a day. Clients book by text, and she answers the same questions all day: prices by breed, how long it takes, whether she does nails only, how to reschedule. She sends reminder texts the night before, writes a short note after each groom about matting or skin, and posts before and after photos on Instagram. Bookings live in a paper diary and her phone's calendar. She has never used AI.",
+  "job": "I run my own mobile dog grooming van.",
+  "level": "not_yet",
+  "device": "phone",
+  "phone": "iphone",
+  "canUse": "self",
+  "connect": null
+ },
+ "versions": {
+  "job": "beginner-job-v5",
+  "questions": "beginner-questions-v6",
+  "intake": "beginner-intake-v8",
+  "path": "beginner-path-v1"
+ },
+ "jobRead": {
+  "repeats": [
+   {
+    "label": "Booking appointments",
+    "ai": true
+   },
+   {
+    "label": "Texting owners reminders",
+    "ai": true
+   },
+   {
+    "label": "Bathing and drying dogs",
+    "ai": false
+   },
+   {
+    "label": "Cutting and styling coats",
+    "ai": false
+   },
+   {
+    "label": "Writing social posts",
+    "ai": true
+   }
+  ],
+  "aiFallback": [
+   "Appointment reminder texts",
+   "Thank you messages",
+   "Grooming service descriptions",
+   "Weekly schedule plans"
+  ],
+  "apps": [
+   "Square",
+   "Vagaro",
+   "Google Calendar",
+   "Instagram",
+   "Facebook Pages",
+   "QuickBooks"
+  ],
+  "aiUses": [
+   "Captions",
+   "Customer texts",
+   "Price quotes",
+   "Social posts",
+   "Service descriptions"
+  ],
+  "worksFor": "self"
+ },
+ "jobReadFallback": false,
+ "asked": [
+  {
+   "id": "asked_1",
+   "title": "How do you reply to owners' questions today?",
+   "kind": "many",
+   "choices": [
+    "Text back right away",
+    "Check the calendar first",
+    "Look up my notes",
+    "Call them back",
+    "Paper notebook"
+   ],
+   "hint": "Pick every one that fits."
+  }
+ ],
+ "screens": 7,
+ "worksForFromJob": "self",
+ "answers": {
+  "job": "I run my own mobile dog grooming van.",
+  "experience": "not_yet",
+  "qas": [
+   {
+    "id": "level",
+    "title": "Where are you with AI?",
+    "picked": [
+     "Never used it"
+    ],
+    "text": null,
+    "shown": [
+     "Never used it",
+     "Tried it a few times",
+     "Use it some weeks",
+     "Use it most days"
+    ]
+   },
+   {
+    "id": "repeats",
+    "title": "What do you do over and over, every day or every week?",
+    "picked": [
+     "Booking appointments",
+     "Texting owners reminders",
+     "Bathing and drying dogs",
+     "Cutting and styling coats",
+     "Writing social posts",
+     "Answering messages"
+    ],
+    "text": "Same price and timing questions all day, every day",
+    "shown": [
+     "Booking appointments",
+     "Texting owners reminders",
+     "Bathing and drying dogs",
+     "Cutting and styling coats",
+     "Writing social posts",
+     "Answering messages",
+     "Writing emails",
+     "Planning my week",
+     "Making lists",
+     "Social posts"
+    ]
+   },
+   {
+    "id": "most",
+    "title": "Which would save you the most time if it got easier?",
+    "picked": [
+     "Answering messages",
+     "Texting owners reminders"
+    ],
+    "text": null,
+    "shown": [
+     "Booking appointments",
+     "Texting owners reminders",
+     "Bathing and drying dogs",
+     "Cutting and styling coats",
+     "Writing social posts",
+     "Answering messages"
+    ]
+   },
+   {
+    "id": "example",
+    "title": "Paste the last one you wrote, or what the last person asked you.",
+    "picked": [],
+    "text": "Hi, is Tuesday at 10 still good for my doodle? Can we do nails only if she's sore from the last one? Thanks!"
+   },
+   {
+    "id": "often",
+    "title": "How often do you do this?",
+    "picked": [
+     "Many times a day"
+    ],
+    "text": null,
+    "shown": [
+     "Many times a day",
+     "About once a day",
+     "A few times a week",
+     "Once a week or less"
+    ]
+   },
+   {
+    "id": "where",
+    "title": "Where does your work happen?",
+    "picked": [
+     "Google Calendar",
+     "Instagram",
+     "Text messages",
+     "Paper",
+     "In person"
+    ],
+    "text": null,
+    "shown": [
+     "Square",
+     "Vagaro",
+     "Google Calendar",
+     "Instagram",
+     "Facebook Pages",
+     "QuickBooks",
+     "Text messages",
+     "Gmail",
+     "Outlook",
+     "Google Sheets",
+     "A work system",
+     "Paper",
+     "In person"
+    ]
+   },
+   {
+    "id": "device",
+    "title": "Do you work on a phone, a computer or both?",
+    "picked": [
+     "Phone only"
+    ],
+    "text": null,
+    "shown": [
+     "Phone only",
+     "Computer only",
+     "Both"
+    ]
+   },
+   {
+    "id": "asked_1",
+    "title": "How do you reply to owners' questions today?",
+    "picked": [
+     "Text back right away",
+     "Check the calendar first",
+     "Look up my notes"
+    ],
+    "text": null,
+    "shown": [
+     "Text back right away",
+     "Check the calendar first",
+     "Look up my notes",
+     "Call them back",
+     "Paper notebook"
+    ]
+   }
+  ],
+  "mostWanted": [
+   "Answering messages",
+   "Texting owners reminders"
+  ],
+  "worksFor": "self",
+  "aiTools": [
+   "none_yet"
+  ],
+  "aiToolsOther": null,
+  "aiPolicy": null,
+  "often": "many_a_day"
+ },
+ "intake": {
+  "role_summary": "You run your own mobile dog grooming van, handling bookings, owner texts, grooming and social posts on your phone.",
+  "tasks": [
+   {
+    "name": "Booking appointments",
+    "ai": false,
+    "private": true,
+    "kind": null
+   },
+   {
+    "name": "Owner reminder texts",
+    "ai": true,
+    "private": false,
+    "kind": "repeat_texts"
+   },
+   {
+    "name": "Bathing and drying dogs",
+    "ai": false,
+    "private": false,
+    "kind": null
+   },
+   {
+    "name": "Cutting and styling coats",
+    "ai": false,
+    "private": false,
+    "kind": null
+   },
+   {
+    "name": "Social posts",
+    "ai": true,
+    "private": false,
+    "kind": "repeat_writing"
+   },
+   {
+    "name": "Answering owner messages",
+    "ai": true,
+    "private": true,
+    "kind": "repeat_texts"
+   }
+  ],
+  "first_win": {
+   "task": "Answering owner messages",
+   "intro": "You said you answer owners' questions many times a day. Here is a reply to that last message about Tuesday and nails, ready to send.",
+   "draft": "Hi! Yes, Tuesday at 10 works for your doodle, I’ll check the calendar to confirm and get back to you shortly. About nails only: I’ll look at how her paws and coat are doing when she arrives, and if she’s sore from her last visit I’ll keep it to nails only and let you know. Thanks for checking in!"
+  },
+  "first_step": "I’m a mobile dog groomer who runs my own grooming van, and I answer owner text messages many times a day. Write a short, friendly text reply to the message I paste below. Keep it under 60 words, warm and plain, with no emojis. Only say what I’ve told you. If the owner asks about a time, price or service I haven’t given, say I’ll check and get back to them. Here is the owner’s message: [paste the owner’s message here]",
+  "map": [
+   {
+    "task": "Booking appointments",
+    "phrase": null,
+    "today": "You book these by hand, one at a time, through your calendar and paper.",
+    "withPath": "Your bookings stay yours, and AI can only help with the wording around them.",
+    "ai": false,
+    "private": true,
+    "kind": null
+   },
+   {
+    "task": "Owner reminder texts",
+    "phrase": "reminder texts",
+    "today": "You write these again and again by hand, each time from scratch.",
+    "withPath": "Each reminder starts from a draft you only need to check and send.",
+    "ai": true,
+    "private": false,
+    "kind": "repeat_texts"
+   },
+   {
+    "task": "Bathing and drying dogs",
+    "phrase": null,
+    "today": "This is hands on work with the dog in front of you.",
+    "withPath": "This stays yours, and AI does not play a part in it.",
+    "ai": false,
+    "private": false,
+    "kind": null
+   },
+   {
+    "task": "Cutting and styling coats",
+    "phrase": "coat cutting and styling",
+    "today": "This is hands on work with the dog in front of you.",
+    "withPath": "This stays yours, and AI does not play a part in it.",
+    "ai": false,
+    "private": false,
+    "kind": null
+   },
+   {
+    "task": "Social posts",
+    "phrase": "Instagram posts",
+    "today": "You write these now and then, each one from a blank page.",
+    "withPath": "Each post starts from a draft you only need to tweak and post.",
+    "ai": true,
+    "private": false,
+    "kind": "repeat_writing"
+   },
+   {
+    "task": "Answering owner messages",
+    "phrase": null,
+    "today": "You answer these many times a day, one by one.",
+    "withPath": "Each reply starts from a draft you only need to check before sending.",
+    "ai": true,
+    "private": true,
+    "kind": "repeat_texts"
+   }
+  ],
+  "needs_follow_up": false,
+  "follow_up_question": null
+ },
+ "free": {
+  "firstWin": {
+   "task": "Answering owner messages",
+   "intro": "You said you answer owners' questions many times a day. Here is a reply to that last message about Tuesday and nails, ready to send.",
+   "draft": "Hi! Yes, Tuesday at 10 works for your doodle, I’ll check the calendar to confirm and get back to you shortly. About nails only: I’ll look at how her paws and coat are doing when she arrives, and if she’s sore from her last visit I’ll keep it to nails only and let you know. Thanks for checking in!"
+  },
+  "firstStep": "I’m a mobile dog groomer who runs my own grooming van, and I answer owner text messages many times a day. Write a short, friendly text reply to the message I paste below. Keep it under 60 words, warm and plain, with no emojis. Only say what I’ve told you. If the owner asks about a time, price or service I haven’t given, say I’ll check and get back to them. Here is the owner’s message: [paste the owner’s message here]",
+  "map": [
+   {
+    "task": "Answering owner messages",
+    "phrase": null,
+    "today": "You answer these many times a day, one by one.",
+    "withPath": "Your common replies are saved on your phone, each a few letters away.",
+    "ai": true,
+    "private": true,
+    "kind": "repeat_texts",
+    "level": 3,
+    "waits": false,
+    "recipe": "phone_quick_replies",
+    "held": null,
+    "askFirst": false
+   },
+   {
+    "task": "Booking appointments",
+    "phrase": null,
+    "today": "You book these by hand, one at a time, through your calendar and paper.",
+    "withPath": "Your bookings stay yours, and AI can only help with the wording around them.",
+    "ai": false,
+    "private": true,
+    "kind": null,
+    "level": 1,
+    "waits": false,
+    "recipe": null,
+    "held": null,
+    "askFirst": false
+   },
+   {
+    "task": "Owner reminder texts",
+    "phrase": "reminder texts",
+    "today": "You write these again and again by hand, each time from scratch.",
+    "withPath": "For your reminder texts, your common replies are saved on your phone, each a few letters away.",
+    "ai": true,
+    "private": false,
+    "kind": "repeat_texts",
+    "level": 3,
+    "waits": false,
+    "recipe": "phone_quick_replies",
+    "held": null,
+    "askFirst": false
+   },
+   {
+    "task": "Bathing and drying dogs",
+    "phrase": null,
+    "today": "This is hands on work with the dog in front of you.",
+    "withPath": "This stays yours, and AI does not play a part in it.",
+    "ai": false,
+    "private": false,
+    "kind": null,
+    "level": 1,
+    "waits": false,
+    "recipe": null,
+    "held": null,
+    "askFirst": false
+   },
+   {
+    "task": "Cutting and styling coats",
+    "phrase": "coat cutting and styling",
+    "today": "This is hands on work with the dog in front of you.",
+    "withPath": "This stays yours, and AI does not play a part in it.",
+    "ai": false,
+    "private": false,
+    "kind": null,
+    "level": 1,
+    "waits": false,
+    "recipe": null,
+    "held": null,
+    "askFirst": false
+   },
+   {
+    "task": "Social posts",
+    "phrase": "Instagram posts",
+    "today": "You write these now and then, each one from a blank page.",
+    "withPath": "For your Instagram posts, you say what you need out loud, and the finished text comes back.",
+    "ai": true,
+    "private": false,
+    "kind": "repeat_writing",
+    "level": 3,
+    "waits": false,
+    "recipe": "say_it_out_loud",
+    "held": null,
+    "askFirst": false
+   }
+  ],
+  "setups": [
+   "Answering owner messages, saved once on your phone",
+   "Your Instagram posts, said out loud, finished as text"
+  ],
+  "prep": [
+   "Get Claude ready on your phone",
+   "Teach Claude who you are"
+  ],
+  "freePlan": true,
+  "tool": "claude",
+  "track": "starter"
+ },
+ "who": {
+  "track": "starter",
+  "canUse": "self",
+  "connect": null,
+  "places": [
+   "Google Calendar",
+   "Instagram",
+   "Text messages",
+   "Paper",
+   "In person"
+  ],
+  "device": "phone",
+  "aiTools": [
+   "none_yet"
+  ]
+ },
+ "outline": [
+  "ready:ready",
+  "about:about",
+  "task_1:workflow(phone_quick_replies)",
+  "task_2:workflow(say_it_out_loud)",
+  "end:end"
+ ],
+ "path": {
+  "version": 3,
+  "role": "You run your own mobile dog grooming van, handling bookings, owner texts, grooming and social posts on your phone.",
+  "track": "starter",
+  "tool": "claude",
+  "worksFor": "self",
+  "policy": null,
+  "device": "phone",
+  "apps": [
+   "any_chat",
+   "claude",
+   "iphone",
+   "gboard",
+   "samsung_keyboard"
+  ],
+  "skipped": [],
+  "steps": [
+   {
+    "id": "ready",
+    "kind": "ready",
+    "card": "claude_get_started",
+    "firstStep": "I’m a mobile dog groomer who runs my own grooming van, and I answer owner text messages many times a day. Write a short, friendly text reply to the message I paste below. Keep it under 60 words, warm and plain, with no emojis. Only say what I’ve told you. If the owner asks about a time, price or service I haven’t given, say I’ll check and get back to them. Here is the owner’s message: [paste the owner’s message here]"
+   },
+   {
+    "id": "about",
+    "kind": "about",
+    "card": "claude_about_you",
+    "note": "I run my own mobile dog grooming van. I book appointments, text owners, groom dogs and post on Instagram, all from my phone. I write to dog owners, and sometimes to people who follow my page. My tone is warm, friendly and short, like a quick text from someone who loves their dogs. I like replies of one to three sentences, in plain words. Never add details I did not give you, like prices, times, openings or promises about a dog’s coat or health. If something is missing, put it in square brackets so I can fill it in. Never use fancy words. Always give me something I can read and send as it is."
+   },
+   {
+    "id": "task_1",
+    "kind": "workflow",
+    "task": "Answering owner messages",
+    "title": "Answering owner messages, saved once on your phone",
+    "recipe": "phone_quick_replies",
+    "read": "Your common replies live on your phone’s keyboard, each a few letters away. You type a short shortcut and the whole reply is one tap from going in. Owners get a quick answer in your own words, and you stop typing the same price and timing answers from scratch.",
+    "material": [
+     {
+      "label": "Your replies",
+      "items": [
+       "Hi [first name], thanks for reaching out! Let me check my calendar and I’ll get right back to you with a time.",
+       "Hi [first name], yes, your appointment is still on for [day and time]. See you and [dog’s name] then!",
+       "Hi [first name], I can do a nails only visit for [dog’s name]. Just let me know what day works and I’ll check my calendar.",
+       "Hi [first name], my prices depend on the size and coat of your dog. Can you tell me the breed and how long it’s been since the last groom? Then I’ll send you a price and the time it takes.",
+       "Hi [first name], a friendly reminder that [dog’s name] has an appointment on [day and time]. Please text me if anything changes!",
+       "Hi [first name], I’m on my way and will be there around [time]. See you soon!",
+       "Hi [first name], thank you for having me today! [dog’s name] was a joy. Let me know when you’d like to book the next visit."
+      ]
+     },
+     {
+      "label": "Your shortcuts",
+      "items": [
+       "chkc",
+       "cnfm",
+       "nlsn",
+       "prcq",
+       "rmnd",
+       "onwy",
+       "thnx"
+      ]
+     }
+    ]
+   },
+   {
+    "id": "task_2",
+    "kind": "workflow",
+    "task": "Social posts",
+    "title": "Your Instagram posts, said out loud, finished as text",
+    "recipe": "say_it_out_loud",
+    "read": "You say your post out loud, and Claude turns it into finished text that waits for your OK. You skip the blank page and keep your own voice. You read it, change what you want, then post it yourself.",
+    "material": [
+     {
+      "label": "Instructions for your assistant",
+      "items": [
+       "I run my own mobile dog grooming van and I post on Instagram. I will tell you out loud what I want to post about, like a groom I just finished, an opening in my schedule or a tip for dog owners. Turn what I say into a finished Instagram caption in my voice, which is warm, friendly and short, in two to four sentences. Use only the details I give you. Do not add prices, times, offers or claims about a dog’s health or coat that I did not say. Do not use the dog owner’s name or any private details. If something is missing, put it in square brackets so I can fill it in. Give me the caption first, then a short line of hashtag ideas I can choose from."
+      ]
+     },
+     {
+      "label": "What to say each time",
+      "items": [
+       "What the post is about, like a before and after, a tip or an opening in my schedule",
+       "The dog’s breed or size, only if I want it in the post",
+       "Anything I want said, like a date, a time or how to book",
+       "Anything to leave out",
+       "The feeling I want, like fun, calm or proud",
+       "Whether I want hashtags"
+      ]
+     }
+    ]
+   },
+   {
+    "id": "end",
+    "kind": "end",
+    "safeUse": [
+     "Never type an owner’s full name, phone number or home address into Claude. Use square brackets or just say “an owner”.",
+     "Never type a dog’s health or medical details tied to a person, like a vet record or medication notes.",
+     "Keep prices, times and openings out of what you ask Claude to invent. Add the real ones yourself.",
+     "Read every reply and every post before it goes out, and fix anything that does not sound like you.",
+     "For any health question about a dog, send the owner to their vet instead of using a draft."
+    ],
+    "askMessage": null
+   }
+  ]
+ },
+ "design": [
+  {
+   "task": "Answering owner messages",
+   "today": "You answer owner texts many times a day, one by one. You text back right away, check the calendar first, or look up your notes.",
+   "newWay": "Your most common replies, like price, timing and whether a Tuesday slot still works, are saved on your phone so each one is a few letters away. You still check Google Calendar for the actual slot and read each reply before you send it. Answers stay the same every time, and you stop retyping what you have already said a hundred times.",
+   "steps": [
+    {
+     "app": null,
+     "ref": null,
+     "goal": "Pick your ten most common owner questions, such as price, timing, nails only and sore dogs, and write down your usual answer to each."
+    },
+    {
+     "app": "ChatGPT",
+     "ref": "chatgpt_get_started",
+     "goal": "Get ChatGPT ready on your phone so you have a helper to tidy your replies."
+    },
+    {
+     "app": "ChatGPT",
+     "ref": "phone_quick_replies",
+     "goal": "Turn your ten answers into short saved replies on your phone keyboard, each a few letters away."
+    },
+    {
+     "app": "Google Calendar",
+     "ref": null,
+     "goal": "Keep checking the calendar yourself for open slots and fill the day and time into the saved reply before sending."
+    }
+   ],
+   "material": [
+    {
+     "label": "Saved replies",
+     "what": "Ten short replies for your most common owner questions, written in your own voice with gaps for the day and time."
+    },
+    {
+     "label": "Shortcut list",
+     "what": "A list of the few letters that bring up each saved reply, so you can find them quickly."
+    },
+    {
+     "label": "Tricky case notes",
+     "what": "A short note on how you answer questions like a sore dog or nails only, so those replies stay kind and consistent."
+    }
+   ],
+   "checkPoint": "You read every reply and check the day and time against your calendar before you send it."
+  },
+  {
+   "task": "Social posts",
+   "today": "You write social posts now and then, each one from a blank page.",
+   "newWay": "You keep one saved assistant that knows your voice and your van. After a groom, you tell it in a few words about the dog and what you did, and it gives you a caption to start from. You change anything that is off and post it yourself, so each post starts from something instead of a blank page.",
+   "steps": [
+    {
+     "app": "Claude",
+     "ref": "claude_get_started",
+     "goal": "Get Claude ready on your phone so you have a place to ask for post drafts."
+    },
+    {
+     "app": "Claude",
+     "ref": "claude_project",
+     "goal": "Make a project for your social posts so your tone notes and examples stay in one place."
+    },
+    {
+     "app": "Claude",
+     "ref": "saved_assistant",
+     "goal": "Set up a saved assistant that turns a few words about a groom into a caption in your voice."
+    },
+    {
+     "app": "Instagram",
+     "ref": null,
+     "goal": "Paste the caption you approve into Instagram and post it yourself."
+    }
+   ],
+   "material": [
+    {
+     "label": "Assistant instructions",
+     "what": "Plain instructions telling the assistant to write short, friendly captions for a mobile dog grooming van."
+    },
+    {
+     "label": "Tone notes",
+     "what": "A few lines on how you sound, such as warm and playful, and words you like or avoid."
+    },
+    {
+     "label": "Post starter",
+     "what": "A short fill in form for the dog's breed, the groom you did and anything fun, so each draft starts quickly."
+    }
+   ],
+   "checkPoint": "You read each caption and check the dog's name and details before you post it yourself, and only post photos of dogs whose owners are happy to be shown."
+  }
+ ],
+ "checks": [
+  {
+   "id": "screens",
+   "pass": true,
+   "detail": "7 screens, at most 9 for a starter"
+  },
+  {
+   "id": "levels_in_code",
+   "pass": true,
+   "detail": "Every row has a level or waits"
+  },
+  {
+   "id": "level3_not_writing_help",
+   "pass": true,
+   "detail": "No line at level 3 or higher reads like writing help"
+  },
+  {
+   "id": "path_line_from_recipe",
+   "pass": true,
+   "detail": "Every line at level 3 or higher is its recipe's"
+  },
+  {
+   "id": "path_written",
+   "pass": true,
+   "detail": "5 steps"
+  },
+  {
+   "id": "workflow_parts",
+   "pass": true,
+   "detail": "2 workflows, each with a test, an approval point and a cost line"
+  },
+  {
+   "id": "setup_from_recipe_or_card",
+   "pass": true,
+   "detail": "card claude_get_started, card claude_about_you, recipe phone_quick_replies, recipe say_it_out_loud"
+  },
+  {
+   "id": "no_click_paths_from_model",
+   "pass": true,
+   "detail": "The model wrote no menu paths or button names"
+  },
+  {
+   "id": "copy_rules",
+   "pass": true,
+   "detail": "No dashes, promised times, prices or percents"
+  },
+  {
+   "id": "offer_matches_path",
+   "pass": true,
+   "detail": "Offer names 2, path has 2 workflows, 2 match by name"
+  }
+ ],
+ "recipes": {
+  "total": 6,
+  "aiTasks": 3,
+  "withRecipe": [
+   {
+    "task": "Answering owner messages",
+    "recipe": "phone_quick_replies",
+    "level": 3
+   },
+   {
+    "task": "Owner reminder texts",
+    "recipe": "phone_quick_replies",
+    "level": 3
+   },
+   {
+    "task": "Social posts",
+    "recipe": "say_it_out_loud",
+    "level": 3
+   }
+  ],
+  "without": [
+   {
+    "task": "Booking appointments",
+    "level": 1,
+    "waits": false
+   },
+   {
+    "task": "Bathing and drying dogs",
+    "level": 1,
+    "waits": false
+   },
+   {
+    "task": "Cutting and styling coats",
+    "level": 1,
+    "waits": false
+   }
+  ],
+  "noRecipe": false,
+  "mostlyAssistant": false
+ },
+ "designCount": {
+  "steps": 8,
+  "checked": 5,
+  "unchecked": 2,
+  "noApp": 1,
+  "badRefs": [],
+  "clickPaths": [],
+  "apps": [
+   [
+    "Google Calendar",
+    1
+   ],
+   [
+    "Instagram",
+    1
+   ]
+  ],
+  "refs": [
+   "chatgpt_get_started",
+   "phone_quick_replies",
+   "claude_get_started",
+   "claude_project",
+   "saved_assistant"
+  ]
+ }
+}

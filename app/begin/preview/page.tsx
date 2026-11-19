@@ -2,9 +2,10 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
 import { Backdrop } from "@/components/Backdrop";
-import { BeginnerPaywall, FirstWinResult } from "@/components/beginner/FirstWinResult";
+import { AskFirst, BeginnerPaywall, FirstWinResult } from "@/components/beginner/FirstWinResult";
 import { QuizHeader } from "@/components/quiz/QuizHeader";
-import { orderMap, setupsFor, setupTasks } from "@/lib/beginner/free-result";
+import { askMessageFor, askOnlyFor, freePlanFor, offerFor, orderMap } from "@/lib/beginner/free-result";
+import { sampleWho, withLevels } from "@/lib/beginner/levels";
 import { beginnerSampleFor, beginnerSamples } from "@/lib/beginner/samples";
 import { offer } from "@/lib/offer";
 import { previewAllowed } from "@/lib/preview";
@@ -34,18 +35,28 @@ export default function Page({ searchParams }: PageProps<"/begin/preview">) {
 async function Preview({ searchParams }: { searchParams: PageProps<"/begin/preview">["searchParams"] }) {
   const { sample } = await searchParams;
   if (!previewAllowed) notFound();
-  const { firstWin, free, plan } = beginnerSampleFor(sample) ?? beginnerSamples.dental;
-  // Her setups are built as on the live result, from her path, her tool and her own tasks.
-  const map = orderMap(free.map, firstWin.task);
-  const setups = setupsFor({
+  const sampled = beginnerSampleFor(sample) ?? beginnerSamples.dental;
+  const { firstWin, free, plan } = sampled;
+  // Levels and the offer are chosen as on the live result, from her path, her answers and her own tasks.
+  const map = orderMap(withLevels(free.map, sampleWho(sampled)), firstWin.task);
+  const offer = offerFor({
     track: free.track,
     tool: plan.tool,
-    ...setupTasks(map, firstWin.task),
+    map,
+    top: firstWin.task,
     device: free.device,
+    restricted: plan.policy === "restricted",
   });
+  const restricted = plan.policy === "restricted";
+  // As on the live result: with every task waiting for her company's OK, no paywall, only the free message.
+  const askOnly = askOnlyFor(map, firstWin.task, restricted);
   return (
-    <FirstWinResult result={{ firstWin, map }} restricted={plan.policy === "restricted"}>
-      <BeginnerPaywall setups={setups} />
+    <FirstWinResult result={{ firstWin, map }} restricted={restricted && !askOnly}>
+      {askOnly ? (
+        <AskFirst message={askMessageFor(map)} />
+      ) : (
+        <BeginnerPaywall {...offer} freePlan={freePlanFor(map, firstWin.task)} />
+      )}
     </FirstWinResult>
   );
 }

@@ -2575,7 +2575,23 @@
     border: 0;
     font-family: inherit;
   }
-  /* How often, under the box on the example screen: a small heading, then one row of chips she taps once. */
+  /* What she does over and over, in two small groups (Phase 8): her own responsibilities, then the usual ones. */
+  .quiz-groups {
+    display: grid;
+    gap: 1.25rem;
+    margin-top: clamp(1.75rem, 1.4rem + 1.5vw, 2.5rem);
+  }
+  .quiz-groups .quiz-topics {
+    margin: 0;
+  }
+  .quiz-group-label {
+    flex-basis: 100%;
+    margin-bottom: 0.125rem;
+    padding: 0;
+    font-weight: 600;
+    color: var(--slate);
+  }
+  /* How often, under her picks on the most wanted screen: a small heading, then one row of chips she taps once. */
   .quiz-often {
     margin-top: 1.5rem;
   }
@@ -5513,6 +5529,41 @@
       0 0 0 1px var(--line-strong),
       var(--shadow-2);
   }
+  /* The level tag over each task (Phase 5), in the plain words of DIRECTION.md, section 3. */
+  .win-map-level {
+    justify-self: start;
+    padding: 0.25rem 0.625rem;
+    border-radius: 999px;
+    background: var(--tint);
+    font-size: var(--fs-micro);
+    font-weight: 700;
+    line-height: var(--lh-micro);
+    letter-spacing: var(--tr-micro);
+    color: var(--slate);
+  }
+  .win-map-level + .win-map-task,
+  .win-map-tags + .win-map-task {
+    margin-top: -0.25rem;
+  }
+  /* The level tag and, on the rows her offer names, In your path, side by side (Phase 8). */
+  .win-map-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.375rem;
+  }
+  .win-map-tags:empty {
+    display: none;
+  }
+  .win-map-in {
+    background: var(--slate);
+    color: var(--off-white);
+  }
+  /* Why a rule held the level down, or to ask her company first: a few quiet words under the lines. */
+  .win-map-why {
+    font-size: var(--fs-small);
+    line-height: var(--lh-small);
+    color: var(--muted);
+  }
   .win-map-task {
     font-family: var(--stack-text);
     font-size: 1.125rem;
@@ -5564,6 +5615,42 @@
   }
   .win-setups .peek-card {
     text-align: left;
+  }
+  /* The pieces Tally builds for each workflow, under its name (Phase 8). */
+  .win-pieces {
+    display: grid;
+    gap: 0.25rem;
+    margin: 0.375rem 0 0;
+    padding: 0 0 0 1.1rem;
+    list-style: disc;
+    color: var(--ink);
+  }
+  .win-pieces li::marker {
+    color: var(--slate);
+  }
+  .win-offer-line {
+    width: 100%;
+    margin-top: 1rem;
+    text-align: left;
+    color: var(--ink);
+  }
+  /* A Starter's two prep steps, under her workflows on the paywall: quieter than the workflows they lead to. */
+  .win-prep {
+    width: 100%;
+    margin-top: 1.25rem;
+    text-align: left;
+  }
+  .win-prep-lead {
+    font-weight: 600;
+    color: var(--slate);
+  }
+  .win-prep-steps {
+    display: grid;
+    gap: 0.375rem;
+    margin: 0.5rem 0 0;
+    padding: 0;
+    list-style: none;
+    color: var(--ink);
   }
   .win-example {
     padding: 0.875rem 1rem;
@@ -5724,5 +5811,246 @@
     line-height: var(--lh-small);
     color: var(--muted);
     text-wrap: pretty;
+  }
+}
+
+/* ---------- Her paid path (/plan, Phase 6) ---------- */
+/* One step at a time, like the quiz: a progress line, the step, a big copy button on what Tally wrote, and
+   Did it work. Mobile first; Back and Next ride in the quiz's dock on a phone. */
+@layer components {
+  .path-flow {
+    display: grid;
+    gap: 1.5rem;
+  }
+  .path-progress {
+    display: grid;
+    gap: 0.375rem;
+  }
+  .path-count {
+    font-size: var(--fs-small);
+    font-weight: 600;
+    color: var(--muted);
+  }
+  .path-bar {
+    height: 0.25rem;
+    border-radius: 999px;
+    background: var(--slate-wash);
+    overflow: hidden;
+  }
+  .path-bar > span {
+    display: block;
+    height: 100%;
+    background: var(--slate);
+    transform-origin: left;
+    transition: transform var(--dur-spring) var(--ease-spring);
+  }
+  .path-step {
+    display: grid;
+    gap: 1.5rem;
+  }
+  .path-step > .quiz-dock {
+    margin-top: 0.5rem;
+  }
+  .path-skipped {
+    display: grid;
+    gap: 0.25rem;
+    margin: 0;
+    padding: 0.75rem 1rem;
+    border-radius: 1rem;
+    background: var(--slate-wash);
+    font-size: var(--fs-small);
+    line-height: var(--lh-small);
+    color: var(--ink);
+    list-style: none;
+  }
+  .path-title {
+    margin: 0;
+  }
+  .path-read {
+    font-size: var(--fs-lead);
+    line-height: var(--lh-lead);
+    color: var(--ink);
+    text-wrap: pretty;
+  }
+  .path-part,
+  .path-piece,
+  .path-phone,
+  .path-help,
+  .path-worked {
+    display: grid;
+    gap: 0.75rem;
+  }
+  .path-piece-label,
+  .path-phone-title,
+  .path-worked-title {
+    font-size: var(--fs-lead);
+    font-weight: 700;
+    color: var(--ink);
+  }
+  .path-items {
+    display: grid;
+    gap: 0.625rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .path-items > li {
+    display: grid;
+    gap: 0.5rem;
+    padding: 0.875rem 1rem;
+    border-radius: 1rem;
+    background: var(--off-white);
+    box-shadow: 0 0 0 1px var(--line);
+    color: var(--ink);
+  }
+  .path-item-text {
+    text-wrap: pretty;
+    overflow-wrap: anywhere;
+  }
+  .path-copy {
+    justify-self: start;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    min-height: 2.75rem;
+    padding: 0 1rem;
+    border: 0;
+    border-radius: 999px;
+    background: var(--slate-wash);
+    color: var(--slate);
+    font: inherit;
+    font-size: var(--fs-small);
+    font-weight: 700;
+    cursor: pointer;
+    touch-action: manipulation;
+  }
+  .path-copy:hover {
+    background: var(--slate-wash-hover);
+  }
+  .path-copy:active {
+    background: var(--slate-wash-press);
+  }
+  .path-copy svg {
+    width: 1rem;
+    height: 1rem;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  .path-pair {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: var(--fs-small);
+    color: var(--muted);
+  }
+  .path-pair strong {
+    color: var(--ink);
+    font-size: var(--fs-body);
+  }
+  .path-devices {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  .path-device {
+    min-height: 2.75rem;
+    padding: 0 1.125rem;
+    border: 0;
+    border-radius: 999px;
+    background: var(--off-white);
+    box-shadow: 0 0 0 1px var(--line-strong);
+    color: var(--ink);
+    font: inherit;
+    font-size: var(--fs-small);
+    font-weight: 700;
+    cursor: pointer;
+    touch-action: manipulation;
+  }
+  .path-device[aria-pressed="true"] {
+    background: var(--slate);
+    box-shadow: none;
+    color: var(--off-white);
+  }
+  .path-note,
+  .path-stops {
+    font-size: var(--fs-small);
+    line-height: var(--lh-small);
+    color: var(--muted);
+    text-wrap: pretty;
+  }
+  .path-note-box {
+    display: grid;
+    gap: 0.375rem;
+    padding: 1rem 1.125rem;
+    border-radius: 1rem;
+    background: var(--slate-wash);
+    color: var(--ink);
+    text-wrap: pretty;
+  }
+  .path-change {
+    justify-self: start;
+  }
+  .path-worked {
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--line);
+  }
+  .path-worked-buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+  }
+  .path-worked-buttons .quiz-choice {
+    justify-content: center;
+    padding-inline: 1rem;
+    text-align: center;
+  }
+  .path-worked-status:empty {
+    display: none;
+  }
+  .path-help-label {
+    font-weight: 600;
+    color: var(--ink);
+  }
+  .path-help-box {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 0;
+    border-radius: 0.875rem;
+    background: var(--off-white);
+    box-shadow: 0 0 0 1px var(--line-strong);
+    color: var(--ink);
+    font: inherit;
+    font-size: 1.0625rem; /* 17px, so iOS does not zoom in on focus */
+    line-height: 1.45;
+    resize: vertical;
+  }
+  .path-help-box:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px var(--slate);
+  }
+  .path-help .btn {
+    justify-self: start;
+  }
+  .path-nav {
+    display: flex;
+    gap: 0.75rem;
+  }
+  .path-nav > .btn {
+    flex: 1;
+    margin-top: 0;
+  }
+
+  /* The free result when every task waits for her company's OK: the message to ask, in place of the paywall. */
+  .ask-first {
+    display: grid;
+    gap: 1rem;
+    margin-top: 2.5rem;
+  }
+  .ask-first-title {
+    margin: 0;
   }
 }

@@ -1,0 +1,1584 @@
+{
+ "name": "hr",
+ "group": "experiment",
+ "persona": {
+  "group": "experiment",
+  "bio": "Priya, 33, HR coordinator at a logistics company with about 300 people. She works in Outlook and the company's HR system all day: scheduling interviews, sending offer letters and onboarding emails, answering the same policy questions about leave and benefits, keeping the onboarding checklist in Excel, and writing the monthly HR newsletter. She tried Copilot a few times. She is not sure what the company allows with employee data.",
+  "job": "HR coordinator at a logistics company, about 300 employees.",
+  "level": "tried",
+  "device": "computer",
+  "phone": "android",
+  "canUse": "not_sure",
+  "connect": "not_sure"
+ },
+ "versions": {
+  "job": "beginner-job-v5",
+  "questions": "beginner-questions-v6",
+  "intake": "beginner-intake-v8",
+  "path": "beginner-path-v1"
+ },
+ "jobRead": {
+  "repeats": [
+   {
+    "label": "Onboarding new hires",
+    "ai": true
+   },
+   {
+    "label": "Answering benefits questions",
+    "ai": true
+   },
+   {
+    "label": "Scheduling interviews",
+    "ai": false
+   },
+   {
+    "label": "Writing job postings",
+    "ai": true
+   },
+   {
+    "label": "Updating employee records",
+    "ai": false
+   },
+   {
+    "label": "Writing policy reminders",
+    "ai": true
+   }
+  ],
+  "aiFallback": [
+   "Welcome message drafts",
+   "Interview question lists",
+   "Employee FAQ answers",
+   "Team announcement drafts"
+  ],
+  "apps": [
+   "Workday",
+   "ADP",
+   "Microsoft Teams",
+   "Zoom",
+   "LinkedIn Recruiter",
+   "SharePoint"
+  ],
+  "aiUses": [
+   "Job descriptions",
+   "Email replies",
+   "Policy summaries",
+   "Interview questions",
+   "Training outlines"
+  ],
+  "worksFor": "employer"
+ },
+ "jobReadFallback": false,
+ "asked": [
+  {
+   "id": "asked_1",
+   "title": "How do benefits questions usually reach you?",
+   "kind": "many",
+   "choices": [
+    "Teams chat",
+    "Outlook email",
+    "Walk up in person",
+    "Phone call",
+    "Ticket form"
+   ],
+   "hint": "Pick every one that happens."
+  }
+ ],
+ "screens": 9,
+ "worksForFromJob": "employer",
+ "answers": {
+  "job": "HR coordinator at a logistics company, about 300 employees.",
+  "experience": "tried",
+  "qas": [
+   {
+    "id": "level",
+    "title": "Where are you with AI?",
+    "picked": [
+     "Tried it a few times"
+    ],
+    "text": null,
+    "shown": [
+     "Never used it",
+     "Tried it a few times",
+     "Use it some weeks",
+     "Use it most days"
+    ]
+   },
+   {
+    "id": "repeats",
+    "title": "What do you do over and over, every day or every week?",
+    "picked": [
+     "Onboarding new hires",
+     "Answering benefits questions",
+     "Scheduling interviews",
+     "Updating employee records",
+     "Writing policy reminders",
+     "Answering messages",
+     "Writing emails"
+    ],
+    "text": "Also the monthly newsletter, every month like clockwork",
+    "shown": [
+     "Onboarding new hires",
+     "Answering benefits questions",
+     "Scheduling interviews",
+     "Writing job postings",
+     "Updating employee records",
+     "Writing policy reminders",
+     "Answering messages",
+     "Writing emails",
+     "Planning my week",
+     "Making lists"
+    ]
+   },
+   {
+    "id": "most",
+    "title": "Which would save you the most time if it got easier?",
+    "picked": [
+     "Answering benefits questions",
+     "Onboarding new hires"
+    ],
+    "text": null,
+    "shown": [
+     "Onboarding new hires",
+     "Answering benefits questions",
+     "Scheduling interviews",
+     "Updating employee records",
+     "Writing policy reminders",
+     "Answering messages"
+    ]
+   },
+   {
+    "id": "example",
+    "title": "Paste the last one you wrote, or what the last person asked you.",
+    "picked": [],
+    "text": "Someone asked how many days of parental leave they get and if it's paid. I told them to check the benefits portal under Leave Policies and said I'd confirm the paid portion with payroll."
+   },
+   {
+    "id": "often",
+    "title": "How often do you do this?",
+    "picked": [
+     "Many times a day"
+    ],
+    "text": null,
+    "shown": [
+     "Many times a day",
+     "About once a day",
+     "A few times a week",
+     "Once a week or less"
+    ]
+   },
+   {
+    "id": "where",
+    "title": "Where does your work happen?",
+    "picked": [
+     "Microsoft Teams",
+     "SharePoint",
+     "Outlook"
+    ],
+    "text": "HR system, Excel for the checklist. Not sure which others",
+    "shown": [
+     "Workday",
+     "ADP",
+     "Microsoft Teams",
+     "Zoom",
+     "LinkedIn Recruiter",
+     "SharePoint",
+     "Text messages",
+     "Gmail",
+     "Outlook",
+     "Google Sheets",
+     "Instagram",
+     "A work system",
+     "Paper",
+     "In person"
+    ]
+   },
+   {
+    "id": "device",
+    "title": "Do you work on a phone, a computer or both?",
+    "picked": [
+     "Computer only"
+    ],
+    "text": null,
+    "shown": [
+     "Phone only",
+     "Computer only",
+     "Both"
+    ]
+   },
+   {
+    "id": "asked_1",
+    "title": "How do benefits questions usually reach you?",
+    "picked": [
+     "Outlook email",
+     "Walk up in person",
+     "Teams chat"
+    ],
+    "text": "Mostly email, but people also stop by my desk. Phone calls a",
+    "shown": [
+     "Teams chat",
+     "Outlook email",
+     "Walk up in person",
+     "Phone call",
+     "Ticket form"
+    ]
+   },
+   {
+    "id": "can_use",
+    "title": "Can you use AI for your work?",
+    "picked": [
+     "Not sure"
+    ],
+    "text": null,
+    "shown": [
+     "Yes",
+     "Not sure",
+     "No, it’s restricted",
+     "I work for myself"
+    ]
+   },
+   {
+    "id": "connect",
+    "title": "Would your company let you link your work email to an AI tool?",
+    "picked": [
+     "Not sure"
+    ],
+    "text": null,
+    "shown": [
+     "Yes",
+     "No",
+     "Not sure"
+    ]
+   }
+  ],
+  "mostWanted": [
+   "Answering benefits questions",
+   "Onboarding new hires"
+  ],
+  "worksFor": "employer",
+  "aiTools": [
+   "not_sure"
+  ],
+  "aiToolsOther": null,
+  "aiPolicy": "no_idea",
+  "often": "many_a_day"
+ },
+ "intake": {
+  "role_summary": "You’re the HR coordinator at a logistics company with about 300 employees, handling onboarding, benefits questions, interviews, records and communications.",
+  "tasks": [
+   {
+    "name": "Answering benefits questions",
+    "ai": true,
+    "private": true,
+    "kind": "email_replies"
+   },
+   {
+    "name": "Onboarding new hires",
+    "ai": true,
+    "private": true,
+    "kind": null
+   },
+   {
+    "name": "Policy reminders",
+    "ai": true,
+    "private": false,
+    "kind": "repeat_writing"
+   },
+   {
+    "name": "Writing emails",
+    "ai": true,
+    "private": false,
+    "kind": "repeat_emails"
+   },
+   {
+    "name": "Monthly newsletter",
+    "ai": true,
+    "private": false,
+    "kind": "repeat_writing"
+   }
+  ],
+  "first_win": {
+   "task": "Answering benefits questions",
+   "intro": "Someone asked how many days of parental leave they get and whether it’s paid. Here is your reply, ready to send.",
+   "draft": "Hi there,\n\nThank you for your question about parental leave. You can find the full details under Leave Policies in the benefits portal. I’m checking the paid portion with payroll and will get back to you as soon as I have a confirmed answer.\n\nIn the meantime, if you have any other questions, just let me know."
+  },
+  "first_step": "I’m an HR coordinator at a logistics company with about 300 employees. Each time someone asks a benefits question, I need a short, friendly reply I can send by email. Keep it under 90 words, plain and warm, with no jargon. Point them to the right section of the benefits portal, and say I will confirm anything I can’t answer from the portal. Here is the question: [paste the employee’s question here]",
+  "map": [
+   {
+    "task": "Answering benefits questions",
+    "phrase": null,
+    "today": "You answer these many times a day, mostly by email and at your desk.",
+    "withPath": "Each reply starts from a draft you only need to check and personalize.",
+    "ai": true,
+    "private": true,
+    "kind": "email_replies"
+   },
+   {
+    "task": "Onboarding new hires",
+    "phrase": null,
+    "today": "You handle onboarding steps for each new hire, often with a checklist.",
+    "withPath": "The checklist and the people details stay yours, and AI helps with the wording around them.",
+    "ai": true,
+    "private": true,
+    "kind": null
+   },
+   {
+    "task": "Writing emails",
+    "phrase": "emails",
+    "today": "You write a lot of emails, many of them repeats.",
+    "withPath": "Common emails start from a draft you only need to adjust.",
+    "ai": true,
+    "private": false,
+    "kind": "repeat_emails"
+   }
+  ],
+  "needs_follow_up": false,
+  "follow_up_question": null
+ },
+ "free": {
+  "firstWin": {
+   "task": "Answering benefits questions",
+   "intro": "Someone asked how many days of parental leave they get and whether it’s paid. Here is your reply, ready to send.",
+   "draft": "Hi there,\n\nThank you for your question about parental leave. You can find the full details under Leave Policies in the benefits portal. I’m checking the paid portion with payroll and will get back to you as soon as I have a confirmed answer.\n\nIn the meantime, if you have any other questions, just let me know."
+  },
+  "firstStep": "I’m an HR coordinator at a logistics company with about 300 employees. Each time someone asks a benefits question, I need a short, friendly reply I can send by email. Keep it under 90 words, plain and warm, with no jargon. Point them to the right section of the benefits portal, and say I will confirm anything I can’t answer from the portal. Here is the question: [paste the employee’s question here]",
+  "map": [
+   {
+    "task": "Answering benefits questions",
+    "phrase": null,
+    "today": "You answer these many times a day, mostly by email and at your desk.",
+    "withPath": "Each reply starts from a draft you only need to check and personalize.",
+    "ai": true,
+    "private": true,
+    "kind": "email_replies",
+    "level": 2,
+    "waits": false,
+    "recipe": null,
+    "held": null,
+    "askFirst": true
+   },
+   {
+    "task": "Onboarding new hires",
+    "phrase": null,
+    "today": "You handle onboarding steps for each new hire, often with a checklist.",
+    "withPath": "The checklist and the people details stay yours, and AI helps with the wording around them.",
+    "ai": true,
+    "private": true,
+    "kind": null,
+    "level": 2,
+    "waits": false,
+    "recipe": null,
+    "held": null,
+    "askFirst": true
+   },
+   {
+    "task": "Writing emails",
+    "phrase": "emails",
+    "today": "You write a lot of emails, many of them repeats.",
+    "withPath": "Common emails start from a draft you only need to adjust.",
+    "ai": true,
+    "private": false,
+    "kind": "repeat_emails",
+    "level": 2,
+    "waits": false,
+    "recipe": null,
+    "held": null,
+    "askFirst": true
+   }
+  ],
+  "setups": [
+   "Answering benefits questions, written with AI",
+   "Your emails, written with AI"
+  ],
+  "prep": [
+   "Get Claude ready on your computer",
+   "Teach Claude who you are"
+  ],
+  "freePlan": false,
+  "tool": "claude",
+  "track": "starter"
+ },
+ "who": {
+  "track": "starter",
+  "canUse": "not_sure",
+  "connect": "not_sure",
+  "places": [
+   "Microsoft Teams",
+   "SharePoint",
+   "Outlook",
+   "HR system",
+   "Excel for the checklist. Not sure which others"
+  ],
+  "device": "computer",
+  "aiTools": [
+   "not_sure"
+  ]
+ },
+ "outline": [
+  "ready:ready",
+  "about:about",
+  "task_1:workflow",
+  "task_2:workflow",
+  "end:end"
+ ],
+ "path": {
+  "version": 3,
+  "role": "You’re the HR coordinator at a logistics company with about 300 employees, handling onboarding, benefits questions, interviews, records and communications.",
+  "track": "starter",
+  "tool": "claude",
+  "worksFor": "employer",
+  "policy": "no_idea",
+  "device": "computer",
+  "apps": [
+   "any_chat",
+   "claude"
+  ],
+  "skipped": [],
+  "steps": [
+   {
+    "id": "ready",
+    "kind": "ready",
+    "card": "claude_get_started",
+    "firstStep": "I’m an HR coordinator at a logistics company with about 300 employees. Each time someone asks a benefits question, I need a short, friendly reply I can send by email. Keep it under 90 words, plain and warm, with no jargon. Point them to the right section of the benefits portal, and say I will confirm anything I can’t answer from the portal. Here is the question: [paste the employee’s question here]"
+   },
+   {
+    "id": "about",
+    "kind": "about",
+    "card": "claude_about_you",
+    "note": "I am an HR coordinator at a logistics company with about 300 employees. I handle onboarding, benefits questions, interviews, employee records and internal communications. I write mostly to employees and new hires, and sometimes to my manager and payroll. My tone is warm, clear and professional, and I keep messages short, usually a few sentences. I point people to the benefits portal or the right team when that is the answer. Never add details I did not give you, like policy numbers, dates, dollar amounts or rules. If something is missing, put it in square brackets so I can fill it in from our approved sources. Always tell me what you assumed."
+   },
+   {
+    "id": "task_1",
+    "kind": "workflow",
+    "task": "Answering benefits questions",
+    "title": "Answering benefits questions, written with AI",
+    "recipe": null,
+    "read": "Claude drafts each benefits answer and waits for your OK. You give it the question and the facts you already have from the benefits portal or payroll, and it writes a clear reply in your voice. That keeps the many daily questions consistent, and you check every answer against your approved sources before it goes out.",
+    "material": [
+     {
+      "label": "Your benefits question message",
+      "items": [
+       "I am an HR coordinator at a logistics company with about 300 employees. An employee asked me this benefits question: [paste the question without names or personal details]. Here is what I know from our approved sources: [facts from the benefits portal or payroll]. Here is what I still need to confirm: [open points, for example the paid portion with payroll]. Write a short, warm reply in my voice that answers only what I gave you, points them to [where to look in the benefits portal], and says I will follow up on anything unconfirmed. Do not add any details I did not give you. Give back the reply, then list anything you assumed."
+      ]
+     }
+    ]
+   },
+   {
+    "id": "task_2",
+    "kind": "workflow",
+    "task": "Writing emails",
+    "title": "Your emails, written with AI",
+    "recipe": null,
+    "read": "Claude drafts each email and waits for your OK. You tell it who the email is for and what it needs to say, and it writes a clean draft in your voice. Many of your emails are repeats, so this keeps them steady and leaves you to read and send.",
+    "material": [
+     {
+      "label": "Your email message",
+      "items": [
+       "I am an HR coordinator at a logistics company with about 300 employees. Write an email to [who it is for, for example a new hire, a candidate or a manager] about [topic]. The key points are: [point one], [point two]. The deadline or next step is [day and time or none]. Keep it short, warm and clear, in my voice, with a plain subject line. Do not add facts, dates or policies I did not give you. Put anything missing in square brackets. Give back the subject line and the email, then list what you assumed."
+      ]
+     }
+    ]
+   },
+   {
+    "id": "end",
+    "kind": "end",
+    "safeUse": [
+     "Never type employee names, ID numbers, home addresses, salary details or health information into a chat tool.",
+     "Never paste records from your HR system, only the question with the personal details taken out.",
+     "Check every benefits answer against the benefits portal or payroll before you send it.",
+     "Do not let AI state policy, leave rules or pay details you have not confirmed yourself.",
+     "Read every draft before it goes out."
+    ],
+    "askMessage": "Hi [manager or IT contact], I would like to use an AI tool to help with my day to day work in HR. I am thinking of drafting replies to benefits questions, writing routine emails and preparing onboarding messages for new hires. Which AI tools are approved at our company, and what may I use them for? I would only use them with personal details removed, and I would read and check everything before it goes out. Could you let me know what is allowed, and whether linking my work email is permitted?"
+   }
+  ]
+ },
+ "design": [
+  {
+   "task": "Answering benefits questions",
+   "today": "You answer benefits questions many times a day, mostly by email and at your desk, and also by Teams chat. Your last one was a parental leave question, where you pointed to the benefits portal and said you would confirm the paid portion with payroll.",
+   "newWay": "Because you are not sure your company allows AI for work, the first step is to ask and get a clear answer, and nothing here touches real work until you have it. If the answer is yes, you keep a saved assistant loaded only with your public benefits policy wording, and it drafts a reply from the question you paste in, with no employee names or personal details. You read each draft, check it against the portal, and send it yourself. Answers stay consistent, and anything the policy does not cover is marked for you to confirm with payroll.",
+   "steps": [
+    {
+     "app": null,
+     "ref": null,
+     "goal": "Ask your manager or IT whether you may use AI for HR work, and what may be pasted into it, before doing anything else."
+    },
+    {
+     "app": null,
+     "ref": null,
+     "goal": "Pick the ten benefits questions you get most often and collect the approved policy wording that answers each one."
+    },
+    {
+     "app": "Claude",
+     "ref": "claude_get_started",
+     "goal": "Get Claude ready on your computer, only if your company says AI is allowed."
+    },
+    {
+     "app": "Claude",
+     "ref": "claude_project",
+     "goal": "Make a project for benefits questions and add the approved policy wording as its reference material."
+    },
+    {
+     "app": "Claude",
+     "ref": "saved_assistant",
+     "goal": "Set up a saved assistant that drafts benefits replies from the policy wording and flags anything it cannot answer."
+    },
+    {
+     "app": null,
+     "ref": null,
+     "goal": "Test it with three past questions that have names and personal details removed, and compare each draft with the portal."
+    }
+   ],
+   "material": [
+    {
+     "label": "Assistant instructions",
+     "what": "Tells the assistant to answer only from your policy wording, to say when something needs payroll or you to confirm, and to never ask for personal details."
+    },
+    {
+     "label": "Policy reference sheet",
+     "what": "Holds your approved wording on leave, health cover and other common benefits topics, with the portal section for each."
+    },
+    {
+     "label": "Tone notes",
+     "what": "Describes how you like to sound with colleagues: warm, short and clear."
+    },
+    {
+     "label": "Escalation list",
+     "what": "Lists the question types that always go to payroll or to you, such as paid portions and individual cases."
+    }
+   ],
+   "checkPoint": "You read every draft, check it against the benefits portal, and send it yourself, and nothing goes out without you."
+  },
+  {
+   "task": "Writing emails",
+   "today": "You write a lot of emails, many of them repeats, covering onboarding, policy reminders and interview scheduling.",
+   "newWay": "Your most repeated emails become saved templates in Outlook-style wording, each with clear gaps for names and dates. This works without connecting your work email to anything, since you only copy the finished wording across yourself. For the monthly newsletter and one-off emails, you say what you want out loud or in rough notes, and an AI tool turns it into a draft, but only if your company allows AI. You fill the gaps and read each email before it goes, so the repeats take less effort and still sound like you.",
+   "steps": [
+    {
+     "app": null,
+     "ref": null,
+     "goal": "List your five most repeated emails, such as welcome note, interview invite, policy reminder and newsletter intro."
+    },
+    {
+     "app": null,
+     "ref": null,
+     "goal": "Ask your manager or IT whether AI may be used for drafting work emails, and keep real employee details out of any tool until you have the answer."
+    },
+    {
+     "app": "ChatGPT",
+     "ref": "chatgpt_get_started",
+     "goal": "Get ChatGPT ready on your computer, only if your company allows AI."
+    },
+    {
+     "app": "ChatGPT",
+     "ref": "chatgpt_about_you",
+     "goal": "Save short notes about your role and writing style so drafts sound like you."
+    },
+    {
+     "app": "ChatGPT",
+     "ref": "saved_assistant",
+     "goal": "Set up a saved assistant that writes your repeated emails as drafts with gaps left for names, dates and details."
+    },
+    {
+     "app": "ChatGPT",
+     "ref": "say_it_out_loud",
+     "goal": "Use rough spoken or typed notes to get a finished draft of the monthly newsletter or a one-off email."
+    }
+   ],
+   "material": [
+    {
+     "label": "Email templates",
+     "what": "Holds your five most repeated emails with clear gaps for names, dates and details."
+    },
+    {
+     "label": "Assistant instructions",
+     "what": "Tells the assistant to write in your voice, keep emails short, and leave gaps instead of guessing facts."
+    },
+    {
+     "label": "Tone notes",
+     "what": "Describes your usual greeting, sign off and level of formality."
+    },
+    {
+     "label": "Newsletter outline",
+     "what": "Lists the sections of your monthly newsletter so each issue starts from the same shape."
+    }
+   ],
+   "checkPoint": "You fill every gap, check every name, date and policy detail, and send each email yourself."
+  }
+ ],
+ "design2": [
+  {
+   "task": "Answering benefits questions",
+   "stays": false,
+   "today": "You answer these many times a day, mostly by email, but also at your desk and in Teams chat. Your last answer pointed to the benefits portal under Leave Policies and promised to confirm the paid portion with payroll.",
+   "newWay": "You keep one saved assistant that holds your approved benefits answers and drafts a reply in your voice from the question you paste in. It points to the right portal page and flags anything it cannot confirm, such as pay details, so you check with payroll before you answer. You answer faster and more consistently, and the same answers work for email, Teams and walk ups. Since you are not sure what your company allows, ask first before you put any work content into an AI tool, and paste only the question with names and personal details removed.",
+   "steps": [
+    {
+     "app": null,
+     "ref": null,
+     "feature": null,
+     "goal": "Ask your manager or IT whether you may use an AI tool for work, and which one, before you paste anything in.",
+     "clickPath": null
+    },
+    {
+     "app": "ChatGPT",
+     "ref": "chatgpt_get_started",
+     "feature": null,
+     "goal": "Get ChatGPT or Claude ready on your computer, whichever your company allows.",
+     "clickPath": null
+    },
+    {
+     "app": "ChatGPT",
+     "ref": "chatgpt_project",
+     "feature": null,
+     "goal": "Make a project for benefits answers so your approved wording stays in one place for every question.",
+     "clickPath": null
+    },
+    {
+     "app": "Microsoft Word",
+     "ref": null,
+     "feature": null,
+     "goal": "Collect your approved benefits answers and the portal page names into one plain document with no employee details, and add it to the project.",
+     "clickPath": null
+    },
+    {
+     "app": "ChatGPT",
+     "ref": "saved_assistant",
+     "feature": null,
+     "goal": "Set the assistant to draft short replies from your approved answers and to mark any pay, eligibility or date it cannot confirm.",
+     "clickPath": null
+    }
+   ],
+   "material": [
+    {
+     "label": "Benefits answer bank",
+     "what": "Your approved answers by topic, with the portal page to point to and who confirms what, such as payroll for paid portions."
+    },
+    {
+     "label": "Assistant instructions",
+     "what": "Tells the assistant to use only your answer bank, keep a warm plain tone, and flag anything it cannot confirm."
+    },
+    {
+     "label": "Reply format",
+     "what": "A short reply layout with the answer, the portal link or page name, and a line on what you are still confirming."
+    }
+   ],
+   "checkPoint": "You read each reply and confirm every number, pay detail and eligibility rule with payroll or the portal before you send it."
+  },
+  {
+   "task": "Onboarding new hires",
+   "stays": false,
+   "today": "You handle onboarding steps for each new hire, often with a checklist in Excel. The steps repeat for every person.",
+   "newWay": "You keep one master checklist in Excel and one saved assistant that turns it into a welcome email, a first week plan and task reminders for each new hire from a few details you give it. You stop rebuilding the same messages and lists each time, and the checklist stays the single source. Ask first about your company's AI rules before you use any tool, and give it only the role and start date, never personal details like address or ID numbers.",
+   "steps": [
+    {
+     "app": null,
+     "ref": null,
+     "feature": null,
+     "goal": "Ask your manager or IT whether you may use an AI tool for onboarding material, and which one.",
+     "clickPath": null
+    },
+    {
+     "app": "Excel",
+     "ref": null,
+     "feature": "Excel Copilot",
+     "goal": "Tidy your onboarding checklist into clear columns for task, owner, due day and status, if Copilot is included in your Microsoft 365 and your company allows it.",
+     "clickPath": "Home, then Copilot"
+    },
+    {
+     "app": "ChatGPT",
+     "ref": "chatgpt_project",
+     "feature": null,
+     "goal": "Make a project for onboarding and add your checklist with no names or personal details.",
+     "clickPath": null
+    },
+    {
+     "app": "ChatGPT",
+     "ref": "saved_assistant",
+     "feature": null,
+     "goal": "Set the assistant to draft the welcome email, first week schedule and reminders to managers and IT from the role and start date.",
+     "clickPath": null
+    },
+    {
+     "app": "Outlook",
+     "ref": null,
+     "feature": "Outlook Quick Parts",
+     "goal": "Save the final welcome email text as a reusable block with gaps for name, date and manager.",
+     "clickPath": "Insert, then Quick Parts"
+    }
+   ],
+   "material": [
+    {
+     "label": "Master onboarding checklist",
+     "what": "Every step with owner, timing and status, written so it works for any role."
+    },
+    {
+     "label": "Welcome email draft",
+     "what": "A friendly first email with gaps for name, start date, manager and where to go on day one."
+    },
+    {
+     "label": "First week plan template",
+     "what": "A day by day outline you adjust for each role."
+    },
+    {
+     "label": "Assistant instructions",
+     "what": "Tells the assistant to use only the role and start date, follow your checklist and leave gaps for anything it does not know."
+    }
+   ],
+   "checkPoint": "You fill every gap, check dates and names against the HR system, and read each message before you send it yourself."
+  },
+  {
+   "task": "Writing emails",
+   "stays": false,
+   "today": "You write a lot of emails, many of them repeats such as policy reminders and benefits replies.",
+   "newWay": "You save your most common emails as reusable blocks in Outlook, and use a saved assistant for the ones that need a fresh version, like policy reminders or the monthly newsletter. The repeats take less effort and the wording stays consistent. Ask first what your company allows before pasting any work text into an AI tool, and leave out names and personal details.",
+   "steps": [
+    {
+     "app": null,
+     "ref": null,
+     "feature": null,
+     "goal": "Ask your manager or IT whether you may use an AI tool for drafting work emails.",
+     "clickPath": null
+    },
+    {
+     "app": null,
+     "ref": null,
+     "feature": null,
+     "goal": "List your five or six most repeated emails from your Sent folder so you know what to save.",
+     "clickPath": null
+    },
+    {
+     "app": "Outlook",
+     "ref": null,
+     "feature": "Outlook Quick Parts",
+     "goal": "Save each repeated email as a block with clear gaps for name, date and details.",
+     "clickPath": "Insert, then Quick Parts"
+    },
+    {
+     "app": "ChatGPT",
+     "ref": "saved_assistant",
+     "feature": null,
+     "goal": "Make an assistant for policy reminders and the monthly newsletter that drafts from the key points you give it, in your tone.",
+     "clickPath": null
+    }
+   ],
+   "material": [
+    {
+     "label": "Email blocks",
+     "what": "Ready to use versions of your most common emails with gaps to fill."
+    },
+    {
+     "label": "Policy reminder prompt",
+     "what": "A short format for turning the policy name, date and action into a clear reminder."
+    },
+    {
+     "label": "Newsletter outline",
+     "what": "A monthly layout with sections you fill from your notes each month."
+    },
+    {
+     "label": "Assistant instructions",
+     "what": "Describes your tone, length and rules such as never inventing dates or policy details."
+    }
+   ],
+   "checkPoint": "You fill every gap, check dates and policy details, and read each email before you send it yourself."
+  }
+ ],
+ "design2Links": {
+  "excel|excel copilot": {
+   "app": "Excel",
+   "feature": "Excel Copilot",
+   "url": "https://support.microsoft.com/en-us/excel/copilot/get-started-with-copilot-in-excel",
+   "title": "Get started with Copilot in Excel"
+  },
+  "outlook|outlook quick parts": {
+   "app": "Outlook",
+   "feature": "Outlook Quick Parts",
+   "url": "https://support.microsoft.com/en-us/word/quick-parts",
+   "title": "Quick Parts"
+  }
+ },
+ "checks": [
+  {
+   "id": "screens",
+   "pass": true,
+   "detail": "9 screens, at most 9 for a starter"
+  },
+  {
+   "id": "levels_in_code",
+   "pass": true,
+   "detail": "Every row has a level or waits"
+  },
+  {
+   "id": "level3_not_writing_help",
+   "pass": true,
+   "detail": "No line at level 3 or higher reads like writing help"
+  },
+  {
+   "id": "path_line_from_recipe",
+   "pass": true,
+   "detail": "Every line at level 3 or higher is its recipe's"
+  },
+  {
+   "id": "no_connect_without_ok",
+   "pass": true,
+   "detail": "No row connects a work app"
+  },
+  {
+   "id": "not_sure_ask_first",
+   "pass": true,
+   "detail": "Every task AI touches says to ask first"
+  },
+  {
+   "id": "path_written",
+   "pass": true,
+   "detail": "5 steps"
+  },
+  {
+   "id": "workflow_parts",
+   "pass": true,
+   "detail": "2 workflows, each with a test, an approval point and a cost line"
+  },
+  {
+   "id": "setup_from_recipe_or_card",
+   "pass": true,
+   "detail": "card claude_get_started, card claude_about_you, Tally's own steps for writing with AI, Tally's own steps for writing with AI"
+  },
+  {
+   "id": "no_click_paths_from_model",
+   "pass": true,
+   "detail": "The model wrote no menu paths or button names"
+  },
+  {
+   "id": "copy_rules",
+   "pass": true,
+   "detail": "No dashes, promised times, prices or percents"
+  },
+  {
+   "id": "offer_matches_path",
+   "pass": true,
+   "detail": "Offer names 2, path has 2 workflows, 2 match by name"
+  }
+ ],
+ "recipes": {
+  "total": 3,
+  "aiTasks": 3,
+  "withRecipe": [],
+  "without": [
+   {
+    "task": "Answering benefits questions",
+    "level": 2,
+    "waits": false
+   },
+   {
+    "task": "Onboarding new hires",
+    "level": 2,
+    "waits": false
+   },
+   {
+    "task": "Writing emails",
+    "level": 2,
+    "waits": false
+   }
+  ],
+  "noRecipe": true,
+  "mostlyAssistant": false
+ },
+ "designCount": {
+  "steps": 12,
+  "checked": 7,
+  "unchecked": 0,
+  "noApp": 5,
+  "badRefs": [],
+  "clickPaths": [],
+  "apps": [],
+  "refs": [
+   "claude_get_started",
+   "claude_project",
+   "saved_assistant",
+   "chatgpt_get_started",
+   "chatgpt_about_you",
+   "say_it_out_loud"
+  ]
+ },
+ "design2Count": {
+  "tasks": 3,
+  "stays": 0,
+  "steps": 14,
+  "checked": 6,
+  "unchecked": 4,
+  "linked": 3,
+  "noApp": 4,
+  "noFeature": 1,
+  "clickInGoal": [],
+  "clickPathsHidden": 0,
+  "apps": [
+   [
+    "Outlook",
+    {
+     "steps": 2,
+     "linked": 2
+    }
+   ],
+   [
+    "Microsoft Word",
+    {
+     "steps": 1,
+     "linked": 0
+    }
+   ],
+   [
+    "Excel",
+    {
+     "steps": 1,
+     "linked": 1
+    }
+   ]
+  ],
+  "lowTasks": [
+   {
+    "task": "Answering benefits questions",
+    "level": 2,
+    "designed": true,
+    "stays": false,
+    "steps": 5,
+    "unchecked": 1
+   },
+   {
+    "task": "Onboarding new hires",
+    "level": 2,
+    "designed": true,
+    "stays": false,
+    "steps": 5,
+    "unchecked": 2
+   },
+   {
+    "task": "Writing emails",
+    "level": 2,
+    "designed": true,
+    "stays": false,
+    "steps": 4,
+    "unchecked": 1
+   }
+  ],
+  "missingTasks": []
+ },
+ "design3": {
+  "responsibilities": [
+   {
+    "name": "Answering benefits questions",
+    "handsOn": null,
+    "around": "Questions arrive by Outlook, Teams and at your desk, and you look up the same answers in the benefits portal and check some with payroll.",
+    "patterns": [
+     10,
+     1,
+     6
+    ],
+    "stays": false,
+    "level": 3,
+    "held": "you are not sure yet what your company allows",
+    "today": "Questions come many times a day by email, Teams chat and people stopping at your desk. You point people to the benefits portal and confirm details with payroll.",
+    "withPath": "A saved assistant that knows your benefits documents drafts the usual answers, and you check each one.",
+    "offerName": "Your benefits answers, from one saved assistant",
+    "newWay": "You make a Claude project that holds your benefits documents and your usual answers, once. When a question comes in, you paste the question without names, read the draft answer and send it yourself from Outlook or Teams. Anything about pay goes to payroll first, so the answers stay consistent and you stop looking things up again.",
+    "builtOnce": "a Claude project with your benefits documents, your usual answers and a note on what needs payroll confirmation",
+    "steps": [
+     {
+      "app": null,
+      "ref": null,
+      "feature": null,
+      "goal": "Ask your manager or IT whether you may put benefits documents and questions into an AI tool.",
+      "clickPath": null
+     },
+     {
+      "app": "Claude",
+      "ref": "claude_project",
+      "feature": null,
+      "goal": "Make a Claude project for benefits questions and add the benefits documents you are allowed to share.",
+      "clickPath": null
+     },
+     {
+      "app": "Claude",
+      "ref": null,
+      "feature": "Claude project instructions",
+      "goal": "Tell the project to answer only from your documents, to say when the answer is not there, and to flag anything about pay for payroll.",
+      "clickPath": null
+     },
+     {
+      "app": "Microsoft Outlook",
+      "ref": null,
+      "feature": "Outlook Quick Parts",
+      "goal": "Save the final answers you use most as reusable text blocks for the questions that repeat.",
+      "clickPath": null
+     }
+    ],
+    "material": [
+     {
+      "label": "Project instructions",
+      "what": "How the assistant answers from your documents, when it says it does not know and when it flags payroll."
+     },
+     {
+      "label": "Usual answers",
+      "what": "Short answers to the most common benefits questions, with blanks for [company specific details]."
+     },
+     {
+      "label": "Payroll check list",
+      "what": "The kinds of questions, like paid parental leave, that you confirm with payroll before answering."
+     }
+    ],
+    "checkPoint": "You read each draft against the benefits portal and send it yourself, with no employee names put into the tool."
+   },
+   {
+    "name": "Onboarding new hires",
+    "handsOn": null,
+    "around": "Each new hire needs the same checklist in Excel, the same welcome messages, the same forms and the same follow ups.",
+    "patterns": [
+     5,
+     2,
+     1,
+     7
+    ],
+    "stays": false,
+    "level": 3,
+    "held": "you are not sure yet what your company allows",
+    "today": "You onboard new hires using a checklist in Excel. The steps and messages repeat for each person.",
+    "withPath": "One standard onboarding checklist with dates that fill in, and saved welcome messages for each step.",
+    "offerName": "Your onboarding, from one standard checklist",
+    "newWay": "AI helps you build once a clean Excel checklist with every step, who does it and when, counted from the start date. For each new hire you copy the sheet, enter the start date and work down it. The welcome email and reminders come from saved text, so nothing gets forgotten.",
+    "builtOnce": "an onboarding checklist in Excel with date formulas, plus saved welcome and reminder messages",
+    "steps": [
+     {
+      "app": null,
+      "ref": null,
+      "feature": null,
+      "goal": "Ask whether you may use an AI tool for HR work, using only general descriptions with no employee details.",
+      "clickPath": null
+     },
+     {
+      "app": "Claude",
+      "ref": null,
+      "feature": null,
+      "goal": "Paste your current checklist steps without names and ask for a standard checklist with owners and days from the start date.",
+      "clickPath": null
+     },
+     {
+      "app": "Microsoft Excel",
+      "ref": null,
+      "feature": "Excel formulas",
+      "goal": "Build the checklist with a start date cell that works out each due date.",
+      "clickPath": null
+     },
+     {
+      "app": "Microsoft Excel",
+      "ref": null,
+      "feature": "Excel conditional formatting",
+      "goal": "Colour overdue steps so you see what is late.",
+      "clickPath": null
+     },
+     {
+      "app": "Microsoft Outlook",
+      "ref": null,
+      "feature": "Outlook Quick Parts",
+      "goal": "Save the welcome email and the first week reminder as text blocks with gaps for name and date.",
+      "clickPath": null
+     }
+    ],
+    "material": [
+     {
+      "label": "Checklist layout",
+      "what": "Columns and steps for the Excel onboarding checklist, with owner and days from start."
+     },
+     {
+      "label": "Welcome email",
+      "what": "A standard welcome with gaps for [name], [start date] and [manager]."
+     },
+     {
+      "label": "Reminder messages",
+      "what": "Short notes to managers and IT about their onboarding tasks."
+     }
+    ],
+    "checkPoint": "You fill in each gap and read every message before you send it yourself."
+   },
+   {
+    "name": "Scheduling interviews",
+    "handsOn": null,
+    "around": "You go back and forth with candidates and managers to find times, then send the same confirmations.",
+    "patterns": [
+     1,
+     5,
+     6
+    ],
+    "stays": false,
+    "level": 3,
+    "held": null,
+    "today": "You schedule interviews by email and messages with candidates and managers.",
+    "withPath": "Saved invitation and confirmation messages, with a standard interview checklist.",
+    "offerName": "Your interview scheduling, from saved messages",
+    "newWay": "You save the invitation, the confirmation and the reschedule note as Outlook text blocks, and keep a short checklist for each interview. You fill in the time and name and send. The wording stays the same every time, so you stop retyping it.",
+    "builtOnce": "saved Outlook text blocks for invitation, confirmation and reschedule",
+    "steps": [
+     {
+      "app": "Microsoft Outlook",
+      "ref": null,
+      "feature": "Outlook Quick Parts",
+      "goal": "Write the invitation, confirmation and reschedule messages once as text blocks with gaps.",
+      "clickPath": null
+     },
+     {
+      "app": "Microsoft Excel",
+      "ref": null,
+      "feature": "Excel table",
+      "goal": "Keep a simple list of candidates, interview times and status.",
+      "clickPath": null
+     }
+    ],
+    "material": [
+     {
+      "label": "Invitation",
+      "what": "Interview invitation with gaps for [name], [role], [date] and [place]."
+     },
+     {
+      "label": "Confirmation and reschedule",
+      "what": "Two short messages for confirming and moving a time."
+     }
+    ],
+    "checkPoint": "You check the time, name and role in each message before you send it yourself."
+   },
+   {
+    "name": "Updating employee records",
+    "handsOn": null,
+    "around": "Changes arrive in different ways and you enter them in the HR system, which needs care each time.",
+    "patterns": [
+     6,
+     7
+    ],
+    "stays": true,
+    "level": 1,
+    "held": null,
+    "today": "You update employee records in the HR system when changes come in.",
+    "withPath": "Stays yours, because the records hold private details and need your judgement.",
+    "offerName": "Your employee records, kept by you",
+    "newWay": "This should stay yours. It holds private details about colleagues and an error affects pay or benefits. Putting that into an AI tool is not worth the risk.",
+    "builtOnce": null,
+    "steps": [],
+    "material": [],
+    "checkPoint": "You check every change in the HR system yourself."
+   },
+   {
+    "name": "Writing policy reminders",
+    "handsOn": null,
+    "around": "The same kinds of reminders go out again and again to staff.",
+    "patterns": [
+     1,
+     7
+    ],
+    "stays": false,
+    "level": 3,
+    "held": "you are not sure yet what your company allows",
+    "today": "You write policy reminders for staff when they are needed.",
+    "withPath": "A saved set of reminder messages and a schedule for when each goes out.",
+    "offerName": "Your policy reminders, from saved messages",
+    "newWay": "You build one set of reminders with AI, one for each policy, with gaps for dates and details. You add a recurring Outlook reminder to send each one. Then you copy, fill in and send without writing again.",
+    "builtOnce": "a set of policy reminder messages with a send schedule",
+    "steps": [
+     {
+      "app": null,
+      "ref": null,
+      "feature": null,
+      "goal": "Ask whether you may use an AI tool to draft general HR messages.",
+      "clickPath": null
+     },
+     {
+      "app": "Claude",
+      "ref": null,
+      "feature": null,
+      "goal": "Ask for a reminder message for each policy with gaps for [policy], [date] and [link].",
+      "clickPath": null
+     },
+     {
+      "app": "Microsoft Outlook",
+      "ref": null,
+      "feature": "Outlook recurring tasks",
+      "goal": "Set a repeating reminder for each policy message to yourself.",
+      "clickPath": null
+     }
+    ],
+    "material": [
+     {
+      "label": "Policy reminders",
+      "what": "One short message per policy with gaps for the details."
+     },
+     {
+      "label": "Reminder calendar",
+      "what": "A list of which reminder goes out and when."
+     }
+    ],
+    "checkPoint": "You check the policy details and link, then send each reminder yourself."
+   },
+   {
+    "name": "Monthly newsletter",
+    "handsOn": null,
+    "around": "Every month you gather items and write it in the same shape.",
+    "patterns": [
+     2,
+     9,
+     7
+    ],
+    "stays": false,
+    "level": 3,
+    "held": "you are not sure yet what your company allows",
+    "today": "You write the newsletter every month.",
+    "withPath": "A saved newsletter layout and a prompt that turns your notes into a draft.",
+    "offerName": "Your newsletter, from one saved layout",
+    "newWay": "You make a Claude project with the layout and a past issue. Each month you paste your notes and get a draft in the same shape. You edit it and publish it yourself.",
+    "builtOnce": "a Claude project with the newsletter layout and tone",
+    "steps": [
+     {
+      "app": null,
+      "ref": null,
+      "feature": null,
+      "goal": "Ask whether you may put newsletter content into an AI tool.",
+      "clickPath": null
+     },
+     {
+      "app": "Claude",
+      "ref": "claude_project",
+      "feature": null,
+      "goal": "Make a project for the newsletter with a past issue and the layout.",
+      "clickPath": null
+     },
+     {
+      "app": "Microsoft Outlook",
+      "ref": null,
+      "feature": "Outlook recurring tasks",
+      "goal": "Set a monthly reminder to collect items.",
+      "clickPath": null
+     }
+    ],
+    "material": [
+     {
+      "label": "Newsletter layout",
+      "what": "Sections in the order you use them each month."
+     },
+     {
+      "label": "Monthly prompt",
+      "what": "What to paste in and how the draft should come back."
+     }
+    ],
+    "checkPoint": "You read the draft, check every date and fact, and send it yourself."
+   },
+   {
+    "name": "Answering messages and emails",
+    "handsOn": null,
+    "around": "Many messages repeat the same answers and arrive in Outlook and Teams.",
+    "patterns": [
+     1,
+     8,
+     6
+    ],
+    "stays": false,
+    "level": 3,
+    "held": null,
+    "today": "You answer messages and write emails daily.",
+    "withPath": "Saved replies for the questions you answer most.",
+    "offerName": "Your common replies, saved once",
+    "newWay": "You pick your ten most common replies and save them as Outlook text blocks. You fill gaps and send. Questions that need thought you still answer yourself.",
+    "builtOnce": "saved Outlook text blocks for your most common replies",
+    "steps": [
+     {
+      "app": "Microsoft Outlook",
+      "ref": null,
+      "feature": "Outlook Quick Parts",
+      "goal": "Save your most common replies as text blocks.",
+      "clickPath": null
+     }
+    ],
+    "material": [
+     {
+      "label": "Common replies",
+      "what": "Short replies for the questions you answer most, with gaps."
+     }
+    ],
+    "checkPoint": "You read each reply and send it yourself."
+   }
+  ],
+  "top": [
+   {
+    "name": "Answering benefits questions",
+    "why": "It comes up many times a day and the answers repeat."
+   },
+   {
+    "name": "Onboarding new hires",
+    "why": "You named it as a top time saver and every hire repeats the same steps."
+   }
+  ]
+ },
+ "design3Links": {
+  "claude|claude project instructions": {
+   "app": "Claude",
+   "feature": "Claude project instructions",
+   "url": "https://support.claude.com/en/articles/9519177-how-can-i-create-and-manage-projects",
+   "title": "How can I create and manage projects?"
+  },
+  "microsoft outlook|outlook quick parts": {
+   "app": "Microsoft Outlook",
+   "feature": "Outlook Quick Parts",
+   "url": "https://support.microsoft.com/en-us/word/quick-parts",
+   "title": "Quick Parts"
+  },
+  "microsoft excel|excel formulas": {
+   "app": "Microsoft Excel",
+   "feature": "Excel formulas",
+   "url": "https://support.microsoft.com/en-us/excel/get-started/overview-of-formulas-in-excel",
+   "title": "Overview of formulas in Excel"
+  },
+  "microsoft excel|excel conditional formatting": {
+   "app": "Microsoft Excel",
+   "feature": "Excel conditional formatting",
+   "url": "https://support.microsoft.com/en-us/excel/use-conditional-formatting-to-highlight-information-in-excel",
+   "title": "Use conditional formatting to highlight information in Excel"
+  },
+  "microsoft excel|excel table": {
+   "app": "Microsoft Excel",
+   "feature": "Excel table",
+   "url": "https://support.microsoft.com/en-us/excel/overview-of-excel-tables",
+   "title": "Overview of Excel tables"
+  },
+  "microsoft outlook|outlook recurring tasks": {
+   "app": "Microsoft Outlook",
+   "feature": "Outlook recurring tasks",
+   "url": null,
+   "title": null,
+   "why": "no vendor page in the results"
+  }
+ },
+ "screens3": {
+  "seeIt": {
+   "task": "Answering benefits questions",
+   "intro": "This is your own parental leave question turned into a standard answer you can copy, with the paid part held back for payroll.",
+   "result": "Hi,\n\nThanks for your question about parental leave. You can find the number of days in the benefits portal under Leave Policies.\n\nI am confirming with payroll whether the leave is paid and will come back to you with that answer as soon as I have it.\n\nKind regards,\n[your name]"
+  },
+  "askMessage": "I would like to use an AI tool to help me draft answers to benefits questions and to build a standard onboarding checklist and messages. I would only use general descriptions and company documents you approve, with no employee names or personal details. Please let me know whether this is allowed and what must stay out of the tool.",
+  "workflows": [
+   {
+    "name": "Answering benefits questions",
+    "read": "From now on you build one Claude project that holds your benefits documents and your usual answers. When a question comes in, you paste it without names, read the draft and send it yourself from Outlook or Teams. Anything about pay goes to payroll first, so your answers stay consistent and you stop looking the same things up again.",
+    "material": [
+     {
+      "label": "Project instructions",
+      "items": [
+       "You help an HR coordinator at a logistics company answer employee benefits questions.",
+       "Answer only from the documents in this project.",
+       "If the answer is not in the documents, say clearly that you do not know and do not guess.",
+       "If a question is about pay, including whether something is paid, say that payroll must confirm it before anyone answers.",
+       "Write short, friendly, plain answers that point to the benefits portal section where it applies.",
+       "Leave out employee names and personal details.",
+       "End each draft with a line listing anything I need to check with payroll."
+      ]
+     },
+     {
+      "label": "Usual answers",
+      "items": [
+       "Parental leave days: You can find the number of days in the benefits portal under Leave Policies.",
+       "Parental leave pay: I am confirming the paid part with payroll and will come back to you.",
+       "[Question 3]: [your usual answer, with company specific details]",
+       "[Question 4]: [your usual answer, with company specific details]"
+      ]
+     },
+     {
+      "label": "Payroll check list",
+      "items": [
+       "Whether parental leave is paid",
+       "Anything about the amount of pay during leave",
+       "[Other pay question you confirm with payroll]",
+       "[Other pay question you confirm with payroll]"
+      ]
+     }
+    ],
+    "test": {
+     "tryOn": "Try it on three real questions you already answered: the parental leave question, one other leave or benefits question, and one pay question. Paste them without names.",
+     "good": "The draft answers only from your documents, points to the right section of the benefits portal, says when the answer is not there, and flags pay for payroll.",
+     "fixes": [
+      "Answer only from the documents and tell me which one you used.",
+      "This is about pay, so flag it for payroll instead of answering.",
+      "Make this shorter and friendlier, with the same facts."
+     ]
+    },
+    "approval": "You read each draft against the benefits portal and send it yourself, with no employee names put into the tool.",
+    "ifStops": "If the answers drift or invent details, open the project, re read the instructions and ask it to answer only from your documents again."
+   },
+   {
+    "name": "Onboarding new hires",
+    "read": "From now on you build one clean Excel checklist with every step, who does it and when, counted from the start date. For each new hire you copy the sheet, enter the start date and work down it. The welcome email and reminders come from saved text, so nothing gets forgotten.",
+    "material": [
+     {
+      "label": "Checklist layout",
+      "items": [
+       "Column A: Step",
+       "Column B: Owner",
+       "Column C: Days from start date",
+       "Column D: Due date, worked out from the start date cell",
+       "Column E: Done",
+       "Column F: Notes",
+       "First steps to fill in from your current checklist: [step 1], [step 2], [step 3]"
+      ]
+     },
+     {
+      "label": "Welcome email",
+      "items": [
+       "Subject: Welcome to the team, [name]",
+       "Hi [name],",
+       "We are glad you are joining us on [start date]. Your manager, [manager], will meet you on your first day.",
+       "Please reply to this email if you have any questions before then.",
+       "Kind regards,",
+       "[your name]"
+      ]
+     },
+     {
+      "label": "Reminder messages",
+      "items": [
+       "To the manager: Hi [manager], a reminder that [name] starts on [start date]. Please complete your onboarding tasks on the checklist: [tasks].",
+       "To IT: Hi, [name] starts on [start date]. Please complete the setup tasks on the checklist by [date].",
+       "First week reminder: Hi [name], a quick note on what is planned for your first week: [first week plan]."
+      ]
+     }
+    ],
+    "test": {
+     "tryOn": "Try it on three recent new hires, using only their start dates and general steps with no personal details.",
+     "good": "Every step has an owner and a due date that changes when you change the start date, and overdue steps show in colour.",
+     "fixes": [
+      "Add the missing step and give it an owner and days from start.",
+      "Change the owner of this step to [owner].",
+      "Rewrite this message shorter, keeping the gaps for name and date."
+     ]
+    },
+    "approval": "You fill in each gap and read every message before you send it yourself.",
+    "ifStops": "If the due dates stop updating, check that the start date cell is filled in and that the formulas were copied down with the sheet."
+   }
+  ],
+  "safeUse": [
+   "You are not sure whether your company allows AI tools, so ask your manager or IT before you put any documents or questions in.",
+   "Use only general descriptions and approved documents, and never put employee names or personal details into the tool.",
+   "Do not connect your work email to an AI tool until your company says it is allowed.",
+   "Send everything yourself after you have read it, and send pay questions to payroll first."
+  ]
+ },
+ "checks3": [
+  {
+   "id": "three_patterns",
+   "pass": true,
+   "detail": "7 responsibilities, each with patterns from the ten"
+  },
+  {
+   "id": "three_refs_real",
+   "pass": true,
+   "detail": "Every card and recipe id exists"
+  },
+  {
+   "id": "three_links_vendor",
+   "pass": true,
+   "detail": "Every link is on the vendor's own site"
+  },
+  {
+   "id": "three_feature_named",
+   "pass": false,
+   "detail": "Paste your current checklist steps without names and ask for a standard checklist with owners and da | Ask for a reminder message for each policy with gaps for [policy], [date] and [link]."
+  },
+  {
+   "id": "three_no_click_without_link",
+   "pass": true,
+   "detail": "No menu path or button name outside a linked click path"
+  },
+  {
+   "id": "three_approval",
+   "pass": true,
+   "detail": "Every workflow has a point where she checks"
+  },
+  {
+   "id": "three_copy_rules",
+   "pass": true,
+   "detail": "No dashes, promised times, prices or percents"
+  },
+  {
+   "id": "three_levels",
+   "pass": true,
+   "detail": "Every level is 1 to 5, and level 1 means it stays hers"
+  },
+  {
+   "id": "three_starter_level",
+   "pass": true,
+   "detail": "Every level is 3 or lower for a Starter"
+  },
+  {
+   "id": "three_not_writing_help",
+   "pass": false,
+   "detail": "A saved newsletter layout and a prompt that turns your notes into a draft."
+  },
+  {
+   "id": "three_no_connect",
+   "pass": true,
+   "detail": "No step connects a work app"
+  },
+  {
+   "id": "three_ask_first",
+   "pass": true,
+   "detail": "Her path opens with the message to ask what is allowed"
+  },
+  {
+   "id": "three_top_two",
+   "pass": true,
+   "detail": "Top: Answering benefits questions, Onboarding new hires; 2 workflows on her path"
+  }
+ ],
+ "design3Count": {
+  "responsibilities": 7,
+  "stays": 1,
+  "builtOnce": 6,
+  "patterns": {
+   "1": 5,
+   "2": 2,
+   "5": 2,
+   "6": 4,
+   "7": 4,
+   "8": 1,
+   "9": 1,
+   "10": 1
+  },
+  "levels": {
+   "1": 1,
+   "3": 6
+  },
+  "steps": 18,
+  "checked": 2,
+  "unchecked": 12,
+  "linked": 8,
+  "noApp": 4,
+  "clickPathsShown": 0,
+  "clickPathsHidden": 0,
+  "apps": [
+   [
+    "Microsoft Outlook",
+    {
+     "steps": 6,
+     "linked": 4
+    }
+   ],
+   [
+    "Claude",
+    {
+     "steps": 3,
+     "linked": 1
+    }
+   ],
+   [
+    "Microsoft Excel",
+    {
+     "steps": 3,
+     "linked": 3
+    }
+   ]
+  ],
+  "refs": [
+   "claude_project"
+  ]
+ }
+}

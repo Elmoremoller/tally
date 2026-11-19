@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, type RefObject } from "react";
+import { useEffect, useRef, type ReactNode, type RefObject } from "react";
 import { ArrowRight, Check } from "@/components/icons";
 import { Dock } from "@/components/quiz/Dock";
 import { MicButton } from "@/components/quiz/MicButton";
@@ -33,6 +33,13 @@ type PickStepProps = {
   headingRef: RefObject<HTMLHeadingElement | null>;
   /** One line under the chips, read out when it changes, like how many of her picks AI can help with. */
   note?: string | null;
+  /** More on the same screen, under the chips, like the one tap row for what she uses for work. */
+  after?: ReactNode;
+  /**
+   * The chips in small groups, each under its own label, like her own responsibilities and the ones usual for her
+   * role (Phase 8). Every option is still one of `options`. Something else comes after the last group.
+   */
+  groups?: { label: string; options: readonly string[] }[];
 };
 
 /**
@@ -54,6 +61,8 @@ export function PickStep({
   error,
   headingRef,
   note = null,
+  after = null,
+  groups,
 }: PickStepProps) {
   const withOther = other !== null;
   const beat = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
@@ -81,35 +90,53 @@ export function PickStep({
     onOther("");
   };
 
+  const chip = (option: string) => {
+    const on = picked.includes(option);
+    return (
+      <label key={option} className="quiz-topic" data-on={on || undefined}>
+        <input type="checkbox" className="sr-only" checked={on} onChange={() => toggle(option)} />
+        {on ? <Check /> : null}
+        {option}
+      </label>
+    );
+  };
+  const other_ = onOther ? (
+    <label className="quiz-topic" data-on={withOther || undefined}>
+      <input type="checkbox" className="sr-only" checked={withOther} onChange={toggleOther} />
+      {withOther ? <Check /> : null}
+      {somethingElse.label}
+    </label>
+  ) : null;
+
   return (
     <>
       <h1 ref={headingRef} tabIndex={-1} className="quiz-title" id="q-pick">
         {title}
       </h1>
       {hint ? <p className="quiz-hint">{hint}</p> : null}
-      <fieldset className="quiz-topics" aria-labelledby="q-pick">
-        {options.map((option) => {
-          const on = picked.includes(option);
-          return (
-            <label key={option} className="quiz-topic" data-on={on || undefined}>
-              <input type="checkbox" className="sr-only" checked={on} onChange={() => toggle(option)} />
-              {on ? <Check /> : null}
-              {option}
-            </label>
-          );
-        })}
-        {onOther ? (
-          <label className="quiz-topic" data-on={withOther || undefined}>
-            <input type="checkbox" className="sr-only" checked={withOther} onChange={toggleOther} />
-            {withOther ? <Check /> : null}
-            {somethingElse.label}
-          </label>
-        ) : null}
-      </fieldset>
+      {groups?.length ? (
+        <div className="quiz-groups">
+          {groups.map((group, i) => (
+            <fieldset key={group.label} className="quiz-topics quiz-group" aria-labelledby={`q-group-${i}`}>
+              <legend className="quiz-group-label" id={`q-group-${i}`}>
+                {group.label}
+              </legend>
+              {group.options.map(chip)}
+              {i === groups.length - 1 ? other_ : null}
+            </fieldset>
+          ))}
+        </div>
+      ) : (
+        <fieldset className="quiz-topics" aria-labelledby="q-pick">
+          {options.map(chip)}
+          {other_}
+        </fieldset>
+      )}
       {withOther && onOther ? <OtherBox value={other ?? ""} setValue={onOther} /> : null}
       <p className="quiz-note" role="status">
         {note ?? ""}
       </p>
+      {after}
 
       {error ? (
         <p className="quiz-error" role="alert">

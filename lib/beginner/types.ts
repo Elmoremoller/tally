@@ -1,5 +1,7 @@
+import type { PatternId } from "./patterns";
 import type { QA } from "./quiz";
 import type { Often } from "./quiz-copy";
+import type { Level, TaskKind } from "./recipes";
 import { chatTools, policyLabels, type AiPolicy, type AiTool, type ChatTool } from "../week";
 
 // The beginner version: for women who want to start using AI and don't know where to begin, in any job. It
@@ -60,6 +62,15 @@ export function canUseToWork(answer: CanUse): { worksFor: WorksFor; aiPolicy: Ai
 /** The screen id of Can you use AI for your work, as kept in her answered screens. */
 export const CAN_USE_ID = "can_use";
 
+/**
+ * Her answer to Can you use AI for your work, from what the rules keep: someone who works for herself is
+ * "self", and an employer's encouraged, restricted or other view is Yes, restricted or Not sure.
+ */
+export function canUseOf(worksFor: WorksFor, aiPolicy: AiPolicy | null): CanUse {
+  if (!hasEmployer(worksFor)) return "self";
+  return aiPolicy === "encouraged" ? "yes" : aiPolicy === "restricted" ? "restricted" : "not_sure";
+}
+
 /** Only someone with an employer is asked about her company's view on AI, and gets the At work part. */
 export const hasEmployer = (worksFor: WorksFor) => worksFor !== "self";
 
@@ -115,7 +126,47 @@ export type MapLine = {
   withPath: string;
   ai: boolean;
   private: boolean;
+  /** The kind of task the intake gave it, checked against TASK_KINDS. Absent before Phase 5. */
+  kind?: TaskKind | null;
+  /**
+   * Its level from levelFor in lib/beginner/levels.ts. Null when it waits for her company's OK. Absent on answers
+   * saved before Phase 5.
+   */
+  level?: Level | null;
+  /** It needs AI and her company restricts AI: it shows Waits for your company's OK in place of a level. */
+  waits?: boolean;
+  /** The id of the recipe that gave it a level of 3 or higher. */
+  recipe?: string | null;
+  /** The rule that held its level down, when one did. */
+  held?: Held | null;
+  /**
+   * She asks first. From Phase 8: she is Not sure whether she can use AI, and its workflow puts her work into an
+   * AI tool. Before Phase 8 also a recipe that needs no AI at work, for someone whose company restricts AI.
+   */
+  askFirst?: boolean;
+  /** The patterns the final read named for it, most fitting first (DIRECTION.md, section 2). Phase 8. */
+  patterns?: PatternId[];
+  /** The thing in her own words, as it fits "Your ___ form", for the pieces her offer lists. Phase 8. */
+  thing?: string | null;
+  /** The id of the pattern workflow that gave it its level, like "pattern_4", when no recipe did. Phase 8. */
+  workflow?: string | null;
+  /** Why it stays hers, on the map (DIRECTION.md, section 2). Phase 8. */
+  stays?: Stays | null;
 };
+
+/** It stays hers: it holds other people's private details, or nothing repeats around it. */
+export type Stays = "private" | "nothing_repeats";
+
+/** One workflow her offer names, with the pieces Tally builds for it (DIRECTION.md, section 3). Phase 8. */
+export type OfferItem = { name: string; pieces: string[] };
+
+/**
+ * Why a rule held a task's level down (DIRECTION.md, section 2, How the level is chosen): her company restricts
+ * AI, she can't connect her work apps, the task holds other people's private details, a Starter path stops at
+ * level 3, or the setup needs a device she doesn't have.
+ */
+export const HELD = ["restricted", "connect", "private", "track", "needs_computer", "needs_phone"] as const;
+export type Held = (typeof HELD)[number];
 
 /**
  * Everything the free result holds (docs/DIRECTION.md, section 3): the map of her week with her finished
@@ -124,9 +175,22 @@ export type MapLine = {
  */
 export type FreeResult = {
   firstWin: FirstWin;
-  firstStep: string;
+  /** The message she pastes into her AI tool. Null from beginner-intake-v9, which no longer writes it. */
+  firstStep: string | null;
   map: MapLine[];
   setups: string[];
+  /** Her workflows with the pieces Tally builds for each, in the order of `setups`. Phase 8. */
+  offer?: OfferItem[];
+  /** A Starter's two prep steps, which her offer lists under her workflows. Empty for a Builder. Phase 5. */
+  prep: string[];
+  /** Every recipe in her offer says the free plan is enough. Phase 5. */
+  freePlan: boolean;
+  /**
+   * Her company restricts AI and every task waits for its OK: no offer, only the free message to ask what's
+   * allowed, which `askMessage` holds. Phase 6.
+   */
+  askOnly?: boolean;
+  askMessage?: string | null;
   tool: ChatTool;
   track: Track;
 };
@@ -151,7 +215,18 @@ export type BeginnerIntake = {
    * What her free result showed beyond her first win, saved so her paid path can be held to it. Absent on
    * answers saved before beginner-intake-v5 (Phase 2 of docs/DIRECTION.md).
    */
-  shown?: { firstStep: string; map: MapLine[]; setups: string[]; tool: ChatTool; track: Track };
+  shown?: {
+    firstStep: string | null;
+    map: MapLine[];
+    /** Her workflows by name, in order. Before Phase 5, every setup her offer named. */
+    setups: string[];
+    offer?: OfferItem[];
+    prep?: string[];
+    freePlan?: boolean;
+    askOnly?: boolean;
+    tool: ChatTool;
+    track: Track;
+  };
 };
 
 /** Her plan holds at least this many ideas, and her free result shows the first few titles of them. */

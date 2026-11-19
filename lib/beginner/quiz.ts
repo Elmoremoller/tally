@@ -1,31 +1,25 @@
 import { cleanText } from "../clean";
 import { ANSWER_MAX } from "../week";
 import { FALLBACK_JOB_READ } from "./copy";
-import { EVERYDAY_SOFTWARE, EVERYDAY_TASKS } from "./quiz-copy";
-import { usesAi, type Experience, type WorksFor } from "./types";
+import { whereScreen } from "./quiz-copy";
+import { usesAi, type CanUse, type Experience, type WorksFor } from "./types";
 
 // The context quiz's shapes and the pure helpers behind its screens. Imports nothing from the server, so the
 // browser, the server actions and the tests can all use it.
 
-/** One thing she does over and over. `ai` says whether AI could help with it. */
-export type JobChoice = { label: string; ai: boolean };
+/** One choice on What do you do over and over: one of her own responsibilities, or one usual for her role. */
+export type JobChoice = { label: string; group: "hers" | "usual" };
 
 /**
- * What the AI read from her job: what she repeats, a fallback list, the software she likely uses, what someone
- * in her job might use AI for, and who she works for.
+ * What the AI read from her job (DIRECTION.md, Phase 8): her own responsibilities in her words, the ones people in
+ * her role usually handle that she didn't mention, the software she likely uses, and who she works for.
  */
 export type JobRead = {
-  repeats: JobChoice[];
-  aiFallback: string[];
+  hers: string[];
+  usual: string[];
   apps: string[];
-  aiUses: string[];
   worksFor: WorksFor | "unclear";
 };
-
-export type AskedKind = "one" | "many" | "text";
-
-/** A question the AI wrote for her. */
-export type AskedQuestion = { id: string; title: string; kind: AskedKind; choices: string[]; hint: string | null };
 
 /**
  * One answered screen. `id` matches ^[a-z0-9_]{1,20}$. `shown` is the choices that screen offered her, so we
@@ -35,64 +29,54 @@ export type QA = { id: string; title: string; picked: string[]; text: string | n
 
 /**
  * Every screen the quiz can show. Answers saved before 2026-11-14 may also hold held_back, picture, ai_uses,
- * works_for and policy, screens that are gone; they still load, since a saved answer is only read by its id.
+ * works_for and policy, answers saved before Phase 5 may hold apps and device as screens of their own, and answers
+ * saved before Phase 8 may hold the real example and the question the AI wrote (example, asked_1); they still load,
+ * since a saved answer is only read by its id. What she uses for work is kept as the device answer, from the where
+ * screen, and how often she does her top task as the often answer, from the most wanted screen.
  */
-export type QuizStep =
-  | "job"
-  | "level"
-  | "done"
-  | "tools"
-  | "repeats"
-  | "most"
-  | "example"
-  | "apps"
-  | "device"
-  | `asked_${number}`
-  | "can_use";
+export type QuizStep = "job" | "level" | "done" | "tools" | "repeats" | "most" | "where" | "can_use" | "connect";
 
 export const QAS_MAX = 16;
 export const PICKS_MAX = 16;
 export const PICK_MAX = 60;
-/** The AI writes at most one question, and the progress bar assumes it while the AI is still writing it. */
-export const ASKED_ASSUMED = 1;
-const MOST_MAX = 6;
-/** The repeats screen shows this many choices: her job's first, then everyday work. */
-export const REPEATS_SHOWN = 10;
+/** Her own responsibilities come first on the repeats screen, at most this many (Karl, 2026-11-16). */
+export const HERS_SHOWN = 5;
+/** The repeats screen shows this many choices in all, filled with ones usual for her role (Karl, 2026-11-16). */
+export const REPEATS_SHOWN = 8;
 const TITLE_MAX = 200;
 const ID_PATTERN = /^[a-z0-9_]{1,20}$/;
 
 /**
- * The choices for "which would save you the most time": every pick she made, in the order of the repeats
- * screen, then what she typed under Something else, so nothing she said goes missing. Only when she picked
- * nothing AI can help with and typed nothing does she get the read's fallback list instead.
+ * The choices for "which would save you the most time": every pick she made, in the order of the repeats screen,
+ * then what she typed under Something else, so nothing she said goes missing.
  */
-export function mostOptions(
-  read: JobRead,
-  picked: string[],
-  typed: string | null,
-): { options: string[]; fallback: boolean } {
-  const hers = repeatChoices(read).filter((r) => picked.includes(r.label));
+export function mostOptions(read: JobRead, picked: string[], typed: string | null): string[] {
+  const options = repeatChoices(read)
+    .filter((r) => picked.includes(r.label))
+    .map((r) => r.label);
   const extra = cleanText(typed, PICK_MAX);
-  if (!extra && !hers.some((r) => r.ai)) return { options: read.aiFallback, fallback: true };
-  const options = hers.map((r) => r.label);
-  if (extra && !options.includes(extra)) options.push(extra);
-  return { options: options.slice(0, MOST_MAX), fallback: false };
+  if (extra && !options.some((o) => o.toLowerCase() === extra.toLowerCase())) options.push(extra);
+  return options;
 }
 
 /**
- * The repeats screen's choices: what the read of her job names first, then everyday work almost every job has,
- * each once whatever its case, REPEATS_SHOWN in all. However little her job answer said, the screen is full.
+ * The repeats screen's choices (Karl, 2026-11-16): her own responsibilities first, at most HERS_SHOWN, then the
+ * ones usual for her role, REPEATS_SHOWN in all, each once whatever its case.
  */
 export function repeatChoices(read: JobRead): JobChoice[] {
   const seen = new Set<string>();
-  return [...read.repeats, ...EVERYDAY_TASKS.map((label) => ({ label, ai: true }))]
-    .filter((r) => {
-      const key = r.label.toLowerCase();
-      if (seen.has(key)) return false;
-      seen.add(key);
-      return true;
-    })
-    .slice(0, Math.max(REPEATS_SHOWN, read.repeats.length));
+  const once = (label: string) => {
+    const key = label.toLowerCase();
+    if (seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  };
+  const hers = read.hers.filter(once).slice(0, HERS_SHOWN).map((label) => ({ label, group: "hers" as const }));
+  const usual = read.usual
+    .filter(once)
+    .slice(0, Math.max(REPEATS_SHOWN - hers.length, 0))
+    .map((label) => ({ label, group: "usual" as const }));
+  return [...hers, ...usual];
 }
 
 /**
@@ -114,13 +98,16 @@ export function toggleKind(job: string, kind: string): string {
 export const hasKind = (job: string, kind: string) =>
   job.split(/,\s*/).some((part) => part.trim().toLowerCase() === kind.toLowerCase());
 
-/** A list of one needs no question: that one is her answer, and the screen is skipped. */
-export const skipsMost = (most: { options: string[]; fallback: boolean }) => !most.fallback && most.options.length === 1;
+/** Names for texting that mean the same place as Text messages, so the where screen shows it once. */
+const TEXTING = /^(texts?|text messages?|sms|texting)$/i;
 
-/** The software screen's choices: what the read of her job names first, then the everyday set, each once. */
-export function softwareOptions(read: JobRead): string[] {
+/**
+ * The where screen's choices: the apps the read of her job names first, then the fixed places, each once. Texts,
+ * SMS and the like are left for the fixed Text messages.
+ */
+export function whereOptions(read: JobRead): string[] {
   const seen = new Set<string>();
-  return [...read.apps, ...EVERYDAY_SOFTWARE].filter((name) => {
+  return [...read.apps.filter((name) => !TEXTING.test(name.trim())), ...whereScreen.places].filter((name) => {
     const key = name.toLowerCase();
     if (seen.has(key)) return false;
     seen.add(key);
@@ -132,41 +119,25 @@ export function softwareOptions(read: JobRead): string[] {
 export const levelWords = (qas: QA[]): string | null => qas.find((qa) => qa.id === "level")?.text ?? null;
 
 /**
- * How many of her picks on the repeats screen AI can help with, out of how many she picked from the list.
- * What she typed under Something else has no flag, so it isn't counted.
- */
-export function aiHelpCount(read: JobRead, picked: string[]): { helps: number; picked: number } {
-  const hers = repeatChoices(read).filter((r) => picked.includes(r.label));
-  return { helps: hers.filter((r) => r.ai).length, picked: hers.length };
-}
-
-/**
  * Every screen she will see, in order, so the progress bar knows the length. A Starter (Never used it, Tried it
- * a few times) sees at most 8 screens and a Builder at most 10:
+ * a few times) sees at most 7 screens and a Builder at most 9 (DIRECTION.md, Phase 8):
  *
- * Starter: job, level, repeats, most, example, device, one asked question, can_use.
- * Builder: job, level, done, tools, repeats, most, example, apps, one asked question, can_use.
+ * Starter: job, level, repeats, most, where, can_use, connect.
+ * Builder: job, level, done, tools, repeats, most, where, can_use, connect.
  *
- * Where an answer isn't known yet, the step is assumed: the asked screen while the AI writes it, and the
- * Builder screens before she picks a level. Can you use AI for your work is left out when her job already
- * said she works for herself. `skipMost` leaves out the most wanted screen when it would show one choice.
+ * Where an answer isn't known yet, the step is assumed: the Builder screens before she picks a level, and connect
+ * before she answers can_use. Can you use AI for your work is left out when her job already said she works for
+ * herself, and connect is only for Yes or Not sure there. The most wanted screen is always shown, even with one
+ * pick, since how often she does it is asked there.
  */
-export function stepsFor(s: {
-  level: Experience | null;
-  askedCount: number | null;
-  worksForFromJob: WorksFor | "unclear" | null;
-  skipMost?: boolean;
-}): QuizStep[] {
-  const builder = usesAi(s.level);
+export function stepsFor(s: { level: Experience | null; worksForFromJob: WorksFor | "unclear" | null; canUse?: CanUse | null }): QuizStep[] {
   const steps: QuizStep[] = ["job", "level"];
-  if (builder) steps.push("done", "tools");
-  steps.push("repeats");
-  if (!s.skipMost) steps.push("most");
-  steps.push("example");
-  steps.push(builder ? "apps" : "device");
-  const asked = Math.min(s.askedCount ?? ASKED_ASSUMED, ASKED_ASSUMED);
-  for (let i = 1; i <= asked; i++) steps.push(`asked_${i}`);
-  if (s.worksForFromJob !== "self") steps.push("can_use");
+  if (usesAi(s.level)) steps.push("done", "tools");
+  steps.push("repeats", "most", "where");
+  if (s.worksForFromJob !== "self") {
+    steps.push("can_use");
+    if (!s.canUse || s.canUse === "yes" || s.canUse === "not_sure") steps.push("connect");
+  }
   return steps;
 }
 

@@ -6,13 +6,15 @@ import {
   deviceOf,
   exampleOf,
   fewHelp,
+  freePlanFor,
+  freeResultFor,
+  offerFor,
   orderMap,
   phraseFor,
   secondTask,
-  setupsFor,
-  setupTasks,
   taskForSetup,
   TIME_PROMISE,
+  workflowName,
 } from "../../lib/beginner/free-result";
 import type { MapLine } from "../../lib/beginner/types";
 
@@ -44,15 +46,17 @@ test("exampleOf gives her real example, and null when she skipped it or left it 
 });
 
 test("TIME_PROMISE catches minutes and hours, and lets her own count through", () => {
-  for (const line of ["Takes two minutes now", "Saves you an hour", "Done in 30 mins", "Back in hours"]) {
+  for (const line of ["Takes two minutes now", "Saves you an hour", "Done in 30 mins", "Back in hours", "Add 2 hrs", "Two Hours back", "1 hr"]) {
     assert.ok(TIME_PROMISE.test(line), line);
   }
-  for (const line of ["You do this many times a day", "Becomes a saved project", "About once a day"]) {
+  for (const line of ["You do this many times a day", "Becomes a saved project", "About once a day", "You answer HR questions by email", "Sent to HR"]) {
     assert.ok(!TIME_PROMISE.test(line), line);
   }
 });
 
-test("deviceOf reads where she would use AI most, by its label", () => {
+test("deviceOf reads what she uses for work, by its label now or on answers saved before Phase 5", () => {
+  assert.equal(deviceOf([{ id: "device", title: "t", picked: ["Phone only"], text: null }]), "phone");
+  assert.equal(deviceOf([{ id: "device", title: "t", picked: ["Computer only"], text: null }]), "computer");
   assert.equal(deviceOf([{ id: "device", title: "t", picked: ["Phone"], text: null }]), "phone");
   assert.equal(deviceOf([{ id: "device", title: "t", picked: ["Both"], text: null }]), "both");
   assert.equal(deviceOf([]), null);
@@ -77,12 +81,9 @@ test("phraseFor trusts a short phrase in her own words, and nothing else", () =>
   assert.equal(phraseFor("Instagram posts", null, hers), null);
 });
 
-test("taskForSetup and setupTasks start a setup name with Your, or with the task's own name", () => {
+test("taskForSetup starts a name with Your, or with the task's own name", () => {
   assert.equal(taskForSetup({ task: "Rescheduling texts", phrase: "rescheduling texts" }), "Your rescheduling texts");
   assert.equal(taskForSetup({ task: "Writing the prep list", phrase: null }), "Writing the prep list");
-  const withPhrases = map.map((m) => ({ ...m, phrase: m.task === "Window displays" ? null : m.phrase }));
-  assert.deepEqual(setupTasks(withPhrases, "Vendor emails"), { top: "Your vendor emails", second: "Window displays" });
-  assert.deepEqual(setupTasks(withPhrases.slice(0, 1), "Vendor emails"), { top: "Your vendor emails", second: null });
 });
 
 test("orderMap puts her first win task first, and AI tasks next only when AI fits fewer than half", () => {
@@ -118,37 +119,141 @@ test("secondTask prefers the next task AI can help with that needs no private de
   assert.equal(secondTask(map, "vendor emails")?.task, "Window displays");
 });
 
-test("a Starter's setups follow Karl's pattern, with her tasks mid sentence", () => {
-  const setups = setupsFor({ track: "starter", tool: "claude", top: "Your rescheduling texts", second: "Your appointment reminders", device: "phone" });
-  assert.deepEqual(setups, [
-    "Get Claude ready on your phone",
-    "Your rescheduling texts, set up",
-    "Teach Claude who you are",
-    "Your appointment reminders, set up",
-  ]);
+test("secondTask takes a task with a recipe before one without", () => {
+  const leveled = map.map((m) => (m.task === "Schedule changes" ? { ...m, level: 3 as const, recipe: "phone_quick_replies" } : m));
+  assert.equal(secondTask(leveled, "Vendor emails")?.task, "Schedule changes");
+});
+
+test("on a tie in level, secondTask takes another recipe than her top task's, and a higher level still wins", () => {
+  const groomer: MapLine[] = [
+    { ...line("Reminder texts", "reminder texts", true, false), level: 3, recipe: "phone_quick_replies" },
+    { ...line("Booking", "booking", true, false), level: 3, recipe: "phone_quick_replies" },
+    { ...line("Social posts", "social posts", true, false), level: 3, recipe: "say_it_out_loud" },
+    { ...line("Grooming notes", "grooming notes", true, false), level: 3, recipe: "say_it_out_loud" },
+  ];
+  assert.equal(secondTask(groomer, "Reminder texts")?.task, "Social posts", "the first with another recipe");
+  assert.equal(secondTask(groomer.slice(0, 2), "Reminder texts")?.task, "Booking", "the same recipe when nothing else has one");
+  const higher = [...groomer.slice(0, 3), { ...line("Replies", "replies", true, false), level: 4 as const, recipe: "gmail_help_me_write" }];
+  assert.equal(secondTask(higher, "Reminder texts")?.task, "Replies");
+  const sameHigher = [
+    { ...line("Answering", "answering", true, false), level: 4 as const, recipe: "gmail_help_me_write" },
+    { ...line("Notes", "notes", true, false), level: 3 as const, recipe: "notes_to_sheet" },
+    { ...line("Vendor emails", "vendor emails", true, false), level: 4 as const, recipe: "gmail_help_me_write" },
+  ];
+  assert.equal(secondTask(sameHigher, "Answering")?.task, "Vendor emails", "level beats a different recipe");
+});
+
+/** A map with levels, as withLevels gives it: rescheduling texts with a recipe, booking replies at level 2. */
+const leveled: MapLine[] = [
+  { ...line("Rescheduling texts", "rescheduling texts", true, false), level: 3, recipe: "phone_quick_replies" },
+  { ...line("Booking replies", "booking replies", true, false), level: 2, recipe: null },
+  { ...line("Answering phones", "answering phones", false, false), level: 1, recipe: null },
+];
+
+test("a task with a recipe is named by what its recipe makes of it", () => {
+  assert.equal(workflowName(leveled[0]), "Your rescheduling texts, saved once on your phone");
+});
+
+test("a task with no recipe is named for what it is, written with AI, never a saved setup", () => {
+  assert.equal(workflowName(leveled[1]), "Your booking replies, written with AI");
+  assert.equal(workflowName({ task: "Writing the prep list", phrase: null, recipe: null }), "Writing the prep list, drafted with AI");
+});
+
+test("a Starter's offer lists her workflows first, and her two prep steps apart", () => {
+  assert.deepEqual(offerFor({ track: "starter", tool: "claude", map: leveled, top: "Rescheduling texts", device: "phone" }), {
+    setups: ["Your rescheduling texts, saved once on your phone", "Your booking replies, written with AI"],
+    prep: ["Get Claude ready on your phone", "Teach Claude who you are"],
+  });
   assert.equal(
-    setupsFor({ track: "starter", tool: "chatgpt", top: "Your vendor emails", second: null, device: null })[0],
+    offerFor({ track: "starter", tool: "chatgpt", map: leveled, top: "Rescheduling texts", device: "both" }).prep[0],
     "Get ChatGPT ready on your phone and computer",
   );
-  assert.equal(setupsFor({ track: "starter", tool: "chatgpt", top: "Your vendor emails", second: null, device: null }).length, 3);
+  assert.equal(
+    offerFor({ track: "starter", tool: "chatgpt", map: leveled, top: "Rescheduling texts", device: "computer" }).prep[0],
+    "Get ChatGPT ready on your computer",
+  );
 });
 
-test("a Builder's setups name the kind of setup and never a sign up step", () => {
-  const setups = setupsFor({ track: "builder", tool: "chatgpt", top: "Your Instagram posts", second: "Your booking DMs", device: null });
-  assert.deepEqual(setups, [
-    "Your Instagram posts, as a saved project",
-    "Test it on three real ones",
-    "Your booking DMs, with the right tool",
-    "Turn it into a routine you reuse",
-  ]);
-  assert.ok(!setups.some((s) => /ready on|sign up|who you are/i.test(s)));
+test("a Builder's offer starts at the workflow, with no prep and no sign up step", () => {
+  const offer = offerFor({ track: "builder", tool: "chatgpt", map: leveled, top: "Booking replies", device: null });
+  assert.deepEqual(offer, {
+    setups: ["Your booking replies, written with AI", "Your rescheduling texts, saved once on your phone"],
+    prep: [],
+  });
+  assert.ok(!offer.setups.some((s) => /ready on|sign up|who you are/i.test(s)));
 });
 
-test("every setups list names her top task, so the paywall names her tasks", () => {
+test("no offer promises a saved project, a setup or a routine a task doesn't get", () => {
+  const noRecipes = leveled.map((m) => ({ ...m, level: m.ai ? (2 as const) : (1 as const), recipe: null }));
   for (const track of ["starter", "builder"] as const) {
-    const setups = setupsFor({ track, tool: "claude", top: "Your vendor emails", second: null, device: "computer" });
-    assert.ok(setups.some((s) => s.includes("Your vendor emails")), track);
-    const named = setupsFor({ track, tool: "claude", top: "Writing the prep list", second: null, device: null });
-    assert.ok(named.some((s) => s.startsWith("Writing the prep list, ")), track);
+    const { setups, prep } = offerFor({ track, tool: "claude", map: noRecipes, top: "Rescheduling texts", device: "phone" });
+    const all = [...setups, ...prep];
+    assert.ok(!all.some((s) => /saved project|set up|routine|right tool|saved once/i.test(s)), all.join(" | "));
+    assert.ok(!all.some((s) => s.includes("Answering phones")), "a task AI can't help with is never offered");
   }
+});
+
+test("a task that waits for her company's OK is never in the offer, and the offer ends with the message to ask", () => {
+  const waiting = leveled.map((m) => (m.task === "Booking replies" ? { ...m, level: null, waits: true } : m));
+  const offer = offerFor({ track: "builder", tool: "claude", map: waiting, top: "Rescheduling texts", device: "phone", restricted: true });
+  assert.deepEqual(offer.setups, ["Your rescheduling texts, saved once on your phone", "The message to ask what’s allowed"]);
+  assert.ok(!offer.setups.some((s) => s.includes("written with AI")));
+});
+
+test("the free plan line shows only when every task in the offer has a recipe that says so", () => {
+  assert.ok(!freePlanFor(leveled, "Rescheduling texts"), "booking replies has no recipe");
+  assert.ok(freePlanFor(leveled.slice(0, 1), "Rescheduling texts"));
+  const unknown = [{ ...leveled[0], recipe: "weekly_no_reply_list", level: 5 as const }];
+  assert.ok(!freePlanFor(unknown, "Rescheduling texts"), "the recipe does not say");
+});
+
+test("freeResultFor chooses levels and the offer in code, as the live server does", () => {
+  const qa = (id: string, picked: string[]) => ({ id, title: id, picked, text: null });
+  const first_win = { task: "Rescheduling texts", intro: "Intro.", draft: "Draft." };
+  const rows: MapLine[] = [
+    { ...line("Rescheduling texts", "rescheduling texts", true, true), kind: "repeat_texts" },
+    { ...line("Answering phones", "answering phones", false, false), kind: null },
+  ];
+  const answers = {
+    experience: "tried" as const,
+    aiTools: ["not_sure" as const],
+    worksFor: "employer" as const,
+    aiPolicy: "no_idea" as const,
+    qas: [qa("where", ["Text messages"]), qa("device", ["Phone only"]), qa("can_use", ["Not sure"])],
+  };
+  const free = freeResultFor(answers, { first_win, first_step: "Step.", map: rows });
+  assert.equal(free.track, "starter");
+  assert.equal(free.map[0].level, 3);
+  assert.equal(free.map[0].recipe, "phone_quick_replies");
+  assert.equal(free.map[1].level, 1);
+  assert.equal(free.prep.length, 2);
+  assert.ok(free.setups[0].startsWith("Your rescheduling texts"));
+  assert.equal(free.askOnly, undefined);
+
+  // Restricted, with no recipe that needs no AI at work: nothing to sell, only the message to ask.
+  const restricted = freeResultFor(
+    { ...answers, aiPolicy: "restricted", qas: [qa("where", ["A work system"]), qa("device", ["Phone only"])] },
+    { first_win: { ...first_win, task: "Writing notes" }, first_step: "Step.", map: [{ ...line("Writing notes", "notes", true, false), kind: null }] },
+  );
+  assert.equal(restricted.askOnly, true);
+  assert.deepEqual(restricted.setups, []);
+  assert.ok(restricted.askMessage);
+});
+
+test("secondTask takes the recipe task at the highest level, the first on her map when two tie", () => {
+  const rows: MapLine[] = [
+    { ...line("Inquiries", "inquiries", true, false), recipe: "phone_quick_replies", level: 3 },
+    { ...line("Client emails", "client emails", true, false), recipe: "gmail_templates", level: 3 },
+    { ...line("Chasing replies", "chasing replies", true, false), recipe: "gmail_claude_follow_ups", level: 4 },
+    { ...line("Proposals", "proposals", true, false), recipe: "saved_assistant", level: 3 },
+  ];
+  assert.equal(secondTask(rows, "Inquiries")?.task, "Chasing replies");
+  assert.equal(secondTask(rows.slice(0, 2).concat(rows[3]), "Inquiries")?.task, "Client emails");
+});
+
+test("a free result saved before Phase 8 still renders its way: no pieces, the old heading rules", async () => {
+  const { readAsResponsibilities } = await import("../../lib/beginner/free-result");
+  const old = [{ task: "Rescheduling texts", phrase: null, today: "t.", withPath: "w.", ai: true, private: false, kind: null }];
+  assert.equal(readAsResponsibilities(old), false);
+  assert.equal(readAsResponsibilities([{ ...old[0], patterns: [1 as const] }]), true);
 });

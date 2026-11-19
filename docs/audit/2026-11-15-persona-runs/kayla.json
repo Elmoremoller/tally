@@ -1,0 +1,1237 @@
+{
+ "name": "kayla",
+ "group": "self employed Starter",
+ "persona": {
+  "group": "self employed Starter",
+  "bio": "Kayla, 27, electrician who owns a one truck business in Phoenix. She is in attics by 7am and on job sites all day; she has no office and works from her Samsung phone in the truck. The paperwork around the job is what drags: writing quotes, sending invoices, texting homeowners about times, chasing payment, asking for reviews. She does quotes on her phone at night, often by talking them through. She tried ChatGPT once to write a review request and forgot about it.",
+  "job": "Electrician. I own my own business, one truck, mostly homes in Phoenix.",
+  "level": "tried",
+  "device": "phone",
+  "phone": "samsung",
+  "canUse": "self",
+  "connect": null,
+  "expect": {
+   "taskLevel": {
+    "task": "quote",
+    "level": 3
+   }
+  }
+ },
+ "versions": {
+  "job": "beginner-job-v5",
+  "questions": "beginner-questions-v6",
+  "intake": "beginner-intake-v8",
+  "path": "beginner-path-v1"
+ },
+ "jobRead": {
+  "repeats": [
+   {
+    "label": "Quoting jobs",
+    "ai": true
+   },
+   {
+    "label": "Texting homeowners",
+    "ai": true
+   },
+   {
+    "label": "Writing invoices",
+    "ai": true
+   },
+   {
+    "label": "Running service calls",
+    "ai": false
+   },
+   {
+    "label": "Pulling wire",
+    "ai": false
+   },
+   {
+    "label": "Following up quotes",
+    "ai": true
+   }
+  ],
+  "aiFallback": [
+   "Quote templates",
+   "Payment reminder texts",
+   "Booking confirmation texts",
+   "Job summary notes"
+  ],
+  "apps": [
+   "Jobber",
+   "QuickBooks",
+   "Google Calendar",
+   "Square",
+   "Thumbtack",
+   "Google Maps"
+  ],
+  "aiUses": [
+   "Quote wording",
+   "Customer texts",
+   "Invoice notes",
+   "Social posts",
+   "Job descriptions"
+  ],
+  "worksFor": "self"
+ },
+ "jobReadFallback": false,
+ "asked": [],
+ "screens": 6,
+ "worksForFromJob": "self",
+ "answers": {
+  "job": "Electrician. I own my own business, one truck, mostly homes in Phoenix.",
+  "experience": "tried",
+  "qas": [
+   {
+    "id": "level",
+    "title": "Where are you with AI?",
+    "picked": [
+     "Tried it a few times"
+    ],
+    "text": null,
+    "shown": [
+     "Never used it",
+     "Tried it a few times",
+     "Use it some weeks",
+     "Use it most days"
+    ]
+   },
+   {
+    "id": "repeats",
+    "title": "What do you do over and over, every day or every week?",
+    "picked": [
+     "Quoting jobs",
+     "Texting homeowners",
+     "Writing invoices",
+     "Following up quotes",
+     "Answering messages"
+    ],
+    "text": "chasing payment and asking for reviews too",
+    "shown": [
+     "Quoting jobs",
+     "Texting homeowners",
+     "Writing invoices",
+     "Running service calls",
+     "Pulling wire",
+     "Following up quotes",
+     "Answering messages",
+     "Writing emails",
+     "Planning my week",
+     "Making lists"
+    ]
+   },
+   {
+    "id": "most",
+    "title": "Which would save you the most time if it got easier?",
+    "picked": [
+     "Quoting jobs"
+    ],
+    "text": null,
+    "shown": [
+     "Quoting jobs",
+     "Texting homeowners",
+     "Writing invoices",
+     "Following up quotes",
+     "Answering messages",
+     "chasing payment and asking for reviews too"
+    ]
+   },
+   {
+    "id": "example",
+    "title": "Paste the last one you wrote, or what the last person asked you.",
+    "picked": [],
+    "text": "Quote for a 200 amp panel upgrade, attic runs, permit included. $2,450, deposit 50%, can start Thursday. Call me if the timing works."
+   },
+   {
+    "id": "often",
+    "title": "How often do you do this?",
+    "picked": [
+     "About once a day"
+    ],
+    "text": null,
+    "shown": [
+     "Many times a day",
+     "About once a day",
+     "A few times a week",
+     "Once a week or less"
+    ]
+   },
+   {
+    "id": "where",
+    "title": "Where does your work happen?",
+    "picked": [
+     "Text messages",
+     "Google Calendar",
+     "Gmail",
+     "Google Maps",
+     "In person"
+    ],
+    "text": null,
+    "shown": [
+     "Jobber",
+     "QuickBooks",
+     "Google Calendar",
+     "Square",
+     "Thumbtack",
+     "Google Maps",
+     "Text messages",
+     "Gmail",
+     "Outlook",
+     "Google Sheets",
+     "Instagram",
+     "A work system",
+     "Paper",
+     "In person"
+    ]
+   },
+   {
+    "id": "device",
+    "title": "Do you work on a phone, a computer or both?",
+    "picked": [
+     "Phone only"
+    ],
+    "text": null,
+    "shown": [
+     "Phone only",
+     "Computer only",
+     "Both"
+    ]
+   }
+  ],
+  "mostWanted": [
+   "Quoting jobs"
+  ],
+  "worksFor": "self",
+  "aiTools": [
+   "not_sure"
+  ],
+  "aiToolsOther": null,
+  "aiPolicy": null,
+  "often": "daily"
+ },
+ "intake": {
+  "role_summary": "You’re a self employed electrician in Phoenix, running your own business from one truck, mostly on home jobs.",
+  "tasks": [
+   {
+    "name": "Quoting jobs",
+    "ai": true,
+    "private": false,
+    "kind": "spoken_writing"
+   },
+   {
+    "name": "Texting homeowners",
+    "ai": true,
+    "private": false,
+    "kind": "repeat_texts"
+   },
+   {
+    "name": "Writing invoices",
+    "ai": true,
+    "private": false,
+    "kind": "repeat_writing"
+   },
+   {
+    "name": "Following up quotes",
+    "ai": true,
+    "private": false,
+    "kind": "repeat_texts"
+   },
+   {
+    "name": "Answering messages",
+    "ai": true,
+    "private": false,
+    "kind": "repeat_texts"
+   },
+   {
+    "name": "Chasing payment and asking for reviews",
+    "ai": true,
+    "private": false,
+    "kind": "repeat_texts"
+   }
+  ],
+  "first_win": {
+   "task": "Quoting jobs",
+   "intro": "You said quoting jobs takes the most time. Here is your quote message, rewritten and ready to send to the homeowner.",
+   "draft": "Hi there,\n\nThanks for reaching out. Here is your quote for a 200 amp panel upgrade with attic runs, permit included.\n\nTotal: $2,450\nDeposit: 50% to hold your start date\nAvailable start: Thursday\n\nIf the timing works for you, give me a call and we can get you on the schedule."
+  },
+  "first_step": "I’m a self employed electrician in Phoenix, and I write quotes for home jobs after a homeowner describes the work. Write a short quote message I can text to the homeowner. Keep it friendly and plain, under 90 words. Include the total, the deposit percentage, the earliest start day, and a line inviting them to call. Here are the job details: [paste the job details and price here].",
+  "map": [
+   {
+    "task": "Quoting jobs",
+    "phrase": "quotes",
+    "today": "You write a quote most days, and each one starts from scratch.",
+    "withPath": "Each quote starts from a draft you only need to check and send.",
+    "ai": true,
+    "private": false,
+    "kind": "spoken_writing"
+   },
+   {
+    "task": "Texting homeowners",
+    "phrase": "homeowner texts",
+    "today": "You send texts to homeowners through the day, often the same few answers.",
+    "withPath": "The common replies become ready drafts you just adjust for the house.",
+    "ai": true,
+    "private": false,
+    "kind": "repeat_texts"
+   },
+   {
+    "task": "Writing invoices",
+    "phrase": "invoices",
+    "today": "You write invoices after jobs, one at a time.",
+    "withPath": "The invoice wording comes ready, and you only fill in the job details.",
+    "ai": true,
+    "private": false,
+    "kind": "repeat_writing"
+   },
+   {
+    "task": "Following up quotes",
+    "phrase": null,
+    "today": "You chase quotes that have not been answered, usually by text.",
+    "withPath": "Each follow up starts from a draft you only need to tweak.",
+    "ai": true,
+    "private": false,
+    "kind": "repeat_texts"
+   },
+   {
+    "task": "Answering messages",
+    "phrase": null,
+    "today": "You answer homeowner messages as they come in during the day.",
+    "withPath": "Your usual answers come ready, so each reply takes less thought.",
+    "ai": true,
+    "private": false,
+    "kind": "repeat_texts"
+   },
+   {
+    "task": "Chasing payment and asking for reviews",
+    "phrase": null,
+    "today": "You send payment reminders and review requests after jobs are done.",
+    "withPath": "Each reminder or review request starts from a ready draft you send as is.",
+    "ai": true,
+    "private": false,
+    "kind": "repeat_texts"
+   }
+  ],
+  "needs_follow_up": false,
+  "follow_up_question": null
+ },
+ "free": {
+  "firstWin": {
+   "task": "Quoting jobs",
+   "intro": "You said quoting jobs takes the most time. Here is your quote message, rewritten and ready to send to the homeowner.",
+   "draft": "Hi there,\n\nThanks for reaching out. Here is your quote for a 200 amp panel upgrade with attic runs, permit included.\n\nTotal: $2,450\nDeposit: 50% to hold your start date\nAvailable start: Thursday\n\nIf the timing works for you, give me a call and we can get you on the schedule."
+  },
+  "firstStep": "I’m a self employed electrician in Phoenix, and I write quotes for home jobs after a homeowner describes the work. Write a short quote message I can text to the homeowner. Keep it friendly and plain, under 90 words. Include the total, the deposit percentage, the earliest start day, and a line inviting them to call. Here are the job details: [paste the job details and price here].",
+  "map": [
+   {
+    "task": "Quoting jobs",
+    "phrase": "quotes",
+    "today": "You write a quote most days, and each one starts from scratch.",
+    "withPath": "For your quotes, you say what you need out loud, and the finished text comes back.",
+    "ai": true,
+    "private": false,
+    "kind": "spoken_writing",
+    "level": 3,
+    "waits": false,
+    "recipe": "say_it_out_loud",
+    "held": null,
+    "askFirst": false
+   },
+   {
+    "task": "Texting homeowners",
+    "phrase": "homeowner texts",
+    "today": "You send texts to homeowners through the day, often the same few answers.",
+    "withPath": "For your homeowner texts, your common replies are saved on your phone, each a few letters away.",
+    "ai": true,
+    "private": false,
+    "kind": "repeat_texts",
+    "level": 3,
+    "waits": false,
+    "recipe": "phone_quick_replies",
+    "held": null,
+    "askFirst": false
+   },
+   {
+    "task": "Writing invoices",
+    "phrase": "invoices",
+    "today": "You write invoices after jobs, one at a time.",
+    "withPath": "For your invoices, you say what you need out loud, and the finished text comes back.",
+    "ai": true,
+    "private": false,
+    "kind": "repeat_writing",
+    "level": 3,
+    "waits": false,
+    "recipe": "say_it_out_loud",
+    "held": null,
+    "askFirst": false
+   },
+   {
+    "task": "Following up quotes",
+    "phrase": null,
+    "today": "You chase quotes that have not been answered, usually by text.",
+    "withPath": "Your common replies are saved on your phone, each a few letters away.",
+    "ai": true,
+    "private": false,
+    "kind": "repeat_texts",
+    "level": 3,
+    "waits": false,
+    "recipe": "phone_quick_replies",
+    "held": null,
+    "askFirst": false
+   },
+   {
+    "task": "Answering messages",
+    "phrase": null,
+    "today": "You answer homeowner messages as they come in during the day.",
+    "withPath": "Your common replies are saved on your phone, each a few letters away.",
+    "ai": true,
+    "private": false,
+    "kind": "repeat_texts",
+    "level": 3,
+    "waits": false,
+    "recipe": "phone_quick_replies",
+    "held": null,
+    "askFirst": false
+   },
+   {
+    "task": "Chasing payment and asking for reviews",
+    "phrase": null,
+    "today": "You send payment reminders and review requests after jobs are done.",
+    "withPath": "Your common replies are saved on your phone, each a few letters away.",
+    "ai": true,
+    "private": false,
+    "kind": "repeat_texts",
+    "level": 3,
+    "waits": false,
+    "recipe": "phone_quick_replies",
+    "held": null,
+    "askFirst": false
+   }
+  ],
+  "setups": [
+   "Your quotes, said out loud, finished as text",
+   "Your homeowner texts, saved once on your phone"
+  ],
+  "prep": [
+   "Get Claude ready on your phone",
+   "Teach Claude who you are"
+  ],
+  "freePlan": true,
+  "tool": "claude",
+  "track": "starter"
+ },
+ "who": {
+  "track": "starter",
+  "canUse": "self",
+  "connect": null,
+  "places": [
+   "Text messages",
+   "Google Calendar",
+   "Gmail",
+   "Google Maps",
+   "In person"
+  ],
+  "device": "phone",
+  "aiTools": [
+   "not_sure"
+  ]
+ },
+ "outline": [
+  "ready:ready",
+  "about:about",
+  "task_1:workflow(say_it_out_loud)",
+  "task_2:workflow(phone_quick_replies)",
+  "end:end"
+ ],
+ "path": {
+  "version": 3,
+  "role": "You’re a self employed electrician in Phoenix, running your own business from one truck, mostly on home jobs.",
+  "track": "starter",
+  "tool": "claude",
+  "worksFor": "self",
+  "policy": null,
+  "device": "phone",
+  "apps": [
+   "any_chat",
+   "claude",
+   "iphone",
+   "gboard",
+   "samsung_keyboard",
+   "gmail"
+  ],
+  "skipped": [],
+  "steps": [
+   {
+    "id": "ready",
+    "kind": "ready",
+    "card": "claude_get_started",
+    "firstStep": "I’m a self employed electrician in Phoenix, and I write quotes for home jobs after a homeowner describes the work. Write a short quote message I can text to the homeowner. Keep it friendly and plain, under 90 words. Include the total, the deposit percentage, the earliest start day, and a line inviting them to call. Here are the job details: [paste the job details and price here]."
+   },
+   {
+    "id": "about",
+    "kind": "about",
+    "card": "claude_about_you",
+    "note": "I’m a self employed electrician in Phoenix. I run my own business from one truck, and most of my work is in homes. I write to homeowners who are busy and not technical, so I keep it short, friendly and plain. I like quotes and texts to be clear about the work, the price, the deposit and when I can start. Never add details I did not give you, like prices, dates, permit rules or code claims. Use square brackets for anything missing. Do not use big words or sales talk. Write the way I would talk to a customer at their door. Give me the finished text only, ready for me to read and send."
+   },
+   {
+    "id": "task_1",
+    "kind": "workflow",
+    "task": "Quoting jobs",
+    "title": "Your quotes, said out loud, finished as text",
+    "recipe": "say_it_out_loud",
+    "read": "From now on you say the job out loud and Claude writes the quote as a text. You are in the truck or the driveway with your phone, so speaking is faster than typing with your thumbs. Claude puts your words in your format and keeps the details you said, so you read it once and send it.",
+    "material": [
+     {
+      "label": "Opening line for Claude",
+      "items": [
+       "I’m a self employed electrician in Phoenix. I work from one truck, mostly on home jobs. I will talk to you out loud, and you turn what I say into a quote text I can send to a homeowner. Use this format: one line naming the job, then what is included, then the price, then the deposit, then the earliest start day, then a short line asking them to call or text me if the timing works. Keep my wording plain and friendly, and keep it short. Use only the details I say. Do not add prices, dates, permit rules or anything I did not mention. If something is missing, put it in square brackets. Give me back only the finished text, ready for me to read and send."
+      ]
+     },
+     {
+      "label": "What to say each time",
+      "items": [
+       "The kind of job, like panel upgrade, new circuits or a fixture install",
+       "Where the work is, like attic runs or an outside wall",
+       "What is included, like the permit, parts and cleanup",
+       "The total price",
+       "The deposit amount or percent",
+       "The day you can start",
+       "Anything that could change the price, like a hidden problem found once the wall is open"
+      ]
+     }
+    ]
+   },
+   {
+    "id": "task_2",
+    "kind": "workflow",
+    "task": "Texting homeowners",
+    "title": "Your homeowner texts, saved once on your phone",
+    "recipe": "phone_quick_replies",
+    "read": "Your common homeowner replies now live on your phone’s keyboard. You type a few letters and the full reply is ready to put in. The answers you give all day stay in your own words, and you only change a name or a time before you send.",
+    "material": [
+     {
+      "label": "Your replies",
+      "items": [
+       "Hi [first name], thanks for reaching out. I can come take a look at the work. What address is it, and what is going on?",
+       "Hi [first name], I can come by [day and time]. Does that work for you?",
+       "Hi [first name], I’m on my way and should be there around [time]. See you soon.",
+       "Hi [first name], here is your quote for [job]. Let me know if you have any questions, and I’m happy to go over it with you.",
+       "Hi [first name], just checking in on the quote I sent for [job]. Do you have any questions, or would you like me to hold a start day for you?",
+       "Hi [first name], your invoice for [job] is attached. Thank you for the work, and let me know if anything looks off.",
+       "Hi [first name], a friendly reminder that the invoice for [job] is still open. Please let me know if you have any questions.",
+       "Hi [first name], thank you for having me out. If you were happy with the work, a short review would mean a lot to me: [review link]."
+      ]
+     },
+     {
+      "label": "Your shortcuts",
+      "items": [
+       "lkwk",
+       "vsit",
+       "omw",
+       "qtsnt",
+       "qtfu",
+       "invs",
+       "pyrm",
+       "revw"
+      ]
+     }
+    ]
+   },
+   {
+    "id": "end",
+    "kind": "end",
+    "safeUse": [
+     "Never type a homeowner’s full name, home address, phone number or gate and door codes into Claude. Use square brackets and fill them in yourself.",
+     "Never type payment details, like card numbers or bank info, into a chat tool.",
+     "Leave out photos or notes that show a customer’s home security, alarm or camera setup.",
+     "Check every price, deposit, date and permit line against your own numbers and your city’s rules before you send a quote.",
+     "Read everything Claude writes before it goes out, and fix anything that does not sound like you."
+    ],
+    "askMessage": null
+   }
+  ]
+ },
+ "design": [
+  {
+   "task": "Quoting jobs",
+   "today": "You write a quote about once a day, and each one starts from scratch. Your last one was a 200 amp panel upgrade with attic runs, permit included, $2,450, 50% deposit.",
+   "newWay": "You keep one saved assistant that knows how your quotes read: scope, permit, price, deposit and start date. On site or in the truck, you tell it the job in your own words and it hands back a finished quote in your wording. You fill in the numbers yourself, so the price is always yours, and each quote starts from your format instead of a blank page.",
+   "steps": [
+    {
+     "app": "ChatGPT",
+     "ref": "chatgpt_get_started",
+     "goal": "Get ChatGPT ready on your phone so you can use it from the truck."
+    },
+    {
+     "app": "ChatGPT",
+     "ref": "chatgpt_about_you",
+     "goal": "Save a short note about your business, your area and how you like to sound, so every quote starts from it."
+    },
+    {
+     "app": null,
+     "ref": null,
+     "goal": "Pick two or three of your past quotes that read the way you like and note what each always includes."
+    },
+    {
+     "app": "ChatGPT",
+     "ref": "saved_assistant",
+     "goal": "Build a saved quote assistant from your past quotes that turns a few spoken details into a finished quote."
+    },
+    {
+     "app": "ChatGPT",
+     "ref": "chatgpt_project",
+     "goal": "Keep the quote assistant, your sample quotes and your standard terms together in one project you can reopen each time."
+    }
+   ],
+   "material": [
+    {
+     "label": "Quote assistant instructions",
+     "what": "Tells the assistant to write a quote in your wording with scope, permit, price, deposit and start date, and to leave a gap for anything you did not say."
+    },
+    {
+     "label": "Sample quotes",
+     "what": "Your own past quotes, including the 200 amp panel upgrade, so the assistant copies your layout and tone."
+    },
+    {
+     "label": "Standard terms note",
+     "what": "Your usual deposit, how you mention permits and how you offer a start date, written once."
+    },
+    {
+     "label": "About you note",
+     "what": "Your business, your Phoenix home work and your plain, friendly way of writing."
+    }
+   ],
+   "checkPoint": "You read every quote and check the scope, price, deposit and start date yourself before you send it to the homeowner."
+  },
+  {
+   "task": "Texting homeowners",
+   "today": "You send texts to homeowners through the day, often the same few answers.",
+   "newWay": "Your most common answers are saved on your phone and come up after a few letters. You read the reply, change anything for that job, and send it yourself. Nothing goes out on its own, and you stop retyping the same answers between jobs.",
+   "steps": [
+    {
+     "app": null,
+     "ref": null,
+     "goal": "List the ten questions homeowners ask you most and write down how you usually answer each."
+    },
+    {
+     "app": "ChatGPT",
+     "ref": "chatgpt_get_started",
+     "goal": "Get ChatGPT ready on your phone to help tidy your ten answers."
+    },
+    {
+     "app": "ChatGPT",
+     "ref": "saved_assistant",
+     "goal": "Have the assistant turn your rough answers into short, clear texts in your voice with gaps for names and times."
+    },
+    {
+     "app": "her phone's keyboard",
+     "ref": "phone_quick_replies",
+     "goal": "Save the ten replies on your phone so each one is a few letters away in any text thread."
+    }
+   ],
+   "material": [
+    {
+     "label": "Ten saved replies",
+     "what": "Short texts for your most common homeowner questions, like arrival time, pricing, permits and scheduling."
+    },
+    {
+     "label": "Shortcut list",
+     "what": "A few letters for each reply so you know what to type to bring it up."
+    },
+    {
+     "label": "Tone notes",
+     "what": "A few lines on how you sound to homeowners, friendly, direct and brief."
+    }
+   ],
+   "checkPoint": "You read each reply, fill in any gap and send it yourself."
+  }
+ ],
+ "checks": [
+  {
+   "id": "screens",
+   "pass": true,
+   "detail": "6 screens, at most 9 for a starter"
+  },
+  {
+   "id": "levels_in_code",
+   "pass": true,
+   "detail": "Every row has a level or waits"
+  },
+  {
+   "id": "level3_not_writing_help",
+   "pass": true,
+   "detail": "No line at level 3 or higher reads like writing help"
+  },
+  {
+   "id": "path_line_from_recipe",
+   "pass": true,
+   "detail": "Every line at level 3 or higher is its recipe's"
+  },
+  {
+   "id": "quote_level_3",
+   "pass": true,
+   "detail": "Following up quotes at level 3"
+  },
+  {
+   "id": "path_written",
+   "pass": true,
+   "detail": "5 steps"
+  },
+  {
+   "id": "workflow_parts",
+   "pass": true,
+   "detail": "2 workflows, each with a test, an approval point and a cost line"
+  },
+  {
+   "id": "setup_from_recipe_or_card",
+   "pass": true,
+   "detail": "card claude_get_started, card claude_about_you, recipe say_it_out_loud, recipe phone_quick_replies"
+  },
+  {
+   "id": "no_click_paths_from_model",
+   "pass": true,
+   "detail": "The model wrote no menu paths or button names"
+  },
+  {
+   "id": "copy_rules",
+   "pass": true,
+   "detail": "No dashes, promised times, prices or percents"
+  },
+  {
+   "id": "offer_matches_path",
+   "pass": true,
+   "detail": "Offer names 2, path has 2 workflows, 2 match by name"
+  }
+ ],
+ "recipes": {
+  "total": 6,
+  "aiTasks": 6,
+  "withRecipe": [
+   {
+    "task": "Quoting jobs",
+    "recipe": "say_it_out_loud",
+    "level": 3
+   },
+   {
+    "task": "Texting homeowners",
+    "recipe": "phone_quick_replies",
+    "level": 3
+   },
+   {
+    "task": "Writing invoices",
+    "recipe": "say_it_out_loud",
+    "level": 3
+   },
+   {
+    "task": "Following up quotes",
+    "recipe": "phone_quick_replies",
+    "level": 3
+   },
+   {
+    "task": "Answering messages",
+    "recipe": "phone_quick_replies",
+    "level": 3
+   },
+   {
+    "task": "Chasing payment and asking for reviews",
+    "recipe": "phone_quick_replies",
+    "level": 3
+   }
+  ],
+  "without": [],
+  "noRecipe": false,
+  "mostlyAssistant": false
+ },
+ "designCount": {
+  "steps": 9,
+  "checked": 7,
+  "unchecked": 0,
+  "noApp": 2,
+  "badRefs": [],
+  "clickPaths": [],
+  "apps": [],
+  "refs": [
+   "chatgpt_get_started",
+   "chatgpt_about_you",
+   "saved_assistant",
+   "chatgpt_project",
+   "phone_quick_replies"
+  ]
+ },
+ "design3": {
+  "responsibilities": [
+   {
+    "name": "Quoting jobs",
+    "handsOn": "You look at the job at the home and note what the work involves.",
+    "around": "You write up each quote from scratch with the scope, price, deposit and start date, about once a day.",
+    "patterns": [
+     2,
+     1
+    ],
+    "stays": false,
+    "level": 3,
+    "held": null,
+    "today": "You write each quote yourself, like the 200 amp panel upgrade with attic runs and permit included. It comes up about once a day.",
+    "withPath": "Your quotes, from one saved assistant that knows your usual wording and terms.",
+    "offerName": "Your quotes, from one saved assistant",
+    "newWay": "Claude is set up once as a saved assistant that knows how you word a quote: scope, permit line, deposit and start date. After a visit you say out loud or type a few rough notes and it gives you the finished quote with gaps for the price. You fill in the numbers and send it yourself.",
+    "builtOnce": "a saved quote assistant with your usual wording, deposit and the blanks for price and start date",
+    "steps": [
+     {
+      "app": "Claude",
+      "ref": "claude_project",
+      "feature": null,
+      "goal": "Make a Claude project for quotes so your wording and terms stay in one place.",
+      "clickPath": null
+     },
+     {
+      "app": "Claude",
+      "ref": "saved_assistant",
+      "feature": null,
+      "goal": "Build the quote assistant from your 200 amp panel quote, with blanks for [price], [deposit] and [start date].",
+      "clickPath": null
+     },
+     {
+      "app": "Claude",
+      "ref": "say_it_out_loud",
+      "feature": null,
+      "goal": "Try it by speaking the job notes after a visit and reading the quote it gives back.",
+      "clickPath": null
+     }
+    ],
+    "material": [
+     {
+      "label": "Quote assistant instructions",
+      "what": "Tells Claude how you word a quote and which parts always appear."
+     },
+     {
+      "label": "Quote template",
+      "what": "Your panel upgrade quote with blanks for price, deposit and start date."
+     },
+     {
+      "label": "Spoken notes prompt",
+      "what": "A short line to start with when you talk through a job."
+     }
+    ],
+    "checkPoint": "You read the quote and check the price, deposit, permit line and start date before you send it."
+   },
+   {
+    "name": "Texting homeowners and answering messages",
+    "handsOn": null,
+    "around": "You answer the same questions about timing, arrival and what happens next by text, over and over.",
+    "patterns": [
+     1
+    ],
+    "stays": false,
+    "level": 3,
+    "held": null,
+    "today": "You answer homeowner texts and messages one at a time. Many of the questions repeat.",
+    "withPath": "Your common replies, saved on your phone as text shortcuts.",
+    "offerName": "Your common texts, saved on your phone",
+    "newWay": "You save your most common replies as text shortcuts on your iPhone, such as on my way, running late and quote is coming. You type a short code and the full text appears. Then you add the details and send. There is no AI at all when you use it.",
+    "builtOnce": "a set of saved replies for your most common homeowner texts",
+    "steps": [
+     {
+      "app": "Claude",
+      "ref": null,
+      "feature": null,
+      "goal": "Paste in a few of your own past replies with no customer names and ask for a short list of the replies you use most.",
+      "clickPath": null
+     },
+     {
+      "app": "iPhone",
+      "ref": "phone_quick_replies",
+      "feature": null,
+      "goal": "Save each reply as a text replacement shortcut on your phone.",
+      "clickPath": null
+     }
+    ],
+    "material": [
+     {
+      "label": "Saved replies list",
+      "what": "Your usual answers on arrival time, delays, access and next steps, with gaps for details."
+     },
+     {
+      "label": "Shortcut codes",
+      "what": "A short code for each reply so it is quick to type."
+     }
+    ],
+    "checkPoint": "You read each reply and fill in the details before you send it."
+   },
+   {
+    "name": "Writing invoices",
+    "handsOn": null,
+    "around": "You build each invoice from the finished job, the quote and the deposit already paid.",
+    "patterns": [
+     2,
+     9
+    ],
+    "stays": false,
+    "level": 3,
+    "held": null,
+    "today": "You write an invoice after each job. The wording changes little from one to the next.",
+    "withPath": "Your invoices, from one saved template that you fill in after each job.",
+    "offerName": "Your invoices, from one template",
+    "newWay": "Claude builds one invoice template once from your usual wording, with the deposit line and blanks for the job and the total. After a job you say or type what you did and it fills the template. You check the figures and send it.",
+    "builtOnce": "an invoice template with blanks for job, deposit paid and balance due",
+    "steps": [
+     {
+      "app": "Claude",
+      "ref": "saved_assistant",
+      "feature": null,
+      "goal": "Build an invoice assistant from one of your past invoices, with blanks for [job], [deposit paid] and [balance due].",
+      "clickPath": null
+     },
+     {
+      "app": "Claude",
+      "ref": "say_it_out_loud",
+      "feature": null,
+      "goal": "Speak what you did on the job and get the finished invoice text.",
+      "clickPath": null
+     }
+    ],
+    "material": [
+     {
+      "label": "Invoice template",
+      "what": "Your usual invoice wording with the deposit line and blanks for amounts."
+     },
+     {
+      "label": "Invoice assistant instructions",
+      "what": "Tells Claude to fill only from what you say and leave amounts blank when unsure."
+     }
+    ],
+    "checkPoint": "You check every amount, name and date against the quote before you send the invoice."
+   },
+   {
+    "name": "Following up quotes",
+    "handsOn": null,
+    "around": "You remember who has not answered a quote and write a nudge to each one.",
+    "patterns": [
+     8,
+     1,
+     7
+    ],
+    "stays": false,
+    "level": 4,
+    "held": null,
+    "today": "You follow up quotes when you remember to. You write each message yourself.",
+    "withPath": "Your quote follow ups, drafted from your Gmail for you to approve.",
+    "offerName": "Your quote follow ups, drafted from Gmail",
+    "newWay": "You connect Gmail to Claude, which you control. Claude finds quotes you sent that have no reply and drafts a short nudge for each in your voice. You read each draft and send it yourself.",
+    "builtOnce": "a follow up style for quotes that matches how you write",
+    "steps": [
+     {
+      "app": "Claude",
+      "ref": "gmail_claude_follow_ups",
+      "feature": null,
+      "goal": "Connect Gmail to Claude and ask it to draft follow ups for quotes with no answer.",
+      "clickPath": null
+     }
+    ],
+    "material": [
+     {
+      "label": "Follow up draft",
+      "what": "A short, friendly nudge that mentions the job and the quote."
+     },
+     {
+      "label": "Follow up instruction",
+      "what": "A saved line telling Claude which emails count as quotes and how long to wait."
+     }
+    ],
+    "checkPoint": "You read each draft and press Send yourself."
+   },
+   {
+    "name": "Chasing payment",
+    "handsOn": null,
+    "around": "You keep track of unpaid invoices and write a reminder to each homeowner.",
+    "patterns": [
+     1,
+     8,
+     7
+    ],
+    "stays": false,
+    "level": 3,
+    "held": null,
+    "today": "You chase payment by message when you notice an invoice is unpaid.",
+    "withPath": "Your payment reminders, saved as a few polite texts in steps.",
+    "offerName": "Your payment reminders, saved",
+    "newWay": "You save three reminders as text shortcuts: a gentle one, a firmer one and a final notice. You pick the one that fits and add the amount and date. You decide who gets which.",
+    "builtOnce": "three saved payment reminders, from gentle to firm",
+    "steps": [
+     {
+      "app": "Claude",
+      "ref": null,
+      "feature": null,
+      "goal": "Ask Claude to write three reminders with blanks for [name], [amount] and [due date], in your tone.",
+      "clickPath": null
+     },
+     {
+      "app": "iPhone",
+      "ref": "phone_quick_replies",
+      "feature": null,
+      "goal": "Save each reminder as a text replacement shortcut.",
+      "clickPath": null
+     }
+    ],
+    "material": [
+     {
+      "label": "Gentle reminder",
+      "what": "A friendly note that the invoice is still open."
+     },
+     {
+      "label": "Firm reminder",
+      "what": "A clear note with the amount and due date."
+     },
+     {
+      "label": "Final notice",
+      "what": "A short, direct note on what happens next."
+     }
+    ],
+    "checkPoint": "You choose which reminder to use and check the name and amount before you send it."
+   },
+   {
+    "name": "Asking for reviews",
+    "handsOn": null,
+    "around": "You ask each happy customer for a review after the job and remember to do it.",
+    "patterns": [
+     1
+    ],
+    "stays": false,
+    "level": 3,
+    "held": null,
+    "today": "You ask for reviews when you think of it.",
+    "withPath": "Your review request, saved as one text you send after a paid job.",
+    "offerName": "Your review request, saved",
+    "newWay": "You save one short, friendly review request as a text shortcut with a blank for the review link. After a job is paid you type the code, add the name and send it.",
+    "builtOnce": "a saved review request text with a blank for your review link",
+    "steps": [
+     {
+      "app": "Claude",
+      "ref": null,
+      "feature": null,
+      "goal": "Ask Claude to write a short review request with blanks for [name] and [review link].",
+      "clickPath": null
+     },
+     {
+      "app": "iPhone",
+      "ref": "phone_quick_replies",
+      "feature": null,
+      "goal": "Save it as a text replacement shortcut.",
+      "clickPath": null
+     }
+    ],
+    "material": [
+     {
+      "label": "Review request text",
+      "what": "A short thank you with a request and a blank for the review link."
+     }
+    ],
+    "checkPoint": "You add the name and link and read it before you send it."
+   }
+  ],
+  "top": [
+   {
+    "name": "Quoting jobs",
+    "why": "You said it would save you the most time, and you write one about once a day."
+   },
+   {
+    "name": "Following up quotes",
+    "why": "Unanswered quotes are lost work, and Claude can find them in your Gmail and draft the nudges for you."
+   }
+  ]
+ },
+ "design3Links": {},
+ "screens3": {
+  "seeIt": {
+   "task": "Quoting jobs",
+   "intro": "This is your 200 amp panel quote rebuilt as the finished quote Claude hands back, with only the price, deposit and start date left for you to fill in.",
+   "result": "Quote for a 200 amp panel upgrade. Scope: upgrade to a 200 amp panel, attic runs, permit included. Price: $[price]. Deposit: 50%, $[deposit]. Start date: [start date]. Call me if the timing works."
+  },
+  "askMessage": null,
+  "workflows": [
+   {
+    "name": "Quoting jobs",
+    "read": "From now on you build the quote once, then reuse it. After a visit you talk or type a few rough notes and Claude gives you the finished quote in your wording, with gaps for the numbers. You keep control of the price, and you stop rewriting the same scope, permit line and deposit every day.",
+    "material": [
+     {
+      "label": "Quote assistant instructions",
+      "items": [
+       "You write quotes for me, a self employed electrician in Phoenix who works mostly on homes.",
+       "I will give you rough notes after a site visit, typed or spoken.",
+       "Turn the notes into a finished quote in the same wording as my template.",
+       "Always include these parts: the scope of work, the permit line, the price, the deposit and the start date.",
+       "Keep it short, plain and friendly, and end with: Call me if the timing works.",
+       "Never invent a price, deposit, date or detail I did not give. Leave a blank like [price] instead.",
+       "If something is missing from my notes, list what is missing after the quote and ask me."
+      ]
+     },
+     {
+      "label": "Quote template",
+      "items": [
+       "Quote for a 200 amp panel upgrade, attic runs, permit included.",
+       "Price: $[price]",
+       "Deposit: 50%, $[deposit]",
+       "Start date: [start date]",
+       "Call me if the timing works."
+      ]
+     },
+     {
+      "label": "Spoken notes prompt",
+      "items": [
+       "New quote notes. Use my quote template and my wording.",
+       "Job: [type of job]. Customer: [first name].",
+       "What I saw and what the job includes: [talk through it here].",
+       "Leave price, deposit and start date as blanks unless I say them."
+      ]
+     }
+    ],
+    "test": {
+     "tryOn": "Try it on three real jobs: your 200 amp panel upgrade, a recent job that was a different size, and a small job from this week.",
+     "good": "A finished quote in your wording with the scope, permit line, deposit and start date all present, and blanks only where you gave no number.",
+     "fixes": [
+      "Too long: Keep it to the same length as my panel quote.",
+      "Wrong wording: Use my template exactly and change only the job details.",
+      "Made up a number: Do not guess. Leave a blank for anything I did not say."
+     ]
+    },
+    "approval": "You read the quote and check the price, deposit, permit line and start date before you send it.",
+    "ifStops": "If Claude stops following your wording, open the quotes project, check the instructions are still there, and paste your template in again."
+   },
+   {
+    "name": "Following up quotes",
+    "read": "From now on Claude finds the quotes you sent that got no reply and drafts a short nudge for each one in your voice. You read each draft and send it yourself. Follow ups stop slipping, and you do not have to write them one by one.",
+    "material": [
+     {
+      "label": "Follow up draft",
+      "items": [
+       "Hi [first name], just checking in on the quote I sent for the [job]. Happy to answer any questions.",
+       "If the timing works, I can fit you in. Let me know what you think.",
+       "Thanks, [your name]"
+      ]
+     },
+     {
+      "label": "Follow up instruction",
+      "items": [
+       "Look in my Gmail for emails I sent that are quotes for electrical jobs.",
+       "Find the ones with no reply after [number of days] days.",
+       "For each one, draft a short, friendly nudge that mentions the job and the quote, in my voice.",
+       "Do not send anything. Leave every draft for me to read.",
+       "Do not change the price or the terms from the original quote."
+      ]
+     }
+    ],
+    "test": {
+     "tryOn": "Try it on three quotes you sent that have had no reply, ideally from different weeks.",
+     "good": "One short draft for each quote with no reply, naming the right job, in a tone that sounds like you, and nothing sent.",
+     "fixes": [
+      "Too pushy: Make it softer and shorter.",
+      "Wrong job named: Check the original quote and fix the job in the draft.",
+      "Missed a quote: Also check emails with the word quote or estimate in them."
+     ]
+    },
+    "approval": "You read each draft and press Send yourself.",
+    "ifStops": "If Claude cannot find your quotes, check that Gmail is still connected, then ask again and name one quote to start with."
+   }
+  ],
+  "safeUse": [
+   "You work for yourself, so you decide what goes into Claude.",
+   "Keep customer phone numbers, full addresses and payment details out of your notes when you can.",
+   "Connect only the Gmail account you use for work.",
+   "Read every quote and draft before it goes out, because you send it, not Claude."
+  ]
+ },
+ "checks3": [
+  {
+   "id": "three_patterns",
+   "pass": true,
+   "detail": "6 responsibilities, each with patterns from the ten"
+  },
+  {
+   "id": "three_refs_real",
+   "pass": true,
+   "detail": "Every card and recipe id exists"
+  },
+  {
+   "id": "three_links_vendor",
+   "pass": true,
+   "detail": "Every link is on the vendor's own site"
+  },
+  {
+   "id": "three_feature_named",
+   "pass": false,
+   "detail": "Paste in a few of your own past replies with no customer names and ask for a short list of the repli | Ask Claude to write three reminders with blanks for [name], [amount] and [due date], in your tone. | Ask Claude to write a short review request with blanks for [name] and [review link]."
+  },
+  {
+   "id": "three_no_click_without_link",
+   "pass": true,
+   "detail": "No menu path or button name outside a linked click path"
+  },
+  {
+   "id": "three_approval",
+   "pass": true,
+   "detail": "Every workflow has a point where she checks"
+  },
+  {
+   "id": "three_copy_rules",
+   "pass": true,
+   "detail": "No dashes, promised times, prices or percents"
+  },
+  {
+   "id": "three_levels",
+   "pass": true,
+   "detail": "Every level is 1 to 5, and level 1 means it stays hers"
+  },
+  {
+   "id": "three_starter_level",
+   "pass": false,
+   "detail": "Above level 3 for a Starter: Following up quotes (4)"
+  },
+  {
+   "id": "three_not_writing_help",
+   "pass": true,
+   "detail": "No map line at level 3 or higher reads like writing help"
+  },
+  {
+   "id": "three_top_two",
+   "pass": true,
+   "detail": "Top: Quoting jobs, Following up quotes; 2 workflows on her path"
+  }
+ ],
+ "design3Count": {
+  "responsibilities": 6,
+  "stays": 0,
+  "builtOnce": 6,
+  "patterns": {
+   "1": 5,
+   "2": 2,
+   "7": 2,
+   "8": 2,
+   "9": 1
+  },
+  "levels": {
+   "3": 5,
+   "4": 1
+  },
+  "steps": 12,
+  "checked": 9,
+  "unchecked": 3,
+  "linked": 0,
+  "noApp": 0,
+  "clickPathsShown": 0,
+  "clickPathsHidden": 0,
+  "apps": [
+   [
+    "Claude",
+    {
+     "steps": 3,
+     "linked": 0
+    }
+   ]
+  ],
+  "refs": [
+   "claude_project",
+   "saved_assistant",
+   "say_it_out_loud",
+   "phone_quick_replies",
+   "gmail_claude_follow_ups"
+  ]
+ }
+}

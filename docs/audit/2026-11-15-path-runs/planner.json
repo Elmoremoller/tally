@@ -1,0 +1,92 @@
+{
+  "promptVersion": "beginner-path-v1",
+  "model": "claude-sonnet-5-5",
+  "content": {
+    "version": 3,
+    "role": "You run your own event planning business, booking vendors, answering client inquiries and keeping guest lists for weddings and company events.",
+    "track": "builder",
+    "tool": "chatgpt",
+    "worksFor": "self",
+    "policy": null,
+    "device": "computer",
+    "apps": [
+      "any_chat",
+      "chatgpt",
+      "gmail",
+      "google_sheets"
+    ],
+    "skipped": [
+      "ready",
+      "about"
+    ],
+    "steps": [
+      {
+        "id": "task_1",
+        "kind": "workflow",
+        "task": "Vendor follow ups",
+        "title": "Your vendor follow ups, drafted from your inbox for your OK",
+        "recipe": "gmail_claude_follow_ups",
+        "read": "Your vendor follow ups now live in a chat with your Gmail connected. ChatGPT looks for the vendors who have gone quiet, drafts each nudge in your tone, and waits for your OK before anything goes out. You stop keeping a running list of who to chase in your head, and every follow up still gets your eyes before it is sent.",
+        "material": [
+          {
+            "label": "Instructions for your assistant",
+            "items": [
+              "I run my own event planning business. I book vendors like caterers, florists, photographers, rental companies and venues for weddings and company events. Look in my Gmail for emails where I asked a vendor a question or sent a request and they have not answered. Count an email as waiting when I sent the last message in the thread and [number] business days have passed. Skip threads where the vendor already replied, and skip anything marked as done. For each waiting email, write a short follow up in the same thread. Use a warm, direct tone, a few sentences long, with no pressure and no fake urgency. Mention the event date and the one thing I still need, but only if it appears in the thread. Never add details I did not give you, such as prices, dates or terms. For a first nudge, keep it friendly. For a second nudge after another [number] business days, be clearer about the deadline I give you. Give me back a list of the vendors you found, then one draft for each, and wait for my OK before anything is sent."
+            ]
+          },
+          {
+            "label": "Your follow up wording",
+            "items": [
+              "Hi [first name], I wanted to check in on my email from [day] about [what I asked]. We are planning for [event date], so I would love to hear back when you have a moment. Thank you, [my name]",
+              "Hi [first name], following up again on [what I asked] for [event date]. I need to confirm this by [deadline] so I can keep the rest of the plan moving. Could you let me know where things stand? If it is easier, a quick call works too. Thanks, [my name]"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "task_2",
+        "kind": "workflow",
+        "task": "Client inquiries",
+        "title": "Your client inquiries, drafted in your inbox",
+        "recipe": "gmail_help_me_write",
+        "read": "Your client inquiries get their first draft inside Gmail, right where the email arrives. Help me write turns a few words from you into a reply, and you read it and fix any detail before you send. You stop starting every answer from a blank page, and the reply still sounds like you.",
+        "material": [
+          {
+            "label": "Starting lines for replies",
+            "items": [
+              "Thank the client for their inquiry about [type of event] on [date]. Say I would love to hear more and ask for guest count, venue ideas and budget range.",
+              "Reply to a client asking if I am free on [date]. Say I will check my calendar and get back to them by [day]. Ask what time the event starts.",
+              "Reply to a client asking about my services. Briefly explain that I handle vendor booking, guest lists and day of planning. Offer a call on [day and time].",
+              "Reply to a client who wants to book. Thank them warmly and say the next step is [next step]. Ask for [what I need from them].",
+              "Reply to a client asking for a quote. Say I need a few details first: [details]. Say I will send a quote after that.",
+              "Politely decline an inquiry for [date] because I am already booked. Wish them well with their event and offer to point them to [another option].",
+              "Reply to a client who went quiet after my quote. Check in kindly, ask if they have questions, and say there is no rush."
+            ]
+          },
+          {
+            "label": "Notes on your tone",
+            "items": [
+              "If a draft sounds stiff or too formal, press Friendly. That is best for first replies to couples and for anyone who writes casually.",
+              "If a draft sounds too casual for a company event or a corporate client, press Formalize. Check that it still sounds like me and not like a form letter.",
+              "If a draft is long, press Shorten. Most of my replies should be a few sentences, with one clear question at the end.",
+              "If a draft makes a promise I did not give, such as a price, a date or a service, I delete that line before sending.",
+              "If a draft still sounds off after one button, I type a new starting line saying what is wrong and create it again."
+            ]
+          }
+        ]
+      },
+      {
+        "id": "end",
+        "kind": "end",
+        "safeUse": [
+          "Never type a client’s full name, home address, phone number or payment details into ChatGPT. Use brackets like [client] or [venue] instead.",
+          "Keep guest names, dietary needs and accessibility needs out of the chat unless you have removed anything that identifies a person.",
+          "Do not paste vendor contracts, bank details or invoice numbers into a chat.",
+          "Check every draft against your own calendar, quotes and contracts, because the draft can get a date or price wrong.",
+          "Read every follow up and reply before it goes out, and keep ChatGPT set to Always ask so nothing is sent without you."
+        ],
+        "askMessage": null
+      }
+    ]
+  }
+}

@@ -1,0 +1,759 @@
+{
+ "name": "beauty",
+ "group": "restricted employee",
+ "persona": {
+  "group": "restricted employee",
+  "bio": "Beauty advisor at a department store makeup counter, paid partly on commission. Makeovers and color matching, restocking testers, cleaning the counter, keeping her client book, texting her clients when new launches come in or there's a gift with purchase, hitting her sales goals, events on weekends. Texting clients and keeping the client book take the most time outside makeovers. She texts clients from her own iPhone. She tried an AI app once and didn't trust it. Her store restricts AI.",
+  "job": "Beauty advisor at a department store makeup counter, paid partly on commission.",
+  "level": "tried",
+  "device": "phone",
+  "phone": "iphone",
+  "canUse": "restricted",
+  "connect": null
+ },
+ "versions": {
+  "job": "beginner-job-v5",
+  "questions": "beginner-questions-v6",
+  "intake": "beginner-intake-v8",
+  "path": "beginner-path-v1"
+ },
+ "jobRead": {
+  "repeats": [
+   {
+    "label": "Doing customer makeovers",
+    "ai": false
+   },
+   {
+    "label": "Restocking the counter",
+    "ai": false
+   },
+   {
+    "label": "Writing follow up texts",
+    "ai": true
+   },
+   {
+    "label": "Booking appointments",
+    "ai": false
+   },
+   {
+    "label": "Planning promotions",
+    "ai": true
+   },
+   {
+    "label": "Tracking commission sales",
+    "ai": true
+   }
+  ],
+  "aiFallback": [
+   "Follow up text drafts",
+   "Product description rewrites",
+   "Monthly sales goal plans",
+   "Social media captions"
+  ],
+  "apps": [
+   "Salesforce",
+   "Square",
+   "Excel",
+   "Instagram",
+   "Google Calendar",
+   "Shopify"
+  ],
+  "aiUses": [
+   "Captions",
+   "Product descriptions",
+   "Follow up texts",
+   "Promotion ideas",
+   "Sales goal plans"
+  ],
+  "worksFor": "employer"
+ },
+ "jobReadFallback": false,
+ "asked": [
+  {
+   "id": "asked_1",
+   "title": "How do you usually start a follow up text?",
+   "kind": "many",
+   "choices": [
+    "Look up her notes",
+    "Check the client book",
+    "Copy an old text",
+    "Start from scratch",
+    "Ask a coworker"
+   ],
+   "hint": "Pick every one that fits."
+  }
+ ],
+ "screens": 8,
+ "worksForFromJob": "employer",
+ "answers": {
+  "job": "Beauty advisor at a department store makeup counter, paid partly on commission.",
+  "experience": "tried",
+  "qas": [
+   {
+    "id": "level",
+    "title": "Where are you with AI?",
+    "picked": [
+     "Tried it a few times"
+    ],
+    "text": null,
+    "shown": [
+     "Never used it",
+     "Tried it a few times",
+     "Use it some weeks",
+     "Use it most days"
+    ]
+   },
+   {
+    "id": "repeats",
+    "title": "What do you do over and over, every day or every week?",
+    "picked": [
+     "Doing customer makeovers",
+     "Restocking the counter",
+     "Writing follow up texts",
+     "Answering messages",
+     "Tracking commission sales"
+    ],
+    "text": null,
+    "shown": [
+     "Doing customer makeovers",
+     "Restocking the counter",
+     "Writing follow up texts",
+     "Booking appointments",
+     "Planning promotions",
+     "Tracking commission sales",
+     "Answering messages",
+     "Writing emails",
+     "Planning my week",
+     "Making lists"
+    ]
+   },
+   {
+    "id": "most",
+    "title": "Which would save you the most time if it got easier?",
+    "picked": [
+     "Writing follow up texts",
+     "Answering messages"
+    ],
+    "text": null,
+    "shown": [
+     "Doing customer makeovers",
+     "Restocking the counter",
+     "Writing follow up texts",
+     "Tracking commission sales",
+     "Answering messages"
+    ]
+   },
+   {
+    "id": "example",
+    "title": "Paste the last one you wrote, or what the last person asked you.",
+    "picked": [],
+    "text": "Hi! The Dior lip oil you liked is back in stock and I saved your shade. Want me to hold it until Saturday? Also gift with purchase starts this weekend 💕"
+   },
+   {
+    "id": "often",
+    "title": "How often do you do this?",
+    "picked": [
+     "Many times a day"
+    ],
+    "text": null,
+    "shown": [
+     "Many times a day",
+     "About once a day",
+     "A few times a week",
+     "Once a week or less"
+    ]
+   },
+   {
+    "id": "where",
+    "title": "Where does your work happen?",
+    "picked": [
+     "Text messages",
+     "Paper",
+     "In person"
+    ],
+    "text": "Mostly my iPhone texts and a paper client book. Store system",
+    "shown": [
+     "Salesforce",
+     "Square",
+     "Excel",
+     "Instagram",
+     "Google Calendar",
+     "Shopify",
+     "Text messages",
+     "Gmail",
+     "Outlook",
+     "Google Sheets",
+     "A work system",
+     "Paper",
+     "In person"
+    ]
+   },
+   {
+    "id": "device",
+    "title": "Do you work on a phone, a computer or both?",
+    "picked": [
+     "Phone only"
+    ],
+    "text": null,
+    "shown": [
+     "Phone only",
+     "Computer only",
+     "Both"
+    ]
+   },
+   {
+    "id": "asked_1",
+    "title": "How do you usually start a follow up text?",
+    "picked": [
+     "Check the client book",
+     "Copy an old text",
+     "Start from scratch"
+    ],
+    "text": "Usually I pull up her notes in the book and go from there.",
+    "shown": [
+     "Look up her notes",
+     "Check the client book",
+     "Copy an old text",
+     "Start from scratch",
+     "Ask a coworker"
+    ]
+   },
+   {
+    "id": "can_use",
+    "title": "Can you use AI for your work?",
+    "picked": [
+     "No, it’s restricted"
+    ],
+    "text": null,
+    "shown": [
+     "Yes",
+     "Not sure",
+     "No, it’s restricted",
+     "I work for myself"
+    ]
+   }
+  ],
+  "mostWanted": [
+   "Writing follow up texts",
+   "Answering messages"
+  ],
+  "worksFor": "employer",
+  "aiTools": [
+   "not_sure"
+  ],
+  "aiToolsOther": null,
+  "aiPolicy": "restricted",
+  "often": "many_a_day"
+ },
+ "intake": {
+  "role_summary": "You’re a beauty advisor at a department store makeup counter, doing makeovers, restocking, texting follow ups to clients and answering messages, partly paid on commission.",
+  "tasks": [
+   {
+    "name": "Follow up texts",
+    "ai": true,
+    "private": true,
+    "kind": "repeat_texts"
+   },
+   {
+    "name": "Answering client messages",
+    "ai": true,
+    "private": true,
+    "kind": "repeat_texts"
+   },
+   {
+    "name": "Customer makeovers",
+    "ai": false,
+    "private": false,
+    "kind": null
+   },
+   {
+    "name": "Restocking the counter",
+    "ai": false,
+    "private": false,
+    "kind": null
+   },
+   {
+    "name": "Tracking commission sales",
+    "ai": true,
+    "private": true,
+    "kind": "notes_to_table"
+   }
+  ],
+  "first_win": {
+   "task": "Follow up texts",
+   "intro": "You said follow up texts take the most time. Here is one for a client about a restock and a weekend offer, ready to send.",
+   "draft": "Hi! The lip oil you liked is back in stock, and I saved your shade for you. Would you like me to hold it for you? [offer details] starts [day], so come by and I can show you what’s included."
+  },
+  "first_step": "I’m a beauty advisor at a department store makeup counter, and I text clients to follow up after visits, restocks and promotions. Write a short, warm text in a friendly, upbeat tone, two to three sentences, that a store can send from a personal phone. Keep it casual, use one emoji at most, and end with a simple question that invites a reply. Here is what this one is about: [paste the client’s name, what they bought or liked, and the news to share].",
+  "map": [
+   {
+    "task": "Follow up texts",
+    "phrase": "follow up texts",
+    "today": "You write these many times a day, often starting from scratch or an old text.",
+    "withPath": "Each text starts from a draft you only need to check and personalize.",
+    "ai": true,
+    "private": true,
+    "kind": "repeat_texts"
+   },
+   {
+    "task": "Answering client messages",
+    "phrase": "client messages",
+    "today": "Messages come in all day, and each one needs a bit of thought.",
+    "withPath": "Replies start from a draft, so you spend your time on the personal touch.",
+    "ai": true,
+    "private": true,
+    "kind": "repeat_texts"
+   },
+   {
+    "task": "Customer makeovers",
+    "phrase": "makeovers",
+    "today": "Makeovers are hands on, face to face work at the counter.",
+    "withPath": "Makeovers stay yours, and AI doesn’t touch that part of your day.",
+    "ai": false,
+    "private": false,
+    "kind": null
+   },
+   {
+    "task": "Restocking the counter",
+    "phrase": "restocking",
+    "today": "Restocking happens by hand on the counter throughout your shift.",
+    "withPath": "Restocking stays hands on, and AI doesn’t change that part of your day.",
+    "ai": false,
+    "private": false,
+    "kind": null
+   },
+   {
+    "task": "Tracking commission sales",
+    "phrase": "commission sales",
+    "today": "You track your commission sales by hand in the book and store system.",
+    "withPath": "Your sales notes stay yours, and AI can help you tidy them into a clear summary.",
+    "ai": true,
+    "private": true,
+    "kind": "notes_to_table"
+   }
+  ],
+  "needs_follow_up": false,
+  "follow_up_question": null
+ },
+ "free": {
+  "firstWin": {
+   "task": "Follow up texts",
+   "intro": "You said follow up texts take the most time. Here is one for a client about a restock and a weekend offer, ready to send.",
+   "draft": "Hi! The lip oil you liked is back in stock, and I saved your shade for you. Would you like me to hold it for you? [offer details] starts [day], so come by and I can show you what’s included."
+  },
+  "firstStep": "I’m a beauty advisor at a department store makeup counter, and I text clients to follow up after visits, restocks and promotions. Write a short, warm text in a friendly, upbeat tone, two to three sentences, that a store can send from a personal phone. Keep it casual, use one emoji at most, and end with a simple question that invites a reply. Here is what this one is about: [paste the client’s name, what they bought or liked, and the news to share].",
+  "map": [
+   {
+    "task": "Follow up texts",
+    "phrase": "follow up texts",
+    "today": "You write these many times a day, often starting from scratch or an old text.",
+    "withPath": "For your follow up texts, your common replies are saved on your phone, each a few letters away.",
+    "ai": true,
+    "private": true,
+    "kind": "repeat_texts",
+    "level": 3,
+    "waits": false,
+    "recipe": "phone_quick_replies",
+    "held": null,
+    "askFirst": true
+   },
+   {
+    "task": "Answering client messages",
+    "phrase": "client messages",
+    "today": "Messages come in all day, and each one needs a bit of thought.",
+    "withPath": "For your client messages, your common replies are saved on your phone, each a few letters away.",
+    "ai": true,
+    "private": true,
+    "kind": "repeat_texts",
+    "level": 3,
+    "waits": false,
+    "recipe": "phone_quick_replies",
+    "held": null,
+    "askFirst": true
+   },
+   {
+    "task": "Customer makeovers",
+    "phrase": "makeovers",
+    "today": "Makeovers are hands on, face to face work at the counter.",
+    "withPath": "Makeovers stay yours, and AI doesn’t touch that part of your day.",
+    "ai": false,
+    "private": false,
+    "kind": null,
+    "level": 1,
+    "waits": false,
+    "recipe": null,
+    "held": null,
+    "askFirst": false
+   },
+   {
+    "task": "Restocking the counter",
+    "phrase": "restocking",
+    "today": "Restocking happens by hand on the counter throughout your shift.",
+    "withPath": "Restocking stays hands on, and AI doesn’t change that part of your day.",
+    "ai": false,
+    "private": false,
+    "kind": null,
+    "level": 1,
+    "waits": false,
+    "recipe": null,
+    "held": null,
+    "askFirst": false
+   },
+   {
+    "task": "Tracking commission sales",
+    "phrase": "commission sales",
+    "today": "You track your commission sales by hand in the book and store system.",
+    "withPath": "Your sales notes stay yours, and AI can help you tidy them into a clear summary.",
+    "ai": true,
+    "private": true,
+    "kind": "notes_to_table",
+    "level": null,
+    "waits": true,
+    "recipe": null,
+    "held": null,
+    "askFirst": false
+   }
+  ],
+  "setups": [
+   "Your follow up texts, saved once on your phone",
+   "Your client messages, saved once on your phone",
+   "The message to ask what’s allowed"
+  ],
+  "prep": [
+   "Get Claude ready on your phone",
+   "Teach Claude who you are"
+  ],
+  "freePlan": true,
+  "tool": "claude",
+  "track": "starter"
+ },
+ "who": {
+  "track": "starter",
+  "canUse": "restricted",
+  "connect": null,
+  "places": [
+   "Text messages",
+   "Paper",
+   "In person",
+   "Mostly my iPhone texts and a paper client book. Store system"
+  ],
+  "device": "phone",
+  "aiTools": [
+   "not_sure"
+  ]
+ },
+ "outline": [
+  "ready:ready",
+  "about:about",
+  "task_1:workflow(phone_quick_replies)",
+  "task_2:extra(phone_quick_replies)",
+  "end:end"
+ ],
+ "path": {
+  "version": 3,
+  "role": "You’re a beauty advisor at a department store makeup counter, doing makeovers, restocking, texting follow ups to clients and answering messages, partly paid on commission.",
+  "track": "starter",
+  "tool": "claude",
+  "worksFor": "employer",
+  "policy": "restricted",
+  "device": "phone",
+  "apps": [
+   "any_chat",
+   "claude",
+   "iphone",
+   "gboard",
+   "samsung_keyboard"
+  ],
+  "skipped": [],
+  "steps": [
+   {
+    "id": "ready",
+    "kind": "ready",
+    "card": "claude_get_started",
+    "firstStep": "I’m a beauty advisor at a department store makeup counter, and I text clients to follow up after visits, restocks and promotions. Write a short, warm text in a friendly, upbeat tone, two to three sentences, that a store can send from a personal phone. Keep it casual, use one emoji at most, and end with a simple question that invites a reply. Here is what this one is about: [paste the client’s name, what they bought or liked, and the news to share]."
+   },
+   {
+    "id": "about",
+    "kind": "about",
+    "card": "claude_about_you",
+    "note": "I am a beauty advisor at a department store makeup counter. I do makeovers, restock, and text my clients to follow up and answer their messages. I write to clients in a warm, short, friendly way, like a real person at the counter, and one or two sentences is usually enough. I never want you to add details I did not give you, like product facts, prices, offers, or what a client said. If something is missing, leave a square bracket for me to fill in. Give me plain text I can read, change, and send myself."
+   },
+   {
+    "id": "task_1",
+    "kind": "workflow",
+    "task": "Follow up texts",
+    "title": "Your follow up texts, saved once on your phone",
+    "recipe": "phone_quick_replies",
+    "read": "Your replies live on your phone’s keyboard, each a few letters away. You still read each one and change the name or the day before you send it. That beats starting from scratch or copying an old text, because every reply already sounds like you and fits your counter.",
+    "material": [
+     {
+      "label": "Your replies",
+      "items": [
+       "Hi [first name]! The [product] you liked is back in stock and I saved your shade. Want me to hold it until [day]?",
+       "Hi [first name], it was so good seeing you at the counter. How is the [product] working for you? I’m happy to help with anything you need.",
+       "Hi [first name], [current offer] starts [day]. I’d love to set aside [product] for you before then. Want me to?",
+       "Hi [first name], I thought of you when [new product] arrived. Want to stop by on [day] and try it?",
+       "Hi [first name], your [product] may be close to needing a refill. Want me to set one aside in [shade]?",
+       "Hi [first name], just checking in after your makeover on [day]. Let me know if you’d like the steps for the look written down."
+      ]
+     },
+     {
+      "label": "Your shortcuts",
+      "items": [
+       "bkst",
+       "chkn",
+       "ofrz",
+       "nwpd",
+       "rfll",
+       "mkov"
+      ]
+     }
+    ]
+   },
+   {
+    "id": "task_2",
+    "kind": "extra",
+    "task": "Answering client messages",
+    "title": "Your client messages, saved once on your phone",
+    "recipe": "phone_quick_replies",
+    "sameAs": "task_1",
+    "read": "Answering client messages is added to the setup you made in the follow up texts step. Your quick answers sit on the same keyboard, so each message gets a reply that sounds like you.",
+    "material": [
+     {
+      "label": "Your replies",
+      "items": [
+       "Hi [first name], thanks for your message! Yes, we have [product] in [shade]. Want me to hold it for you until [day]?",
+       "Hi [first name], I’m with another client right now. I’ll write back properly as soon as I’m free.",
+       "Hi [first name], I’m not sure that’s in stock. Let me check and I’ll get back to you by [day].",
+       "Hi [first name], I’m at the counter [days and hours]. Come by any time and I’ll take care of you.",
+       "Hi [first name], I’d suggest [product] for that. Come in and I’ll show you how it looks on you before you decide.",
+       "Hi [first name], thanks for letting me know. I’ll add it to your notes so I remember for next time."
+      ]
+     },
+     {
+      "label": "Your shortcuts",
+      "items": [
+       "qhld",
+       "qbzy",
+       "qchk",
+       "qhrz",
+       "qsgg",
+       "qnts"
+      ]
+     }
+    ]
+   },
+   {
+    "id": "end",
+    "kind": "end",
+    "safeUse": [
+     "Never type a client’s full name, phone number, address, or purchase history into a chat tool. Use square brackets and fill them in yourself.",
+     "Leave out anything private from your paper client book, like skin concerns, allergies, or personal notes about a client.",
+     "Do not paste store system details, sales numbers, or commission figures into a chat tool.",
+     "Only check product facts, offers, and stock against your store’s own sources, never from a chat tool’s answer.",
+     "Read every text on your screen and change the brackets before you send it.",
+     "Check with your manager on which tools are approved before you use any AI at work."
+    ],
+    "askMessage": "Hi [manager’s name], I’d like to know which AI tools, if any, are approved for use at the counter, and what I’m allowed to use them for. I’m thinking of using one to help me write follow up texts to clients and to answer client messages faster, with no client names or private details typed in. I’d also like to know whether using AI to track my commission sales is allowed, and I will not do that until I hear from you. Could you let me know, or point me to the right person in IT?"
+   }
+  ]
+ },
+ "design": [
+  {
+   "task": "Follow up texts",
+   "today": "You write follow up texts many times a day, usually after pulling up the client's notes in your paper book. You often start from scratch or copy an old text.",
+   "newWay": "Your company restricts AI, so AI does not touch this work. Instead you build your own bank of follow up texts by hand, written once in your own voice and kept in your phone's text replacement list, so each one is a few letters away. You still read the client book and fill in her name, shade and date yourself. Every text stays fully yours, and you stop rewriting the same message from scratch.",
+   "steps": [
+    {
+     "app": null,
+     "ref": null,
+     "goal": "Go through your recent follow up texts and pick the five or six kinds you send most, like restock alerts, hold requests, gift with purchase news and thank you after a makeover."
+    },
+    {
+     "app": null,
+     "ref": null,
+     "goal": "Write one version of each by hand in your own voice, with clear gaps for her name, product, shade and day."
+    },
+    {
+     "app": "Your iPhone's keyboard settings",
+     "ref": null,
+     "goal": "Save each text so it is a few letters away when you need it."
+    },
+    {
+     "app": "Your paper client book",
+     "ref": null,
+     "goal": "Add a short note next to each client on which kind of follow up suits her, so you pick the right one quickly."
+    }
+   ],
+   "material": [
+    {
+     "label": "Follow up text bank",
+     "what": "Five or six texts you write yourself, each with gaps for name, product, shade and day."
+    },
+    {
+     "label": "Shortcut list",
+     "what": "A short list of the letters you type for each saved text, kept in your book."
+    }
+   ],
+   "checkPoint": "You read each text, fill every gap and check the shade, product and day before you press send."
+  },
+  {
+   "task": "Answering client messages",
+   "today": "Messages come in all day, and each one needs a bit of thought. Your work happens in iPhone texts, your paper client book and the store system.",
+   "newWay": "Your company restricts AI, so AI is not used on client messages or any client details. You prepare your own short answers to the questions that come up most, such as stock, holds, shades and offers, and keep them a few letters away on your phone. Anything that needs real thought you still answer yourself, with your book beside you. Common questions get answered quickly, and your attention goes to the messages that need you.",
+   "steps": [
+    {
+     "app": null,
+     "ref": null,
+     "goal": "List the ten questions clients ask you most often, such as stock, holds, shade matches and gift with purchase dates."
+    },
+    {
+     "app": null,
+     "ref": null,
+     "goal": "Write a short answer to each one by hand in your own voice, leaving gaps for anything that changes."
+    },
+    {
+     "app": "Your iPhone's keyboard settings",
+     "ref": null,
+     "goal": "Save the ten answers so each one is a few letters away."
+    },
+    {
+     "app": null,
+     "ref": null,
+     "goal": "Mark which question types always need a personal answer from you, so you never use a saved reply for those."
+    }
+   ],
+   "material": [
+    {
+     "label": "Top ten questions",
+     "what": "The questions clients ask most, in your own words."
+    },
+    {
+     "label": "Saved answers",
+     "what": "A short handwritten reply for each question, with gaps for details that change."
+    },
+    {
+     "label": "Personal answer list",
+     "what": "A note of the message types you always answer by hand."
+    }
+   ],
+   "checkPoint": "You read every reply, fill the gaps and check stock and dates in the store system before you send it."
+  }
+ ],
+ "checks": [
+  {
+   "id": "screens",
+   "pass": true,
+   "detail": "8 screens, at most 9 for a starter"
+  },
+  {
+   "id": "levels_in_code",
+   "pass": true,
+   "detail": "Every row has a level or waits"
+  },
+  {
+   "id": "level3_not_writing_help",
+   "pass": true,
+   "detail": "No line at level 3 or higher reads like writing help"
+  },
+  {
+   "id": "path_line_from_recipe",
+   "pass": true,
+   "detail": "Every line at level 3 or higher is its recipe's"
+  },
+  {
+   "id": "no_connect_without_ok",
+   "pass": true,
+   "detail": "No row connects a work app"
+  },
+  {
+   "id": "restricted_waits",
+   "pass": true,
+   "detail": "Every AI task waits or needs no AI at work"
+  },
+  {
+   "id": "path_written",
+   "pass": true,
+   "detail": "5 steps"
+  },
+  {
+   "id": "workflow_parts",
+   "pass": true,
+   "detail": "2 workflows, each with a test, an approval point and a cost line"
+  },
+  {
+   "id": "setup_from_recipe_or_card",
+   "pass": true,
+   "detail": "card claude_get_started, card claude_about_you, recipe phone_quick_replies, recipe phone_quick_replies"
+  },
+  {
+   "id": "no_click_paths_from_model",
+   "pass": true,
+   "detail": "The model wrote no menu paths or button names"
+  },
+  {
+   "id": "copy_rules",
+   "pass": true,
+   "detail": "No dashes, promised times, prices or percents"
+  },
+  {
+   "id": "offer_matches_path",
+   "pass": true,
+   "detail": "Offer names 2, path has 2 workflows, 2 match by name"
+  }
+ ],
+ "recipes": {
+  "total": 5,
+  "aiTasks": 3,
+  "withRecipe": [
+   {
+    "task": "Follow up texts",
+    "recipe": "phone_quick_replies",
+    "level": 3
+   },
+   {
+    "task": "Answering client messages",
+    "recipe": "phone_quick_replies",
+    "level": 3
+   }
+  ],
+  "without": [
+   {
+    "task": "Customer makeovers",
+    "level": 1,
+    "waits": false
+   },
+   {
+    "task": "Restocking the counter",
+    "level": 1,
+    "waits": false
+   },
+   {
+    "task": "Tracking commission sales",
+    "level": null,
+    "waits": true
+   }
+  ],
+  "noRecipe": false,
+  "mostlyAssistant": false
+ },
+ "designCount": {
+  "steps": 8,
+  "checked": 0,
+  "unchecked": 3,
+  "noApp": 5,
+  "badRefs": [],
+  "clickPaths": [],
+  "apps": [
+   [
+    "Your iPhone's keyboard settings",
+    2
+   ],
+   [
+    "Your paper client book",
+    1
+   ]
+  ],
+  "refs": []
+ }
+}
