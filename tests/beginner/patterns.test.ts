@@ -4,7 +4,7 @@ import { levelCopy, offerCopy, firstWinCopy } from "../../lib/beginner/copy";
 import { endingFor, freeResultFor, offerTasks, orderMap, piecesFor, repeatsIn, SECOND_ENDINGS, singularLast, smootherCount, thingFor, usesAiTool, withoutDoubles, workflowName } from "../../lib/beginner/free-result";
 import { recipes } from "../../lib/beginner/recipes";
 import { levelFor, withLevels, type LevelTask, type Who } from "../../lib/beginner/levels";
-import { PATTERN_IDS, PATTERN_WORKFLOWS, patternOf, placeFor, emailAppOf, type PatternId } from "../../lib/beginner/patterns";
+import { PATTERN_IDS, PATTERN_WORKFLOWS, patternOf, placeFor, emailAppOf, suiteOf, type PatternId } from "../../lib/beginner/patterns";
 import type { QA } from "../../lib/beginner/quiz";
 import type { MapLine } from "../../lib/beginner/types";
 import { DASH } from "../../scripts/persona-checks";
@@ -93,7 +93,7 @@ test("her offer names lunch and restocking, with the pieces in her own words, an
   assert.deepEqual(free.setups, ["Your lunch orders, collected and counted", "Your fridge restocks, counted against your usual amounts"]);
   assert.deepEqual(free.offer?.[0].pieces, [
     "Your Friday lunch order form, written for you",
-    "Your Friday lunch order sheet, counted for you",
+    "Your Friday lunch order counts, ready in your form",
     "Your Friday lunch order email, ready to send",
   ]);
   assert.deepEqual(free.offer?.[1].pieces, ["Your fridge restock list, with the usual amounts", "Your fridge restock order, ready to send"]);
@@ -212,7 +212,7 @@ test("thingFor keeps her words and turns down anything else", () => {
 });
 
 test("every offer ending, piece and new line follows the copy rules", () => {
-  const ctx = { thing: "lunch order", tool: "claude" as const, emailApp: "Outlook" as const, onPhone: false };
+  const ctx = { thing: "lunch order", tool: "claude" as const, emailApp: "Outlook" as const, onPhone: false, suite: "microsoft" as const };
   const lines = [
     ...PATTERN_IDS.flatMap((p) => [
       PATTERN_WORKFLOWS[p].offer,
@@ -276,7 +276,7 @@ test("the offer line says plainly that Tally builds her top two, and promises no
 });
 
 test("events, onboarding and inspections get a tracker on a computer and a dated checklist on a phone", () => {
-  const ctx = { thing: "new hire", tool: "claude" as const, emailApp: null, onPhone: false };
+  const ctx = { thing: "new hire", tool: "claude" as const, emailApp: null, onPhone: false, suite: "microsoft" as const };
   assert.deepEqual(PATTERN_WORKFLOWS[5].pieces(ctx), [
     "Your new hire tracker, one row for each new hire",
     "Your new hire steps, each dated from the start day",
@@ -326,7 +326,7 @@ test("no pattern's own direction line sounds automatic or promises speed", async
 });
 
 test("a tracker for a thing ending in ing says one row each time", () => {
-  const ctx = { thing: "vendor scheduling", tool: "claude" as const, emailApp: null, onPhone: false };
+  const ctx = { thing: "vendor scheduling", tool: "claude" as const, emailApp: null, onPhone: false, suite: "microsoft" as const };
   assert.equal(PATTERN_WORKFLOWS[5].pieces(ctx)[0], "Your vendor scheduling tracker, one row each time");
 });
 
@@ -361,4 +361,18 @@ test("whatever word of an ending her words hold, the name never repeats itself",
       }
     }
   }
+});
+
+test("lunch in Microsoft Forms has no sheet, and a Google path keeps the sheet until Karl confirms the Summary counts", () => {
+  assert.equal(suiteOf(["Outlook", "Excel", "Teams"]), "microsoft");
+  assert.equal(suiteOf(["Gmail", "Google Sheets"]), "google");
+  assert.equal(suiteOf(["Gmail", "Excel"]), "microsoft", "a Microsoft app wins, Microsoft first");
+  assert.equal(suiteOf(["Paper", "In person"]), "microsoft", "nothing named, Microsoft first");
+  const ctx = { thing: "lunch order", tool: "claude" as const, emailApp: null, onPhone: false };
+  assert.deepEqual(PATTERN_WORKFLOWS[4].pieces({ ...ctx, suite: "microsoft" }), [
+    "Your lunch order form, written for you",
+    "Your lunch order counts, ready in your form",
+    "Your lunch order email, ready to send",
+  ]);
+  assert.ok(PATTERN_WORKFLOWS[4].pieces({ ...ctx, suite: "google" }).includes("Your lunch order sheet, counted for you"));
 });

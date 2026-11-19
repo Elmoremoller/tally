@@ -82,6 +82,8 @@ export type PieceContext = {
   emailApp: "Outlook" | "Gmail" | null;
   /** The workflow is set up on her phone. */
   onPhone: boolean;
+  /** Microsoft or Google, for the apps her form and sheet live in. See suiteOf. */
+  suite: Suite;
 };
 
 export type PatternWorkflow = {
@@ -138,9 +140,11 @@ export const PATTERN_WORKFLOWS: Record<PatternId, PatternWorkflow> = {
     usesAi: false,
     where: "suite",
     offer: "collected and counted",
-    pieces: ({ thing }) => [
+    // Microsoft Forms counts each choice on its results page, so a Microsoft path has no sheet (Karl, 2026-11-16). A
+    // Google path keeps the sheet until Karl confirms that the Summary tab shows a count for each choice.
+    pieces: ({ thing, suite }) => [
       `Your ${thing} form, written for you`,
-      `Your ${thing} sheet, counted for you`,
+      suite === "google" ? `Your ${thing} sheet, counted for you` : `Your ${thing} counts, ready in your form`,
       `Your ${thing} email, ready to send`,
     ],
   }),
@@ -228,6 +232,19 @@ export const PREVIEW_GUIDE: Record<PatternId, string> = {
   9: "the columns of her sheet, in order, with one example row of blanks",
   10: "the instructions for her assistant, saying it answers only from her documents",
 };
+
+/** The apps a form or sheet workflow is set up in. */
+export type Suite = "microsoft" | "google";
+
+/**
+ * Microsoft or Google, from where her work happens: Google only when she names a Google app and no Microsoft one,
+ * otherwise Microsoft, which comes first (DIRECTION.md, section 8).
+ */
+export function suiteOf(places: readonly string[]): Suite {
+  const microsoft = places.some((p) => /\b(outlook|excel|teams|microsoft|word|onedrive|sharepoint|office 365|microsoft 365)\b/i.test(p));
+  const google = places.some((p) => /\b(gmail|google|sheets)\b/i.test(p));
+  return google && !microsoft ? "google" : "microsoft";
+}
 
 /** Her email app, from where her work happens: Outlook before Gmail (DIRECTION.md, section 8). */
 export function emailAppOf(places: readonly string[]): "Outlook" | "Gmail" | null {

@@ -1,0 +1,1195 @@
+{
+  "name": "hr",
+  "input": {
+    "job": "HR coordinator at a logistics company, about 300 employees.",
+    "qas": [
+      {
+        "id": "level",
+        "title": "Where are you with AI?",
+        "picked": [
+          "Tried it a few times"
+        ],
+        "text": null,
+        "shown": [
+          "Never used it",
+          "Tried it a few times",
+          "Use it some weeks",
+          "Use it most days"
+        ]
+      },
+      {
+        "id": "repeats",
+        "title": "What do you do over and over, every day or every week?",
+        "picked": [
+          "Onboarding new hires",
+          "Leave requests",
+          "Benefits enrollment",
+          "Employee records",
+          "Interview scheduling"
+        ],
+        "text": null,
+        "shown": [
+          "Onboarding new hires",
+          "Payroll questions",
+          "Leave requests",
+          "Benefits enrollment",
+          "Employee records",
+          "Interview scheduling",
+          "Policy updates",
+          "Training reminders"
+        ]
+      },
+      {
+        "id": "most",
+        "title": "Which would save you the most time if it got easier?",
+        "picked": [
+          "Onboarding new hires",
+          "Benefits enrollment"
+        ],
+        "text": null,
+        "shown": [
+          "Onboarding new hires",
+          "Leave requests",
+          "Benefits enrollment",
+          "Employee records",
+          "Interview scheduling"
+        ]
+      },
+      {
+        "id": "often",
+        "title": "How often do you do this?",
+        "picked": [
+          "A few times a week"
+        ],
+        "text": null,
+        "shown": [
+          "Many times a day",
+          "About once a day",
+          "A few times a week",
+          "Once a week or less"
+        ]
+      },
+      {
+        "id": "where",
+        "title": "Where does your work happen?",
+        "picked": [
+          "Microsoft Excel",
+          "Outlook",
+          "A work system"
+        ],
+        "text": null,
+        "shown": [
+          "Workday",
+          "Microsoft Excel",
+          "Outlook",
+          "Microsoft Teams",
+          "ADP",
+          "DocuSign",
+          "SharePoint",
+          "Google Sheets",
+          "Text messages",
+          "Gmail",
+          "Instagram",
+          "A work system",
+          "Paper",
+          "In person"
+        ]
+      },
+      {
+        "id": "device",
+        "title": "Do you work on a phone, a computer or both?",
+        "picked": [
+          "Computer only"
+        ],
+        "text": null,
+        "shown": [
+          "Phone only",
+          "Computer only",
+          "Both"
+        ]
+      },
+      {
+        "id": "can_use",
+        "title": "Can you use AI for your work?",
+        "picked": [
+          "Not sure"
+        ],
+        "text": null,
+        "shown": [
+          "Yes",
+          "Not sure",
+          "No, it’s restricted",
+          "I work for myself"
+        ]
+      },
+      {
+        "id": "connect",
+        "title": "Would your company let you link your work email to an AI tool?",
+        "picked": [
+          "Not sure"
+        ],
+        "text": null,
+        "shown": [
+          "Yes",
+          "No",
+          "Not sure"
+        ]
+      }
+    ],
+    "mostWanted": [
+      "Onboarding new hires",
+      "Benefits enrollment"
+    ],
+    "role": "You’re the HR coordinator for about 300 people at a logistics company, keeping onboarding, benefits, leave and records running smoothly.",
+    "worksFor": "employer",
+    "experience": "tried",
+    "aiTools": [
+      "not_sure"
+    ],
+    "aiPolicy": "no_idea",
+    "map": [
+      {
+        "task": "Onboarding new hires",
+        "phrase": null,
+        "thing": "new hire",
+        "today": "You onboard new hires a few times a week, all on your own.",
+        "withPath": "New hire steps run from one checklist you follow each time.",
+        "ai": true,
+        "private": false,
+        "kind": "repeat_emails",
+        "patterns": [
+          5,
+          1
+        ],
+        "level": 3,
+        "waits": false,
+        "recipe": null,
+        "held": null,
+        "askFirst": false,
+        "workflow": "pattern_5",
+        "stays": null
+      },
+      {
+        "task": "Benefits enrollment",
+        "phrase": null,
+        "thing": "benefits enrollment",
+        "today": "You answer benefits enrollment questions as they come in, one by one.",
+        "withPath": "Benefits questions collected in one place with saved replies ready.",
+        "ai": true,
+        "private": false,
+        "kind": "repeat_emails",
+        "patterns": [
+          6,
+          1
+        ],
+        "level": 3,
+        "waits": false,
+        "recipe": null,
+        "held": null,
+        "askFirst": false,
+        "workflow": "pattern_6",
+        "stays": null
+      },
+      {
+        "task": "Leave requests",
+        "phrase": "leave requests",
+        "thing": "leave request",
+        "today": "Leave requests reach you one at a time from employees.",
+        "withPath": "Leave requests collected in one place for you to review.",
+        "ai": true,
+        "private": false,
+        "kind": null,
+        "patterns": [
+          6
+        ],
+        "level": 3,
+        "waits": false,
+        "recipe": null,
+        "held": null,
+        "askFirst": false,
+        "workflow": "pattern_6",
+        "stays": null
+      },
+      {
+        "task": "Interview scheduling",
+        "phrase": null,
+        "thing": "interview",
+        "today": "You schedule interviews by email, one candidate at a time.",
+        "withPath": "Interview emails you send again and again, ready to reuse.",
+        "ai": true,
+        "private": false,
+        "kind": "repeat_emails",
+        "patterns": [
+          1
+        ],
+        "level": 3,
+        "waits": false,
+        "recipe": null,
+        "held": null,
+        "askFirst": false,
+        "workflow": "pattern_1",
+        "stays": null
+      },
+      {
+        "task": "Employee records",
+        "phrase": "employee records",
+        "thing": "employee record",
+        "today": "You keep employee records up to date in your own systems.",
+        "withPath": "This stays yours.",
+        "ai": false,
+        "private": true,
+        "kind": null,
+        "patterns": [],
+        "level": 1,
+        "waits": false,
+        "recipe": null,
+        "held": null,
+        "askFirst": false,
+        "workflow": null,
+        "stays": "private"
+      }
+    ],
+    "top": "Onboarding new hires",
+    "track": "starter",
+    "tool": "claude",
+    "device": "computer",
+    "apps": [
+      "any_chat",
+      "claude"
+    ],
+    "firstStep": null
+  },
+  "path": {
+    "version": 4,
+    "role": "You’re the HR coordinator for about 300 people at a logistics company, keeping onboarding, benefits, leave and records running smoothly.",
+    "track": "starter",
+    "tool": "claude",
+    "worksFor": "employer",
+    "policy": "no_idea",
+    "device": "computer",
+    "places": [
+      "Microsoft Excel",
+      "Outlook",
+      "A work system"
+    ],
+    "apps": [
+      "any_chat",
+      "claude"
+    ],
+    "map": [
+      {
+        "task": "Onboarding new hires",
+        "phrase": null,
+        "thing": "new hire",
+        "today": "You onboard new hires a few times a week, all on your own.",
+        "withPath": "New hire steps run from one checklist you follow each time.",
+        "ai": true,
+        "private": false,
+        "kind": "repeat_emails",
+        "patterns": [
+          5,
+          1
+        ],
+        "level": 3,
+        "waits": false,
+        "recipe": null,
+        "held": null,
+        "askFirst": false,
+        "workflow": "pattern_5",
+        "stays": null
+      },
+      {
+        "task": "Benefits enrollment",
+        "phrase": null,
+        "thing": "benefits enrollment",
+        "today": "You answer benefits enrollment questions as they come in, one by one.",
+        "withPath": "Benefits questions collected in one place with saved replies ready.",
+        "ai": true,
+        "private": false,
+        "kind": "repeat_emails",
+        "patterns": [
+          6,
+          1
+        ],
+        "level": 3,
+        "waits": false,
+        "recipe": null,
+        "held": null,
+        "askFirst": false,
+        "workflow": "pattern_6",
+        "stays": null
+      },
+      {
+        "task": "Leave requests",
+        "phrase": "leave requests",
+        "thing": "leave request",
+        "today": "Leave requests reach you one at a time from employees.",
+        "withPath": "Leave requests collected in one place for you to review.",
+        "ai": true,
+        "private": false,
+        "kind": null,
+        "patterns": [
+          6
+        ],
+        "level": 3,
+        "waits": false,
+        "recipe": null,
+        "held": null,
+        "askFirst": false,
+        "workflow": "pattern_6",
+        "stays": null
+      },
+      {
+        "task": "Interview scheduling",
+        "phrase": null,
+        "thing": "interview",
+        "today": "You schedule interviews by email, one candidate at a time.",
+        "withPath": "Interview emails you send again and again, ready to reuse.",
+        "ai": true,
+        "private": false,
+        "kind": "repeat_emails",
+        "patterns": [
+          1
+        ],
+        "level": 3,
+        "waits": false,
+        "recipe": null,
+        "held": null,
+        "askFirst": false,
+        "workflow": "pattern_1",
+        "stays": null
+      },
+      {
+        "task": "Employee records",
+        "phrase": "employee records",
+        "thing": "employee record",
+        "today": "You keep employee records up to date in your own systems.",
+        "withPath": "This stays yours.",
+        "ai": false,
+        "private": true,
+        "kind": null,
+        "patterns": [],
+        "level": 1,
+        "waits": false,
+        "recipe": null,
+        "held": null,
+        "askFirst": false,
+        "workflow": null,
+        "stays": "private"
+      }
+    ],
+    "confirmed": true,
+    "slots": [
+      {
+        "id": "task_1",
+        "task": "Onboarding new hires",
+        "answers": [
+          {
+            "id": "start",
+            "picked": [
+              "start_day"
+            ],
+            "text": null
+          },
+          {
+            "id": "steps",
+            "picked": [
+              "many"
+            ],
+            "text": null
+          },
+          {
+            "id": "together",
+            "picked": [
+              "few"
+            ],
+            "text": null
+          },
+          {
+            "id": "kept",
+            "picked": [
+              "sheet"
+            ],
+            "text": null
+          },
+          {
+            "id": "example",
+            "picked": [],
+            "text": "Offer accepted, so send the offer letter and welcome email. Set up the Outlook calendar invites for the first-week meetings. Book the interviews and orientation slots. Put the new hire in the onboarding checklist sheet and tick off each item. Confirm the laptop and badge request. Send the benefits and leave FAQ link. Check the records are updated in the HR system before the start day."
+          }
+        ],
+        "design": {
+          "read": "From now on, each new hire is one row in a single tracker, and every step is dated from the start day for you. You no longer work out dates by hand or scan a checklist for what is late. The tracker shows the next date due in each row and marks it Due once that day has come, so you can see at a glance which of your new hires needs you today.",
+          "material": [
+            {
+              "label": "Your new hire tracker",
+              "items": [
+                "Column A: New hire",
+                "Column B: Start day",
+                "Column C: Offer letter and welcome email",
+                "Column D: Calendar invites for first week",
+                "Column E: Interviews and orientation booked",
+                "Column F: Laptop and badge confirmed",
+                "Column G: Benefits and leave FAQ sent",
+                "Column H: HR system records checked",
+                "Column I: Next due",
+                "Column J: Status"
+              ]
+            },
+            {
+              "label": "Your new hire step dates",
+              "items": [
+                "C2: =B2-14",
+                "D2: =B2-7",
+                "E2: =B2-7",
+                "F2: =B2-5",
+                "G2: =B2-3",
+                "H2: =B2-1"
+              ]
+            },
+            {
+              "label": "Your next due formulas",
+              "items": [
+                "I2: =IF(COUNT(C2:H2)=0,\"All done\",MIN(C2:H2))",
+                "J2: =IF(AND(I2<>\"\",ISNUMBER(I2),I2<=TODAY()),\"Due\",\"\")"
+              ]
+            },
+            {
+              "label": "Your due date highlight",
+              "items": [
+                "=AND(ISNUMBER(I2),I2<=TODAY())"
+              ]
+            }
+          ],
+          "steps": [
+            {
+              "use": "excel_days_after",
+              "say": "Set up the tracker with one row for each new hire, and date every step from the start day. Tally has written the columns and the day counts, which you can change to match how you work.",
+              "piece": 2,
+              "when": "once"
+            },
+            {
+              "use": "excel_next_due",
+              "say": "Add the Next due column and the Status column so each row shows its earliest step still to do.",
+              "piece": 3,
+              "when": "once"
+            },
+            {
+              "use": "excel_due_highlight",
+              "say": "Make the Next due dates stand out once the day has come.",
+              "piece": 4,
+              "when": "once"
+            },
+            {
+              "use": "goal",
+              "say": "When you get a new offer acceptance, add a row with the name and start day, then copy the date formulas down from the row above.",
+              "piece": 1,
+              "when": "each_time"
+            },
+            {
+              "use": "goal",
+              "say": "Each morning, open the tracker and work through the rows marked Due. When a step is finished, type done over its date.",
+              "piece": null,
+              "when": "each_time"
+            },
+            {
+              "use": "goal",
+              "say": "Once a new hire shows All done, move that row to your archive sheet so the tracker holds only people still being onboarded.",
+              "piece": null,
+              "when": "each_time"
+            }
+          ],
+          "tryOn": "Your next two or three new hires, starting from their start days.",
+          "good": "Every new hire has one row, each step has a date, and you see which rows are Due without checking a separate checklist.",
+          "approval": "Check each start day and each date before you rely on it, and confirm the laptop, badge and HR system records yourself before the first day.",
+          "usesAi": false,
+          "suite": "microsoft",
+          "phone": null
+        },
+        "solved": false,
+        "tries": 1
+      },
+      {
+        "id": "task_2",
+        "task": "Benefits enrollment",
+        "answers": [
+          {
+            "id": "reach",
+            "picked": [
+              "email"
+            ],
+            "text": null
+          },
+          {
+            "id": "need",
+            "picked": [
+              "who",
+              "what",
+              "urgent",
+              "when"
+            ],
+            "text": null
+          },
+          {
+            "id": "after",
+            "picked": [
+              "self"
+            ],
+            "text": null
+          },
+          {
+            "id": "volume",
+            "picked": [
+              "many"
+            ],
+            "text": null
+          },
+          {
+            "id": "example",
+            "picked": [],
+            "text": "Hi, I'm going on leave at the start of next month and I'm not sure if I need to change my health plan before it starts. Does coverage stop on the last day I work, and is there a deadline to add my new baby? Thanks, I need to submit before Friday."
+          }
+        ],
+        "design": {
+          "read": "From now on, colleagues enter their benefits enrollment questions themselves in one form, instead of writing to you one by one. Every request arrives with who it is from, what it is about, how urgent it is and when it is needed. You read them all in one place, so you stop sorting through email.",
+          "material": [
+            {
+              "label": "Your benefits enrollment form",
+              "items": [
+                "Title: Benefits enrollment request",
+                "Your full name\nTheir own words",
+                "What is your request about?\nChanging my health plan\nAdding a family member\nWhen my coverage starts or ends\nLeave and benefits\nSomething else",
+                "How urgent is it?\nI need an answer today\nI need an answer this week\nNo rush",
+                "When do you need it by?\nTheir own words",
+                "Tell us a little more\nTheir own words"
+              ]
+            },
+            {
+              "label": "Your message with the link",
+              "items": [
+                "Hi all, for any benefits enrollment question or change, please use this form instead of emailing me: [link]. It asks who you are, what it is about, how urgent it is and when you need it by. I will read every answer in one place and reply to you. Thanks, [your name]"
+              ]
+            },
+            {
+              "label": "Your benefits enrollment list",
+              "items": [
+                "Open the form answers in Excel and leave that workbook as it is.",
+                "Read each row: name, request type, urgency, date needed and details.",
+                "On the form's results page, the count for each request type and urgency is already shown."
+              ]
+            }
+          ],
+          "steps": [
+            {
+              "use": "ms_forms_create",
+              "say": "Create the form. Tally has written the questions for you.",
+              "piece": 1,
+              "when": "once"
+            },
+            {
+              "use": "ms_forms_share",
+              "say": "Send the form link to your colleagues using the message Tally wrote.",
+              "piece": 2,
+              "when": "once"
+            },
+            {
+              "use": "ms_forms_results",
+              "say": "Each time you sit down to work on enrollment, open the results page to see how many requests there are for each type and how urgent they are.",
+              "piece": null,
+              "when": "each_time"
+            },
+            {
+              "use": "ms_forms_to_excel",
+              "say": "Open the answers in Excel to read each person's request, who it is from and when they need it. Leave the workbook as it is.",
+              "piece": 3,
+              "when": "each_time"
+            },
+            {
+              "use": "goal",
+              "say": "Reply to each person, starting with the most urgent and earliest dates. When a round of enrollment is finished, start the next one by deleting the old answers in Forms once you have recorded what you need.",
+              "piece": null,
+              "when": "each_time"
+            }
+          ],
+          "tryOn": "The next benefits enrollment questions that reach you this week.",
+          "good": "Colleagues send their requests through the form, and you see each one with who it is from, what it is about, how urgent it is and when it is needed, with no email sorting.",
+          "approval": "Before you reply to anyone or change anything in a benefits record, check the person's details and the deadline yourself.",
+          "usesAi": false,
+          "suite": "microsoft",
+          "phone": null
+        },
+        "solved": false,
+        "tries": 1
+      }
+    ],
+    "prep": null,
+    "skipped": []
+  },
+  "asked": {
+    "task_1": {
+      "set": {
+        "questions": [
+          {
+            "id": "start",
+            "title": "What starts it each time?",
+            "kind": "one",
+            "choices": [
+              {
+                "id": "start_day",
+                "label": "A start day, like a new hire's first day"
+              },
+              {
+                "id": "date",
+                "label": "A date in the calendar"
+              },
+              {
+                "id": "request",
+                "label": "Someone asks for it"
+              },
+              {
+                "id": "solved",
+                "label": "An app already runs it for me",
+                "solved": true
+              }
+            ]
+          },
+          {
+            "id": "steps",
+            "title": "About how many steps are there?",
+            "kind": "one",
+            "choices": [
+              {
+                "id": "few",
+                "label": "Under 5"
+              },
+              {
+                "id": "some",
+                "label": "5 to 10"
+              },
+              {
+                "id": "many",
+                "label": "More than 10"
+              }
+            ]
+          },
+          {
+            "id": "together",
+            "title": "How many run at the same time?",
+            "kind": "one",
+            "choices": [
+              {
+                "id": "one",
+                "label": "Usually one"
+              },
+              {
+                "id": "few",
+                "label": "2 to 5"
+              },
+              {
+                "id": "many",
+                "label": "More than 5"
+              }
+            ]
+          },
+          {
+            "id": "kept",
+            "title": "Where do you keep the steps today?",
+            "kind": "one",
+            "choices": [
+              {
+                "id": "head",
+                "label": "In my head"
+              },
+              {
+                "id": "paper",
+                "label": "A checklist on paper"
+              },
+              {
+                "id": "sheet",
+                "label": "A sheet"
+              },
+              {
+                "id": "emails",
+                "label": "In old emails"
+              }
+            ]
+          }
+        ],
+        "example": {
+          "label": "Paste your steps",
+          "hint": "In any order, as you remember them. Optional."
+        }
+      },
+      "answers": [
+        {
+          "id": "start",
+          "picked": [
+            "start_day"
+          ],
+          "text": null
+        },
+        {
+          "id": "steps",
+          "picked": [
+            "many"
+          ],
+          "text": null
+        },
+        {
+          "id": "together",
+          "picked": [
+            "few"
+          ],
+          "text": null
+        },
+        {
+          "id": "kept",
+          "picked": [
+            "sheet"
+          ],
+          "text": null
+        },
+        {
+          "id": "example",
+          "picked": [],
+          "text": "Offer accepted, so send the offer letter and welcome email. Set up the Outlook calendar invites for the first-week meetings. Book the interviews and orientation slots. Put the new hire in the onboarding checklist sheet and tick off each item. Confirm the laptop and badge request. Send the benefits and leave FAQ link. Check the records are updated in the HR system before the start day."
+        }
+      ]
+    },
+    "task_2": {
+      "set": {
+        "questions": [
+          {
+            "id": "reach",
+            "title": "How do requests reach you today?",
+            "hint": "Tick all that fit.",
+            "kind": "many",
+            "choices": [
+              {
+                "id": "email",
+                "label": "Email"
+              },
+              {
+                "id": "texts",
+                "label": "Text messages"
+              },
+              {
+                "id": "chat",
+                "label": "Teams or another chat"
+              },
+              {
+                "id": "person",
+                "label": "In person"
+              },
+              {
+                "id": "solved",
+                "label": "An app already collects them",
+                "solved": true
+              }
+            ]
+          },
+          {
+            "id": "need",
+            "title": "What do you need to know for each one?",
+            "hint": "Tick all that fit.",
+            "kind": "many",
+            "choices": [
+              {
+                "id": "who",
+                "label": "Who it is from"
+              },
+              {
+                "id": "where",
+                "label": "Where it is"
+              },
+              {
+                "id": "what",
+                "label": "What it is about"
+              },
+              {
+                "id": "urgent",
+                "label": "How urgent it is"
+              },
+              {
+                "id": "when",
+                "label": "When it is needed"
+              }
+            ]
+          },
+          {
+            "id": "after",
+            "title": "What happens after one comes in?",
+            "kind": "one",
+            "choices": [
+              {
+                "id": "self",
+                "label": "I sort it out myself"
+              },
+              {
+                "id": "pass",
+                "label": "I pass it to someone"
+              },
+              {
+                "id": "book",
+                "label": "I book someone to come"
+              }
+            ]
+          },
+          {
+            "id": "volume",
+            "title": "About how many a week?",
+            "kind": "one",
+            "choices": [
+              {
+                "id": "few",
+                "label": "Under 5"
+              },
+              {
+                "id": "some",
+                "label": "5 to 20"
+              },
+              {
+                "id": "many",
+                "label": "More than 20"
+              }
+            ]
+          }
+        ],
+        "example": {
+          "label": "Paste one request you got",
+          "hint": "Take out names and private details. Optional."
+        }
+      },
+      "answers": [
+        {
+          "id": "reach",
+          "picked": [
+            "email"
+          ],
+          "text": null
+        },
+        {
+          "id": "need",
+          "picked": [
+            "who",
+            "what",
+            "urgent",
+            "when"
+          ],
+          "text": null
+        },
+        {
+          "id": "after",
+          "picked": [
+            "self"
+          ],
+          "text": null
+        },
+        {
+          "id": "volume",
+          "picked": [
+            "many"
+          ],
+          "text": null
+        },
+        {
+          "id": "example",
+          "picked": [],
+          "text": "Hi, I'm going on leave at the start of next month and I'm not sure if I need to change my health plan before it starts. Does coverage stop on the last day I work, and is there a deadline to add my new baby? Thanks, I need to submit before Friday."
+        }
+      ]
+    }
+  },
+  "runs": [
+    {
+      "slot": "task_1",
+      "task": "Onboarding new hires",
+      "seconds": 7.966609083000001,
+      "dollars": 0.019188,
+      "attempts": 1,
+      "usage": [
+        {
+          "model": "claude-sonnet-5-5",
+          "input": 4754,
+          "output": 968,
+          "cacheRead": 0,
+          "cacheWrite": 0
+        }
+      ]
+    },
+    {
+      "slot": "task_2",
+      "task": "Benefits enrollment",
+      "seconds": 7.709423124999997,
+      "dollars": 0.01825,
+      "attempts": 1,
+      "usage": [
+        {
+          "model": "claude-sonnet-5-5",
+          "input": 4570,
+          "output": 911,
+          "cacheRead": 0,
+          "cacheWrite": 0
+        }
+      ]
+    }
+  ],
+  "raws": [
+    {
+      "slot": "task_1",
+      "errors": null,
+      "raw": {
+        "read": "From now on, each new hire is one row in a single tracker, and every step is dated from the start day for you. You no longer work out dates by hand or scan a checklist for what is late. The tracker shows the next date due in each row and marks it Due once that day has come, so you can see at a glance which of your new hires needs you today.",
+        "material": [
+          {
+            "label": "Your new hire tracker",
+            "items": [
+              "Column A: New hire",
+              "Column B: Start day",
+              "Column C: Offer letter and welcome email",
+              "Column D: Calendar invites for first week",
+              "Column E: Interviews and orientation booked",
+              "Column F: Laptop and badge confirmed",
+              "Column G: Benefits and leave FAQ sent",
+              "Column H: HR system records checked",
+              "Column I: Next due",
+              "Column J: Status"
+            ]
+          },
+          {
+            "label": "Your new hire step dates",
+            "items": [
+              "C2: =B2-14",
+              "D2: =B2-7",
+              "E2: =B2-7",
+              "F2: =B2-5",
+              "G2: =B2-3",
+              "H2: =B2-1"
+            ]
+          },
+          {
+            "label": "Your next due formulas",
+            "items": [
+              "I2: =IF(COUNT(C2:H2)=0,\"All done\",MIN(C2:H2))",
+              "J2: =IF(AND(I2<>\"\",ISNUMBER(I2),I2<=TODAY()),\"Due\",\"\")"
+            ]
+          },
+          {
+            "label": "Your due date highlight",
+            "items": [
+              "=AND(ISNUMBER(I2),I2<=TODAY())"
+            ]
+          }
+        ],
+        "steps": [
+          {
+            "use": "excel_days_after",
+            "say": "Set up the tracker with one row for each new hire, and date every step from the start day. Tally has written the columns and the day counts, which you can change to match how you work.",
+            "piece": 2,
+            "when": "once"
+          },
+          {
+            "use": "excel_next_due",
+            "say": "Add the Next due column and the Status column so each row shows its earliest step still to do.",
+            "piece": 3,
+            "when": "once"
+          },
+          {
+            "use": "excel_due_highlight",
+            "say": "Make the Next due dates stand out once the day has come.",
+            "piece": 4,
+            "when": "once"
+          },
+          {
+            "use": "goal",
+            "say": "When you get a new offer acceptance, add a row with the name and start day, then copy the date formulas down from the row above.",
+            "piece": 1,
+            "when": "each_time"
+          },
+          {
+            "use": "goal",
+            "say": "Each morning, open the tracker and work through the rows marked Due. When a step is finished, type done over its date.",
+            "piece": null,
+            "when": "each_time"
+          },
+          {
+            "use": "goal",
+            "say": "Once a new hire shows All done, move that row to your archive sheet so the tracker holds only people still being onboarded.",
+            "piece": null,
+            "when": "each_time"
+          }
+        ],
+        "try_on": "Your next two or three new hires, starting from their start days.",
+        "good": "Every new hire has one row, each step has a date, and you see which rows are Due without checking a separate checklist.",
+        "approval": "Check each start day and each date before you rely on it, and confirm the laptop, badge and HR system records yourself before the first day.",
+        "about_note": null,
+        "safe_use": [],
+        "ask_message": null
+      }
+    },
+    {
+      "slot": "task_2",
+      "errors": null,
+      "raw": {
+        "read": "From now on, colleagues enter their benefits enrollment questions themselves in one form, instead of writing to you one by one. Every request arrives with who it is from, what it is about, how urgent it is and when it is needed. You read them all in one place, so you stop sorting through email.",
+        "material": [
+          {
+            "label": "Your benefits enrollment form",
+            "items": [
+              "Title: Benefits enrollment request",
+              "Your full name\nTheir own words",
+              "What is your request about?\nChanging my health plan\nAdding a family member\nWhen my coverage starts or ends\nLeave and benefits\nSomething else",
+              "How urgent is it?\nI need an answer today\nI need an answer this week\nNo rush",
+              "When do you need it by?\nTheir own words",
+              "Tell us a little more\nTheir own words"
+            ]
+          },
+          {
+            "label": "Your message with the link",
+            "items": [
+              "Hi all, for any benefits enrollment question or change, please use this form instead of emailing me: [link]. It asks who you are, what it is about, how urgent it is and when you need it by. I will read every answer in one place and reply to you. Thanks, [your name]"
+            ]
+          },
+          {
+            "label": "Your benefits enrollment list",
+            "items": [
+              "Open the form answers in Excel and leave that workbook as it is.",
+              "Read each row: name, request type, urgency, date needed and details.",
+              "On the form's results page, the count for each request type and urgency is already shown."
+            ]
+          }
+        ],
+        "steps": [
+          {
+            "use": "ms_forms_create",
+            "say": "Create the form. Tally has written the questions for you.",
+            "piece": 1,
+            "when": "once"
+          },
+          {
+            "use": "ms_forms_share",
+            "say": "Send the form link to your colleagues using the message Tally wrote.",
+            "piece": 2,
+            "when": "once"
+          },
+          {
+            "use": "ms_forms_results",
+            "say": "Each time you sit down to work on enrollment, open the results page to see how many requests there are for each type and how urgent they are.",
+            "piece": null,
+            "when": "each_time"
+          },
+          {
+            "use": "ms_forms_to_excel",
+            "say": "Open the answers in Excel to read each person's request, who it is from and when they need it. Leave the workbook as it is.",
+            "piece": 3,
+            "when": "each_time"
+          },
+          {
+            "use": "goal",
+            "say": "Reply to each person, starting with the most urgent and earliest dates. When a round of enrollment is finished, start the next one by deleting the old answers in Forms once you have recorded what you need.",
+            "piece": null,
+            "when": "each_time"
+          }
+        ],
+        "try_on": "The next benefits enrollment questions that reach you this week.",
+        "good": "Colleagues send their requests through the form, and you see each one with who it is from, what it is about, how urgent it is and when it is needed, with no email sorting.",
+        "approval": "Before you reply to anyone or change anything in a benefits record, check the person's details and the deadline yourself.",
+        "about_note": null,
+        "safe_use": [],
+        "ask_message": null
+      }
+    }
+  ],
+  "checks": [
+    {
+      "id": "valid_path",
+      "pass": true,
+      "detail": "the saved path loads"
+    },
+    {
+      "id": "did_it_work_steps",
+      "pass": true,
+      "detail": "Did it work is saved per workflow as task_1 and task_2"
+    },
+    {
+      "id": "task_1_ids",
+      "pass": true,
+      "detail": "excel_days_after, excel_next_due, excel_due_highlight, goal, goal, goal"
+    },
+    {
+      "id": "task_1_not_checked",
+      "pass": true,
+      "detail": "nothing says not checked"
+    },
+    {
+      "id": "task_1_no_clicks_from_model",
+      "pass": true,
+      "detail": "every short line is free of clicks"
+    },
+    {
+      "id": "task_1_approval",
+      "pass": true,
+      "detail": "Check each start day and each date before you rely on it, and confirm the laptop, badge and HR system records yourself before the first day."
+    },
+    {
+      "id": "task_1_each_time",
+      "pass": true,
+      "detail": "When you get a new offer acceptance, add a row with the name and start day, then copy the date formulas down from the row above. | Each morning, open the tracker and work through the rows marked Due. When a step is finished, type done over its date. | Once a new hire shows All done, move that row to your archive sheet so the tracker holds only people still being onboarded."
+    },
+    {
+      "id": "task_1_no_ai_ask",
+      "pass": true,
+      "detail": "no AI named"
+    },
+    {
+      "id": "task_1_goals_plain",
+      "pass": true,
+      "detail": "3 goals"
+    },
+    {
+      "id": "task_1_fast",
+      "pass": true,
+      "detail": "8.0 s"
+    },
+    {
+      "id": "task_2_ids",
+      "pass": true,
+      "detail": "ms_forms_create, ms_forms_share, ms_forms_results, ms_forms_to_excel, goal"
+    },
+    {
+      "id": "task_2_not_checked",
+      "pass": true,
+      "detail": "nothing says not checked"
+    },
+    {
+      "id": "task_2_no_clicks_from_model",
+      "pass": true,
+      "detail": "every short line is free of clicks"
+    },
+    {
+      "id": "task_2_approval",
+      "pass": true,
+      "detail": "Before you reply to anyone or change anything in a benefits record, check the person's details and the deadline yourself."
+    },
+    {
+      "id": "task_2_each_time",
+      "pass": true,
+      "detail": "Each time you sit down to work on enrollment, open the results page to see how many requests there are for each type and how urgent they are. | Open the answers in Excel to read each person's request, who it is from and when they need it. Leave the workbook as it is. | Reply to each person, starting with the most urgent and earliest dates. When a round of enrollment is finished, start the next one by deleting the old answers in Forms once you have recorded what you need."
+    },
+    {
+      "id": "task_2_no_ai_ask",
+      "pass": true,
+      "detail": "no AI named"
+    },
+    {
+      "id": "task_2_goals_plain",
+      "pass": true,
+      "detail": "1 goals"
+    },
+    {
+      "id": "task_2_fast",
+      "pass": true,
+      "detail": "7.7 s"
+    }
+  ]
+}

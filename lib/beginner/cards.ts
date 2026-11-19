@@ -216,6 +216,7 @@ export const BLOCK_HELP = {
 export const BLOCK_CARD_IDS = [
   "ms_forms_create",
   "ms_forms_share",
+  "ms_forms_results",
   "ms_forms_to_excel",
   "ms_forms_clear",
   "excel_dropdown",
@@ -246,6 +247,7 @@ export type BlockCardId = (typeof BLOCK_CARD_IDS)[number];
 export const BLOCK_FEATURES = [
   "form_create",
   "form_share",
+  "form_results",
   "form_to_sheet",
   "form_clear",
   "dropdown",
@@ -269,6 +271,8 @@ export type BlockCard = {
   steps: { computer?: string[]; android?: string[]; iphone?: string[] };
   /** Something she should know before she starts, like a device it can't be made on. */
   note?: string;
+  /** The note matters only when her workflow also has this feature, like a workbook made from her form (Phase 10). */
+  noteWhen?: BlockFeature;
   /** What changes outside US English settings, for a card whose formula has commas. */
   region?: string;
   /** Whether a free account is enough, and what it limits when that matters. */
@@ -343,7 +347,7 @@ const sheetsAppFormula = (cell: string, formula: string, after: string) => [
  * Excel uses the list separator of her region between the parts of a formula: a comma with US English settings, often
  * a semicolon in Europe (Microsoft, checked 2026-11-16). Excel in a browser follows its own regional setting. DRAFT
  */
-const EXCEL_REGION =
+export const EXCEL_REGION =
   "If Excel won't take the formula, type a semicolon wherever it has a comma. Excel uses the separator of your region, and many European regions use a semicolon.";
 
 const NEXT_DUE = '=IF(COUNT(C2:F2)=0,"All done",MIN(C2:F2))';
@@ -393,6 +397,25 @@ export const blockCards: readonly BlockCard[] = [
     sources: [MS.formsSend],
   },
   {
+    // Checked 2026-11-19 against the results page: "Each question box displays the number of responses", and its
+    // screenshot of Responses Overview shows a number beside each choice. Phase 10, for lunch without a sheet.
+    id: "ms_forms_results",
+    app: "microsoft_forms",
+    feature: "form_results",
+    title: "Read the count for each choice in Microsoft Forms",
+    steps: {
+      computer: [
+        "Go to forms.office.com and open your form.",
+        "Select View responses.",
+        "Each question shows a chart with a number beside each choice. That number is how many people picked it.",
+        "To see who picked what, select More details under a question.",
+      ],
+    },
+    freePlan: { enough: true },
+    checked: "2026-11-19",
+    sources: [MS.formsResults],
+  },
+  {
     id: "ms_forms_to_excel",
     app: "microsoft_forms",
     feature: "form_to_sheet",
@@ -428,6 +451,7 @@ export const blockCards: readonly BlockCard[] = [
       ],
     },
     note: "Microsoft's pages don't say whether this also clears the workbook made with Open results in Excel.",
+    noteWhen: "form_to_sheet",
     freePlan: { enough: true },
     checked: CHECKED_P9,
     sources: [MS.formsResults, MS.formsLimits],
@@ -465,6 +489,7 @@ export const blockCards: readonly BlockCard[] = [
       ],
     },
     note: "If the answers come from Microsoft Forms, count in a downloaded copy. A formula added to the form's own workbook stops new answers arriving.",
+    noteWhen: "form_to_sheet",
     region: EXCEL_REGION,
     freePlan: { enough: true, note: "Excel in a browser is free with a Microsoft account." },
     checked: CHECKED_P9,
@@ -654,6 +679,7 @@ export const blockCards: readonly BlockCard[] = [
       ],
     },
     note: "Your answers sheet is a separate file, and Google's pages don't say whether its rows are cleared too.",
+    noteWhen: "form_to_sheet",
     freePlan: { enough: true },
     checked: CHECKED_P9,
     sources: [GOOGLE.formSheet],

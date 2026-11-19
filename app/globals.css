@@ -6044,6 +6044,57 @@
     margin-top: 0;
   }
 
+  /* Phase 10: her two workflows to keep or swap, the follow up questions, and each workflow's steps with the
+     exact clicks from its card under a short line. What Tally wrote keeps its line breaks, as form questions and
+     emails have them. */
+  .path-flow .path-item-text,
+  .path-flow .win-draft {
+    white-space: pre-line;
+  }
+  .path-pick {
+    padding: 1rem 1.125rem;
+    border: 1px solid var(--line);
+    border-radius: 1rem;
+  }
+  .path-pick .plan-rules {
+    margin: 0;
+    padding-left: 1.25rem;
+  }
+  .path-swap {
+    display: grid;
+    gap: 0.5rem;
+  }
+  .path-wsteps {
+    gap: 1rem;
+  }
+  .path-wstep {
+    display: grid;
+    gap: 0.375rem;
+  }
+  .path-say {
+    margin: 0;
+    text-wrap: pretty;
+  }
+  .path-uses {
+    color: var(--muted);
+    font-size: var(--fs-small);
+  }
+  .path-clicks {
+    display: grid;
+    gap: 0.25rem;
+    margin: 0;
+    padding-left: 1.125rem;
+    list-style: lower-alpha;
+    font-size: var(--fs-small);
+    line-height: var(--lh-small);
+    color: var(--ink);
+    text-wrap: pretty;
+    overflow-wrap: anywhere;
+  }
+  .path-flow .path-wstep .path-note {
+    margin: 0;
+  }
+
   /* The free result when every task waits for her company's OK: the message to ask, in place of the paywall. */
   .ask-first {
     display: grid;

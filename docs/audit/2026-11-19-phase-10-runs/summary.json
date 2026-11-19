@@ -1,0 +1,369 @@
+{
+  "written": "2026-11-19T19:18:47.274Z",
+  "results": [
+    {
+      "name": "property",
+      "runs": [
+        {
+          "slot": "task_1",
+          "task": "Repairs",
+          "seconds": 8.269130874999998,
+          "dollars": 0.018598,
+          "attempts": 1,
+          "model": "claude-sonnet-5-5"
+        },
+        {
+          "slot": "task_2",
+          "task": "Inspections",
+          "seconds": 9.248098167,
+          "dollars": 0.019348,
+          "attempts": 1,
+          "model": "claude-sonnet-5-5"
+        }
+      ],
+      "checks": [
+        {
+          "id": "valid_path",
+          "pass": true,
+          "detail": "the saved path loads"
+        },
+        {
+          "id": "did_it_work_steps",
+          "pass": true,
+          "detail": "Did it work is saved per workflow as task_1 and task_2"
+        },
+        {
+          "id": "task_1_ids",
+          "pass": true,
+          "detail": "google_forms_create, google_forms_to_sheets, sheets_dropdown, sheets_highlight_row, google_forms_share, goal"
+        },
+        {
+          "id": "task_1_not_checked",
+          "pass": true,
+          "detail": "nothing says not checked"
+        },
+        {
+          "id": "task_1_no_clicks_from_model",
+          "pass": true,
+          "detail": "every short line is free of clicks"
+        },
+        {
+          "id": "task_1_approval",
+          "pass": true,
+          "detail": "Check each emergency row yourself and confirm the details and the day before you book anyone to come."
+        },
+        {
+          "id": "task_1_each_time",
+          "pass": true,
+          "detail": "Each time, open your list, read the new rows, book someone for each one, and set the Status to Booked. Send people back to the form if they text or email you a repair."
+        },
+        {
+          "id": "task_1_no_ai_ask",
+          "pass": true,
+          "detail": "no AI named"
+        },
+        {
+          "id": "task_1_goals_plain",
+          "pass": true,
+          "detail": "1 goals"
+        },
+        {
+          "id": "task_1_fast",
+          "pass": true,
+          "detail": "8.3 s"
+        },
+        {
+          "id": "task_2_ids",
+          "pass": true,
+          "detail": "goal, goal, notes_to_sheet, goal"
+        },
+        {
+          "id": "task_2_not_checked",
+          "pass": true,
+          "detail": "nothing says not checked"
+        },
+        {
+          "id": "task_2_no_clicks_from_model",
+          "pass": true,
+          "detail": "every short line is free of clicks"
+        },
+        {
+          "id": "task_2_approval",
+          "pass": true,
+          "detail": "Check every row against your own notes, especially unit numbers, dates and who is booked to do the work, and look at any row marked [check]."
+        },
+        {
+          "id": "task_2_each_time",
+          "pass": true,
+          "detail": "Paste your phone notes under your saved instructions and let ChatGPT turn them into rows. | Read each row against your notes, then copy the rows into the next empty rows of your sheet."
+        },
+        {
+          "id": "task_2_no_ai_ask",
+          "pass": true,
+          "detail": "uses AI by design"
+        },
+        {
+          "id": "task_2_goals_plain",
+          "pass": true,
+          "detail": "3 goals"
+        },
+        {
+          "id": "task_2_fast",
+          "pass": true,
+          "detail": "9.2 s"
+        }
+      ]
+    },
+    {
+      "name": "hr",
+      "runs": [
+        {
+          "slot": "task_1",
+          "task": "Onboarding new hires",
+          "seconds": 7.966609083000001,
+          "dollars": 0.019188,
+          "attempts": 1,
+          "model": "claude-sonnet-5-5"
+        },
+        {
+          "slot": "task_2",
+          "task": "Benefits enrollment",
+          "seconds": 7.709423124999997,
+          "dollars": 0.01825,
+          "attempts": 1,
+          "model": "claude-sonnet-5-5"
+        }
+      ],
+      "checks": [
+        {
+          "id": "valid_path",
+          "pass": true,
+          "detail": "the saved path loads"
+        },
+        {
+          "id": "did_it_work_steps",
+          "pass": true,
+          "detail": "Did it work is saved per workflow as task_1 and task_2"
+        },
+        {
+          "id": "task_1_ids",
+          "pass": true,
+          "detail": "excel_days_after, excel_next_due, excel_due_highlight, goal, goal, goal"
+        },
+        {
+          "id": "task_1_not_checked",
+          "pass": true,
+          "detail": "nothing says not checked"
+        },
+        {
+          "id": "task_1_no_clicks_from_model",
+          "pass": true,
+          "detail": "every short line is free of clicks"
+        },
+        {
+          "id": "task_1_approval",
+          "pass": true,
+          "detail": "Check each start day and each date before you rely on it, and confirm the laptop, badge and HR system records yourself before the first day."
+        },
+        {
+          "id": "task_1_each_time",
+          "pass": true,
+          "detail": "When you get a new offer acceptance, add a row with the name and start day, then copy the date formulas down from the row above. | Each morning, open the tracker and work through the rows marked Due. When a step is finished, type done over its date. | Once a new hire shows All done, move that row to your archive sheet so the tracker holds only people still being onboarded."
+        },
+        {
+          "id": "task_1_no_ai_ask",
+          "pass": true,
+          "detail": "no AI named"
+        },
+        {
+          "id": "task_1_goals_plain",
+          "pass": true,
+          "detail": "3 goals"
+        },
+        {
+          "id": "task_1_fast",
+          "pass": true,
+          "detail": "8.0 s"
+        },
+        {
+          "id": "task_2_ids",
+          "pass": true,
+          "detail": "ms_forms_create, ms_forms_share, ms_forms_results, ms_forms_to_excel, goal"
+        },
+        {
+          "id": "task_2_not_checked",
+          "pass": true,
+          "detail": "nothing says not checked"
+        },
+        {
+          "id": "task_2_no_clicks_from_model",
+          "pass": true,
+          "detail": "every short line is free of clicks"
+        },
+        {
+          "id": "task_2_approval",
+          "pass": true,
+          "detail": "Before you reply to anyone or change anything in a benefits record, check the person's details and the deadline yourself."
+        },
+        {
+          "id": "task_2_each_time",
+          "pass": true,
+          "detail": "Each time you sit down to work on enrollment, open the results page to see how many requests there are for each type and how urgent they are. | Open the answers in Excel to read each person's request, who it is from and when they need it. Leave the workbook as it is. | Reply to each person, starting with the most urgent and earliest dates. When a round of enrollment is finished, start the next one by deleting the old answers in Forms once you have recorded what you need."
+        },
+        {
+          "id": "task_2_no_ai_ask",
+          "pass": true,
+          "detail": "no AI named"
+        },
+        {
+          "id": "task_2_goals_plain",
+          "pass": true,
+          "detail": "1 goals"
+        },
+        {
+          "id": "task_2_fast",
+          "pass": true,
+          "detail": "7.7 s"
+        }
+      ]
+    },
+    {
+      "name": "office",
+      "runs": [
+        {
+          "slot": "task_1",
+          "task": "Ordering lunch",
+          "seconds": 7.970209749999999,
+          "dollars": 0.020006,
+          "attempts": 1,
+          "model": "claude-sonnet-5-5"
+        },
+        {
+          "slot": "task_2",
+          "task": "Restocking the fridges",
+          "seconds": 21.221732333,
+          "dollars": 0.049254,
+          "attempts": 2,
+          "model": "claude-sonnet-5-5"
+        }
+      ],
+      "checks": [
+        {
+          "id": "valid_path",
+          "pass": true,
+          "detail": "the saved path loads"
+        },
+        {
+          "id": "did_it_work_steps",
+          "pass": true,
+          "detail": "Did it work is saved per workflow as task_1 and task_2"
+        },
+        {
+          "id": "task_1_ids",
+          "pass": true,
+          "detail": "ms_forms_create, ms_forms_share, ms_forms_results, outlook_saved_email, goal, ms_forms_clear"
+        },
+        {
+          "id": "task_1_not_checked",
+          "pass": true,
+          "detail": "nothing says not checked"
+        },
+        {
+          "id": "task_1_no_clicks_from_model",
+          "pass": true,
+          "detail": "every short line is free of clicks"
+        },
+        {
+          "id": "task_1_approval",
+          "pass": true,
+          "detail": "Before you send the email, check that the counts match the results page, the day and time are right, and any vegetarian or gluten free orders are included."
+        },
+        {
+          "id": "task_1_each_time",
+          "pass": true,
+          "detail": "Send the form link to everyone in your message. | On order day, open the answers in Forms. The count for each choice is already there. | Open your saved email, fill in the counts from the results page, read it through and send it to the caterer. | After you order, clear last week's answers so the form is ready for the next round."
+        },
+        {
+          "id": "task_1_no_ai_ask",
+          "pass": true,
+          "detail": "no AI named"
+        },
+        {
+          "id": "task_1_goals_plain",
+          "pass": true,
+          "detail": "1 goals"
+        },
+        {
+          "id": "task_1_fast",
+          "pass": true,
+          "detail": "8.0 s"
+        },
+        {
+          "id": "lunch_microsoft",
+          "pass": true,
+          "detail": "microsoft"
+        },
+        {
+          "id": "lunch_no_sheet",
+          "pass": true,
+          "detail": "ms_forms_create, ms_forms_share, ms_forms_results, outlook_saved_email, goal, ms_forms_clear"
+        },
+        {
+          "id": "lunch_target_steps",
+          "pass": true,
+          "detail": "form, link, counts in Forms, clear"
+        },
+        {
+          "id": "lunch_combined_choices",
+          "pass": true,
+          "detail": "Your name | Your lunch choice | Anything else I should know? | Hello,"
+        },
+        {
+          "id": "lunch_clear_after_order",
+          "pass": true,
+          "detail": "After you order, clear last week's answers so the form is ready for the next round."
+        },
+        {
+          "id": "task_2_ids",
+          "pass": true,
+          "detail": "goal, excel_below_usual, outlook_saved_email, outlook_repeat_reminder, goal, goal"
+        },
+        {
+          "id": "task_2_not_checked",
+          "pass": true,
+          "detail": "nothing says not checked"
+        },
+        {
+          "id": "task_2_no_clicks_from_model",
+          "pass": true,
+          "detail": "every short line is free of clicks"
+        },
+        {
+          "id": "task_2_approval",
+          "pass": true,
+          "detail": "Check the amounts against what you see in the fridges, and read the email and the supplier name before you send it."
+        },
+        {
+          "id": "task_2_each_time",
+          "pass": true,
+          "detail": "Each day, type what is in the fridges now beside each item. The low list updates by itself. | Open your saved email as a new draft, copy the low items and amounts into it, read it through and send it. The next day you simply update the counts again."
+        },
+        {
+          "id": "task_2_no_ai_ask",
+          "pass": true,
+          "detail": "no AI named"
+        },
+        {
+          "id": "task_2_goals_plain",
+          "pass": true,
+          "detail": "3 goals"
+        },
+        {
+          "id": "task_2_fast",
+          "pass": true,
+          "detail": "21.2 s"
+        }
+      ]
+    }
+  ]
+}
