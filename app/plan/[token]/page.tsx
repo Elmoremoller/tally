@@ -10,6 +10,7 @@ import { PlanWaiting } from "@/components/plan/PlanWaiting";
 import { SiteNav } from "@/components/SiteNav";
 import { orderEmail, pathEvents, planByToken } from "@/lib/funnel-db";
 import { PATH_VERSION, savedFrom, validPath, type PathPlan } from "@/lib/beginner/path";
+import { PATH_V4, validPathV4, type PathV4 } from "@/lib/beginner/workflow";
 import { offer } from "@/lib/offer";
 import { planCopy } from "@/lib/plan-copy";
 import { writePlanAfterResponse } from "@/lib/plan-generation";
@@ -70,10 +71,13 @@ async function TokenPlan({
   const email = welcome === "1" ? await orderEmail(plan.order_id).catch(() => null) : null;
   const note = email ? { email, token } : null;
   // Version 2 is the beginner version's plan, and version 3 her paid path (Phase 6). Older plans keep their pages.
-  const content = plan.content as PlanContent | BeginnerPlan | PathPlan | null;
+  const content = plan.content as PlanContent | BeginnerPlan | PathPlan | PathV4 | null;
   if (plan.status === "ready" && content?.version === 1) return <PlanPage content={content} welcome={note} />;
   if (plan.status === "ready" && content?.version === 2) return <BeginnerPlanPage content={content} welcome={note} />;
-  if (plan.status === "ready" && content?.version === PATH_VERSION && validPath(content)) {
+  if (
+    plan.status === "ready" &&
+    ((content?.version === PATH_VERSION && validPath(content)) || (content?.version === PATH_V4 && validPathV4(content)))
+  ) {
     // Her answers so far, so her progress shows on any device. Without them the path still shows, from the start.
     const events = await pathEvents(plan.session_id).catch((error) => {
       console.error("Loading her path answers failed", error);

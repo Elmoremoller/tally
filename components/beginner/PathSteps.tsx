@@ -159,7 +159,7 @@ export function PathSteps({ content, token, saved }: { content: PathPlan; token:
 }
 
 /** A Starter's first step: her tool ready, from its card, then her first message, so she sees one real result. */
-function Ready({ step, plan }: { step: ReadyStep; plan: PathPlan }) {
+export function Ready({ step, plan }: { step: ReadyStep; plan: Pick<PathPlan, "device" | "tool"> }) {
   const card = stepCard(step);
   return (
     <>
@@ -179,7 +179,7 @@ function Ready({ step, plan }: { step: ReadyStep; plan: PathPlan }) {
 }
 
 /** Teach it who she is: her tool's card for saved instructions, then the note Tally wrote about her. */
-function About({ step, plan }: { step: AboutStep; plan: PathPlan }) {
+export function About({ step, plan }: { step: AboutStep; plan: Pick<PathPlan, "device" | "tool"> }) {
   const card = stepCard(step);
   const name = toolName(plan.tool);
   const devices = card ? devicesFor(card.steps, plan.device) : [];
@@ -300,7 +300,7 @@ function End({ step }: { step: EndStep }) {
 }
 
 /** A labelled line, like her approval point or what it costs. */
-function Note({ label, text }: { label: string; text: string }) {
+export function Note({ label, text }: { label: string; text: string }) {
   return (
     <div className="path-note-box">
       <p className="plan-try-label">{label}</p>
@@ -358,7 +358,7 @@ function DeviceSteps({ steps, device }: { steps: { phone?: RecipeStep[]; compute
  * What Tally wrote for her. One item gets the big copy button. A list gets a copy button on every item, and a
  * paired piece, like a shortcut for each reply, sits under its item.
  */
-function Pieces({
+export function Pieces({
   pieces,
   lead,
   paired = false,
@@ -442,7 +442,7 @@ function SmallCopy({ words }: { words: string }) {
  * with the support email, offering help or her money back, and a small box for a few words on what went wrong;
  * that answer is saved with her words when she sends it.
  */
-function DidItWork({
+export function DidItWork({
   token,
   stepId,
   answers,

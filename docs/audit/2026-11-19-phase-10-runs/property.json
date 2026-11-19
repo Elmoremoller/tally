@@ -1,0 +1,1285 @@
+{
+  "name": "property",
+  "input": {
+    "job": "Property manager for 40 rental apartments in three buildings. Repairs, tenants, move ins and outs, inspections.",
+    "qas": [
+      {
+        "id": "level",
+        "title": "Where are you with AI?",
+        "picked": [
+          "Use it some weeks"
+        ],
+        "text": null,
+        "shown": [
+          "Never used it",
+          "Tried it a few times",
+          "Use it some weeks",
+          "Use it most days"
+        ]
+      },
+      {
+        "id": "done",
+        "title": "What have you already done with AI?",
+        "picked": [
+          "Pasted in my own text"
+        ],
+        "text": null,
+        "shown": [
+          "Pasted in my own text",
+          "Saved instructions about myself",
+          "Made a project",
+          "Connected an app",
+          "Pay for a plan",
+          "None of these"
+        ]
+      },
+      {
+        "id": "tools",
+        "title": "Which AI have you used?",
+        "picked": [
+          "ChatGPT"
+        ],
+        "text": null,
+        "shown": [
+          "ChatGPT",
+          "Copilot",
+          "Gemini",
+          "Claude",
+          "Other",
+          "None yet",
+          "Not sure"
+        ]
+      },
+      {
+        "id": "repeats",
+        "title": "What do you do over and over, every day or every week?",
+        "picked": [
+          "Repairs",
+          "Tenant requests",
+          "Move ins and outs",
+          "Inspections",
+          "Rent collection",
+          "Maintenance scheduling"
+        ],
+        "text": null,
+        "shown": [
+          "Repairs",
+          "Tenant requests",
+          "Move ins and outs",
+          "Inspections",
+          "Rent collection",
+          "Lease renewals",
+          "Maintenance scheduling",
+          "Vendor invoices"
+        ]
+      },
+      {
+        "id": "most",
+        "title": "Which would save you the most time if it got easier?",
+        "picked": [
+          "Repairs",
+          "Inspections"
+        ],
+        "text": null,
+        "shown": [
+          "Repairs",
+          "Tenant requests",
+          "Move ins and outs",
+          "Inspections",
+          "Rent collection",
+          "Maintenance scheduling"
+        ]
+      },
+      {
+        "id": "often",
+        "title": "How often do you do this?",
+        "picked": [
+          "Many times a day"
+        ],
+        "text": null,
+        "shown": [
+          "Many times a day",
+          "About once a day",
+          "A few times a week",
+          "Once a week or less"
+        ]
+      },
+      {
+        "id": "where",
+        "title": "Where does your work happen?",
+        "picked": [
+          "Google Sheets",
+          "Gmail",
+          "Text messages",
+          "In person"
+        ],
+        "text": null,
+        "shown": [
+          "Buildium",
+          "AppFolio",
+          "QuickBooks",
+          "Google Sheets",
+          "Outlook",
+          "Microsoft Teams",
+          "WhatsApp",
+          "DocuSign",
+          "Text messages",
+          "Gmail",
+          "Instagram",
+          "A work system",
+          "Paper",
+          "In person"
+        ]
+      },
+      {
+        "id": "device",
+        "title": "Do you work on a phone, a computer or both?",
+        "picked": [
+          "Both"
+        ],
+        "text": null,
+        "shown": [
+          "Phone only",
+          "Computer only",
+          "Both"
+        ]
+      },
+      {
+        "id": "can_use",
+        "title": "Can you use AI for your work?",
+        "picked": [
+          "Yes"
+        ],
+        "text": null,
+        "shown": [
+          "Yes",
+          "Not sure",
+          "No, it’s restricted",
+          "I work for myself"
+        ]
+      },
+      {
+        "id": "connect",
+        "title": "Would your company let you link your work email to an AI tool?",
+        "picked": [
+          "Not sure"
+        ],
+        "text": null,
+        "shown": [
+          "Yes",
+          "No",
+          "Not sure"
+        ]
+      }
+    ],
+    "mostWanted": [
+      "Repairs",
+      "Inspections"
+    ],
+    "role": "You’re the property manager for 40 rental apartments across three buildings, keeping repairs, tenants, move ins and outs, and inspections running.",
+    "worksFor": "employer",
+    "experience": "uses",
+    "aiTools": [
+      "chatgpt"
+    ],
+    "aiPolicy": "encouraged",
+    "map": [
+      {
+        "task": "Repairs",
+        "phrase": "repair requests",
+        "thing": "repair",
+        "today": "You handle repairs many times a day across three buildings.",
+        "withPath": "Repair requests collected in one place so they reach you in order.",
+        "ai": true,
+        "private": false,
+        "kind": null,
+        "patterns": [
+          6,
+          3
+        ],
+        "level": 3,
+        "waits": false,
+        "recipe": null,
+        "held": null,
+        "askFirst": false,
+        "workflow": "pattern_6",
+        "stays": null
+      },
+      {
+        "task": "Inspections",
+        "phrase": null,
+        "thing": "inspection",
+        "today": "You take inspection notes across your 40 apartments and copy them over.",
+        "withPath": "Your notes go in as they are and come out as rows for your sheet.",
+        "ai": true,
+        "private": false,
+        "kind": "notes_to_table",
+        "patterns": [
+          9,
+          5
+        ],
+        "level": 3,
+        "waits": false,
+        "recipe": "notes_to_sheet",
+        "held": null,
+        "askFirst": false,
+        "workflow": null,
+        "stays": null
+      },
+      {
+        "task": "Tenant requests",
+        "phrase": "tenant requests",
+        "thing": "tenant request",
+        "today": "Tenant requests reach you one by one across your three buildings.",
+        "withPath": "Tenant requests collected in one place instead of arriving one at a time.",
+        "ai": true,
+        "private": false,
+        "kind": null,
+        "patterns": [
+          6
+        ],
+        "level": 3,
+        "waits": false,
+        "recipe": null,
+        "held": null,
+        "askFirst": false,
+        "workflow": "pattern_6",
+        "stays": null
+      },
+      {
+        "task": "Move ins and outs",
+        "phrase": null,
+        "thing": null,
+        "today": "You run move ins and outs for your tenants as they come up.",
+        "withPath": "Move in and move out steps kept on one checklist you follow each time.",
+        "ai": true,
+        "private": false,
+        "kind": null,
+        "patterns": [
+          5
+        ],
+        "level": 3,
+        "waits": false,
+        "recipe": null,
+        "held": null,
+        "askFirst": false,
+        "workflow": "pattern_5",
+        "stays": null
+      },
+      {
+        "task": "Rent collection",
+        "phrase": null,
+        "thing": "rent",
+        "today": "You collect rent each month across your 40 apartments.",
+        "withPath": "Rent reminders that come round on schedule, so you keep track of them.",
+        "ai": true,
+        "private": false,
+        "kind": null,
+        "patterns": [
+          7
+        ],
+        "level": 3,
+        "waits": false,
+        "recipe": null,
+        "held": null,
+        "askFirst": false,
+        "workflow": "pattern_7",
+        "stays": null
+      },
+      {
+        "task": "Maintenance scheduling",
+        "phrase": "maintenance schedule",
+        "thing": "maintenance",
+        "today": "You schedule maintenance across the three buildings by hand.",
+        "withPath": "Maintenance jobs laid out on a schedule so each one comes round on time.",
+        "ai": true,
+        "private": false,
+        "kind": null,
+        "patterns": [
+          7
+        ],
+        "level": 3,
+        "waits": false,
+        "recipe": null,
+        "held": null,
+        "askFirst": false,
+        "workflow": "pattern_7",
+        "stays": null
+      }
+    ],
+    "top": "Repairs",
+    "track": "builder",
+    "tool": "chatgpt",
+    "device": "both",
+    "apps": [
+      "any_chat",
+      "chatgpt",
+      "iphone",
+      "gboard",
+      "samsung_keyboard",
+      "gmail",
+      "google_sheets"
+    ],
+    "firstStep": null
+  },
+  "path": {
+    "version": 4,
+    "role": "You’re the property manager for 40 rental apartments across three buildings, keeping repairs, tenants, move ins and outs, and inspections running.",
+    "track": "builder",
+    "tool": "chatgpt",
+    "worksFor": "employer",
+    "policy": "encouraged",
+    "device": "both",
+    "places": [
+      "Google Sheets",
+      "Gmail",
+      "Text messages",
+      "In person"
+    ],
+    "apps": [
+      "any_chat",
+      "chatgpt",
+      "iphone",
+      "gboard",
+      "samsung_keyboard",
+      "gmail",
+      "google_sheets"
+    ],
+    "map": [
+      {
+        "task": "Repairs",
+        "phrase": "repair requests",
+        "thing": "repair",
+        "today": "You handle repairs many times a day across three buildings.",
+        "withPath": "Repair requests collected in one place so they reach you in order.",
+        "ai": true,
+        "private": false,
+        "kind": null,
+        "patterns": [
+          6,
+          3
+        ],
+        "level": 3,
+        "waits": false,
+        "recipe": null,
+        "held": null,
+        "askFirst": false,
+        "workflow": "pattern_6",
+        "stays": null
+      },
+      {
+        "task": "Inspections",
+        "phrase": null,
+        "thing": "inspection",
+        "today": "You take inspection notes across your 40 apartments and copy them over.",
+        "withPath": "Your notes go in as they are and come out as rows for your sheet.",
+        "ai": true,
+        "private": false,
+        "kind": "notes_to_table",
+        "patterns": [
+          9,
+          5
+        ],
+        "level": 3,
+        "waits": false,
+        "recipe": "notes_to_sheet",
+        "held": null,
+        "askFirst": false,
+        "workflow": null,
+        "stays": null
+      },
+      {
+        "task": "Tenant requests",
+        "phrase": "tenant requests",
+        "thing": "tenant request",
+        "today": "Tenant requests reach you one by one across your three buildings.",
+        "withPath": "Tenant requests collected in one place instead of arriving one at a time.",
+        "ai": true,
+        "private": false,
+        "kind": null,
+        "patterns": [
+          6
+        ],
+        "level": 3,
+        "waits": false,
+        "recipe": null,
+        "held": null,
+        "askFirst": false,
+        "workflow": "pattern_6",
+        "stays": null
+      },
+      {
+        "task": "Move ins and outs",
+        "phrase": null,
+        "thing": null,
+        "today": "You run move ins and outs for your tenants as they come up.",
+        "withPath": "Move in and move out steps kept on one checklist you follow each time.",
+        "ai": true,
+        "private": false,
+        "kind": null,
+        "patterns": [
+          5
+        ],
+        "level": 3,
+        "waits": false,
+        "recipe": null,
+        "held": null,
+        "askFirst": false,
+        "workflow": "pattern_5",
+        "stays": null
+      },
+      {
+        "task": "Rent collection",
+        "phrase": null,
+        "thing": "rent",
+        "today": "You collect rent each month across your 40 apartments.",
+        "withPath": "Rent reminders that come round on schedule, so you keep track of them.",
+        "ai": true,
+        "private": false,
+        "kind": null,
+        "patterns": [
+          7
+        ],
+        "level": 3,
+        "waits": false,
+        "recipe": null,
+        "held": null,
+        "askFirst": false,
+        "workflow": "pattern_7",
+        "stays": null
+      },
+      {
+        "task": "Maintenance scheduling",
+        "phrase": "maintenance schedule",
+        "thing": "maintenance",
+        "today": "You schedule maintenance across the three buildings by hand.",
+        "withPath": "Maintenance jobs laid out on a schedule so each one comes round on time.",
+        "ai": true,
+        "private": false,
+        "kind": null,
+        "patterns": [
+          7
+        ],
+        "level": 3,
+        "waits": false,
+        "recipe": null,
+        "held": null,
+        "askFirst": false,
+        "workflow": "pattern_7",
+        "stays": null
+      }
+    ],
+    "confirmed": true,
+    "slots": [
+      {
+        "id": "task_1",
+        "task": "Repairs",
+        "answers": [
+          {
+            "id": "reach",
+            "picked": [
+              "email",
+              "texts"
+            ],
+            "text": null
+          },
+          {
+            "id": "need",
+            "picked": [
+              "who",
+              "where",
+              "what",
+              "urgent",
+              "when"
+            ],
+            "text": null
+          },
+          {
+            "id": "after",
+            "picked": [
+              "book"
+            ],
+            "text": null
+          },
+          {
+            "id": "volume",
+            "picked": [
+              "many"
+            ],
+            "text": null
+          },
+          {
+            "id": "example",
+            "picked": [],
+            "text": "Hi Dana, the kitchen sink in unit 3B is backing up again and water is pooling on the floor. Can someone come today? I'm home after 4 if that works. Thanks, Marcy"
+          }
+        ],
+        "design": {
+          "read": "From now on, repairs no longer reach you one by one by email and text. Everyone sends a request through one form, and every request lands as a row in one list. You see who it is from, where it is, what it is about, how urgent it is and when it is needed, all in the same place, so you can book someone to come without piecing details together.",
+          "material": [
+            {
+              "label": "Your repair form",
+              "items": [
+                "Who is this from?\nTheir own words",
+                "Where is the problem?\nTheir own words",
+                "What is the problem?\nTheir own words",
+                "How urgent is it?\nEmergency, water or safety risk\nUrgent, needs to be fixed in a day or two\nNormal, can wait for the next visit",
+                "When do you need someone to come?\nTheir own words"
+              ]
+            },
+            {
+              "label": "Your message with the link",
+              "items": [
+                "Hi all, to report a repair, please use this form instead of emailing or texting me: [link]. It takes a minute. Tell me who you are, where the problem is, what is wrong, how urgent it is and when someone can come. If there is water or a safety risk, please also call me right away. Thanks, [your name]"
+              ]
+            },
+            {
+              "label": "Your repair list columns",
+              "items": [
+                "Timestamp",
+                "Who is this from?",
+                "Where is the problem?",
+                "What is the problem?",
+                "How urgent is it?",
+                "When do you need someone to come?",
+                "Status",
+                "Who is booked"
+              ]
+            },
+            {
+              "label": "Your urgent row color",
+              "items": [
+                "=$E1=\"Emergency, water or safety risk\""
+              ]
+            }
+          ],
+          "steps": [
+            {
+              "use": "google_forms_create",
+              "say": "Create the form. Tally has written the questions for you.",
+              "piece": 1,
+              "when": "once"
+            },
+            {
+              "use": "google_forms_to_sheets",
+              "say": "Send the form answers to a sheet, so every request becomes a row in one list.",
+              "piece": null,
+              "when": "once"
+            },
+            {
+              "use": "sheets_dropdown",
+              "say": "In the Status column, add a drop down with these choices: New, Booked, Done. Put the same kind of drop down in Who is booked if you like.",
+              "piece": 3,
+              "when": "once"
+            },
+            {
+              "use": "sheets_highlight_row",
+              "say": "Color the emergency rows so they stand out. Tally has written the formula for you.",
+              "piece": 4,
+              "when": "once"
+            },
+            {
+              "use": "google_forms_share",
+              "say": "Share the form link with tenants and colleagues, using the message Tally wrote.",
+              "piece": 2,
+              "when": "once"
+            },
+            {
+              "use": "goal",
+              "say": "Each time, open your list, read the new rows, book someone for each one, and set the Status to Booked. Send people back to the form if they text or email you a repair.",
+              "piece": null,
+              "when": "each_time"
+            }
+          ],
+          "tryOn": "Your next three repair requests.",
+          "good": "Every repair arrives as one row with all five details filled in, and you book someone without having to ask follow up questions.",
+          "approval": "Check each emergency row yourself and confirm the details and the day before you book anyone to come.",
+          "usesAi": false,
+          "suite": "google",
+          "phone": null
+        },
+        "solved": false,
+        "tries": 1
+      },
+      {
+        "id": "task_2",
+        "task": "Inspections",
+        "answers": [
+          {
+            "id": "notes",
+            "picked": [
+              "phone"
+            ],
+            "text": null
+          },
+          {
+            "id": "end",
+            "picked": [
+              "sheet"
+            ],
+            "text": null
+          },
+          {
+            "id": "fields",
+            "picked": [
+              "date",
+              "place",
+              "found",
+              "todo"
+            ],
+            "text": null
+          },
+          {
+            "id": "often",
+            "picked": [
+              "monthly"
+            ],
+            "text": null
+          },
+          {
+            "id": "example",
+            "picked": [],
+            "text": "Bldg 2, Unit 3B, bathroom: slow drain and small drip under sink. Needs plumber, booked for Thursday. Hallway light out by the stairs, handyman to replace bulb and check fixture."
+          }
+        ],
+        "design": {
+          "read": "From now on, your inspection notes go straight from your phone into rows for your sheet. You keep jotting notes the way you do today, then paste them in with your saved instructions and get clean rows back. You stop retyping each note by hand across your 40 apartments.",
+          "material": [
+            {
+              "label": "Your inspection instructions",
+              "items": [
+                "I will paste in my inspection notes. Turn them into rows for my sheet, one row per issue found. Use exactly these columns, in this order: Date, Building, Unit, Place, What was found, What needs doing. Date: write the date of the inspection as [date], or leave it blank if I did not give one. Building: for example Bldg 2. Unit: for example 3B. Place: the room or area, for example bathroom or hallway. What was found: the problem in a few plain words. What needs doing: the action and who does it, and the day if I gave one. If one note has two problems, make two rows. Never add details I did not give. Show the rows as a table I can copy into Google Sheets.",
+                "If a line does not fit the columns, do not drop it. Put it in a last row with the full line copied word for word in What was found, and write [check] in What needs doing. Leave any column you cannot fill blank, and never guess."
+              ]
+            },
+            {
+              "label": "Your inspection sheet columns",
+              "items": [
+                "Date",
+                "Building",
+                "Unit",
+                "Place",
+                "What was found",
+                "What needs doing"
+              ]
+            }
+          ],
+          "steps": [
+            {
+              "use": "goal",
+              "say": "Open a new Google Sheet and type the six column names in the first row, in this order.",
+              "piece": 2,
+              "when": "once"
+            },
+            {
+              "use": "goal",
+              "say": "Save your inspection instructions in ChatGPT so you can use them again each month.",
+              "piece": 1,
+              "when": "once"
+            },
+            {
+              "use": "notes_to_sheet",
+              "say": "Paste your phone notes under your saved instructions and let ChatGPT turn them into rows.",
+              "piece": 1,
+              "when": "each_time"
+            },
+            {
+              "use": "goal",
+              "say": "Read each row against your notes, then copy the rows into the next empty rows of your sheet.",
+              "piece": null,
+              "when": "each_time"
+            }
+          ],
+          "tryOn": "This month's notes from one building.",
+          "good": "Every issue in your notes is one row in your sheet, with the right unit, place and action, and nothing added that you did not write.",
+          "approval": "Check every row against your own notes, especially unit numbers, dates and who is booked to do the work, and look at any row marked [check].",
+          "usesAi": true,
+          "suite": "google",
+          "phone": null
+        },
+        "solved": false,
+        "tries": 1
+      }
+    ],
+    "prep": {
+      "aboutNote": "I am a property manager for 40 rental apartments in three buildings. I handle repairs, tenant requests, move ins and move outs, and inspections. I often paste in my own rough notes from my phone and want them turned into clean, short rows for a Google Sheet. I like plain, direct wording with no extra chat. Never add details I did not give, such as dates, names, prices or causes. If something is unclear, leave it blank or mark it with [check] and ask me. Never drop a line of my notes. Keep tenant names and private details out of your answers.",
+      "safeUse": [
+        "Never type tenant names, phone numbers or email addresses into ChatGPT.",
+        "Leave out door codes, keys, lockbox details and passwords.",
+        "Do not paste lease terms, rent amounts or payment details.",
+        "Use unit numbers and plain descriptions of the problem only.",
+        "Read every row before it goes into your sheet."
+      ],
+      "askMessage": null
+    },
+    "skipped": [
+      "ready"
+    ]
+  },
+  "asked": {
+    "task_1": {
+      "set": {
+        "questions": [
+          {
+            "id": "reach",
+            "title": "How do requests reach you today?",
+            "hint": "Tick all that fit.",
+            "kind": "many",
+            "choices": [
+              {
+                "id": "email",
+                "label": "Email"
+              },
+              {
+                "id": "texts",
+                "label": "Text messages"
+              },
+              {
+                "id": "chat",
+                "label": "Teams or another chat"
+              },
+              {
+                "id": "person",
+                "label": "In person"
+              },
+              {
+                "id": "solved",
+                "label": "An app already collects them",
+                "solved": true
+              }
+            ]
+          },
+          {
+            "id": "need",
+            "title": "What do you need to know for each one?",
+            "hint": "Tick all that fit.",
+            "kind": "many",
+            "choices": [
+              {
+                "id": "who",
+                "label": "Who it is from"
+              },
+              {
+                "id": "where",
+                "label": "Where it is"
+              },
+              {
+                "id": "what",
+                "label": "What it is about"
+              },
+              {
+                "id": "urgent",
+                "label": "How urgent it is"
+              },
+              {
+                "id": "when",
+                "label": "When it is needed"
+              }
+            ]
+          },
+          {
+            "id": "after",
+            "title": "What happens after one comes in?",
+            "kind": "one",
+            "choices": [
+              {
+                "id": "self",
+                "label": "I sort it out myself"
+              },
+              {
+                "id": "pass",
+                "label": "I pass it to someone"
+              },
+              {
+                "id": "book",
+                "label": "I book someone to come"
+              }
+            ]
+          },
+          {
+            "id": "volume",
+            "title": "About how many a week?",
+            "kind": "one",
+            "choices": [
+              {
+                "id": "few",
+                "label": "Under 5"
+              },
+              {
+                "id": "some",
+                "label": "5 to 20"
+              },
+              {
+                "id": "many",
+                "label": "More than 20"
+              }
+            ]
+          }
+        ],
+        "example": {
+          "label": "Paste one request you got",
+          "hint": "Take out names and private details. Optional."
+        }
+      },
+      "answers": [
+        {
+          "id": "reach",
+          "picked": [
+            "email",
+            "texts"
+          ],
+          "text": null
+        },
+        {
+          "id": "need",
+          "picked": [
+            "who",
+            "where",
+            "what",
+            "urgent",
+            "when"
+          ],
+          "text": null
+        },
+        {
+          "id": "after",
+          "picked": [
+            "book"
+          ],
+          "text": null
+        },
+        {
+          "id": "volume",
+          "picked": [
+            "many"
+          ],
+          "text": null
+        },
+        {
+          "id": "example",
+          "picked": [],
+          "text": "Hi Dana, the kitchen sink in unit 3B is backing up again and water is pooling on the floor. Can someone come today? I'm home after 4 if that works. Thanks, Marcy"
+        }
+      ]
+    },
+    "task_2": {
+      "set": {
+        "questions": [
+          {
+            "id": "notes",
+            "title": "Where do you take the notes?",
+            "kind": "one",
+            "choices": [
+              {
+                "id": "paper",
+                "label": "On paper"
+              },
+              {
+                "id": "phone",
+                "label": "Notes on my phone"
+              },
+              {
+                "id": "photos",
+                "label": "Photos"
+              },
+              {
+                "id": "solved",
+                "label": "An app already keeps them for me",
+                "solved": true
+              }
+            ]
+          },
+          {
+            "id": "end",
+            "title": "Where should they end up?",
+            "kind": "one",
+            "choices": [
+              {
+                "id": "sheet",
+                "label": "In a sheet"
+              },
+              {
+                "id": "report",
+                "label": "In a report"
+              },
+              {
+                "id": "email",
+                "label": "In an email to someone"
+              }
+            ]
+          },
+          {
+            "id": "fields",
+            "title": "What goes in each note?",
+            "hint": "Tick all that fit.",
+            "kind": "many",
+            "choices": [
+              {
+                "id": "date",
+                "label": "The date"
+              },
+              {
+                "id": "place",
+                "label": "The place or unit"
+              },
+              {
+                "id": "found",
+                "label": "What you found"
+              },
+              {
+                "id": "todo",
+                "label": "What needs doing"
+              },
+              {
+                "id": "who",
+                "label": "Who did it"
+              }
+            ]
+          },
+          {
+            "id": "often",
+            "title": "How often do you take them?",
+            "kind": "one",
+            "choices": [
+              {
+                "id": "daily",
+                "label": "Every day"
+              },
+              {
+                "id": "weekly",
+                "label": "Every week"
+              },
+              {
+                "id": "monthly",
+                "label": "Every month"
+              }
+            ]
+          }
+        ],
+        "example": {
+          "label": "Paste one set of notes",
+          "hint": "As you wrote them. Take out names. Optional."
+        }
+      },
+      "answers": [
+        {
+          "id": "notes",
+          "picked": [
+            "phone"
+          ],
+          "text": null
+        },
+        {
+          "id": "end",
+          "picked": [
+            "sheet"
+          ],
+          "text": null
+        },
+        {
+          "id": "fields",
+          "picked": [
+            "date",
+            "place",
+            "found",
+            "todo"
+          ],
+          "text": null
+        },
+        {
+          "id": "often",
+          "picked": [
+            "monthly"
+          ],
+          "text": null
+        },
+        {
+          "id": "example",
+          "picked": [],
+          "text": "Bldg 2, Unit 3B, bathroom: slow drain and small drip under sink. Needs plumber, booked for Thursday. Hallway light out by the stairs, handyman to replace bulb and check fixture."
+        }
+      ]
+    }
+  },
+  "runs": [
+    {
+      "slot": "task_1",
+      "task": "Repairs",
+      "seconds": 8.269130874999998,
+      "dollars": 0.018598,
+      "attempts": 1,
+      "usage": [
+        {
+          "model": "claude-sonnet-5-5",
+          "input": 4619,
+          "output": 936,
+          "cacheRead": 0,
+          "cacheWrite": 0
+        }
+      ]
+    },
+    {
+      "slot": "task_2",
+      "task": "Inspections",
+      "seconds": 9.248098167,
+      "dollars": 0.019348,
+      "attempts": 1,
+      "usage": [
+        {
+          "model": "claude-sonnet-5-5",
+          "input": 4364,
+          "output": 1062,
+          "cacheRead": 0,
+          "cacheWrite": 0
+        }
+      ]
+    }
+  ],
+  "raws": [
+    {
+      "slot": "task_1",
+      "errors": null,
+      "raw": {
+        "read": "From now on, repairs no longer reach you one by one by email and text. Everyone sends a request through one form, and every request lands as a row in one list. You see who it is from, where it is, what it is about, how urgent it is and when it is needed, all in the same place, so you can book someone to come without piecing details together.",
+        "material": [
+          {
+            "label": "Your repair form",
+            "items": [
+              "Who is this from?\nTheir own words",
+              "Where is the problem?\nTheir own words",
+              "What is the problem?\nTheir own words",
+              "How urgent is it?\nEmergency, water or safety risk\nUrgent, needs to be fixed in a day or two\nNormal, can wait for the next visit",
+              "When do you need someone to come?\nTheir own words"
+            ]
+          },
+          {
+            "label": "Your message with the link",
+            "items": [
+              "Hi all, to report a repair, please use this form instead of emailing or texting me: [link]. It takes a minute. Tell me who you are, where the problem is, what is wrong, how urgent it is and when someone can come. If there is water or a safety risk, please also call me right away. Thanks, [your name]"
+            ]
+          },
+          {
+            "label": "Your repair list columns",
+            "items": [
+              "Timestamp",
+              "Who is this from?",
+              "Where is the problem?",
+              "What is the problem?",
+              "How urgent is it?",
+              "When do you need someone to come?",
+              "Status",
+              "Who is booked"
+            ]
+          },
+          {
+            "label": "Your urgent row color",
+            "items": [
+              "=$E1=\"Emergency, water or safety risk\""
+            ]
+          }
+        ],
+        "steps": [
+          {
+            "use": "google_forms_create",
+            "say": "Create the form. Tally has written the questions for you.",
+            "piece": 1,
+            "when": "once"
+          },
+          {
+            "use": "google_forms_to_sheets",
+            "say": "Send the form answers to a sheet, so every request becomes a row in one list.",
+            "piece": null,
+            "when": "once"
+          },
+          {
+            "use": "sheets_dropdown",
+            "say": "In the Status column, add a drop down with these choices: New, Booked, Done. Put the same kind of drop down in Who is booked if you like.",
+            "piece": 3,
+            "when": "once"
+          },
+          {
+            "use": "sheets_highlight_row",
+            "say": "Color the emergency rows so they stand out. Tally has written the formula for you.",
+            "piece": 4,
+            "when": "once"
+          },
+          {
+            "use": "google_forms_share",
+            "say": "Share the form link with tenants and colleagues, using the message Tally wrote.",
+            "piece": 2,
+            "when": "once"
+          },
+          {
+            "use": "goal",
+            "say": "Each time, open your list, read the new rows, book someone for each one, and set the Status to Booked. Send people back to the form if they text or email you a repair.",
+            "piece": null,
+            "when": "each_time"
+          }
+        ],
+        "try_on": "Your next three repair requests.",
+        "good": "Every repair arrives as one row with all five details filled in, and you book someone without having to ask follow up questions.",
+        "approval": "Check each emergency row yourself and confirm the details and the day before you book anyone to come.",
+        "about_note": null,
+        "safe_use": [],
+        "ask_message": null
+      }
+    },
+    {
+      "slot": "task_2",
+      "errors": null,
+      "raw": {
+        "read": "From now on, your inspection notes go straight from your phone into rows for your sheet. You keep jotting notes the way you do today, then paste them in with your saved instructions and get clean rows back. You stop retyping each note by hand across your 40 apartments.",
+        "material": [
+          {
+            "label": "Your inspection instructions",
+            "items": [
+              "I will paste in my inspection notes. Turn them into rows for my sheet, one row per issue found. Use exactly these columns, in this order: Date, Building, Unit, Place, What was found, What needs doing. Date: write the date of the inspection as [date], or leave it blank if I did not give one. Building: for example Bldg 2. Unit: for example 3B. Place: the room or area, for example bathroom or hallway. What was found: the problem in a few plain words. What needs doing: the action and who does it, and the day if I gave one. If one note has two problems, make two rows. Never add details I did not give. Show the rows as a table I can copy into Google Sheets.",
+              "If a line does not fit the columns, do not drop it. Put it in a last row with the full line copied word for word in What was found, and write [check] in What needs doing. Leave any column you cannot fill blank, and never guess."
+            ]
+          },
+          {
+            "label": "Your inspection sheet columns",
+            "items": [
+              "Date",
+              "Building",
+              "Unit",
+              "Place",
+              "What was found",
+              "What needs doing"
+            ]
+          }
+        ],
+        "steps": [
+          {
+            "use": "goal",
+            "say": "Open a new Google Sheet and type the six column names in the first row, in this order.",
+            "piece": 2,
+            "when": "once"
+          },
+          {
+            "use": "goal",
+            "say": "Save your inspection instructions in ChatGPT so you can use them again each month.",
+            "piece": 1,
+            "when": "once"
+          },
+          {
+            "use": "notes_to_sheet",
+            "say": "Paste your phone notes under your saved instructions and let ChatGPT turn them into rows.",
+            "piece": 1,
+            "when": "each_time"
+          },
+          {
+            "use": "goal",
+            "say": "Read each row against your notes, then copy the rows into the next empty rows of your sheet.",
+            "piece": null,
+            "when": "each_time"
+          }
+        ],
+        "try_on": "This month's notes from one building.",
+        "good": "Every issue in your notes is one row in your sheet, with the right unit, place and action, and nothing added that you did not write.",
+        "approval": "Check every row against your own notes, especially unit numbers, dates and who is booked to do the work, and look at any row marked [check].",
+        "about_note": "I am a property manager for 40 rental apartments in three buildings. I handle repairs, tenant requests, move ins and move outs, and inspections. I often paste in my own rough notes from my phone and want them turned into clean, short rows for a Google Sheet. I like plain, direct wording with no extra chat. Never add details I did not give, such as dates, names, prices or causes. If something is unclear, leave it blank or mark it with [check] and ask me. Never drop a line of my notes. Keep tenant names and private details out of your answers.",
+        "safe_use": [
+          "Never type tenant names, phone numbers or email addresses into ChatGPT.",
+          "Leave out door codes, keys, lockbox details and passwords.",
+          "Do not paste lease terms, rent amounts or payment details.",
+          "Use unit numbers and plain descriptions of the problem only.",
+          "Read every row before it goes into your sheet."
+        ],
+        "ask_message": null
+      }
+    }
+  ],
+  "checks": [
+    {
+      "id": "valid_path",
+      "pass": true,
+      "detail": "the saved path loads"
+    },
+    {
+      "id": "did_it_work_steps",
+      "pass": true,
+      "detail": "Did it work is saved per workflow as task_1 and task_2"
+    },
+    {
+      "id": "task_1_ids",
+      "pass": true,
+      "detail": "google_forms_create, google_forms_to_sheets, sheets_dropdown, sheets_highlight_row, google_forms_share, goal"
+    },
+    {
+      "id": "task_1_not_checked",
+      "pass": true,
+      "detail": "nothing says not checked"
+    },
+    {
+      "id": "task_1_no_clicks_from_model",
+      "pass": true,
+      "detail": "every short line is free of clicks"
+    },
+    {
+      "id": "task_1_approval",
+      "pass": true,
+      "detail": "Check each emergency row yourself and confirm the details and the day before you book anyone to come."
+    },
+    {
+      "id": "task_1_each_time",
+      "pass": true,
+      "detail": "Each time, open your list, read the new rows, book someone for each one, and set the Status to Booked. Send people back to the form if they text or email you a repair."
+    },
+    {
+      "id": "task_1_no_ai_ask",
+      "pass": true,
+      "detail": "no AI named"
+    },
+    {
+      "id": "task_1_goals_plain",
+      "pass": true,
+      "detail": "1 goals"
+    },
+    {
+      "id": "task_1_fast",
+      "pass": true,
+      "detail": "8.3 s"
+    },
+    {
+      "id": "task_2_ids",
+      "pass": true,
+      "detail": "goal, goal, notes_to_sheet, goal"
+    },
+    {
+      "id": "task_2_not_checked",
+      "pass": true,
+      "detail": "nothing says not checked"
+    },
+    {
+      "id": "task_2_no_clicks_from_model",
+      "pass": true,
+      "detail": "every short line is free of clicks"
+    },
+    {
+      "id": "task_2_approval",
+      "pass": true,
+      "detail": "Check every row against your own notes, especially unit numbers, dates and who is booked to do the work, and look at any row marked [check]."
+    },
+    {
+      "id": "task_2_each_time",
+      "pass": true,
+      "detail": "Paste your phone notes under your saved instructions and let ChatGPT turn them into rows. | Read each row against your notes, then copy the rows into the next empty rows of your sheet."
+    },
+    {
+      "id": "task_2_no_ai_ask",
+      "pass": true,
+      "detail": "uses AI by design"
+    },
+    {
+      "id": "task_2_goals_plain",
+      "pass": true,
+      "detail": "3 goals"
+    },
+    {
+      "id": "task_2_fast",
+      "pass": true,
+      "detail": "9.2 s"
+    }
+  ]
+}

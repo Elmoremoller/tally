@@ -793,3 +793,40 @@ export const pathCopy = {
   end: "That is your path. You can come back to any step.",
   saveError: "That didn’t save. Please try again.",
 };
+
+/**
+ * Her paid path from Phase 10 (docs/DIRECTION.md, section 4): confirming her two workflows, the follow up
+ * questions, and each workflow written from her answers. Every line is a DRAFT until Karl approves it.
+ */
+export const workflowCopy = {
+  startTitle: "Your two workflows",
+  startLead: "Tally builds these with you, one at a time. Before each one, a few quick questions about how you do it today.",
+  startOne: "Your workflow",
+  swap: "Swap",
+  swapTitle: "Swap it for",
+  swapCancel: "Keep it",
+  start: "Start with these",
+  questionsLead: "A few quick questions about how you do this today. Tally writes your setup from your answers.",
+  pickMany: "Tick all that fit.",
+  exampleOptional: "Optional",
+  write: "Write my setup",
+  writing: "Tally is writing your setup from your answers. This takes about half a minute.",
+  writeError: "That didn’t work. Please try again.",
+  writeLimit: (email: string) => `We couldn’t write this one. Write to ${email} and we will set it up with you.`,
+  solvedTitle: "Sounds like this already runs well",
+  solvedLead: "Pick another part of your week, and Tally builds that one with you instead.",
+  solvedBack: "Change my answers",
+  onceLabel: "Set it up once",
+  eachTimeLabel: "Each time from then on",
+  copyThis: (label: string) => `Uses ${label}, above.`,
+  regionLabel: "Outside the US",
+  noteLabel: "Good to know",
+  tryLabel: "Try it on",
+  goodLabel: "What good looks like",
+  approvalLabel: "You always check",
+  costFirst: "Before you start",
+  endTitle: "That is your path",
+  endLead: "Both of your workflows are set up. You can come back to any step.",
+  safeTitle: "What is safe at your job",
+  progress: (at: number, total: number) => `Step ${at} of ${total}`,
+};

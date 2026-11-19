@@ -1,6 +1,8 @@
 import { after } from "next/server";
 import { writeBeginnerPlan } from "./beginner/plan-writer";
+import { readAsResponsibilities } from "./beginner/free-result";
 import { writePath } from "./beginner/path-writer";
+import { startPath } from "./beginner/workflow";
 import {
   claimPlanGeneration,
   failPlan,
@@ -33,7 +35,12 @@ export async function writeAndSavePlan(planId: string, origin: string) {
       // Answers from the beginner quiz get the paid path when her free result showed levels (Phase 6), and the
       // beginner plan when they were saved before; the first version's answers get the first plan.
       const { intake } = await loadWeek(plan.session_id);
-      const { content, model, promptVersion } = wantsPath(intake?.beginner)
+      // From Phase 10 a map read as responsibilities opens her path at once, with no AI call: each workflow is
+      // written later, from her answers to its follow up questions (DIRECTION.md, section 4).
+      const v4 = wantsPath(intake?.beginner) && readAsResponsibilities(intake?.beginner?.shown?.map ?? []);
+      const { content, model, promptVersion } = v4
+        ? { content: startPath(await loadPathInput(plan)), model: "none", promptVersion: "beginner-path-v4" }
+        : wantsPath(intake?.beginner)
         ? await writePath(await loadPathInput(plan))
         : intake?.beginner
           ? await writeBeginnerPlan(await loadBeginnerPlanInput(plan))
