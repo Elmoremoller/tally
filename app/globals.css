@@ -3344,6 +3344,112 @@
     text-align: center;
   }
 
+  /* Black Week (lib/offer.ts, components/BlackWeek.tsx): a dark tag with the offer's name, the line beside it.
+     On the smallest phones the line wraps under the tag and the pill becomes a rounded card. */
+  .bw-pill {
+    display: inline-flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 0.375rem 0.625rem;
+    padding: 0.3rem 0.875rem 0.3rem 0.3rem;
+    border-radius: 1.25rem;
+    background: var(--frost);
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 0 0 1px var(--line);
+    font-size: var(--fs-micro);
+    font-weight: 600;
+    line-height: var(--lh-micro);
+    letter-spacing: var(--tr-micro);
+    color: var(--ink);
+    text-align: center;
+  }
+  .bw-tag {
+    padding: 0.25rem 0.7rem;
+    border-radius: 999px;
+    background: var(--slate);
+    color: var(--off-white);
+    font-weight: 700;
+    white-space: nowrap;
+  }
+  .bw-pill:not(:has(.bw-line)) {
+    padding: 0;
+    background: none;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    box-shadow: none;
+  }
+  .hero-deal {
+    margin-bottom: 1.5rem;
+  }
+  .bw-pill-invert {
+    background: rgb(239 234 228 / 0.1);
+    box-shadow: 0 0 0 1px rgb(239 234 228 / 0.28);
+    color: var(--off-white);
+  }
+  .bw-pill-invert .bw-tag {
+    background: var(--off-white);
+    color: var(--slate);
+  }
+  .paywall-pill {
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 0.875rem;
+  }
+
+  /* The paywall's price during Black Week: the usual price struck, what she pays big, and 50% off beside it. */
+  .paywall-deal {
+    display: grid;
+    justify-items: center;
+    gap: 0.25rem;
+  }
+  .paywall-deal-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: center;
+    gap: 0.375rem 0.75rem;
+    font-variant-numeric: tabular-nums;
+  }
+  .paywall-was {
+    font-size: var(--fs-lead);
+    color: var(--muted);
+    text-decoration-thickness: 1.5px;
+  }
+  .paywall-now {
+    font-family: var(--stack-display);
+    font-size: clamp(2rem, 1.8rem + 0.8vw, 2.5rem);
+    line-height: 1;
+    letter-spacing: var(--tr-title);
+    color: var(--slate);
+  }
+  .paywall-off {
+    align-self: center;
+    padding: 0.25rem 0.7rem;
+    border-radius: 999px;
+    background: var(--slate);
+    color: var(--off-white);
+    font-size: var(--fs-micro);
+    font-weight: 700;
+    line-height: var(--lh-micro);
+    letter-spacing: var(--tr-micro);
+    white-space: nowrap;
+  }
+  .paywall-terms {
+    font-size: var(--fs-small);
+    line-height: var(--lh-small);
+    color: var(--muted);
+  }
+  .paywall-ends {
+    font-size: var(--fs-micro);
+    font-weight: 600;
+    line-height: var(--lh-micro);
+    color: var(--ink);
+    text-align: center;
+    text-wrap: balance;
+  }
+
   /* The main button kept in reach on a phone (components/quiz/Dock.tsx), the way phone quizzes and paywalls
      do it: pinned to the bottom of the screen while the step scrolls under it, and back in its own place at
      the end. While pinned it gets the header's frosted bar, so the two frame the screen. */

@@ -1,5 +1,5 @@
 import { planParts } from "./landing";
-import { dollars, offer } from "./offer";
+import { blackWeek, dollars, offer } from "./offer";
 import { hoursText, toolLabels, type AiTool, type ChatTool, type Pile } from "./week";
 
 // The words around her plan: the paywall, checkout, the page after paying and the plan page. The paywall's
@@ -13,6 +13,16 @@ export const paywallCopy = {
   lead: "Here’s what’s inside, built from your answers.", // approved 2026-10-24
   handBack: (task: string) => `A polite script to hand back ${inSentence(task)}`,
   price: `${dollars(offer.price.cents)}, paid once. No subscription.`,
+  /** The price line while the Black Week offer runs (lib/offer.ts): the usual price struck, then what she pays. */
+  deal: {
+    was: dollars(blackWeek.compareCents),
+    now: dollars(offer.price.cents),
+    off: blackWeek.off,
+    wasLabel: "Usually",
+    nowLabel: "Black Week price",
+    terms: "Paid once. No subscription.",
+    ends: blackWeek.ends,
+  },
   refund: offer.refund,
   cta: "Get my plan",
   pending: "One moment",
