@@ -2,6 +2,7 @@
 
 One line per change, newest first.
 
+- 2026-11-21: The beginner ad pages (new_to_ai, own_job, first_try) show the Tally share image again when their link is shared.
 - 2026-11-14: Phase 0 of docs/DIRECTION.md. README, OVERVIEW and SETUP describe Tally, the old product's migrations and CSS are gone, AGENTS.md points to the direction, and the paywall shows the approved refund line.
 - 2026-11-14: Added robots.txt, a sitemap and a canonical address for the landing page so search engines find the right pages.
 - 2026-11-13: Removed six unused icons from components/icons.tsx.
