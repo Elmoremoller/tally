@@ -1,14 +1,18 @@
 "use client";
 
 import { useId, useState, type ReactNode } from "react";
+import { useBlackWeek } from "./BlackWeek";
 
 type QA = { readonly q: string; readonly a: ReactNode };
 
 /**
  * Collapsible questions. Each answer opens on a spring (grid rows from 0fr to 1fr) and stays out of the
- * tab order and the accessibility tree while closed. Without JavaScript every answer is shown.
+ * tab order and the accessibility tree while closed. Without JavaScript every answer is shown. `first`, the
+ * Black Week question, comes first while the offer runs (components/BlackWeek.tsx).
  */
-export function Faq({ items }: { items: readonly QA[] }) {
+export function Faq({ items: given, first }: { items: readonly QA[]; first?: QA }) {
+  const deal = useBlackWeek();
+  const items = first && deal ? [first, ...given] : given;
   const [open, setOpen] = useState<ReadonlySet<number>>(() => new Set());
   const base = useId();
 

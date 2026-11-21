@@ -9,6 +9,7 @@ import { MotionToggle } from "@/components/MotionToggle";
 import { PhoneMockup } from "@/components/PhoneMockup";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteNav } from "@/components/SiteNav";
+import { BlackWeekPill } from "@/components/BlackWeek";
 import { BeforeAfter } from "@/components/beginner/BeforeAfter";
 import { BeginnerSections } from "@/components/beginner/Sections";
 import { beginnerFeelingVisuals, beginnerStepVisuals } from "@/components/beginner/Shots";
@@ -17,7 +18,7 @@ import { Reviews } from "./Reviews";
 import { stepVisuals } from "./StepVisuals";
 import { faqs, planParts, problem, steps, why } from "@/lib/landing";
 import { beginnerFaqs, beginnerOffer, beginnerProblem, beginnerSteps, beginnerWhy } from "@/lib/beginner/copy";
-import { angleFit, angles, isBeginner, offer, type AngleId } from "@/lib/offer";
+import { angleFit, angles, blackWeek, isBeginner, offer, type AngleId } from "@/lib/offer";
 import { beginnerLandingTestimonials, landingTestimonials, reviewsMinimum, type Testimonial } from "@/lib/testimonials";
 
 /**
@@ -102,6 +103,8 @@ export function Landing({ angle, reviews: given }: { angle: AngleId; reviews?: r
   const fit = angleFit(angle);
   const page = pageFor(angle);
   const reviews = given ?? page.reviews;
+  // Black Week (lib/offer.ts): a pill in the hero and the closing band, and its question first. No price.
+  // The page is built ahead of time, so each part turns itself off in the browser when the offer ends.
   const { problem, why } = page;
   // Running on empty (It's not you on the beginner page): each feeling named big, then what it's like, then
   // what Tally does about it. The beginner page draws each feeling above its name.
@@ -173,6 +176,7 @@ export function Landing({ angle, reviews: given }: { angle: AngleId; reviews?: r
           {heroPhone ? null : <DotField />}
           <div className="wrap hero-grid">
             <div className="hero-copy">
+              <BlackWeekPill line={blackWeek.pillLine} className="hero-deal" />
               <h1
                 id="hero-title"
                 className="hero-title"
@@ -281,6 +285,7 @@ export function Landing({ angle, reviews: given }: { angle: AngleId; reviews?: r
         <section className="closing" aria-labelledby="closing-title" data-section="closing">
           <div className="wrap grid justify-items-center gap-6">
             <Mark className="closing-mark" />
+            <BlackWeekPill line={blackWeek.pillLine} className="bw-pill-invert" />
             <h2 id="closing-title" className="closing-title">
               {page.adLine}
             </h2>
@@ -297,7 +302,7 @@ export function Landing({ angle, reviews: given }: { angle: AngleId; reviews?: r
                 Questions
               </h2>
             </div>
-            <Faq items={page.faqs} />
+            <Faq items={page.faqs} first={blackWeek.faq} />
           </div>
         </section>
       </main>

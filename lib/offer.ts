@@ -29,6 +29,32 @@ export const offer = {
   },
 } as const;
 
+/**
+ * The Black Week offer, asked for by Elmore on 2026-11-21. The price she pays stays offer.price; the paywall
+ * shows it struck against `compareCents` as 50% off. The landing page names the offer but never a price.
+ * Everything Black Week turns itself off at `endsAt`, the end of Cyber Monday in the US (midnight Pacific).
+ */
+export const blackWeek = {
+  name: "Black Week",
+  compareCents: 3999,
+  off: "50% off",
+  endsAt: "2026-12-01T08:00:00Z",
+  endsOn: "Monday, November 30",
+  /** The pill on the landing page and above the paywall. */
+  pill: "Black Week offer",
+  /** Beside the pill on the landing page. */
+  pillLine: "50% off, this week only",
+  /** On the paywall under the button. */
+  ends: "This price is only for Black Week. It ends Monday, November 30.",
+  faq: {
+    q: "Is there a Black Week offer?",
+    a: "Yes. This week only, your plan is 50% off. The offer ends Monday, November 30, and you’ll see it after your free result.",
+  },
+} as const;
+
+/** True while the Black Week offer runs. */
+export const blackWeekOn = (now: number = Date.now()) => now < Date.parse(blackWeek.endsAt);
+
 export type AngleId = keyof typeof angles;
 
 /**
