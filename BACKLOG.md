@@ -12,6 +12,9 @@ Write each item as one line with one clear purpose. An item can be up to about 2
 
 Ideas the daily run spotted but has not built. Nothing here gets built until you move it up to "To do".
 
+- Upgrade Next.js from 16.4.2 to the patched release, because the build now warns that this version has a known security vulnerability and stops on the first try.
+- Give the beginner ad pages their own share image showing the beginner headline, so a shared link shows words that match the page it opens instead of the main ad line.
+
 ## Needs Karl
 
 Items the daily run found but may not touch: payments, checkout, prices, paywall logic, environment variables, database schema, quiz questions, the plan generator master prompt.
