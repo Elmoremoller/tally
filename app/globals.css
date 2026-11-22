@@ -3441,8 +3441,15 @@
     color: var(--muted);
   }
   .page-small a {
+    position: relative;
     color: var(--slate);
     font-weight: 600;
+  }
+  /* The link is one line of small text, so this widens the area a finger can hit to about 44px without moving anything. */
+  .page-small a::after {
+    content: "";
+    position: absolute;
+    inset: -0.75rem -0.25rem;
   }
   .page-resend {
     display: flex;
