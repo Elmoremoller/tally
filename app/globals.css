@@ -3648,8 +3648,11 @@
     outline: none;
     box-shadow: 0 0 0 2px var(--slate);
   }
+  /* At least 44px wide so a short label like Copy is easy to tap on phones. The text stays on the left. */
   .plan-say-copy {
     justify-self: start;
+    min-width: 2.75rem;
+    text-align: start;
   }
   /* The line for the answer they just gave, above the step it led to. */
   .plan-now {
