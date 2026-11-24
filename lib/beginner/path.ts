@@ -3,7 +3,7 @@ import { offerTasks } from "./free-result";
 import { appsOf, hasStepsFor, recipeOf } from "./levels";
 import type { QA } from "./quiz";
 import { doneWithAi, type Device } from "./quiz-copy";
-import { RECIPE_APPS, RECIPE_IDS, recipeById, type Recipe, type RecipeApp, type RecipeRoute, type RecipeStep } from "./recipes";
+import { RECIPE_APPS, RECIPE_IDS, type Recipe, type RecipeApp, type RecipeRoute, type RecipeStep } from "./recipes";
 import type { MapLine, Track, WorksFor } from "./types";
 import { hasEmployer } from "./types";
 import { toolLabels, type AiPolicy, type AiTool, type ChatTool } from "../week";
@@ -183,13 +183,6 @@ export function routeFor(
   if (!her.phone) return { route: null, askPhone: true };
   const mine = phoneApp[her.phone];
   return { route: routes.find((route) => phoneOf(route) === mine) ?? null, askPhone: false };
-}
-
-/** A step that asks which phone she has before it can show its setup. */
-export function asksPhone(step: PathStep, plan: Pick<PathPlan, "apps" | "tool" | "device">): boolean {
-  if (step.kind !== "workflow" && step.kind !== "extra") return false;
-  const recipe = step.recipe ? recipeById(step.recipe) : undefined;
-  return recipe ? routeFor(recipe, { ...plan, phone: null }).askPhone : false;
 }
 
 /** The devices whose steps she sees: hers, or both when she uses both or the quiz didn't ask. */

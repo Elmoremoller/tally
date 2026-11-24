@@ -9,13 +9,4 @@ export const cleanText = (value: unknown, max: number) => {
   return text && text.length <= max ? text : null;
 };
 
-/** One to three short read back bullets, or null. */
-export const cleanBullets = (value: unknown) =>
-  Array.isArray(value) &&
-  value.length >= 1 &&
-  value.length <= 3 &&
-  value.every((b) => typeof b === "string" && b.trim().length > 0 && b.length <= 300)
-    ? (value as string[]).map((b) => b.trim())
-    : null;
-
 export const looksLikeEmail = (value: string) => /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(value);

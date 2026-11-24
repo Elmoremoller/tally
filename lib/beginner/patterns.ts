@@ -210,8 +210,6 @@ export const PATTERN_WORKFLOWS: Record<PatternId, PatternWorkflow> = {
   }),
 };
 
-export const PATTERN_WORKFLOW_IDS = PATTERN_IDS.map((p) => PATTERN_WORKFLOWS[p].id);
-
 /** A pattern workflow by its id, like "pattern_4". */
 export const patternWorkflowById = (id: string): PatternWorkflow | undefined =>
   PATTERN_IDS.map((p) => PATTERN_WORKFLOWS[p]).find((w) => w.id === id);

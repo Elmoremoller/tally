@@ -12,6 +12,8 @@ Write each item as one line with one clear purpose. An item can be up to about 2
 
 Ideas the daily run spotted but has not built. Nothing here gets built until you move it up to "To do".
 
+- [ ] Add a "page not found" page in the site's own look with a link back to the home page and the quiz, so a visitor who follows a broken or mistyped link is not left on the plain default page with nowhere to go.
+
 ## Needs Karl
 
 Items the daily run found but may not touch: payments, checkout, prices, paywall logic, environment variables, database schema, quiz questions, the plan generator master prompt.
