@@ -100,10 +100,15 @@ export function DotField({ still = false }: { still?: boolean }) {
     };
 
     const tick = (now: number) => {
+      // Paused or off screen, the loop stops altogether, and the watcher below starts it again
+      if (held()) {
+        frame = 0;
+        return;
+      }
       frame = requestAnimationFrame(tick);
       const dt = Math.min(now - last, 100) / 1000;
       last = now;
-      if (!grid || held()) return;
+      if (!grid) return;
       clock += dt;
       // The dots follow the mouse while it is over the field, or else a ghost that circles the copy
       const box = el.getBoundingClientRect();
@@ -130,7 +135,7 @@ export function DotField({ still = false }: { still?: boolean }) {
     const sync = () => {
       cancelAnimationFrame(frame);
       draw();
-      if (moving()) {
+      if (moving() && !held()) {
         last = performance.now();
         frame = requestAnimationFrame(tick);
       }
@@ -166,11 +171,15 @@ export function DotField({ still = false }: { still?: boolean }) {
 
     const observer = new ResizeObserver(fit);
     observer.observe(el);
+    // The pause button and the off screen watcher only change attributes on the host, so the loop listens for them
+    const watcher = new MutationObserver(sync);
+    if (host) watcher.observe(host, { attributes: true, attributeFilter: ["data-motion", "data-offscreen"] });
     reduced.addEventListener("change", sync);
     sync();
     return () => {
       cancelAnimationFrame(frame);
       observer.disconnect();
+      watcher.disconnect();
       reduced.removeEventListener("change", sync);
       document.removeEventListener("pointermove", move);
       document.documentElement.removeEventListener("pointerleave", leave);
