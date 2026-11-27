@@ -12,6 +12,8 @@ Write each item as one line with one clear purpose. An item can be up to about 2
 
 Ideas the daily run spotted but has not built. Nothing here gets built until you move it up to "To do".
 
+- [ ] Upgrade Next.js from 16.4.2 to a patched version: every build now warns that this version has a known security vulnerability, and keeping the site patched protects visitors and their quiz answers.
+
 ## Needs Karl
 
 Items the daily run found but may not touch: payments, checkout, prices, paywall logic, environment variables, database schema, quiz questions, the plan generator master prompt.
