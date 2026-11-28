@@ -17,10 +17,20 @@ export function LoginForm() {
     <form action={action} className="page-form" noValidate>
       <label className="quiz-field">
         <span>Email</span>
-        <input type="email" name="email" inputMode="email" autoComplete="email" autoCapitalize="off" spellCheck={false} required />
+        <input
+          type="email"
+          name="email"
+          inputMode="email"
+          autoComplete="email"
+          autoCapitalize="off"
+          spellCheck={false}
+          required
+          defaultValue={state?.email}
+          aria-describedby={state?.error ? "login-error" : undefined}
+        />
       </label>
       {state?.error ? (
-        <p className="quiz-error" role="alert">
+        <p className="quiz-error" id="login-error" role="alert">
           {state.error}
         </p>
       ) : null}
